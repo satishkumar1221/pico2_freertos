@@ -1,0 +1,52 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+GCC/\+PPC405\+\_\+\+Xilinx/\+FPU\+\_\+\+Macros.h File Reference}
+\hypertarget{_p_p_c405___xilinx_2_f_p_u___macros_8h}{}\label{_p_p_c405___xilinx_2_f_p_u___macros_8h}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/PPC405\_Xilinx/FPU\_Macros.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/PPC405\_Xilinx/FPU\_Macros.h}}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_p_p_c405___xilinx_2_f_p_u___macros_8h_a4b94b0d35e9a4ad783af7be32cabbdaa}{trace\+TASK\+\_\+\+SWITCHED\+\_\+\+OUT}}()
+\item 
+\#define \mbox{\hyperlink{_p_p_c405___xilinx_2_f_p_u___macros_8h_a2f813fe80d3519a396a9f2bb7cc7e820}{trace\+TASK\+\_\+\+SWITCHED\+\_\+\+IN}}()
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_p_p_c405___xilinx_2_f_p_u___macros_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_p_p_c405___xilinx_2_f_p_u___macros_8h_a2f813fe80d3519a396a9f2bb7cc7e820}\index{FPU\_Macros.h@{FPU\_Macros.h}!traceTASK\_SWITCHED\_IN@{traceTASK\_SWITCHED\_IN}}
+\index{traceTASK\_SWITCHED\_IN@{traceTASK\_SWITCHED\_IN}!FPU\_Macros.h@{FPU\_Macros.h}}
+\doxysubsubsection{\texorpdfstring{traceTASK\_SWITCHED\_IN}{traceTASK\_SWITCHED\_IN}}
+{\footnotesize\ttfamily \label{_p_p_c405___xilinx_2_f_p_u___macros_8h_a2f813fe80d3519a396a9f2bb7cc7e820} 
+\#define trace\+TASK\+\_\+\+SWITCHED\+\_\+\+IN(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}}-\/>pxTaskTag\ !=\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ vPortRestoreFPURegisters(\ \textcolor{keywordtype}{void}\ *\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ vPortRestoreFPURegisters(\ (\ \textcolor{keywordtype}{void}\ *\ )\ (\ \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}}-\/>pxTaskTag\ )\ );\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_p_p_c405___xilinx_2_f_p_u___macros_8h_source_l00040}{40}} of file \mbox{\hyperlink{_p_p_c405___xilinx_2_f_p_u___macros_8h_source}{FPU\+\_\+\+Macros.\+h}}.
+
+\Hypertarget{_p_p_c405___xilinx_2_f_p_u___macros_8h_a4b94b0d35e9a4ad783af7be32cabbdaa}\index{FPU\_Macros.h@{FPU\_Macros.h}!traceTASK\_SWITCHED\_OUT@{traceTASK\_SWITCHED\_OUT}}
+\index{traceTASK\_SWITCHED\_OUT@{traceTASK\_SWITCHED\_OUT}!FPU\_Macros.h@{FPU\_Macros.h}}
+\doxysubsubsection{\texorpdfstring{traceTASK\_SWITCHED\_OUT}{traceTASK\_SWITCHED\_OUT}}
+{\footnotesize\ttfamily \label{_p_p_c405___xilinx_2_f_p_u___macros_8h_a4b94b0d35e9a4ad783af7be32cabbdaa} 
+\#define trace\+TASK\+\_\+\+SWITCHED\+\_\+\+OUT(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}}-\/>pxTaskTag\ !=\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ vPortSaveFPURegisters(\ \textcolor{keywordtype}{void}\ *\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ vPortSaveFPURegisters(\ (\ \textcolor{keywordtype}{void}\ *\ )\ (\ \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}}-\/>pxTaskTag\ )\ );\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_p_p_c405___xilinx_2_f_p_u___macros_8h_source_l00031}{31}} of file \mbox{\hyperlink{_p_p_c405___xilinx_2_f_p_u___macros_8h_source}{FPU\+\_\+\+Macros.\+h}}.
+

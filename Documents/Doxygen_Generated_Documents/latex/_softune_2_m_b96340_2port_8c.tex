@@ -1,0 +1,302 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+Softune/\+MB96340/port.c File Reference}
+\hypertarget{_softune_2_m_b96340_2port_8c}{}\label{_softune_2_m_b96340_2port_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/Softune/MB96340/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/Softune/MB96340/port.c}}
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}task.\+h"{}}\newline
+Include dependency graph for port.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_a798f37b250502b49763c54a56b3aa4b0}{port\+SAVE\+\_\+\+CONTEXT}}()
+\item 
+\#define \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_a8d3a167375b5b57944a57df23d45b39e}{port\+RESTORE\+\_\+\+CONTEXT}}()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_a13e5fe7547f79ab37fa3a6908f4a298e}{x\+Get\+\_\+\+DPR\+\_\+\+ADB\+\_\+bank}} (void)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_ac1749073ebb72afb94fe7392ae8ba435}{x\+Get\+\_\+\+DTB\+\_\+\+PCB\+\_\+bank}} (void)
+\item 
+GLOBAL \+\_\+x\+Get\+\_\+\+DPR\+\_\+\+ADB\+\_\+bank GLOBAL \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_ad707757f4336268c389905abf826b948}{\+\_\+x\+Get\+\_\+\+DTB\+\_\+\+PCB\+\_\+bank}} SECTION DPR SWAP MOV ADB ORW \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ae2572b8ee3e438f22571e0214222bd1b}{A}} RETP DTB SWAP MOV PCB ORW \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ae2572b8ee3e438f22571e0214222bd1b}{A}} RETP \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_a97682e6bdcf335803f8ed01ae0d11b58}{px\+Port\+Initialise\+Stack}} (\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}px\+Top\+Of\+Stack, \mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}} px\+Code, void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{x\+Port\+Start\+Scheduler}} (void)
+\item 
+void \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{v\+Port\+End\+Scheduler}} (void)
+\begin{DoxyCompactList}\small\item\em End the Free\+RTOS scheduler. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+interrupt void \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_aa4da5ab5570e9f7f2177febfa143843a}{prv\+RLT0\+\_\+\+TICKISR}} (void)
+\item 
+\+\_\+\+\_\+nosavereg \+\_\+\+\_\+interrupt void \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_a37d8576541c056d8278f58b796d4e017}{v\+Port\+Yield}} (void)
+\begin{DoxyCompactList}\small\item\em Yield the CPU. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+nosavereg \+\_\+\+\_\+interrupt void \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_a04375590036a5cbfb25df405922ab067}{v\+Port\+Yield\+Delayed}} (void)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+volatile \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_af5b0f7452857787ed70ce2856ca74c4b}{TCB\+\_\+t}} \texorpdfstring{$\ast$}{*}volatile \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_af7b1fc0a36e224b885fb22b9936a03a2}{px\+Current\+TCB}}
+\item 
+GLOBAL \+\_\+x\+Get\+\_\+\+DPR\+\_\+\+ADB\+\_\+bank GLOBAL \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_ad707757f4336268c389905abf826b948}{\+\_\+x\+Get\+\_\+\+DTB\+\_\+\+PCB\+\_\+bank}} SECTION \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_a7d51db29a9359d977e16da4b501a4274}{CODE}}
+\item 
+GLOBAL \+\_\+x\+Get\+\_\+\+DPR\+\_\+\+ADB\+\_\+bank GLOBAL \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_ad707757f4336268c389905abf826b948}{\+\_\+x\+Get\+\_\+\+DTB\+\_\+\+PCB\+\_\+bank}} SECTION \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_a8de422401fee7edc1a14cf099a10ec3c}{ALIGN}}
+\item 
+GLOBAL \+\_\+x\+Get\+\_\+\+DPR\+\_\+\+ADB\+\_\+bank GLOBAL \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_ad707757f4336268c389905abf826b948}{\+\_\+x\+Get\+\_\+\+DTB\+\_\+\+PCB\+\_\+bank}} SECTION DPR SWAP MOV \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_ae2572b8ee3e438f22571e0214222bd1b}{A}}
+\item 
+GLOBAL \+\_\+x\+Get\+\_\+\+DPR\+\_\+\+ADB\+\_\+bank GLOBAL \+\_\+x\+Get\+\_\+\+DTB\+\_\+\+PCB\+\_\+bank SECTION DPR SWAP MOV ADB ORW \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ae2572b8ee3e438f22571e0214222bd1b}{A}} RETP \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_ad707757f4336268c389905abf826b948}{\+\_\+x\+Get\+\_\+\+DTB\+\_\+\+PCB\+\_\+bank}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_softune_2_m_b96340_2port_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_softune_2_m_b96340_2port_8c_a8d3a167375b5b57944a57df23d45b39e}\index{port.c@{port.c}!portRESTORE\_CONTEXT@{portRESTORE\_CONTEXT}}
+\index{portRESTORE\_CONTEXT@{portRESTORE\_CONTEXT}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portRESTORE\_CONTEXT}{portRESTORE\_CONTEXT}}
+{\footnotesize\ttfamily \label{_softune_2_m_b96340_2port_8c_a8d3a167375b5b57944a57df23d45b39e} 
+\#define port\+RESTORE\+\_\+\+CONTEXT(\begin{DoxyParamCaption}\item[{}]{void}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ MOVW\ A,\ \_pxCurrentTCB\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ MOVW\ A,\ @A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ AND\ \ CCR,\#H'DF\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ MOVW\ SP,\ A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ POPW\ (RW0,RW1,RW2,RW3,RW4,RW5,RW6,RW7)\ "{}});\ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ POPW\ \ A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ OR\ \ \ CCR,\#H'20\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ PUSHW\ \ A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ AND\ \ CCR,\#H'DF\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ POPW\ \ A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ OR\ \ \ CCR,\#H'20\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ PUSHW\ \ A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ AND\ \ CCR,\#H'DF\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ POPW\ \ A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ OR\ \ \ CCR,\#H'20\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ PUSHW\ \ A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ AND\ \ CCR,\#H'DF\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ POPW\ \ A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ OR\ \ \ CCR,\#H'20\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ PUSHW\ \ A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ AND\ \ CCR,\#H'DF\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ POPW\ \ A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ OR\ \ \ CCR,\#H'20\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ PUSHW\ \ A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ AND\ \ CCR,\#H'DF\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ POPW\ \ A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ OR\ \ \ CCR,\#H'20\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ PUSHW\ \ A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_source_l00117}{117}} of file \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_softune_2_m_b96340_2port_8c_a798f37b250502b49763c54a56b3aa4b0}\index{port.c@{port.c}!portSAVE\_CONTEXT@{portSAVE\_CONTEXT}}
+\index{portSAVE\_CONTEXT@{portSAVE\_CONTEXT}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portSAVE\_CONTEXT}{portSAVE\_CONTEXT}}
+{\footnotesize\ttfamily \label{_softune_2_m_b96340_2port_8c_a798f37b250502b49763c54a56b3aa4b0} 
+\#define port\+SAVE\+\_\+\+CONTEXT(\begin{DoxyParamCaption}\item[{}]{void}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ POPW\ \ A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ AND\ \ CCR,\#H'DF\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ PUSHW\ \ A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ OR\ \ \ CCR,\#H'20\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ POPW\ \ A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ AND\ \ CCR,\#H'DF\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ PUSHW\ \ A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ OR\ \ \ CCR,\#H'20\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ POPW\ \ A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ AND\ \ CCR,\#H'DF\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ PUSHW\ \ A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ OR\ \ \ CCR,\#H'20\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ POPW\ \ A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ AND\ \ CCR,\#H'DF\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ PUSHW\ \ A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ OR\ \ \ CCR,\#H'20\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ POPW\ \ A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ AND\ \ CCR,\#H'DF\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ PUSHW\ \ A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ OR\ \ \ CCR,\#H'20\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ POPW\ \ A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ AND\ \ CCR,\#H'DF\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ PUSHW\ \ A\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ PUSHW\ (RW0,RW1,RW2,RW3,RW4,RW5,RW6,RW7)\ "{}});\ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ MOVW\ A,\ \_pxCurrentTCB\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ MOVW\ A,\ SP\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ SWAPW\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ MOVW\ @AL,\ AH\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ OR\ \ \ CCR,\#H'20\ "{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_source_l00075}{75}} of file \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_source}{port.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_softune_2_m_b96340_2port_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_softune_2_m_b96340_2port_8c_aa4da5ab5570e9f7f2177febfa143843a}\index{port.c@{port.c}!prvRLT0\_TICKISR@{prvRLT0\_TICKISR}}
+\index{prvRLT0\_TICKISR@{prvRLT0\_TICKISR}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{prvRLT0\_TICKISR()}{prvRLT0\_TICKISR()}}
+{\footnotesize\ttfamily \label{_softune_2_m_b96340_2port_8c_aa4da5ab5570e9f7f2177febfa143843a} 
+\+\_\+\+\_\+interrupt void prv\+RLT0\+\_\+\+TICKISR (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_source_l00453}{453}} of file \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{_softune_2_m_b96340_2port_8c_a97682e6bdcf335803f8ed01ae0d11b58}\index{port.c@{port.c}!pxPortInitialiseStack@{pxPortInitialiseStack}}
+\index{pxPortInitialiseStack@{pxPortInitialiseStack}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{pxPortInitialiseStack()}{pxPortInitialiseStack()}}
+{\footnotesize\ttfamily \label{_softune_2_m_b96340_2port_8c_a97682e6bdcf335803f8ed01ae0d11b58} 
+GLOBAL \+\_\+x\+Get\+\_\+\+DPR\+\_\+\+ADB\+\_\+bank GLOBAL \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_ad707757f4336268c389905abf826b948}{\+\_\+x\+Get\+\_\+\+DTB\+\_\+\+PCB\+\_\+bank}} SECTION DPR SWAP MOV ADB ORW \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ae2572b8ee3e438f22571e0214222bd1b}{A}} RETP DTB SWAP MOV PCB ORW \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ae2572b8ee3e438f22571e0214222bd1b}{A}} RETP \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} px\+Port\+Initialise\+Stack (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{px\+Top\+Of\+Stack}{, }\item[{\mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}}}]{px\+Code}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+px\+Top\+Of\+Stack = 0x11;
+
+px\+Top\+Of\+Stack = 0x22;
+
+px\+Top\+Of\+Stack = 0x33;
+
+Definition at line \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_source_l00264}{264}} of file \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{_softune_2_m_b96340_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}\index{port.c@{port.c}!vPortEndScheduler@{vPortEndScheduler}}
+\index{vPortEndScheduler@{vPortEndScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEndScheduler()}{vPortEndScheduler()}}
+{\footnotesize\ttfamily \label{_softune_2_m_b96340_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423} 
+void v\+Port\+End\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+End the Free\+RTOS scheduler. 
+
+Not implemented on this port. 
+
+Definition at line \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_source_l00394}{394}} of file \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_softune_2_m_b96340_2port_8c_a37d8576541c056d8278f58b796d4e017}\index{port.c@{port.c}!vPortYield@{vPortYield}}
+\index{vPortYield@{vPortYield}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortYield()}{vPortYield()}}
+{\footnotesize\ttfamily \label{_softune_2_m_b96340_2port_8c_a37d8576541c056d8278f58b796d4e017} 
+\+\_\+\+\_\+nosavereg \+\_\+\+\_\+interrupt void v\+Port\+Yield (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Yield the CPU. 
+
+
+
+Definition at line \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_source_l00470}{470}} of file \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{_softune_2_m_b96340_2port_8c_a04375590036a5cbfb25df405922ab067}\index{port.c@{port.c}!vPortYieldDelayed@{vPortYieldDelayed}}
+\index{vPortYieldDelayed@{vPortYieldDelayed}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortYieldDelayed()}{vPortYieldDelayed()}}
+{\footnotesize\ttfamily \label{_softune_2_m_b96340_2port_8c_a04375590036a5cbfb25df405922ab067} 
+\+\_\+\+\_\+nosavereg \+\_\+\+\_\+interrupt void v\+Port\+Yield\+Delayed (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_source_l00483}{483}} of file \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{_softune_2_m_b96340_2port_8c_a13e5fe7547f79ab37fa3a6908f4a298e}\index{port.c@{port.c}!xGet\_DPR\_ADB\_bank@{xGet\_DPR\_ADB\_bank}}
+\index{xGet\_DPR\_ADB\_bank@{xGet\_DPR\_ADB\_bank}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xGet\_DPR\_ADB\_bank()}{xGet\_DPR\_ADB\_bank()}}
+{\footnotesize\ttfamily \label{_softune_2_m_b96340_2port_8c_a13e5fe7547f79ab37fa3a6908f4a298e} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} x\+Get\+\_\+\+DPR\+\_\+\+ADB\+\_\+bank (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+% FIG 5
+\Hypertarget{_softune_2_m_b96340_2port_8c_ac1749073ebb72afb94fe7392ae8ba435}\index{port.c@{port.c}!xGet\_DTB\_PCB\_bank@{xGet\_DTB\_PCB\_bank}}
+\index{xGet\_DTB\_PCB\_bank@{xGet\_DTB\_PCB\_bank}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xGet\_DTB\_PCB\_bank()}{xGet\_DTB\_PCB\_bank()}}
+{\footnotesize\ttfamily \label{_softune_2_m_b96340_2port_8c_ac1749073ebb72afb94fe7392ae8ba435} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} x\+Get\+\_\+\+DTB\+\_\+\+PCB\+\_\+bank (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+% FIG 6
+\Hypertarget{_softune_2_m_b96340_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}\index{port.c@{port.c}!xPortStartScheduler@{xPortStartScheduler}}
+\index{xPortStartScheduler@{xPortStartScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortStartScheduler()}{xPortStartScheduler()}}
+{\footnotesize\ttfamily \label{_softune_2_m_b96340_2port_8c_ade5a8c6666e7413a0355cc252029c5c6} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Start\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_source_l00376}{376}} of file \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_source}{port.\+c}}.
+
+
+
+\label{doc-var-members}
+\Hypertarget{_softune_2_m_b96340_2port_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_softune_2_m_b96340_2port_8c_ad707757f4336268c389905abf826b948}\index{port.c@{port.c}!\_xGet\_DTB\_PCB\_bank@{\_xGet\_DTB\_PCB\_bank}}
+\index{\_xGet\_DTB\_PCB\_bank@{\_xGet\_DTB\_PCB\_bank}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{\_xGet\_DTB\_PCB\_bank}{\_xGet\_DTB\_PCB\_bank}}
+{\footnotesize\ttfamily \label{_softune_2_m_b96340_2port_8c_ad707757f4336268c389905abf826b948} 
+GLOBAL \+\_\+x\+Get\+\_\+\+DPR\+\_\+\+ADB\+\_\+bank GLOBAL \+\_\+x\+Get\+\_\+\+DTB\+\_\+\+PCB\+\_\+bank SECTION DPR SWAP MOV ADB ORW \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ae2572b8ee3e438f22571e0214222bd1b}{A}} RETP \+\_\+x\+Get\+\_\+\+DTB\+\_\+\+PCB\+\_\+bank}
+
+
+
+Definition at line \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_source_l00243}{243}} of file \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_softune_2_m_b96340_2port_8c_ae2572b8ee3e438f22571e0214222bd1b}\index{port.c@{port.c}!A@{A}}
+\index{A@{A}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{A}{A}}
+{\footnotesize\ttfamily \label{_softune_2_m_b96340_2port_8c_ae2572b8ee3e438f22571e0214222bd1b} 
+GLOBAL \+\_\+x\+Get\+\_\+\+DPR\+\_\+\+ADB\+\_\+bank GLOBAL \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_ad707757f4336268c389905abf826b948}{\+\_\+x\+Get\+\_\+\+DTB\+\_\+\+PCB\+\_\+bank}} SECTION DPR SWAP MOV ADB ORW A RETP DTB SWAP MOV A}
+
+
+
+Definition at line \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_source_l00234}{234}} of file \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_softune_2_m_b96340_2port_8c_a8de422401fee7edc1a14cf099a10ec3c}\index{port.c@{port.c}!ALIGN@{ALIGN}}
+\index{ALIGN@{ALIGN}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{ALIGN}{ALIGN}}
+{\footnotesize\ttfamily \label{_softune_2_m_b96340_2port_8c_a8de422401fee7edc1a14cf099a10ec3c} 
+GLOBAL \+\_\+x\+Get\+\_\+\+DPR\+\_\+\+ADB\+\_\+bank GLOBAL \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_ad707757f4336268c389905abf826b948}{\+\_\+x\+Get\+\_\+\+DTB\+\_\+\+PCB\+\_\+bank}} SECTION ALIGN}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=1}
+\DoxyCodeLine{}
+\DoxyCodeLine{\_xGet\_DPR\_ADB\_bank:}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ MOV\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ae2572b8ee3e438f22571e0214222bd1b}{A}}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_source_l00228}{228}} of file \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_softune_2_m_b96340_2port_8c_a7d51db29a9359d977e16da4b501a4274}\index{port.c@{port.c}!CODE@{CODE}}
+\index{CODE@{CODE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{CODE}{CODE}}
+{\footnotesize\ttfamily \label{_softune_2_m_b96340_2port_8c_a7d51db29a9359d977e16da4b501a4274} 
+GLOBAL \+\_\+x\+Get\+\_\+\+DPR\+\_\+\+ADB\+\_\+bank GLOBAL \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_ad707757f4336268c389905abf826b948}{\+\_\+x\+Get\+\_\+\+DTB\+\_\+\+PCB\+\_\+bank}} SECTION CODE}
+
+
+
+Definition at line \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_source_l00228}{228}} of file \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_softune_2_m_b96340_2port_8c_af7b1fc0a36e224b885fb22b9936a03a2}\index{port.c@{port.c}!pxCurrentTCB@{pxCurrentTCB}}
+\index{pxCurrentTCB@{pxCurrentTCB}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{pxCurrentTCB}{pxCurrentTCB}}
+{\footnotesize\ttfamily \label{_softune_2_m_b96340_2port_8c_af7b1fc0a36e224b885fb22b9936a03a2} 
+volatile \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_af5b0f7452857787ed70ce2856ca74c4b}{TCB\+\_\+t}}\texorpdfstring{$\ast$}{*} volatile px\+Current\+TCB\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_source_l00067}{67}} of file \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_source}{ISR\+\_\+\+Support.\+h}}.
+

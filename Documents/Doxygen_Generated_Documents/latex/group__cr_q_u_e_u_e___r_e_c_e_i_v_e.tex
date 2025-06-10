@@ -1,0 +1,66 @@
+\doxysection{cr\+QUEUE\+\_\+\+RECEIVE }
+\hypertarget{group__cr_q_u_e_u_e___r_e_c_e_i_v_e}{}\label{group__cr_q_u_e_u_e___r_e_c_e_i_v_e}\index{crQUEUE\_RECEIVE@{crQUEUE\_RECEIVE}}
+croutine. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{croutine_8h_a586d57fd9a3e2aa5ae66484ed3be36c9}{crQUEUE\_RECEIVE}}(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{croutine_8h_a33b9d058688c92258155b5756d9936dd}{CoRoutineHandle\_t}}\ xHandle,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ pxQueue,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *pvBuffer,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xTicksToWait,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ *pxResult}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ )}
+
+\end{DoxyCode}
+
+
+The macro\textquotesingle{}s \doxylink{croutine_8h_a26af3d36f22a04168eebdf5b08465d6e}{cr\+QUEUE\+\_\+\+SEND()} and \doxylink{croutine_8h_a586d57fd9a3e2aa5ae66484ed3be36c9}{cr\+QUEUE\+\_\+\+RECEIVE()} are the co-\/routine equivalent to the \doxylink{queue_8h_af7eb49d3249351176992950d9185abe9}{x\+Queue\+Send()} and \doxylink{queue_8h_ae8364d988c6f9b63c771cc2b3dfe5df9}{x\+Queue\+Receive()} functions used by tasks.
+
+cr\+QUEUE\+\_\+\+SEND and cr\+QUEUE\+\_\+\+RECEIVE can only be used from a co-\/routine whereas \doxylink{queue_8h_af7eb49d3249351176992950d9185abe9}{x\+Queue\+Send()} and \doxylink{queue_8h_ae8364d988c6f9b63c771cc2b3dfe5df9}{x\+Queue\+Receive()} can only be used from tasks.
+
+cr\+QUEUE\+\_\+\+RECEIVE can only be called from the co-\/routine function itself -\/ not from within a function called by the co-\/routine function. This is because co-\/routines do not maintain their own stack.
+
+See the co-\/routine section of the WEB documentation for information on passing data between tasks and co-\/routines and between ISR\textquotesingle{}s and co-\/routines.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Handle} & The handle of the calling co-\/routine. This is the x\+Handle parameter of the co-\/routine function.\\
+\hline
+{\em px\+Queue} & The handle of the queue from which the data will be received. The handle is obtained as the return value when the queue is created using the x\+Queue\+Create() API function.\\
+\hline
+{\em pv\+Buffer} & The buffer into which the received item is to be copied. The number of bytes of each queued item is specified when the queue is created. This number of bytes is copied into pv\+Buffer.\\
+\hline
+{\em x\+Tick\+To\+Delay} & The number of ticks that the co-\/routine should block to wait for data to become available from the queue, should data not be available immediately. The actual amount of time this equates to is defined by config\+TICK\+\_\+\+RATE\+\_\+\+HZ (set in Free\+RTOSConfig.\+h). The constant port\+TICK\+\_\+\+PERIOD\+\_\+\+MS can be used to convert ticks to milliseconds (see the cr\+QUEUE\+\_\+\+SEND example).\\
+\hline
+{\em px\+Result} & The variable pointed to by px\+Result will be set to pd\+PASS if data was successfully retrieved from the queue, otherwise it will be set to an error code as defined within \doxylink{projdefs_8h}{Proj\+Defs.\+h}.\\
+\hline
+\end{DoxyParams}
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ A\ co-\/routine\ receives\ the\ number\ of\ an\ LED\ to\ flash\ from\ a\ queue.\ \ It}}
+\DoxyCodeLine{\textcolor{comment}{//\ blocks\ on\ the\ queue\ until\ the\ number\ is\ received.}}
+\DoxyCodeLine{\textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ prvCoRoutineFlashWorkTask(\ \mbox{\hyperlink{croutine_8h_a33b9d058688c92258155b5756d9936dd}{CoRoutineHandle\_t}}\ xHandle,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxIndex\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{//\ Variables\ in\ co-\/routines\ must\ be\ declared\ static\ if\ they\ must\ maintain\ value\ across\ a\ blocking\ call.}}
+\DoxyCodeLine{\textcolor{keyword}{static}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xResult;}
+\DoxyCodeLine{\textcolor{keyword}{static}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxLEDToFlash;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ All\ co-\/routines\ must\ start\ with\ a\ call\ to\ crSTART().}}
+\DoxyCodeLine{\ \mbox{\hyperlink{croutine_8h_a19a57a201a325e8af1207ed68c4aedde}{crSTART}}(\ xHandle\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\ ;;\ )}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Wait\ for\ data\ to\ become\ available\ on\ the\ queue.}}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{croutine_8h_a586d57fd9a3e2aa5ae66484ed3be36c9}{crQUEUE\_RECEIVE}}(\ xHandle,\ xCoRoutineQueue,\ \&uxLEDToFlash,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a72723ba1e4a85ca14f25c2b9e066613d}{portMAX\_DELAY}},\ \&xResult\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(\ xResult\ ==\ \mbox{\hyperlink{projdefs_8h_a07848d3078849bd32353c69d30a479b3}{pdPASS}}\ )}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ We\ received\ the\ LED\ to\ flash\ -\/\ flash\ it!}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ vParTestToggleLED(\ uxLEDToFlash\ );}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \mbox{\hyperlink{croutine_8h_ae6038cc976689b50000475ebfc4e2f23}{crEND}}();}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

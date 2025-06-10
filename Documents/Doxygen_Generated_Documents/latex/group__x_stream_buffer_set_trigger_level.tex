@@ -1,0 +1,27 @@
+\doxysection{x\+Stream\+Buffer\+Set\+Trigger\+Level }
+\hypertarget{group__x_stream_buffer_set_trigger_level}{}\label{group__x_stream_buffer_set_trigger_level}\index{xStreamBufferSetTriggerLevel@{xStreamBufferSetTriggerLevel}}
+\doxylink{stream__buffer_8h}{stream\+\_\+buffer.\+h}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{stream__buffer_8h_a28f0280587c76e71efeaa8f415ebde04}{xStreamBufferSetTriggerLevel}}(\ \mbox{\hyperlink{stream__buffer_8h_a8b80974e2278f073412293e6580ce56f}{StreamBufferHandle\_t}}\ xStreamBuffer,\ \textcolor{keywordtype}{size\_t}\ xTriggerLevel\ );}
+
+\end{DoxyCode}
+
+
+A stream buffer\textquotesingle{}s trigger level is the number of bytes that must be in the stream buffer before a task that is blocked on the stream buffer to wait for data is moved out of the blocked state. For example, if a task is blocked on a read of an empty stream buffer that has a trigger level of 1 then the task will be unblocked when a single byte is written to the buffer or the task\textquotesingle{}s block time expires. As another example, if a task is blocked on a read of an empty stream buffer that has a trigger level of 10 then the task will not be unblocked until the stream buffer contains at least 10 bytes or the task\textquotesingle{}s block time expires. If a reading task\textquotesingle{}s block time expires before the trigger level is reached then the task will still receive however many bytes are actually available. Setting a trigger level of 0 will result in a trigger level of 1 being used. It is not valid to specify a trigger level that is greater than the buffer size.
+
+A trigger level is set when the stream buffer is created, and can be modified using \doxylink{stream__buffer_8h_a28f0280587c76e71efeaa8f415ebde04}{x\+Stream\+Buffer\+Set\+Trigger\+Level()}.
+
+config\+USE\+\_\+\+STREAM\+\_\+\+BUFFERS must be set to 1 in for Free\+RTOSConfig.\+h for \doxylink{stream__buffer_8h_a28f0280587c76e71efeaa8f415ebde04}{x\+Stream\+Buffer\+Set\+Trigger\+Level()} to be available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Stream\+Buffer} & The handle of the stream buffer being updated.\\
+\hline
+{\em x\+Trigger\+Level} & The new trigger level for the stream buffer.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If x\+Trigger\+Level was less than or equal to the stream buffer\textquotesingle{}s length then the trigger level will be updated and pd\+TRUE is returned. Otherwise pd\+FALSE is returned. 
+\end{DoxyReturn}

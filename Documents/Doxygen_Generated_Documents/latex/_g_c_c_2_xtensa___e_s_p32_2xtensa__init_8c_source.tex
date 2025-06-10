@@ -1,0 +1,82 @@
+\doxysection{xtensa\+\_\+init.\+c}
+\hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source}{}\label{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/Xtensa\_ESP32/xtensa\_init.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/Xtensa\_ESP32/xtensa\_init.c}}
+\mbox{\hyperlink{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00002}00002\ \textcolor{comment}{\ *\ SPDX-\/FileCopyrightText:\ 2015-\/2019\ Cadence\ Design\ Systems,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00003}00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00004}00004\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00005}00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00006}00006\ \textcolor{comment}{\ *\ SPDX-\/FileContributor:\ 2016-\/2022\ Espressif\ Systems\ (Shanghai)\ CO\ LTD}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00007}00007\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00009}00009\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00010}00010\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2015-\/2019\ Cadence\ Design\ Systems,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00011}00011\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00012}00012\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00013}00013\ \textcolor{comment}{\ *\ a\ copy\ of\ this\ software\ and\ associated\ documentation\ files\ (the}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00014}00014\ \textcolor{comment}{\ *\ "{}Software"{}),\ to\ deal\ in\ the\ Software\ without\ restriction,\ including}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00015}00015\ \textcolor{comment}{\ *\ without\ limitation\ the\ rights\ to\ use,\ copy,\ modify,\ merge,\ publish,}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00016}00016\ \textcolor{comment}{\ *\ distribute,\ sublicense,\ and/or\ sell\ copies\ of\ the\ Software,\ and\ to}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00017}00017\ \textcolor{comment}{\ *\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,\ subject\ to}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00018}00018\ \textcolor{comment}{\ *\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00019}00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00020}00020\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00021}00021\ \textcolor{comment}{\ *\ in\ all\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00022}00022\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00023}00023\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00024}00024\ \textcolor{comment}{\ *\ EXPRESS\ OR\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00025}00025\ \textcolor{comment}{\ *\ MERCHANTABILITY,\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00026}00026\ \textcolor{comment}{\ *\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00027}00027\ \textcolor{comment}{\ *\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER\ IN\ AN\ ACTION\ OF\ CONTRACT,}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00028}00028\ \textcolor{comment}{\ *\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN\ CONNECTION\ WITH\ THE}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00029}00029\ \textcolor{comment}{\ *\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00030}00030\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00032}00032\ \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00033}00033\ \textcolor{comment}{*}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00034}00034\ \textcolor{comment}{*\ \ \ \ \ \ \ XTENSA\ INITIALIZATION\ ROUTINES\ CODED\ IN\ C}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00035}00035\ \textcolor{comment}{*}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00036}00036\ \textcolor{comment}{*\ \ This\ file\ contains\ miscellaneous\ Xtensa\ RTOS-\/generic\ initialization\ functions}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00037}00037\ \textcolor{comment}{*\ \ that\ are\ implemented\ in\ C.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00038}00038\ \textcolor{comment}{*}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00039}00039\ \textcolor{comment}{*******************************************************************************/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00042}00042\ \textcolor{preprocessor}{\#ifdef\ XT\_BOARD}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00043}00043\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}xtensa/xtbsp.h"{}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00044}00044\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00046}00046\ \textcolor{preprocessor}{\#include\ "{}xtensa\_rtos.h"{}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00047}00047\ \textcolor{preprocessor}{\#include\ "{}sdkconfig.h"{}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00048}00048\ \textcolor{preprocessor}{\#include\ "{}esp\_idf\_version.h"{}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00049}00049\ \textcolor{preprocessor}{\#if\ (\ ESP\_IDF\_VERSION\ <\ ESP\_IDF\_VERSION\_VAL(\ 4,\ 2,\ 0\ )\ )}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00050}00050\ \textcolor{preprocessor}{\ \ \ \ \#include\ \ \ \ "{}esp\_clk.h"{}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00051}00051\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00052}00052\ \textcolor{preprocessor}{\ \ \ \ \#if\ CONFIG\_IDF\_TARGET\_ESP32}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00053}00053\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#include\ "{}esp32/clk.h"{}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00054}00054\ \textcolor{preprocessor}{\ \ \ \ \#elif\ CONFIG\_IDF\_TARGET\_ESP32S2}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00055}00055\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#include\ "{}esp32s2/clk.h"{}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00056}00056\ \textcolor{preprocessor}{\ \ \ \ \#elif\ CONFIG\_IDF\_TARGET\_ESP32S3}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00057}00057\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#include\ "{}esp32s3/clk.h"{}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00058}00058\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00059}00059\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ ESP\_IDF\_VERSION\ <\ ESP\_IDF\_VERSION\_VAL(4,\ 2,\ 0)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00061}00061\ \textcolor{preprocessor}{\#ifdef\ XT\_RTOS\_TIMER\_INT}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00063}00063\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{_g_c_c_2_xtensa___e_s_p32_2include_2xtensa__timer_8h_a29b2b6d585d1c417918c1aac884c30c5}{\_xt\_tick\_divisor}}\ =\ 0;\ \textcolor{comment}{/*\ cached\ number\ of\ cycles\ per\ tick\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00065}00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_c_c_2_xtensa___e_s_p32_2include_2xtensa__timer_8h_a698fa42e858f9941700aafc5bb68a6c9}{\_xt\_tick\_divisor\_init}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00066}00066\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00067}00067\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_g_c_c_2_xtensa___e_s_p32_2include_2xtensa__timer_8h_a29b2b6d585d1c417918c1aac884c30c5}{\_xt\_tick\_divisor}}\ =\ esp\_clk\_cpu\_freq()\ /\ \mbox{\hyperlink{_g_c_c_2_xtensa___e_s_p32_2include_2xtensa__rtos_8h_a1befd3074ee02406895785750b2baf43}{XT\_TICK\_PER\_SEC}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00068}00068\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00070}00070\ \textcolor{comment}{/*\ Deprecated,\ to\ be\ removed\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00071}00071\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_ab4440ca844e09af984e871862ac3a603}{xt\_clock\_freq}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00072}00072\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00073}00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ esp\_clk\_cpu\_freq();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00074}00074\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_xtensa___e_s_p32_2xtensa__init_8c_source_l00076}00076\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ XT\_RTOS\_TIMER\_INT\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

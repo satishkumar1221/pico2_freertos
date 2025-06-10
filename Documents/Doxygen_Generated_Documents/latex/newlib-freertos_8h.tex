@@ -1,0 +1,88 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/include/newlib-\/freertos.h File Reference}
+\hypertarget{newlib-freertos_8h}{}\label{newlib-freertos_8h}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/newlib-\/freertos.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/newlib-\/freertos.h}}
+{\ttfamily \#include $<$reent.\+h$>$}\newline
+Include dependency graph for newlib-\/freertos.h\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{newlib-freertos_8h_a4807cda51a20b460daeedb131f6654dc}{config\+USE\+\_\+\+C\+\_\+\+RUNTIME\+\_\+\+TLS\+\_\+\+SUPPORT}}~1
+\item 
+\#define \mbox{\hyperlink{newlib-freertos_8h_aafd9f168d1e58611a5d4517abda2c12b}{config\+TLS\+\_\+\+BLOCK\+\_\+\+TYPE}}~struct \+\_\+reent
+\item 
+\#define \mbox{\hyperlink{newlib-freertos_8h_a0ec3ff910e465b074abe0d34584b433e}{config\+INIT\+\_\+\+TLS\+\_\+\+BLOCK}}(x\+TLSBlock,  px\+Top\+Of\+Stack)
+\item 
+\#define \mbox{\hyperlink{newlib-freertos_8h_a570a14f4311409e74c87f22d977ee7af}{config\+SET\+\_\+\+TLS\+\_\+\+BLOCK}}(x\+TLSBlock)
+\item 
+\#define \mbox{\hyperlink{newlib-freertos_8h_a78b23cee14ba1d8058e093a6a4920e85}{config\+DEINIT\+\_\+\+TLS\+\_\+\+BLOCK}}(x\+TLSBlock)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{newlib-freertos_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{newlib-freertos_8h_a78b23cee14ba1d8058e093a6a4920e85}\index{newlib-\/freertos.h@{newlib-\/freertos.h}!configDEINIT\_TLS\_BLOCK@{configDEINIT\_TLS\_BLOCK}}
+\index{configDEINIT\_TLS\_BLOCK@{configDEINIT\_TLS\_BLOCK}!newlib-\/freertos.h@{newlib-\/freertos.h}}
+\doxysubsubsection{\texorpdfstring{configDEINIT\_TLS\_BLOCK}{configDEINIT\_TLS\_BLOCK}}
+{\footnotesize\ttfamily \label{newlib-freertos_8h_a78b23cee14ba1d8058e093a6a4920e85} 
+\#define config\+DEINIT\+\_\+\+TLS\+\_\+\+BLOCK(\begin{DoxyParamCaption}\item[{}]{x\+TLSBlock}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__config_8h_a689daf184a6aa33c6362e0cc473f7b93}{\_reclaim\_reent}}(\ \&(\ xTLSBlock\ )\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{newlib-freertos_8h_source_l00059}{59}} of file \mbox{\hyperlink{newlib-freertos_8h_source}{newlib-\/freertos.\+h}}.
+
+\Hypertarget{newlib-freertos_8h_a0ec3ff910e465b074abe0d34584b433e}\index{newlib-\/freertos.h@{newlib-\/freertos.h}!configINIT\_TLS\_BLOCK@{configINIT\_TLS\_BLOCK}}
+\index{configINIT\_TLS\_BLOCK@{configINIT\_TLS\_BLOCK}!newlib-\/freertos.h@{newlib-\/freertos.h}}
+\doxysubsubsection{\texorpdfstring{configINIT\_TLS\_BLOCK}{configINIT\_TLS\_BLOCK}}
+{\footnotesize\ttfamily \label{newlib-freertos_8h_a0ec3ff910e465b074abe0d34584b433e} 
+\#define config\+INIT\+\_\+\+TLS\+\_\+\+BLOCK(\begin{DoxyParamCaption}\item[{}]{x\+TLSBlock}{, }\item[{}]{px\+Top\+Of\+Stack}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__config_8h_a0747346f319f43cf7e00a66498d468e7}{\_REENT\_INIT\_PTR}}(\ \&(\ xTLSBlock\ )\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{newlib-freertos_8h_source_l00051}{51}} of file \mbox{\hyperlink{newlib-freertos_8h_source}{newlib-\/freertos.\+h}}.
+
+\Hypertarget{newlib-freertos_8h_a570a14f4311409e74c87f22d977ee7af}\index{newlib-\/freertos.h@{newlib-\/freertos.h}!configSET\_TLS\_BLOCK@{configSET\_TLS\_BLOCK}}
+\index{configSET\_TLS\_BLOCK@{configSET\_TLS\_BLOCK}!newlib-\/freertos.h@{newlib-\/freertos.h}}
+\doxysubsubsection{\texorpdfstring{configSET\_TLS\_BLOCK}{configSET\_TLS\_BLOCK}}
+{\footnotesize\ttfamily \label{newlib-freertos_8h_a570a14f4311409e74c87f22d977ee7af} 
+\#define config\+SET\+\_\+\+TLS\+\_\+\+BLOCK(\begin{DoxyParamCaption}\item[{}]{x\+TLSBlock}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__config_8h_a6a6068e97d871e2f6b533cfa2ed0df26}{\_impure\_ptr}}\ =\ \&(\ xTLSBlock\ )\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{newlib-freertos_8h_source_l00055}{55}} of file \mbox{\hyperlink{newlib-freertos_8h_source}{newlib-\/freertos.\+h}}.
+
+\Hypertarget{newlib-freertos_8h_aafd9f168d1e58611a5d4517abda2c12b}\index{newlib-\/freertos.h@{newlib-\/freertos.h}!configTLS\_BLOCK\_TYPE@{configTLS\_BLOCK\_TYPE}}
+\index{configTLS\_BLOCK\_TYPE@{configTLS\_BLOCK\_TYPE}!newlib-\/freertos.h@{newlib-\/freertos.h}}
+\doxysubsubsection{\texorpdfstring{configTLS\_BLOCK\_TYPE}{configTLS\_BLOCK\_TYPE}}
+{\footnotesize\ttfamily \label{newlib-freertos_8h_aafd9f168d1e58611a5d4517abda2c12b} 
+\#define config\+TLS\+\_\+\+BLOCK\+\_\+\+TYPE~struct \+\_\+reent}
+
+
+
+Definition at line \mbox{\hyperlink{newlib-freertos_8h_source_l00047}{47}} of file \mbox{\hyperlink{newlib-freertos_8h_source}{newlib-\/freertos.\+h}}.
+
+\Hypertarget{newlib-freertos_8h_a4807cda51a20b460daeedb131f6654dc}\index{newlib-\/freertos.h@{newlib-\/freertos.h}!configUSE\_C\_RUNTIME\_TLS\_SUPPORT@{configUSE\_C\_RUNTIME\_TLS\_SUPPORT}}
+\index{configUSE\_C\_RUNTIME\_TLS\_SUPPORT@{configUSE\_C\_RUNTIME\_TLS\_SUPPORT}!newlib-\/freertos.h@{newlib-\/freertos.h}}
+\doxysubsubsection{\texorpdfstring{configUSE\_C\_RUNTIME\_TLS\_SUPPORT}{configUSE\_C\_RUNTIME\_TLS\_SUPPORT}}
+{\footnotesize\ttfamily \label{newlib-freertos_8h_a4807cda51a20b460daeedb131f6654dc} 
+\#define config\+USE\+\_\+\+C\+\_\+\+RUNTIME\+\_\+\+TLS\+\_\+\+SUPPORT~1}
+
+
+
+Definition at line \mbox{\hyperlink{newlib-freertos_8h_source_l00044}{44}} of file \mbox{\hyperlink{newlib-freertos_8h_source}{newlib-\/freertos.\+h}}.
+

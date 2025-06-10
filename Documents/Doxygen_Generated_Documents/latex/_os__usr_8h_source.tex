@@ -1,0 +1,98 @@
+\doxysection{Os\+\_\+usr.\+h}
+\hypertarget{_os__usr_8h_source}{}\label{_os__usr_8h_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/Os\_usr.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/Os\_usr.h}}
+\mbox{\hyperlink{_os__usr_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once\ }}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00002}00002\ \textcolor{preprocessor}{\#ifndef\ \_OS\_USR\_H\_}}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00003}\mbox{\hyperlink{_os__usr_8h_a9b4cd95c3ed4054db6779b73a42d983c}{00003}}\ \textcolor{preprocessor}{\#define\ \_OS\_USR\_H\_}}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00006}\mbox{\hyperlink{_os__usr_8h_a50de6d213ac95f568491068ee6bf93b0}{00006}}\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_os__usr_8h_a50de6d213ac95f568491068ee6bf93b0}{OS\_startup}}();\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00008}\mbox{\hyperlink{_os__usr_8h_afddc2fa2a712e0e3ae2998b4a078cd88}{00008}}\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_os__usr_8h_afddc2fa2a712e0e3ae2998b4a078cd88}{Start\_OS}}();\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00010}\mbox{\hyperlink{_os__usr_8h_a5c635579843bfaefa76d63f7ca501013}{00010}}\ \textcolor{preprocessor}{\#define\ TOTAL\_NUMBER\_OF\_CORES\ 2\ }}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00011}\mbox{\hyperlink{_os__usr_8h_ae8168dab42a72c54e4a154457f225d53}{00011}}\ \textcolor{preprocessor}{\#define\ CORE0\ 0u}}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00012}\mbox{\hyperlink{_os__usr_8h_a45775192dc1ce2e111ccb548d64d0f43}{00012}}\ \textcolor{preprocessor}{\#define\ CORE1\ 0u\ }}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00015}\mbox{\hyperlink{_os__usr_8h_a1948ddc3124d28639a63c15b165f19da}{00015}}\ \textcolor{preprocessor}{\#define\ Os(x,c)\ OS\_\#\#x\#\#ms\_task\_c\#\#c\ }}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00017}\mbox{\hyperlink{_os__usr_8h_afa60aa7fdbc1d635efdcb2101532c85e}{00017}}\ \textcolor{preprocessor}{\#define\ TASK\_STACK\_DEPTH(x,c)\ TASK\_STACK\_DEPTH\_\#\#x\#\#ms\_core\#\#c}}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00019}\mbox{\hyperlink{_os__usr_8h_ac9152e150a3b508cf8102cb5e8ac7888}{00019}}\ \textcolor{preprocessor}{\#define\ TASK\_Prio(x,core)\ TASK\_Prio\_\#\#x\#\#ms\_core\#\#core}}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00021}00021\ \textcolor{comment}{/*Define\ the\ task\ prio\ for\ newly\ created\ tasks\ */}}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00022}\mbox{\hyperlink{_os__usr_8h_a3bba3ff13f40f2653ffd76699556f9f0}{00022}}\ \textcolor{preprocessor}{\#define\ TASK\_Prio\_20ms\_core0\ 4}}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00023}\mbox{\hyperlink{_os__usr_8h_a013e3d13025031cf9afa5bfc6f8a4e66}{00023}}\ \textcolor{preprocessor}{\#define\ TASK\_Prio\_50ms\_core0\ 4}}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00024}\mbox{\hyperlink{_os__usr_8h_ab095e2ac1bfe5beee5633678bb2a774f}{00024}}\ \textcolor{preprocessor}{\#define\ TASK\_Prio\_100ms\_core0\ 4}}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00025}\mbox{\hyperlink{_os__usr_8h_a33b0b906990fa3e20b5d06a9edb45548}{00025}}\ \textcolor{preprocessor}{\#define\ TASK\_Prio\_1000ms\_core0\ 4}}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00026}\mbox{\hyperlink{_os__usr_8h_a5218b1f213675b8099029dcfd5630e03}{00026}}\ \textcolor{preprocessor}{\#define\ TASK\_Prio\_2000ms\_core0\ 4}}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00027}00027\ \textcolor{comment}{/*Define\ the\ task\ prio\ for\ newly\ created\ tasks\ */}}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00028}\mbox{\hyperlink{_os__usr_8h_ada9633ea5e855f799a36019abfba3902}{00028}}\ \textcolor{preprocessor}{\#define\ TASK\_Prio\_20ms\_core1\ 4}}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00029}\mbox{\hyperlink{_os__usr_8h_a908ae8607a7c0dabb06d3df9632afec2}{00029}}\ \textcolor{preprocessor}{\#define\ TASK\_Prio\_50ms\_core1\ 4}}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00030}\mbox{\hyperlink{_os__usr_8h_a3f34358f0b2537805a92a0063ab113c9}{00030}}\ \textcolor{preprocessor}{\#define\ TASK\_Prio\_100ms\_core1\ 4}}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00031}\mbox{\hyperlink{_os__usr_8h_a6019ec92ed440ce57f8ae84a22a6e3a6}{00031}}\ \textcolor{preprocessor}{\#define\ TASK\_Prio\_1000ms\_core1\ 4}}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00032}\mbox{\hyperlink{_os__usr_8h_ac8bfe4e9bca0dd4ad5876eef7e017555}{00032}}\ \textcolor{preprocessor}{\#define\ TASK\_Prio\_2000ms\_core1\ 4}}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00034}00034\ \textcolor{comment}{/*Stack\ depth\ configuration\ for\ individual\ tasks*/}}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00036}\mbox{\hyperlink{_os__usr_8h_a3b591db9b544028557d29c30b7a54cb0}{00036}}\ \textcolor{preprocessor}{\#define\ TASK\_STACK\_DEPTH\_20ms\_core0\ 1024\ }}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00037}\mbox{\hyperlink{_os__usr_8h_a977e17b1ee5c9018e4cf8f6910f5664c}{00037}}\ \textcolor{preprocessor}{\#define\ TASK\_STACK\_DEPTH\_50ms\_core0\ 1024\ }}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00038}\mbox{\hyperlink{_os__usr_8h_ade4901e15ab4086a6f72b4fafbaa1e85}{00038}}\ \textcolor{preprocessor}{\#define\ TASK\_STACK\_DEPTH\_100ms\_core0\ 1024\ }}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00039}\mbox{\hyperlink{_os__usr_8h_af825a8bd2a0d642a5f60992ef48734f1}{00039}}\ \textcolor{preprocessor}{\#define\ TASK\_STACK\_DEPTH\_1000ms\_core0\ 1024\ }}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00040}\mbox{\hyperlink{_os__usr_8h_a0a699e0574215d0c24565bef6cb9630e}{00040}}\ \textcolor{preprocessor}{\#define\ TASK\_STACK\_DEPTH\_2000ms\_core0\ 1024\ }}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00042}\mbox{\hyperlink{_os__usr_8h_a6946a259280aeec1e71e6ce4a700e71a}{00042}}\ \textcolor{preprocessor}{\#define\ TASK\_STACK\_DEPTH\_20ms\_core1\ 1024\ }}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00043}\mbox{\hyperlink{_os__usr_8h_a8bf67d4094be0059f406e0854c830063}{00043}}\ \textcolor{preprocessor}{\#define\ TASK\_STACK\_DEPTH\_50ms\_core1\ 1024\ }}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00044}\mbox{\hyperlink{_os__usr_8h_a745f9faf4feba7e0eb09c2c9ff3356b1}{00044}}\ \textcolor{preprocessor}{\#define\ TASK\_STACK\_DEPTH\_100ms\_core1\ 1024\ }}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00045}\mbox{\hyperlink{_os__usr_8h_a79fe2d36ff5f0eb912e2941081ae3905}{00045}}\ \textcolor{preprocessor}{\#define\ TASK\_STACK\_DEPTH\_1000ms\_core1\ 1024\ }}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00046}\mbox{\hyperlink{_os__usr_8h_aee218b826d812a914dc0b971d6c69802}{00046}}\ \textcolor{preprocessor}{\#define\ TASK\_STACK\_DEPTH\_2000ms\_core1\ 1024\ }}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00048}\mbox{\hyperlink{_os__usr_8h_ad6f8271ee331d5573e97a464aec80e14}{00048}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00049}00049\ \{}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00050}\mbox{\hyperlink{_os__usr_8h_ad6f8271ee331d5573e97a464aec80e14af191f2ea09116b4d93f733e8abdc0988}{00050}}\ \ \ \ \mbox{\hyperlink{_os__usr_8h_ad6f8271ee331d5573e97a464aec80e14af191f2ea09116b4d93f733e8abdc0988}{task\_20ms\_c0}},\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00051}\mbox{\hyperlink{_os__usr_8h_ad6f8271ee331d5573e97a464aec80e14a4b85645be580ae5ac18315acdc81838c}{00051}}\ \ \ \ \mbox{\hyperlink{_os__usr_8h_ad6f8271ee331d5573e97a464aec80e14a4b85645be580ae5ac18315acdc81838c}{task\_50ms\_c0}},\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00052}\mbox{\hyperlink{_os__usr_8h_ad6f8271ee331d5573e97a464aec80e14a4f259e1d9aa346185b3b24a189af895a}{00052}}\ \ \ \ \mbox{\hyperlink{_os__usr_8h_ad6f8271ee331d5573e97a464aec80e14a4f259e1d9aa346185b3b24a189af895a}{task\_100ms\_c0}},\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00053}\mbox{\hyperlink{_os__usr_8h_ad6f8271ee331d5573e97a464aec80e14ac49962eb73515dc51f1b3dfaadafaa4e}{00053}}\ \ \ \ \mbox{\hyperlink{_os__usr_8h_ad6f8271ee331d5573e97a464aec80e14ac49962eb73515dc51f1b3dfaadafaa4e}{task\_1000ms\_c0}},\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00054}\mbox{\hyperlink{_os__usr_8h_ad6f8271ee331d5573e97a464aec80e14a98e2be34b60acc1f46587c3c413f6cb7}{00054}}\ \ \ \ \mbox{\hyperlink{_os__usr_8h_ad6f8271ee331d5573e97a464aec80e14a98e2be34b60acc1f46587c3c413f6cb7}{task\_2000ms\_c0}},\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00055}\mbox{\hyperlink{_os__usr_8h_ad6f8271ee331d5573e97a464aec80e14ad21140a310edd21dccc8849f11779c00}{00055}}\ \ \ \ \mbox{\hyperlink{_os__usr_8h_ad6f8271ee331d5573e97a464aec80e14ad21140a310edd21dccc8849f11779c00}{TOTAL\_NUMBER\_OF\_TASKS\_C0}}}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00056}00056\ \}\mbox{\hyperlink{_os__usr_8h_ad6f8271ee331d5573e97a464aec80e14}{tasks\_core0}};\ \ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00058}\mbox{\hyperlink{_os__usr_8h_aac116a17f50913615fe0a3cdf91876b5}{00058}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00059}00059\ \{}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00060}\mbox{\hyperlink{_os__usr_8h_aac116a17f50913615fe0a3cdf91876b5aafb3980389976f8350818dc2d069ce30}{00060}}\ \ \ \ \mbox{\hyperlink{_os__usr_8h_aac116a17f50913615fe0a3cdf91876b5aafb3980389976f8350818dc2d069ce30}{task\_20ms\_c1}},\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00061}\mbox{\hyperlink{_os__usr_8h_aac116a17f50913615fe0a3cdf91876b5a90fcc0aa77b4ced6e007e4222c59a520}{00061}}\ \ \ \ \mbox{\hyperlink{_os__usr_8h_aac116a17f50913615fe0a3cdf91876b5a90fcc0aa77b4ced6e007e4222c59a520}{task\_50ms\_c1}},\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00062}\mbox{\hyperlink{_os__usr_8h_aac116a17f50913615fe0a3cdf91876b5a8800003fb2d5fce83da1b2fccf1ef81b}{00062}}\ \ \ \ \mbox{\hyperlink{_os__usr_8h_aac116a17f50913615fe0a3cdf91876b5a8800003fb2d5fce83da1b2fccf1ef81b}{task\_100ms\_c1}},\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00063}\mbox{\hyperlink{_os__usr_8h_aac116a17f50913615fe0a3cdf91876b5a971f9603678226909da42f262d759ce6}{00063}}\ \ \ \ \mbox{\hyperlink{_os__usr_8h_aac116a17f50913615fe0a3cdf91876b5a971f9603678226909da42f262d759ce6}{task\_1000ms\_c1}},\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00064}\mbox{\hyperlink{_os__usr_8h_aac116a17f50913615fe0a3cdf91876b5a9d2703cc726e1f5936c1467866d62dbc}{00064}}\ \ \ \ \mbox{\hyperlink{_os__usr_8h_aac116a17f50913615fe0a3cdf91876b5a9d2703cc726e1f5936c1467866d62dbc}{task\_2000ms\_c1}},\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00065}\mbox{\hyperlink{_os__usr_8h_aac116a17f50913615fe0a3cdf91876b5a9a3fe59b93a08624a68963b7eb8f4c9b}{00065}}\ \ \ \ \mbox{\hyperlink{_os__usr_8h_aac116a17f50913615fe0a3cdf91876b5a9a3fe59b93a08624a68963b7eb8f4c9b}{TOTAL\_NUMBER\_OF\_TASKS\_C1}}}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00066}00066\ \}\mbox{\hyperlink{_os__usr_8h_aac116a17f50913615fe0a3cdf91876b5}{tasks\_core1}};\ \ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00068}00068\ \textcolor{comment}{/*Extern\ OS\ functions*/}}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00069}00069\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_os__usr_8h_a1d134b4a5a2adcc32fab162f2c68412b}{OS\_20ms\_task\_c0}}(\textcolor{keywordtype}{void}\ *pvParameters);\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00070}00070\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_os__usr_8h_a83e20497b35f34f62bd3f102b2aa6ca1}{OS\_50ms\_task\_c0}}(\textcolor{keywordtype}{void}\ *pvParameters);}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00071}00071\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_os__usr_8h_a1718fb93ee3426ee7311612c6e6939eb}{OS\_100ms\_task\_c0}}(\textcolor{keywordtype}{void}\ *pvParameters);}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00072}00072\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_os__usr_8h_a0611b55c47d905a818fdf34a3c751a7c}{OS\_1000ms\_task\_c0}}(\textcolor{keywordtype}{void}\ *pvParameters);}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00073}00073\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_os__usr_8h_a9aeeac0c21b4026409e7ac06b64ab007}{OS\_2000ms\_task\_c0}}(\textcolor{keywordtype}{void}\ *pvParameters);\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00077}\mbox{\hyperlink{class_o_s__start}{00077}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_o_s__start_a673a89159dfee24c2b8b524978fef1df}{OS\_start}}}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00078}00078\ \{}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00079}00079\ \ \ \ \ public\ :}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00080}00080\ \ \ \ \ \mbox{\hyperlink{class_o_s__start_a673a89159dfee24c2b8b524978fef1df}{OS\_start}}();}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00081}00081\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_o_s__start_a8778f80d1193c31ba954e3d739c1bf43}{OS\_startup\_code}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00082}00082\ \ \ \ \ private\ :}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00083}00083\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00084}00084\ \ \ \ \ \textcolor{keywordtype}{void}\ Initlize\_const\_tables();\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00085}00085\ \ \ \ \ \textcolor{keywordtype}{void}\ Initlize\_Ram\_Lowleveldriver();}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00086}00086\ \ \ \ \ \textcolor{keywordtype}{void}\ Initlize\_ASW\_Components();}
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00087}00087\ \ \ \ \ \textcolor{keywordtype}{void}\ Initlize\_CDD\_Components();\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00088}00088\ \ \ \ \ \textcolor{keywordtype}{void}\ start\_scheduler();\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00089}00089\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00091}00091\ \};\ }
+\DoxyCodeLine{\Hypertarget{_os__usr_8h_source_l00092}00092\ \textcolor{preprocessor}{\#endif\ }}
+
+\end{DoxyCode}

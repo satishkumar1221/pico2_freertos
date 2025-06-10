@@ -1,0 +1,145 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+GCC/\+ARM7\+\_\+\+LPC2000/port\+ISR.c File Reference}
+\hypertarget{_a_r_m7___l_p_c2000_2port_i_s_r_8c}{}\label{_a_r_m7___l_p_c2000_2port_i_s_r_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/ARM7\_LPC2000/portISR.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/ARM7\_LPC2000/portISR.c}}
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+Include dependency graph for port\+ISR.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_a5d1170b4f887fa351d9ae34793f0651d}{port\+TIMER\+\_\+\+MATCH\+\_\+\+ISR\+\_\+\+BIT}}~( ( uint8\+\_\+t ) 0x01 )
+\item 
+\#define \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_ae731fb827429e8e40831e1c8a8232d15}{port\+CLEAR\+\_\+\+VIC\+\_\+\+INTERRUPT}}~( ( uint32\+\_\+t ) 0 )
+\item 
+\#define \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_ab7c7cbbda4fb9a253c7e5086071db162}{port\+NO\+\_\+\+CRITICAL\+\_\+\+NESTING}}~( ( uint32\+\_\+t ) 0 )
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_ac295ae47abb7152bd3b68c2a63b86ac1}{v\+Port\+Yield\+Processor}} (void \mbox{\hyperlink{_g_c_c_2_a_r_m7___a_t91_f_r40008_2port_8c_ab6f659b3911405d21fe98a1c7a347d8f}{v\+Port\+ISRStart\+First\+Task}} void)
+\item 
+void \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_ab2e6549af16c47ab2e7d0fccb861a708}{v\+Port\+Yield\+Processor}} (void)
+\item 
+void \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_a502142367426395ab5c401b99204b437}{v\+Tick\+ISR}} (void)
+\item 
+void \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_a2ed3554a3de09a3bd09d396ee081ab69}{v\+Port\+Enter\+Critical}} (void)
+\begin{DoxyCompactList}\small\item\em Enter critical section. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_aed20ada05b957181a0de042802a82a5b}{v\+Port\+Exit\+Critical}} (void)
+\begin{DoxyCompactList}\small\item\em Exit critical section. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+volatile uint32\+\_\+t \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_a4e719b187cba9cb244aeb611aca513f6}{ul\+Critical\+Nesting}} = 9999UL
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_a_r_m7___l_p_c2000_2port_i_s_r_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_a_r_m7___l_p_c2000_2port_i_s_r_8c_ae731fb827429e8e40831e1c8a8232d15}\index{portISR.c@{portISR.c}!portCLEAR\_VIC\_INTERRUPT@{portCLEAR\_VIC\_INTERRUPT}}
+\index{portCLEAR\_VIC\_INTERRUPT@{portCLEAR\_VIC\_INTERRUPT}!portISR.c@{portISR.c}}
+\doxysubsubsection{\texorpdfstring{portCLEAR\_VIC\_INTERRUPT}{portCLEAR\_VIC\_INTERRUPT}}
+{\footnotesize\ttfamily \label{_a_r_m7___l_p_c2000_2port_i_s_r_8c_ae731fb827429e8e40831e1c8a8232d15} 
+\#define port\+CLEAR\+\_\+\+VIC\+\_\+\+INTERRUPT~( ( uint32\+\_\+t ) 0 )}
+
+
+
+Definition at line \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_source_l00060}{60}} of file \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_source}{port\+ISR.\+c}}.
+
+\Hypertarget{_a_r_m7___l_p_c2000_2port_i_s_r_8c_ab7c7cbbda4fb9a253c7e5086071db162}\index{portISR.c@{portISR.c}!portNO\_CRITICAL\_NESTING@{portNO\_CRITICAL\_NESTING}}
+\index{portNO\_CRITICAL\_NESTING@{portNO\_CRITICAL\_NESTING}!portISR.c@{portISR.c}}
+\doxysubsubsection{\texorpdfstring{portNO\_CRITICAL\_NESTING}{portNO\_CRITICAL\_NESTING}}
+{\footnotesize\ttfamily \label{_a_r_m7___l_p_c2000_2port_i_s_r_8c_ab7c7cbbda4fb9a253c7e5086071db162} 
+\#define port\+NO\+\_\+\+CRITICAL\+\_\+\+NESTING~( ( uint32\+\_\+t ) 0 )}
+
+
+
+Definition at line \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_source_l00063}{63}} of file \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_source}{port\+ISR.\+c}}.
+
+\Hypertarget{_a_r_m7___l_p_c2000_2port_i_s_r_8c_a5d1170b4f887fa351d9ae34793f0651d}\index{portISR.c@{portISR.c}!portTIMER\_MATCH\_ISR\_BIT@{portTIMER\_MATCH\_ISR\_BIT}}
+\index{portTIMER\_MATCH\_ISR\_BIT@{portTIMER\_MATCH\_ISR\_BIT}!portISR.c@{portISR.c}}
+\doxysubsubsection{\texorpdfstring{portTIMER\_MATCH\_ISR\_BIT}{portTIMER\_MATCH\_ISR\_BIT}}
+{\footnotesize\ttfamily \label{_a_r_m7___l_p_c2000_2port_i_s_r_8c_a5d1170b4f887fa351d9ae34793f0651d} 
+\#define port\+TIMER\+\_\+\+MATCH\+\_\+\+ISR\+\_\+\+BIT~( ( uint8\+\_\+t ) 0x01 )}
+
+
+
+Definition at line \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_source_l00059}{59}} of file \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_source}{port\+ISR.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_a_r_m7___l_p_c2000_2port_i_s_r_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_a_r_m7___l_p_c2000_2port_i_s_r_8c_a2ed3554a3de09a3bd09d396ee081ab69}\index{portISR.c@{portISR.c}!vPortEnterCritical@{vPortEnterCritical}}
+\index{vPortEnterCritical@{vPortEnterCritical}!portISR.c@{portISR.c}}
+\doxysubsubsection{\texorpdfstring{vPortEnterCritical()}{vPortEnterCritical()}}
+{\footnotesize\ttfamily \label{_a_r_m7___l_p_c2000_2port_i_s_r_8c_a2ed3554a3de09a3bd09d396ee081ab69} 
+void v\+Port\+Enter\+Critical (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Enter critical section. 
+
+
+
+Definition at line \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_source_l00180}{180}} of file \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_source}{port\+ISR.\+c}}.
+
+\Hypertarget{_a_r_m7___l_p_c2000_2port_i_s_r_8c_aed20ada05b957181a0de042802a82a5b}\index{portISR.c@{portISR.c}!vPortExitCritical@{vPortExitCritical}}
+\index{vPortExitCritical@{vPortExitCritical}!portISR.c@{portISR.c}}
+\doxysubsubsection{\texorpdfstring{vPortExitCritical()}{vPortExitCritical()}}
+{\footnotesize\ttfamily \label{_a_r_m7___l_p_c2000_2port_i_s_r_8c_aed20ada05b957181a0de042802a82a5b} 
+void v\+Port\+Exit\+Critical (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Exit critical section. 
+
+
+
+Definition at line \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_source_l00196}{196}} of file \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_source}{port\+ISR.\+c}}.
+
+\Hypertarget{_a_r_m7___l_p_c2000_2port_i_s_r_8c_ac295ae47abb7152bd3b68c2a63b86ac1}\index{portISR.c@{portISR.c}!vPortYieldProcessor@{vPortYieldProcessor}}
+\index{vPortYieldProcessor@{vPortYieldProcessor}!portISR.c@{portISR.c}}
+\doxysubsubsection{\texorpdfstring{vPortYieldProcessor()}{vPortYieldProcessor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{_a_r_m7___l_p_c2000_2port_i_s_r_8c_ac295ae47abb7152bd3b68c2a63b86ac1} 
+void v\+Port\+Yield\+Processor (\begin{DoxyParamCaption}\item[{void \mbox{\hyperlink{_g_c_c_2_a_r_m7___a_t91_f_r40008_2port_8c_ab6f659b3911405d21fe98a1c7a347d8f}{v\+Port\+ISRStart\+First\+Task}}}]{void}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_source_l00069}{69}} of file \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_source}{port\+ISR.\+c}}.
+
+\Hypertarget{_a_r_m7___l_p_c2000_2port_i_s_r_8c_ab2e6549af16c47ab2e7d0fccb861a708}\index{portISR.c@{portISR.c}!vPortYieldProcessor@{vPortYieldProcessor}}
+\index{vPortYieldProcessor@{vPortYieldProcessor}!portISR.c@{portISR.c}}
+\doxysubsubsection{\texorpdfstring{vPortYieldProcessor()}{vPortYieldProcessor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{_a_r_m7___l_p_c2000_2port_i_s_r_8c_ab2e6549af16c47ab2e7d0fccb861a708} 
+void v\+Port\+Yield\+Processor (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_source_l00094}{94}} of file \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_source}{port\+ISR.\+c}}.
+
+\Hypertarget{_a_r_m7___l_p_c2000_2port_i_s_r_8c_a502142367426395ab5c401b99204b437}\index{portISR.c@{portISR.c}!vTickISR@{vTickISR}}
+\index{vTickISR@{vTickISR}!portISR.c@{portISR.c}}
+\doxysubsubsection{\texorpdfstring{vTickISR()}{vTickISR()}}
+{\footnotesize\ttfamily \label{_a_r_m7___l_p_c2000_2port_i_s_r_8c_a502142367426395ab5c401b99204b437} 
+void v\+Tick\+ISR (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_source_l00115}{115}} of file \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_source}{port\+ISR.\+c}}.
+
+
+
+\label{doc-var-members}
+\Hypertarget{_a_r_m7___l_p_c2000_2port_i_s_r_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_a_r_m7___l_p_c2000_2port_i_s_r_8c_a4e719b187cba9cb244aeb611aca513f6}\index{portISR.c@{portISR.c}!ulCriticalNesting@{ulCriticalNesting}}
+\index{ulCriticalNesting@{ulCriticalNesting}!portISR.c@{portISR.c}}
+\doxysubsubsection{\texorpdfstring{ulCriticalNesting}{ulCriticalNesting}}
+{\footnotesize\ttfamily \label{_a_r_m7___l_p_c2000_2port_i_s_r_8c_a4e719b187cba9cb244aeb611aca513f6} 
+volatile uint32\+\_\+t ul\+Critical\+Nesting = 9999UL}
+
+
+
+Definition at line \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_source_l00064}{64}} of file \mbox{\hyperlink{_a_r_m7___l_p_c2000_2port_i_s_r_8c_source}{port\+ISR.\+c}}.
+

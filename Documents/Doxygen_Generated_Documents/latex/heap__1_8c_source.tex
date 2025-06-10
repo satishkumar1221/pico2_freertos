@@ -1,0 +1,184 @@
+\doxysection{heap\+\_\+1.\+c}
+\hypertarget{heap__1_8c_source}{}\label{heap__1_8c_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/MemMang/heap\_1.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/MemMang/heap\_1.c}}
+\mbox{\hyperlink{heap__1_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00030}00030\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00031}00031\ \textcolor{comment}{\ *\ The\ simplest\ possible\ implementation\ of\ pvPortMalloc().\ \ Note\ that\ this}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00032}00032\ \textcolor{comment}{\ *\ implementation\ does\ NOT\ allow\ allocated\ memory\ to\ be\ freed\ again.}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00033}00033\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00034}00034\ \textcolor{comment}{\ *\ See\ heap\_2.c,\ heap\_3.c\ and\ heap\_4.c\ for\ alternative\ implementations,\ and\ the}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00035}00035\ \textcolor{comment}{\ *\ memory\ management\ pages\ of\ https://www.FreeRTOS.org\ for\ more\ information.}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00036}00036\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00037}00037\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00039}00039\ \textcolor{comment}{/*\ Defining\ MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE\ prevents\ task.h\ from\ redefining}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00040}00040\ \textcolor{comment}{\ *\ all\ the\ API\ functions\ to\ use\ the\ MPU\ wrappers.\ \ That\ should\ only\ be\ done\ when}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00041}00041\ \textcolor{comment}{\ *\ task.h\ is\ included\ from\ an\ application\ file.\ */}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00042}\mbox{\hyperlink{heap__1_8c_ab622d8c674f2a417a666a7ed89109e79}{00042}}\ \textcolor{preprocessor}{\#define\ MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00044}00044\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_free_r_t_o_s_8h}{FreeRTOS.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00045}00045\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{task_8h}{task.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00047}00047\ \textcolor{preprocessor}{\#undef\ MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00049}00049\ \textcolor{preprocessor}{\#if\ (\ configSUPPORT\_DYNAMIC\_ALLOCATION\ ==\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00050}00050\ \textcolor{preprocessor}{\ \ \ \ \#error\ This\ file\ must\ not\ be\ used\ if\ configSUPPORT\_DYNAMIC\_ALLOCATION\ is\ 0}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00051}00051\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00053}00053\ \textcolor{comment}{/*\ A\ few\ bytes\ might\ be\ lost\ to\ byte\ aligning\ the\ heap\ start\ address.\ */}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00054}\mbox{\hyperlink{heap__1_8c_a3e68bebe7509a99550e1358cbca8e23f}{00054}}\ \textcolor{preprocessor}{\#define\ configADJUSTED\_HEAP\_SIZE\ \ \ \ \ \ \ \ (\ configTOTAL\_HEAP\_SIZE\ -\/\ portBYTE\_ALIGNMENT\ )}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00056}00056\ \textcolor{comment}{/*\ Max\ value\ that\ fits\ in\ a\ size\_t\ type.\ */}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00057}\mbox{\hyperlink{heap__1_8c_a44190865b2e28c843cfe20e23e946219}{00057}}\ \textcolor{preprocessor}{\#define\ heapSIZE\_MAX\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ \string~(\ (\ size\_t\ )\ 0\ )\ )}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00059}00059\ \textcolor{comment}{/*\ Check\ if\ adding\ a\ and\ b\ will\ result\ in\ overflow.\ */}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00060}\mbox{\hyperlink{heap__1_8c_a427b4999e850bf9bc628d6c48183baff}{00060}}\ \textcolor{preprocessor}{\#define\ heapADD\_WILL\_OVERFLOW(\ a,\ b\ )\ \ \ (\ (\ a\ )\ >\ (\ heapSIZE\_MAX\ -\/\ (\ b\ )\ )\ )}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00062}00062\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00064}00064\ \textcolor{comment}{/*\ Allocate\ the\ memory\ for\ the\ heap.\ */}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00065}00065\ \textcolor{preprocessor}{\#if\ (\ configAPPLICATION\_ALLOCATED\_HEAP\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00067}00067\ \textcolor{comment}{/*\ The\ application\ writer\ has\ already\ defined\ the\ array\ used\ for\ the\ RTOS}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00068}00068\ \textcolor{comment}{*\ heap\ -\/\ probably\ so\ it\ can\ be\ placed\ in\ a\ special\ segment\ or\ address.\ */}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00069}00069\ \ \ \ \ \textcolor{keyword}{extern}\ uint8\_t\ ucHeap[\ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_a9f213227674effff0122a75d94d87938}{configTOTAL\_HEAP\_SIZE}}\ ];}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00070}00070\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00071}00071\ \ \ \ \ \textcolor{keyword}{static}\ uint8\_t\ ucHeap[\ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_a9f213227674effff0122a75d94d87938}{configTOTAL\_HEAP\_SIZE}}\ ];}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00072}00072\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ configAPPLICATION\_ALLOCATED\_HEAP\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00074}00074\ \textcolor{comment}{/*\ Index\ into\ the\ ucHeap\ array.\ */}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00075}00075\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{size\_t}\ xNextFreeByte\ =\ (\ size\_t\ )\ 0U;}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00077}00077\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00079}\mbox{\hyperlink{heap__1_8c_ac56bcb7515f081a5b3df83935499fa4a}{00079}}\ \textcolor{keywordtype}{void}\ *\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_a4d523dc6c079459faa62130465595246}{pvPortMalloc}}(\ \textcolor{keywordtype}{size\_t}\ xWantedSize\ )}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00080}00080\ \{}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00081}00081\ \ \ \ \ \textcolor{keywordtype}{void}\ *\ pvReturn\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00082}00082\ \ \ \ \ \textcolor{keyword}{static}\ uint8\_t\ *\ pucAlignedHeap\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00084}00084\ \ \ \ \ \textcolor{comment}{/*\ Ensure\ that\ blocks\ are\ always\ aligned.\ */}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00085}00085\ \textcolor{preprocessor}{\ \ \ \ \#if\ (\ portBYTE\_ALIGNMENT\ !=\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00086}00086\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00087}00087\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ xAdditionalRequiredSize;}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00089}00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ (\ xWantedSize\ \&\ portBYTE\_ALIGNMENT\_MASK\ )\ !=\ 0x00\ )}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00090}00090\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Byte\ alignment\ required.\ */}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ xAdditionalRequiredSize\ =\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_ab9091ce3940d8bd93ec850122a2c6a1c}{portBYTE\_ALIGNMENT}}\ -\/\ (\ xWantedSize\ \&\ portBYTE\_ALIGNMENT\_MASK\ );}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{heap__1_8c_a427b4999e850bf9bc628d6c48183baff}{heapADD\_WILL\_OVERFLOW}}(\ xWantedSize,\ xAdditionalRequiredSize\ )\ ==\ 0\ )}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ xWantedSize\ +=\ xAdditionalRequiredSize;}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ xWantedSize\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00102}00102\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00103}00103\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00104}00104\ \textcolor{preprocessor}{\ \ \ \ \#endif\ }\textcolor{comment}{/*\ if\ (\ portBYTE\_ALIGNMENT\ !=\ 1\ )\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00106}00106\ \ \ \ \ \mbox{\hyperlink{task_8h_a366b302eba79d10b5ee2a3756f0fcc43}{vTaskSuspendAll}}();}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00107}00107\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00108}00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ pucAlignedHeap\ ==\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00109}00109\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Ensure\ the\ heap\ starts\ on\ a\ correctly\ aligned\ boundary.\ */}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ pucAlignedHeap\ =\ (\ uint8\_t\ *\ )\ (\ (\ (\ \mbox{\hyperlink{_free_r_t_o_s_8h_a53bae25f223b7156dce0fc6e6b1b2295}{portPOINTER\_SIZE\_TYPE}}\ )\ \&(\ ucHeap[\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_ab9091ce3940d8bd93ec850122a2c6a1c}{portBYTE\_ALIGNMENT}}\ -\/\ 1\ ]\ )\ )\ \&}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ \string~(\ (\ \mbox{\hyperlink{_free_r_t_o_s_8h_a53bae25f223b7156dce0fc6e6b1b2295}{portPOINTER\_SIZE\_TYPE}}\ )\ portBYTE\_ALIGNMENT\_MASK\ )\ )\ );}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00113}00113\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00115}00115\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Check\ there\ is\ enough\ room\ left\ for\ the\ allocation.\ */}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00116}00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ (\ xWantedSize\ >\ 0\ )\ \&\&}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ (\ \mbox{\hyperlink{heap__1_8c_a427b4999e850bf9bc628d6c48183baff}{heapADD\_WILL\_OVERFLOW}}(\ xNextFreeByte,\ xWantedSize\ )\ ==\ 0\ )\ \&\&}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ (\ (\ xNextFreeByte\ +\ xWantedSize\ )\ <\ \mbox{\hyperlink{heap__1_8c_a3e68bebe7509a99550e1358cbca8e23f}{configADJUSTED\_HEAP\_SIZE}}\ )\ )}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00119}00119\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Return\ the\ next\ free\ byte\ then\ increment\ the\ index\ past\ this}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00121}00121\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ block.\ */}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ pvReturn\ =\ pucAlignedHeap\ +\ xNextFreeByte;}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ xNextFreeByte\ +=\ xWantedSize;}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00124}00124\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00126}00126\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_af326afe922ffa6da245c98dc227a3293}{traceMALLOC}}(\ pvReturn,\ xWantedSize\ );}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00127}00127\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00128}00128\ \ \ \ \ (\ void\ )\ \mbox{\hyperlink{task_8h_a003f8ae6d649225abd030cc76e1c7d0e}{xTaskResumeAll}}();}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00130}00130\ \textcolor{preprocessor}{\ \ \ \ \#if\ (\ configUSE\_MALLOC\_FAILED\_HOOK\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00131}00131\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00132}00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ pvReturn\ ==\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00133}00133\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ vApplicationMallocFailedHook();}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00135}00135\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00136}00136\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00137}00137\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00139}00139\ \ \ \ \ \textcolor{keywordflow}{return}\ pvReturn;}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00140}00140\ \}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00141}00141\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00143}\mbox{\hyperlink{heap__1_8c_a1e7cea2fd1bc894ea3b5f5e8179d259b}{00143}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_a5e70e878c0ed79ab346b5eab7e93ddff}{vPortFree}}(\ \textcolor{keywordtype}{void}\ *\ pv\ )}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00144}00144\ \{}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00145}00145\ \ \ \ \ \textcolor{comment}{/*\ Memory\ cannot\ be\ freed\ using\ this\ scheme.\ \ See\ heap\_2.c,\ heap\_3.c\ and}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00146}00146\ \textcolor{comment}{\ \ \ \ \ *\ heap\_4.c\ for\ alternative\ implementations,\ and\ the\ memory\ management\ pages\ of}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00147}00147\ \textcolor{comment}{\ \ \ \ \ *\ https://www.FreeRTOS.org\ for\ more\ information.\ */}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00148}00148\ \ \ \ \ (\ void\ )\ pv;}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00150}00150\ \ \ \ \ \textcolor{comment}{/*\ Force\ an\ assert\ as\ it\ is\ invalid\ to\ call\ this\ function.\ */}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00151}00151\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ pv\ ==\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ );}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00152}00152\ \}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00153}00153\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00155}\mbox{\hyperlink{portable_8h_a846b5ebdaf2b51fe707efb4a0974f676}{00155}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{heap__1_8c_a8bf103ce32ce8473574e9920af8b4eec}{vPortInitialiseBlocks}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00156}00156\ \{}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00157}00157\ \ \ \ \ \textcolor{comment}{/*\ Only\ required\ when\ static\ memory\ is\ not\ cleared.\ */}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00158}00158\ \ \ \ \ xNextFreeByte\ =\ (\ size\_t\ )\ 0;}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00159}00159\ \}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00160}00160\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00162}\mbox{\hyperlink{heap__1_8c_a0c28a12b313bc248be0cb7a37ed81bb7}{00162}}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{heap__1_8c_a0c28a12b313bc248be0cb7a37ed81bb7}{xPortGetFreeHeapSize}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00163}00163\ \{}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00164}00164\ \ \ \ \ \textcolor{keywordflow}{return}(\ \mbox{\hyperlink{heap__1_8c_a3e68bebe7509a99550e1358cbca8e23f}{configADJUSTED\_HEAP\_SIZE}}\ -\/\ xNextFreeByte\ );}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00165}00165\ \}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00167}00167\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00169}00169\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00170}00170\ \textcolor{comment}{\ *\ Reset\ the\ state\ in\ this\ file.\ This\ state\ is\ normally\ initialized\ at\ start\ up.}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00171}00171\ \textcolor{comment}{\ *\ This\ function\ must\ be\ called\ by\ the\ application\ before\ restarting\ the}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00172}00172\ \textcolor{comment}{\ *\ scheduler.}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00173}00173\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00174}\mbox{\hyperlink{portable_8h_ab1d82c64224912f762fbf4bf1f4d59de}{00174}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{heap__1_8c_af44030217c31ad748406a5a72c2e7be0}{vPortHeapResetState}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00175}00175\ \{}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00176}00176\ \ \ \ \ xNextFreeByte\ =\ (\ size\_t\ )\ 0U;}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00177}00177\ \}}
+\DoxyCodeLine{\Hypertarget{heap__1_8c_source_l00178}00178\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+
+\end{DoxyCode}

@@ -1,0 +1,88 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+IAR/\+AVR32\+\_\+\+UC3/read.c File Reference}
+\hypertarget{read_8c}{}\label{read_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/IAR/AVR32\_UC3/read.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/IAR/AVR32\_UC3/read.c}}
+
+
+System-\/specific implementation of the \doxylink{read_8c_a1b62afd2da23c9384092042a9655a1f5}{\+\_\+\+\_\+read} function used by the standard library.  
+
+
+{\ttfamily \#include $<$yfuns.\+h$>$}\newline
+{\ttfamily \#include $<$avr32/io.\+h$>$}\newline
+{\ttfamily \#include "{}usart.\+h"{}}\newline
+Include dependency graph for read.\+c\+:
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+size\+\_\+t \mbox{\hyperlink{read_8c_a1b62afd2da23c9384092042a9655a1f5}{\+\_\+\+\_\+read}} (int handle, uint8\+\_\+t \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Reads a number of bytes, at most {\itshape size}, into the memory area pointed to by {\itshape buffer}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\+\_\+\+STD\+\_\+\+BEGIN volatile avr32\+\_\+usart\+\_\+t \texorpdfstring{$\ast$}{*}volatile \mbox{\hyperlink{read_8c_a353b888a8672d114546f480996688dec}{stdio\+\_\+usart\+\_\+base}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+System-\/specific implementation of the \doxylink{read_8c_a1b62afd2da23c9384092042a9655a1f5}{\+\_\+\+\_\+read} function used by the standard library. 
+
+
+\begin{DoxyItemize}
+\item Compiler\+: IAR EWAVR32
+\item Supported devices\+: All AVR32 devices with a USART module can be used.
+\item App\+Note\+:
+\end{DoxyItemize}
+
+\begin{DoxyAuthor}{Author}
+Atmel Corporation (Now Microchip)\+: \href{https://www.microchip.com}{\texttt{https\+://www.\+microchip.\+com}} ~\newline
+ Support and FAQ\+: \href{https://www.microchip.com/support/}{\texttt{https\+://www.\+microchip.\+com/support/}} 
+\end{DoxyAuthor}
+
+
+Definition in file \mbox{\hyperlink{read_8c_source}{read.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{read_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{read_8c_a1b62afd2da23c9384092042a9655a1f5}\index{read.c@{read.c}!\_\_read@{\_\_read}}
+\index{\_\_read@{\_\_read}!read.c@{read.c}}
+\doxysubsubsection{\texorpdfstring{\_\_read()}{\_\_read()}}
+{\footnotesize\ttfamily \label{read_8c_a1b62afd2da23c9384092042a9655a1f5} 
+size\+\_\+t \+\_\+\+\_\+read (\begin{DoxyParamCaption}\item[{int}]{handle}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})}
+
+
+
+Reads a number of bytes, at most {\itshape size}, into the memory area pointed to by {\itshape buffer}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em handle} & File handle to read from. \\
+\hline
+{\em buffer} & Pointer to buffer to write read bytes to. \\
+\hline
+{\em size} & Number of bytes to read.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of bytes read, {\ttfamily 0} at the end of the file, or {\ttfamily \+\_\+\+LLIO\+\_\+\+ERROR} on failure. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{read_8c_source_l00099}{99}} of file \mbox{\hyperlink{read_8c_source}{read.\+c}}.
+
+
+
+\label{doc-var-members}
+\Hypertarget{read_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{read_8c_a353b888a8672d114546f480996688dec}\index{read.c@{read.c}!stdio\_usart\_base@{stdio\_usart\_base}}
+\index{stdio\_usart\_base@{stdio\_usart\_base}!read.c@{read.c}}
+\doxysubsubsection{\texorpdfstring{stdio\_usart\_base}{stdio\_usart\_base}}
+{\footnotesize\ttfamily \label{read_8c_a353b888a8672d114546f480996688dec} 
+\+\_\+\+STD\+\_\+\+BEGIN volatile avr32\+\_\+usart\+\_\+t\texorpdfstring{$\ast$}{*} volatile stdio\+\_\+usart\+\_\+base\hspace{0.3cm}{\ttfamily [extern]}}
+
+Pointer to the base of the USART module instance to use for stdio. 
+
+Definition at line \mbox{\hyperlink{write_8c_source_l00087}{87}} of file \mbox{\hyperlink{write_8c_source}{write.\+c}}.
+

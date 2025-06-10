@@ -1,0 +1,39 @@
+\doxysection{v\+Task\+Notify\+Give\+Indexed\+From\+ISR }
+\hypertarget{group__v_task_notify_give_indexed_from_i_s_r}{}\label{group__v_task_notify_give_indexed_from_i_s_r}\index{vTaskNotifyGiveIndexedFromISR@{vTaskNotifyGiveIndexedFromISR}}
+task. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{task_8h_a756fe3c4656aaaa8ef6d309e0078e132}{vTaskNotifyGiveIndexedFromISR}}(\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ \mbox{\hyperlink{_free_r_t_o_s_8h_af7cd8f53b62f0c497b442b504c30f2ec}{xTaskHandle}},\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxIndexToNotify,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ *pxHigherPriorityTaskWoken\ );}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{task_8h_a1add9ef24d3763e34603b18802fae9d7}{vTaskNotifyGiveFromISR}}(\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ \mbox{\hyperlink{_free_r_t_o_s_8h_af7cd8f53b62f0c497b442b504c30f2ec}{xTaskHandle}},\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ *pxHigherPriorityTaskWoken\ );}
+
+\end{DoxyCode}
+
+
+A version of \doxylink{task_8h_a53ec0c8b6b8281a3055747813570193c}{x\+Task\+Notify\+Give\+Indexed()} that can be called from an interrupt service routine (ISR).
+
+See \href{https://www.FreeRTOS.org/RTOS-task-notifications.html}{\texttt{https\+://www.\+Free\+RTOS.\+org/\+RTOS-\/task-\/notifications.\+html}} for more details.
+
+config\+USE\+\_\+\+TASK\+\_\+\+NOTIFICATIONS must be undefined or defined as 1 for this macro to be available.
+
+Each task has a private array of "{}notification values"{} (or \textquotesingle{}notifications\textquotesingle{}), each of which is a 32-\/bit unsigned integer (uint32\+\_\+t). The constant config\+TASK\+\_\+\+NOTIFICATION\+\_\+\+ARRAY\+\_\+\+ENTRIES sets the number of indexes in the array, and (for backward compatibility) defaults to 1 if left undefined. Prior to Free\+RTOS V10.\+4.\+0 there was only one notification value per task.
+
+Events can be sent to a task using an intermediary object. Examples of such objects are queues, semaphores, mutexes and event groups. Task notifications are a method of sending an event directly to a task without the need for such an intermediary object.
+
+A notification sent to a task can optionally perform an action, such as update, overwrite or increment one of the task\textquotesingle{}s notification values. In that way task notifications can be used to send data to a task, or be used as light weight and fast binary or counting semaphores.
+
+\doxylink{task_8h_a756fe3c4656aaaa8ef6d309e0078e132}{v\+Task\+Notify\+Give\+Indexed\+From\+ISR()} is intended for use when task notifications are used as light weight and faster binary or counting semaphore equivalents. Actual Free\+RTOS semaphores are given from an ISR using the \doxylink{semphr_8h_a68aa43df8b2a0dbe17d05fad74670ef0}{x\+Semaphore\+Give\+From\+ISR()} API function, the equivalent action that instead uses a task notification is \doxylink{task_8h_a756fe3c4656aaaa8ef6d309e0078e132}{v\+Task\+Notify\+Give\+Indexed\+From\+ISR()}.
+
+When task notifications are being used as a binary or counting semaphore equivalent then the task being notified should wait for the notification using the \doxylink{task_8h_a4f42982425f3b106e1a9f19b41ba4124}{ul\+Task\+Notify\+Take\+Indexed()} API function rather than the \doxylink{task_8h_a5bcd5a5b7d7c41dd782a38093be1b7c9}{x\+Task\+Notify\+Wait\+Indexed()} API function.
+
+{\bfseries{NOTE}} Each notification within the array operates independently -\/ a task can only block on one notification within the array at a time and will not be unblocked by a notification sent to any other array index.
+
+Backward compatibility information\+: Prior to Free\+RTOS V10.\+4.\+0 each task had a single "{}notification value"{}, and all task notification API functions operated on that value. Replacing the single notification value with an array of notification values necessitated a new set of API functions that could address specific notifications within the array. \doxylink{task_8h_a1ed9129068b96a909356bd0369c5ecb0}{x\+Task\+Notify\+From\+ISR()} is the original API function, and remains backward compatible by always operating on the notification value at index 0 within the array. Calling x\+Task\+Notify\+Give\+From\+ISR() is equivalent to calling x\+Task\+Notify\+Give\+Indexed\+From\+ISR() with the ux\+Index\+To\+Notify parameter set to 0.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Task\+To\+Notify} & The handle of the task being notified. The handle to a task can be returned from the x\+Task\+Create() API function used to create the task, and the handle of the currently running task can be obtained by calling \doxylink{task_8h_a85a0f9c9f817b18686efbf8f37c72dfc}{x\+Task\+Get\+Current\+Task\+Handle()}.\\
+\hline
+{\em ux\+Index\+To\+Notify} & The index within the target task\textquotesingle{}s array of notification values to which the notification is to be sent. ux\+Index\+To\+Notify must be less than config\+TASK\+\_\+\+NOTIFICATION\+\_\+\+ARRAY\+\_\+\+ENTRIES. x\+Task\+Notify\+Give\+From\+ISR() does not have this parameter and always sends notifications to index 0.\\
+\hline
+{\em px\+Higher\+Priority\+Task\+Woken} & \doxylink{task_8h_a1add9ef24d3763e34603b18802fae9d7}{v\+Task\+Notify\+Give\+From\+ISR()} will set \texorpdfstring{$\ast$}{*}px\+Higher\+Priority\+Task\+Woken to pd\+TRUE if sending the notification caused the task to which the notification was sent to leave the Blocked state, and the unblocked task has a priority higher than the currently running task. If \doxylink{task_8h_a1add9ef24d3763e34603b18802fae9d7}{v\+Task\+Notify\+Give\+From\+ISR()} sets this value to pd\+TRUE then a context switch should be requested before the interrupt is exited. How a context switch is requested from an ISR is dependent on the port -\/ see the documentation page for the port in use. \\
+\hline
+\end{DoxyParams}

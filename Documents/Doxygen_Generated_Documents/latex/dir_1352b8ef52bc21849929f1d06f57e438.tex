@@ -1,0 +1,54 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+Third\+Party/\+GCC/\+RP2040 Directory Reference}
+\hypertarget{dir_1352b8ef52bc21849929f1d06f57e438}{}\label{dir_1352b8ef52bc21849929f1d06f57e438}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/RP2040 Directory Reference@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/RP2040 Directory Reference}}
+Directory dependency graph for RP2040\+:
+% FIG 0
+\doxysubsubsection*{Directories}
+\begin{DoxyCompactItemize}
+\item 
+directory \mbox{\hyperlink{dir_bb065536b4b68120b336adf3a68638ea}{include}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Files}
+\begin{DoxyCompactItemize}
+\item 
+file \mbox{\hyperlink{_third_party_2_g_c_c_2_r_p2040_2port_8c}{port.\+c}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{README.md_autotoc_md33}{}\doxysubsection{\texorpdfstring{Overview}{Overview}}\label{README.md_autotoc_md33}
+This directory provides an SMP Free\+RTOS-\/\+Kernel port that can be used with the Raspberry Pi Pico SDK on RP2040. It supports\+:
+
+
+\begin{DoxyItemize}
+\item Simple CMake INTERFACE libraries, to provide the Free\+RTOS-\/\+Kernel and also the individual allocator types, without copying code into the user\textquotesingle{}s project.
+\item Running the Free\+RTOS-\/\+Kernel and tasks on either core 0 or core 1, or both.
+\item Use of SDK synchronization primitives (such as mutexes, semaphores, queues from pico\+\_\+sync) between Free\+RTOS tasks and code executing on a non Free\+RTOS core, or in IRQ handlers.
+\end{DoxyItemize}
+
+Note that whilst this SMP version can be run on just a single (either) core, it is probably more efficient to use the non SMP version in the main Free\+RTOS-\/\+Kernel branch in that case.\hypertarget{README.md_autotoc_md34}{}\doxysubsection{\texorpdfstring{Using this port}{Using this port}}\label{README.md_autotoc_md34}
+You can copy \href{FreeRTOS_Kernel_import.cmake}{\texttt{Free\+RTOS\+\_\+\+Kernel\+\_\+import.\+cmake}} into your project, and add the following in your {\ttfamily CMake\+Lists.\+txt}\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{include(FreeRTOS\_Kernel\_import.cmake)}
+
+\end{DoxyCode}
+
+
+This will locate the Free\+RTOS kernel if it is a direct sub-\/module of your project, or if you provide the {\ttfamily FREERTOS\+\_\+\+KERNEL\+\_\+\+PATH} variable in your environment or via {\ttfamily -\/DFREERTOS\+\_\+\+KERNEL\+\_\+\+PATH=/path/to/\+Free\+RTOS-\/\+Kernel} on the CMake command line.
+
+{\bfseries{NOTE\+:}} If you are using version 1.\+3.\+1 or older of the Raspberry Pi Pico SDK then this line must appear before the {\ttfamily pico\+\_\+sdk\+\_\+init()} and will cause Free\+RTOS to be included/required in all RP2040 targets in your project. After this SDK version, you can include the Free\+RTOS-\/\+Kernel support later in your CMake build (possibly in a subdirectory) and the Free\+RTOS-\/\+Kernel support will only apply to those targets which explicitly include Free\+RTOS support.
+
+As an alternative to the {\ttfamily import} statement above, you can just add this directory directly via thw following (with the same placement restrictions related to the Raspberry Pi Pico SDK version above)\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{add\_subdirectory(path/to/this/directory\ FreeRTOS-\/Kernel)}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md35}{}\doxysubsection{\texorpdfstring{Advanced Configuration}{Advanced Configuration}}\label{README.md_autotoc_md35}
+Some additional {\ttfamily config} options are defined \href{include/rp2040_config.h}{\texttt{here}} which control some low level implementation details.\hypertarget{README.md_autotoc_md36}{}\doxysubsection{\texorpdfstring{Known Limitations}{Known Limitations}}\label{README.md_autotoc_md36}
+
+\begin{DoxyItemize}
+\item Tickless idle has not currently been tested, and is likely non-\/functional 
+\end{DoxyItemize}

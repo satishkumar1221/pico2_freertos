@@ -1,0 +1,62 @@
+\doxysection{x\+Stream\+Buffer\+Receive }
+\hypertarget{group__x_stream_buffer_receive}{}\label{group__x_stream_buffer_receive}\index{xStreamBufferReceive@{xStreamBufferReceive}}
+\doxylink{stream__buffer_8h}{stream\+\_\+buffer.\+h}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{stream__buffer_8h_a55efc144b988598d84a6087d3e20b507}{xStreamBufferReceive}}(\ \mbox{\hyperlink{stream__buffer_8h_a8b80974e2278f073412293e6580ce56f}{StreamBufferHandle\_t}}\ xStreamBuffer,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *pvRxData,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ xBufferLengthBytes,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xTicksToWait\ );}
+
+\end{DoxyCode}
+
+
+Receives bytes from a stream buffer.
+
+{\itshape {\bfseries{NOTE}}}\+: Uniquely among Free\+RTOS objects, the stream buffer implementation (so also the message buffer implementation, as message buffers are built on top of stream buffers) assumes there is only one task or interrupt that will write to the buffer (the writer), and only one task or interrupt that will read from the buffer (the reader). It is safe for the writer and reader to be different tasks or interrupts, but, unlike other Free\+RTOS objects, it is not safe to have multiple different writers or multiple different readers. If there are to be multiple different writers then the application writer must place each call to a writing API function (such as \doxylink{stream__buffer_8h_a35cdf3b6bf677086b9128782f762499d}{x\+Stream\+Buffer\+Send()}) inside a critical section and set the send block time to 0. Likewise, if there are to be multiple different readers then the application writer must place each call to a reading API function (such as \doxylink{stream__buffer_8h_a55efc144b988598d84a6087d3e20b507}{x\+Stream\+Buffer\+Receive()}) inside a critical section and set the receive block time to 0.
+
+Use \doxylink{stream__buffer_8h_a55efc144b988598d84a6087d3e20b507}{x\+Stream\+Buffer\+Receive()} to read from a stream buffer from a task. Use \doxylink{stream__buffer_8h_a6c882a1d9f26c40f93f271bd1b844b3b}{x\+Stream\+Buffer\+Receive\+From\+ISR()} to read from a stream buffer from an interrupt service routine (ISR).
+
+config\+USE\+\_\+\+STREAM\+\_\+\+BUFFERS must be set to 1 in for Free\+RTOSConfig.\+h for \doxylink{stream__buffer_8h_a55efc144b988598d84a6087d3e20b507}{x\+Stream\+Buffer\+Receive()} to be available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Stream\+Buffer} & The handle of the stream buffer from which bytes are to be received.\\
+\hline
+{\em pv\+Rx\+Data} & A pointer to the buffer into which the received bytes will be copied.\\
+\hline
+{\em x\+Buffer\+Length\+Bytes} & The length of the buffer pointed to by the pv\+Rx\+Data parameter. This sets the maximum number of bytes to receive in one call. x\+Stream\+Buffer\+Receive will return as many bytes as possible up to a maximum set by x\+Buffer\+Length\+Bytes.\\
+\hline
+{\em x\+Ticks\+To\+Wait} & The maximum amount of time the task should remain in the Blocked state to wait for data to become available if the stream buffer is empty. \doxylink{stream__buffer_8h_a55efc144b988598d84a6087d3e20b507}{x\+Stream\+Buffer\+Receive()} will return immediately if x\+Ticks\+To\+Wait is zero. The block time is specified in tick periods, so the absolute time it represents is dependent on the tick frequency. The macro \doxylink{projdefs_8h_a353d0f62b82a402cb3db63706c81ec3f}{pd\+MS\+\_\+\+TO\+\_\+\+TICKS()} can be used to convert a time specified in milliseconds into a time specified in ticks. Setting x\+Ticks\+To\+Wait to port\+MAX\+\_\+\+DELAY will cause the task to wait indefinitely (without timing out), provided INCLUDE\+\_\+v\+Task\+Suspend is set to 1 in Free\+RTOSConfig.\+h. A task does not use any CPU time when it is in the Blocked state.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of bytes actually read from the stream buffer, which will be less than x\+Buffer\+Length\+Bytes if the call to \doxylink{stream__buffer_8h_a55efc144b988598d84a6087d3e20b507}{x\+Stream\+Buffer\+Receive()} timed out before x\+Buffer\+Length\+Bytes were available.
+\end{DoxyReturn}
+Example use\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vAFunction(\ StreamBuffer\_t\ xStreamBuffer\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{uint8\_t\ ucRxData[\ 20\ ];}
+\DoxyCodeLine{\textcolor{keywordtype}{size\_t}\ xReceivedBytes;}
+\DoxyCodeLine{\textcolor{keyword}{const}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xBlockTime\ =\ \mbox{\hyperlink{projdefs_8h_a353d0f62b82a402cb3db63706c81ec3f}{pdMS\_TO\_TICKS}}(\ 20\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Receive\ up\ to\ another\ sizeof(\ ucRxData\ )\ bytes\ from\ the\ stream\ buffer.}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Wait\ in\ the\ Blocked\ state\ (so\ not\ using\ any\ CPU\ processing\ time)\ for\ a}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ maximum\ of\ 100ms\ for\ the\ full\ sizeof(\ ucRxData\ )\ number\ of\ bytes\ to\ be}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ available.}}
+\DoxyCodeLine{\ xReceivedBytes\ =\ \mbox{\hyperlink{stream__buffer_8h_a55efc144b988598d84a6087d3e20b507}{xStreamBufferReceive}}(\ xStreamBuffer,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ \textcolor{keywordtype}{void}\ *\ )\ ucRxData,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{sizeof}(\ ucRxData\ ),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ xBlockTime\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(\ xReceivedBytes\ >\ 0\ )}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ A\ ucRxData\ contains\ another\ xReceivedBytes\ bytes\ of\ data,\ which\ can}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ be\ processed\ here....}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

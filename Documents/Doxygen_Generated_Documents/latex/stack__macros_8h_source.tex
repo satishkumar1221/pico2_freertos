@@ -1,0 +1,147 @@
+\doxysection{stack\+\_\+macros.\+h}
+\hypertarget{stack__macros_8h_source}{}\label{stack__macros_8h_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/stack\_macros.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/stack\_macros.h}}
+\mbox{\hyperlink{stack__macros_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00029}00029\ \textcolor{preprocessor}{\#ifndef\ STACK\_MACROS\_H}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00030}00030\ \textcolor{preprocessor}{\#define\ STACK\_MACROS\_H}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00032}00032\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00033}00033\ \textcolor{comment}{\ *\ Call\ the\ stack\ overflow\ hook\ function\ if\ the\ stack\ of\ the\ task\ being\ swapped}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00034}00034\ \textcolor{comment}{\ *\ out\ is\ currently\ overflowed,\ or\ looks\ like\ it\ might\ have\ overflowed\ in\ the}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00035}00035\ \textcolor{comment}{\ *\ past.}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00036}00036\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00037}00037\ \textcolor{comment}{\ *\ Setting\ configCHECK\_FOR\_STACK\_OVERFLOW\ to\ 1\ will\ cause\ the\ macro\ to\ check}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00038}00038\ \textcolor{comment}{\ *\ the\ current\ stack\ state\ only\ -\/\ comparing\ the\ current\ top\ of\ stack\ value\ to}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00039}00039\ \textcolor{comment}{\ *\ the\ stack\ limit.\ \ Setting\ configCHECK\_FOR\_STACK\_OVERFLOW\ to\ greater\ than\ 1}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00040}00040\ \textcolor{comment}{\ *\ will\ also\ cause\ the\ last\ few\ stack\ bytes\ to\ be\ checked\ to\ ensure\ the\ value}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00041}00041\ \textcolor{comment}{\ *\ to\ which\ the\ bytes\ were\ set\ when\ the\ task\ was\ created\ have\ not\ been}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00042}00042\ \textcolor{comment}{\ *\ overwritten.\ \ Note\ this\ second\ test\ does\ not\ guarantee\ that\ an\ overflowed}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00043}00043\ \textcolor{comment}{\ *\ stack\ will\ always\ be\ recognised.}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00044}00044\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00046}00046\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00048}00048\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00049}00049\ \textcolor{comment}{\ *\ portSTACK\_LIMIT\_PADDING\ is\ a\ number\ of\ extra\ words\ to\ consider\ to\ be\ in}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00050}00050\ \textcolor{comment}{\ *\ use\ on\ the\ stack.}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00051}00051\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00052}00052\ \textcolor{preprocessor}{\#ifndef\ portSTACK\_LIMIT\_PADDING}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00053}\mbox{\hyperlink{stack__macros_8h_a34285eeb084c04b618299bb059b1995e}{00053}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ portSTACK\_LIMIT\_PADDING\ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00054}00054\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00056}00056\ \textcolor{preprocessor}{\#if\ (\ (\ configCHECK\_FOR\_STACK\_OVERFLOW\ ==\ 1\ )\ \&\&\ (\ portSTACK\_GROWTH\ <\ 0\ )\ )}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00058}00058\ \textcolor{comment}{/*\ Only\ the\ current\ stack\ state\ is\ to\ be\ checked.\ */}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00059}00059\ \textcolor{preprocessor}{\ \ \ \ \#define\ taskCHECK\_FOR\_STACK\_OVERFLOW()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00060}00060\ \textcolor{preprocessor}{\ \ \ \ do\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00061}00061\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ }\textcolor{comment}{/*\ Is\ the\ currently\ saved\ stack\ pointer\ within\ the\ stack\ limit?\ */}\textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00062}00062\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if(\ pxCurrentTCB-\/>pxTopOfStack\ <=\ pxCurrentTCB-\/>pxStack\ +\ portSTACK\_LIMIT\_PADDING\ )\ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00063}00063\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00064}00064\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ char\ *\ pcOverflowTaskName\ =\ pxCurrentTCB-\/>pcTaskName;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00065}00065\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ vApplicationStackOverflowHook(\ (\ TaskHandle\_t\ )\ pxCurrentTCB,\ pcOverflowTaskName\ );\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00066}00066\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00067}00067\ \textcolor{preprocessor}{\ \ \ \ \}\ while(\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00069}00069\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ configCHECK\_FOR\_STACK\_OVERFLOW\ ==\ 1\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00070}00070\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00072}00072\ \textcolor{preprocessor}{\#if\ (\ (\ configCHECK\_FOR\_STACK\_OVERFLOW\ ==\ 1\ )\ \&\&\ (\ portSTACK\_GROWTH\ >\ 0\ )\ )}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00074}00074\ \textcolor{comment}{/*\ Only\ the\ current\ stack\ state\ is\ to\ be\ checked.\ */}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00075}00075\ \textcolor{preprocessor}{\ \ \ \ \#define\ taskCHECK\_FOR\_STACK\_OVERFLOW()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00076}00076\ \textcolor{preprocessor}{\ \ \ \ do\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00077}00077\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00078}00078\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ }\textcolor{comment}{/*\ Is\ the\ currently\ saved\ stack\ pointer\ within\ the\ stack\ limit?\ */}\textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00079}00079\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if(\ pxCurrentTCB-\/>pxTopOfStack\ >=\ pxCurrentTCB-\/>pxEndOfStack\ -\/\ portSTACK\_LIMIT\_PADDING\ )\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00080}00080\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00081}00081\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ char\ *\ pcOverflowTaskName\ =\ pxCurrentTCB-\/>pcTaskName;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00082}00082\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ vApplicationStackOverflowHook(\ (\ TaskHandle\_t\ )\ pxCurrentTCB,\ pcOverflowTaskName\ );\ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00083}00083\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00084}00084\ \textcolor{preprocessor}{\ \ \ \ \}\ while(\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00086}00086\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ configCHECK\_FOR\_STACK\_OVERFLOW\ ==\ 1\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00087}00087\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00089}00089\ \textcolor{preprocessor}{\#if\ (\ (\ configCHECK\_FOR\_STACK\_OVERFLOW\ >\ 1\ )\ \&\&\ (\ portSTACK\_GROWTH\ <\ 0\ )\ )}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00091}00091\ \textcolor{preprocessor}{\ \ \ \ \#define\ taskCHECK\_FOR\_STACK\_OVERFLOW()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00092}00092\ \textcolor{preprocessor}{\ \ \ \ do\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00093}00093\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ const\ uint32\_t\ *\ const\ pulStack\ =\ (\ uint32\_t\ *\ )\ pxCurrentTCB-\/>pxStack;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00094}00094\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ const\ uint32\_t\ ulCheckValue\ =\ (\ uint32\_t\ )\ 0xa5a5a5a5U;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00095}00095\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00096}00096\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if(\ (\ pulStack[\ 0\ ]\ !=\ ulCheckValue\ )\ ||\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00097}00097\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ (\ pulStack[\ 1\ ]\ !=\ ulCheckValue\ )\ ||\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00098}00098\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ (\ pulStack[\ 2\ ]\ !=\ ulCheckValue\ )\ ||\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00099}00099\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ (\ pulStack[\ 3\ ]\ !=\ ulCheckValue\ )\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00100}00100\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00101}00101\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ char\ *\ pcOverflowTaskName\ =\ pxCurrentTCB-\/>pcTaskName;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00102}00102\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ vApplicationStackOverflowHook(\ (\ TaskHandle\_t\ )\ pxCurrentTCB,\ pcOverflowTaskName\ );\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00103}00103\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00104}00104\ \textcolor{preprocessor}{\ \ \ \ \}\ while(\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00106}00106\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \#if(\ configCHECK\_FOR\_STACK\_OVERFLOW\ >\ 1\ )\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00107}00107\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00109}00109\ \textcolor{preprocessor}{\#if\ (\ (\ configCHECK\_FOR\_STACK\_OVERFLOW\ >\ 1\ )\ \&\&\ (\ portSTACK\_GROWTH\ >\ 0\ )\ )}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00111}00111\ \textcolor{preprocessor}{\ \ \ \ \#define\ taskCHECK\_FOR\_STACK\_OVERFLOW()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00112}00112\ \textcolor{preprocessor}{\ \ \ \ do\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00113}00113\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ int8\_t\ *\ pcEndOfStack\ =\ (\ int8\_t\ *\ )\ pxCurrentTCB-\/>pxEndOfStack;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00114}00114\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ static\ const\ uint8\_t\ ucExpectedStackBytes[]\ =\ \{\ tskSTACK\_FILL\_BYTE,\ tskSTACK\_FILL\_BYTE,\ tskSTACK\_FILL\_BYTE,\ tskSTACK\_FILL\_BYTE,\ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00115}00115\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tskSTACK\_FILL\_BYTE,\ tskSTACK\_FILL\_BYTE,\ tskSTACK\_FILL\_BYTE,\ tskSTACK\_FILL\_BYTE,\ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00116}00116\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tskSTACK\_FILL\_BYTE,\ tskSTACK\_FILL\_BYTE,\ tskSTACK\_FILL\_BYTE,\ tskSTACK\_FILL\_BYTE,\ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00117}00117\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tskSTACK\_FILL\_BYTE,\ tskSTACK\_FILL\_BYTE,\ tskSTACK\_FILL\_BYTE,\ tskSTACK\_FILL\_BYTE,\ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00118}00118\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tskSTACK\_FILL\_BYTE,\ tskSTACK\_FILL\_BYTE,\ tskSTACK\_FILL\_BYTE,\ tskSTACK\_FILL\_BYTE\ \};\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00119}00119\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00120}00120\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00121}00121\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ pcEndOfStack\ -\/=\ sizeof(\ ucExpectedStackBytes\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00122}00122\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00123}00123\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ }\textcolor{comment}{/*\ Has\ the\ extremity\ of\ the\ task\ stack\ ever\ been\ written\ over?\ */}\textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00124}00124\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if(\ memcmp(\ (\ void\ *\ )\ pcEndOfStack,\ (\ void\ *\ )\ ucExpectedStackBytes,\ sizeof(\ ucExpectedStackBytes\ )\ )\ !=\ 0\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00125}00125\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00126}00126\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ char\ *\ pcOverflowTaskName\ =\ pxCurrentTCB-\/>pcTaskName;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00127}00127\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ vApplicationStackOverflowHook(\ (\ TaskHandle\_t\ )\ pxCurrentTCB,\ pcOverflowTaskName\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00128}00128\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00129}00129\ \textcolor{preprocessor}{\ \ \ \ \}\ while(\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00131}00131\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \#if(\ configCHECK\_FOR\_STACK\_OVERFLOW\ >\ 1\ )\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00132}00132\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00134}00134\ \textcolor{comment}{/*\ Remove\ stack\ overflow\ macro\ if\ not\ being\ used.\ */}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00135}00135\ \textcolor{preprocessor}{\#ifndef\ taskCHECK\_FOR\_STACK\_OVERFLOW}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00136}\mbox{\hyperlink{stack__macros_8h_a48d287f599f5c139ae0764f024368806}{00136}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ taskCHECK\_FOR\_STACK\_OVERFLOW()}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00137}00137\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{stack__macros_8h_source_l00141}00141\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ STACK\_MACROS\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

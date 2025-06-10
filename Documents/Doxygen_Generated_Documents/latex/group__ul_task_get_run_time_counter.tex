@@ -1,0 +1,17 @@
+\doxysection{ul\+Task\+Get\+Run\+Time\+Counter }
+\hypertarget{group__ul_task_get_run_time_counter}{}\label{group__ul_task_get_run_time_counter}\index{ulTaskGetRunTimeCounter@{ulTaskGetRunTimeCounter}}
+task. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_free_r_t_o_s_8h_ac9ea108cc5201dd5b2877a7dfe7e07a3}{configRUN\_TIME\_COUNTER\_TYPE}}\ ulTaskGetRunTimeCounter(\ \textcolor{keyword}{const}\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xTask\ );}
+\DoxyCodeLine{\mbox{\hyperlink{_free_r_t_o_s_8h_ac9ea108cc5201dd5b2877a7dfe7e07a3}{configRUN\_TIME\_COUNTER\_TYPE}}\ ulTaskGetRunTimePercent(\ \textcolor{keyword}{const}\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xTask\ );}
+
+\end{DoxyCode}
+
+
+config\+GENERATE\+\_\+\+RUN\+\_\+\+TIME\+\_\+\+STATS must be defined as 1 for these functions to be available. The application must also then provide definitions for \doxylink{_free_r_t_o_s_8h_a727939bcdb98501e0eba0ec8a1841e1b}{port\+CONFIGURE\+\_\+\+TIMER\+\_\+\+FOR\+\_\+\+RUN\+\_\+\+TIME\+\_\+\+STATS()} and \doxylink{_third_party_2_g_c_c_2_posix_2portmacro_8h_aa7cb8c79fb40bf2d4caccf5ba9ae6737}{port\+GET\+\_\+\+RUN\+\_\+\+TIME\+\_\+\+COUNTER\+\_\+\+VALUE()} to configure a peripheral timer/counter and return the timers current count value respectively. The counter should be at least 10 times the frequency of the tick count.
+
+Setting config\+GENERATE\+\_\+\+RUN\+\_\+\+TIME\+\_\+\+STATS to 1 will result in a total accumulated execution time being stored for each task. The resolution of the accumulated time value depends on the frequency of the timer configured by the \doxylink{_free_r_t_o_s_8h_a727939bcdb98501e0eba0ec8a1841e1b}{port\+CONFIGURE\+\_\+\+TIMER\+\_\+\+FOR\+\_\+\+RUN\+\_\+\+TIME\+\_\+\+STATS()} macro. While ux\+Task\+Get\+System\+State() and \doxylink{task_8h_a9d9cbeb55e8b255293690ceed544b047}{v\+Task\+Get\+Run\+Time\+Stats()} writes the total execution time of each task into a buffer, ul\+Task\+Get\+Run\+Time\+Counter() returns the total execution time of just one task and ul\+Task\+Get\+Run\+Time\+Percent() returns the percentage of the CPU time used by just one task.
+
+\begin{DoxyReturn}{Returns}
+The total run time of the given task or the percentage of the total run time consumed by the given task. This is the amount of time the task has actually been executing. The unit of time is dependent on the frequency configured using the \doxylink{_free_r_t_o_s_8h_a727939bcdb98501e0eba0ec8a1841e1b}{port\+CONFIGURE\+\_\+\+TIMER\+\_\+\+FOR\+\_\+\+RUN\+\_\+\+TIME\+\_\+\+STATS()} and \doxylink{_third_party_2_g_c_c_2_posix_2portmacro_8h_aa7cb8c79fb40bf2d4caccf5ba9ae6737}{port\+GET\+\_\+\+RUN\+\_\+\+TIME\+\_\+\+COUNTER\+\_\+\+VALUE()} macros. 
+\end{DoxyReturn}

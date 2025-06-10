@@ -1,0 +1,48 @@
+\doxysection{v\+Task\+Suspend\+All }
+\hypertarget{group__v_task_suspend_all}{}\label{group__v_task_suspend_all}\index{vTaskSuspendAll@{vTaskSuspendAll}}
+task. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{task_8h_a366b302eba79d10b5ee2a3756f0fcc43}{vTaskSuspendAll}}(\ \textcolor{keywordtype}{void}\ );}
+
+\end{DoxyCode}
+
+
+Suspends the scheduler without disabling interrupts. Context switches will not occur while the scheduler is suspended.
+
+After calling v\+Task\+Suspend\+All () the calling task will continue to execute without risk of being swapped out until a call to x\+Task\+Resume\+All () has been made.
+
+API functions that have the potential to cause a context switch (for example, \doxylink{task_8h_af7ba46e730bec507c8a20d9f9b9c0e1d}{x\+Task\+Delay\+Until()}, \doxylink{queue_8h_af7eb49d3249351176992950d9185abe9}{x\+Queue\+Send()}, etc.) must not be called while the scheduler is suspended.
+
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vTask1(\ \textcolor{keywordtype}{void}\ *\ pvParameters\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\ ;;\ )}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Task\ code\ goes\ here.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ ...}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ At\ some\ point\ the\ task\ wants\ to\ perform\ a\ long\ operation\ during}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ which\ it\ does\ not\ want\ to\ get\ swapped\ out.\ \ It\ cannot\ use}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ taskENTER\_CRITICAL\ ()/taskEXIT\_CRITICAL\ ()\ as\ the\ length\ of\ the}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ operation\ may\ cause\ interrupts\ to\ be\ missed\ -\/\ including\ the}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ ticks.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Prevent\ the\ real\ time\ kernel\ swapping\ out\ the\ task.}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{task_8h_a366b302eba79d10b5ee2a3756f0fcc43}{vTaskSuspendAll}}\ ();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Perform\ the\ operation\ here.\ \ There\ is\ no\ need\ to\ use\ critical}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ sections\ as\ we\ have\ all\ the\ microcontroller\ processing\ time.}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ During\ this\ time\ interrupts\ will\ still\ operate\ and\ the\ kernel}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ tick\ count\ will\ be\ maintained.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ ...}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ The\ operation\ is\ complete.\ \ Restart\ the\ kernel.}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{task_8h_a003f8ae6d649225abd030cc76e1c7d0e}{xTaskResumeAll}}\ ();}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

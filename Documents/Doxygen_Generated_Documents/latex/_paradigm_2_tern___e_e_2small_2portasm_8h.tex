@@ -1,0 +1,97 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+Paradigm/\+Tern\+\_\+\+EE/small/portasm.h File Reference}
+\hypertarget{_paradigm_2_tern___e_e_2small_2portasm_8h}{}\label{_paradigm_2_tern___e_e_2small_2portasm_8h}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/Paradigm/Tern\_EE/small/portasm.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/Paradigm/Tern\_EE/small/portasm.h}}
+This graph shows which files directly or indirectly include this file\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_paradigm_2_tern___e_e_2small_2portasm_8h_a914715fb0a397668da11e31282942b4d}{port\+END\+\_\+\+SWITCHING\+\_\+\+ISR}}()
+\item 
+\#define \mbox{\hyperlink{_paradigm_2_tern___e_e_2small_2portasm_8h_a5ba70a7960be7c8188af742db5c6158e}{port\+FIRST\+\_\+\+CONTEXT}}()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_paradigm_2_tern___e_e_2small_2portasm_8h_a9c86137bc3c1cbffc39fff22627cb885}{v\+Task\+Switch\+Context}} (void)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+volatile \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_af5b0f7452857787ed70ce2856ca74c4b}{TCB\+\_\+t}} \texorpdfstring{$\ast$}{*}volatile \mbox{\hyperlink{_paradigm_2_tern___e_e_2small_2portasm_8h_af7b1fc0a36e224b885fb22b9936a03a2}{px\+Current\+TCB}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_paradigm_2_tern___e_e_2small_2portasm_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_paradigm_2_tern___e_e_2small_2portasm_8h_a914715fb0a397668da11e31282942b4d}\index{portasm.h@{portasm.h}!portEND\_SWITCHING\_ISR@{portEND\_SWITCHING\_ISR}}
+\index{portEND\_SWITCHING\_ISR@{portEND\_SWITCHING\_ISR}!portasm.h@{portasm.h}}
+\doxysubsubsection{\texorpdfstring{portEND\_SWITCHING\_ISR}{portEND\_SWITCHING\_ISR}}
+{\footnotesize\ttfamily \label{_paradigm_2_tern___e_e_2small_2portasm_8h_a914715fb0a397668da11e31282942b4d} 
+void port\+END\+\_\+\+SWITCHING\+\_\+\+ISR(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{asm}\ \{\ mov\ \ \ bx,\ [\mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}}]\ \ \ \ \ \ \ \ \ \ \}\ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{asm}\ \{\ mov\ \ \ word\ ptr\ [bx],\ \mbox{\hyperlink{_g_c_c_2_r_i_s_c-_v_2chip__specific__extensions_2_pulpino___vega___r_v32_m1_r_m_2freertos__risc_42330ed41578e3246f3d21d6cb759dc2_a699b7084df75437444a9e8885fa2c693}{sp}}\ \ \ \ \ \ \ \ \ \ \ \}\ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{asm}\ \{\ \mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_a869a0a2c43d256ec1a6346c64bfca0ad}{call}}\ \ far\ ptr\ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_a9c86137bc3c1cbffc39fff22627cb885}{vTaskSwitchContext}}\ \ \}\ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{asm}\ \{\ mov\ \ \ bx,\ [\mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}}]\ \ \ \ \ \ \ \ \ \ \}\ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{asm}\ \{\ mov\ \ \ \mbox{\hyperlink{_g_c_c_2_r_i_s_c-_v_2chip__specific__extensions_2_pulpino___vega___r_v32_m1_r_m_2freertos__risc_42330ed41578e3246f3d21d6cb759dc2_a699b7084df75437444a9e8885fa2c693}{sp}},\ [bx]\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_paradigm_2_tern___e_e_2small_2portasm_8h_source_l00050}{50}} of file \mbox{\hyperlink{_paradigm_2_tern___e_e_2small_2portasm_8h_source}{portasm.\+h}}.
+
+\Hypertarget{_paradigm_2_tern___e_e_2small_2portasm_8h_a5ba70a7960be7c8188af742db5c6158e}\index{portasm.h@{portasm.h}!portFIRST\_CONTEXT@{portFIRST\_CONTEXT}}
+\index{portFIRST\_CONTEXT@{portFIRST\_CONTEXT}!portasm.h@{portasm.h}}
+\doxysubsubsection{\texorpdfstring{portFIRST\_CONTEXT}{portFIRST\_CONTEXT}}
+{\footnotesize\ttfamily \label{_paradigm_2_tern___e_e_2small_2portasm_8h_a5ba70a7960be7c8188af742db5c6158e} 
+\#define port\+FIRST\+\_\+\+CONTEXT(\begin{DoxyParamCaption}\item[{}]{void}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{asm}\ \{\ mov\ \ \ bx,\ [\mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}}]\ \ \ \ \ \ \ \ \ \ \}\ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{asm}\ \{\ mov\ \ \ \mbox{\hyperlink{_g_c_c_2_r_i_s_c-_v_2chip__specific__extensions_2_pulpino___vega___r_v32_m1_r_m_2freertos__risc_42330ed41578e3246f3d21d6cb759dc2_a699b7084df75437444a9e8885fa2c693}{sp}},\ [bx]\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{asm}\ \{\ pop\ \ \ bp\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{asm}\ \{\ pop\ \ \ di\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{asm}\ \{\ pop\ \ \ si\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{asm}\ \{\ pop\ \ \ ds\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{asm}\ \{\ pop\ \ \ es\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{asm}\ \{\ pop\ \ \ dx\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{asm}\ \{\ pop\ \ \ cx\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{asm}\ \{\ pop\ \ \ bx\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{asm}\ \{\ pop\ \ \ ax\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{asm}\ \{\ iret\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_paradigm_2_tern___e_e_2small_2portasm_8h_source_l00057}{57}} of file \mbox{\hyperlink{_paradigm_2_tern___e_e_2small_2portasm_8h_source}{portasm.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_paradigm_2_tern___e_e_2small_2portasm_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_paradigm_2_tern___e_e_2small_2portasm_8h_a9c86137bc3c1cbffc39fff22627cb885}\index{portasm.h@{portasm.h}!vTaskSwitchContext@{vTaskSwitchContext}}
+\index{vTaskSwitchContext@{vTaskSwitchContext}!portasm.h@{portasm.h}}
+\doxysubsubsection{\texorpdfstring{vTaskSwitchContext()}{vTaskSwitchContext()}}
+{\footnotesize\ttfamily \label{_paradigm_2_tern___e_e_2small_2portasm_8h_a9c86137bc3c1cbffc39fff22627cb885} 
+void v\+Task\+Switch\+Context (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+\label{doc-var-members}
+\Hypertarget{_paradigm_2_tern___e_e_2small_2portasm_8h_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_paradigm_2_tern___e_e_2small_2portasm_8h_af7b1fc0a36e224b885fb22b9936a03a2}\index{portasm.h@{portasm.h}!pxCurrentTCB@{pxCurrentTCB}}
+\index{pxCurrentTCB@{pxCurrentTCB}!portasm.h@{portasm.h}}
+\doxysubsubsection{\texorpdfstring{pxCurrentTCB}{pxCurrentTCB}}
+{\footnotesize\ttfamily \label{_paradigm_2_tern___e_e_2small_2portasm_8h_af7b1fc0a36e224b885fb22b9936a03a2} 
+volatile \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_af5b0f7452857787ed70ce2856ca74c4b}{TCB\+\_\+t}}\texorpdfstring{$\ast$}{*} volatile px\+Current\+TCB\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_source_l00067}{67}} of file \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_source}{ISR\+\_\+\+Support.\+h}}.
+

@@ -1,0 +1,40 @@
+\doxysection{x\+Task\+Notify\+Give\+Indexed }
+\hypertarget{group__x_task_notify_give_indexed}{}\label{group__x_task_notify_give_indexed}\index{xTaskNotifyGiveIndexed@{xTaskNotifyGiveIndexed}}
+task. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{task_8h_a53ec0c8b6b8281a3055747813570193c}{xTaskNotifyGiveIndexed}}(\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xTaskToNotify,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxIndexToNotify\ );}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{task_8h_ac60cbd05577a3e4f3c3587dd9b213930}{xTaskNotifyGive}}(\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xTaskToNotify\ );}
+
+\end{DoxyCode}
+
+
+Sends a direct to task notification to a particular index in the target task\textquotesingle{}s notification array in a manner similar to giving a counting semaphore.
+
+See \href{https://www.FreeRTOS.org/RTOS-task-notifications.html}{\texttt{https\+://www.\+Free\+RTOS.\+org/\+RTOS-\/task-\/notifications.\+html}} for more details.
+
+config\+USE\+\_\+\+TASK\+\_\+\+NOTIFICATIONS must be undefined or defined as 1 for these macros to be available.
+
+Each task has a private array of "{}notification values"{} (or \textquotesingle{}notifications\textquotesingle{}), each of which is a 32-\/bit unsigned integer (uint32\+\_\+t). The constant config\+TASK\+\_\+\+NOTIFICATION\+\_\+\+ARRAY\+\_\+\+ENTRIES sets the number of indexes in the array, and (for backward compatibility) defaults to 1 if left undefined. Prior to Free\+RTOS V10.\+4.\+0 there was only one notification value per task.
+
+Events can be sent to a task using an intermediary object. Examples of such objects are queues, semaphores, mutexes and event groups. Task notifications are a method of sending an event directly to a task without the need for such an intermediary object.
+
+A notification sent to a task can optionally perform an action, such as update, overwrite or increment one of the task\textquotesingle{}s notification values. In that way task notifications can be used to send data to a task, or be used as light weight and fast binary or counting semaphores.
+
+\doxylink{task_8h_a53ec0c8b6b8281a3055747813570193c}{x\+Task\+Notify\+Give\+Indexed()} is a helper macro intended for use when task notifications are used as light weight and faster binary or counting semaphore equivalents. Actual Free\+RTOS semaphores are given using the \doxylink{semphr_8h_aae55761cabfa9bf85c8f4430f78c0953}{x\+Semaphore\+Give()} API function, the equivalent action that instead uses a task notification is \doxylink{task_8h_a53ec0c8b6b8281a3055747813570193c}{x\+Task\+Notify\+Give\+Indexed()}.
+
+When task notifications are being used as a binary or counting semaphore equivalent then the task being notified should wait for the notification using the \doxylink{task_8h_a4f42982425f3b106e1a9f19b41ba4124}{ul\+Task\+Notify\+Take\+Indexed()} API function rather than the \doxylink{task_8h_a5bcd5a5b7d7c41dd782a38093be1b7c9}{x\+Task\+Notify\+Wait\+Indexed()} API function.
+
+{\bfseries{NOTE}} Each notification within the array operates independently -\/ a task can only block on one notification within the array at a time and will not be unblocked by a notification sent to any other array index.
+
+Backward compatibility information\+: Prior to Free\+RTOS V10.\+4.\+0 each task had a single "{}notification value"{}, and all task notification API functions operated on that value. Replacing the single notification value with an array of notification values necessitated a new set of API functions that could address specific notifications within the array. \doxylink{task_8h_ac60cbd05577a3e4f3c3587dd9b213930}{x\+Task\+Notify\+Give()} is the original API function, and remains backward compatible by always operating on the notification value at index 0 in the array. Calling \doxylink{task_8h_ac60cbd05577a3e4f3c3587dd9b213930}{x\+Task\+Notify\+Give()} is equivalent to calling \doxylink{task_8h_a53ec0c8b6b8281a3055747813570193c}{x\+Task\+Notify\+Give\+Indexed()} with the ux\+Index\+To\+Notify parameter set to 0.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Task\+To\+Notify} & The handle of the task being notified. The handle to a task can be returned from the x\+Task\+Create() API function used to create the task, and the handle of the currently running task can be obtained by calling \doxylink{task_8h_a85a0f9c9f817b18686efbf8f37c72dfc}{x\+Task\+Get\+Current\+Task\+Handle()}.\\
+\hline
+{\em ux\+Index\+To\+Notify} & The index within the target task\textquotesingle{}s array of notification values to which the notification is to be sent. ux\+Index\+To\+Notify must be less than config\+TASK\+\_\+\+NOTIFICATION\+\_\+\+ARRAY\+\_\+\+ENTRIES. \doxylink{task_8h_ac60cbd05577a3e4f3c3587dd9b213930}{x\+Task\+Notify\+Give()} does not have this parameter and always sends notifications to index 0.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{task_8h_ac60cbd05577a3e4f3c3587dd9b213930}{x\+Task\+Notify\+Give()} is a macro that calls \doxylink{task_8h_a0d2d54fb8a64011dfbb54983e4ed06bd}{x\+Task\+Notify()} with the e\+Action parameter set to e\+Increment -\/ so pd\+PASS is always returned. 
+\end{DoxyReturn}

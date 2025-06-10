@@ -1,0 +1,463 @@
+\doxysection{port.\+c}
+\hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source}{}\label{_g_c_c_2_micro_blaze_v8_2port_8c_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/MicroBlazeV8/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/MicroBlazeV8/port.c}}
+\mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2port_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00029}00029\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00030}00030\ \textcolor{comment}{*\ Implementation\ of\ functions\ defined\ in\ portable.h\ for\ the\ MicroBlaze\ port.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00031}00031\ \textcolor{comment}{*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00034}00034\ \textcolor{comment}{/*\ Scheduler\ includes.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00035}00035\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_free_r_t_o_s_8h}{FreeRTOS.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00036}00036\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{task_8h}{task.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00038}00038\ \textcolor{comment}{/*\ Standard\ includes.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00039}00039\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00041}00041\ \textcolor{comment}{/*\ Hardware\ includes.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00042}00042\ \textcolor{preprocessor}{\#include\ <xintc\_i.h>}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00043}00043\ \textcolor{preprocessor}{\#include\ <xil\_exception.h>}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00044}00044\ \textcolor{preprocessor}{\#include\ <microblaze\_exceptions\_g.h>}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00046}00046\ \textcolor{comment}{/*\ Tasks\ are\ started\ with\ a\ critical\ section\ nesting\ of\ 0\ -\/\ however,\ prior\ to}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00047}00047\ \textcolor{comment}{\ *\ the\ scheduler\ being\ commenced\ interrupts\ should\ not\ be\ enabled,\ so\ the\ critical}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00048}00048\ \textcolor{comment}{\ *\ nesting\ variable\ is\ initialised\ to\ a\ non-\/zero\ value.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00049}\mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2port_8c_aaf4c6392598146ee2b2903d18c9b16dd}{00049}}\ \textcolor{preprocessor}{\#define\ portINITIAL\_NESTING\_VALUE\ \ \ \ (\ 0xff\ )}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00051}00051\ \textcolor{comment}{/*\ The\ bit\ within\ the\ MSR\ register\ that\ enabled/disables\ interrupts\ and}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00052}00052\ \textcolor{comment}{\ *\ exceptions\ respectively.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00053}\mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2port_8c_a059b21a5b3a22d23d07cb9d748f2dd45}{00053}}\ \textcolor{preprocessor}{\#define\ portMSR\_IE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x02U\ )}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00054}\mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2port_8c_ada2b09e5e8732dcb5fda3aed3b25518c}{00054}}\ \textcolor{preprocessor}{\#define\ portMSR\_EE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x100U\ )}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00056}00056\ \textcolor{comment}{/*\ If\ the\ floating\ point\ unit\ is\ included\ in\ the\ MicroBlaze\ build,\ then\ the}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00057}00057\ \textcolor{comment}{\ *\ FSR\ register\ is\ saved\ as\ part\ of\ the\ task\ context.\ \ portINITIAL\_FSR\ is\ the\ value}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00058}00058\ \textcolor{comment}{\ *\ given\ to\ the\ FSR\ register\ when\ the\ initial\ context\ is\ set\ up\ for\ a\ task\ being}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00059}00059\ \textcolor{comment}{\ *\ created.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00060}\mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2port_8c_a269fe189a2f2e945a456492c37d1169e}{00060}}\ \textcolor{preprocessor}{\#define\ portINITIAL\_FSR\ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0U\ )}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00061}00061\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00063}00063\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00064}00064\ \textcolor{comment}{\ *\ Initialise\ the\ interrupt\ controller\ instance.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00065}00065\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00066}00066\ \textcolor{keyword}{static}\ int32\_t\ prvInitialiseInterruptController(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00068}00068\ \textcolor{comment}{/*\ Ensure\ the\ interrupt\ controller\ instance\ variable\ is\ initialised\ before\ it\ is}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00069}00069\ \textcolor{comment}{\ *\ used,\ and\ that\ the\ initialisation\ only\ happens\ once.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00070}00070\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00071}00071\ \textcolor{keyword}{static}\ int32\_t\ prvEnsureInterruptControllerIsInitialised(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00073}00073\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00075}00075\ \textcolor{comment}{/*\ Counts\ the\ nesting\ depth\ of\ calls\ to\ portENTER\_CRITICAL().\ \ Each\ task}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00076}00076\ \textcolor{comment}{\ *\ maintains\ its\ own\ count,\ so\ this\ variable\ is\ saved\ as\ part\ of\ the\ task}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00077}00077\ \textcolor{comment}{\ *\ context.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00078}\mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2port_8c_abf3b0e1cd9ee0a23eaf382bd87ff0744}{00078}}\ \textcolor{keyword}{volatile}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxCriticalNesting\ =\ \mbox{\hyperlink{_g_c_c_2_micro_blaze_2port_8c_aaf4c6392598146ee2b2903d18c9b16dd}{portINITIAL\_NESTING\_VALUE}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00080}00080\ \textcolor{comment}{/*\ This\ port\ uses\ a\ separate\ stack\ for\ interrupts.\ \ This\ prevents\ the\ stack\ of}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00081}00081\ \textcolor{comment}{\ *\ every\ task\ needing\ to\ be\ large\ enough\ to\ hold\ an\ entire\ interrupt\ stack\ on\ top}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00082}00082\ \textcolor{comment}{\ *\ of\ the\ task\ stack.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00083}\mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2port_8c_a60d3684649a523b5843b5286b5643f75}{00083}}\ uint32\_t\ *\ \mbox{\hyperlink{_g_c_c_2_micro_blaze_2port_8c_a60d3684649a523b5843b5286b5643f75}{pulISRStack}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00085}00085\ \textcolor{comment}{/*\ If\ an\ interrupt\ requests\ a\ context\ switch,\ then\ ulTaskSwitchRequested\ will}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00086}00086\ \textcolor{comment}{\ *\ get\ set\ to\ 1.\ \ ulTaskSwitchRequested\ is\ inspected\ just\ before\ the\ main\ interrupt}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00087}00087\ \textcolor{comment}{\ *\ handler\ exits.\ \ If,\ at\ that\ time,\ ulTaskSwitchRequested\ is\ set\ to\ 1,\ the\ kernel}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00088}00088\ \textcolor{comment}{\ *\ will\ call\ vTaskSwitchContext()\ to\ ensure\ the\ task\ that\ runs\ immediately\ after}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00089}00089\ \textcolor{comment}{\ *\ the\ interrupt\ exists\ is\ the\ highest\ priority\ task\ that\ is\ able\ to\ run.\ \ This\ is}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00090}00090\ \textcolor{comment}{\ *\ an\ unusual\ mechanism,\ but\ is\ used\ for\ this\ port\ because\ a\ single\ interrupt\ can}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00091}00091\ \textcolor{comment}{\ *\ cause\ the\ servicing\ of\ multiple\ peripherals\ -\/\ and\ it\ is\ inefficient\ to\ call}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00092}00092\ \textcolor{comment}{\ *\ vTaskSwitchContext()\ multiple\ times\ as\ each\ peripheral\ is\ serviced.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00093}\mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2port_8c_a142558b17027233797220c49c71c4f1f}{00093}}\ \textcolor{keyword}{volatile}\ uint32\_t\ \mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2port_8c_a142558b17027233797220c49c71c4f1f}{ulTaskSwitchRequested}}\ =\ 0UL;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00095}00095\ \textcolor{comment}{/*\ The\ instance\ of\ the\ interrupt\ controller\ used\ by\ this\ port.\ \ This\ is\ required}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00096}00096\ \textcolor{comment}{\ *\ by\ the\ Xilinx\ library\ API\ functions.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00097}00097\ \textcolor{keyword}{static}\ XIntc\ xInterruptControllerInstance;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00099}00099\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00101}00101\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00102}00102\ \textcolor{comment}{\ *\ Initialise\ the\ stack\ of\ a\ task\ to\ look\ exactly\ as\ if\ a\ call\ to}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00103}00103\ \textcolor{comment}{\ *\ portSAVE\_CONTEXT\ had\ been\ made.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00104}00104\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00105}00105\ \textcolor{comment}{\ *\ See\ the\ portable.h\ header\ file.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00106}00106\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00107}\mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}{00107}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_aaa2085423d917cf1707f4770de3354e2}{pxPortInitialiseStack}}(\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *\ pxTopOfStack,}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{TaskFunction\_t}}\ pxCode,}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *\ pvParameters\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00110}00110\ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00111}00111\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ *\ \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_a81624ca490eba0c00f2891b2d0b41fe6}{\_SDA2\_BASE\_}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00112}00112\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ *\ \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_a654f9a86791256da01ca2d0d7b075566}{\_SDA\_BASE\_}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00113}00113\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ ulR2\ =\ (\ uint32\_t\ )\ \&\mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_a81624ca490eba0c00f2891b2d0b41fe6}{\_SDA2\_BASE\_}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00114}00114\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ ulR13\ =\ (\ uint32\_t\ )\ \&\mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_a654f9a86791256da01ca2d0d7b075566}{\_SDA\_BASE\_}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00116}00116\ \ \ \ \ \textcolor{comment}{/*\ Place\ a\ few\ bytes\ of\ known\ values\ on\ the\ bottom\ of\ the\ stack.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00117}00117\ \textcolor{comment}{\ \ \ \ \ *\ This\ is\ essential\ for\ the\ Microblaze\ port\ and\ these\ lines\ must}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00118}00118\ \textcolor{comment}{\ \ \ \ \ *\ not\ be\ omitted.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00119}00119\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x00000000;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00120}00120\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00121}00121\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x00000000;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00122}00122\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00123}00123\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x00000000;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00124}00124\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00126}00126\ \textcolor{preprocessor}{\ \ \ \ \#if\ (\ XPAR\_MICROBLAZE\_USE\_FPU\ !=\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00127}00127\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ The\ FSR\ value\ placed\ in\ the\ initial\ task\ context\ is\ just\ 0.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00128}00128\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ \mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2port_8c_a269fe189a2f2e945a456492c37d1169e}{portINITIAL\_FSR}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00129}00129\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00130}00130\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00132}00132\ \ \ \ \ \textcolor{comment}{/*\ The\ MSR\ value\ placed\ in\ the\ initial\ task\ context\ should\ have\ interrupts}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00133}00133\ \textcolor{comment}{\ \ \ \ \ *\ disabled.\ \ Each\ task\ will\ enable\ interrupts\ automatically\ when\ it\ enters}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00134}00134\ \textcolor{comment}{\ \ \ \ \ *\ the\ running\ state\ for\ the\ first\ time.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00135}00135\ \ \ \ \ *pxTopOfStack\ =\ mfmsr()\ \&\ \mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2port_8c_a059b21a5b3a22d23d07cb9d748f2dd45}{\string~portMSR\_IE}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00137}00137\ \textcolor{preprocessor}{\ \ \ \ \#if\ (\ MICROBLAZE\_EXCEPTIONS\_ENABLED\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00138}00138\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00139}00139\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Ensure\ exceptions\ are\ enabled\ for\ the\ task.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00140}00140\ \ \ \ \ \ \ \ \ *pxTopOfStack\ |=\ \mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2port_8c_ada2b09e5e8732dcb5fda3aed3b25518c}{portMSR\_EE}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00141}00141\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00142}00142\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00144}00144\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00146}00146\ \ \ \ \ \textcolor{comment}{/*\ First\ stack\ an\ initial\ value\ for\ the\ critical\ section\ nesting.\ \ This}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00147}00147\ \textcolor{comment}{\ \ \ \ \ *\ is\ initialised\ to\ zero.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00148}00148\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x00;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00150}00150\ \ \ \ \ \textcolor{comment}{/*\ R0\ is\ always\ zero.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00151}00151\ \ \ \ \ \textcolor{comment}{/*\ R1\ is\ the\ SP.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00153}00153\ \ \ \ \ \textcolor{comment}{/*\ Place\ an\ initial\ value\ for\ all\ the\ general\ purpose\ registers.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00154}00154\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00155}00155\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ ulR2;\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ R2\ -\/\ read\ only\ small\ data\ area.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00156}00156\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00157}00157\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x03;\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ R3\ -\/\ return\ values\ and\ temporaries.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00158}00158\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00159}00159\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x04;\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ R4\ -\/\ return\ values\ and\ temporaries.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00160}00160\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00161}00161\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ pvParameters;\ \textcolor{comment}{/*\ R5\ contains\ the\ function\ call\ parameters.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00163}00163\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ portPRE\_LOAD\_STACK\_FOR\_DEBUGGING}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00164}00164\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00165}00165\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x06;\ \textcolor{comment}{/*\ R6\ -\/\ other\ parameters\ and\ temporaries.\ \ Used\ as\ the\ return\ address\ from\ vPortTaskEntryPoint.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00166}00166\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00167}00167\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x07;\ \textcolor{comment}{/*\ R7\ -\/\ other\ parameters\ and\ temporaries.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00168}00168\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00169}00169\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x08;\ \textcolor{comment}{/*\ R8\ -\/\ other\ parameters\ and\ temporaries.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00170}00170\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00171}00171\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x09;\ \textcolor{comment}{/*\ R9\ -\/\ other\ parameters\ and\ temporaries.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00172}00172\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00173}00173\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x0a;\ \textcolor{comment}{/*\ R10\ -\/\ other\ parameters\ and\ temporaries.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00174}00174\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00175}00175\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x0b;\ \textcolor{comment}{/*\ R11\ -\/\ temporaries.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00176}00176\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00177}00177\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x0c;\ \textcolor{comment}{/*\ R12\ -\/\ temporaries.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00178}00178\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00179}00179\ \textcolor{preprocessor}{\ \ \ \ \#else\ }\textcolor{comment}{/*\ ifdef\ portPRE\_LOAD\_STACK\_FOR\_DEBUGGING\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00180}00180\ \ \ \ \ \ \ \ \ pxTopOfStack\ -\/=\ 8;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00181}00181\ \textcolor{preprocessor}{\ \ \ \ \#endif\ }\textcolor{comment}{/*\ ifdef\ portPRE\_LOAD\_STACK\_FOR\_DEBUGGING\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00183}00183\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ ulR13;\ \ \textcolor{comment}{/*\ R13\ -\/\ read/write\ small\ data\ area.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00184}00184\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00185}00185\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ pxCode;\ \textcolor{comment}{/*\ R14\ -\/\ return\ address\ for\ interrupt.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00186}00186\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00187}00187\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};\ \ \ \textcolor{comment}{/*\ R15\ -\/\ return\ address\ for\ subroutine.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00188}00188\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00189}00189\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ portPRE\_LOAD\_STACK\_FOR\_DEBUGGING}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00190}00190\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00191}00191\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x10;\ \textcolor{comment}{/*\ R16\ -\/\ return\ address\ for\ trap\ (debugger).\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00192}00192\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00193}00193\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x11;\ \textcolor{comment}{/*\ R17\ -\/\ return\ address\ for\ exceptions,\ if\ configured.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00194}00194\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00195}00195\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x12;\ \textcolor{comment}{/*\ R18\ -\/\ reserved\ for\ assembler\ and\ compiler\ temporaries.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00196}00196\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00197}00197\ \textcolor{preprocessor}{\ \ \ \ \#else}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00198}00198\ \ \ \ \ \ \ \ \ pxTopOfStack\ -\/=\ 4;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00199}00199\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00200}00200\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00201}00201\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x00;\ \textcolor{comment}{/*\ R19\ -\/\ must\ be\ saved\ across\ function\ calls.\ Callee-\/save.\ \ Seems\ to\ be\ interpreted\ as\ the\ frame\ pointer.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00203}00203\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ portPRE\_LOAD\_STACK\_FOR\_DEBUGGING}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00204}00204\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00205}00205\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x14;\ \textcolor{comment}{/*\ R20\ -\/\ reserved\ for\ storing\ a\ pointer\ to\ the\ Global\ Offset\ Table\ (GOT)\ in\ Position\ Independent\ Code\ (PIC).\ Non-\/volatile\ in\ non-\/PIC\ code.\ Must\ be\ saved\ across\ function\ calls.\ Callee-\/save.\ \ Not\ used\ by\ FreeRTOS.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00206}00206\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00207}00207\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x15;\ \textcolor{comment}{/*\ R21\ -\/\ must\ be\ saved\ across\ function\ calls.\ Callee-\/save.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00208}00208\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00209}00209\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x16;\ \textcolor{comment}{/*\ R22\ -\/\ must\ be\ saved\ across\ function\ calls.\ Callee-\/save.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00210}00210\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00211}00211\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x17;\ \textcolor{comment}{/*\ R23\ -\/\ must\ be\ saved\ across\ function\ calls.\ Callee-\/save.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00212}00212\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00213}00213\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x18;\ \textcolor{comment}{/*\ R24\ -\/\ must\ be\ saved\ across\ function\ calls.\ Callee-\/save.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00214}00214\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00215}00215\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x19;\ \textcolor{comment}{/*\ R25\ -\/\ must\ be\ saved\ across\ function\ calls.\ Callee-\/save.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00216}00216\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00217}00217\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x1a;\ \textcolor{comment}{/*\ R26\ -\/\ must\ be\ saved\ across\ function\ calls.\ Callee-\/save.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00218}00218\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00219}00219\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x1b;\ \textcolor{comment}{/*\ R27\ -\/\ must\ be\ saved\ across\ function\ calls.\ Callee-\/save.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00220}00220\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00221}00221\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x1c;\ \textcolor{comment}{/*\ R28\ -\/\ must\ be\ saved\ across\ function\ calls.\ Callee-\/save.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00222}00222\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00223}00223\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x1d;\ \textcolor{comment}{/*\ R29\ -\/\ must\ be\ saved\ across\ function\ calls.\ Callee-\/save.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00224}00224\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00225}00225\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x1e;\ \textcolor{comment}{/*\ R30\ -\/\ must\ be\ saved\ across\ function\ calls.\ Callee-\/save.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00226}00226\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00227}00227\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x1f;\ \textcolor{comment}{/*\ R31\ -\/\ must\ be\ saved\ across\ function\ calls.\ Callee-\/save.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00228}00228\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00229}00229\ \textcolor{preprocessor}{\ \ \ \ \#else\ }\textcolor{comment}{/*\ ifdef\ portPRE\_LOAD\_STACK\_FOR\_DEBUGGING\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00230}00230\ \ \ \ \ \ \ \ \ pxTopOfStack\ -\/=\ 13;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00231}00231\ \textcolor{preprocessor}{\ \ \ \ \#endif\ }\textcolor{comment}{/*\ ifdef\ portPRE\_LOAD\_STACK\_FOR\_DEBUGGING\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00233}00233\ \ \ \ \ \textcolor{comment}{/*\ Return\ a\ pointer\ to\ the\ top\ of\ the\ stack\ that\ has\ been\ generated\ so\ this}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00234}00234\ \textcolor{comment}{\ \ \ \ \ *\ can\ be\ stored\ in\ the\ task\ control\ block\ for\ the\ task.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00235}00235\ \ \ \ \ \textcolor{keywordflow}{return}\ pxTopOfStack;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00236}00236\ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00237}00237\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00239}\mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{00239}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{xPortStartScheduler}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00240}00240\ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00241}00241\ \ \ \ \ \textcolor{keyword}{extern}\ void(\ \mbox{\hyperlink{_c_c_s_2_a_r_m___c_m3_2port_8c_a5cfc38319f17c8e804020ec247b6325d}{vPortStartFirstTask}}\ )(\ void\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00242}00242\ \ \ \ \ \textcolor{keyword}{extern}\ uint32\_t\ \_stack[];}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00243}00243\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00244}00244\ \ \ \ \ \textcolor{comment}{/*\ Setup\ the\ hardware\ to\ generate\ the\ tick.\ \ Interrupts\ are\ disabled\ when}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00245}00245\ \textcolor{comment}{\ \ \ \ \ *\ this\ function\ is\ called.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00246}00246\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00247}00247\ \textcolor{comment}{\ \ \ \ \ *\ This\ port\ uses\ an\ application\ defined\ callback\ function\ to\ install\ the\ tick}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00248}00248\ \textcolor{comment}{\ \ \ \ \ *\ interrupt\ handler\ because\ the\ kernel\ will\ run\ on\ lots\ of\ different}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00249}00249\ \textcolor{comment}{\ \ \ \ \ *\ MicroBlaze\ and\ FPGA\ configurations\ -\/\ not\ all\ of\ which\ will\ have\ the\ same}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00250}00250\ \textcolor{comment}{\ \ \ \ \ *\ timer\ peripherals\ defined\ or\ available.\ \ An\ example\ definition\ of}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00251}00251\ \textcolor{comment}{\ \ \ \ \ *\ vApplicationSetupTimerInterrupt()\ is\ provided\ in\ the\ official\ demo}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00252}00252\ \textcolor{comment}{\ \ \ \ \ *\ application\ that\ accompanies\ this\ port.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00253}00253\ \ \ \ \ \mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2portmacro_8h_af6c61ea6aaa9367ebdc5348c1b121aa7}{vApplicationSetupTimerInterrupt}}();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00254}00254\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00255}00255\ \ \ \ \ \textcolor{comment}{/*\ Reuse\ the\ stack\ from\ main()\ as\ the\ stack\ for\ the\ interrupts/exceptions.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00256}00256\ \ \ \ \ \mbox{\hyperlink{_g_c_c_2_micro_blaze_2port_8c_a60d3684649a523b5843b5286b5643f75}{pulISRStack}}\ =\ (\ uint32\_t\ *\ )\ \_stack;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00257}00257\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00258}00258\ \ \ \ \ \textcolor{comment}{/*\ Ensure\ there\ is\ enough\ space\ for\ the\ functions\ called\ from\ the\ interrupt}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00259}00259\ \textcolor{comment}{\ \ \ \ \ *\ service\ routines\ to\ write\ back\ into\ the\ stack\ frame\ of\ the\ caller.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00260}00260\ \ \ \ \ \mbox{\hyperlink{_g_c_c_2_micro_blaze_2port_8c_a60d3684649a523b5843b5286b5643f75}{pulISRStack}}\ -\/=\ 2;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00261}00261\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00262}00262\ \ \ \ \ \textcolor{comment}{/*\ Restore\ the\ context\ of\ the\ first\ task\ that\ is\ going\ to\ run.\ \ From\ here}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00263}00263\ \textcolor{comment}{\ \ \ \ \ *\ on,\ the\ created\ tasks\ will\ be\ executing.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00264}00264\ \ \ \ \ \mbox{\hyperlink{_c_c_s_2_a_r_m___c_m3_2port_8c_a5cfc38319f17c8e804020ec247b6325d}{vPortStartFirstTask}}();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00265}00265\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00266}00266\ \ \ \ \ \textcolor{comment}{/*\ Should\ not\ get\ here\ as\ the\ tasks\ are\ now\ running!\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00267}00267\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00268}00268\ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00269}00269\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00270}00270\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00271}\mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{00271}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{vPortEndScheduler}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00272}00272\ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00273}00273\ \ \ \ \ \textcolor{comment}{/*\ Not\ implemented\ in\ ports\ where\ there\ is\ nothing\ to\ return\ to.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00274}00274\ \textcolor{comment}{\ \ \ \ \ *\ Artificially\ force\ an\ assert.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00275}00275\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ uxCriticalNesting\ ==\ 1000UL\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00276}00276\ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00277}00277\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00278}00278\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00279}00279\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00280}00280\ \textcolor{comment}{\ *\ Manual\ context\ switch\ called\ by\ portYIELD\ or\ taskYIELD.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00281}00281\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00282}\mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2port_8c_add01c927fb689f7ec170e42d47d27927}{00282}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_add01c927fb689f7ec170e42d47d27927}{vPortYield}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00283}00283\ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00284}00284\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ VPortYieldASM(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00285}00285\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00286}00286\ \ \ \ \ \textcolor{comment}{/*\ Perform\ the\ context\ switch\ in\ a\ critical\ section\ to\ assure\ it\ is}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00287}00287\ \textcolor{comment}{\ \ \ \ \ *\ not\ interrupted\ by\ the\ tick\ ISR.\ \ It\ is\ not\ a\ problem\ to\ do\ this\ as}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00288}00288\ \textcolor{comment}{\ \ \ \ \ *\ each\ task\ maintains\ its\ own\ interrupt\ status.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00289}00289\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a8a09321ad004019f3c8d0f2e4d7224c7}{portENTER\_CRITICAL}}();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00290}00290\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00291}00291\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Jump\ directly\ to\ the\ yield\ function\ to\ ensure\ there\ is\ no}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00292}00292\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ compiler\ generated\ prologue\ code.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00293}00293\ \ \ \ \ \ \ \ \ \textcolor{keyword}{asm}\ \textcolor{keyword}{volatile}\ (\ \textcolor{stringliteral}{"{}bralid\ r14,\ VPortYieldASM\ \ \ \ \ \ \(\backslash\)n\(\backslash\)t"{}}\ \(\backslash\)}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}or\ r0,\ r0,\ r0\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)n\(\backslash\)t"{}}\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00295}00295\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00296}00296\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a529358e6147881dd881c890ade21c9bd}{portEXIT\_CRITICAL}}();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00297}00297\ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00298}00298\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00299}00299\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00300}\mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2port_8c_a0471656744e861f8982a1f5397a27838}{00300}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2port_8c_a0471656744e861f8982a1f5397a27838}{vPortEnableInterrupt}}(\ uint8\_t\ ucInterruptID\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00301}00301\ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00302}00302\ \ \ \ \ int32\_t\ lReturn;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00303}00303\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00304}00304\ \ \ \ \ \textcolor{comment}{/*\ An\ API\ function\ is\ provided\ to\ enable\ an\ interrupt\ in\ the\ interrupt}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00305}00305\ \textcolor{comment}{\ \ \ \ \ *\ controller\ because\ the\ interrupt\ controller\ instance\ variable\ is\ private}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00306}00306\ \textcolor{comment}{\ \ \ \ \ *\ to\ this\ file.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00307}00307\ \ \ \ \ lReturn\ =\ prvEnsureInterruptControllerIsInitialised();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00308}00308\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00309}00309\ \ \ \ \ \textcolor{keywordflow}{if}(\ lReturn\ ==\ \mbox{\hyperlink{projdefs_8h_a07848d3078849bd32353c69d30a479b3}{pdPASS}}\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00310}00310\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00311}00311\ \ \ \ \ \ \ \ \ XIntc\_Enable(\ \&xInterruptControllerInstance,\ ucInterruptID\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00312}00312\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00313}00313\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00314}00314\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ lReturn\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00315}00315\ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00316}00316\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00317}00317\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00318}\mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2port_8c_a46aef84bd9c309576be51201c6f09741}{00318}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2port_8c_a46aef84bd9c309576be51201c6f09741}{vPortDisableInterrupt}}(\ uint8\_t\ ucInterruptID\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00319}00319\ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00320}00320\ \ \ \ \ int32\_t\ lReturn;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00321}00321\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00322}00322\ \ \ \ \ \textcolor{comment}{/*\ An\ API\ function\ is\ provided\ to\ disable\ an\ interrupt\ in\ the\ interrupt}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00323}00323\ \textcolor{comment}{\ \ \ \ \ *\ controller\ because\ the\ interrupt\ controller\ instance\ variable\ is\ private}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00324}00324\ \textcolor{comment}{\ \ \ \ \ *\ to\ this\ file.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00325}00325\ \ \ \ \ lReturn\ =\ prvEnsureInterruptControllerIsInitialised();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00326}00326\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00327}00327\ \ \ \ \ \textcolor{keywordflow}{if}(\ lReturn\ ==\ \mbox{\hyperlink{projdefs_8h_a07848d3078849bd32353c69d30a479b3}{pdPASS}}\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00328}00328\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00329}00329\ \ \ \ \ \ \ \ \ XIntc\_Disable(\ \&xInterruptControllerInstance,\ ucInterruptID\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00330}00330\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00331}00331\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00332}00332\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ lReturn\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00333}00333\ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00334}00334\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00335}00335\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00336}\mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2port_8c_a7e326747e8b11763013926ee724d5523}{00336}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{_g_c_c_2_i_a32__flat_2port_8c_aafd5a66e2a6b457102a8bad08e680532}{xPortInstallInterruptHandler}}(\ uint8\_t\ ucInterruptID,}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00337}00337\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ XInterruptHandler\ pxHandler,}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00338}00338\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *\ pvCallBackRef\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00339}00339\ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00340}00340\ \ \ \ \ int32\_t\ lReturn;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00341}00341\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00342}00342\ \ \ \ \ \textcolor{comment}{/*\ An\ API\ function\ is\ provided\ to\ install\ an\ interrupt\ handler\ because\ the}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00343}00343\ \textcolor{comment}{\ \ \ \ \ *\ interrupt\ controller\ instance\ variable\ is\ private\ to\ this\ file.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00344}00344\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00345}00345\ \ \ \ \ lReturn\ =\ prvEnsureInterruptControllerIsInitialised();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00346}00346\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00347}00347\ \ \ \ \ \textcolor{keywordflow}{if}(\ lReturn\ ==\ \mbox{\hyperlink{projdefs_8h_a07848d3078849bd32353c69d30a479b3}{pdPASS}}\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00348}00348\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00349}00349\ \ \ \ \ \ \ \ \ lReturn\ =\ XIntc\_Connect(\ \&xInterruptControllerInstance,\ ucInterruptID,\ pxHandler,\ pvCallBackRef\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00350}00350\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00351}00351\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00352}00352\ \ \ \ \ \textcolor{keywordflow}{if}(\ lReturn\ ==\ XST\_SUCCESS\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00353}00353\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00354}00354\ \ \ \ \ \ \ \ \ lReturn\ =\ \mbox{\hyperlink{projdefs_8h_a07848d3078849bd32353c69d30a479b3}{pdPASS}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00355}00355\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00356}00356\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00357}00357\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ lReturn\ ==\ \mbox{\hyperlink{projdefs_8h_a07848d3078849bd32353c69d30a479b3}{pdPASS}}\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00358}00358\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00359}00359\ \ \ \ \ \textcolor{keywordflow}{return}\ lReturn;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00360}00360\ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00361}00361\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00362}00362\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00363}00363\ \textcolor{keyword}{static}\ int32\_t\ prvEnsureInterruptControllerIsInitialised(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00364}00364\ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00365}00365\ \ \ \ \ \textcolor{keyword}{static}\ int32\_t\ lInterruptControllerInitialised\ =\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00366}00366\ \ \ \ \ int32\_t\ lReturn;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00367}00367\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00368}00368\ \ \ \ \ \textcolor{comment}{/*\ Ensure\ the\ interrupt\ controller\ instance\ variable\ is\ initialised\ before}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00369}00369\ \textcolor{comment}{\ \ \ \ \ *\ it\ is\ used,\ and\ that\ the\ initialisation\ only\ happens\ once.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00370}00370\ \ \ \ \ \textcolor{keywordflow}{if}(\ lInterruptControllerInitialised\ !=\ \mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}}\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00371}00371\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00372}00372\ \ \ \ \ \ \ \ \ lReturn\ =\ prvInitialiseInterruptController();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00373}00373\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00374}00374\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ lReturn\ ==\ \mbox{\hyperlink{projdefs_8h_a07848d3078849bd32353c69d30a479b3}{pdPASS}}\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00375}00375\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00376}00376\ \ \ \ \ \ \ \ \ \ \ \ \ lInterruptControllerInitialised\ =\ \mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00377}00377\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00378}00378\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00379}00379\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00380}00380\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00381}00381\ \ \ \ \ \ \ \ \ lReturn\ =\ \mbox{\hyperlink{projdefs_8h_a07848d3078849bd32353c69d30a479b3}{pdPASS}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00382}00382\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00383}00383\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00384}00384\ \ \ \ \ \textcolor{keywordflow}{return}\ lReturn;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00385}00385\ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00386}00386\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00387}00387\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00388}00388\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00389}00389\ \textcolor{comment}{\ *\ Handler\ for\ the\ timer\ interrupt.\ \ This\ is\ the\ handler\ that\ the\ application}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00390}00390\ \textcolor{comment}{\ *\ defined\ callback\ function\ vApplicationSetupTimerInterrupt()\ should\ install.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00391}00391\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00392}\mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2port_8c_a1065eac33ef6a9f310236e5f51d25156}{00392}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_code_warrior_2_cold_fire___v1_2port_8c_aad6152882d58328e92220bb7bc58dabb}{vPortTickISR}}(\ \textcolor{keywordtype}{void}\ *\ pvUnused\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00393}00393\ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00394}00394\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2portmacro_8h_ada8bec0ed1974828097368e3eb2e6a09}{vApplicationClearTimerInterrupt}}(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00395}00395\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00396}00396\ \ \ \ \ \textcolor{comment}{/*\ Ensure\ the\ unused\ parameter\ does\ not\ generate\ a\ compiler\ warning.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00397}00397\ \ \ \ \ (\ void\ )\ pvUnused;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00398}00398\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00399}00399\ \ \ \ \ \textcolor{comment}{/*\ This\ port\ uses\ an\ application\ defined\ callback\ function\ to\ clear\ the\ tick}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00400}00400\ \textcolor{comment}{\ \ \ \ \ *\ interrupt\ because\ the\ kernel\ will\ run\ on\ lots\ of\ different\ MicroBlaze\ and}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00401}00401\ \textcolor{comment}{\ \ \ \ \ *\ FPGA\ configurations\ -\/\ not\ all\ of\ which\ will\ have\ the\ same\ timer\ peripherals}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00402}00402\ \textcolor{comment}{\ \ \ \ \ *\ defined\ or\ available.\ \ An\ example\ definition\ of}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00403}00403\ \textcolor{comment}{\ \ \ \ \ *\ vApplicationClearTimerInterrupt()\ is\ provided\ in\ the\ official\ demo}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00404}00404\ \textcolor{comment}{\ \ \ \ \ *\ application\ that\ accompanies\ this\ port.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00405}00405\ \ \ \ \ \mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2portmacro_8h_ada8bec0ed1974828097368e3eb2e6a09}{vApplicationClearTimerInterrupt}}();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00406}00406\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00407}00407\ \ \ \ \ \textcolor{comment}{/*\ Increment\ the\ RTOS\ tick\ -\/\ this\ might\ cause\ a\ task\ to\ unblock.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00408}00408\ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{task_8h_a978e25460ac35706f9ad30b46d9403d8}{xTaskIncrementTick}}()\ !=\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}}\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00409}00409\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00410}00410\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Force\ vTaskSwitchContext()\ to\ be\ called\ as\ the\ interrupt\ exits.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00411}00411\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2port_8c_a142558b17027233797220c49c71c4f1f}{ulTaskSwitchRequested}}\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00412}00412\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00413}00413\ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00414}00414\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00415}00415\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00416}00416\ \textcolor{keyword}{static}\ int32\_t\ prvInitialiseInterruptController(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00417}00417\ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00418}00418\ \ \ \ \ int32\_t\ lStatus;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00419}00419\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00420}00420\ \ \ \ \ lStatus\ =\ XIntc\_Initialize(\ \&xInterruptControllerInstance,\ configINTERRUPT\_CONTROLLER\_TO\_USE\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00421}00421\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00422}00422\ \ \ \ \ \textcolor{keywordflow}{if}(\ lStatus\ ==\ XST\_SUCCESS\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00423}00423\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00424}00424\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Initialise\ the\ exception\ table.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00425}00425\ \ \ \ \ \ \ \ \ Xil\_ExceptionInit();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00426}00426\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00427}00427\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Service\ all\ pending\ interrupts\ each\ time\ the\ handler\ is\ entered.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00428}00428\ \ \ \ \ \ \ \ \ XIntc\_SetIntrSvcOption(\ xInterruptControllerInstance.BaseAddress,\ XIN\_SVC\_ALL\_ISRS\_OPTION\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00429}00429\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00430}00430\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Install\ exception\ handlers\ if\ the\ MicroBlaze\ is\ configured\ to\ handle}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00431}00431\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ exceptions,\ and\ the\ application\ defined\ constant}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00432}00432\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ configINSTALL\_EXCEPTION\_HANDLERS\ is\ set\ to\ 1.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00433}00433\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ (\ MICROBLAZE\_EXCEPTIONS\_ENABLED\ ==\ 1\ )\ \&\&\ (\ configINSTALL\_EXCEPTION\_HANDLERS\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00434}00434\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00435}00435\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_g_c_c_2_micro_blaze_v8_2portmacro_8h_a02e7621bd12097c626a731d7a0b452c7}{vPortExceptionsInstallHandlers}}();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00436}00436\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00437}00437\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif\ }\textcolor{comment}{/*\ MICROBLAZE\_EXCEPTIONS\_ENABLED\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00438}00438\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00439}00439\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Start\ the\ interrupt\ controller.\ \ Interrupts\ are\ enabled\ when\ the}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00440}00440\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ scheduler\ starts.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00441}00441\ \ \ \ \ \ \ \ \ lStatus\ =\ XIntc\_Start(\ \&xInterruptControllerInstance,\ XIN\_REAL\_MODE\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00442}00442\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00443}00443\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ lStatus\ ==\ XST\_SUCCESS\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00444}00444\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00445}00445\ \ \ \ \ \ \ \ \ \ \ \ \ lStatus\ =\ \mbox{\hyperlink{projdefs_8h_a07848d3078849bd32353c69d30a479b3}{pdPASS}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00446}00446\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00447}00447\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00448}00448\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00449}00449\ \ \ \ \ \ \ \ \ \ \ \ \ lStatus\ =\ \mbox{\hyperlink{projdefs_8h_a99e2866c8cf4fe86db87dab62e7d6aa6}{pdFAIL}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00450}00450\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00451}00451\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00452}00452\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00453}00453\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ lStatus\ ==\ \mbox{\hyperlink{projdefs_8h_a07848d3078849bd32353c69d30a479b3}{pdPASS}}\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00454}00454\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00455}00455\ \ \ \ \ \textcolor{keywordflow}{return}\ lStatus;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00456}00456\ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_micro_blaze_v8_2port_8c_source_l00457}00457\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+
+\end{DoxyCode}

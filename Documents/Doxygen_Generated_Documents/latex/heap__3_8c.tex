@@ -1,0 +1,96 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+Mem\+Mang/heap\+\_\+3.c File Reference}
+\hypertarget{heap__3_8c}{}\label{heap__3_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/MemMang/heap\_3.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/MemMang/heap\_3.c}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}task.\+h"{}}\newline
+Include dependency graph for heap\+\_\+3.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{heap__3_8c_ab622d8c674f2a417a666a7ed89109e79}{MPU\+\_\+\+WRAPPERS\+\_\+\+INCLUDED\+\_\+\+FROM\+\_\+\+API\+\_\+\+FILE}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{heap__3_8c_ac56bcb7515f081a5b3df83935499fa4a}{pv\+Port\+Malloc}} (size\+\_\+t x\+Wanted\+Size)
+\begin{DoxyCompactList}\small\item\em Allocates memory from heap. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{heap__3_8c_a1e7cea2fd1bc894ea3b5f5e8179d259b}{v\+Port\+Free}} (void \texorpdfstring{$\ast$}{*}pv)
+\begin{DoxyCompactList}\small\item\em Frees the previously allocated memory. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{heap__3_8c_af44030217c31ad748406a5a72c2e7be0}{v\+Port\+Heap\+Reset\+State}} (void)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{heap__3_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{heap__3_8c_ab622d8c674f2a417a666a7ed89109e79}\index{heap\_3.c@{heap\_3.c}!MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE@{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}}
+\index{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE@{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}!heap\_3.c@{heap\_3.c}}
+\doxysubsubsection{\texorpdfstring{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}}
+{\footnotesize\ttfamily \label{heap__3_8c_ab622d8c674f2a417a666a7ed89109e79} 
+\#define MPU\+\_\+\+WRAPPERS\+\_\+\+INCLUDED\+\_\+\+FROM\+\_\+\+API\+\_\+\+FILE}
+
+
+
+Definition at line \mbox{\hyperlink{heap__3_8c_source_l00046}{46}} of file \mbox{\hyperlink{heap__3_8c_source}{heap\+\_\+3.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{heap__3_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{heap__3_8c_ac56bcb7515f081a5b3df83935499fa4a}\index{heap\_3.c@{heap\_3.c}!pvPortMalloc@{pvPortMalloc}}
+\index{pvPortMalloc@{pvPortMalloc}!heap\_3.c@{heap\_3.c}}
+\doxysubsubsection{\texorpdfstring{pvPortMalloc()}{pvPortMalloc()}}
+{\footnotesize\ttfamily \label{heap__3_8c_ac56bcb7515f081a5b3df83935499fa4a} 
+void \texorpdfstring{$\ast$}{*} pv\+Port\+Malloc (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{x\+Wanted\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Allocates memory from heap. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em x\+Wanted\+Size} & The size of the memory to be allocated.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the memory region if the allocation is successful, NULL otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{heap__3_8c_source_l00059}{59}} of file \mbox{\hyperlink{heap__3_8c_source}{heap\+\_\+3.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{heap__3_8c_a1e7cea2fd1bc894ea3b5f5e8179d259b}\index{heap\_3.c@{heap\_3.c}!vPortFree@{vPortFree}}
+\index{vPortFree@{vPortFree}!heap\_3.c@{heap\_3.c}}
+\doxysubsubsection{\texorpdfstring{vPortFree()}{vPortFree()}}
+{\footnotesize\ttfamily \label{heap__3_8c_a1e7cea2fd1bc894ea3b5f5e8179d259b} 
+void v\+Port\+Free (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{pv}{}\end{DoxyParamCaption})}
+
+
+
+Frees the previously allocated memory. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em pv} & Pointer to the memory to be freed. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{heap__3_8c_source_l00083}{83}} of file \mbox{\hyperlink{heap__3_8c_source}{heap\+\_\+3.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{heap__3_8c_af44030217c31ad748406a5a72c2e7be0}\index{heap\_3.c@{heap\_3.c}!vPortHeapResetState@{vPortHeapResetState}}
+\index{vPortHeapResetState@{vPortHeapResetState}!heap\_3.c@{heap\_3.c}}
+\doxysubsubsection{\texorpdfstring{vPortHeapResetState()}{vPortHeapResetState()}}
+{\footnotesize\ttfamily \label{heap__3_8c_af44030217c31ad748406a5a72c2e7be0} 
+void v\+Port\+Heap\+Reset\+State (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{heap__3_8c_source_l00102}{102}} of file \mbox{\hyperlink{heap__3_8c_source}{heap\+\_\+3.\+c}}.
+

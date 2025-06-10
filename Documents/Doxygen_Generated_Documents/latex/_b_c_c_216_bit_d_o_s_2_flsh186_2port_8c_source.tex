@@ -1,0 +1,250 @@
+\doxysection{port.\+c}
+\hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source}{}\label{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/BCC/16BitDOS/Flsh186/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/BCC/16BitDOS/Flsh186/port.c}}
+\mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00029}00029\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00030}00030\ \textcolor{comment}{Changes\ from\ V1.00:}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00031}00031\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00032}00032\ \textcolor{comment}{\ \ \ \ +\ Call\ to\ taskYIELD()\ from\ within\ tick\ ISR\ has\ been\ replaced\ by\ the\ more}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00033}00033\ \textcolor{comment}{\ \ \ \ \ \ efficient\ portSWITCH\_CONTEXT().}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00034}00034\ \textcolor{comment}{\ \ \ \ +\ ISR\ function\ definitions\ renamed\ to\ include\ the\ prv\ prefix.}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00035}00035\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00036}00036\ \textcolor{comment}{Changes\ from\ V2.6.1}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00037}00037\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00038}00038\ \textcolor{comment}{\ \ \ \ +\ Replaced\ the\ sUsingPreemption\ variable\ with\ the\ configUSE\_PREEMPTION}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00039}00039\ \textcolor{comment}{\ \ \ \ \ \ macro\ to\ be\ consistent\ with\ the\ later\ ports.}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00040}00040\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00042}00042\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00043}00043\ \textcolor{comment}{\ *\ Implementation\ of\ functions\ defined\ in\ portable.h\ for\ the\ Flashlite\ 186}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00044}00044\ \textcolor{comment}{\ *\ port.}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00045}00045\ \textcolor{comment}{\ *-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00047}00047\ \textcolor{preprocessor}{\#include\ <dos.h>}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00048}00048\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00049}00049\ \textcolor{preprocessor}{\#include\ <setjmp.h>}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00051}00051\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_free_r_t_o_s_8h}{FreeRTOS.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00052}00052\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{task_8h}{task.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00053}00053\ \textcolor{preprocessor}{\#include\ "{}portasm.h"{}}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00055}00055\ \textcolor{comment}{/*lint\ -\/e950\ Non\ ANSI\ reserved\ words\ okay\ in\ this\ file\ only.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00057}\mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_a3a3790b17df2b9caadc73f994a12a5e6}{00057}}\ \textcolor{preprocessor}{\#define\ portTIMER\_EOI\_TYPE\ \ \ \ \ \ (\ 8\ )}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00058}\mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_a3c772ef1e2592552c78f8d9dcd24cb15}{00058}}\ \textcolor{preprocessor}{\#define\ portRESET\_PIC()\ \ \ \ \ \ \ \ \ portOUTPUT\_WORD(\ (\ uint16\_t\ )\ 0xff22,\ portTIMER\_EOI\_TYPE\ )}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00059}\mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_a7aa65bf5567c7a0cadf05fa4f8b40412}{00059}}\ \textcolor{preprocessor}{\#define\ portTIMER\_INT\_NUMBER\ \ \ \ 0x12}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00061}\mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_a8b32d6d1ae543356a995fb6551dd3a53}{00061}}\ \textcolor{preprocessor}{\#define\ portTIMER\_1\_CONTROL\_REGISTER\ \ \ \ (\ (\ uint16\_t\ )\ 0xff5e\ )}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00062}\mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_a54aabc595291ced640095509415d0dbc}{00062}}\ \textcolor{preprocessor}{\#define\ portTIMER\_0\_CONTROL\_REGISTER\ \ \ \ (\ (\ uint16\_t\ )\ 0xff56\ )}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00063}\mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_a9303f7f8ba7c49f34cfac61ce9013b32}{00063}}\ \textcolor{preprocessor}{\#define\ portTIMER\_INTERRUPT\_ENABLE\ \ \ \ \ \ (\ (\ uint16\_t\ )\ 0x2000\ )}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00065}00065\ \textcolor{comment}{/*\ Setup\ the\ hardware\ to\ generate\ the\ required\ tick\ frequency.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00066}00066\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ prvSetTickFrequency(\ uint32\_t\ ulTickRateHz\ );}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00068}00068\ \textcolor{comment}{/*\ Set\ the\ hardware\ back\ to\ the\ state\ as\ per\ before\ the\ scheduler\ started.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00069}00069\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ prvExitFunction(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00071}00071\ \textcolor{comment}{/*\ The\ ISR\ used\ depends\ on\ whether\ the\ preemptive\ or\ cooperative\ scheduler}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00072}00072\ \textcolor{comment}{is\ being\ used.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00073}00073\ \textcolor{preprocessor}{\#if(\ configUSE\_PREEMPTION\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00074}00074\ \ \ \ \ \textcolor{comment}{/*\ Tick\ service\ routine\ used\ by\ the\ scheduler\ when\ preemptive\ scheduling\ is}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00075}00075\ \textcolor{comment}{\ \ \ \ being\ used.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00076}00076\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \_\_interrupt\ \_\_far\ prvPreemptiveTick(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00077}00077\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00078}00078\ \ \ \ \ \textcolor{comment}{/*\ Tick\ service\ routine\ used\ by\ the\ scheduler\ when\ cooperative\ scheduling\ is}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00079}00079\ \textcolor{comment}{\ \ \ \ being\ used.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00080}00080\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \_\_interrupt\ \_\_far\ prvNonPreemptiveTick(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00081}00081\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00083}00083\ \textcolor{comment}{/*\ Trap\ routine\ used\ by\ taskYIELD()\ to\ manually\ cause\ a\ context\ switch.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00084}00084\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \_\_interrupt\ \_\_far\ prvYieldProcessor(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00086}00086\ \textcolor{comment}{/*lint\ -\/e956\ File\ scopes\ necessary\ here.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00088}00088\ \textcolor{comment}{/*\ Set\ true\ when\ the\ vectors\ are\ set\ so\ the\ scheduler\ will\ service\ the\ tick.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00089}00089\ \textcolor{keyword}{static}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xSchedulerRunning\ =\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}};}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00091}00091\ \textcolor{comment}{/*\ Points\ to\ the\ original\ routine\ installed\ on\ the\ vector\ we\ use\ for\ manual}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00092}00092\ \textcolor{comment}{context\ switches.\ \ This\ is\ then\ used\ to\ restore\ the\ original\ routine\ during}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00093}00093\ \textcolor{comment}{prvExitFunction().\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00094}00094\ \textcolor{keyword}{static}\ void\ (\ \_\_interrupt\ \_\_far\ *pxOldSwitchISR\ )();}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00096}00096\ \textcolor{comment}{/*\ Used\ to\ restore\ the\ original\ DOS\ context\ when\ the\ scheduler\ is\ ended.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00097}00097\ \textcolor{keyword}{static}\ jmp\_buf\ xJumpBuf;}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00099}00099\ \textcolor{comment}{/*lint\ +e956\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00101}00101\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00102}\mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{00102}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{xPortStartScheduler}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00103}00103\ \{}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00104}00104\ \ \ \ \ \textcolor{comment}{/*\ This\ is\ called\ with\ interrupts\ already\ disabled.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00106}00106\ \ \ \ \ \textcolor{comment}{/*\ Remember\ what\ was\ on\ the\ interrupts\ we\ are\ going\ to\ use}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00107}00107\ \textcolor{comment}{\ \ \ \ so\ we\ can\ put\ them\ back\ later\ if\ required.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00108}00108\ \ \ \ \ pxOldSwitchISR\ =\ \_dos\_getvect(\ \mbox{\hyperlink{_flsh186_2prtmacro_8h_a74f345489b3279d2d32a1f21ad6d4cd6}{portSWITCH\_INT\_NUMBER}}\ );}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00110}00110\ \ \ \ \ \textcolor{comment}{/*\ Put\ our\ manual\ switch\ (yield)\ function\ on\ a\ known}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00111}00111\ \textcolor{comment}{\ \ \ \ vector.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00112}00112\ \ \ \ \ \_dos\_setvect(\ \mbox{\hyperlink{_flsh186_2prtmacro_8h_a74f345489b3279d2d32a1f21ad6d4cd6}{portSWITCH\_INT\_NUMBER}},\ prvYieldProcessor\ );}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00114}00114\ \textcolor{preprocessor}{\ \ \ \ \#if(\ configUSE\_PREEMPTION\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00115}00115\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00116}00116\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Put\ our\ tick\ switch\ function\ on\ the\ timer\ interrupt.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00117}00117\ \ \ \ \ \ \ \ \ \_dos\_setvect(\ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_a7aa65bf5567c7a0cadf05fa4f8b40412}{portTIMER\_INT\_NUMBER}},\ prvPreemptiveTick\ );}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00118}00118\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00119}00119\ \textcolor{preprocessor}{\ \ \ \ \#else}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00120}00120\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00121}00121\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ We\ want\ the\ timer\ interrupt\ to\ just\ increment\ the\ tick\ count.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00122}00122\ \ \ \ \ \ \ \ \ \_dos\_setvect(\ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_a7aa65bf5567c7a0cadf05fa4f8b40412}{portTIMER\_INT\_NUMBER}},\ prvNonPreemptiveTick\ );}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00123}00123\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00124}00124\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00126}00126\ \ \ \ \ prvSetTickFrequency(\ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_a2f0258dd1e3b877e5bc013be54c2db6a}{configTICK\_RATE\_HZ}}\ );}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00128}00128\ \ \ \ \ \textcolor{comment}{/*\ Clean\ up\ function\ if\ we\ want\ to\ return\ to\ DOS.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00129}00129\ \ \ \ \ \textcolor{keywordflow}{if}(\ setjmp(\ xJumpBuf\ )\ !=\ 0\ )}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00130}00130\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00131}00131\ \ \ \ \ \ \ \ \ prvExitFunction();}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00132}00132\ \ \ \ \ \ \ \ \ xSchedulerRunning\ =\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}};}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00133}00133\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00134}00134\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00135}00135\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00136}00136\ \ \ \ \ \ \ \ \ xSchedulerRunning\ =\ \mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}};}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00138}00138\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Kick\ off\ the\ scheduler\ by\ setting\ up\ the\ context\ of\ the\ first\ task.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00139}00139\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_a77d89f631d90f682ac62e4f846a3a9cc}{portFIRST\_CONTEXT}}();}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00140}00140\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00142}00142\ \ \ \ \ \textcolor{keywordflow}{return}\ xSchedulerRunning;}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00143}00143\ \}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00144}00144\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00146}00146\ \textcolor{comment}{/*\ The\ ISR\ used\ depends\ on\ whether\ the\ preemptive\ or\ cooperative\ scheduler}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00147}00147\ \textcolor{comment}{is\ being\ used.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00148}00148\ \textcolor{preprocessor}{\#if(\ configUSE\_PREEMPTION\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00149}00149\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \_\_interrupt\ \_\_far\ prvPreemptiveTick(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00150}00150\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00151}00151\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Get\ the\ scheduler\ to\ update\ the\ task\ states\ following\ the\ tick.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00152}00152\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{task_8h_a978e25460ac35706f9ad30b46d9403d8}{xTaskIncrementTick}}()\ !=\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}}\ )}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00153}00153\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Switch\ in\ the\ context\ of\ the\ next\ task\ to\ be\ run.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_aaea6ce0c286cb419f68cce25598762ea}{portSWITCH\_CONTEXT}}();}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00156}00156\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00157}00157\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00158}00158\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Reset\ the\ PIC\ ready\ for\ the\ next\ time.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00159}00159\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_a3c772ef1e2592552c78f8d9dcd24cb15}{portRESET\_PIC}}();}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00160}00160\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00161}00161\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00162}00162\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \_\_interrupt\ \_\_far\ prvNonPreemptiveTick(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00163}00163\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00164}00164\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Same\ as\ preemptive\ tick,\ but\ the\ cooperative\ scheduler\ is\ being\ used}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00165}00165\ \textcolor{comment}{\ \ \ \ \ \ \ \ so\ we\ don't\ have\ to\ switch\ in\ the\ context\ of\ the\ next\ task.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00166}00166\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{task_8h_a978e25460ac35706f9ad30b46d9403d8}{xTaskIncrementTick}}();}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00167}00167\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_a3c772ef1e2592552c78f8d9dcd24cb15}{portRESET\_PIC}}();}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00168}00168\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00169}00169\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00170}00170\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00171}00171\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00172}00172\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \_\_interrupt\ \_\_far\ prvYieldProcessor(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00173}00173\ \{}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00174}00174\ \ \ \ \ \textcolor{comment}{/*\ Switch\ in\ the\ context\ of\ the\ next\ task\ to\ be\ run.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00175}00175\ \ \ \ \ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_aaea6ce0c286cb419f68cce25598762ea}{portSWITCH\_CONTEXT}}();}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00176}00176\ \}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00177}00177\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00178}00178\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00179}\mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{00179}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{vPortEndScheduler}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00180}00180\ \{}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00181}00181\ \ \ \ \ \textcolor{comment}{/*\ Jump\ back\ to\ the\ processor\ state\ prior\ to\ starting\ the}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00182}00182\ \textcolor{comment}{\ \ \ \ scheduler.\ \ This\ means\ we\ are\ not\ going\ to\ be\ using\ a}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00183}00183\ \textcolor{comment}{\ \ \ \ task\ stack\ frame\ so\ the\ task\ can\ be\ deleted.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00184}00184\ \ \ \ \ longjmp(\ xJumpBuf,\ 1\ );}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00185}00185\ \}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00186}00186\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00187}00187\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00188}00188\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ prvExitFunction(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00189}00189\ \{}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00190}00190\ \textcolor{keyword}{const}\ uint16\_t\ usTimerDisable\ =\ 0x0000;}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00191}00191\ uint16\_t\ usTimer0Control;}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00192}00192\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00193}00193\ \ \ \ \ \textcolor{comment}{/*\ Interrupts\ should\ be\ disabled\ here\ anyway\ -\/\ but\ no}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00194}00194\ \textcolor{comment}{\ \ \ \ harm\ in\ making\ sure.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00195}00195\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portable_2_g_c_c_2_a_r_m___c_m23_2portmacro_8h_a6e3d10ee1a0734a647ca192523c2cfc1}{portDISABLE\_INTERRUPTS}}();}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00196}00196\ \ \ \ \ \textcolor{keywordflow}{if}(\ xSchedulerRunning\ ==\ \mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}}\ )}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00197}00197\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00198}00198\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Put\ back\ the\ switch\ interrupt\ routines\ that\ was\ in\ place}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00199}00199\ \textcolor{comment}{\ \ \ \ \ \ \ \ before\ the\ scheduler\ started.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00200}00200\ \ \ \ \ \ \ \ \ \_dos\_setvect(\ \mbox{\hyperlink{_flsh186_2prtmacro_8h_a74f345489b3279d2d32a1f21ad6d4cd6}{portSWITCH\_INT\_NUMBER}},\ pxOldSwitchISR\ );}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00201}00201\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00203}00203\ \ \ \ \ \textcolor{comment}{/*\ Disable\ the\ timer\ used\ for\ the\ tick\ to\ ensure\ the\ scheduler\ is}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00204}00204\ \textcolor{comment}{\ \ \ \ not\ called\ before\ restoring\ interrupts.\ \ There\ was\ previously\ nothing}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00205}00205\ \textcolor{comment}{\ \ \ \ on\ this\ timer\ so\ there\ is\ no\ old\ ISR\ to\ restore.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00206}00206\ \ \ \ \ \mbox{\hyperlink{_flsh186_2prtmacro_8h_a379b8e03bcb6e21e8d78f7b042cde6ac}{portOUTPUT\_WORD}}(\ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_a8b32d6d1ae543356a995fb6551dd3a53}{portTIMER\_1\_CONTROL\_REGISTER}},\ usTimerDisable\ );}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00207}00207\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00208}00208\ \ \ \ \ \textcolor{comment}{/*\ Restart\ the\ DOS\ tick.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00209}00209\ \ \ \ \ usTimer0Control\ =\ \mbox{\hyperlink{_flsh186_2prtmacro_8h_aa2c258d8be67c853499f20d2a33ab0f0}{portINPUT\_WORD}}(\ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_a54aabc595291ced640095509415d0dbc}{portTIMER\_0\_CONTROL\_REGISTER}}\ );}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00210}00210\ \ \ \ \ usTimer0Control\ |=\ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_a9303f7f8ba7c49f34cfac61ce9013b32}{portTIMER\_INTERRUPT\_ENABLE}};}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00211}00211\ \ \ \ \ \mbox{\hyperlink{_flsh186_2prtmacro_8h_a379b8e03bcb6e21e8d78f7b042cde6ac}{portOUTPUT\_WORD}}(\ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_a54aabc595291ced640095509415d0dbc}{portTIMER\_0\_CONTROL\_REGISTER}},\ usTimer0Control\ );}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00212}00212\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00213}00213\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00214}00214\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portable_2_g_c_c_2_a_r_m___c_m23_2portmacro_8h_abc47e85a6befbb47961ad5ee7aa57173}{portENABLE\_INTERRUPTS}}();}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00215}00215\ \}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00216}00216\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00218}00218\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ prvSetTickFrequency(\ uint32\_t\ ulTickRateHz\ )}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00219}00219\ \{}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00220}00220\ \textcolor{keyword}{const}\ uint16\_t\ usMaxCountRegister\ =\ 0xff5a;}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00221}00221\ \textcolor{keyword}{const}\ uint16\_t\ usTimerPriorityRegister\ =\ 0xff32;}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00222}00222\ \textcolor{keyword}{const}\ uint16\_t\ usTimerEnable\ =\ 0xC000;}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00223}00223\ \textcolor{keyword}{const}\ uint16\_t\ usRetrigger\ =\ 0x0001;}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00224}00224\ \textcolor{keyword}{const}\ uint16\_t\ usTimerHighPriority\ =\ 0x0000;}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00225}00225\ uint16\_t\ usTimer0Control;}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00226}00226\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00227}00227\ \textcolor{comment}{/*\ (\ CPU\ frequency\ /\ 4\ )\ /\ clock\ 2\ max\ count\ [inpw(\ 0xff62\ )\ =\ 7]\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00228}00228\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00229}00229\ \textcolor{keyword}{const}\ uint32\_t\ ulClockFrequency\ =\ (\ uint32\_t\ )\ 0x7f31a0UL;}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00230}00230\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00231}00231\ uint32\_t\ ulTimerCount\ =\ ulClockFrequency\ /\ ulTickRateHz;}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00233}00233\ \ \ \ \ \mbox{\hyperlink{_flsh186_2prtmacro_8h_a379b8e03bcb6e21e8d78f7b042cde6ac}{portOUTPUT\_WORD}}(\ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_a8b32d6d1ae543356a995fb6551dd3a53}{portTIMER\_1\_CONTROL\_REGISTER}},\ usTimerEnable\ |\ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_a9303f7f8ba7c49f34cfac61ce9013b32}{portTIMER\_INTERRUPT\_ENABLE}}\ |\ usRetrigger\ );}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00234}00234\ \ \ \ \ \mbox{\hyperlink{_flsh186_2prtmacro_8h_a379b8e03bcb6e21e8d78f7b042cde6ac}{portOUTPUT\_WORD}}(\ usMaxCountRegister,\ (\ uint16\_t\ )\ ulTimerCount\ );}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00235}00235\ \ \ \ \ \mbox{\hyperlink{_flsh186_2prtmacro_8h_a379b8e03bcb6e21e8d78f7b042cde6ac}{portOUTPUT\_WORD}}(\ usTimerPriorityRegister,\ usTimerHighPriority\ );}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00237}00237\ \ \ \ \ \textcolor{comment}{/*\ Stop\ the\ DOS\ tick\ -\/\ don't\ do\ this\ if\ you\ want\ to\ maintain\ a\ TOD\ clock.\ */}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00238}00238\ \ \ \ \ usTimer0Control\ =\ \mbox{\hyperlink{_flsh186_2prtmacro_8h_aa2c258d8be67c853499f20d2a33ab0f0}{portINPUT\_WORD}}(\ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_a54aabc595291ced640095509415d0dbc}{portTIMER\_0\_CONTROL\_REGISTER}}\ );}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00239}00239\ \ \ \ \ usTimer0Control\ \&=\ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_a9303f7f8ba7c49f34cfac61ce9013b32}{\string~portTIMER\_INTERRUPT\_ENABLE}};}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00240}00240\ \ \ \ \ \mbox{\hyperlink{_flsh186_2prtmacro_8h_a379b8e03bcb6e21e8d78f7b042cde6ac}{portOUTPUT\_WORD}}(\ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_a54aabc595291ced640095509415d0dbc}{portTIMER\_0\_CONTROL\_REGISTER}},\ usTimer0Control\ );}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00241}00241\ \}}
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00242}00242\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00243}00243\ }
+\DoxyCodeLine{\Hypertarget{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_source_l00244}00244\ \textcolor{comment}{/*lint\ +e950\ */}}
+
+\end{DoxyCode}

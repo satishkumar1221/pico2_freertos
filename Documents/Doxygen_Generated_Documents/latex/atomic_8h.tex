@@ -1,0 +1,99 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/include/atomic.h File Reference}
+\hypertarget{atomic_8h}{}\label{atomic_8h}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/atomic.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/atomic.h}}
+
+
+Free\+RTOS atomic operation support.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+Include dependency graph for atomic.\+h\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{atomic_8h_a155d89b2444fe81cbc8d051f0fd849c9}{ATOMIC\+\_\+\+ENTER\+\_\+\+CRITICAL}}()
+\item 
+\#define \mbox{\hyperlink{atomic_8h_a1aab48db50f9e59e44032386aa3eb5b8}{ATOMIC\+\_\+\+EXIT\+\_\+\+CRITICAL}}()
+\item 
+\#define \mbox{\hyperlink{atomic_8h_aaa356ca7932487d20a42d6839842d308}{port\+FORCE\+\_\+\+INLINE}}
+\item 
+\#define \mbox{\hyperlink{atomic_8h_a2d30f083e50b866caf8822ec31a75969}{ATOMIC\+\_\+\+COMPARE\+\_\+\+AND\+\_\+\+SWAP\+\_\+\+SUCCESS}}~0x1U
+\item 
+\#define \mbox{\hyperlink{atomic_8h_ab374919fbdbc585c3436a94f5bad31b6}{ATOMIC\+\_\+\+COMPARE\+\_\+\+AND\+\_\+\+SWAP\+\_\+\+FAILURE}}~0x0U
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Free\+RTOS atomic operation support. 
+
+This file implements atomic functions by disabling interrupts globally. Implementations with architecture specific atomic instructions can be provided under each compiler directory.
+
+The atomic interface can be used in Free\+RTOS tasks on all Free\+RTOS ports. It can also be used in Interrupt Service Routines (ISRs) on Free\+RTOS ports that support nested interrupts (i.\+e. port\+HAS\+\_\+\+NESTED\+\_\+\+INTERRUPTS is set to 1). The atomic interface must not be used in ISRs on Free\+RTOS ports that do not support nested interrupts (i.\+e. port\+HAS\+\_\+\+NESTED\+\_\+\+INTERRUPTS is set to 0) because ISRs on these ports cannot be interrupted and therefore, do not need atomics in ISRs. 
+
+Definition in file \mbox{\hyperlink{atomic_8h_source}{atomic.\+h}}.
+
+
+
+\label{doc-define-members}
+\Hypertarget{atomic_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{atomic_8h_ab374919fbdbc585c3436a94f5bad31b6}\index{atomic.h@{atomic.h}!ATOMIC\_COMPARE\_AND\_SWAP\_FAILURE@{ATOMIC\_COMPARE\_AND\_SWAP\_FAILURE}}
+\index{ATOMIC\_COMPARE\_AND\_SWAP\_FAILURE@{ATOMIC\_COMPARE\_AND\_SWAP\_FAILURE}!atomic.h@{atomic.h}}
+\doxysubsubsection{\texorpdfstring{ATOMIC\_COMPARE\_AND\_SWAP\_FAILURE}{ATOMIC\_COMPARE\_AND\_SWAP\_FAILURE}}
+{\footnotesize\ttfamily \label{atomic_8h_ab374919fbdbc585c3436a94f5bad31b6} 
+\#define ATOMIC\+\_\+\+COMPARE\+\_\+\+AND\+\_\+\+SWAP\+\_\+\+FAILURE~0x0U}
+
+Compare and swap failed, did not swap. 
+
+Definition at line \mbox{\hyperlink{atomic_8h_source_l00099}{99}} of file \mbox{\hyperlink{atomic_8h_source}{atomic.\+h}}.
+
+\Hypertarget{atomic_8h_a2d30f083e50b866caf8822ec31a75969}\index{atomic.h@{atomic.h}!ATOMIC\_COMPARE\_AND\_SWAP\_SUCCESS@{ATOMIC\_COMPARE\_AND\_SWAP\_SUCCESS}}
+\index{ATOMIC\_COMPARE\_AND\_SWAP\_SUCCESS@{ATOMIC\_COMPARE\_AND\_SWAP\_SUCCESS}!atomic.h@{atomic.h}}
+\doxysubsubsection{\texorpdfstring{ATOMIC\_COMPARE\_AND\_SWAP\_SUCCESS}{ATOMIC\_COMPARE\_AND\_SWAP\_SUCCESS}}
+{\footnotesize\ttfamily \label{atomic_8h_a2d30f083e50b866caf8822ec31a75969} 
+\#define ATOMIC\+\_\+\+COMPARE\+\_\+\+AND\+\_\+\+SWAP\+\_\+\+SUCCESS~0x1U}
+
+Compare and swap succeeded, swapped. 
+
+Definition at line \mbox{\hyperlink{atomic_8h_source_l00098}{98}} of file \mbox{\hyperlink{atomic_8h_source}{atomic.\+h}}.
+
+\Hypertarget{atomic_8h_a155d89b2444fe81cbc8d051f0fd849c9}\index{atomic.h@{atomic.h}!ATOMIC\_ENTER\_CRITICAL@{ATOMIC\_ENTER\_CRITICAL}}
+\index{ATOMIC\_ENTER\_CRITICAL@{ATOMIC\_ENTER\_CRITICAL}!atomic.h@{atomic.h}}
+\doxysubsubsection{\texorpdfstring{ATOMIC\_ENTER\_CRITICAL}{ATOMIC\_ENTER\_CRITICAL}}
+{\footnotesize\ttfamily \label{atomic_8h_a155d89b2444fe81cbc8d051f0fd849c9} 
+\#define ATOMIC\+\_\+\+ENTER\+\_\+\+CRITICAL(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a8a09321ad004019f3c8d0f2e4d7224c7}{portENTER\_CRITICAL}}()}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{atomic_8h_source_l00082}{82}} of file \mbox{\hyperlink{atomic_8h_source}{atomic.\+h}}.
+
+\Hypertarget{atomic_8h_a1aab48db50f9e59e44032386aa3eb5b8}\index{atomic.h@{atomic.h}!ATOMIC\_EXIT\_CRITICAL@{ATOMIC\_EXIT\_CRITICAL}}
+\index{ATOMIC\_EXIT\_CRITICAL@{ATOMIC\_EXIT\_CRITICAL}!atomic.h@{atomic.h}}
+\doxysubsubsection{\texorpdfstring{ATOMIC\_EXIT\_CRITICAL}{ATOMIC\_EXIT\_CRITICAL}}
+{\footnotesize\ttfamily \label{atomic_8h_a1aab48db50f9e59e44032386aa3eb5b8} 
+\#define ATOMIC\+\_\+\+EXIT\+\_\+\+CRITICAL(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a529358e6147881dd881c890ade21c9bd}{portEXIT\_CRITICAL}}()}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{atomic_8h_source_l00083}{83}} of file \mbox{\hyperlink{atomic_8h_source}{atomic.\+h}}.
+
+\Hypertarget{atomic_8h_aaa356ca7932487d20a42d6839842d308}\index{atomic.h@{atomic.h}!portFORCE\_INLINE@{portFORCE\_INLINE}}
+\index{portFORCE\_INLINE@{portFORCE\_INLINE}!atomic.h@{atomic.h}}
+\doxysubsubsection{\texorpdfstring{portFORCE\_INLINE}{portFORCE\_INLINE}}
+{\footnotesize\ttfamily \label{atomic_8h_aaa356ca7932487d20a42d6839842d308} 
+\#define port\+FORCE\+\_\+\+INLINE}
+
+
+
+Definition at line \mbox{\hyperlink{atomic_8h_source_l00095}{95}} of file \mbox{\hyperlink{atomic_8h_source}{atomic.\+h}}.
+

@@ -1,0 +1,108 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+Wiz\+C/\+PIC18/\+Drivers/\+Tick/\+Tick.c File Reference}
+\hypertarget{_tick_8c}{}\label{_tick_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/WizC/PIC18/Drivers/Tick/Tick.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/WizC/PIC18/Drivers/Tick/Tick.c}}
+{\ttfamily \#include $<$Free\+RTOS.\+h$>$}\newline
+{\ttfamily \#include $<$task.\+h$>$}\newline
+Include dependency graph for Tick.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_tick_8c_af90312d7bbf878b4175a88247b5d5d0f}{port\+BIT\+\_\+\+SET}}~(1)
+\item 
+\#define \mbox{\hyperlink{_tick_8c_ae10c299006f2c1b8ec405bb1fa9e993b}{port\+BIT\+\_\+\+CLEAR}}~(0)
+\item 
+\#define \mbox{\hyperlink{_tick_8c_aaed649db146f6545797f1a85b29bffed}{port\+TIMER\+\_\+\+COMPARE\+\_\+\+BASE}}~((APROCFREQ/4)/\mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_a2f0258dd1e3b877e5bc013be54c2db6a}{config\+TICK\+\_\+\+RATE\+\_\+\+HZ}})
+\item 
+\#define \mbox{\hyperlink{_tick_8c_a4deee5f3cea1a853d7bfced1ca88ab32}{port\+TIMER\+\_\+\+COMPARE\+\_\+\+VALUE}}~(\mbox{\hyperlink{_tick_8c_aaed649db146f6545797f1a85b29bffed}{port\+TIMER\+\_\+\+COMPARE\+\_\+\+BASE}})
+\item 
+\#define \mbox{\hyperlink{_tick_8c_a510a9891ca09fb506485fbbe4096b231}{port\+TIMER\+\_\+\+COMPARE\+\_\+\+PS1}}~(\mbox{\hyperlink{_m_p_l_a_b_2_p_i_c18_f_2port_8c_ae10c299006f2c1b8ec405bb1fa9e993b}{port\+BIT\+\_\+\+CLEAR}})
+\item 
+\#define \mbox{\hyperlink{_tick_8c_a7845f993e8d451104d6e78e8f0b61e0e}{port\+TIMER\+\_\+\+COMPARE\+\_\+\+PS0}}~(\mbox{\hyperlink{_m_p_l_a_b_2_p_i_c18_f_2port_8c_ae10c299006f2c1b8ec405bb1fa9e993b}{port\+BIT\+\_\+\+CLEAR}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_tick_8c_a97b27e7afea96574a70aab311e350ac0}{port\+Setup\+Tick}} (void)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_tick_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_tick_8c_ae10c299006f2c1b8ec405bb1fa9e993b}\index{Tick.c@{Tick.c}!portBIT\_CLEAR@{portBIT\_CLEAR}}
+\index{portBIT\_CLEAR@{portBIT\_CLEAR}!Tick.c@{Tick.c}}
+\doxysubsubsection{\texorpdfstring{portBIT\_CLEAR}{portBIT\_CLEAR}}
+{\footnotesize\ttfamily \label{_tick_8c_ae10c299006f2c1b8ec405bb1fa9e993b} 
+\#define port\+BIT\+\_\+\+CLEAR~(0)}
+
+
+
+Definition at line \mbox{\hyperlink{_tick_8c_source_l00045}{45}} of file \mbox{\hyperlink{_tick_8c_source}{Tick.\+c}}.
+
+\Hypertarget{_tick_8c_af90312d7bbf878b4175a88247b5d5d0f}\index{Tick.c@{Tick.c}!portBIT\_SET@{portBIT\_SET}}
+\index{portBIT\_SET@{portBIT\_SET}!Tick.c@{Tick.c}}
+\doxysubsubsection{\texorpdfstring{portBIT\_SET}{portBIT\_SET}}
+{\footnotesize\ttfamily \label{_tick_8c_af90312d7bbf878b4175a88247b5d5d0f} 
+\#define port\+BIT\+\_\+\+SET~(1)}
+
+
+
+Definition at line \mbox{\hyperlink{_tick_8c_source_l00044}{44}} of file \mbox{\hyperlink{_tick_8c_source}{Tick.\+c}}.
+
+\Hypertarget{_tick_8c_aaed649db146f6545797f1a85b29bffed}\index{Tick.c@{Tick.c}!portTIMER\_COMPARE\_BASE@{portTIMER\_COMPARE\_BASE}}
+\index{portTIMER\_COMPARE\_BASE@{portTIMER\_COMPARE\_BASE}!Tick.c@{Tick.c}}
+\doxysubsubsection{\texorpdfstring{portTIMER\_COMPARE\_BASE}{portTIMER\_COMPARE\_BASE}}
+{\footnotesize\ttfamily \label{_tick_8c_aaed649db146f6545797f1a85b29bffed} 
+\#define port\+TIMER\+\_\+\+COMPARE\+\_\+\+BASE~((APROCFREQ/4)/\mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_a2f0258dd1e3b877e5bc013be54c2db6a}{config\+TICK\+\_\+\+RATE\+\_\+\+HZ}})}
+
+
+
+Definition at line \mbox{\hyperlink{_tick_8c_source_l00053}{53}} of file \mbox{\hyperlink{_tick_8c_source}{Tick.\+c}}.
+
+\Hypertarget{_tick_8c_a7845f993e8d451104d6e78e8f0b61e0e}\index{Tick.c@{Tick.c}!portTIMER\_COMPARE\_PS0@{portTIMER\_COMPARE\_PS0}}
+\index{portTIMER\_COMPARE\_PS0@{portTIMER\_COMPARE\_PS0}!Tick.c@{Tick.c}}
+\doxysubsubsection{\texorpdfstring{portTIMER\_COMPARE\_PS0}{portTIMER\_COMPARE\_PS0}}
+{\footnotesize\ttfamily \label{_tick_8c_a7845f993e8d451104d6e78e8f0b61e0e} 
+\#define port\+TIMER\+\_\+\+COMPARE\+\_\+\+PS0~(\mbox{\hyperlink{_m_p_l_a_b_2_p_i_c18_f_2port_8c_ae10c299006f2c1b8ec405bb1fa9e993b}{port\+BIT\+\_\+\+CLEAR}})}
+
+
+
+Definition at line \mbox{\hyperlink{_tick_8c_source_l00058}{58}} of file \mbox{\hyperlink{_tick_8c_source}{Tick.\+c}}.
+
+\Hypertarget{_tick_8c_a510a9891ca09fb506485fbbe4096b231}\index{Tick.c@{Tick.c}!portTIMER\_COMPARE\_PS1@{portTIMER\_COMPARE\_PS1}}
+\index{portTIMER\_COMPARE\_PS1@{portTIMER\_COMPARE\_PS1}!Tick.c@{Tick.c}}
+\doxysubsubsection{\texorpdfstring{portTIMER\_COMPARE\_PS1}{portTIMER\_COMPARE\_PS1}}
+{\footnotesize\ttfamily \label{_tick_8c_a510a9891ca09fb506485fbbe4096b231} 
+\#define port\+TIMER\+\_\+\+COMPARE\+\_\+\+PS1~(\mbox{\hyperlink{_m_p_l_a_b_2_p_i_c18_f_2port_8c_ae10c299006f2c1b8ec405bb1fa9e993b}{port\+BIT\+\_\+\+CLEAR}})}
+
+
+
+Definition at line \mbox{\hyperlink{_tick_8c_source_l00057}{57}} of file \mbox{\hyperlink{_tick_8c_source}{Tick.\+c}}.
+
+\Hypertarget{_tick_8c_a4deee5f3cea1a853d7bfced1ca88ab32}\index{Tick.c@{Tick.c}!portTIMER\_COMPARE\_VALUE@{portTIMER\_COMPARE\_VALUE}}
+\index{portTIMER\_COMPARE\_VALUE@{portTIMER\_COMPARE\_VALUE}!Tick.c@{Tick.c}}
+\doxysubsubsection{\texorpdfstring{portTIMER\_COMPARE\_VALUE}{portTIMER\_COMPARE\_VALUE}}
+{\footnotesize\ttfamily \label{_tick_8c_a4deee5f3cea1a853d7bfced1ca88ab32} 
+\#define port\+TIMER\+\_\+\+COMPARE\+\_\+\+VALUE~(\mbox{\hyperlink{_tick_8c_aaed649db146f6545797f1a85b29bffed}{port\+TIMER\+\_\+\+COMPARE\+\_\+\+BASE}})}
+
+
+
+Definition at line \mbox{\hyperlink{_tick_8c_source_l00056}{56}} of file \mbox{\hyperlink{_tick_8c_source}{Tick.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_tick_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_tick_8c_a97b27e7afea96574a70aab311e350ac0}\index{Tick.c@{Tick.c}!portSetupTick@{portSetupTick}}
+\index{portSetupTick@{portSetupTick}!Tick.c@{Tick.c}}
+\doxysubsubsection{\texorpdfstring{portSetupTick()}{portSetupTick()}}
+{\footnotesize\ttfamily \label{_tick_8c_a97b27e7afea96574a70aab311e350ac0} 
+void port\+Setup\+Tick (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_tick_8c_source_l00080}{80}} of file \mbox{\hyperlink{_tick_8c_source}{Tick.\+c}}.
+
+Here is the caller graph for this function\+:
+% FIG 1

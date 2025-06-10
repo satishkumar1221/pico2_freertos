@@ -1,0 +1,85 @@
+\doxysection{x\+Queue\+Receive }
+\hypertarget{group__x_queue_receive}{}\label{group__x_queue_receive}\index{xQueueReceive@{xQueueReceive}}
+queue. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{queue_8h_ae8364d988c6f9b63c771cc2b3dfe5df9}{xQueueReceive}}(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ xQueue,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *pvBuffer,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xTicksToWait}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
+
+\end{DoxyCode}
+
+
+Receive an item from a queue. The item is received by copy so a buffer of adequate size must be provided. The number of bytes copied into the buffer was defined when the queue was created.
+
+Successfully received items are removed from the queue.
+
+This function must not be used in an interrupt service routine. See x\+Queue\+Receive\+From\+ISR for an alternative that can.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Queue} & The handle to the queue from which the item is to be received.\\
+\hline
+{\em pv\+Buffer} & Pointer to the buffer into which the received item will be copied.\\
+\hline
+{\em x\+Ticks\+To\+Wait} & The maximum amount of time the task should block waiting for an item to receive should the queue be empty at the time of the call. \doxylink{queue_8h_ae8364d988c6f9b63c771cc2b3dfe5df9}{x\+Queue\+Receive()} will return immediately if x\+Ticks\+To\+Wait is zero and the queue is empty. The time is defined in tick periods so the constant port\+TICK\+\_\+\+PERIOD\+\_\+\+MS should be used to convert to real time if this is required.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pd\+TRUE if an item was successfully received from the queue, otherwise pd\+FALSE.
+\end{DoxyReturn}
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{struct\ }AMessage}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ ucMessageID;}
+\DoxyCodeLine{\ \textcolor{keywordtype}{char}\ ucData[\ 20\ ];}
+\DoxyCodeLine{\}\ xMessage;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ xQueue;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Task\ to\ create\ a\ queue\ and\ post\ a\ value.}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vATask(\ \textcolor{keywordtype}{void}\ *pvParameters\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{struct\ }AMessage\ *pxMessage;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ a\ queue\ capable\ of\ containing\ 10\ pointers\ to\ AMessage\ structures.}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ These\ should\ be\ passed\ by\ pointer\ as\ they\ contain\ a\ lot\ of\ data.}}
+\DoxyCodeLine{\ xQueue\ =\ xQueueCreate(\ 10,\ \textcolor{keyword}{sizeof}(\ \textcolor{keyword}{struct}\ AMessage\ *\ )\ );}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(\ xQueue\ ==\ 0\ )}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Failed\ to\ create\ the\ queue.}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ ...}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Send\ a\ pointer\ to\ a\ struct\ AMessage\ object.\ \ Don't\ block\ if\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ queue\ is\ already\ full.}}
+\DoxyCodeLine{\ pxMessage\ =\ \&\ xMessage;}
+\DoxyCodeLine{\ \mbox{\hyperlink{queue_8h_af7eb49d3249351176992950d9185abe9}{xQueueSend}}(\ xQueue,\ (\ \textcolor{keywordtype}{void}\ *\ )\ \&pxMessage,\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ )\ 0\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ ...\ Rest\ of\ task\ code.}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Task\ to\ receive\ from\ the\ queue.}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vADifferentTask(\ \textcolor{keywordtype}{void}\ *pvParameters\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{struct\ }AMessage\ *pxRxedMessage;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(\ xQueue\ !=\ 0\ )}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Receive\ a\ message\ on\ the\ created\ queue.\ \ Block\ for\ 10\ ticks\ if\ a}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ message\ is\ not\ immediately\ available.}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{queue_8h_ae8364d988c6f9b63c771cc2b3dfe5df9}{xQueueReceive}}(\ xQueue,\ \&(\ pxRxedMessage\ ),\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ )\ 10\ )\ )}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ pcRxedMessage\ now\ points\ to\ the\ struct\ AMessage\ variable\ posted}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ by\ vATask.}}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ ...\ Rest\ of\ task\ code.}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

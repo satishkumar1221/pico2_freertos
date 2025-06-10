@@ -1,0 +1,173 @@
+\doxysection{port\+\_\+common.\+c}
+\hypertarget{port__common_8c_source}{}\label{port__common_8c_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/Xtensa\_ESP32/port\_common.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/Xtensa\_ESP32/port\_common.c}}
+\mbox{\hyperlink{port__common_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00002}00002\ \textcolor{comment}{\ *\ SPDX-\/FileCopyrightText:\ 2022\ Espressif\ Systems\ (Shanghai)\ CO\ LTD}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00003}00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00004}00004\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00005}00005\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00008}00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_free_r_t_o_s_8h}{FreeRTOS.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{task_8h}{task.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}portmacro.h"{}}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}esp\_system.h"{}}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}esp\_heap\_caps\_init.h"{}}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}esp\_int\_wdt.h"{}}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}esp\_task\_wdt.h"{}}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}esp\_task.h"{}}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00016}00016\ \textcolor{preprocessor}{\#include\ "{}esp\_private/crosscore\_int.h"{}}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00017}00017\ \textcolor{preprocessor}{\#include\ "{}esp\_private/startup\_internal.h"{}}\ \textcolor{comment}{/*\ Required\ by\ g\_spiram\_ok.\ [refactor-\/todo]\ for\ g\_spiram\_ok\ */}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00018}00018\ \textcolor{preprocessor}{\#include\ "{}esp\_log.h"{}}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00019}00019\ \textcolor{preprocessor}{\#include\ "{}soc/soc\_memory\_types.h"{}}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00020}00020\ \textcolor{preprocessor}{\#include\ "{}soc/dport\_access.h"{}}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00021}00021\ \textcolor{preprocessor}{\#include\ "{}sdkconfig.h"{}}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00022}00022\ \textcolor{preprocessor}{\#include\ "{}esp\_freertos\_hooks.h"{}}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00024}00024\ \textcolor{preprocessor}{\#if\ CONFIG\_IDF\_TARGET\_ESP32}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00025}00025\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}esp32/spiram.h"{}}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00026}00026\ \textcolor{preprocessor}{\#elif\ CONFIG\_IDF\_TARGET\_ESP32S2}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00027}00027\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}esp32s2/spiram.h"{}}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00028}00028\ \textcolor{preprocessor}{\#elif\ CONFIG\_IDF\_TARGET\_ESP32S3}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00029}00029\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}esp32s3/spiram.h"{}}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00030}00030\ \textcolor{preprocessor}{\#elif\ CONFIG\_IDF\_TARGET\_ESP32C3\ ||\ CONFIG\_IDF\_TARGET\_ESP32H2}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00031}00031\ \textcolor{comment}{/*\ SPIRAM\ is\ not\ supported\ on\ ESP32-\/C3\ */}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00032}00032\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00034}00034\ \textcolor{preprocessor}{\#if\ CONFIG\_SPIRAM\_MALLOC\_RESERVE\_INTERNAL}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00035}00035\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ TAG\ =\ \textcolor{stringliteral}{"{}cpu\_start"{}};}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00036}00036\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00038}00038\ \textcolor{comment}{/*\ Architecture-\/agnostic\ parts\ of\ the\ FreeRTOS\ ESP-\/IDF\ port\ layer\ can\ go\ here.}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00039}00039\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00040}00040\ \textcolor{comment}{\ *\ The\ actual\ call\ flow\ will\ be\ to\ call\ esp\_startup\_start\_app()\ in\ <ARCH>/port.c,}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00041}00041\ \textcolor{comment}{\ *\ which\ will\ then\ call\ esp\_startup\_start\_app\_common()}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00042}00042\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00044}00044\ \textcolor{comment}{/*\ Duplicate\ of\ inaccessible\ xSchedulerRunning;\ needed\ at\ startup\ to\ avoid\ counting\ nesting\ */}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00045}\mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_aba355329d1f37d32fd6c5dc0500cc53c}{00045}}\ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_aba355329d1f37d32fd6c5dc0500cc53c}{port\_xSchedulerRunning}}[\ portNUM\_PROCESSORS\ ]\ =\ \{\ 0\ \};}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00047}00047\ \textcolor{comment}{/*\ For\ now,\ running\ FreeRTOS\ on\ one\ core\ and\ a\ bare\ metal\ on\ the\ other\ (or\ other\ OSes)\ */}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00048}00048\ \textcolor{comment}{/*\ is\ not\ supported.\ For\ now\ CONFIG\_FREERTOS\_UNICORE\ and\ CONFIG\_ESP\_SYSTEM\_SINGLE\_CORE\_MODE\ */}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00049}00049\ \textcolor{comment}{/*\ should\ mirror\ each\ other's\ values.\ */}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00050}00050\ \textcolor{comment}{/*\ */}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00051}00051\ \textcolor{comment}{/*\ And\ since\ this\ should\ be\ true,\ we\ can\ just\ check\ for\ CONFIG\_FREERTOS\_UNICORE.\ */}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00052}00052\ \textcolor{preprocessor}{\#if\ CONFIG\_FREERTOS\_UNICORE\ !=\ CONFIG\_ESP\_SYSTEM\_SINGLE\_CORE\_MODE}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00053}00053\ \textcolor{preprocessor}{\ \ \ \ \#error\ "{}FreeRTOS\ and\ system\ configuration\ mismatch\ regarding\ the\ use\ of\ multiple\ cores."{}}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00054}00054\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00056}00056\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ main\_task(\ \textcolor{keywordtype}{void}\ *\ args\ );}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00058}00058\ \textcolor{preprocessor}{\#ifdef\ CONFIG\_ESP\_SYSTEM\_GDBSTUB\_RUNTIME}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00059}00059\ \ \ \ \ \textcolor{keywordtype}{void}\ esp\_gdbstub\_init(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00060}00060\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ CONFIG\_ESP\_SYSTEM\_GDBSTUB\_RUNTIME}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00062}\mbox{\hyperlink{port__common_8c_a630544a7f0a2cc40d8a7fefab7e2fe70}{00062}}\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{port__common_8c_a630544a7f0a2cc40d8a7fefab7e2fe70}{app\_main}}(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00064}\mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a765536cb3658e8044320544315adbf32}{00064}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{port__common_8c_a765536cb3658e8044320544315adbf32}{esp\_startup\_start\_app\_common}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00065}00065\ \{}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00066}00066\ \textcolor{preprocessor}{\ \ \ \ \#if\ CONFIG\_ESP\_INT\_WDT}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00067}00067\ \ \ \ \ \ \ \ \ esp\_int\_wdt\_init();}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*Initialize\ the\ interrupt\ watch\ dog\ for\ CPU0.\ */}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00069}00069\ \ \ \ \ \ \ \ \ esp\_int\_wdt\_cpu\_init();}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00070}00070\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00072}00072\ \ \ \ \ esp\_crosscore\_int\_init();}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00074}00074\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ CONFIG\_ESP\_SYSTEM\_GDBSTUB\_RUNTIME}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00075}00075\ \ \ \ \ \ \ \ \ esp\_gdbstub\_init();}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00076}00076\ \textcolor{preprocessor}{\ \ \ \ \#endif\ }\textcolor{comment}{//\ CONFIG\_ESP\_SYSTEM\_GDBSTUB\_RUNTIME}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00078}00078\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a1ebe82d24d764ae4e352f7c3a9f92c01}{portBASE\_TYPE}}\ res\ =\ xTaskCreatePinnedToCore(\ \&main\_task,\ \textcolor{stringliteral}{"{}main"{}},}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ESP\_TASK\_MAIN\_STACK,\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}},}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ESP\_TASK\_MAIN\_PRIO,\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}},\ ESP\_TASK\_MAIN\_CORE\ );}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00081}00081\ \ \ \ \ \mbox{\hyperlink{portmux__impl_8inc_8h_a05668f96f8bae85b380c20e72a2b006a}{assert}}(\ res\ ==\ \mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}}\ );}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00082}00082\ \ \ \ \ (\ void\ )\ res;}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00083}00083\ \}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00085}00085\ \textcolor{preprocessor}{\#if\ !CONFIG\_FREERTOS\_UNICORE}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00086}00086\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{bool}\ s\_other\_cpu\_startup\_done\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00087}00087\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ other\_cpu\_startup\_idle\_hook\_cb(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00088}00088\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00089}00089\ \ \ \ \ \ \ \ \ s\_other\_cpu\_startup\_done\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00090}00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00091}00091\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00092}00092\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00094}00094\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ main\_task(\ \textcolor{keywordtype}{void}\ *\ args\ )}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00095}00095\ \{}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00096}00096\ \textcolor{preprocessor}{\ \ \ \ \#if\ !CONFIG\_FREERTOS\_UNICORE}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00097}00097\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Wait\ for\ FreeRTOS\ initialization\ to\ finish\ on\ other\ core,\ before\ replacing\ its\ startup\ stack\ */}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00098}00098\ \ \ \ \ \ \ \ \ esp\_register\_freertos\_idle\_hook\_for\_cpu(\ other\_cpu\_startup\_idle\_hook\_cb,\ !xPortGetCoreID()\ );}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00100}00100\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}(\ !s\_other\_cpu\_startup\_done\ )}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00101}00101\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00102}00102\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00103}00103\ \ \ \ \ \ \ \ \ esp\_deregister\_freertos\_idle\_hook\_for\_cpu(\ other\_cpu\_startup\_idle\_hook\_cb,\ !xPortGetCoreID()\ );}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00104}00104\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00106}00106\ \ \ \ \ \textcolor{comment}{/*\ [refactor-\/todo]\ check\ if\ there\ is\ a\ way\ to\ move\ the\ following\ block\ to\ esp\_system\ startup\ */}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00107}00107\ \ \ \ \ heap\_caps\_enable\_nonos\_stack\_heaps();}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00109}00109\ \ \ \ \ \textcolor{comment}{/*\ Now\ we\ have\ startup\ stack\ RAM\ available\ for\ heap,\ enable\ any\ DMA\ pool\ memory\ */}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00110}00110\ \textcolor{preprocessor}{\ \ \ \ \#if\ CONFIG\_SPIRAM\_MALLOC\_RESERVE\_INTERNAL}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00111}00111\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ g\_spiram\_ok\ )}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00112}00112\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ esp\_err\_t\ r\ =\ esp\_spiram\_reserve\_dma\_pool(\ CONFIG\_SPIRAM\_MALLOC\_RESERVE\_INTERNAL\ );}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ r\ !=\ ESP\_OK\ )}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ESP\_EARLY\_LOGE(\ TAG,\ \textcolor{stringliteral}{"{}Could\ not\ reserve\ internal/DMA\ pool\ (error\ 0x\%x)"{}},\ r\ );}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ abort();}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00120}00120\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00121}00121\ \textcolor{preprocessor}{\ \ \ \ \#endif\ }\textcolor{comment}{/*\ if\ CONFIG\_SPIRAM\_MALLOC\_RESERVE\_INTERNAL\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00123}00123\ \ \ \ \ \textcolor{comment}{/*Initialize\ task\ wdt\ if\ configured\ to\ do\ so\ */}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00124}00124\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ CONFIG\_ESP\_TASK\_WDT\_PANIC}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00125}00125\ \ \ \ \ \ \ \ \ ESP\_ERROR\_CHECK(\ esp\_task\_wdt\_init(\ CONFIG\_ESP\_TASK\_WDT\_TIMEOUT\_S,\ \textcolor{keyword}{true}\ )\ );}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00126}00126\ \textcolor{preprocessor}{\ \ \ \ \#elif\ CONFIG\_ESP\_TASK\_WDT}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00127}00127\ \ \ \ \ \ \ \ \ ESP\_ERROR\_CHECK(\ esp\_task\_wdt\_init(\ CONFIG\_ESP\_TASK\_WDT\_TIMEOUT\_S,\ \textcolor{keyword}{false}\ )\ );}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00128}00128\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00130}00130\ \ \ \ \ \textcolor{comment}{/*Add\ IDLE\ 0\ to\ task\ wdt\ */}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00131}00131\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ CONFIG\_ESP\_TASK\_WDT\_CHECK\_IDLE\_TASK\_CPU0}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00132}00132\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ idle\_0\ =\ xTaskGetIdleTaskHandleForCPU(\ 0\ );}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00134}00134\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ idle\_0\ !=\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00135}00135\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ ESP\_ERROR\_CHECK(\ esp\_task\_wdt\_add(\ idle\_0\ )\ );}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00137}00137\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00138}00138\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00139}00139\ \ \ \ \ \textcolor{comment}{/*Add\ IDLE\ 1\ to\ task\ wdt\ */}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00140}00140\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ CONFIG\_ESP\_TASK\_WDT\_CHECK\_IDLE\_TASK\_CPU1}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00141}00141\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ idle\_1\ =\ xTaskGetIdleTaskHandleForCPU(\ 1\ );}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00143}00143\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ idle\_1\ !=\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00144}00144\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ ESP\_ERROR\_CHECK(\ esp\_task\_wdt\_add(\ idle\_1\ )\ );}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00146}00146\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00147}00147\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00149}00149\ \ \ \ \ \mbox{\hyperlink{port__common_8c_a630544a7f0a2cc40d8a7fefab7e2fe70}{app\_main}}();}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00150}00150\ \ \ \ \ \mbox{\hyperlink{task_8h_a27ff4ebce26565bef136bda84201ff80}{vTaskDelete}}(\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ );}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00151}00151\ \}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00153}00153\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Heap\ Related\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00155}\mbox{\hyperlink{port__common_8c_a36d64f6a5d19614cd0c914e0d5ca7d39}{00155}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{port__common_8c_a36d64f6a5d19614cd0c914e0d5ca7d39}{xPortCheckValidTCBMem}}(\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *\ ptr\ )}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00156}00156\ \{}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00157}00157\ \ \ \ \ \textcolor{keywordflow}{return}\ esp\_ptr\_internal(\ ptr\ )\ \&\&\ esp\_ptr\_byte\_accessible(\ ptr\ );}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00158}00158\ \}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00160}\mbox{\hyperlink{port__common_8c_a304af8bb7f964470d497048a280e3c30}{00160}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{port__common_8c_a304af8bb7f964470d497048a280e3c30}{xPortcheckValidStackMem}}(\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *\ ptr\ )}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00161}00161\ \{}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00162}00162\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ CONFIG\_SPIRAM\_ALLOW\_STACK\_EXTERNAL\_MEMORY}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00163}00163\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ esp\_ptr\_byte\_accessible(\ ptr\ );}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00164}00164\ \textcolor{preprocessor}{\ \ \ \ \#else}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00165}00165\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ esp\_ptr\_internal(\ ptr\ )\ \&\&\ esp\_ptr\_byte\_accessible(\ ptr\ );}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00166}00166\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{port__common_8c_source_l00167}00167\ \}}
+
+\end{DoxyCode}

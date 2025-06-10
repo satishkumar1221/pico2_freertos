@@ -1,0 +1,173 @@
+\doxysection{croutine.\+h}
+\hypertarget{croutine_8h_source}{}\label{croutine_8h_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/croutine.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/croutine.h}}
+\mbox{\hyperlink{croutine_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00029}00029\ \textcolor{preprocessor}{\#ifndef\ CO\_ROUTINE\_H}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00030}00030\ \textcolor{preprocessor}{\#define\ CO\_ROUTINE\_H}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00032}00032\ \textcolor{preprocessor}{\#ifndef\ INC\_FREERTOS\_H}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00033}00033\ \textcolor{preprocessor}{\ \ \ \ \#error\ "{}include\ FreeRTOS.h\ must\ appear\ in\ source\ files\ before\ include\ croutine.h"{}}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00034}00034\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00036}00036\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{list_8h}{list.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00038}00038\ \textcolor{comment}{/*\ *INDENT-\/OFF*\ */}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00039}00039\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00040}00040\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00041}00041\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00042}00042\ \textcolor{comment}{/*\ *INDENT-\/ON*\ */}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00044}00044\ \textcolor{comment}{/*\ Used\ to\ hide\ the\ implementation\ of\ the\ co-\/routine\ control\ block.\ \ The}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00045}00045\ \textcolor{comment}{\ *\ control\ block\ structure\ however\ has\ to\ be\ included\ in\ the\ header\ due\ to}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00046}00046\ \textcolor{comment}{\ *\ the\ macro\ implementation\ of\ the\ co-\/routine\ functionality.\ */}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00047}\mbox{\hyperlink{croutine_8h_a33b9d058688c92258155b5756d9936dd}{00047}}\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{void}\ *\ \mbox{\hyperlink{croutine_8h_a33b9d058688c92258155b5756d9936dd}{CoRoutineHandle\_t}};}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00049}00049\ \textcolor{comment}{/*\ Defines\ the\ prototype\ to\ which\ co-\/routine\ functions\ must\ conform.\ */}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00050}\mbox{\hyperlink{croutine_8h_ac1dc8634ed2f2698ca66545571a195c4}{00050}}\ \textcolor{keyword}{typedef}\ void\ (*\ \mbox{\hyperlink{croutine_8h_ac1dc8634ed2f2698ca66545571a195c4}{crCOROUTINE\_CODE}})(\ \mbox{\hyperlink{croutine_8h_a33b9d058688c92258155b5756d9936dd}{CoRoutineHandle\_t}}\ xHandle,}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxIndex\ );}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00053}\mbox{\hyperlink{structcor_co_routine_control_block}{00053}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structcor_co_routine_control_block}{corCoRoutineControlBlock}}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00054}00054\ \{}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00055}\mbox{\hyperlink{structcor_co_routine_control_block_acc98c7364cd88e8e034a5f9bba113832}{00055}}\ \ \ \ \ \mbox{\hyperlink{croutine_8h_ac1dc8634ed2f2698ca66545571a195c4}{crCOROUTINE\_CODE}}\ \mbox{\hyperlink{structcor_co_routine_control_block_acc98c7364cd88e8e034a5f9bba113832}{pxCoRoutineFunction}};}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00056}\mbox{\hyperlink{structcor_co_routine_control_block_aa2900494db8782eeb8ef12d482501406}{00056}}\ \ \ \ \ \mbox{\hyperlink{list_8h_a1a62d469392f9bfe2443e7efab9c8398}{ListItem\_t}}\ \mbox{\hyperlink{structcor_co_routine_control_block_aa2900494db8782eeb8ef12d482501406}{xGenericListItem}};\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00057}\mbox{\hyperlink{structcor_co_routine_control_block_a105d316da0069f766acc3b210afed1b9}{00057}}\ \ \ \ \ \mbox{\hyperlink{list_8h_a1a62d469392f9bfe2443e7efab9c8398}{ListItem\_t}}\ \mbox{\hyperlink{structcor_co_routine_control_block_a105d316da0069f766acc3b210afed1b9}{xEventListItem}};\ \ \ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00058}\mbox{\hyperlink{structcor_co_routine_control_block_a752101a5d41b5caa7fd5149436613c8f}{00058}}\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ \mbox{\hyperlink{structcor_co_routine_control_block_a752101a5d41b5caa7fd5149436613c8f}{uxPriority}};\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00059}\mbox{\hyperlink{structcor_co_routine_control_block_a6c185cd2145f562fb570bea9b158fc81}{00059}}\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ \mbox{\hyperlink{structcor_co_routine_control_block_a6c185cd2145f562fb570bea9b158fc81}{uxIndex}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00060}\mbox{\hyperlink{structcor_co_routine_control_block_aa0d702ff5a23c61598fe13e5a78fb1dc}{00060}}\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{structcor_co_routine_control_block_aa0d702ff5a23c61598fe13e5a78fb1dc}{uxState}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00061}\mbox{\hyperlink{croutine_8h_a1c15f304ffe02d0777ae2509b3658e6f}{00061}}\ \}\ \mbox{\hyperlink{croutine_8h_a1c15f304ffe02d0777ae2509b3658e6f}{CRCB\_t}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Co-\/routine\ control\ block.\ \ Note\ must\ be\ identical\ in\ size\ down\ to\ uxPriority\ with\ TCB\_t.\ */}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00136}\mbox{\hyperlink{croutine_8h_ae0e03637a3d2c134e9b52006f353d8c0}{00136}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{croutine_8h_ae0e03637a3d2c134e9b52006f353d8c0}{xCoRoutineCreate}}(\ \mbox{\hyperlink{croutine_8h_ac1dc8634ed2f2698ca66545571a195c4}{crCOROUTINE\_CODE}}\ pxCoRoutineCode,}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxPriority,}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxIndex\ );}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00181}\mbox{\hyperlink{croutine_8h_a5333c649a2c063006ca3cd7a3b5b9240}{00181}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{croutine_8h_a5333c649a2c063006ca3cd7a3b5b9240}{vCoRoutineSchedule}}(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00214}\mbox{\hyperlink{croutine_8h_a19a57a201a325e8af1207ed68c4aedde}{00214}}\ \textcolor{preprocessor}{\#define\ crSTART(\ pxCRCB\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00215}00215\ \textcolor{preprocessor}{\ \ \ \ switch(\ (\ (\ CRCB\_t\ *\ )\ (\ pxCRCB\ )\ )-\/>uxState\ )\ \{\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00216}00216\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ case\ 0:}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00249}\mbox{\hyperlink{croutine_8h_ae6038cc976689b50000475ebfc4e2f23}{00249}}\ \textcolor{preprocessor}{\#define\ crEND()\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00251}00251\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00252}00252\ \textcolor{comment}{\ *\ These\ macros\ are\ intended\ for\ internal\ use\ by\ the\ co-\/routine\ implementation}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00253}00253\ \textcolor{comment}{\ *\ only.\ \ The\ macros\ should\ not\ be\ used\ directly\ by\ application\ writers.}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00254}00254\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00255}\mbox{\hyperlink{croutine_8h_aa8ec8c0192674b896b04df1f82d679f7}{00255}}\ \textcolor{preprocessor}{\#define\ crSET\_STATE0(\ xHandle\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00256}00256\ \textcolor{preprocessor}{\ \ \ \ (\ (\ CRCB\_t\ *\ )\ (\ xHandle\ )\ )-\/>uxState\ =\ (\ \_\_LINE\_\_\ *\ 2\ );\ return;\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00257}00257\ \textcolor{preprocessor}{\ \ \ \ case\ (\ \_\_LINE\_\_\ *\ 2\ ):}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00258}\mbox{\hyperlink{croutine_8h_a345ffc731dc40152bfb1162453ecc1f7}{00258}}\ \textcolor{preprocessor}{\#define\ crSET\_STATE1(\ xHandle\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00259}00259\ \textcolor{preprocessor}{\ \ \ \ (\ (\ CRCB\_t\ *\ )\ (\ xHandle\ )\ )-\/>uxState\ =\ (\ (\ \_\_LINE\_\_\ *\ 2\ )\ +\ 1\ );\ return;\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00260}00260\ \textcolor{preprocessor}{\ \ \ \ case\ (\ (\ \_\_LINE\_\_\ *\ 2\ )\ +\ 1\ ):}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00261}00261\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00310}\mbox{\hyperlink{croutine_8h_a05a06feb11028f2d1d440ea335f562ba}{00310}}\ \textcolor{preprocessor}{\#define\ crDELAY(\ xHandle,\ xTicksToDelay\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00311}00311\ \textcolor{preprocessor}{\ \ \ \ do\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00312}00312\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if(\ (\ xTicksToDelay\ )\ >\ 0\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00313}00313\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00314}00314\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ vCoRoutineAddToDelayedList(\ (\ xTicksToDelay\ ),\ NULL\ );\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00315}00315\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00316}00316\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ crSET\_STATE0(\ (\ xHandle\ )\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00317}00317\ \textcolor{preprocessor}{\ \ \ \ \}\ while(\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00318}00318\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00404}\mbox{\hyperlink{croutine_8h_a26af3d36f22a04168eebdf5b08465d6e}{00404}}\ \textcolor{preprocessor}{\#define\ crQUEUE\_SEND(\ xHandle,\ pxQueue,\ pvItemToQueue,\ xTicksToWait,\ pxResult\ )\ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00405}00405\ \textcolor{preprocessor}{\ \ \ \ do\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00406}00406\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ *(\ pxResult\ )\ =\ xQueueCRSend(\ (\ pxQueue\ ),\ (\ pvItemToQueue\ ),\ (\ xTicksToWait\ )\ );\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00407}00407\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if(\ *(\ pxResult\ )\ ==\ errQUEUE\_BLOCKED\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00408}00408\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00409}00409\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ crSET\_STATE0(\ (\ xHandle\ )\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00410}00410\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ *pxResult\ =\ xQueueCRSend(\ (\ pxQueue\ ),\ (\ pvItemToQueue\ ),\ 0\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00411}00411\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00412}00412\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if(\ *pxResult\ ==\ errQUEUE\_YIELD\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00413}00413\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00414}00414\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ crSET\_STATE1(\ (\ xHandle\ )\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00415}00415\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ *pxResult\ =\ pdPASS;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00416}00416\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00417}00417\ \textcolor{preprocessor}{\ \ \ \ \}\ while(\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00418}00418\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00498}\mbox{\hyperlink{croutine_8h_a586d57fd9a3e2aa5ae66484ed3be36c9}{00498}}\ \textcolor{preprocessor}{\#define\ crQUEUE\_RECEIVE(\ xHandle,\ pxQueue,\ pvBuffer,\ xTicksToWait,\ pxResult\ )\ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00499}00499\ \textcolor{preprocessor}{\ \ \ \ do\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00500}00500\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ *(\ pxResult\ )\ =\ xQueueCRReceive(\ (\ pxQueue\ ),\ (\ pvBuffer\ ),\ (\ xTicksToWait\ )\ );\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00501}00501\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if(\ *(\ pxResult\ )\ ==\ errQUEUE\_BLOCKED\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00502}00502\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00503}00503\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ crSET\_STATE0(\ (\ xHandle\ )\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00504}00504\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ *(\ pxResult\ )\ =\ xQueueCRReceive(\ (\ pxQueue\ ),\ (\ pvBuffer\ ),\ 0\ );\ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00505}00505\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00506}00506\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if(\ *(\ pxResult\ )\ ==\ errQUEUE\_YIELD\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00507}00507\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00508}00508\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ crSET\_STATE1(\ (\ xHandle\ )\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00509}00509\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ *(\ pxResult\ )\ =\ pdPASS;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00510}00510\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00511}00511\ \textcolor{preprocessor}{\ \ \ \ \}\ while(\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00512}00512\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00609}\mbox{\hyperlink{croutine_8h_ac8eb0a81c5cf69de7e4edd73ce44a3be}{00609}}\ \textcolor{preprocessor}{\#define\ crQUEUE\_SEND\_FROM\_ISR(\ pxQueue,\ pvItemToQueue,\ xCoRoutinePreviouslyWoken\ )\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00610}00610\ \textcolor{preprocessor}{\ \ \ \ xQueueCRSendFromISR(\ (\ pxQueue\ ),\ (\ pvItemToQueue\ ),\ (\ xCoRoutinePreviouslyWoken\ )\ )}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00611}00611\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00612}00612\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00725}\mbox{\hyperlink{croutine_8h_a9c0fa977ca69adbddb4811affa2a71f7}{00725}}\ \textcolor{preprocessor}{\#define\ crQUEUE\_RECEIVE\_FROM\_ISR(\ pxQueue,\ pvBuffer,\ pxCoRoutineWoken\ )\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00726}00726\ \textcolor{preprocessor}{\ \ \ \ xQueueCRReceiveFromISR(\ (\ pxQueue\ ),\ (\ pvBuffer\ ),\ (\ pxCoRoutineWoken\ )\ )}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00727}00727\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00728}00728\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00729}00729\ \textcolor{comment}{\ *\ This\ function\ is\ intended\ for\ internal\ use\ by\ the\ co-\/routine\ macros\ only.}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00730}00730\ \textcolor{comment}{\ *\ The\ macro\ nature\ of\ the\ co-\/routine\ implementation\ requires\ that\ the}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00731}00731\ \textcolor{comment}{\ *\ prototype\ appears\ here.\ \ The\ function\ should\ not\ be\ used\ by\ application}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00732}00732\ \textcolor{comment}{\ *\ writers.}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00733}00733\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00734}00734\ \textcolor{comment}{\ *\ Removes\ the\ current\ co-\/routine\ from\ its\ ready\ list\ and\ places\ it\ in\ the}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00735}00735\ \textcolor{comment}{\ *\ appropriate\ delayed\ list.}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00736}00736\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00737}\mbox{\hyperlink{croutine_8h_a6b5b1c5857d38b79c96636754208e32d}{00737}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{croutine_8h_a6b5b1c5857d38b79c96636754208e32d}{vCoRoutineAddToDelayedList}}(\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xTicksToDelay,}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00738}00738\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_ad14d7e3de1350e459c7c23c6f59c902a}{List\_t}}\ *\ pxEventList\ );}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00739}00739\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00740}00740\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00741}00741\ \textcolor{comment}{\ *\ This\ function\ is\ intended\ for\ internal\ use\ by\ the\ queue\ implementation\ only.}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00742}00742\ \textcolor{comment}{\ *\ The\ function\ should\ not\ be\ used\ by\ application\ writers.}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00743}00743\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00744}00744\ \textcolor{comment}{\ *\ Removes\ the\ highest\ priority\ co-\/routine\ from\ the\ event\ list\ and\ places\ it\ in}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00745}00745\ \textcolor{comment}{\ *\ the\ pending\ ready\ list.}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00746}00746\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00747}\mbox{\hyperlink{croutine_8h_af2a96db518b18f5a7e1cd2fdf3c82873}{00747}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{croutine_8h_af2a96db518b18f5a7e1cd2fdf3c82873}{xCoRoutineRemoveFromEventList}}(\ \textcolor{keyword}{const}\ \mbox{\hyperlink{list_8h_ad14d7e3de1350e459c7c23c6f59c902a}{List\_t}}\ *\ pxEventList\ );}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00748}00748\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00749}00749\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00750}00750\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00751}00751\ \textcolor{comment}{\ *\ This\ function\ resets\ the\ internal\ state\ of\ the\ coroutine\ module.\ It\ must\ be}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00752}00752\ \textcolor{comment}{\ *\ called\ by\ the\ application\ before\ restarting\ the\ scheduler.}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00753}00753\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00754}\mbox{\hyperlink{croutine_8h_aaedadc5718726d97b3adfb507c8ab207}{00754}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{croutine_8h_aaedadc5718726d97b3adfb507c8ab207}{vCoRoutineResetState}}(\ \textcolor{keywordtype}{void}\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00755}00755\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00756}00756\ \textcolor{comment}{/*\ *INDENT-\/OFF*\ */}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00757}00757\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00758}00758\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00759}00759\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00760}00760\ \textcolor{comment}{/*\ *INDENT-\/ON*\ */}}
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00761}00761\ }
+\DoxyCodeLine{\Hypertarget{croutine_8h_source_l00762}00762\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ CO\_ROUTINE\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

@@ -1,0 +1,208 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+GCC/\+Micro\+Blaze\+V9/port\+\_\+exceptions.c File Reference}
+\hypertarget{_micro_blaze_v9_2port__exceptions_8c}{}\label{_micro_blaze_v9_2port__exceptions_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/MicroBlazeV9/port\_exceptions.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/MicroBlazeV9/port\_exceptions.c}}
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}task.\+h"{}}\newline
+{\ttfamily \#include $<$microblaze\+\_\+exceptions\+\_\+i.\+h$>$}\newline
+{\ttfamily \#include $<$microblaze\+\_\+exceptions\+\_\+g.\+h$>$}\newline
+Include dependency graph for port\+\_\+exceptions.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_a67b0d2d6648a89e6fc631476b003dce2}{portex\+R3\+\_\+\+STACK\+\_\+\+OFFSET}}~4
+\item 
+\#define \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_af021fb14debb1514c6c130a024fd959a}{portex\+R4\+\_\+\+STACK\+\_\+\+OFFSET}}~5
+\item 
+\#define \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_ab2032d33da00217604f69e085a42a1d8}{portex\+R5\+\_\+\+STACK\+\_\+\+OFFSET}}~6
+\item 
+\#define \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_a439fb3e073392e64e8656f4cb3f633f5}{portex\+R6\+\_\+\+STACK\+\_\+\+OFFSET}}~7
+\item 
+\#define \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_af7efce7d7d559eadfc4b4c7bf35caa20}{portex\+R7\+\_\+\+STACK\+\_\+\+OFFSET}}~8
+\item 
+\#define \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_acaf811831589f3af5b5f9761516e34b0}{portex\+R8\+\_\+\+STACK\+\_\+\+OFFSET}}~9
+\item 
+\#define \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_acf9894253c97cd0e7e954a63a7211438}{portex\+R9\+\_\+\+STACK\+\_\+\+OFFSET}}~10
+\item 
+\#define \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_a7cf672aba1e83a11712e416f7b5c90af}{portex\+R10\+\_\+\+STACK\+\_\+\+OFFSET}}~11
+\item 
+\#define \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_a3525147303a6fc5b6d876a112bc052d6}{portex\+R11\+\_\+\+STACK\+\_\+\+OFFSET}}~12
+\item 
+\#define \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_abeee247c241a8c0fc335e5124c1a970e}{portex\+R12\+\_\+\+STACK\+\_\+\+OFFSET}}~13
+\item 
+\#define \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_aa3bea181b2055a918eb47b12c3b2dc2a}{portex\+R15\+\_\+\+STACK\+\_\+\+OFFSET}}~16
+\item 
+\#define \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_a2355520ad19feb3637ff45f0d07be3d5}{portex\+R18\+\_\+\+STACK\+\_\+\+OFFSET}}~19
+\item 
+\#define \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_a39e410810f98f970bb9ecf9fbbdd77ef}{portex\+MSR\+\_\+\+STACK\+\_\+\+OFFSET}}~20
+\item 
+\#define \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_a800877d751d4d8d307cdb1a43df33a2e}{portex\+R19\+\_\+\+STACK\+\_\+\+OFFSET}}~-\/1
+\item 
+\#define \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_af8973c49ce70c23c1a69e7b4e9255902}{portex\+ASM\+\_\+\+HANDLER\+\_\+\+STACK\+\_\+\+FRAME\+\_\+\+SIZE}}~84UL
+\item 
+\#define \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_ad1dec687a4fa584f7eca76c23c89bd58}{portex\+INSTRUCTION\+\_\+\+SIZE}}~4
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_micro_blaze_v9_2port__exceptions_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_micro_blaze_v9_2port__exceptions_8c_af8973c49ce70c23c1a69e7b4e9255902}\index{port\_exceptions.c@{port\_exceptions.c}!portexASM\_HANDLER\_STACK\_FRAME\_SIZE@{portexASM\_HANDLER\_STACK\_FRAME\_SIZE}}
+\index{portexASM\_HANDLER\_STACK\_FRAME\_SIZE@{portexASM\_HANDLER\_STACK\_FRAME\_SIZE}!port\_exceptions.c@{port\_exceptions.c}}
+\doxysubsubsection{\texorpdfstring{portexASM\_HANDLER\_STACK\_FRAME\_SIZE}{portexASM\_HANDLER\_STACK\_FRAME\_SIZE}}
+{\footnotesize\ttfamily \label{_micro_blaze_v9_2port__exceptions_8c_af8973c49ce70c23c1a69e7b4e9255902} 
+\#define portex\+ASM\+\_\+\+HANDLER\+\_\+\+STACK\+\_\+\+FRAME\+\_\+\+SIZE~84UL}
+
+
+
+Definition at line \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source_l00058}{58}} of file \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source}{port\+\_\+exceptions.\+c}}.
+
+\Hypertarget{_micro_blaze_v9_2port__exceptions_8c_ad1dec687a4fa584f7eca76c23c89bd58}\index{port\_exceptions.c@{port\_exceptions.c}!portexINSTRUCTION\_SIZE@{portexINSTRUCTION\_SIZE}}
+\index{portexINSTRUCTION\_SIZE@{portexINSTRUCTION\_SIZE}!port\_exceptions.c@{port\_exceptions.c}}
+\doxysubsubsection{\texorpdfstring{portexINSTRUCTION\_SIZE}{portexINSTRUCTION\_SIZE}}
+{\footnotesize\ttfamily \label{_micro_blaze_v9_2port__exceptions_8c_ad1dec687a4fa584f7eca76c23c89bd58} 
+\#define portex\+INSTRUCTION\+\_\+\+SIZE~4}
+
+
+
+Definition at line \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source_l00061}{61}} of file \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source}{port\+\_\+exceptions.\+c}}.
+
+\Hypertarget{_micro_blaze_v9_2port__exceptions_8c_a39e410810f98f970bb9ecf9fbbdd77ef}\index{port\_exceptions.c@{port\_exceptions.c}!portexMSR\_STACK\_OFFSET@{portexMSR\_STACK\_OFFSET}}
+\index{portexMSR\_STACK\_OFFSET@{portexMSR\_STACK\_OFFSET}!port\_exceptions.c@{port\_exceptions.c}}
+\doxysubsubsection{\texorpdfstring{portexMSR\_STACK\_OFFSET}{portexMSR\_STACK\_OFFSET}}
+{\footnotesize\ttfamily \label{_micro_blaze_v9_2port__exceptions_8c_a39e410810f98f970bb9ecf9fbbdd77ef} 
+\#define portex\+MSR\+\_\+\+STACK\+\_\+\+OFFSET~20}
+
+
+
+Definition at line \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source_l00052}{52}} of file \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source}{port\+\_\+exceptions.\+c}}.
+
+\Hypertarget{_micro_blaze_v9_2port__exceptions_8c_a7cf672aba1e83a11712e416f7b5c90af}\index{port\_exceptions.c@{port\_exceptions.c}!portexR10\_STACK\_OFFSET@{portexR10\_STACK\_OFFSET}}
+\index{portexR10\_STACK\_OFFSET@{portexR10\_STACK\_OFFSET}!port\_exceptions.c@{port\_exceptions.c}}
+\doxysubsubsection{\texorpdfstring{portexR10\_STACK\_OFFSET}{portexR10\_STACK\_OFFSET}}
+{\footnotesize\ttfamily \label{_micro_blaze_v9_2port__exceptions_8c_a7cf672aba1e83a11712e416f7b5c90af} 
+\#define portex\+R10\+\_\+\+STACK\+\_\+\+OFFSET~11}
+
+
+
+Definition at line \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source_l00047}{47}} of file \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source}{port\+\_\+exceptions.\+c}}.
+
+\Hypertarget{_micro_blaze_v9_2port__exceptions_8c_a3525147303a6fc5b6d876a112bc052d6}\index{port\_exceptions.c@{port\_exceptions.c}!portexR11\_STACK\_OFFSET@{portexR11\_STACK\_OFFSET}}
+\index{portexR11\_STACK\_OFFSET@{portexR11\_STACK\_OFFSET}!port\_exceptions.c@{port\_exceptions.c}}
+\doxysubsubsection{\texorpdfstring{portexR11\_STACK\_OFFSET}{portexR11\_STACK\_OFFSET}}
+{\footnotesize\ttfamily \label{_micro_blaze_v9_2port__exceptions_8c_a3525147303a6fc5b6d876a112bc052d6} 
+\#define portex\+R11\+\_\+\+STACK\+\_\+\+OFFSET~12}
+
+
+
+Definition at line \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source_l00048}{48}} of file \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source}{port\+\_\+exceptions.\+c}}.
+
+\Hypertarget{_micro_blaze_v9_2port__exceptions_8c_abeee247c241a8c0fc335e5124c1a970e}\index{port\_exceptions.c@{port\_exceptions.c}!portexR12\_STACK\_OFFSET@{portexR12\_STACK\_OFFSET}}
+\index{portexR12\_STACK\_OFFSET@{portexR12\_STACK\_OFFSET}!port\_exceptions.c@{port\_exceptions.c}}
+\doxysubsubsection{\texorpdfstring{portexR12\_STACK\_OFFSET}{portexR12\_STACK\_OFFSET}}
+{\footnotesize\ttfamily \label{_micro_blaze_v9_2port__exceptions_8c_abeee247c241a8c0fc335e5124c1a970e} 
+\#define portex\+R12\+\_\+\+STACK\+\_\+\+OFFSET~13}
+
+
+
+Definition at line \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source_l00049}{49}} of file \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source}{port\+\_\+exceptions.\+c}}.
+
+\Hypertarget{_micro_blaze_v9_2port__exceptions_8c_aa3bea181b2055a918eb47b12c3b2dc2a}\index{port\_exceptions.c@{port\_exceptions.c}!portexR15\_STACK\_OFFSET@{portexR15\_STACK\_OFFSET}}
+\index{portexR15\_STACK\_OFFSET@{portexR15\_STACK\_OFFSET}!port\_exceptions.c@{port\_exceptions.c}}
+\doxysubsubsection{\texorpdfstring{portexR15\_STACK\_OFFSET}{portexR15\_STACK\_OFFSET}}
+{\footnotesize\ttfamily \label{_micro_blaze_v9_2port__exceptions_8c_aa3bea181b2055a918eb47b12c3b2dc2a} 
+\#define portex\+R15\+\_\+\+STACK\+\_\+\+OFFSET~16}
+
+
+
+Definition at line \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source_l00050}{50}} of file \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source}{port\+\_\+exceptions.\+c}}.
+
+\Hypertarget{_micro_blaze_v9_2port__exceptions_8c_a2355520ad19feb3637ff45f0d07be3d5}\index{port\_exceptions.c@{port\_exceptions.c}!portexR18\_STACK\_OFFSET@{portexR18\_STACK\_OFFSET}}
+\index{portexR18\_STACK\_OFFSET@{portexR18\_STACK\_OFFSET}!port\_exceptions.c@{port\_exceptions.c}}
+\doxysubsubsection{\texorpdfstring{portexR18\_STACK\_OFFSET}{portexR18\_STACK\_OFFSET}}
+{\footnotesize\ttfamily \label{_micro_blaze_v9_2port__exceptions_8c_a2355520ad19feb3637ff45f0d07be3d5} 
+\#define portex\+R18\+\_\+\+STACK\+\_\+\+OFFSET~19}
+
+
+
+Definition at line \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source_l00051}{51}} of file \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source}{port\+\_\+exceptions.\+c}}.
+
+\Hypertarget{_micro_blaze_v9_2port__exceptions_8c_a800877d751d4d8d307cdb1a43df33a2e}\index{port\_exceptions.c@{port\_exceptions.c}!portexR19\_STACK\_OFFSET@{portexR19\_STACK\_OFFSET}}
+\index{portexR19\_STACK\_OFFSET@{portexR19\_STACK\_OFFSET}!port\_exceptions.c@{port\_exceptions.c}}
+\doxysubsubsection{\texorpdfstring{portexR19\_STACK\_OFFSET}{portexR19\_STACK\_OFFSET}}
+{\footnotesize\ttfamily \label{_micro_blaze_v9_2port__exceptions_8c_a800877d751d4d8d307cdb1a43df33a2e} 
+\#define portex\+R19\+\_\+\+STACK\+\_\+\+OFFSET~-\/1}
+
+
+
+Definition at line \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source_l00053}{53}} of file \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source}{port\+\_\+exceptions.\+c}}.
+
+\Hypertarget{_micro_blaze_v9_2port__exceptions_8c_a67b0d2d6648a89e6fc631476b003dce2}\index{port\_exceptions.c@{port\_exceptions.c}!portexR3\_STACK\_OFFSET@{portexR3\_STACK\_OFFSET}}
+\index{portexR3\_STACK\_OFFSET@{portexR3\_STACK\_OFFSET}!port\_exceptions.c@{port\_exceptions.c}}
+\doxysubsubsection{\texorpdfstring{portexR3\_STACK\_OFFSET}{portexR3\_STACK\_OFFSET}}
+{\footnotesize\ttfamily \label{_micro_blaze_v9_2port__exceptions_8c_a67b0d2d6648a89e6fc631476b003dce2} 
+\#define portex\+R3\+\_\+\+STACK\+\_\+\+OFFSET~4}
+
+
+
+Definition at line \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source_l00040}{40}} of file \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source}{port\+\_\+exceptions.\+c}}.
+
+\Hypertarget{_micro_blaze_v9_2port__exceptions_8c_af021fb14debb1514c6c130a024fd959a}\index{port\_exceptions.c@{port\_exceptions.c}!portexR4\_STACK\_OFFSET@{portexR4\_STACK\_OFFSET}}
+\index{portexR4\_STACK\_OFFSET@{portexR4\_STACK\_OFFSET}!port\_exceptions.c@{port\_exceptions.c}}
+\doxysubsubsection{\texorpdfstring{portexR4\_STACK\_OFFSET}{portexR4\_STACK\_OFFSET}}
+{\footnotesize\ttfamily \label{_micro_blaze_v9_2port__exceptions_8c_af021fb14debb1514c6c130a024fd959a} 
+\#define portex\+R4\+\_\+\+STACK\+\_\+\+OFFSET~5}
+
+
+
+Definition at line \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source_l00041}{41}} of file \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source}{port\+\_\+exceptions.\+c}}.
+
+\Hypertarget{_micro_blaze_v9_2port__exceptions_8c_ab2032d33da00217604f69e085a42a1d8}\index{port\_exceptions.c@{port\_exceptions.c}!portexR5\_STACK\_OFFSET@{portexR5\_STACK\_OFFSET}}
+\index{portexR5\_STACK\_OFFSET@{portexR5\_STACK\_OFFSET}!port\_exceptions.c@{port\_exceptions.c}}
+\doxysubsubsection{\texorpdfstring{portexR5\_STACK\_OFFSET}{portexR5\_STACK\_OFFSET}}
+{\footnotesize\ttfamily \label{_micro_blaze_v9_2port__exceptions_8c_ab2032d33da00217604f69e085a42a1d8} 
+\#define portex\+R5\+\_\+\+STACK\+\_\+\+OFFSET~6}
+
+
+
+Definition at line \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source_l00042}{42}} of file \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source}{port\+\_\+exceptions.\+c}}.
+
+\Hypertarget{_micro_blaze_v9_2port__exceptions_8c_a439fb3e073392e64e8656f4cb3f633f5}\index{port\_exceptions.c@{port\_exceptions.c}!portexR6\_STACK\_OFFSET@{portexR6\_STACK\_OFFSET}}
+\index{portexR6\_STACK\_OFFSET@{portexR6\_STACK\_OFFSET}!port\_exceptions.c@{port\_exceptions.c}}
+\doxysubsubsection{\texorpdfstring{portexR6\_STACK\_OFFSET}{portexR6\_STACK\_OFFSET}}
+{\footnotesize\ttfamily \label{_micro_blaze_v9_2port__exceptions_8c_a439fb3e073392e64e8656f4cb3f633f5} 
+\#define portex\+R6\+\_\+\+STACK\+\_\+\+OFFSET~7}
+
+
+
+Definition at line \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source_l00043}{43}} of file \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source}{port\+\_\+exceptions.\+c}}.
+
+\Hypertarget{_micro_blaze_v9_2port__exceptions_8c_af7efce7d7d559eadfc4b4c7bf35caa20}\index{port\_exceptions.c@{port\_exceptions.c}!portexR7\_STACK\_OFFSET@{portexR7\_STACK\_OFFSET}}
+\index{portexR7\_STACK\_OFFSET@{portexR7\_STACK\_OFFSET}!port\_exceptions.c@{port\_exceptions.c}}
+\doxysubsubsection{\texorpdfstring{portexR7\_STACK\_OFFSET}{portexR7\_STACK\_OFFSET}}
+{\footnotesize\ttfamily \label{_micro_blaze_v9_2port__exceptions_8c_af7efce7d7d559eadfc4b4c7bf35caa20} 
+\#define portex\+R7\+\_\+\+STACK\+\_\+\+OFFSET~8}
+
+
+
+Definition at line \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source_l00044}{44}} of file \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source}{port\+\_\+exceptions.\+c}}.
+
+\Hypertarget{_micro_blaze_v9_2port__exceptions_8c_acaf811831589f3af5b5f9761516e34b0}\index{port\_exceptions.c@{port\_exceptions.c}!portexR8\_STACK\_OFFSET@{portexR8\_STACK\_OFFSET}}
+\index{portexR8\_STACK\_OFFSET@{portexR8\_STACK\_OFFSET}!port\_exceptions.c@{port\_exceptions.c}}
+\doxysubsubsection{\texorpdfstring{portexR8\_STACK\_OFFSET}{portexR8\_STACK\_OFFSET}}
+{\footnotesize\ttfamily \label{_micro_blaze_v9_2port__exceptions_8c_acaf811831589f3af5b5f9761516e34b0} 
+\#define portex\+R8\+\_\+\+STACK\+\_\+\+OFFSET~9}
+
+
+
+Definition at line \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source_l00045}{45}} of file \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source}{port\+\_\+exceptions.\+c}}.
+
+\Hypertarget{_micro_blaze_v9_2port__exceptions_8c_acf9894253c97cd0e7e954a63a7211438}\index{port\_exceptions.c@{port\_exceptions.c}!portexR9\_STACK\_OFFSET@{portexR9\_STACK\_OFFSET}}
+\index{portexR9\_STACK\_OFFSET@{portexR9\_STACK\_OFFSET}!port\_exceptions.c@{port\_exceptions.c}}
+\doxysubsubsection{\texorpdfstring{portexR9\_STACK\_OFFSET}{portexR9\_STACK\_OFFSET}}
+{\footnotesize\ttfamily \label{_micro_blaze_v9_2port__exceptions_8c_acf9894253c97cd0e7e954a63a7211438} 
+\#define portex\+R9\+\_\+\+STACK\+\_\+\+OFFSET~10}
+
+
+
+Definition at line \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source_l00046}{46}} of file \mbox{\hyperlink{_micro_blaze_v9_2port__exceptions_8c_source}{port\+\_\+exceptions.\+c}}.
+

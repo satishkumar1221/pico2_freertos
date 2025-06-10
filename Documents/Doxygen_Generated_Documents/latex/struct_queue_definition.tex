@@ -1,0 +1,168 @@
+\doxysection{Queue\+Definition Struct Reference}
+\hypertarget{struct_queue_definition}{}\label{struct_queue_definition}\index{QueueDefinition@{QueueDefinition}}
+
+
+Collaboration diagram for Queue\+Definition\+:
+% FIG 0
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int8\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{struct_queue_definition_a487dc7e43b380c58212cba72bc33e0ed}{pc\+Head}}
+\item 
+int8\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{struct_queue_definition_abdf13cc013c8488848cee3fce4f0fed3}{pc\+Write\+To}}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>\mbox{\hyperlink{queue_8c_afa576747932ccf4c923633fc6a46a0d8}{QueuePointers\_t}} \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}}\\
+\>\mbox{\hyperlink{queue_8c_a8806dcfc511df585a0b4daf54a9a909a}{SemaphoreData\_t}} \mbox{\hyperlink{struct_queue_definition_adb2c0818274974553c619ff953b6f477}{xSemaphore}}\\
+\} \mbox{\hyperlink{struct_queue_definition_a8adf8bd5851e84f3c50d5c2a84dfe20d}{u}}\\
+
+\end{tabbing}\item 
+\mbox{\hyperlink{list_8h_ad14d7e3de1350e459c7c23c6f59c902a}{List\+\_\+t}} \mbox{\hyperlink{struct_queue_definition_aaab135c4345cb0393d6ff3cd5164c7b2}{x\+Tasks\+Waiting\+To\+Send}}
+\item 
+\mbox{\hyperlink{list_8h_ad14d7e3de1350e459c7c23c6f59c902a}{List\+\_\+t}} \mbox{\hyperlink{struct_queue_definition_af6d61526f77beee659cd604a0c473359}{x\+Tasks\+Waiting\+To\+Receive}}
+\item 
+volatile \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} \mbox{\hyperlink{struct_queue_definition_a12b07a40152d0f21488ca06d362d13d1}{ux\+Messages\+Waiting}}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} \mbox{\hyperlink{struct_queue_definition_ae80d17a812c669d4d41265b7f693988c}{ux\+Length}}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} \mbox{\hyperlink{struct_queue_definition_a81bb7d3826909244baa9debf5a55abb0}{ux\+Item\+Size}}
+\item 
+volatile int8\+\_\+t \mbox{\hyperlink{struct_queue_definition_ac750a3f75a6e174adbc697e473a0dd13}{c\+Rx\+Lock}}
+\item 
+volatile int8\+\_\+t \mbox{\hyperlink{struct_queue_definition_a24ac3f0707f098da2a22244d843fcf82}{c\+Tx\+Lock}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{queue_8c_source_l00103}{103}} of file \mbox{\hyperlink{queue_8c_source}{queue.\+c}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{struct_queue_definition_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_queue_definition_ac750a3f75a6e174adbc697e473a0dd13}\index{QueueDefinition@{QueueDefinition}!cRxLock@{cRxLock}}
+\index{cRxLock@{cRxLock}!QueueDefinition@{QueueDefinition}}
+\doxysubsubsection{\texorpdfstring{cRxLock}{cRxLock}}
+{\footnotesize\ttfamily \label{struct_queue_definition_ac750a3f75a6e174adbc697e473a0dd13} 
+volatile int8\+\_\+t Queue\+Definition\+::c\+Rx\+Lock}
+
+Stores the number of items received from the queue (removed from the queue) while the queue was locked. Set to queue\+UNLOCKED when the queue is not locked. 
+
+Definition at line \mbox{\hyperlink{queue_8c_source_l00121}{121}} of file \mbox{\hyperlink{queue_8c_source}{queue.\+c}}.
+
+\Hypertarget{struct_queue_definition_a24ac3f0707f098da2a22244d843fcf82}\index{QueueDefinition@{QueueDefinition}!cTxLock@{cTxLock}}
+\index{cTxLock@{cTxLock}!QueueDefinition@{QueueDefinition}}
+\doxysubsubsection{\texorpdfstring{cTxLock}{cTxLock}}
+{\footnotesize\ttfamily \label{struct_queue_definition_a24ac3f0707f098da2a22244d843fcf82} 
+volatile int8\+\_\+t Queue\+Definition\+::c\+Tx\+Lock}
+
+Stores the number of items transmitted to the queue (added to the queue) while the queue was locked. Set to queue\+UNLOCKED when the queue is not locked. 
+
+Definition at line \mbox{\hyperlink{queue_8c_source_l00122}{122}} of file \mbox{\hyperlink{queue_8c_source}{queue.\+c}}.
+
+\Hypertarget{struct_queue_definition_a487dc7e43b380c58212cba72bc33e0ed}\index{QueueDefinition@{QueueDefinition}!pcHead@{pcHead}}
+\index{pcHead@{pcHead}!QueueDefinition@{QueueDefinition}}
+\doxysubsubsection{\texorpdfstring{pcHead}{pcHead}}
+{\footnotesize\ttfamily \label{struct_queue_definition_a487dc7e43b380c58212cba72bc33e0ed} 
+int8\+\_\+t\texorpdfstring{$\ast$}{*} Queue\+Definition\+::pc\+Head}
+
+Points to the beginning of the queue storage area. 
+
+Definition at line \mbox{\hyperlink{queue_8c_source_l00105}{105}} of file \mbox{\hyperlink{queue_8c_source}{queue.\+c}}.
+
+\Hypertarget{struct_queue_definition_abdf13cc013c8488848cee3fce4f0fed3}\index{QueueDefinition@{QueueDefinition}!pcWriteTo@{pcWriteTo}}
+\index{pcWriteTo@{pcWriteTo}!QueueDefinition@{QueueDefinition}}
+\doxysubsubsection{\texorpdfstring{pcWriteTo}{pcWriteTo}}
+{\footnotesize\ttfamily \label{struct_queue_definition_abdf13cc013c8488848cee3fce4f0fed3} 
+int8\+\_\+t\texorpdfstring{$\ast$}{*} Queue\+Definition\+::pc\+Write\+To}
+
+Points to the free next place in the storage area. 
+
+Definition at line \mbox{\hyperlink{queue_8c_source_l00106}{106}} of file \mbox{\hyperlink{queue_8c_source}{queue.\+c}}.
+
+\Hypertarget{struct_queue_definition_a8adf8bd5851e84f3c50d5c2a84dfe20d}\index{QueueDefinition@{QueueDefinition}!u@{u}}
+\index{u@{u}!QueueDefinition@{QueueDefinition}}
+\doxysubsubsection{\texorpdfstring{[union]}{[union]}}
+{\footnotesize\ttfamily \label{struct_queue_definition_a8adf8bd5851e84f3c50d5c2a84dfe20d} 
+union  \{ ... \}  Queue\+Definition\+::u}
+
+\Hypertarget{struct_queue_definition_a81bb7d3826909244baa9debf5a55abb0}\index{QueueDefinition@{QueueDefinition}!uxItemSize@{uxItemSize}}
+\index{uxItemSize@{uxItemSize}!QueueDefinition@{QueueDefinition}}
+\doxysubsubsection{\texorpdfstring{uxItemSize}{uxItemSize}}
+{\footnotesize\ttfamily \label{struct_queue_definition_a81bb7d3826909244baa9debf5a55abb0} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} Queue\+Definition\+::ux\+Item\+Size}
+
+The size of each items that the queue will hold. 
+
+Definition at line \mbox{\hyperlink{queue_8c_source_l00119}{119}} of file \mbox{\hyperlink{queue_8c_source}{queue.\+c}}.
+
+\Hypertarget{struct_queue_definition_ae80d17a812c669d4d41265b7f693988c}\index{QueueDefinition@{QueueDefinition}!uxLength@{uxLength}}
+\index{uxLength@{uxLength}!QueueDefinition@{QueueDefinition}}
+\doxysubsubsection{\texorpdfstring{uxLength}{uxLength}}
+{\footnotesize\ttfamily \label{struct_queue_definition_ae80d17a812c669d4d41265b7f693988c} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} Queue\+Definition\+::ux\+Length}
+
+The length of the queue defined as the number of items it will hold, not the number of bytes. 
+
+Definition at line \mbox{\hyperlink{queue_8c_source_l00118}{118}} of file \mbox{\hyperlink{queue_8c_source}{queue.\+c}}.
+
+\Hypertarget{struct_queue_definition_a12b07a40152d0f21488ca06d362d13d1}\index{QueueDefinition@{QueueDefinition}!uxMessagesWaiting@{uxMessagesWaiting}}
+\index{uxMessagesWaiting@{uxMessagesWaiting}!QueueDefinition@{QueueDefinition}}
+\doxysubsubsection{\texorpdfstring{uxMessagesWaiting}{uxMessagesWaiting}}
+{\footnotesize\ttfamily \label{struct_queue_definition_a12b07a40152d0f21488ca06d362d13d1} 
+volatile \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} Queue\+Definition\+::ux\+Messages\+Waiting}
+
+The number of items currently in the queue. 
+
+Definition at line \mbox{\hyperlink{queue_8c_source_l00117}{117}} of file \mbox{\hyperlink{queue_8c_source}{queue.\+c}}.
+
+\Hypertarget{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}\index{QueueDefinition@{QueueDefinition}!xQueue@{xQueue}}
+\index{xQueue@{xQueue}!QueueDefinition@{QueueDefinition}}
+\doxysubsubsection{\texorpdfstring{xQueue}{xQueue}}
+{\footnotesize\ttfamily \label{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0} 
+\mbox{\hyperlink{queue_8c_afa576747932ccf4c923633fc6a46a0d8}{Queue\+Pointers\+\_\+t}} Queue\+Definition\+::x\+Queue}
+
+Data required exclusively when this structure is used as a queue. 
+
+Definition at line \mbox{\hyperlink{queue_8c_source_l00110}{110}} of file \mbox{\hyperlink{queue_8c_source}{queue.\+c}}.
+
+\Hypertarget{struct_queue_definition_adb2c0818274974553c619ff953b6f477}\index{QueueDefinition@{QueueDefinition}!xSemaphore@{xSemaphore}}
+\index{xSemaphore@{xSemaphore}!QueueDefinition@{QueueDefinition}}
+\doxysubsubsection{\texorpdfstring{xSemaphore}{xSemaphore}}
+{\footnotesize\ttfamily \label{struct_queue_definition_adb2c0818274974553c619ff953b6f477} 
+\mbox{\hyperlink{queue_8c_a8806dcfc511df585a0b4daf54a9a909a}{Semaphore\+Data\+\_\+t}} Queue\+Definition\+::x\+Semaphore}
+
+Data required exclusively when this structure is used as a semaphore. 
+
+Definition at line \mbox{\hyperlink{queue_8c_source_l00111}{111}} of file \mbox{\hyperlink{queue_8c_source}{queue.\+c}}.
+
+\Hypertarget{struct_queue_definition_af6d61526f77beee659cd604a0c473359}\index{QueueDefinition@{QueueDefinition}!xTasksWaitingToReceive@{xTasksWaitingToReceive}}
+\index{xTasksWaitingToReceive@{xTasksWaitingToReceive}!QueueDefinition@{QueueDefinition}}
+\doxysubsubsection{\texorpdfstring{xTasksWaitingToReceive}{xTasksWaitingToReceive}}
+{\footnotesize\ttfamily \label{struct_queue_definition_af6d61526f77beee659cd604a0c473359} 
+\mbox{\hyperlink{list_8h_ad14d7e3de1350e459c7c23c6f59c902a}{List\+\_\+t}} Queue\+Definition\+::x\+Tasks\+Waiting\+To\+Receive}
+
+List of tasks that are blocked waiting to read from this queue. Stored in priority order. 
+
+Definition at line \mbox{\hyperlink{queue_8c_source_l00115}{115}} of file \mbox{\hyperlink{queue_8c_source}{queue.\+c}}.
+
+\Hypertarget{struct_queue_definition_aaab135c4345cb0393d6ff3cd5164c7b2}\index{QueueDefinition@{QueueDefinition}!xTasksWaitingToSend@{xTasksWaitingToSend}}
+\index{xTasksWaitingToSend@{xTasksWaitingToSend}!QueueDefinition@{QueueDefinition}}
+\doxysubsubsection{\texorpdfstring{xTasksWaitingToSend}{xTasksWaitingToSend}}
+{\footnotesize\ttfamily \label{struct_queue_definition_aaab135c4345cb0393d6ff3cd5164c7b2} 
+\mbox{\hyperlink{list_8h_ad14d7e3de1350e459c7c23c6f59c902a}{List\+\_\+t}} Queue\+Definition\+::x\+Tasks\+Waiting\+To\+Send}
+
+List of tasks that are blocked waiting to post onto this queue. Stored in priority order. 
+
+Definition at line \mbox{\hyperlink{queue_8c_source_l00114}{114}} of file \mbox{\hyperlink{queue_8c_source}{queue.\+c}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/\mbox{\hyperlink{queue_8c}{queue.\+c}}\end{DoxyCompactItemize}

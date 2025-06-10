@@ -1,0 +1,77 @@
+\doxysection{x\+Queue\+Overwrite }
+\hypertarget{group__x_queue_overwrite}{}\label{group__x_queue_overwrite}\index{xQueueOverwrite@{xQueueOverwrite}}
+queue. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{queue_8h_a8e9ced123b5a0e37a36d3bbdb2e56b4e}{xQueueOverwrite}}(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ xQueue,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *\ pvItemToQueue}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
+
+\end{DoxyCode}
+
+
+Only for use with queues that have a length of one -\/ so the queue is either empty or full.
+
+Post an item on a queue. If the queue is already full then overwrite the value held in the queue. The item is queued by copy, not by reference.
+
+This function must not be called from an interrupt service routine. See x\+Queue\+Overwrite\+From\+ISR () for an alternative which may be used in an ISR.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Queue} & The handle of the queue to which the data is being sent.\\
+\hline
+{\em pv\+Item\+To\+Queue} & A pointer to the item that is to be placed on the queue. The size of the items the queue will hold was defined when the queue was created, so this many bytes will be copied from pv\+Item\+To\+Queue into the queue storage area.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{queue_8h_a8e9ced123b5a0e37a36d3bbdb2e56b4e}{x\+Queue\+Overwrite()} is a macro that calls \doxylink{queue_8h_a7ce86d1026e0c3055a523935bf53c0b3}{x\+Queue\+Generic\+Send()}, and therefore has the same return values as \doxylink{queue_8h_aa612fcc2b1ceee0200f34b942e300b41}{x\+Queue\+Send\+To\+Front()}. However, pd\+PASS is the only value that can be returned because \doxylink{queue_8h_a8e9ced123b5a0e37a36d3bbdb2e56b4e}{x\+Queue\+Overwrite()} will write to the queue even when the queue is already full.
+\end{DoxyReturn}
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vFunction(\ \textcolor{keywordtype}{void}\ *pvParameters\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ xQueue;}
+\DoxyCodeLine{uint32\_t\ ulVarToSend,\ ulValReceived;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ a\ queue\ to\ hold\ one\ uint32\_t\ value.\ \ It\ is\ strongly}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ recommended\ *not*\ to\ use\ xQueueOverwrite()\ on\ queues\ that\ can}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ contain\ more\ than\ one\ value,\ and\ doing\ so\ will\ trigger\ an\ assertion}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ if\ configASSERT()\ is\ defined.}}
+\DoxyCodeLine{\ xQueue\ =\ xQueueCreate(\ 1,\ \textcolor{keyword}{sizeof}(\ uint32\_t\ )\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Write\ the\ value\ 10\ to\ the\ queue\ using\ xQueueOverwrite().}}
+\DoxyCodeLine{\ ulVarToSend\ =\ 10;}
+\DoxyCodeLine{\ \mbox{\hyperlink{queue_8h_a8e9ced123b5a0e37a36d3bbdb2e56b4e}{xQueueOverwrite}}(\ xQueue,\ \&ulVarToSend\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Peeking\ the\ queue\ should\ now\ return\ 10,\ but\ leave\ the\ value\ 10\ in}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ the\ queue.\ \ A\ block\ time\ of\ zero\ is\ used\ as\ it\ is\ known\ that\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ queue\ holds\ a\ value.}}
+\DoxyCodeLine{\ ulValReceived\ =\ 0;}
+\DoxyCodeLine{\ \mbox{\hyperlink{queue_8h_a3f9e430276fe5244417fd82644ec8a75}{xQueuePeek}}(\ xQueue,\ \&ulValReceived,\ 0\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(\ ulValReceived\ !=\ 10\ )}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Error\ unless\ the\ item\ was\ removed\ by\ a\ different\ task.}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ The\ queue\ is\ still\ full.\ \ Use\ xQueueOverwrite()\ to\ overwrite\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ value\ held\ in\ the\ queue\ with\ 100.}}
+\DoxyCodeLine{\ ulVarToSend\ =\ 100;}
+\DoxyCodeLine{\ \mbox{\hyperlink{queue_8h_a8e9ced123b5a0e37a36d3bbdb2e56b4e}{xQueueOverwrite}}(\ xQueue,\ \&ulVarToSend\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ This\ time\ read\ from\ the\ queue,\ leaving\ the\ queue\ empty\ once\ more.}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ A\ block\ time\ of\ 0\ is\ used\ again.}}
+\DoxyCodeLine{\ \mbox{\hyperlink{queue_8h_ae8364d988c6f9b63c771cc2b3dfe5df9}{xQueueReceive}}(\ xQueue,\ \&ulValReceived,\ 0\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ The\ value\ read\ should\ be\ the\ last\ value\ written,\ even\ though\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ queue\ was\ already\ full\ when\ the\ value\ was\ written.}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(\ ulValReceived\ !=\ 100\ )}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Error!}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ ...}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

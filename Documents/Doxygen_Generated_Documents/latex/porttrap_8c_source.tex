@@ -1,0 +1,288 @@
+\doxysection{porttrap.\+c}
+\hypertarget{porttrap_8c_source}{}\label{porttrap_8c_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/TriCore\_1782/porttrap.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/TriCore\_1782/porttrap.c}}
+\mbox{\hyperlink{porttrap_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00029}00029\ \textcolor{comment}{/*\ Kernel\ includes.\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00030}00030\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_free_r_t_o_s_8h}{FreeRTOS.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00032}00032\ \textcolor{comment}{/*\ Machine\ includes\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00033}00033\ \textcolor{preprocessor}{\#include\ <tc1782.h>}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00034}00034\ \textcolor{preprocessor}{\#include\ <machine/intrinsics.h>}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00035}00035\ \textcolor{preprocessor}{\#include\ <machine/cint.h>}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00036}00036\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00038}00038\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00039}00039\ \textcolor{comment}{\ *\ This\ reference\ is\ required\ by\ the\ Save/Restore\ Context\ Macros.}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00040}00040\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00041}00041\ \textcolor{keyword}{extern}\ \textcolor{keyword}{volatile}\ uint32\_t\ *\ \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}};}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00042}00042\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00044}00044\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00045}00045\ \textcolor{comment}{\ *\ This\ file\ contains\ base\ definitions\ for\ all\ of\ the\ possible\ traps\ in\ the\ system.}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00046}00046\ \textcolor{comment}{\ *\ It\ is\ suggested\ to\ provide\ implementations\ for\ all\ of\ the\ traps\ but\ for}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00047}00047\ \textcolor{comment}{\ *\ the\ time\ being\ they\ simply\ trigger\ a\ DEBUG\ instruction\ so\ that\ it\ is\ easy}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00048}00048\ \textcolor{comment}{\ *\ to\ see\ what\ caused\ a\ particular\ trap.}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00049}00049\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00050}00050\ \textcolor{comment}{\ *\ Trap\ Class\ 6,\ the\ SYSCALL,\ is\ used\ exclusively\ by\ the\ operating\ system.}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00051}00051\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00053}00053\ \textcolor{comment}{/*\ The\ Trap\ Classes.\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00054}\mbox{\hyperlink{porttrap_8c_a19574159690cc73d5516f9631513d4a4}{00054}}\ \textcolor{preprocessor}{\#define\ portMMU\_TRAP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00055}\mbox{\hyperlink{porttrap_8c_ad0e47b88bb18949b0510947bad3e1190}{00055}}\ \textcolor{preprocessor}{\#define\ portIPT\_TRAP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00056}\mbox{\hyperlink{porttrap_8c_a81801d9644ad1d4521a3eaf4137d8571}{00056}}\ \textcolor{preprocessor}{\#define\ portIE\_TRAP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00057}\mbox{\hyperlink{porttrap_8c_ab3f86fd445d3b2c5cf8bcb08ec93235e}{00057}}\ \textcolor{preprocessor}{\#define\ portCM\_TRAP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 3}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00058}\mbox{\hyperlink{porttrap_8c_a87db88c9e1fb17c8c046effd3bf7bfc2}{00058}}\ \textcolor{preprocessor}{\#define\ portSBP\_TRAP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 4}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00059}\mbox{\hyperlink{porttrap_8c_a6690536b9d305a9282546f5a536c8328}{00059}}\ \textcolor{preprocessor}{\#define\ portASSERT\_TRAP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 5}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00060}\mbox{\hyperlink{porttrap_8c_aab331e9d6d1e8dac44c97388276cca85}{00060}}\ \textcolor{preprocessor}{\#define\ portNMI\_TRAP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 7}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00062}00062\ \textcolor{comment}{/*\ MMU\ Trap\ Identifications.\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00063}\mbox{\hyperlink{porttrap_8c_ad9b9239a473b11f706afb8b0d6586f1a}{00063}}\ \textcolor{preprocessor}{\#define\ portTIN\_MMU\_VIRTUAL\_ADDRESS\_FILL\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00064}\mbox{\hyperlink{porttrap_8c_a7c003a9a21dc8823e318b576bc82ed7b}{00064}}\ \textcolor{preprocessor}{\#define\ portTIN\_MMU\_VIRTUAL\_ADDRESS\_PROTECTION\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00066}00066\ \textcolor{comment}{/*\ Internal\ Protection\ Trap\ Identifications.\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00067}\mbox{\hyperlink{porttrap_8c_a74b7095c6659a6b412bbf4654c2f7ff4}{00067}}\ \textcolor{preprocessor}{\#define\ portTIN\_IPT\_PRIVILEGED\_INSTRUCTION\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00068}\mbox{\hyperlink{porttrap_8c_a6520569fea7230dc66ee1b5a19065deb}{00068}}\ \textcolor{preprocessor}{\#define\ portTIN\_IPT\_MEMORY\_PROTECTION\_READ\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00069}\mbox{\hyperlink{porttrap_8c_ad4654eec04bbedb0656ec845509035eb}{00069}}\ \textcolor{preprocessor}{\#define\ portTIN\_IPT\_MEMORY\_PROTECTION\_WRITE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 3}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00070}\mbox{\hyperlink{porttrap_8c_a5c0788ce09ba6c8be8dd7599f1377176}{00070}}\ \textcolor{preprocessor}{\#define\ portTIN\_IPT\_MEMORY\_PROTECTION\_EXECUTION\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 4}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00071}\mbox{\hyperlink{porttrap_8c_ac05a768f68abd98f28be5e0313ed6515}{00071}}\ \textcolor{preprocessor}{\#define\ portTIN\_IPT\_MEMORY\_PROTECTION\_PERIPHERAL\_ACCESS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 5}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00072}\mbox{\hyperlink{porttrap_8c_af23cf09dc01576ae3f453843273d612d}{00072}}\ \textcolor{preprocessor}{\#define\ portTIN\_IPT\_MEMORY\_PROTECTION\_NULL\_ADDRESS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 6}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00073}\mbox{\hyperlink{porttrap_8c_a63fc66e9db7a64c5a567f3d6fefe154d}{00073}}\ \textcolor{preprocessor}{\#define\ portTIN\_IPT\_MEMORY\_PROTECTION\_GLOBAL\_REGISTER\_WRITE\_PROTECTION\ \ \ \ 7}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00075}00075\ \textcolor{comment}{/*\ Instruction\ Error\ Trap\ Identifications.\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00076}\mbox{\hyperlink{porttrap_8c_aebe03fed8ed96e9f07fa3a0eab0c7ce3}{00076}}\ \textcolor{preprocessor}{\#define\ portTIN\_IE\_ILLEGAL\_OPCODE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00077}\mbox{\hyperlink{porttrap_8c_ac721c04450108aadf4bb89f200aea693}{00077}}\ \textcolor{preprocessor}{\#define\ portTIN\_IE\_UNIMPLEMENTED\_OPCODE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00078}\mbox{\hyperlink{porttrap_8c_af06d62070e1eb8b2be65291dd9dbb921}{00078}}\ \textcolor{preprocessor}{\#define\ portTIN\_IE\_INVALID\_OPERAND\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 3}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00079}\mbox{\hyperlink{porttrap_8c_a5d8f29815d7b281ad0e74c2993f33eb1}{00079}}\ \textcolor{preprocessor}{\#define\ portTIN\_IE\_DATA\_ADDRESS\_ALIGNMENT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 4}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00080}\mbox{\hyperlink{porttrap_8c_a839742a1cf33628369e89e9baa8b4a1e}{00080}}\ \textcolor{preprocessor}{\#define\ portTIN\_IE\_INVALID\_LOCAL\_MEMORY\_ADDRESS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 5}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00082}00082\ \textcolor{comment}{/*\ Context\ Management\ Trap\ Identifications.\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00083}\mbox{\hyperlink{porttrap_8c_a88cb81edc5f51574e7a55b068aee9ce7}{00083}}\ \textcolor{preprocessor}{\#define\ portTIN\_CM\_FREE\_CONTEXT\_LIST\_DEPLETION\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00084}\mbox{\hyperlink{porttrap_8c_a2a7f15a31db2366f92e50766b9abe484}{00084}}\ \textcolor{preprocessor}{\#define\ portTIN\_CM\_CALL\_DEPTH\_OVERFLOW\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00085}\mbox{\hyperlink{porttrap_8c_a2c093ef9717650fa21b107526a594261}{00085}}\ \textcolor{preprocessor}{\#define\ portTIN\_CM\_CALL\_DEPTH\_UNDEFLOW\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 3}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00086}\mbox{\hyperlink{porttrap_8c_a3c56cccf318cc2d97ccd7a6198256bef}{00086}}\ \textcolor{preprocessor}{\#define\ portTIN\_CM\_FREE\_CONTEXT\_LIST\_UNDERFLOW\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 4}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00087}\mbox{\hyperlink{porttrap_8c_ade5bfcd7385e0090c512a558cbd32a4c}{00087}}\ \textcolor{preprocessor}{\#define\ portTIN\_CM\_CALL\_STACK\_UNDERFLOW\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 5}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00088}\mbox{\hyperlink{porttrap_8c_a34f74adf77b80ef51fc77dc6ddf2d36d}{00088}}\ \textcolor{preprocessor}{\#define\ portTIN\_CM\_CONTEXT\_TYPE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 6}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00089}\mbox{\hyperlink{porttrap_8c_ad5dd939bcebb4a64ace182148e2a6ecb}{00089}}\ \textcolor{preprocessor}{\#define\ portTIN\_CM\_NESTING\_ERROR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 7}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00091}00091\ \textcolor{comment}{/*\ System\ Bus\ and\ Peripherals\ Trap\ Identifications.\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00092}\mbox{\hyperlink{porttrap_8c_abeed4a92b28d993b3ec720db7f5f1c7d}{00092}}\ \textcolor{preprocessor}{\#define\ portTIN\_SBP\_PROGRAM\_FETCH\_SYNCHRONOUS\_ERROR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00093}\mbox{\hyperlink{porttrap_8c_a9657bedeff9a9d3db32847ffb4bf4f65}{00093}}\ \textcolor{preprocessor}{\#define\ portTIN\_SBP\_DATA\_ACCESS\_SYNCHRONOUS\_ERROR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00094}\mbox{\hyperlink{porttrap_8c_a0efb53203fe1e31f991c4d8498579cb1}{00094}}\ \textcolor{preprocessor}{\#define\ portTIN\_SBP\_DATA\_ACCESS\_ASYNCHRONOUS\_ERROR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 3}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00095}\mbox{\hyperlink{porttrap_8c_a0ba91b09ce91c633797573d2d93bdef5}{00095}}\ \textcolor{preprocessor}{\#define\ portTIN\_SBP\_COPROCESSOR\_TRAP\_ASYNCHRONOUS\_ERROR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 4}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00096}\mbox{\hyperlink{porttrap_8c_a251922ef039d9e89290931b624750ed7}{00096}}\ \textcolor{preprocessor}{\#define\ portTIN\_SBP\_PROGRAM\_MEMORY\_INTEGRITY\_ERROR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 5}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00097}\mbox{\hyperlink{porttrap_8c_ae47f3511a67430b35ecac9a94f6ad0c3}{00097}}\ \textcolor{preprocessor}{\#define\ portTIN\_SBP\_DATA\_MEMORY\_INTEGRITY\_ERROR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 6}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00099}00099\ \textcolor{comment}{/*\ Assertion\ Trap\ Identifications.\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00100}\mbox{\hyperlink{porttrap_8c_a4ec173ee40ccc4a8aa63bbc40d742f2c}{00100}}\ \textcolor{preprocessor}{\#define\ portTIN\_ASSERT\_ARITHMETIC\_OVERFLOW\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00101}\mbox{\hyperlink{porttrap_8c_a6a82e70ebd8fbef797f0928e02fa5e05}{00101}}\ \textcolor{preprocessor}{\#define\ portTIN\_ASSERT\_STICKY\_ARITHMETIC\_OVERFLOW\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00103}00103\ \textcolor{comment}{/*\ Non-\/maskable\ Interrupt\ Trap\ Identifications.\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00104}\mbox{\hyperlink{porttrap_8c_a064714dade4b780c59cfe3d357aeee3b}{00104}}\ \textcolor{preprocessor}{\#define\ portTIN\_NMI\_NON\_MASKABLE\_INTERRUPT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00105}00105\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00107}\mbox{\hyperlink{porttrap_8c_acf66f77446c31149307d114f4e52e89a}{00107}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{porttrap_8c_a17a5aece41bf1c8f900abc6c18e21f79}{vMMUTrap}}(\ \textcolor{keywordtype}{int}\ iTrapIdentification\ )\ \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_ab35b2424ac8c0625cfdbbcf916c5e1c3}{\_\_attribute\_\_}}(\ (\ longcall,\ \mbox{\hyperlink{porttrap_8c_acf66f77446c31149307d114f4e52e89a}{weak}}\ )\ );}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00108}00108\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{porttrap_8c_a5df71a2cd124792eeddc63b57ec6de08}{vInternalProtectionTrap}}(\ \textcolor{keywordtype}{int}\ iTrapIdentification\ )\ \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_ab35b2424ac8c0625cfdbbcf916c5e1c3}{\_\_attribute\_\_}}(\ (\ longcall,\ \mbox{\hyperlink{porttrap_8c_acf66f77446c31149307d114f4e52e89a}{weak}}\ )\ );}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00109}00109\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{porttrap_8c_a51979b7d23c817291c4bec28288e37ef}{vInstructionErrorTrap}}(\ \textcolor{keywordtype}{int}\ iTrapIdentification\ )\ \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_ab35b2424ac8c0625cfdbbcf916c5e1c3}{\_\_attribute\_\_}}(\ (\ longcall,\ \mbox{\hyperlink{porttrap_8c_acf66f77446c31149307d114f4e52e89a}{weak}}\ )\ );}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00110}00110\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{porttrap_8c_aafb193dbaa52093ad36ea36e60742031}{vContextManagementTrap}}(\ \textcolor{keywordtype}{int}\ iTrapIdentification\ )\ \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_ab35b2424ac8c0625cfdbbcf916c5e1c3}{\_\_attribute\_\_}}(\ (\ longcall,\ \mbox{\hyperlink{porttrap_8c_acf66f77446c31149307d114f4e52e89a}{weak}}\ )\ );}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00111}00111\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{porttrap_8c_a8b44898fec32d8fa9b25be516928ff69}{vSystemBusAndPeripheralsTrap}}(\ \textcolor{keywordtype}{int}\ iTrapIdentification\ )\ \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_ab35b2424ac8c0625cfdbbcf916c5e1c3}{\_\_attribute\_\_}}(\ (\ longcall,\ \mbox{\hyperlink{porttrap_8c_acf66f77446c31149307d114f4e52e89a}{weak}}\ )\ );}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00112}00112\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{porttrap_8c_a0d55dbf825efb634259c4f5cecda97f6}{vAssertionTrap}}(\ \textcolor{keywordtype}{int}\ iTrapIdentification\ )\ \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_ab35b2424ac8c0625cfdbbcf916c5e1c3}{\_\_attribute\_\_}}(\ (\ longcall,\ \mbox{\hyperlink{porttrap_8c_acf66f77446c31149307d114f4e52e89a}{weak}}\ )\ );}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00113}00113\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{porttrap_8c_ad338c056dbca06ab78a09678009a1cb2}{vNonMaskableInterruptTrap}}(\ \textcolor{keywordtype}{int}\ iTrapIdentification\ )\ \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_ab35b2424ac8c0625cfdbbcf916c5e1c3}{\_\_attribute\_\_}}(\ (\ longcall,\ \mbox{\hyperlink{porttrap_8c_acf66f77446c31149307d114f4e52e89a}{weak}}\ )\ );}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00114}00114\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00116}\mbox{\hyperlink{porttrap_8c_abb81dc2f729d6c6fe39b23aa9f61e1a5}{00116}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{porttrap_8c_abb81dc2f729d6c6fe39b23aa9f61e1a5}{vTrapInstallHandlers}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00117}00117\ \{}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00118}00118\ \ \ \ \ \textcolor{keywordflow}{if}(\ 0\ ==\ \_install\_trap\_handler(\ \mbox{\hyperlink{porttrap_8c_a19574159690cc73d5516f9631513d4a4}{portMMU\_TRAP}},\ \mbox{\hyperlink{porttrap_8c_a17a5aece41bf1c8f900abc6c18e21f79}{vMMUTrap}}\ )\ )}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00119}00119\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00120}00120\ \ \ \ \ \ \ \ \ \_debug();}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00121}00121\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00123}00123\ \ \ \ \ \textcolor{keywordflow}{if}(\ 0\ ==\ \_install\_trap\_handler(\ \mbox{\hyperlink{porttrap_8c_ad0e47b88bb18949b0510947bad3e1190}{portIPT\_TRAP}},\ \mbox{\hyperlink{porttrap_8c_a5df71a2cd124792eeddc63b57ec6de08}{vInternalProtectionTrap}}\ )\ )}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00124}00124\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00125}00125\ \ \ \ \ \ \ \ \ \_debug();}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00126}00126\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00128}00128\ \ \ \ \ \textcolor{keywordflow}{if}(\ 0\ ==\ \_install\_trap\_handler(\ \mbox{\hyperlink{porttrap_8c_a81801d9644ad1d4521a3eaf4137d8571}{portIE\_TRAP}},\ \mbox{\hyperlink{porttrap_8c_a51979b7d23c817291c4bec28288e37ef}{vInstructionErrorTrap}}\ )\ )}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00129}00129\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00130}00130\ \ \ \ \ \ \ \ \ \_debug();}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00131}00131\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00133}00133\ \ \ \ \ \textcolor{keywordflow}{if}(\ 0\ ==\ \_install\_trap\_handler(\ \mbox{\hyperlink{porttrap_8c_ab3f86fd445d3b2c5cf8bcb08ec93235e}{portCM\_TRAP}},\ \mbox{\hyperlink{porttrap_8c_aafb193dbaa52093ad36ea36e60742031}{vContextManagementTrap}}\ )\ )}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00134}00134\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00135}00135\ \ \ \ \ \ \ \ \ \_debug();}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00136}00136\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00138}00138\ \ \ \ \ \textcolor{keywordflow}{if}(\ 0\ ==\ \_install\_trap\_handler(\ \mbox{\hyperlink{porttrap_8c_a87db88c9e1fb17c8c046effd3bf7bfc2}{portSBP\_TRAP}},\ \mbox{\hyperlink{porttrap_8c_a8b44898fec32d8fa9b25be516928ff69}{vSystemBusAndPeripheralsTrap}}\ )\ )}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00139}00139\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00140}00140\ \ \ \ \ \ \ \ \ \_debug();}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00141}00141\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00143}00143\ \ \ \ \ \textcolor{keywordflow}{if}(\ 0\ ==\ \_install\_trap\_handler(\ \mbox{\hyperlink{porttrap_8c_a6690536b9d305a9282546f5a536c8328}{portASSERT\_TRAP}},\ \mbox{\hyperlink{porttrap_8c_a0d55dbf825efb634259c4f5cecda97f6}{vAssertionTrap}}\ )\ )}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00144}00144\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00145}00145\ \ \ \ \ \ \ \ \ \_debug();}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00146}00146\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00148}00148\ \ \ \ \ \textcolor{keywordflow}{if}(\ 0\ ==\ \_install\_trap\_handler(\ \mbox{\hyperlink{porttrap_8c_aab331e9d6d1e8dac44c97388276cca85}{portNMI\_TRAP}},\ \mbox{\hyperlink{porttrap_8c_ad338c056dbca06ab78a09678009a1cb2}{vNonMaskableInterruptTrap}}\ )\ )}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00149}00149\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00150}00150\ \ \ \ \ \ \ \ \ \_debug();}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00151}00151\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00152}00152\ \}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00153}00153\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00155}\mbox{\hyperlink{porttrap_8c_a17a5aece41bf1c8f900abc6c18e21f79}{00155}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{porttrap_8c_a17a5aece41bf1c8f900abc6c18e21f79}{vMMUTrap}}(\ \textcolor{keywordtype}{int}\ iTrapIdentification\ )}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00156}00156\ \{}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00157}00157\ \ \ \ \ \textcolor{keywordflow}{switch}(\ iTrapIdentification\ )}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00158}00158\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00159}00159\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_ad9b9239a473b11f706afb8b0d6586f1a}{portTIN\_MMU\_VIRTUAL\_ADDRESS\_FILL}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00160}00160\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_a7c003a9a21dc8823e318b576bc82ed7b}{portTIN\_MMU\_VIRTUAL\_ADDRESS\_PROTECTION}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00161}00161\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \_debug();}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00164}00164\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00165}00165\ \}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00166}00166\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00167}00167\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00168}\mbox{\hyperlink{porttrap_8c_a5df71a2cd124792eeddc63b57ec6de08}{00168}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{porttrap_8c_a5df71a2cd124792eeddc63b57ec6de08}{vInternalProtectionTrap}}(\ \textcolor{keywordtype}{int}\ iTrapIdentification\ )}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00169}00169\ \{}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00170}00170\ \ \ \ \ \textcolor{comment}{/*\ Deliberate\ fall\ through\ to\ default.\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00171}00171\ \ \ \ \ \textcolor{keywordflow}{switch}(\ iTrapIdentification\ )}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00172}00172\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00173}00173\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_a74b7095c6659a6b412bbf4654c2f7ff4}{portTIN\_IPT\_PRIVILEGED\_INSTRUCTION}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00174}00174\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Instruction\ is\ not\ allowed\ at\ current\ execution\ level,\ eg\ DISABLE\ at\ User-\/0.\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00175}00175\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00176}00176\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_a6520569fea7230dc66ee1b5a19065deb}{portTIN\_IPT\_MEMORY\_PROTECTION\_READ}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00177}00177\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Load\ word\ using\ invalid\ address.\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00178}00178\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00179}00179\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_ad4654eec04bbedb0656ec845509035eb}{portTIN\_IPT\_MEMORY\_PROTECTION\_WRITE}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00180}00180\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Store\ Word\ using\ invalid\ address.\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00181}00181\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00182}00182\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_a5c0788ce09ba6c8be8dd7599f1377176}{portTIN\_IPT\_MEMORY\_PROTECTION\_EXECUTION}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00183}00183\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ PC\ jumped\ to\ an\ address\ outside\ of\ the\ valid\ range.\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00184}00184\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00185}00185\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_ac05a768f68abd98f28be5e0313ed6515}{portTIN\_IPT\_MEMORY\_PROTECTION\_PERIPHERAL\_ACCESS}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00186}00186\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Access\ to\ a\ peripheral\ denied\ at\ current\ execution\ level.\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00187}00187\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00188}00188\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_af23cf09dc01576ae3f453843273d612d}{portTIN\_IPT\_MEMORY\_PROTECTION\_NULL\_ADDRESS}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00189}00189\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ NULL\ Pointer.\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00191}00191\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_a63fc66e9db7a64c5a567f3d6fefe154d}{portTIN\_IPT\_MEMORY\_PROTECTION\_GLOBAL\_REGISTER\_WRITE\_PROTECTION}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00192}00192\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Tried\ to\ modify\ a\ global\ address\ pointer\ register.\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00194}00194\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00195}00195\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}}[\ 0\ ]\ =\ \_\_MFCR(\ \$PCXI\ );}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \_debug();}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00199}00199\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00200}00200\ \}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00201}00201\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00203}\mbox{\hyperlink{porttrap_8c_a51979b7d23c817291c4bec28288e37ef}{00203}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{porttrap_8c_a51979b7d23c817291c4bec28288e37ef}{vInstructionErrorTrap}}(\ \textcolor{keywordtype}{int}\ iTrapIdentification\ )}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00204}00204\ \{}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00205}00205\ \ \ \ \ \textcolor{comment}{/*\ Deliberate\ fall\ through\ to\ default.\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00206}00206\ \ \ \ \ \textcolor{keywordflow}{switch}(\ iTrapIdentification\ )}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00207}00207\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00208}00208\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_aebe03fed8ed96e9f07fa3a0eab0c7ce3}{portTIN\_IE\_ILLEGAL\_OPCODE}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00209}00209\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_ac721c04450108aadf4bb89f200aea693}{portTIN\_IE\_UNIMPLEMENTED\_OPCODE}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00210}00210\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_af06d62070e1eb8b2be65291dd9dbb921}{portTIN\_IE\_INVALID\_OPERAND}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00211}00211\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_a5d8f29815d7b281ad0e74c2993f33eb1}{portTIN\_IE\_DATA\_ADDRESS\_ALIGNMENT}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00212}00212\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_a839742a1cf33628369e89e9baa8b4a1e}{portTIN\_IE\_INVALID\_LOCAL\_MEMORY\_ADDRESS}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00213}00213\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \_debug();}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00216}00216\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00217}00217\ \}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00218}00218\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00219}00219\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00220}\mbox{\hyperlink{porttrap_8c_aafb193dbaa52093ad36ea36e60742031}{00220}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{porttrap_8c_aafb193dbaa52093ad36ea36e60742031}{vContextManagementTrap}}(\ \textcolor{keywordtype}{int}\ iTrapIdentification\ )}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00221}00221\ \{}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00222}00222\ \ \ \ \ \textcolor{comment}{/*\ Deliberate\ fall\ through\ to\ default.\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00223}00223\ \ \ \ \ \textcolor{keywordflow}{switch}(\ iTrapIdentification\ )}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00224}00224\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00225}00225\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_a88cb81edc5f51574e7a55b068aee9ce7}{portTIN\_CM\_FREE\_CONTEXT\_LIST\_DEPLETION}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00226}00226\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_a2a7f15a31db2366f92e50766b9abe484}{portTIN\_CM\_CALL\_DEPTH\_OVERFLOW}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00227}00227\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_a2c093ef9717650fa21b107526a594261}{portTIN\_CM\_CALL\_DEPTH\_UNDEFLOW}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00228}00228\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_a3c56cccf318cc2d97ccd7a6198256bef}{portTIN\_CM\_FREE\_CONTEXT\_LIST\_UNDERFLOW}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00229}00229\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_ade5bfcd7385e0090c512a558cbd32a4c}{portTIN\_CM\_CALL\_STACK\_UNDERFLOW}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00230}00230\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_a34f74adf77b80ef51fc77dc6ddf2d36d}{portTIN\_CM\_CONTEXT\_TYPE}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00231}00231\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_ad5dd939bcebb4a64ace182148e2a6ecb}{portTIN\_CM\_NESTING\_ERROR}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00232}00232\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \_debug();}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00235}00235\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00236}00236\ \}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00237}00237\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00239}\mbox{\hyperlink{porttrap_8c_a8b44898fec32d8fa9b25be516928ff69}{00239}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{porttrap_8c_a8b44898fec32d8fa9b25be516928ff69}{vSystemBusAndPeripheralsTrap}}(\ \textcolor{keywordtype}{int}\ iTrapIdentification\ )}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00240}00240\ \{}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00241}00241\ \ \ \ \ \textcolor{comment}{/*\ Deliberate\ fall\ through\ to\ default.\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00242}00242\ \ \ \ \ \textcolor{keywordflow}{switch}(\ iTrapIdentification\ )}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00243}00243\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00244}00244\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_abeed4a92b28d993b3ec720db7f5f1c7d}{portTIN\_SBP\_PROGRAM\_FETCH\_SYNCHRONOUS\_ERROR}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00245}00245\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_a9657bedeff9a9d3db32847ffb4bf4f65}{portTIN\_SBP\_DATA\_ACCESS\_SYNCHRONOUS\_ERROR}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00246}00246\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_a0efb53203fe1e31f991c4d8498579cb1}{portTIN\_SBP\_DATA\_ACCESS\_ASYNCHRONOUS\_ERROR}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00247}00247\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_a0ba91b09ce91c633797573d2d93bdef5}{portTIN\_SBP\_COPROCESSOR\_TRAP\_ASYNCHRONOUS\_ERROR}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00248}00248\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_a251922ef039d9e89290931b624750ed7}{portTIN\_SBP\_PROGRAM\_MEMORY\_INTEGRITY\_ERROR}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00249}00249\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_ae47f3511a67430b35ecac9a94f6ad0c3}{portTIN\_SBP\_DATA\_MEMORY\_INTEGRITY\_ERROR}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00250}00250\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00251}00251\ \ \ \ \ \ \ \ \ \ \ \ \ \_debug();}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00253}00253\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00254}00254\ \}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00255}00255\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00256}00256\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00257}\mbox{\hyperlink{porttrap_8c_a0d55dbf825efb634259c4f5cecda97f6}{00257}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{porttrap_8c_a0d55dbf825efb634259c4f5cecda97f6}{vAssertionTrap}}(\ \textcolor{keywordtype}{int}\ iTrapIdentification\ )}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00258}00258\ \{}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00259}00259\ \ \ \ \ \textcolor{comment}{/*\ Deliberate\ fall\ through\ to\ default.\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00260}00260\ \ \ \ \ \textcolor{keywordflow}{switch}(\ iTrapIdentification\ )}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00261}00261\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00262}00262\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_a4ec173ee40ccc4a8aa63bbc40d742f2c}{portTIN\_ASSERT\_ARITHMETIC\_OVERFLOW}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00263}00263\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_a6a82e70ebd8fbef797f0928e02fa5e05}{portTIN\_ASSERT\_STICKY\_ARITHMETIC\_OVERFLOW}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00264}00264\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \_debug();}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00266}00266\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00267}00267\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00268}00268\ \}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00269}00269\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00270}00270\ }
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00271}\mbox{\hyperlink{porttrap_8c_ad338c056dbca06ab78a09678009a1cb2}{00271}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{porttrap_8c_ad338c056dbca06ab78a09678009a1cb2}{vNonMaskableInterruptTrap}}(\ \textcolor{keywordtype}{int}\ iTrapIdentification\ )}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00272}00272\ \{}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00273}00273\ \ \ \ \ \textcolor{comment}{/*\ Deliberate\ fall\ through\ to\ default.\ */}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00274}00274\ \ \ \ \ \textcolor{keywordflow}{switch}(\ iTrapIdentification\ )}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00275}00275\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00276}00276\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{porttrap_8c_a064714dade4b780c59cfe3d357aeee3b}{portTIN\_NMI\_NON\_MASKABLE\_INTERRUPT}}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00277}00277\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00278}00278\ \ \ \ \ \ \ \ \ \ \ \ \ \_debug();}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00279}00279\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00280}00280\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00281}00281\ \}}
+\DoxyCodeLine{\Hypertarget{porttrap_8c_source_l00282}00282\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+
+\end{DoxyCode}

@@ -1,0 +1,134 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+GCC/\+Cold\+Fire\+\_\+\+V2/port.c File Reference}
+\hypertarget{_g_c_c_2_cold_fire___v2_2port_8c}{}\label{_g_c_c_2_cold_fire___v2_2port_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/ColdFire\_V2/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/ColdFire\_V2/port.c}}
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}task.\+h"{}}\newline
+Include dependency graph for port.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_cold_fire___v2_2port_8c_a44e54987059c931615e53125b64bb45e}{port\+INITIAL\+\_\+\+FORMAT\+\_\+\+VECTOR}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x4000 )
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_cold_fire___v2_2port_8c_a90d9878b0ef16ef9f50817499b1688e5}{port\+INITIAL\+\_\+\+STATUS\+\_\+\+REGISTER}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x2000 )
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_g_c_c_2_cold_fire___v2_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}{px\+Port\+Initialise\+Stack}} (\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}px\+Top\+Of\+Stack, \mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}} px\+Code, void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_g_c_c_2_cold_fire___v2_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{x\+Port\+Start\+Scheduler}} (void)
+\item 
+void \mbox{\hyperlink{_g_c_c_2_cold_fire___v2_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{v\+Port\+End\+Scheduler}} (void)
+\begin{DoxyCompactList}\small\item\em End the Free\+RTOS scheduler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_cold_fire___v2_2port_8c_a2ed3554a3de09a3bd09d396ee081ab69}{v\+Port\+Enter\+Critical}} (void)
+\begin{DoxyCompactList}\small\item\em Enter critical section. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_cold_fire___v2_2port_8c_aed20ada05b957181a0de042802a82a5b}{v\+Port\+Exit\+Critical}} (void)
+\begin{DoxyCompactList}\small\item\em Exit critical section. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_cold_fire___v2_2port_8c_ad39f79e3ec80894f2c6b1e5ed132f10f}{v\+Port\+Yield\+Handler}} (void)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_g_c_c_2_cold_fire___v2_2port_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_g_c_c_2_cold_fire___v2_2port_8c_a44e54987059c931615e53125b64bb45e}\index{port.c@{port.c}!portINITIAL\_FORMAT\_VECTOR@{portINITIAL\_FORMAT\_VECTOR}}
+\index{portINITIAL\_FORMAT\_VECTOR@{portINITIAL\_FORMAT\_VECTOR}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portINITIAL\_FORMAT\_VECTOR}{portINITIAL\_FORMAT\_VECTOR}}
+{\footnotesize\ttfamily \label{_g_c_c_2_cold_fire___v2_2port_8c_a44e54987059c931615e53125b64bb45e} 
+\#define port\+INITIAL\+\_\+\+FORMAT\+\_\+\+VECTOR~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x4000 )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_cold_fire___v2_2port_8c_source_l00033}{33}} of file \mbox{\hyperlink{_g_c_c_2_cold_fire___v2_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_cold_fire___v2_2port_8c_a90d9878b0ef16ef9f50817499b1688e5}\index{port.c@{port.c}!portINITIAL\_STATUS\_REGISTER@{portINITIAL\_STATUS\_REGISTER}}
+\index{portINITIAL\_STATUS\_REGISTER@{portINITIAL\_STATUS\_REGISTER}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portINITIAL\_STATUS\_REGISTER}{portINITIAL\_STATUS\_REGISTER}}
+{\footnotesize\ttfamily \label{_g_c_c_2_cold_fire___v2_2port_8c_a90d9878b0ef16ef9f50817499b1688e5} 
+\#define port\+INITIAL\+\_\+\+STATUS\+\_\+\+REGISTER~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x2000 )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_cold_fire___v2_2port_8c_source_l00036}{36}} of file \mbox{\hyperlink{_g_c_c_2_cold_fire___v2_2port_8c_source}{port.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_g_c_c_2_cold_fire___v2_2port_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_g_c_c_2_cold_fire___v2_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}\index{port.c@{port.c}!pxPortInitialiseStack@{pxPortInitialiseStack}}
+\index{pxPortInitialiseStack@{pxPortInitialiseStack}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{pxPortInitialiseStack()}{pxPortInitialiseStack()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_cold_fire___v2_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} px\+Port\+Initialise\+Stack (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{px\+Top\+Of\+Stack}{, }\item[{\mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}}}]{px\+Code}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_cold_fire___v2_2port_8c_source_l00044}{44}} of file \mbox{\hyperlink{_g_c_c_2_cold_fire___v2_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_cold_fire___v2_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}\index{port.c@{port.c}!vPortEndScheduler@{vPortEndScheduler}}
+\index{vPortEndScheduler@{vPortEndScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEndScheduler()}{vPortEndScheduler()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_cold_fire___v2_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423} 
+void v\+Port\+End\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+End the Free\+RTOS scheduler. 
+
+Not implemented on this port. 
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_cold_fire___v2_2port_8c_source_l00084}{84}} of file \mbox{\hyperlink{_g_c_c_2_cold_fire___v2_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_cold_fire___v2_2port_8c_a2ed3554a3de09a3bd09d396ee081ab69}\index{port.c@{port.c}!vPortEnterCritical@{vPortEnterCritical}}
+\index{vPortEnterCritical@{vPortEnterCritical}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEnterCritical()}{vPortEnterCritical()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_cold_fire___v2_2port_8c_a2ed3554a3de09a3bd09d396ee081ab69} 
+void v\+Port\+Enter\+Critical (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Enter critical section. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_cold_fire___v2_2port_8c_source_l00090}{90}} of file \mbox{\hyperlink{_g_c_c_2_cold_fire___v2_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_cold_fire___v2_2port_8c_aed20ada05b957181a0de042802a82a5b}\index{port.c@{port.c}!vPortExitCritical@{vPortExitCritical}}
+\index{vPortExitCritical@{vPortExitCritical}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortExitCritical()}{vPortExitCritical()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_cold_fire___v2_2port_8c_aed20ada05b957181a0de042802a82a5b} 
+void v\+Port\+Exit\+Critical (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Exit critical section. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_cold_fire___v2_2port_8c_source_l00113}{113}} of file \mbox{\hyperlink{_g_c_c_2_cold_fire___v2_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_cold_fire___v2_2port_8c_ad39f79e3ec80894f2c6b1e5ed132f10f}\index{port.c@{port.c}!vPortYieldHandler@{vPortYieldHandler}}
+\index{vPortYieldHandler@{vPortYieldHandler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortYieldHandler()}{vPortYieldHandler()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_cold_fire___v2_2port_8c_ad39f79e3ec80894f2c6b1e5ed132f10f} 
+void v\+Port\+Yield\+Handler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_cold_fire___v2_2port_8c_source_l00124}{124}} of file \mbox{\hyperlink{_g_c_c_2_cold_fire___v2_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{_g_c_c_2_cold_fire___v2_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}\index{port.c@{port.c}!xPortStartScheduler@{xPortStartScheduler}}
+\index{xPortStartScheduler@{xPortStartScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortStartScheduler()}{xPortStartScheduler()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_cold_fire___v2_2port_8c_ade5a8c6666e7413a0355cc252029c5c6} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Start\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_cold_fire___v2_2port_8c_source_l00068}{68}} of file \mbox{\hyperlink{_g_c_c_2_cold_fire___v2_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 2

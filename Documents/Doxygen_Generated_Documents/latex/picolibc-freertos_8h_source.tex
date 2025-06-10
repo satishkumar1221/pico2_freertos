@@ -1,0 +1,97 @@
+\doxysection{picolibc-\/freertos.h}
+\hypertarget{picolibc-freertos_8h_source}{}\label{picolibc-freertos_8h_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/picolibc-\/freertos.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/picolibc-\/freertos.h}}
+\mbox{\hyperlink{picolibc-freertos_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00029}00029\ \textcolor{preprocessor}{\#ifndef\ INC\_PICOLIBC\_FREERTOS\_H}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00030}00030\ \textcolor{preprocessor}{\#define\ INC\_PICOLIBC\_FREERTOS\_H}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00032}00032\ \textcolor{comment}{/*\ Use\ picolibc\ TLS\ support\ to\ allocate\ space\ for\ \_\_thread\ variables,}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00033}00033\ \textcolor{comment}{\ *\ initialize\ them\ at\ thread\ creation\ and\ set\ the\ TLS\ context\ at}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00034}00034\ \textcolor{comment}{\ *\ thread\ switch\ time.}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00035}00035\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00036}00036\ \textcolor{comment}{\ *\ See\ the\ picolibc\ TLS\ docs:}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00037}00037\ \textcolor{comment}{\ *\ https://github.com/picolibc/picolibc/blob/main/doc/tls.md}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00038}00038\ \textcolor{comment}{\ *\ for\ additional\ information.\ */}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00040}00040\ \textcolor{preprocessor}{\#include\ <picotls.h>}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00042}\mbox{\hyperlink{picolibc-freertos_8h_a4807cda51a20b460daeedb131f6654dc}{00042}}\ \textcolor{preprocessor}{\#define\ configUSE\_C\_RUNTIME\_TLS\_SUPPORT\ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00044}\mbox{\hyperlink{picolibc-freertos_8h_aafd9f168d1e58611a5d4517abda2c12b}{00044}}\ \textcolor{preprocessor}{\#define\ configTLS\_BLOCK\_TYPE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ void\ *}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00046}\mbox{\hyperlink{picolibc-freertos_8h_a445c74bd671a7b437f68ac1b52411524}{00046}}\ \textcolor{preprocessor}{\#define\ picolibcTLS\_SIZE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ (\ portPOINTER\_SIZE\_TYPE\ )\ \_tls\_size()\ )}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00047}\mbox{\hyperlink{picolibc-freertos_8h_a5ddfab7a61289006a9a963e132284ff4}{00047}}\ \textcolor{preprocessor}{\#define\ picolibcSTACK\_ALIGNMENT\_MASK\ \ \ \ \ \ \ (\ (\ portPOINTER\_SIZE\_TYPE\ )\ portBYTE\_ALIGNMENT\_MASK\ )}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00049}00049\ \textcolor{preprocessor}{\#if\ \_\_PICOLIBC\_MAJOR\_\_\ >\ 1\ ||\ \_\_PICOLIBC\_MINOR\_\_\ >=\ 8}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00051}00051\ \textcolor{comment}{/*\ Picolibc\ 1.8\ and\ newer\ have\ explicit\ alignment\ values\ provided}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00052}00052\ \textcolor{comment}{\ *\ by\ the\ \_tls\_align()\ inline\ */}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00053}00053\ \textcolor{preprocessor}{\ \ \ \ \#define\ picolibcTLS\_ALIGNMENT\_MASK\ \ \ \ (\ (\ portPOINTER\_SIZE\_TYPE\ )\ (\ \_tls\_align()\ -\/\ 1\ )\ )}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00054}00054\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00056}00056\ \textcolor{comment}{/*\ For\ older\ Picolibc\ versions,\ use\ the\ general\ port\ alignment\ value\ */}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00057}\mbox{\hyperlink{picolibc-freertos_8h_a131184d98c0d1b52f52f64368f4d8a65}{00057}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ picolibcTLS\_ALIGNMENT\_MASK\ \ \ \ (\ (\ portPOINTER\_SIZE\_TYPE\ )\ portBYTE\_ALIGNMENT\_MASK\ )}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00058}00058\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00060}00060\ \textcolor{comment}{/*\ Allocate\ thread\ local\ storage\ block\ off\ the\ end\ of\ the}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00061}00061\ \textcolor{comment}{\ *\ stack.\ The\ picolibcTLS\_SIZE\ macro\ returns\ the\ size\ (in}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00062}00062\ \textcolor{comment}{\ *\ bytes)\ of\ the\ total\ TLS\ area\ used\ by\ the\ application.}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00063}00063\ \textcolor{comment}{\ *\ Calculate\ the\ top\ of\ stack\ address.\ */}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00064}00064\ \textcolor{preprocessor}{\#if\ (\ portSTACK\_GROWTH\ <\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00066}00066\ \textcolor{preprocessor}{\ \ \ \ \#define\ configINIT\_TLS\_BLOCK(\ xTLSBlock,\ pxTopOfStack\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00067}00067\ \textcolor{preprocessor}{\ \ \ \ do\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00068}00068\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ xTLSBlock\ =\ (\ void\ *\ )\ (\ (\ (\ (\ portPOINTER\_SIZE\_TYPE\ )\ pxTopOfStack\ )\ -\/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00069}00069\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ picolibcTLS\_SIZE\ )\ \&\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00070}00070\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \string~picolibcTLS\_ALIGNMENT\_MASK\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00071}00071\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ pxTopOfStack\ =\ (\ StackType\_t\ *\ )\ (\ (\ (\ (\ portPOINTER\_SIZE\_TYPE\ )\ xTLSBlock\ )\ -\/\ 1\ )\ \&\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00072}00072\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \string~picolibcSTACK\_ALIGNMENT\_MASK\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00073}00073\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \_init\_tls(\ xTLSBlock\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00074}00074\ \textcolor{preprocessor}{\ \ \ \ \}\ while(\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00075}00075\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{/*\ portSTACK\_GROWTH\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00076}\mbox{\hyperlink{picolibc-freertos_8h_a0ec3ff910e465b074abe0d34584b433e}{00076}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ configINIT\_TLS\_BLOCK(\ xTLSBlock,\ pxTopOfStack\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00077}00077\ \textcolor{preprocessor}{\ \ \ \ do\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00078}00078\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ xTLSBlock\ =\ (\ void\ *\ )\ (\ (\ (\ portPOINTER\_SIZE\_TYPE\ )\ pxTopOfStack\ +\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00079}00079\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ picolibcTLS\_ALIGNMENT\_MASK\ )\ \&\ \string~picolibcTLS\_ALIGNMENT\_MASK\ );\ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00080}00080\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ pxTopOfStack\ =\ (\ StackType\_t\ *\ )\ (\ (\ (\ (\ (\ portPOINTER\_SIZE\_TYPE\ )\ xTLSBlock\ )\ +\ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00081}00081\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ picolibcTLS\_SIZE\ )\ +\ picolibcSTACK\_ALIGNMENT\_MASK\ )\ \&\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00082}00082\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \string~picolibcSTACK\_ALIGNMENT\_MASK\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00083}00083\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \_init\_tls(\ xTLSBlock\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00084}00084\ \textcolor{preprocessor}{\ \ \ \ \}\ while(\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00085}00085\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ portSTACK\_GROWTH\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00087}\mbox{\hyperlink{picolibc-freertos_8h_a570a14f4311409e74c87f22d977ee7af}{00087}}\ \textcolor{preprocessor}{\#define\ configSET\_TLS\_BLOCK(\ xTLSBlock\ )\ \ \ \ \_set\_tls(\ xTLSBlock\ )}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00089}\mbox{\hyperlink{picolibc-freertos_8h_a78b23cee14ba1d8058e093a6a4920e85}{00089}}\ \textcolor{preprocessor}{\#define\ configDEINIT\_TLS\_BLOCK(\ xTLSBlock\ )}}
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{picolibc-freertos_8h_source_l00091}00091\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_PICOLIBC\_FREERTOS\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

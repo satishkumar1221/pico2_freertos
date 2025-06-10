@@ -1,0 +1,91 @@
+\doxysection{portmacro.\+h}
+\hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source}{}\label{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ARMv8M/non\_secure/portable/IAR/ARM\_CM55/portmacro.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ARMv8M/non\_secure/portable/IAR/ARM\_CM55/portmacro.h}}
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00029}00029\ \textcolor{preprocessor}{\#ifndef\ PORTMACRO\_H}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00030}00030\ \textcolor{preprocessor}{\#define\ PORTMACRO\_H}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00032}00032\ \textcolor{comment}{/*\ *INDENT-\/OFF*\ */}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00033}00033\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00034}00034\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00035}00035\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00036}00036\ \textcolor{comment}{/*\ *INDENT-\/ON*\ */}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00038}00038\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00039}00039\ \textcolor{comment}{\ *\ Port\ specific\ definitions.}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00040}00040\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00041}00041\ \textcolor{comment}{\ *\ The\ settings\ in\ this\ file\ configure\ FreeRTOS\ correctly\ for\ the\ given\ hardware}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00042}00042\ \textcolor{comment}{\ *\ and\ compiler.}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00043}00043\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00044}00044\ \textcolor{comment}{\ *\ These\ settings\ should\ not\ be\ altered.}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00045}00045\ \textcolor{comment}{\ *-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00046}00046\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00048}00048\ \textcolor{preprocessor}{\#ifndef\ configENABLE\_MVE}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00049}00049\ \textcolor{preprocessor}{\ \ \ \ \#error\ configENABLE\_MVE\ must\ be\ defined\ in\ FreeRTOSConfig.h.\ Set\ configENABLE\_MVE\ to\ 1\ to\ enable\ the\ MVE\ or\ 0\ to\ disable\ the\ MVE.}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00050}00050\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ configENABLE\_MVE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00051}00051\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00056}\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_a2d5be0d247f2bf84b3d699be1378e8c4}{00056}}\ \textcolor{preprocessor}{\#define\ portARCH\_NAME\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}Cortex-\/M55"{}}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00057}\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_a45f856f8d2bb256b75d714275d4ce576}{00057}}\ \textcolor{preprocessor}{\#define\ portHAS\_ARMV8M\_MAIN\_EXTENSION\ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00058}\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_ae5e902215928479614db859062b41a8f}{00058}}\ \textcolor{preprocessor}{\#define\ portARMV8M\_MINOR\_VERSION\ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00059}\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_a6720aeadd2ae4379a1280e2d6ff42c0c}{00059}}\ \textcolor{preprocessor}{\#define\ portDONT\_DISCARD\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_root}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00060}00060\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00062}00062\ \textcolor{comment}{/*\ ARMv8-\/M\ common\ port\ configurations.\ */}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00063}00063\ \textcolor{preprocessor}{\#include\ "{}portmacrocommon.h"{}}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00064}00064\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00066}00066\ \textcolor{preprocessor}{\#if\ (\ configTOTAL\_MPU\_REGIONS\ ==\ 16\ )}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00067}00067\ \textcolor{preprocessor}{\ \ \ \ \#error\ 16\ MPU\ regions\ are\ not\ yet\ supported\ for\ this\ port.}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00068}00068\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00069}00069\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00074}\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_a6e3d10ee1a0734a647ca192523c2cfc1}{00074}}\ \textcolor{preprocessor}{\#define\ portDISABLE\_INTERRUPTS()\ \ \ \ ulSetInterruptMask()}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00075}\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_abc47e85a6befbb47961ad5ee7aa57173}{00075}}\ \textcolor{preprocessor}{\#define\ portENABLE\_INTERRUPTS()\ \ \ \ \ vClearInterruptMask(\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00076}00076\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00078}00078\ \textcolor{comment}{/*\ Suppress\ warnings\ that\ are\ generated\ by\ the\ IAR\ tools,\ but\ cannot\ be\ fixed\ in}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00079}00079\ \textcolor{comment}{\ *\ the\ source\ code\ because\ to\ do\ so\ would\ cause\ other\ compilers\ to\ generate}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00080}00080\ \textcolor{comment}{\ *\ warnings.\ */}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00081}00081\ \textcolor{preprocessor}{\#pragma\ diag\_suppress=Be006}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00082}00082\ \textcolor{preprocessor}{\#pragma\ diag\_suppress=Pa082}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00083}00083\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00085}00085\ \textcolor{comment}{/*\ *INDENT-\/OFF*\ */}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00086}00086\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00087}00087\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00088}00088\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00089}00089\ \textcolor{comment}{/*\ *INDENT-\/ON*\ */}}
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_a_r_mv8_m_2non__secure_2portable_2_i_a_r_2_a_r_m___c_m55_2portmacro_8h_source_l00091}00091\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ PORTMACRO\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

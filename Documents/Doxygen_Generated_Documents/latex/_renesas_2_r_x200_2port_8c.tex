@@ -1,0 +1,158 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+Renesas/\+RX200/port.c File Reference}
+\hypertarget{_renesas_2_r_x200_2port_8c}{}\label{_renesas_2_r_x200_2port_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/Renesas/RX200/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/Renesas/RX200/port.c}}
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}task.\+h"{}}\newline
+{\ttfamily \#include "{}string.\+h"{}}\newline
+{\ttfamily \#include "{}iodefine.\+h"{}}\newline
+Include dependency graph for port.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_renesas_2_r_x200_2port_8c_a3b89bf729488db5c18a40f8a016e3838}{port\+INITIAL\+\_\+\+PSW}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x00030000 )
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_renesas_2_r_x200_2port_8c_a05b8170f6114a4798593860395d9e8fd}{v\+Software\+Interrupt\+ISR}} (void)
+\item 
+void \mbox{\hyperlink{_renesas_2_r_x200_2port_8c_a9c86137bc3c1cbffc39fff22627cb885}{v\+Task\+Switch\+Context}} (void)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_renesas_2_r_x200_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}{px\+Port\+Initialise\+Stack}} (\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}px\+Top\+Of\+Stack, \mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}} px\+Code, void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_renesas_2_r_x200_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{x\+Port\+Start\+Scheduler}} (void)
+\item 
+void \mbox{\hyperlink{_renesas_2_r_x200_2port_8c_a502142367426395ab5c401b99204b437}{v\+Tick\+ISR}} (void)
+\item 
+void \mbox{\hyperlink{_renesas_2_r_x200_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{v\+Port\+End\+Scheduler}} (void)
+\begin{DoxyCompactList}\small\item\em End the Free\+RTOS scheduler. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_renesas_2_r_x200_2port_8c_a7ade8bf6610b9a777396aee010d2c025}{v\+Software\+Interrupt\+Entry}}
+\item 
+const \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_renesas_2_r_x200_2port_8c_a0aed5e7cfd612d9bef585820d17cf47f}{p\+\_\+v\+Software\+Interrupt\+Entry}} = \&\mbox{\hyperlink{_renesas_2_r_x100_2port_8c_a7ade8bf6610b9a777396aee010d2c025}{v\+Software\+Interrupt\+Entry}}
+\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_renesas_2_r_x200_2port_8c_a8492c047932aa45cec6a7b6351206b38}{px\+Current\+TCB}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_renesas_2_r_x200_2port_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_renesas_2_r_x200_2port_8c_a3b89bf729488db5c18a40f8a016e3838}\index{port.c@{port.c}!portINITIAL\_PSW@{portINITIAL\_PSW}}
+\index{portINITIAL\_PSW@{portINITIAL\_PSW}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portINITIAL\_PSW}{portINITIAL\_PSW}}
+{\footnotesize\ttfamily \label{_renesas_2_r_x200_2port_8c_a3b89bf729488db5c18a40f8a016e3838} 
+\#define port\+INITIAL\+\_\+\+PSW~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x00030000 )}
+
+
+
+Definition at line \mbox{\hyperlink{_renesas_2_r_x200_2port_8c_source_l00047}{47}} of file \mbox{\hyperlink{_renesas_2_r_x200_2port_8c_source}{port.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_renesas_2_r_x200_2port_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_renesas_2_r_x200_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}\index{port.c@{port.c}!pxPortInitialiseStack@{pxPortInitialiseStack}}
+\index{pxPortInitialiseStack@{pxPortInitialiseStack}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{pxPortInitialiseStack()}{pxPortInitialiseStack()}}
+{\footnotesize\ttfamily \label{_renesas_2_r_x200_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} px\+Port\+Initialise\+Stack (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{px\+Top\+Of\+Stack}{, }\item[{\mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}}}]{px\+Code}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+px\+Top\+Of\+Stack = 0x11;
+
+px\+Top\+Of\+Stack = 0x22;
+
+px\+Top\+Of\+Stack = 0x33;
+
+Definition at line \mbox{\hyperlink{_renesas_2_r_x200_2port_8c_source_l00092}{92}} of file \mbox{\hyperlink{_renesas_2_r_x200_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_renesas_2_r_x200_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}\index{port.c@{port.c}!vPortEndScheduler@{vPortEndScheduler}}
+\index{vPortEndScheduler@{vPortEndScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEndScheduler()}{vPortEndScheduler()}}
+{\footnotesize\ttfamily \label{_renesas_2_r_x200_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423} 
+void v\+Port\+End\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+End the Free\+RTOS scheduler. 
+
+Not implemented on this port. 
+
+Definition at line \mbox{\hyperlink{_renesas_2_r_x200_2port_8c_source_l00313}{313}} of file \mbox{\hyperlink{_renesas_2_r_x200_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{_renesas_2_r_x200_2port_8c_a05b8170f6114a4798593860395d9e8fd}\index{port.c@{port.c}!vSoftwareInterruptISR@{vSoftwareInterruptISR}}
+\index{vSoftwareInterruptISR@{vSoftwareInterruptISR}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vSoftwareInterruptISR()}{vSoftwareInterruptISR()}}
+{\footnotesize\ttfamily \label{_renesas_2_r_x200_2port_8c_a05b8170f6114a4798593860395d9e8fd} 
+void v\+Software\+Interrupt\+ISR (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_renesas_2_r_x200_2port_8c_source_l00233}{233}} of file \mbox{\hyperlink{_renesas_2_r_x200_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_renesas_2_r_x200_2port_8c_a9c86137bc3c1cbffc39fff22627cb885}\index{port.c@{port.c}!vTaskSwitchContext@{vTaskSwitchContext}}
+\index{vTaskSwitchContext@{vTaskSwitchContext}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vTaskSwitchContext()}{vTaskSwitchContext()}}
+{\footnotesize\ttfamily \label{_renesas_2_r_x200_2port_8c_a9c86137bc3c1cbffc39fff22627cb885} 
+void v\+Task\+Switch\+Context (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+
+\Hypertarget{_renesas_2_r_x200_2port_8c_a502142367426395ab5c401b99204b437}\index{port.c@{port.c}!vTickISR@{vTickISR}}
+\index{vTickISR@{vTickISR}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vTickISR()}{vTickISR()}}
+{\footnotesize\ttfamily \label{_renesas_2_r_x200_2port_8c_a502142367426395ab5c401b99204b437} 
+void v\+Tick\+ISR (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_renesas_2_r_x200_2port_8c_source_l00218}{218}} of file \mbox{\hyperlink{_renesas_2_r_x200_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{_renesas_2_r_x200_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}\index{port.c@{port.c}!xPortStartScheduler@{xPortStartScheduler}}
+\index{xPortStartScheduler@{xPortStartScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortStartScheduler()}{xPortStartScheduler()}}
+{\footnotesize\ttfamily \label{_renesas_2_r_x200_2port_8c_ade5a8c6666e7413a0355cc252029c5c6} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Start\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_renesas_2_r_x200_2port_8c_source_l00157}{157}} of file \mbox{\hyperlink{_renesas_2_r_x200_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\label{doc-var-members}
+\Hypertarget{_renesas_2_r_x200_2port_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_renesas_2_r_x200_2port_8c_a0aed5e7cfd612d9bef585820d17cf47f}\index{port.c@{port.c}!p\_vSoftwareInterruptEntry@{p\_vSoftwareInterruptEntry}}
+\index{p\_vSoftwareInterruptEntry@{p\_vSoftwareInterruptEntry}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{p\_vSoftwareInterruptEntry}{p\_vSoftwareInterruptEntry}}
+{\footnotesize\ttfamily \label{_renesas_2_r_x200_2port_8c_a0aed5e7cfd612d9bef585820d17cf47f} 
+const \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}}\texorpdfstring{$\ast$}{*} p\+\_\+v\+Software\+Interrupt\+Entry = \&\mbox{\hyperlink{_renesas_2_r_x100_2port_8c_a7ade8bf6610b9a777396aee010d2c025}{v\+Software\+Interrupt\+Entry}}}
+
+
+
+Definition at line \mbox{\hyperlink{_renesas_2_r_x200_2port_8c_source_l00055}{55}} of file \mbox{\hyperlink{_renesas_2_r_x200_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_renesas_2_r_x200_2port_8c_a8492c047932aa45cec6a7b6351206b38}\index{port.c@{port.c}!pxCurrentTCB@{pxCurrentTCB}}
+\index{pxCurrentTCB@{pxCurrentTCB}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{pxCurrentTCB}{pxCurrentTCB}}
+{\footnotesize\ttfamily \label{_renesas_2_r_x200_2port_8c_a8492c047932aa45cec6a7b6351206b38} 
+void\texorpdfstring{$\ast$}{*} px\+Current\+TCB\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_source_l00067}{67}} of file \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_source}{ISR\+\_\+\+Support.\+h}}.
+
+\Hypertarget{_renesas_2_r_x200_2port_8c_a7ade8bf6610b9a777396aee010d2c025}\index{port.c@{port.c}!vSoftwareInterruptEntry@{vSoftwareInterruptEntry}}
+\index{vSoftwareInterruptEntry@{vSoftwareInterruptEntry}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vSoftwareInterruptEntry}{vSoftwareInterruptEntry}}
+{\footnotesize\ttfamily \label{_renesas_2_r_x200_2port_8c_a7ade8bf6610b9a777396aee010d2c025} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} v\+Software\+Interrupt\+Entry\hspace{0.3cm}{\ttfamily [extern]}}
+

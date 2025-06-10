@@ -1,0 +1,51 @@
+\doxysection{x\+Event\+Group\+Clear\+Bits\+From\+ISR }
+\hypertarget{group__x_event_group_clear_bits_from_i_s_r}{}\label{group__x_event_group_clear_bits_from_i_s_r}\index{xEventGroupClearBitsFromISR@{xEventGroupClearBitsFromISR}}
+\doxylink{event__groups_8h}{event\+\_\+groups.\+h} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{event__groups_8h_a3d7de214a697f33fe7b914e26a93f33a}{xEventGroupClearBitsFromISR}}(\ \mbox{\hyperlink{event__groups_8h_acab96e0b6a5cab7f7b29822b79cc78ed}{EventGroupHandle\_t}}\ xEventGroup,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{event__groups_8h_ab2f21b93db0b2a0ab64d7a81ff32ac2e}{EventBits\_t}}\ uxBitsToSet\ );}
+
+\end{DoxyCode}
+
+
+A version of \doxylink{event__groups_8h_a0fb72cfdd4f0d5f86d955fc3af448f2a}{x\+Event\+Group\+Clear\+Bits()} that can be called from an interrupt.
+
+Setting bits in an event group is not a deterministic operation because there are an unknown number of tasks that may be waiting for the bit or bits being set. Free\+RTOS does not allow nondeterministic operations to be performed while interrupts are disabled, so protects event groups that are accessed from tasks by suspending the scheduler rather than disabling interrupts. As a result event groups cannot be accessed directly from an interrupt service routine. Therefore \doxylink{event__groups_8h_a3d7de214a697f33fe7b914e26a93f33a}{x\+Event\+Group\+Clear\+Bits\+From\+ISR()} sends a message to the timer task to have the clear operation performed in the context of the timer task.
+
+\begin{DoxyNote}{Note}
+If this function returns pd\+PASS then the timer task is ready to run and a \doxylink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_aac6850c66595efdc02a8bbb95fb4648e}{port\+YIELD\+\_\+\+FROM\+\_\+\+ISR(pd\+TRUE)} should be executed to perform the needed clear on the event group. This behavior is different from x\+Event\+Group\+Set\+Bits\+From\+ISR because the parameter x\+Higher\+Priority\+Task\+Woken is not present.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Event\+Group} & The event group in which the bits are to be cleared.\\
+\hline
+{\em ux\+Bits\+To\+Clear} & A bitwise value that indicates the bit or bits to clear. For example, to clear bit 3 only, set ux\+Bits\+To\+Clear to 0x08. To clear bit 3 and bit 0 set ux\+Bits\+To\+Clear to 0x09.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If the request to execute the function was posted successfully then pd\+PASS is returned, otherwise pd\+FALSE is returned. pd\+FALSE will be returned if the timer service queue was full.
+\end{DoxyReturn}
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BIT\_0\ (\ 1\ <<\ 0\ )}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BIT\_4\ (\ 1\ <<\ 4\ )}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ An\ event\ group\ which\ it\ is\ assumed\ has\ already\ been\ created\ by\ a\ call\ to}}
+\DoxyCodeLine{\textcolor{comment}{//\ xEventGroupCreate().}}
+\DoxyCodeLine{\mbox{\hyperlink{event__groups_8h_acab96e0b6a5cab7f7b29822b79cc78ed}{EventGroupHandle\_t}}\ xEventGroup;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ anInterruptHandler(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Clear\ bit\ 0\ and\ bit\ 4\ in\ xEventGroup.}}
+\DoxyCodeLine{\ \ \ \ \ xResult\ =\ \mbox{\hyperlink{event__groups_8h_a3d7de214a697f33fe7b914e26a93f33a}{xEventGroupClearBitsFromISR}}(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ xEventGroup,\ \ \ \ \ \textcolor{comment}{//\ The\ event\ group\ being\ updated.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ BIT\_0\ |\ BIT\_4\ );\ \textcolor{comment}{//\ The\ bits\ being\ set.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(\ xResult\ ==\ \mbox{\hyperlink{projdefs_8h_a07848d3078849bd32353c69d30a479b3}{pdPASS}}\ )}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ message\ was\ posted\ successfully.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_aac6850c66595efdc02a8bbb95fb4648e}{portYIELD\_FROM\_ISR}}(\mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}});}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

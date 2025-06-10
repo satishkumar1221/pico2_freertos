@@ -1,0 +1,31 @@
+\doxysection{x\+Task\+Notify\+State\+Clear\+Indexed }
+\hypertarget{group__x_task_notify_state_clear_indexed}{}\label{group__x_task_notify_state_clear_indexed}\index{xTaskNotifyStateClearIndexed@{xTaskNotifyStateClearIndexed}}
+task. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{task_8h_ad7fc12476fa032389e0b3dd52ecb709f}{xTaskNotifyStateClearIndexed}}(\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xTask,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxIndexToCLear\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{task_8h_ad4a465a489d7c2b22130ec2cc68b3284}{xTaskNotifyStateClear}}(\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xTask\ );}
+
+\end{DoxyCode}
+
+
+See \href{https://www.FreeRTOS.org/RTOS-task-notifications.html}{\texttt{https\+://www.\+Free\+RTOS.\+org/\+RTOS-\/task-\/notifications.\+html}} for details.
+
+config\+USE\+\_\+\+TASK\+\_\+\+NOTIFICATIONS must be undefined or defined as 1 for these functions to be available.
+
+Each task has a private array of "{}notification values"{} (or \textquotesingle{}notifications\textquotesingle{}), each of which is a 32-\/bit unsigned integer (uint32\+\_\+t). The constant config\+TASK\+\_\+\+NOTIFICATION\+\_\+\+ARRAY\+\_\+\+ENTRIES sets the number of indexes in the array, and (for backward compatibility) defaults to 1 if left undefined. Prior to Free\+RTOS V10.\+4.\+0 there was only one notification value per task.
+
+If a notification is sent to an index within the array of notifications then the notification at that index is said to be \textquotesingle{}pending\textquotesingle{} until it is read or explicitly cleared by the receiving task. \doxylink{task_8h_ad7fc12476fa032389e0b3dd52ecb709f}{x\+Task\+Notify\+State\+Clear\+Indexed()} is the function that clears a pending notification without reading the notification value. The notification value at the same array index is not altered. Set x\+Task to NULL to clear the notification state of the calling task.
+
+Backward compatibility information\+: Prior to Free\+RTOS V10.\+4.\+0 each task had a single "{}notification value"{}, and all task notification API functions operated on that value. Replacing the single notification value with an array of notification values necessitated a new set of API functions that could address specific notifications within the array. \doxylink{task_8h_ad4a465a489d7c2b22130ec2cc68b3284}{x\+Task\+Notify\+State\+Clear()} is the original API function, and remains backward compatible by always operating on the notification value at index 0 within the array. Calling \doxylink{task_8h_ad4a465a489d7c2b22130ec2cc68b3284}{x\+Task\+Notify\+State\+Clear()} is equivalent to calling \doxylink{task_8h_ad7fc12476fa032389e0b3dd52ecb709f}{x\+Task\+Notify\+State\+Clear\+Indexed()} with the ux\+Index\+To\+Notify parameter set to 0.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Task} & The handle of the RTOS task that will have a notification state cleared. Set x\+Task to NULL to clear a notification state in the calling task. To obtain a task\textquotesingle{}s handle create the task using x\+Task\+Create() and make use of the px\+Created\+Task parameter, or create the task using x\+Task\+Create\+Static() and store the returned value, or use the task\textquotesingle{}s name in a call to x\+Task\+Get\+Handle().\\
+\hline
+{\em ux\+Index\+To\+Clear} & The index within the target task\textquotesingle{}s array of notification values to act upon. For example, setting ux\+Index\+To\+Clear to 1 will clear the state of the notification at index 1 within the array. ux\+Index\+To\+Clear must be less than config\+TASK\+\_\+\+NOTIFICATION\+\_\+\+ARRAY\+\_\+\+ENTRIES. ul\+Task\+Notify\+State\+Clear() does not have this parameter and always acts on the notification at index 0.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pd\+TRUE if the task\textquotesingle{}s notification state was set to e\+Not\+Waiting\+Notification, otherwise pd\+FALSE. 
+\end{DoxyReturn}

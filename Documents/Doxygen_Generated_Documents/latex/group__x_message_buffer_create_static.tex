@@ -1,0 +1,61 @@
+\doxysection{x\+Message\+Buffer\+Create\+Static }
+\hypertarget{group__x_message_buffer_create_static}{}\label{group__x_message_buffer_create_static}\index{xMessageBufferCreateStatic@{xMessageBufferCreateStatic}}
+\doxylink{message__buffer_8h}{message\+\_\+buffer.\+h}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{message__buffer_8h_a6c510e0a4aeb3a08df4af49c1d651057}{MessageBufferHandle\_t}}\ \mbox{\hyperlink{message__buffer_8h_acc84f4a15dbd39ecbad35f7337e78b2c}{xMessageBufferCreateStatic}}(\ \textcolor{keywordtype}{size\_t}\ xBufferSizeBytes,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ *pucMessageBufferStorageArea,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_aebe27a051714571e9051a8e33fe40bd9}{StaticMessageBuffer\_t}}\ *pxStaticMessageBuffer\ );}
+
+\end{DoxyCode}
+ Creates a new message buffer using statically allocated memory. See \doxylink{message__buffer_8h_a2959cd0e3d2bd20d46908e5c9872be36}{x\+Message\+Buffer\+Create()} for a version that uses dynamically allocated memory.
+
+config\+USE\+\_\+\+STREAM\+\_\+\+BUFFERS must be set to 1 in for Free\+RTOSConfig.\+h for \doxylink{message__buffer_8h_acc84f4a15dbd39ecbad35f7337e78b2c}{x\+Message\+Buffer\+Create\+Static()} to be available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Buffer\+Size\+Bytes} & The size, in bytes, of the buffer pointed to by the puc\+Message\+Buffer\+Storage\+Area parameter. When a message is written to the message buffer an additional sizeof( size\+\_\+t ) bytes are also written to store the message\textquotesingle{}s length. sizeof( size\+\_\+t ) is typically 4 bytes on a 32-\/bit architecture, so on most 32-\/bit architecture a 10 byte message will take up 14 bytes of message buffer space. The maximum number of bytes that can be stored in the message buffer is actually (x\+Buffer\+Size\+Bytes -\/ 1).\\
+\hline
+{\em puc\+Message\+Buffer\+Storage\+Area} & Must point to a uint8\+\_\+t array that is at least x\+Buffer\+Size\+Bytes big. This is the array to which messages are copied when they are written to the message buffer.\\
+\hline
+{\em px\+Static\+Message\+Buffer} & Must point to a variable of type \doxylink{_free_r_t_o_s_8h_aebe27a051714571e9051a8e33fe40bd9}{Static\+Message\+Buffer\+\_\+t}, which will be used to hold the message buffer\textquotesingle{}s data structure.\\
+\hline
+{\em px\+Send\+Completed\+Callback} & Callback invoked when a new message is sent to the message buffer. If the parameter is NULL or \doxylink{message__buffer_8h_a2959cd0e3d2bd20d46908e5c9872be36}{x\+Message\+Buffer\+Create()} is called without the parameter, then it will use the default implementation provided by sb\+SEND\+\_\+\+COMPLETED macro. To enable the callback, config\+USE\+\_\+\+SB\+\_\+\+COMPLETED\+\_\+\+CALLBACK must be set to 1 in Free\+RTOSConfig.\+h.\\
+\hline
+{\em px\+Receive\+Completed\+Callback} & Callback invoked when a message is read from a message buffer. If the parameter is NULL or \doxylink{message__buffer_8h_a2959cd0e3d2bd20d46908e5c9872be36}{x\+Message\+Buffer\+Create()} is called without the parameter, it will use the default implementation provided by sb\+RECEIVE\+\_\+\+COMPLETED macro. To enable the callback, config\+USE\+\_\+\+SB\+\_\+\+COMPLETED\+\_\+\+CALLBACK must be set to 1 in Free\+RTOSConfig.\+h.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If the message buffer is created successfully then a handle to the created message buffer is returned. If either puc\+Message\+Buffer\+Storage\+Area or px\+Staticmessage\+Buffer are NULL then NULL is returned.
+\end{DoxyReturn}
+Example use\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Used\ to\ dimension\ the\ array\ used\ to\ hold\ the\ messages.\ \ The\ available\ space}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ will\ actually\ be\ one\ less\ than\ this,\ so\ 999.}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ STORAGE\_SIZE\_BYTES\ 1000}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Defines\ the\ memory\ that\ will\ actually\ hold\ the\ messages\ within\ the\ message}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ buffer.}}
+\DoxyCodeLine{\ \ \textcolor{keyword}{static}\ uint8\_t\ ucStorageBuffer[\ STORAGE\_SIZE\_BYTES\ ];}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ The\ variable\ used\ to\ hold\ the\ message\ buffer\ structure.}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{_free_r_t_o_s_8h_aebe27a051714571e9051a8e33fe40bd9}{StaticMessageBuffer\_t}}\ xMessageBufferStruct;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{void}\ MyFunction(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{message__buffer_8h_a6c510e0a4aeb3a08df4af49c1d651057}{MessageBufferHandle\_t}}\ xMessageBuffer;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \ xMessageBuffer\ =\ \mbox{\hyperlink{message__buffer_8h_acc84f4a15dbd39ecbad35f7337e78b2c}{xMessageBufferCreateStatic}}(\ \textcolor{keyword}{sizeof}(\ ucStorageBuffer\ ),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ucStorageBuffer,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&xMessageBufferStruct\ );}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ As\ neither\ the\ pucMessageBufferStorageArea\ or\ pxStaticMessageBuffer}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ parameters\ were\ NULL,\ xMessageBuffer\ will\ not\ be\ NULL,\ and\ can\ be\ used\ to}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ reference\ the\ created\ message\ buffer\ in\ other\ message\ buffer\ API\ calls.}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Other\ code\ that\ uses\ the\ message\ buffer\ can\ go\ here.}}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+ 

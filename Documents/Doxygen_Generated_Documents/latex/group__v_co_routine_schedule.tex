@@ -1,0 +1,37 @@
+\doxysection{v\+Co\+Routine\+Schedule }
+\hypertarget{group__v_co_routine_schedule}{}\label{group__v_co_routine_schedule}\index{vCoRoutineSchedule@{vCoRoutineSchedule}}
+croutine. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{croutine_8h_a5333c649a2c063006ca3cd7a3b5b9240}{vCoRoutineSchedule}}(\ \textcolor{keywordtype}{void}\ );}
+
+\end{DoxyCode}
+
+
+Run a co-\/routine.
+
+\doxylink{croutine_8h_a5333c649a2c063006ca3cd7a3b5b9240}{v\+Co\+Routine\+Schedule()} executes the highest priority co-\/routine that is able to run. The co-\/routine will execute until it either blocks, yields or is preempted by a task. Co-\/routines execute cooperatively so one co-\/routine cannot be preempted by another, but can be preempted by a task.
+
+If an application comprises of both tasks and co-\/routines then v\+Co\+Routine\+Schedule should be called from the idle task (in an idle task hook).
+
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ This\ idle\ task\ hook\ will\ schedule\ a\ co-\/routine\ each\ time\ it\ is\ called.}}
+\DoxyCodeLine{\textcolor{comment}{//\ The\ rest\ of\ the\ idle\ task\ will\ execute\ between\ co-\/routine\ calls.}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vApplicationIdleHook(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \mbox{\hyperlink{croutine_8h_a5333c649a2c063006ca3cd7a3b5b9240}{vCoRoutineSchedule}}();}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Alternatively,\ if\ you\ do\ not\ require\ any\ other\ part\ of\ the\ idle\ task\ to}}
+\DoxyCodeLine{\textcolor{comment}{//\ execute,\ the\ idle\ task\ hook\ can\ call\ vCoRoutineSchedule()\ within\ an}}
+\DoxyCodeLine{\textcolor{comment}{//\ infinite\ loop.}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vApplicationIdleHook(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\ ;;\ )}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{croutine_8h_a5333c649a2c063006ca3cd7a3b5b9240}{vCoRoutineSchedule}}();}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

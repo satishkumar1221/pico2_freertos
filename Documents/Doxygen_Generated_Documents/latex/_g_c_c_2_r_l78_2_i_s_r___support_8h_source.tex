@@ -1,0 +1,133 @@
+\doxysection{isr\+\_\+support.\+h}
+\hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source}{}\label{_g_c_c_2_r_l78_2_i_s_r___support_8h_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/RL78/isr\_support.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/RL78/isr\_support.h}}
+\mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00029}00029\ \textcolor{comment}{/*\ Variables\ used\ by\ scheduler\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00030}00030\ .extern\ \mbox{\hyperlink{_rowley_2_m_s_p430_f449_2portasm_8h_a2e7047e7ca4988756191e5189dbf3b19}{\_pxCurrentTCB}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00031}00031\ \ \ \ .extern\ \mbox{\hyperlink{_rowley_2_m_s_p430_f449_2portasm_8h_ad1c111deb40b0ac1fe527337124e2910}{\_usCriticalNesting}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00033}00033\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00034}00034\ \textcolor{comment}{\ *\ portSAVE\_CONTEXT\ MACRO}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00035}00035\ \textcolor{comment}{\ *\ Saves\ the\ context\ of\ the\ general\ purpose\ registers,\ CS\ and\ ES\ (only\ in\ far}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00036}00036\ \textcolor{comment}{\ *\ memory\ mode)\ registers\ the\ usCriticalNesting\ Value\ and\ the\ Stack\ Pointer}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00037}00037\ \textcolor{comment}{\ *\ of\ the\ active\ Task\ onto\ the\ task\ stack}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00038}00038\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00039}00039\ \ \ \ .macro\ \mbox{\hyperlink{_code_warrior_2_cold_fire___v2_2port_8c_a798f37b250502b49763c54a56b3aa4b0}{portSAVE\_CONTEXT}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00041}00041\ \textcolor{keywordtype}{SEL}\ RB0}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00043}00043\ \textcolor{comment}{/*\ Save\ AX\ Register\ to\ stack.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00044}00044\ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a551efa3573f442f9676984d3b220c981}{PUSH}}\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ac07dd4b65f1d21f9225978c9cfd67772}{AX}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00045}00045\ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a551efa3573f442f9676984d3b220c981}{PUSH}}\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a30c2eb330b4fbf8161ba6379d629e7a5}{HL}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00046}00046\ \textcolor{comment}{/*\ Save\ CS\ register.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00047}00047\ MOV\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ae2572b8ee3e438f22571e0214222bd1b}{A}},\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a80a70aea205e0e10f3ea6e7f6e9a94d2}{CS}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00048}\mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ae2572b8ee3e438f22571e0214222bd1b}{00048}}\ XCH\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ae2572b8ee3e438f22571e0214222bd1b}{A}},\ \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_a836d136c5cf9b95192920ca0affa917e}{X}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00049}00049\ \textcolor{comment}{/*\ Save\ ES\ register.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00050}00050\ MOV\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ae2572b8ee3e438f22571e0214222bd1b}{A}},\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a7bdba1afa6d8c5f506cdda4a6236a923}{ES}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00051}00051\ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a551efa3573f442f9676984d3b220c981}{PUSH}}\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ac07dd4b65f1d21f9225978c9cfd67772}{AX}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00052}00052\ \textcolor{comment}{/*\ Save\ the\ remaining\ general\ purpose\ registers\ from\ bank\ 0.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00053}00053\ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a551efa3573f442f9676984d3b220c981}{PUSH}}\ \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_ada21f928de52d04774d34370a6721d6e}{DE}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00054}00054\ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a551efa3573f442f9676984d3b220c981}{PUSH}}\ \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_a47e51e20d00428621fddaf2b63b109fa}{BC}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00055}00055\ \textcolor{comment}{/*\ Save\ the\ other\ register\ banks\ -\/\ only\ necessary\ in\ the\ GCC\ port.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00056}00056\ \textcolor{keywordtype}{SEL}\ RB1}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00057}00057\ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a551efa3573f442f9676984d3b220c981}{PUSH}}\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ac07dd4b65f1d21f9225978c9cfd67772}{AX}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00058}00058\ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a551efa3573f442f9676984d3b220c981}{PUSH}}\ \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_a47e51e20d00428621fddaf2b63b109fa}{BC}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00059}00059\ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a551efa3573f442f9676984d3b220c981}{PUSH}}\ \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_ada21f928de52d04774d34370a6721d6e}{DE}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00060}00060\ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a551efa3573f442f9676984d3b220c981}{PUSH}}\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a30c2eb330b4fbf8161ba6379d629e7a5}{HL}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00061}00061\ \textcolor{keywordtype}{SEL}\ RB2}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00062}00062\ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a551efa3573f442f9676984d3b220c981}{PUSH}}\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ac07dd4b65f1d21f9225978c9cfd67772}{AX}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00063}00063\ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a551efa3573f442f9676984d3b220c981}{PUSH}}\ \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_a47e51e20d00428621fddaf2b63b109fa}{BC}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00064}00064\ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a551efa3573f442f9676984d3b220c981}{PUSH}}\ \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_ada21f928de52d04774d34370a6721d6e}{DE}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00065}00065\ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a551efa3573f442f9676984d3b220c981}{PUSH}}\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a30c2eb330b4fbf8161ba6379d629e7a5}{HL}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00066}00066\ \textcolor{comment}{/*\ Registers\ in\ bank\ 3\ are\ for\ ISR\ use\ only\ so\ don't\ need\ saving.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00067}00067\ \textcolor{keywordtype}{SEL}\ RB0}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00068}00068\ \textcolor{comment}{/*\ Save\ the\ usCriticalNesting\ value.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00069}\mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ac07dd4b65f1d21f9225978c9cfd67772}{00069}}\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a1f39b94dd6e5a8fe66b74470a3e448cc}{MOVW}}\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ac07dd4b65f1d21f9225978c9cfd67772}{AX}},\ !\mbox{\hyperlink{_rowley_2_m_s_p430_f449_2portasm_8h_ad1c111deb40b0ac1fe527337124e2910}{\_usCriticalNesting}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00070}00070\ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a551efa3573f442f9676984d3b220c981}{PUSH}}\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ac07dd4b65f1d21f9225978c9cfd67772}{AX}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00071}00071\ \textcolor{comment}{/*\ Save\ the\ Stack\ pointer.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00072}00072\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a1f39b94dd6e5a8fe66b74470a3e448cc}{MOVW}}\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ac07dd4b65f1d21f9225978c9cfd67772}{AX}},\ !\mbox{\hyperlink{_rowley_2_m_s_p430_f449_2portasm_8h_a2e7047e7ca4988756191e5189dbf3b19}{\_pxCurrentTCB}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00073}\mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a30c2eb330b4fbf8161ba6379d629e7a5}{00073}}\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a1f39b94dd6e5a8fe66b74470a3e448cc}{MOVW}}\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a30c2eb330b4fbf8161ba6379d629e7a5}{HL}},\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ac07dd4b65f1d21f9225978c9cfd67772}{AX}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00074}00074\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a1f39b94dd6e5a8fe66b74470a3e448cc}{MOVW}}\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ac07dd4b65f1d21f9225978c9cfd67772}{AX}},\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a85224ff891d5fa22f8aa26c3eaca34f1}{SP}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00075}\mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a1f39b94dd6e5a8fe66b74470a3e448cc}{00075}}\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a1f39b94dd6e5a8fe66b74470a3e448cc}{MOVW}}[\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a30c2eb330b4fbf8161ba6379d629e7a5}{HL}}\ ],\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ac07dd4b65f1d21f9225978c9cfd67772}{AX}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00076}00076\ \textcolor{comment}{/*\ Switch\ stack\ pointers.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00077}\mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a9fac601aa4df67d37f16bd1781d7a5f7}{00077}}\ movw\ \mbox{\hyperlink{_g_c_c_2_r_i_s_c-_v_2chip__specific__extensions_2_pulpino___vega___r_v32_m1_r_m_2freertos__risc_42330ed41578e3246f3d21d6cb759dc2_a699b7084df75437444a9e8885fa2c693}{sp}},\ \#\ \_stack\ \textcolor{comment}{/*\ Set\ stack\ pointer\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00079}00079\ \ \ \ .endm}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00082}00082\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00083}00083\ \textcolor{comment}{\ *\ portRESTORE\_CONTEXT\ MACRO}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00084}00084\ \textcolor{comment}{\ *\ Restores\ the\ task\ Stack\ Pointer\ then\ use\ this\ to\ restore\ usCriticalNesting,}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00085}00085\ \textcolor{comment}{\ *\ general\ purpose\ registers\ and\ the\ CS\ and\ ES\ (only\ in\ far\ memory\ mode)}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00086}00086\ \textcolor{comment}{\ *\ of\ the\ selected\ task\ from\ the\ task\ stack}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00087}00087\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00088}00088\ \ \ \ .macro\ \mbox{\hyperlink{_code_warrior_2_cold_fire___v2_2port_8c_a8d3a167375b5b57944a57df23d45b39e}{portRESTORE\_CONTEXT}}\ \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_a5cad46a34d0a2cb6cf8bf513b9487216}{MACRO}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00089}00089\ \textcolor{keywordtype}{SEL}\ RB0}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00090}00090\ \textcolor{comment}{/*\ Restore\ the\ Stack\ pointer.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00091}00091\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a1f39b94dd6e5a8fe66b74470a3e448cc}{MOVW}}\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ac07dd4b65f1d21f9225978c9cfd67772}{AX}},\ !\mbox{\hyperlink{_rowley_2_m_s_p430_f449_2portasm_8h_a2e7047e7ca4988756191e5189dbf3b19}{\_pxCurrentTCB}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00092}00092\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a1f39b94dd6e5a8fe66b74470a3e448cc}{MOVW}}\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a30c2eb330b4fbf8161ba6379d629e7a5}{HL}},\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ac07dd4b65f1d21f9225978c9cfd67772}{AX}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00093}00093\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a1f39b94dd6e5a8fe66b74470a3e448cc}{MOVW}}\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ac07dd4b65f1d21f9225978c9cfd67772}{AX}},\ [\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a30c2eb330b4fbf8161ba6379d629e7a5}{HL}}\ ]}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00094}\mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a85224ff891d5fa22f8aa26c3eaca34f1}{00094}}\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a1f39b94dd6e5a8fe66b74470a3e448cc}{MOVW}}\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a85224ff891d5fa22f8aa26c3eaca34f1}{SP}},\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ac07dd4b65f1d21f9225978c9cfd67772}{AX}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00095}00095\ \textcolor{comment}{/*\ Restore\ usCriticalNesting\ value.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00096}00096\ POP\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ac07dd4b65f1d21f9225978c9cfd67772}{AX}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00097}\mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a984428455f93bc7098d7bc14d5d1c941}{00097}}\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a1f39b94dd6e5a8fe66b74470a3e448cc}{MOVW}}\ \ \ \ !\mbox{\hyperlink{_rowley_2_m_s_p430_f449_2portasm_8h_ad1c111deb40b0ac1fe527337124e2910}{\_usCriticalNesting}},\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ac07dd4b65f1d21f9225978c9cfd67772}{AX}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00099}00099\ \textcolor{comment}{/*\ Restore\ the\ alternative\ register\ banks\ -\/\ only\ necessary\ in\ the\ GCC}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00100}00100\ \textcolor{comment}{\ *\ port.\ \ Register\ bank\ 3\ is\ dedicated\ for\ interrupts\ use\ so\ is\ not\ saved\ or}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00101}00101\ \textcolor{comment}{\ *\ restored.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00102}00102\ \textcolor{keywordtype}{SEL}\ RB2}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00103}00103\ POP\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a30c2eb330b4fbf8161ba6379d629e7a5}{HL}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00104}00104\ POP\ \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_ada21f928de52d04774d34370a6721d6e}{DE}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00105}00105\ POP\ \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_a47e51e20d00428621fddaf2b63b109fa}{BC}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00106}00106\ POP\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ac07dd4b65f1d21f9225978c9cfd67772}{AX}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00107}00107\ \textcolor{keywordtype}{SEL}\ RB1}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00108}00108\ POP\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a30c2eb330b4fbf8161ba6379d629e7a5}{HL}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00109}00109\ POP\ \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_ada21f928de52d04774d34370a6721d6e}{DE}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00110}00110\ POP\ \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_a47e51e20d00428621fddaf2b63b109fa}{BC}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00111}00111\ POP\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ac07dd4b65f1d21f9225978c9cfd67772}{AX}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00112}00112\ \textcolor{keywordtype}{SEL}\ RB0}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00113}00113\ \textcolor{comment}{/*\ Restore\ the\ necessary\ general\ purpose\ registers.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00114}00114\ POP\ \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_a47e51e20d00428621fddaf2b63b109fa}{BC}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00115}00115\ POP\ \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_ada21f928de52d04774d34370a6721d6e}{DE}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00116}00116\ \textcolor{comment}{/*\ Restore\ the\ ES\ register.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00117}00117\ POP\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ac07dd4b65f1d21f9225978c9cfd67772}{AX}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00118}\mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a7bdba1afa6d8c5f506cdda4a6236a923}{00118}}\ MOV\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a7bdba1afa6d8c5f506cdda4a6236a923}{ES}},\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ae2572b8ee3e438f22571e0214222bd1b}{A}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00119}00119\ \textcolor{comment}{/*\ Restore\ the\ CS\ register.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00120}00120\ XCH\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ae2572b8ee3e438f22571e0214222bd1b}{A}},\ \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_a836d136c5cf9b95192920ca0affa917e}{X}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00121}\mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a80a70aea205e0e10f3ea6e7f6e9a94d2}{00121}}\ MOV\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a80a70aea205e0e10f3ea6e7f6e9a94d2}{CS}},\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ae2572b8ee3e438f22571e0214222bd1b}{A}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00122}00122\ \textcolor{comment}{/*\ Restore\ general\ purpose\ register\ HL.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00123}00123\ POP\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a30c2eb330b4fbf8161ba6379d629e7a5}{HL}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00124}00124\ \textcolor{comment}{/*\ Restore\ AX.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00125}00125\ POP\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ac07dd4b65f1d21f9225978c9cfd67772}{AX}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_r_l78_2_i_s_r___support_8h_source_l00127}00127\ \ \ \ .endm}
+
+\end{DoxyCode}

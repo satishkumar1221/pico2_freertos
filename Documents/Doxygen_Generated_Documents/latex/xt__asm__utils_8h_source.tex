@@ -1,0 +1,81 @@
+\doxysection{xt\+\_\+asm\+\_\+utils.\+h}
+\hypertarget{xt__asm__utils_8h_source}{}\label{xt__asm__utils_8h_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/Xtensa\_ESP32/include/xt\_asm\_utils.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/Xtensa\_ESP32/include/xt\_asm\_utils.h}}
+\mbox{\hyperlink{xt__asm__utils_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00002}00002\ \textcolor{comment}{\ *\ SPDX-\/FileCopyrightText:\ 2017,\ Intel\ Corporation}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00003}00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00004}00004\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00005}00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00006}00006\ \textcolor{comment}{\ *\ SPDX-\/FileContributor:\ 2016-\/2022\ Espressif\ Systems\ (Shanghai)\ CO\ LTD}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00007}00007\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00009}00009\ \textcolor{comment}{/*\ File\ adapted\ to\ use\ on\ IDF\ FreeRTOS\ component,\ extracted}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00010}00010\ \textcolor{comment}{\ *\ originally\ from\ zephyr\ RTOS\ code\ base:}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00011}00011\ \textcolor{comment}{\ *\ https://github.com/zephyrproject-\/rtos/zephyr/blob/dafd3485bf67880e667b6e9a758b0b64fb688d63/arch/xtensa/include/xtensa-\/asm2-\/s.h}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00012}00012\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00014}00014\ \textcolor{preprocessor}{\#ifndef\ \_\_XT\_ASM\_UTILS\_H}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00015}00015\ \textcolor{preprocessor}{\#define\ \_\_XT\_ASM\_UTILS\_H}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00017}00017\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00018}00018\ \textcolor{comment}{\ *\ SPILL\_ALL\_WINDOWS}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00019}00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00020}00020\ \textcolor{comment}{\ *\ Spills\ all\ windowed\ registers\ (i.e.\ registers\ not\ visible\ as}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00021}00021\ \textcolor{comment}{\ *\ A0-\/A15)\ to\ their\ ABI-\/defined\ spill\ regions\ on\ the\ stack.}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00022}00022\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00023}00023\ \textcolor{comment}{\ *\ Unlike\ the\ Xtensa\ HAL\ implementation,\ this\ code\ requires\ that\ the}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00024}00024\ \textcolor{comment}{\ *\ EXCM\ and\ WOE\ bit\ be\ enabled\ in\ PS,\ and\ relies\ on\ repeated\ hardware}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00025}00025\ \textcolor{comment}{\ *\ exception\ handling\ to\ do\ the\ register\ spills.\ \ The\ trick\ is\ to\ do\ a}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00026}00026\ \textcolor{comment}{\ *\ noop\ write\ to\ the\ high\ registers,\ which\ the\ hardware\ will\ trap}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00027}00027\ \textcolor{comment}{\ *\ (into\ an\ overflow\ exception)\ in\ the\ case\ where\ those\ registers\ are}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00028}00028\ \textcolor{comment}{\ *\ already\ used\ by\ an\ existing\ call\ frame.\ \ Then\ it\ rotates\ the\ window}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00029}00029\ \textcolor{comment}{\ *\ and\ repeats\ until\ all\ but\ the\ A0-\/A3\ registers\ of\ the\ original\ frame}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00030}00030\ \textcolor{comment}{\ *\ are\ guaranteed\ to\ be\ spilled,\ eventually\ rotating\ back\ around\ into}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00031}00031\ \textcolor{comment}{\ *\ the\ original\ frame.\ \ Advantages:}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00032}00032\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00033}00033\ \textcolor{comment}{\ *\ -\/\ Vastly\ smaller\ code\ size}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00034}00034\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00035}00035\ \textcolor{comment}{\ *\ -\/\ More\ easily\ maintained\ if\ changes\ are\ needed\ to\ window\ over/underflow}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00036}00036\ \textcolor{comment}{\ *\ \ \ exception\ handling.}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00037}00037\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00038}00038\ \textcolor{comment}{\ *\ -\/\ Requires\ no\ scratch\ registers\ to\ do\ its\ work,\ so\ can\ be\ used\ safely\ in\ any}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00039}00039\ \textcolor{comment}{\ *\ \ \ context.}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00040}00040\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00041}00041\ \textcolor{comment}{\ *\ -\/\ If\ the\ WOE\ bit\ is\ not\ enabled\ (for\ example,\ in\ code\ written\ for}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00042}00042\ \textcolor{comment}{\ *\ \ \ the\ CALL0\ ABI),\ this\ becomes\ a\ silent\ noop\ and\ operates\ compatbily.}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00043}00043\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00044}00044\ \textcolor{comment}{\ *\ -\/\ Hilariously\ it's\ ACTUALLY\ FASTER\ than\ the\ HAL\ routine.\ \ And\ not}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00045}00045\ \textcolor{comment}{\ *\ \ \ just\ a\ little\ bit,\ it's\ MUCH\ faster.\ \ With\ a\ mostly\ full\ register}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00046}00046\ \textcolor{comment}{\ *\ \ \ file\ on\ an\ LX6\ core\ (ESP-\/32)\ I'm\ measuring\ 145\ cycles\ to\ spill}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00047}00047\ \textcolor{comment}{\ *\ \ \ registers\ with\ this\ vs.\ 279\ (!)\ to\ do\ it\ with}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00048}00048\ \textcolor{comment}{\ *\ \ \ xthal\_spill\_windows().}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00049}00049\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00051}00051\ .macro\ SPILL\_ALL\_WINDOWS}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00052}00052\ \textcolor{preprocessor}{\#if\ XCHAL\_NUM\_AREGS\ ==\ 64}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00053}00053\ \ \ \ \ and\ a12,\ a12,\ a12}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00054}00054\ \ \ \ \ rotw\ 3}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00055}00055\ \ \ \ \ and\ a12,\ a12,\ a12}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00056}00056\ \ \ \ \ rotw\ 3}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00057}00057\ \ \ \ \ and\ a12,\ a12,\ a12}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00058}00058\ \ \ \ \ rotw\ 3}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00059}00059\ \ \ \ \ and\ a12,\ a12,\ a12}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00060}00060\ \ \ \ \ rotw\ 3}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00061}00061\ \ \ \ \ and\ a12,\ a12,\ a12}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00062}00062\ \ \ \ \ rotw\ 4}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00063}00063\ \textcolor{preprocessor}{\#elif\ XCHAL\_NUM\_AREGS\ ==\ 32}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00064}00064\ \ \ \ \ and\ a12,\ a12,\ a12}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00065}00065\ \ \ \ \ rotw\ 3}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00066}00066\ \ \ \ \ and\ a12,\ a12,\ a12}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00067}00067\ \ \ \ \ rotw\ 3}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00068}00068\ \ \ \ \ and\ a4,\ a4,\ a4}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00069}00069\ \ \ \ \ rotw\ 2}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00070}00070\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{/*\ if\ XCHAL\_NUM\_AREGS\ ==\ 64\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00071}00071\ \textcolor{preprocessor}{\ \ \ \ \#error\ Unrecognized\ XCHAL\_NUM\_AREGS}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00072}00072\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ if\ XCHAL\_NUM\_AREGS\ ==\ 64\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00073}00073\ \ \ \ .endm}
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{xt__asm__utils_8h_source_l00075}00075\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ ifndef\ \_\_XT\_ASM\_UTILS\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

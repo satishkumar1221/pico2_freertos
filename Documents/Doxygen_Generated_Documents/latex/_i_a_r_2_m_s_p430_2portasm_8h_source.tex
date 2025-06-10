@@ -1,0 +1,90 @@
+\doxysection{portasm.\+h}
+\hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source}{}\label{_i_a_r_2_m_s_p430_2portasm_8h_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/IAR/MSP430/portasm.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/IAR/MSP430/portasm.h}}
+\mbox{\hyperlink{_i_a_r_2_m_s_p430_2portasm_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00029}00029\ \textcolor{preprocessor}{\#ifndef\ PORTASM\_H}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00030}00030\ \textcolor{preprocessor}{\#define\ PORTASM\_H}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00032}00032\ \mbox{\hyperlink{_code_warrior_2_cold_fire___v2_2port_8c_a798f37b250502b49763c54a56b3aa4b0}{portSAVE\_CONTEXT}}\ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a65c8432cac2434a5fc857e7562a4715e}{macro}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00034}00034\ \ \ \ \ IMPORT\ \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00035}00035\ \ \ \ \ IMPORT\ \mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2port_8c_a7738f5a9321a7eccc2da96119924d68d}{usCriticalNesting}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00037}00037\ \ \ \ \ \textcolor{comment}{/*\ Save\ the\ remaining\ registers.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00038}00038\ \ \ \ \ push\ \ \ r4}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00039}00039\ \ \ \ \ push\ \ \ \mbox{\hyperlink{_i_a_r_2_v850_e_s_2_i_s_r___support_8h_a3fcfa18569b1b284679c20e09e02d9c6}{r5}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00040}00040\ \ \ \ \ push\ \ \ \mbox{\hyperlink{_i_a_r_2_v850_e_s_2_i_s_r___support_8h_a3d6130575c16febdf03fb81108a9db16}{r6}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00041}00041\ \ \ \ \ push\ \ \ \mbox{\hyperlink{_i_a_r_2_v850_e_s_2_i_s_r___support_8h_abbb29ec9eebc44f016eb0daa4bb34505}{r7}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00042}00042\ \ \ \ \ push\ \ \ \mbox{\hyperlink{_i_a_r_2_v850_e_s_2_i_s_r___support_8h_af3a370af3b9655f90e20856a8ba2e82d}{r8}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00043}00043\ \ \ \ \ push\ \ \ \mbox{\hyperlink{_i_a_r_2_v850_e_s_2_i_s_r___support_8h_aaf5a92e28d3809dcdc1cbd2401ddc816}{r9}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00044}00044\ \ \ \ \ push\ \ \ \mbox{\hyperlink{_i_a_r_2_v850_e_s_2_i_s_r___support_8h_ab56bd753f7e564682bba3a779d8cbffb}{r10}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00045}00045\ \ \ \ \ push\ \ \ \mbox{\hyperlink{_i_a_r_2_v850_e_s_2_i_s_r___support_8h_a562e4109f740f0eed42d5e03979d89a9}{r11}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00046}00046\ \ \ \ \ push\ \ \ \mbox{\hyperlink{_i_a_r_2_m_s_p430_2portasm_8h_a913077a41a6d2b1c89b1c2d3dccf82f7}{r12}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00047}00047\ \ \ \ \ push\ \ \ \mbox{\hyperlink{_i_a_r_2_v850_e_s_2_i_s_r___support_8h_a1036da56beef9b5747c2bf55f00f4600}{r13}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00048}00048\ \ \ \ \ push\ \ \ \mbox{\hyperlink{_i_a_r_2_v850_e_s_2_i_s_r___support_8h_a1c32238e2b606fd26a88ecb61998578e}{r14}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00049}00049\ \ \ \ \ push\ \ \ \mbox{\hyperlink{_i_a_r_2_m_s_p430_2portasm_8h_ae019cbc79ad6d9d99799163b98ebafd4}{r15}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00050}\mbox{\hyperlink{_i_a_r_2_m_s_p430_2portasm_8h_a4a98b76072c98df36485e810c18a8583}{00050}}\ \ \ \ \ mov.w\ \ \&\mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2port_8c_a7738f5a9321a7eccc2da96119924d68d}{usCriticalNesting}},\ \mbox{\hyperlink{_i_a_r_2_v850_e_s_2_i_s_r___support_8h_a1c32238e2b606fd26a88ecb61998578e}{r14}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00051}00051\ \ \ \ \ push\ \ \ \mbox{\hyperlink{_i_a_r_2_v850_e_s_2_i_s_r___support_8h_a1c32238e2b606fd26a88ecb61998578e}{r14}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00052}\mbox{\hyperlink{_i_a_r_2_m_s_p430_2portasm_8h_a0102232d85bbda42395b8223058fa736}{00052}}\ \ \ \ \ mov.w\ \ \&\mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}},\ \mbox{\hyperlink{_i_a_r_2_m_s_p430_2portasm_8h_a913077a41a6d2b1c89b1c2d3dccf82f7}{r12}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00053}\mbox{\hyperlink{_i_a_r_2_m_s_p430_2portasm_8h_af9f29ff5843da274d4b02c16068ed81c}{00053}}\ \ \ \ \ mov.w\ \ \mbox{\hyperlink{_i_a_r_2_m_s_p430_2portasm_8h_af9f29ff5843da274d4b02c16068ed81c}{r1}},\ 0(\mbox{\hyperlink{_i_a_r_2_m_s_p430_2portasm_8h_a913077a41a6d2b1c89b1c2d3dccf82f7}{r12}})}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00054}00054\ \ \ \ \ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_aaec09ef8da6454489ef6003fd8a9e2a1}{endm}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00055}00055\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00057}00057\ \mbox{\hyperlink{_code_warrior_2_cold_fire___v2_2port_8c_a8d3a167375b5b57944a57df23d45b39e}{portRESTORE\_CONTEXT}}\ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a65c8432cac2434a5fc857e7562a4715e}{macro}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00058}00058\ \ \ \ \ mov.w\ \ \&\mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}},\ \mbox{\hyperlink{_i_a_r_2_m_s_p430_2portasm_8h_a913077a41a6d2b1c89b1c2d3dccf82f7}{r12}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00059}\mbox{\hyperlink{_i_a_r_2_m_s_p430_2portasm_8h_a913077a41a6d2b1c89b1c2d3dccf82f7}{00059}}\ \ \ \ \ mov.w\ \ @\mbox{\hyperlink{_i_a_r_2_m_s_p430_2portasm_8h_a913077a41a6d2b1c89b1c2d3dccf82f7}{r12}},\ \mbox{\hyperlink{_i_a_r_2_m_s_p430_2portasm_8h_af9f29ff5843da274d4b02c16068ed81c}{r1}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00060}00060\ \ \ \ \ pop\ \ \ \ \mbox{\hyperlink{_i_a_r_2_m_s_p430_2portasm_8h_ae019cbc79ad6d9d99799163b98ebafd4}{r15}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00061}\mbox{\hyperlink{_i_a_r_2_m_s_p430_2portasm_8h_ae019cbc79ad6d9d99799163b98ebafd4}{00061}}\ \ \ \ \ mov.w\ \ \mbox{\hyperlink{_i_a_r_2_m_s_p430_2portasm_8h_ae019cbc79ad6d9d99799163b98ebafd4}{r15}},\ \&\mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2port_8c_a7738f5a9321a7eccc2da96119924d68d}{usCriticalNesting}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00062}00062\ \ \ \ \ pop\ \ \ \ \mbox{\hyperlink{_i_a_r_2_m_s_p430_2portasm_8h_ae019cbc79ad6d9d99799163b98ebafd4}{r15}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00063}00063\ \ \ \ \ pop\ \ \ \ \mbox{\hyperlink{_i_a_r_2_v850_e_s_2_i_s_r___support_8h_a1c32238e2b606fd26a88ecb61998578e}{r14}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00064}00064\ \ \ \ \ pop\ \ \ \ \mbox{\hyperlink{_i_a_r_2_v850_e_s_2_i_s_r___support_8h_a1036da56beef9b5747c2bf55f00f4600}{r13}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00065}00065\ \ \ \ \ pop\ \ \ \ \mbox{\hyperlink{_i_a_r_2_m_s_p430_2portasm_8h_a913077a41a6d2b1c89b1c2d3dccf82f7}{r12}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00066}00066\ \ \ \ \ pop\ \ \ \ \mbox{\hyperlink{_i_a_r_2_v850_e_s_2_i_s_r___support_8h_a562e4109f740f0eed42d5e03979d89a9}{r11}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00067}00067\ \ \ \ \ pop\ \ \ \ \mbox{\hyperlink{_i_a_r_2_v850_e_s_2_i_s_r___support_8h_ab56bd753f7e564682bba3a779d8cbffb}{r10}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00068}00068\ \ \ \ \ pop\ \ \ \ \mbox{\hyperlink{_i_a_r_2_v850_e_s_2_i_s_r___support_8h_aaf5a92e28d3809dcdc1cbd2401ddc816}{r9}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00069}00069\ \ \ \ \ pop\ \ \ \ \mbox{\hyperlink{_i_a_r_2_v850_e_s_2_i_s_r___support_8h_af3a370af3b9655f90e20856a8ba2e82d}{r8}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00070}00070\ \ \ \ \ pop\ \ \ \ \mbox{\hyperlink{_i_a_r_2_v850_e_s_2_i_s_r___support_8h_abbb29ec9eebc44f016eb0daa4bb34505}{r7}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00071}00071\ \ \ \ \ pop\ \ \ \ \mbox{\hyperlink{_i_a_r_2_v850_e_s_2_i_s_r___support_8h_a3d6130575c16febdf03fb81108a9db16}{r6}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00072}00072\ \ \ \ \ pop\ \ \ \ \mbox{\hyperlink{_i_a_r_2_v850_e_s_2_i_s_r___support_8h_a3fcfa18569b1b284679c20e09e02d9c6}{r5}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00073}00073\ \ \ \ \ pop\ \ \ \ r4}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00075}00075\ \ \ \ \ \textcolor{comment}{/*\ The\ last\ thing\ on\ the\ stack\ will\ be\ the\ status\ register.}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00076}00076\ \textcolor{comment}{\ \ \ \ \ *\ Ensure\ the\ power\ down\ bits\ are\ clear\ ready\ for\ the\ next}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00077}00077\ \textcolor{comment}{\ \ \ \ \ *\ time\ this\ power\ down\ register\ is\ popped\ from\ the\ stack.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00078}00078\ \ \ \ \ bic.w\ \ \#0xf0,\ 0(\mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a85224ff891d5fa22f8aa26c3eaca34f1}{SP}})}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00080}00080\ \ \ \ \ reti}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00081}00081\ \ \ \ \ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_aaec09ef8da6454489ef6003fd8a9e2a1}{endm}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00082}00082\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_m_s_p430_2portasm_8h_source_l00084}00084\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ ifndef\ PORTASM\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

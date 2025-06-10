@@ -1,0 +1,28 @@
+var _g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c =
+[
+    [ "configCLEAR_TICK_INTERRUPT", "_g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c.html#a3fa0e1f577a34f688d80f58d51d937f2", null ],
+    [ "portAPSR_MODE_BITS_MASK", "_g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c.html#a22f68e4b19d3c26b3cf77a143b8359d6", null ],
+    [ "portCLEAR_INTERRUPT_MASK", "_g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c.html#add90c69e5eb5f04699c6978856695904", null ],
+    [ "portDAIF_I", "_g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c.html#a58229c12b445c89bb297a2704db0be37", null ],
+    [ "portEL3", "_g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c.html#ad377f3a8bf381f88b95b8c4bb0f28449", null ],
+    [ "portINITIAL_PSTATE", "_g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c.html#aa57547732409129ad43ec6f656a083eb", null ],
+    [ "portNO_CRITICAL_NESTING", "_g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c.html#ab7c7cbbda4fb9a253c7e5086071db162", null ],
+    [ "portNO_FLOATING_POINT_CONTEXT", "_g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c.html#a20b80621f4d4ec9522bd510f89641cf3", null ],
+    [ "portSP_EL0", "_g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c.html#a9b28537e49893287c89a094235639d43", null ],
+    [ "portSP_ELx", "_g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c.html#a4a8870707a188204a5f2e344a2cb4f72", null ],
+    [ "portUNMASK_VALUE", "_g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c.html#a5eeb3ad5676c34d091d186ab0d926e35", null ],
+    [ "__attribute__", "_g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c.html#a5833b69735b0e55c3ba043433556540c", null ],
+    [ "FreeRTOS_Tick_Handler", "_g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c.html#a3853f6eea7b62957ada2e0feba299037", null ],
+    [ "uxPortSetInterruptMask", "_g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c.html#a01c8d84ad6ff85fa1710c05fdccb0b57", null ],
+    [ "vPortClearInterruptMask", "_g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c.html#aac0c43c94966fe5ff5a89c1396e2e1fa", null ],
+    [ "vPortEndScheduler", "_g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c.html#af76f3c0b44c5b5c06fc046a4ee1a6423", null ],
+    [ "vPortEnterCritical", "_g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c.html#a2ed3554a3de09a3bd09d396ee081ab69", null ],
+    [ "vPortExitCritical", "_g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c.html#aed20ada05b957181a0de042802a82a5b", null ],
+    [ "vPortRestoreTaskContext", "_g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c.html#a222aec9e4494ebf3fdbda864b5cb3a4b", null ],
+    [ "vPortTaskUsesFPU", "_g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c.html#a4c83c3bee8f08f0a7247571845b56d65", null ],
+    [ "xPortStartScheduler", "_g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c.html#ade5a8c6666e7413a0355cc252029c5c6", null ],
+    [ "ullCriticalNesting", "_g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c.html#a6926f2a7838addbba85833667d4d10d3", null ],
+    [ "ullPortInterruptNesting", "_g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c.html#a2dac83a0657a10812594a4f3d4fdcea0", null ],
+    [ "ullPortTaskHasFPUContext", "_g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c.html#a2a56e57eb5c52a3002ae65a9e0a4c038", null ],
+    [ "ullPortYieldRequired", "_g_c_c_2_a_r_m___a_a_r_c_h64___s_r_e_2port_8c.html#ade3230db36947eec41dc48cf55f827e8", null ]
+];

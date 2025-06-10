@@ -1,0 +1,165 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+Third\+Party/\+XCC/\+Xtensa/xtensa\+\_\+rtos.h File Reference}
+\hypertarget{_x_c_c_2_xtensa_2xtensa__rtos_8h}{}\label{_x_c_c_2_xtensa_2xtensa__rtos_8h}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/XCC/Xtensa/xtensa\_rtos.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/XCC/Xtensa/xtensa\_rtos.h}}
+{\ttfamily \#include $<$xtensa/config/core.\+h$>$}\newline
+{\ttfamily \#include $<$xtensa/corebits.\+h$>$}\newline
+{\ttfamily \#include $<$xtensa/config/system.\+h$>$}\newline
+{\ttfamily \#include $<$xtensa/simcall.\+h$>$}\newline
+{\ttfamily \#include $<$Free\+RTOSConfig.\+h$>$}\newline
+{\ttfamily \#include "{}xtensa\+\_\+context.\+h"{}}\newline
+{\ttfamily \#include "{}xtensa\+\_\+timer.\+h"{}}\newline
+Include dependency graph for xtensa\+\_\+rtos.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_a03165e4baffc94d6008d8674d63c1e94}{XT\+\_\+\+RTOS\+\_\+\+NAME}}~Free\+RTOS
+\item 
+\#define \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_a8fd87500e60256cdfd2adcf40f0fa14d}{XT\+\_\+\+RTOS\+\_\+\+INT\+\_\+\+ENTER}}~\+\_\+frxt\+\_\+int\+\_\+enter
+\item 
+\#define \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_a507af08b734df3bc9e8568199971a7ca}{XT\+\_\+\+RTOS\+\_\+\+INT\+\_\+\+EXIT}}~\+\_\+frxt\+\_\+int\+\_\+exit
+\item 
+\#define \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_a3dc1eaba65ace130de5d56122c278f74}{XT\+\_\+\+RTOS\+\_\+\+TIMER\+\_\+\+INT}}~\+\_\+frxt\+\_\+timer\+\_\+int
+\item 
+\#define \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_a1befd3074ee02406895785750b2baf43}{XT\+\_\+\+TICK\+\_\+\+PER\+\_\+\+SEC}}~\mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_a2f0258dd1e3b877e5bc013be54c2db6a}{config\+TICK\+\_\+\+RATE\+\_\+\+HZ}}
+\item 
+\#define \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_ac1470214e1959a5bf3887ba11b4c0ab0}{XT\+\_\+\+RTOS\+\_\+\+CP\+\_\+\+STATE}}~\+\_\+frxt\+\_\+task\+\_\+coproc\+\_\+state
+\item 
+\#define \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_ad9e8360dd7fd5f45edd880ac844bffdd}{XT\+\_\+\+INTEXC\+\_\+\+HOOK\+\_\+\+NUM}}~(1 + XCHAL\+\_\+\+NUM\+\_\+\+INTLEVELS + XCHAL\+\_\+\+HAVE\+\_\+\+NMI)
+\item 
+\#define \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_adfabe3b3fd3f402dfe76d21f2ef9b9cc}{XTENSA\+\_\+\+PORT\+\_\+\+VERSION}}~1.\+7
+\item 
+\#define \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_a44433d7a2a3beae81d7aaf88d13bf2d1}{XTENSA\+\_\+\+PORT\+\_\+\+VERSION\+\_\+\+STRING}}~"{}1.\+7"{}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef unsigned(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_a660e2df37c1cad0b2118e8df89ef453f}{XT\+\_\+\+INTEXC\+\_\+\+HOOK}}) (unsigned cause)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+volatile \mbox{\hyperlink{_g_c_c_2_xtensa___e_s_p32_2include_2xtensa__rtos_8h_a660e2df37c1cad0b2118e8df89ef453f}{XT\+\_\+\+INTEXC\+\_\+\+HOOK}} \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_afd82bc892fb9a2c9932353e8fb72feba}{\+\_\+xt\+\_\+intexc\+\_\+hooks}} \mbox{[}\mbox{\hyperlink{_g_c_c_2_xtensa___e_s_p32_2include_2xtensa__rtos_8h_ad9e8360dd7fd5f45edd880ac844bffdd}{XT\+\_\+\+INTEXC\+\_\+\+HOOK\+\_\+\+NUM}}\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_x_c_c_2_xtensa_2xtensa__rtos_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_x_c_c_2_xtensa_2xtensa__rtos_8h_ad9e8360dd7fd5f45edd880ac844bffdd}\index{xtensa\_rtos.h@{xtensa\_rtos.h}!XT\_INTEXC\_HOOK\_NUM@{XT\_INTEXC\_HOOK\_NUM}}
+\index{XT\_INTEXC\_HOOK\_NUM@{XT\_INTEXC\_HOOK\_NUM}!xtensa\_rtos.h@{xtensa\_rtos.h}}
+\doxysubsubsection{\texorpdfstring{XT\_INTEXC\_HOOK\_NUM}{XT\_INTEXC\_HOOK\_NUM}}
+{\footnotesize\ttfamily \label{_x_c_c_2_xtensa_2xtensa__rtos_8h_ad9e8360dd7fd5f45edd880ac844bffdd} 
+\#define XT\+\_\+\+INTEXC\+\_\+\+HOOK\+\_\+\+NUM~(1 + XCHAL\+\_\+\+NUM\+\_\+\+INTLEVELS + XCHAL\+\_\+\+HAVE\+\_\+\+NMI)}
+
+
+
+Definition at line \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_source_l00205}{205}} of file \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_source}{xtensa\+\_\+rtos.\+h}}.
+
+\Hypertarget{_x_c_c_2_xtensa_2xtensa__rtos_8h_ac1470214e1959a5bf3887ba11b4c0ab0}\index{xtensa\_rtos.h@{xtensa\_rtos.h}!XT\_RTOS\_CP\_STATE@{XT\_RTOS\_CP\_STATE}}
+\index{XT\_RTOS\_CP\_STATE@{XT\_RTOS\_CP\_STATE}!xtensa\_rtos.h@{xtensa\_rtos.h}}
+\doxysubsubsection{\texorpdfstring{XT\_RTOS\_CP\_STATE}{XT\_RTOS\_CP\_STATE}}
+{\footnotesize\ttfamily \label{_x_c_c_2_xtensa_2xtensa__rtos_8h_ac1470214e1959a5bf3887ba11b4c0ab0} 
+\#define XT\+\_\+\+RTOS\+\_\+\+CP\+\_\+\+STATE~\+\_\+frxt\+\_\+task\+\_\+coproc\+\_\+state}
+
+
+
+Definition at line \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_source_l00168}{168}} of file \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_source}{xtensa\+\_\+rtos.\+h}}.
+
+\Hypertarget{_x_c_c_2_xtensa_2xtensa__rtos_8h_a8fd87500e60256cdfd2adcf40f0fa14d}\index{xtensa\_rtos.h@{xtensa\_rtos.h}!XT\_RTOS\_INT\_ENTER@{XT\_RTOS\_INT\_ENTER}}
+\index{XT\_RTOS\_INT\_ENTER@{XT\_RTOS\_INT\_ENTER}!xtensa\_rtos.h@{xtensa\_rtos.h}}
+\doxysubsubsection{\texorpdfstring{XT\_RTOS\_INT\_ENTER}{XT\_RTOS\_INT\_ENTER}}
+{\footnotesize\ttfamily \label{_x_c_c_2_xtensa_2xtensa__rtos_8h_a8fd87500e60256cdfd2adcf40f0fa14d} 
+\#define XT\+\_\+\+RTOS\+\_\+\+INT\+\_\+\+ENTER~\+\_\+frxt\+\_\+int\+\_\+enter}
+
+
+
+Definition at line \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_source_l00133}{133}} of file \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_source}{xtensa\+\_\+rtos.\+h}}.
+
+\Hypertarget{_x_c_c_2_xtensa_2xtensa__rtos_8h_a507af08b734df3bc9e8568199971a7ca}\index{xtensa\_rtos.h@{xtensa\_rtos.h}!XT\_RTOS\_INT\_EXIT@{XT\_RTOS\_INT\_EXIT}}
+\index{XT\_RTOS\_INT\_EXIT@{XT\_RTOS\_INT\_EXIT}!xtensa\_rtos.h@{xtensa\_rtos.h}}
+\doxysubsubsection{\texorpdfstring{XT\_RTOS\_INT\_EXIT}{XT\_RTOS\_INT\_EXIT}}
+{\footnotesize\ttfamily \label{_x_c_c_2_xtensa_2xtensa__rtos_8h_a507af08b734df3bc9e8568199971a7ca} 
+\#define XT\+\_\+\+RTOS\+\_\+\+INT\+\_\+\+EXIT~\+\_\+frxt\+\_\+int\+\_\+exit}
+
+
+
+Definition at line \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_source_l00146}{146}} of file \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_source}{xtensa\+\_\+rtos.\+h}}.
+
+\Hypertarget{_x_c_c_2_xtensa_2xtensa__rtos_8h_a03165e4baffc94d6008d8674d63c1e94}\index{xtensa\_rtos.h@{xtensa\_rtos.h}!XT\_RTOS\_NAME@{XT\_RTOS\_NAME}}
+\index{XT\_RTOS\_NAME@{XT\_RTOS\_NAME}!xtensa\_rtos.h@{xtensa\_rtos.h}}
+\doxysubsubsection{\texorpdfstring{XT\_RTOS\_NAME}{XT\_RTOS\_NAME}}
+{\footnotesize\ttfamily \label{_x_c_c_2_xtensa_2xtensa__rtos_8h_a03165e4baffc94d6008d8674d63c1e94} 
+\#define XT\+\_\+\+RTOS\+\_\+\+NAME~Free\+RTOS}
+
+
+
+Definition at line \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_source_l00103}{103}} of file \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_source}{xtensa\+\_\+rtos.\+h}}.
+
+\Hypertarget{_x_c_c_2_xtensa_2xtensa__rtos_8h_a3dc1eaba65ace130de5d56122c278f74}\index{xtensa\_rtos.h@{xtensa\_rtos.h}!XT\_RTOS\_TIMER\_INT@{XT\_RTOS\_TIMER\_INT}}
+\index{XT\_RTOS\_TIMER\_INT@{XT\_RTOS\_TIMER\_INT}!xtensa\_rtos.h@{xtensa\_rtos.h}}
+\doxysubsubsection{\texorpdfstring{XT\_RTOS\_TIMER\_INT}{XT\_RTOS\_TIMER\_INT}}
+{\footnotesize\ttfamily \label{_x_c_c_2_xtensa_2xtensa__rtos_8h_a3dc1eaba65ace130de5d56122c278f74} 
+\#define XT\+\_\+\+RTOS\+\_\+\+TIMER\+\_\+\+INT~\+\_\+frxt\+\_\+timer\+\_\+int}
+
+
+
+Definition at line \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_source_l00155}{155}} of file \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_source}{xtensa\+\_\+rtos.\+h}}.
+
+\Hypertarget{_x_c_c_2_xtensa_2xtensa__rtos_8h_a1befd3074ee02406895785750b2baf43}\index{xtensa\_rtos.h@{xtensa\_rtos.h}!XT\_TICK\_PER\_SEC@{XT\_TICK\_PER\_SEC}}
+\index{XT\_TICK\_PER\_SEC@{XT\_TICK\_PER\_SEC}!xtensa\_rtos.h@{xtensa\_rtos.h}}
+\doxysubsubsection{\texorpdfstring{XT\_TICK\_PER\_SEC}{XT\_TICK\_PER\_SEC}}
+{\footnotesize\ttfamily \label{_x_c_c_2_xtensa_2xtensa__rtos_8h_a1befd3074ee02406895785750b2baf43} 
+\#define XT\+\_\+\+TICK\+\_\+\+PER\+\_\+\+SEC~\mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_a2f0258dd1e3b877e5bc013be54c2db6a}{config\+TICK\+\_\+\+RATE\+\_\+\+HZ}}}
+
+
+
+Definition at line \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_source_l00156}{156}} of file \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_source}{xtensa\+\_\+rtos.\+h}}.
+
+\Hypertarget{_x_c_c_2_xtensa_2xtensa__rtos_8h_adfabe3b3fd3f402dfe76d21f2ef9b9cc}\index{xtensa\_rtos.h@{xtensa\_rtos.h}!XTENSA\_PORT\_VERSION@{XTENSA\_PORT\_VERSION}}
+\index{XTENSA\_PORT\_VERSION@{XTENSA\_PORT\_VERSION}!xtensa\_rtos.h@{xtensa\_rtos.h}}
+\doxysubsubsection{\texorpdfstring{XTENSA\_PORT\_VERSION}{XTENSA\_PORT\_VERSION}}
+{\footnotesize\ttfamily \label{_x_c_c_2_xtensa_2xtensa__rtos_8h_adfabe3b3fd3f402dfe76d21f2ef9b9cc} 
+\#define XTENSA\+\_\+\+PORT\+\_\+\+VERSION~1.\+7}
+
+
+
+Definition at line \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_source_l00235}{235}} of file \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_source}{xtensa\+\_\+rtos.\+h}}.
+
+\Hypertarget{_x_c_c_2_xtensa_2xtensa__rtos_8h_a44433d7a2a3beae81d7aaf88d13bf2d1}\index{xtensa\_rtos.h@{xtensa\_rtos.h}!XTENSA\_PORT\_VERSION\_STRING@{XTENSA\_PORT\_VERSION\_STRING}}
+\index{XTENSA\_PORT\_VERSION\_STRING@{XTENSA\_PORT\_VERSION\_STRING}!xtensa\_rtos.h@{xtensa\_rtos.h}}
+\doxysubsubsection{\texorpdfstring{XTENSA\_PORT\_VERSION\_STRING}{XTENSA\_PORT\_VERSION\_STRING}}
+{\footnotesize\ttfamily \label{_x_c_c_2_xtensa_2xtensa__rtos_8h_a44433d7a2a3beae81d7aaf88d13bf2d1} 
+\#define XTENSA\+\_\+\+PORT\+\_\+\+VERSION\+\_\+\+STRING~"{}1.\+7"{}}
+
+
+
+Definition at line \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_source_l00236}{236}} of file \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_source}{xtensa\+\_\+rtos.\+h}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{_x_c_c_2_xtensa_2xtensa__rtos_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{_x_c_c_2_xtensa_2xtensa__rtos_8h_a660e2df37c1cad0b2118e8df89ef453f}\index{xtensa\_rtos.h@{xtensa\_rtos.h}!XT\_INTEXC\_HOOK@{XT\_INTEXC\_HOOK}}
+\index{XT\_INTEXC\_HOOK@{XT\_INTEXC\_HOOK}!xtensa\_rtos.h@{xtensa\_rtos.h}}
+\doxysubsubsection{\texorpdfstring{XT\_INTEXC\_HOOK}{XT\_INTEXC\_HOOK}}
+{\footnotesize\ttfamily \label{_x_c_c_2_xtensa_2xtensa__rtos_8h_a660e2df37c1cad0b2118e8df89ef453f} 
+typedef unsigned(\texorpdfstring{$\ast$}{*} XT\+\_\+\+INTEXC\+\_\+\+HOOK) (unsigned cause)}
+
+
+
+Definition at line \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_source_l00208}{208}} of file \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h_source}{xtensa\+\_\+rtos.\+h}}.
+
+
+
+\label{doc-var-members}
+\Hypertarget{_x_c_c_2_xtensa_2xtensa__rtos_8h_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_x_c_c_2_xtensa_2xtensa__rtos_8h_afd82bc892fb9a2c9932353e8fb72feba}\index{xtensa\_rtos.h@{xtensa\_rtos.h}!\_xt\_intexc\_hooks@{\_xt\_intexc\_hooks}}
+\index{\_xt\_intexc\_hooks@{\_xt\_intexc\_hooks}!xtensa\_rtos.h@{xtensa\_rtos.h}}
+\doxysubsubsection{\texorpdfstring{\_xt\_intexc\_hooks}{\_xt\_intexc\_hooks}}
+{\footnotesize\ttfamily \label{_x_c_c_2_xtensa_2xtensa__rtos_8h_afd82bc892fb9a2c9932353e8fb72feba} 
+volatile \mbox{\hyperlink{_g_c_c_2_xtensa___e_s_p32_2include_2xtensa__rtos_8h_a660e2df37c1cad0b2118e8df89ef453f}{XT\+\_\+\+INTEXC\+\_\+\+HOOK}} \+\_\+xt\+\_\+intexc\+\_\+hooks\mbox{[}\mbox{\hyperlink{_g_c_c_2_xtensa___e_s_p32_2include_2xtensa__rtos_8h_ad9e8360dd7fd5f45edd880ac844bffdd}{XT\+\_\+\+INTEXC\+\_\+\+HOOK\+\_\+\+NUM}}\mbox{]}\hspace{0.3cm}{\ttfamily [extern]}}
+

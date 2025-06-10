@@ -1,0 +1,553 @@
+\doxysection{port.\+c}
+\hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source}{}\label{_g_c_c_2_tri_core__1782_2port_8c_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/TriCore\_1782/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/TriCore\_1782/port.c}}
+\mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00029}00029\ \textcolor{comment}{/*\ Standard\ includes.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00030}00030\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00031}00031\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00033}00033\ \textcolor{comment}{/*\ TriCore\ specific\ includes.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00034}00034\ \textcolor{preprocessor}{\#include\ <tc1782.h>}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00035}00035\ \textcolor{preprocessor}{\#include\ <machine/intrinsics.h>}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00036}00036\ \textcolor{preprocessor}{\#include\ <machine/cint.h>}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00037}00037\ \textcolor{preprocessor}{\#include\ <machine/wdtcon.h>}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00039}00039\ \textcolor{comment}{/*\ Kernel\ includes.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00040}00040\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_free_r_t_o_s_8h}{FreeRTOS.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00041}00041\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{task_8h}{task.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00042}00042\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{list_8h}{list.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00044}00044\ \textcolor{preprocessor}{\#if\ configCHECK\_FOR\_STACK\_OVERFLOW\ >\ 0}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00045}00045\ \textcolor{preprocessor}{\ \ \ \ \#error\ "{}Stack\ checking\ cannot\ be\ used\ with\ this\ port,\ as,\ unlike\ most\ ports,\ the\ pxTopOfStack\ member\ of\ the\ TCB\ is\ consumed\ CSA.\ \ CSA\ starvation,\ loosely\ equivalent\ to\ stack\ overflow,\ will\ result\ in\ a\ trap\ exception."{}}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00046}00046\ \ \ \ \ \textcolor{comment}{/*\ The\ stack\ pointer\ is\ accessible\ using\ portCSA\_TO\_ADDRESS(\ portCSA\_TO\_ADDRESS(\ pxCurrentTCB-\/>pxTopOfStack\ )[\ 0\ ]\ )[\ 2\ ];\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00047}00047\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ configCHECK\_FOR\_STACK\_OVERFLOW\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00050}00050\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00052}00052\ \textcolor{comment}{/*\ System\ register\ Definitions.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00053}\mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_a53c7e0018d578cc75a6de242b255efe7}{00053}}\ \textcolor{preprocessor}{\#define\ portSYSTEM\_PROGRAM\_STATUS\_WORD\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x000008FFUL\ )\ }\textcolor{comment}{/*\ Supervisor\ Mode,\ MPU\ Register\ Set\ 0\ and\ Call\ Depth\ Counting\ disabled.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00054}\mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_aebaaca5ba9d52f6f5bf4710cf2e85cd5}{00054}}\ \textcolor{preprocessor}{\#define\ portINITIAL\_PRIVILEGED\_PROGRAM\_STATUS\_WORD\ \ \ \ \ \ (\ 0x000014FFUL\ )\ }\textcolor{comment}{/*\ IO\ Level\ 1,\ MPU\ Register\ Set\ 1\ and\ Call\ Depth\ Counting\ disabled.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00055}\mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_a03c1ebce1ade45e402edb73ceb8379aa}{00055}}\ \textcolor{preprocessor}{\#define\ portINITIAL\_UNPRIVILEGED\_PROGRAM\_STATUS\_WORD\ \ \ \ (\ 0x000010FFUL\ )\ }\textcolor{comment}{/*\ IO\ Level\ 0,\ MPU\ Register\ Set\ 1\ and\ Call\ Depth\ Counting\ disabled.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00056}\mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_a04fc64e05f3949f4ff4b5c276c036407}{00056}}\ \textcolor{preprocessor}{\#define\ portINITIAL\_PCXI\_UPPER\_CONTEXT\_WORD\ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x00C00000UL\ )\ }\textcolor{comment}{/*\ The\ lower\ 20\ bits\ identify\ the\ CSA\ address.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00057}\mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_ad00855b9a1ed5b492cea473aa43574af}{00057}}\ \textcolor{preprocessor}{\#define\ portINITIAL\_SYSCON\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x00000000UL\ )\ }\textcolor{comment}{/*\ MPU\ Disable.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00059}00059\ \textcolor{comment}{/*\ CSA\ manipulation\ macros.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00060}\mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_a24b47f41a4ccf1c96020b4981fec5f98}{00060}}\ \textcolor{preprocessor}{\#define\ portCSA\_FCX\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x000FFFFFUL\ )}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00062}00062\ \textcolor{comment}{/*\ OS\ Interrupt\ and\ Trap\ mechanisms.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00063}\mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_a8b8c4b80063cf1c2f6da57b93b66d595}{00063}}\ \textcolor{preprocessor}{\#define\ portRESTORE\_PSW\_MASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ \string~(\ 0x000000FFUL\ )\ )}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00064}\mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_af46f8ef7814652af16a16ef746a6fe56}{00064}}\ \textcolor{preprocessor}{\#define\ portSYSCALL\_TRAP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ 6\ )}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00066}00066\ \textcolor{comment}{/*\ Each\ CSA\ contains\ 16\ words\ of\ data.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00067}\mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_ad3bc25f78b2c1da77824c18234353c71}{00067}}\ \textcolor{preprocessor}{\#define\ portNUM\_WORDS\_IN\_CSA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ 16\ )}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00069}00069\ \textcolor{comment}{/*\ The\ interrupt\ enable\ bit\ in\ the\ PCP\_SRC\ register.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00070}\mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_a1191455c4b11064d65717fc18324faac}{00070}}\ \textcolor{preprocessor}{\#define\ portENABLE\_CPU\_INTERRUPT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ 1U\ <<\ 12U\ )}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00071}00071\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00073}00073\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00074}00074\ \textcolor{comment}{\ *\ Perform\ any\ hardware\ configuration\ necessary\ to\ generate\ the\ tick\ interrupt.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00075}00075\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00076}00076\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ prvSystemTickHandler(\ \textcolor{keywordtype}{int}\ )\ \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_ab35b2424ac8c0625cfdbbcf916c5e1c3}{\_\_attribute\_\_}}(\ (\ longcall\ )\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00077}00077\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_rowley_2_m_s_p430_f449_2port_8c_a397ed34de04a678dc71217c713763423}{prvSetupTimerInterrupt}}(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00079}00079\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00080}00080\ \textcolor{comment}{\ *\ Trap\ handler\ for\ yields.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00081}00081\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00082}00082\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ prvTrapYield(\ \textcolor{keywordtype}{int}\ iTrapIdentification\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00084}00084\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00085}00085\ \textcolor{comment}{\ *\ Priority\ 1\ interrupt\ handler\ for\ yields\ pended\ from\ an\ interrupt.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00086}00086\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00087}00087\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ prvInterruptYield(\ \textcolor{keywordtype}{int}\ iTrapIdentification\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00089}00089\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00091}00091\ \textcolor{comment}{/*\ This\ reference\ is\ required\ by\ the\ save/restore\ context\ macros.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00092}00092\ \textcolor{keyword}{extern}\ \textcolor{keyword}{volatile}\ uint32\_t\ *\ \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00094}00094\ \textcolor{comment}{/*\ Precalculate\ the\ compare\ match\ value\ at\ compile\ time.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00095}00095\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint32\_t\ ulCompareMatchValue\ =\ (\ configPERIPHERAL\_CLOCK\_HZ\ /\ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_a2f0258dd1e3b877e5bc013be54c2db6a}{configTICK\_RATE\_HZ}}\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00097}00097\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00099}00099\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_aaa2085423d917cf1707f4770de3354e2}{pxPortInitialiseStack}}(\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *\ pxTopOfStack,}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{TaskFunction\_t}}\ pxCode,}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *\ pvParameters\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00102}00102\ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00103}00103\ \ \ \ \ uint32\_t\ *\ pulUpperCSA\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00104}00104\ \ \ \ \ uint32\_t\ *\ pulLowerCSA\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00106}00106\ \ \ \ \ \textcolor{comment}{/*\ 16\ Address\ Registers\ (4\ Address\ registers\ are\ global),\ 16\ Data}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00107}00107\ \textcolor{comment}{\ \ \ \ \ *\ Registers,\ and\ 3\ System\ Registers.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00108}00108\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00109}00109\ \textcolor{comment}{\ \ \ \ \ *\ There\ are\ 3\ registers\ that\ track\ the\ CSAs.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00110}00110\ \textcolor{comment}{\ \ \ \ \ *\ \ FCX\ points\ to\ the\ head\ of\ globally\ free\ set\ of\ CSAs.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00111}00111\ \textcolor{comment}{\ \ \ \ \ *\ \ PCX\ for\ the\ task\ needs\ to\ point\ to\ Lower-\/>Upper-\/>NULL\ arrangement.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00112}00112\ \textcolor{comment}{\ \ \ \ \ *\ \ LCX\ points\ to\ the\ last\ free\ CSA\ so\ that\ corrective\ action\ can\ be\ taken.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00113}00113\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00114}00114\ \textcolor{comment}{\ \ \ \ \ *\ Need\ two\ CSAs\ to\ store\ the\ context\ of\ a\ task.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00115}00115\ \textcolor{comment}{\ \ \ \ \ *\ \ The\ upper\ context\ contains\ D8-\/D15,\ A10-\/A15,\ PSW\ and\ PCXI-\/>NULL.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00116}00116\ \textcolor{comment}{\ \ \ \ \ *\ \ The\ lower\ context\ contains\ D0-\/D7,\ A2-\/A7,\ A11\ and\ PCXI-\/>UpperContext.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00117}00117\ \textcolor{comment}{\ \ \ \ \ *\ \ The\ pxCurrentTCB-\/>pxTopOfStack\ points\ to\ the\ Lower\ Context\ RSLCX\ matching\ the\ initial\ BISR.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00118}00118\ \textcolor{comment}{\ \ \ \ \ *\ \ The\ Lower\ Context\ points\ to\ the\ Upper\ Context\ ready\ for\ the\ return\ from\ the\ interrupt\ handler.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00119}00119\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00120}00120\ \textcolor{comment}{\ \ \ \ \ *\ The\ Real\ stack\ pointer\ for\ the\ task\ is\ stored\ in\ the\ A10\ which\ is\ restored}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00121}00121\ \textcolor{comment}{\ \ \ \ \ *\ with\ the\ upper\ context.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00123}00123\ \ \ \ \ \textcolor{comment}{/*\ Have\ to\ disable\ interrupts\ here\ because\ the\ CSAs\ are\ going\ to\ be}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00124}00124\ \textcolor{comment}{\ \ \ \ \ *\ manipulated.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00125}00125\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a8a09321ad004019f3c8d0f2e4d7224c7}{portENTER\_CRITICAL}}();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00126}00126\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00127}00127\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ DSync\ to\ ensure\ that\ buffering\ is\ not\ a\ problem.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00128}00128\ \ \ \ \ \ \ \ \ \_dsync();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00130}00130\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Consume\ two\ free\ CSAs.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00131}00131\ \ \ \ \ \ \ \ \ pulLowerCSA\ =\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2portmacro_8h_a7bfbb11e7993c09f2c131e50b65edbff}{portCSA\_TO\_ADDRESS}}(\ \_\_MFCR(\ \$FCX\ )\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00133}00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ !=\ pulLowerCSA\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00134}00134\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ The\ Lower\ Links\ to\ the\ Upper.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ pulUpperCSA\ =\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2portmacro_8h_a7bfbb11e7993c09f2c131e50b65edbff}{portCSA\_TO\_ADDRESS}}(\ pulLowerCSA[\ 0\ ]\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00137}00137\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00139}00139\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Check\ that\ we\ have\ successfully\ reserved\ two\ CSAs.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00140}00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ (\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ !=\ pulLowerCSA\ )\ \&\&\ (\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ !=\ pulUpperCSA\ )\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00141}00141\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Remove\ the\ two\ consumed\ CSAs\ from\ the\ free\ CSA\ list.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \_disable();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \_dsync();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \_mtcr(\ \$FCX,\ pulUpperCSA[\ 0\ ]\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \_isync();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \_enable();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00148}00148\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00149}00149\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00150}00150\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Simply\ trigger\ a\ context\ list\ depletion\ trap.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \_svlcx();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00153}00153\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00154}00154\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00155}00155\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a529358e6147881dd881c890ade21c9bd}{portEXIT\_CRITICAL}}();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00157}00157\ \ \ \ \ \textcolor{comment}{/*\ Clear\ the\ upper\ CSA.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00158}00158\ \ \ \ \ memset(\ pulUpperCSA,\ 0,\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_ad3bc25f78b2c1da77824c18234353c71}{portNUM\_WORDS\_IN\_CSA}}\ *\ \textcolor{keyword}{sizeof}(\ uint32\_t\ )\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00160}00160\ \ \ \ \ \textcolor{comment}{/*\ Upper\ Context.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00161}00161\ \ \ \ \ pulUpperCSA[\ 2\ ]\ =\ (\ uint32\_t\ )\ pxTopOfStack;\ \ \ \ \ \ \textcolor{comment}{/*\ A10;\ Stack\ Return\ aka\ Stack\ Pointer\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00162}00162\ \ \ \ \ pulUpperCSA[\ 1\ ]\ =\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_a53c7e0018d578cc75a6de242b255efe7}{portSYSTEM\_PROGRAM\_STATUS\_WORD}};\ \textcolor{comment}{/*\ PSW\ \ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00164}00164\ \ \ \ \ \textcolor{comment}{/*\ Clear\ the\ lower\ CSA.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00165}00165\ \ \ \ \ memset(\ pulLowerCSA,\ 0,\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_ad3bc25f78b2c1da77824c18234353c71}{portNUM\_WORDS\_IN\_CSA}}\ *\ \textcolor{keyword}{sizeof}(\ uint32\_t\ )\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00167}00167\ \ \ \ \ \textcolor{comment}{/*\ Lower\ Context.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00168}00168\ \ \ \ \ pulLowerCSA[\ 8\ ]\ =\ (\ uint32\_t\ )\ pvParameters;\ \textcolor{comment}{/*\ A4;\ \ Address\ Type\ Parameter\ Register\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00169}00169\ \ \ \ \ pulLowerCSA[\ 1\ ]\ =\ (\ uint32\_t\ )\ pxCode;\ \ \ \ \ \ \ \textcolor{comment}{/*\ A11;\ Return\ Address\ aka\ RA\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00171}00171\ \ \ \ \ \textcolor{comment}{/*\ PCXI\ pointing\ to\ the\ Upper\ context.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00172}00172\ \ \ \ \ pulLowerCSA[\ 0\ ]\ =\ (\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_a04fc64e05f3949f4ff4b5c276c036407}{portINITIAL\_PCXI\_UPPER\_CONTEXT\_WORD}}\ |\ (\ uint32\_t\ )\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2portmacro_8h_a625b0cc597364c07a6fa0f13f7c83374}{portADDRESS\_TO\_CSA}}(\ pulUpperCSA\ )\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00173}00173\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00174}00174\ \ \ \ \ \textcolor{comment}{/*\ Save\ the\ link\ to\ the\ CSA\ in\ the\ top\ of\ stack.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00175}00175\ \ \ \ \ pxTopOfStack\ =\ (\ uint32\_t\ *\ )\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2portmacro_8h_a625b0cc597364c07a6fa0f13f7c83374}{portADDRESS\_TO\_CSA}}(\ pulLowerCSA\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00177}00177\ \ \ \ \ \textcolor{comment}{/*\ DSync\ to\ ensure\ that\ buffering\ is\ not\ a\ problem.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00178}00178\ \ \ \ \ \_dsync();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00180}00180\ \ \ \ \ \textcolor{keywordflow}{return}\ pxTopOfStack;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00181}00181\ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00182}00182\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00183}00183\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00184}\mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_a42d48e1e07c99c055d4353dc3b38b466}{00184}}\ int32\_t\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{xPortStartScheduler}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00185}00185\ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00186}00186\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{porttrap_8c_abb81dc2f729d6c6fe39b23aa9f61e1a5}{vTrapInstallHandlers}}(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00187}00187\ \ \ \ \ uint32\_t\ ulMFCR\ =\ 0UL;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00188}00188\ \ \ \ \ uint32\_t\ *\ pulUpperCSA\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00189}00189\ \ \ \ \ uint32\_t\ *\ pulLowerCSA\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00191}00191\ \ \ \ \ \textcolor{comment}{/*\ Interrupts\ at\ or\ below\ configMAX\_SYSCALL\_INTERRUPT\_PRIORITY\ are\ disable}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00192}00192\ \textcolor{comment}{\ \ \ \ \ *\ when\ this\ function\ is\ called.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00194}00194\ \ \ \ \ \textcolor{comment}{/*\ Set-\/up\ the\ timer\ interrupt.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00195}00195\ \ \ \ \ \mbox{\hyperlink{_rowley_2_m_s_p430_f449_2port_8c_a397ed34de04a678dc71217c713763423}{prvSetupTimerInterrupt}}();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00197}00197\ \ \ \ \ \textcolor{comment}{/*\ Install\ the\ Trap\ Handlers.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00198}00198\ \ \ \ \ \mbox{\hyperlink{porttrap_8c_abb81dc2f729d6c6fe39b23aa9f61e1a5}{vTrapInstallHandlers}}();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00199}00199\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00200}00200\ \ \ \ \ \textcolor{comment}{/*\ Install\ the\ Syscall\ Handler\ for\ yield\ calls.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00201}00201\ \ \ \ \ \textcolor{keywordflow}{if}(\ 0\ ==\ \_install\_trap\_handler(\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_af46f8ef7814652af16a16ef746a6fe56}{portSYSCALL\_TRAP}},\ prvTrapYield\ )\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00202}00202\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00203}00203\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Failed\ to\ install\ the\ yield\ handler,\ force\ an\ assert.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00204}00204\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ (\ (\ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{void}\ *\ )\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00205}00205\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00206}00206\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00207}00207\ \ \ \ \ \textcolor{comment}{/*\ Enable\ then\ install\ the\ priority\ 1\ interrupt\ for\ pending\ context}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00208}00208\ \textcolor{comment}{\ \ \ \ \ *\ switches\ from\ an\ ISR.\ \ See\ mod\_SRC\ in\ the\ TriCore\ manual.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00209}00209\ \ \ \ \ CPU\_SRC0.reg\ =\ (\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_a1191455c4b11064d65717fc18324faac}{portENABLE\_CPU\_INTERRUPT}}\ )\ |\ (\ configKERNEL\_YIELD\_PRIORITY\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00211}00211\ \ \ \ \ \textcolor{keywordflow}{if}(\ 0\ ==\ \_install\_int\_handler(\ configKERNEL\_YIELD\_PRIORITY,\ prvInterruptYield,\ 0\ )\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00212}00212\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00213}00213\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Failed\ to\ install\ the\ yield\ handler,\ force\ an\ assert.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00214}00214\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ (\ (\ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{void}\ *\ )\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00215}00215\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00216}00216\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00217}00217\ \ \ \ \ \_disable();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00219}00219\ \ \ \ \ \textcolor{comment}{/*\ Load\ the\ initial\ SYSCON.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00220}00220\ \ \ \ \ \_mtcr(\ \$SYSCON,\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_ad00855b9a1ed5b492cea473aa43574af}{portINITIAL\_SYSCON}}\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00221}00221\ \ \ \ \ \_isync();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00223}00223\ \ \ \ \ \textcolor{comment}{/*\ ENDINIT\ has\ already\ been\ applied\ in\ the\ 'cstart.c'\ code.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00224}00224\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00225}00225\ \ \ \ \ \textcolor{comment}{/*\ Clear\ the\ PSW.CDC\ to\ enable\ the\ use\ of\ an\ RFE\ without\ it\ generating\ an}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00226}00226\ \textcolor{comment}{\ \ \ \ \ *\ exception\ because\ this\ code\ is\ not\ genuinely\ in\ an\ exception.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00227}00227\ \ \ \ \ ulMFCR\ =\ \_\_MFCR(\ \$PSW\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00228}00228\ \ \ \ \ ulMFCR\ \&=\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_a8b8c4b80063cf1c2f6da57b93b66d595}{portRESTORE\_PSW\_MASK}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00229}00229\ \ \ \ \ \_dsync();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00230}00230\ \ \ \ \ \_mtcr(\ \$PSW,\ ulMFCR\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00231}00231\ \ \ \ \ \_isync();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00233}00233\ \ \ \ \ \textcolor{comment}{/*\ Finally,\ perform\ the\ equivalent\ of\ a\ portRESTORE\_CONTEXT()\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00234}00234\ \ \ \ \ pulLowerCSA\ =\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2portmacro_8h_a7bfbb11e7993c09f2c131e50b65edbff}{portCSA\_TO\_ADDRESS}}(\ (\ *\mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}}\ )\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00235}00235\ \ \ \ \ pulUpperCSA\ =\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2portmacro_8h_a7bfbb11e7993c09f2c131e50b65edbff}{portCSA\_TO\_ADDRESS}}(\ pulLowerCSA[\ 0\ ]\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00236}00236\ \ \ \ \ \_dsync();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00237}00237\ \ \ \ \ \_mtcr(\ \$PCXI,\ *\mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}}\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00238}00238\ \ \ \ \ \_isync();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00239}00239\ \ \ \ \ \_nop();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00240}00240\ \ \ \ \ \_rslcx();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00241}00241\ \ \ \ \ \_nop();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00242}00242\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00243}00243\ \ \ \ \ \textcolor{comment}{/*\ Return\ to\ the\ first\ task\ selected\ to\ execute.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00244}00244\ \ \ \ \ \_\_asm\ \textcolor{keyword}{volatile}\ (\ \textcolor{stringliteral}{"{}rfe"{}}\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00245}00245\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00246}00246\ \ \ \ \ \textcolor{comment}{/*\ Will\ not\ get\ here.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00247}00247\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00248}00248\ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00249}00249\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00251}00251\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_rowley_2_m_s_p430_f449_2port_8c_a397ed34de04a678dc71217c713763423}{prvSetupTimerInterrupt}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00252}00252\ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00253}00253\ \ \ \ \ \textcolor{comment}{/*\ Set-\/up\ the\ clock\ divider.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00254}00254\ \ \ \ \ unlock\_wdtcon();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00255}00255\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00256}00256\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Wait\ until\ access\ to\ Endint\ protected\ register\ is\ enabled.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00257}00257\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}(\ 0\ !=\ (\ WDT\_CON0.reg\ \&\ 0x1UL\ )\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00258}00258\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00259}00259\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00260}00260\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00261}00261\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ RMC\ ==\ 1\ so\ STM\ Clock\ ==\ FPI\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00262}00262\ \ \ \ \ \ \ \ \ STM\_CLC.reg\ =\ (\ 1UL\ <<\ 8\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00263}00263\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00264}00264\ \ \ \ \ lock\_wdtcon();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00265}00265\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00266}00266\ \ \ \ \ \textcolor{comment}{/*\ Determine\ how\ many\ bits\ are\ used\ without\ changing\ other\ bits\ in\ the\ CMCON\ register.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00267}00267\ \ \ \ \ STM\_CMCON.reg\ \&=\ \string~(\ 0x1fUL\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00268}00268\ \ \ \ \ STM\_CMCON.reg\ |=\ (\ 0x1fUL\ -\/\ \_\_CLZ(\ configPERIPHERAL\_CLOCK\_HZ\ /\ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_a2f0258dd1e3b877e5bc013be54c2db6a}{configTICK\_RATE\_HZ}}\ )\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00269}00269\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00270}00270\ \ \ \ \ \textcolor{comment}{/*\ Take\ into\ account\ the\ current\ time\ so\ a\ tick\ doesn't\ happen\ immediately.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00271}00271\ \ \ \ \ STM\_CMP0.reg\ =\ ulCompareMatchValue\ +\ STM\_TIM0.reg;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00272}00272\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00273}00273\ \ \ \ \ \textcolor{keywordflow}{if}(\ 0\ !=\ \_install\_int\_handler(\ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_ac42cff506ad61d4174fa23e952e3225e}{configKERNEL\_INTERRUPT\_PRIORITY}},\ prvSystemTickHandler,\ 0\ )\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00274}00274\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00275}00275\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Set-\/up\ the\ interrupt.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00276}00276\ \ \ \ \ \ \ \ \ STM\_SRC0.reg\ =\ (\ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_ac42cff506ad61d4174fa23e952e3225e}{configKERNEL\_INTERRUPT\_PRIORITY}}\ |\ 0x00005000UL\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00277}00277\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00278}00278\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Enable\ the\ Interrupt.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00279}00279\ \ \ \ \ \ \ \ \ STM\_ISRR.reg\ \&=\ \string~(\ 0x03UL\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00280}00280\ \ \ \ \ \ \ \ \ STM\_ISRR.reg\ |=\ 0x1UL;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00281}00281\ \ \ \ \ \ \ \ \ STM\_ISRR.reg\ \&=\ \string~(\ 0x07UL\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00282}00282\ \ \ \ \ \ \ \ \ STM\_ICR.reg\ |=\ 0x1UL;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00283}00283\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00284}00284\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00285}00285\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00286}00286\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Failed\ to\ install\ the\ Tick\ Interrupt.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00287}00287\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ (\ (\ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{void}\ *\ )\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00288}00288\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00289}00289\ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00290}00290\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00291}00291\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00292}00292\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ prvSystemTickHandler(\ \textcolor{keywordtype}{int}\ iArg\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00293}00293\ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00294}00294\ \ \ \ \ uint32\_t\ ulSavedInterruptMask;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00295}00295\ \ \ \ \ uint32\_t\ *\ pxUpperCSA\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00296}00296\ \ \ \ \ uint32\_t\ xUpperCSA\ =\ 0UL;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00297}00297\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keyword}{volatile}\ uint32\_t\ *\ \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00298}00298\ \ \ \ \ int32\_t\ lYieldRequired;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00299}00299\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00300}00300\ \ \ \ \ \textcolor{comment}{/*\ Just\ to\ avoid\ compiler\ warnings\ about\ unused\ parameters.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00301}00301\ \ \ \ \ (\ void\ )\ iArg;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00302}00302\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00303}00303\ \ \ \ \ \textcolor{comment}{/*\ Clear\ the\ interrupt\ source.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00304}00304\ \ \ \ \ STM\_ISRR.reg\ =\ 1UL;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00305}00305\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00306}00306\ \ \ \ \ \textcolor{comment}{/*\ Reload\ the\ Compare\ Match\ register\ for\ X\ ticks\ into\ the\ future.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00307}00307\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00308}00308\ \textcolor{comment}{\ \ \ \ \ *\ If\ critical\ section\ or\ interrupt\ nesting\ budgets\ are\ exceeded,\ then}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00309}00309\ \textcolor{comment}{\ \ \ \ \ *\ it\ is\ possible\ that\ the\ calculated\ next\ compare\ match\ value\ is\ in\ the}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00310}00310\ \textcolor{comment}{\ \ \ \ \ *\ past.\ \ If\ this\ occurs\ (unlikely),\ it\ is\ possible\ that\ the\ resulting}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00311}00311\ \textcolor{comment}{\ \ \ \ \ *\ time\ slippage\ will\ exceed\ a\ single\ tick\ period.\ \ Any\ adverse\ effect\ of}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00312}00312\ \textcolor{comment}{\ \ \ \ \ *\ this\ is\ time\ bounded\ by\ the\ fact\ that\ only\ the\ first\ n\ bits\ of\ the\ 56\ bit}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00313}00313\ \textcolor{comment}{\ \ \ \ \ *\ STM\ timer\ are\ being\ used\ for\ a\ compare\ match,\ so\ another\ compare\ match}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00314}00314\ \textcolor{comment}{\ \ \ \ \ *\ will\ occur\ after\ an\ overflow\ in\ just\ those\ n\ bits\ (not\ the\ entire\ 56\ bits).}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00315}00315\ \textcolor{comment}{\ \ \ \ \ *\ As\ an\ example,\ if\ the\ peripheral\ clock\ is\ 75MHz,\ and\ the\ tick\ rate\ is\ 1KHz,}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00316}00316\ \textcolor{comment}{\ \ \ \ \ *\ a\ missed\ tick\ could\ result\ in\ the\ next\ tick\ interrupt\ occurring\ within\ a}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00317}00317\ \textcolor{comment}{\ \ \ \ \ *\ time\ that\ is\ 1.7\ times\ the\ desired\ period.\ \ The\ fact\ that\ this\ is\ greater}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00318}00318\ \textcolor{comment}{\ \ \ \ \ *\ than\ a\ single\ tick\ period\ is\ an\ effect\ of\ using\ a\ timer\ that\ cannot\ be}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00319}00319\ \textcolor{comment}{\ \ \ \ \ *\ automatically\ reset,\ in\ hardware,\ by\ the\ occurrence\ of\ a\ tick\ interrupt.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00320}00320\ \textcolor{comment}{\ \ \ \ \ *\ Changing\ the\ tick\ source\ to\ a\ timer\ that\ has\ an\ automatic\ reset\ on\ compare}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00321}00321\ \textcolor{comment}{\ \ \ \ \ *\ match\ (such\ as\ a\ GPTA\ timer)\ will\ reduce\ the\ maximum\ possible\ additional}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00322}00322\ \textcolor{comment}{\ \ \ \ \ *\ period\ to\ exactly\ 1\ times\ the\ desired\ period.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00323}00323\ \ \ \ \ STM\_CMP0.reg\ +=\ ulCompareMatchValue;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00324}00324\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00325}00325\ \ \ \ \ \textcolor{comment}{/*\ Kernel\ API\ calls\ require\ Critical\ Sections.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00326}00326\ \ \ \ \ ulSavedInterruptMask\ =\ \mbox{\hyperlink{_free_r_t_o_s_8h_a31b4260dbc1823ba80b578f86eb15a98}{portSET\_INTERRUPT\_MASK\_FROM\_ISR}}();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00327}00327\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00328}00328\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Increment\ the\ Tick.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00329}00329\ \ \ \ \ \ \ \ \ lYieldRequired\ =\ \mbox{\hyperlink{task_8h_a978e25460ac35706f9ad30b46d9403d8}{xTaskIncrementTick}}();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00330}00330\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00331}00331\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_a2661e2c5a4e4afe5bef2ebe9872e28b3}{portCLEAR\_INTERRUPT\_MASK\_FROM\_ISR}}(\ ulSavedInterruptMask\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00332}00332\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00333}00333\ \ \ \ \ \textcolor{keywordflow}{if}(\ lYieldRequired\ !=\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}}\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00334}00334\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00335}00335\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Save\ the\ context\ of\ a\ task.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00336}00336\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ The\ upper\ context\ is\ automatically\ saved\ when\ entering\ a\ trap\ or\ interrupt.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00337}00337\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Need\ to\ save\ the\ lower\ context\ as\ well\ and\ copy\ the\ PCXI\ CSA\ ID\ into}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00338}00338\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ pxCurrentTCB-\/>pxTopOfStack.\ Only\ Lower\ Context\ CSA\ IDs\ may\ be\ saved\ to\ the}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00339}00339\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ TCB\ of\ a\ task.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00340}00340\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00341}00341\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Call\ vTaskSwitchContext\ to\ select\ the\ next\ task,\ note\ that\ this\ changes\ the}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00342}00342\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ value\ of\ pxCurrentTCB\ so\ that\ it\ needs\ to\ be\ reloaded.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00343}00343\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00344}00344\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Call\ vPortSetMPURegisterSetOne\ to\ change\ the\ MPU\ mapping\ for\ the\ task}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00345}00345\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ that\ has\ just\ been\ switched\ in.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00346}00346\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00347}00347\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Load\ the\ context\ of\ the\ task.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00348}00348\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Need\ to\ restore\ the\ lower\ context\ by\ loading\ the\ CSA\ from}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00349}00349\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ pxCurrentTCB-\/>pxTopOfStack\ into\ PCXI\ (effectively\ changing\ the\ call\ stack).}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00350}00350\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ In\ the\ Interrupt\ handler\ post-\/amble,\ RSLCX\ will\ restore\ the\ lower\ context}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00351}00351\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ of\ the\ task.\ RFE\ will\ restore\ the\ upper\ context\ of\ the\ task,\ jump\ to\ the}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00352}00352\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ return\ address\ and\ restore\ the\ previous\ state\ of\ interrupts\ being}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00353}00353\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ enabled/disabled.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00354}00354\ \ \ \ \ \ \ \ \ \_disable();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00355}00355\ \ \ \ \ \ \ \ \ \_dsync();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00356}00356\ \ \ \ \ \ \ \ \ xUpperCSA\ =\ \_\_MFCR(\ \$PCXI\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00357}00357\ \ \ \ \ \ \ \ \ pxUpperCSA\ =\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2portmacro_8h_a7bfbb11e7993c09f2c131e50b65edbff}{portCSA\_TO\_ADDRESS}}(\ xUpperCSA\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00358}00358\ \ \ \ \ \ \ \ \ *\mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}}\ =\ pxUpperCSA[\ 0\ ];}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00359}00359\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_a9c86137bc3c1cbffc39fff22627cb885}{vTaskSwitchContext}}();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00360}00360\ \ \ \ \ \ \ \ \ pxUpperCSA[\ 0\ ]\ =\ *\mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00361}00361\ \ \ \ \ \ \ \ \ CPU\_SRC0.bits.SETR\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00362}00362\ \ \ \ \ \ \ \ \ \_isync();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00363}00363\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00364}00364\ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00365}00365\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00366}00366\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00367}00367\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00368}00368\ \textcolor{comment}{\ *\ When\ a\ task\ is\ deleted,\ it\ is\ yielded\ permanently\ until\ the\ IDLE\ task}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00369}00369\ \textcolor{comment}{\ *\ has\ an\ opportunity\ to\ reclaim\ the\ memory\ that\ that\ task\ was\ using.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00370}00370\ \textcolor{comment}{\ *\ Typically,\ the\ memory\ used\ by\ a\ task\ is\ the\ TCB\ and\ Stack\ but\ in\ the}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00371}00371\ \textcolor{comment}{\ *\ TriCore\ this\ includes\ the\ CSAs\ that\ were\ consumed\ as\ part\ of\ the\ Call}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00372}00372\ \textcolor{comment}{\ *\ Stack.\ These\ CSAs\ can\ only\ be\ returned\ to\ the\ Globally\ Free\ Pool\ when}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00373}00373\ \textcolor{comment}{\ *\ they\ are\ not\ part\ of\ the\ current\ Call\ Stack,\ hence,\ delaying\ the}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00374}00374\ \textcolor{comment}{\ *\ reclamation\ until\ the\ IDLE\ task\ is\ freeing\ the\ task's\ other\ resources.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00375}00375\ \textcolor{comment}{\ *\ This\ function\ uses\ the\ head\ of\ the\ linked\ list\ of\ CSAs\ (from\ when\ the}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00376}00376\ \textcolor{comment}{\ *\ task\ yielded\ for\ the\ last\ time)\ and\ finds\ the\ tail\ (the\ very\ bottom\ of}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00377}00377\ \textcolor{comment}{\ *\ the\ call\ stack)\ and\ inserts\ this\ list\ at\ the\ head\ of\ the\ Free\ list,}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00378}00378\ \textcolor{comment}{\ *\ attaching\ the\ existing\ Free\ List\ to\ the\ tail\ of\ the\ reclaimed\ call\ stack.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00379}00379\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00380}00380\ \textcolor{comment}{\ *\ NOTE:\ the\ IDLE\ task\ needs\ processing\ time\ to\ complete\ this\ function}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00381}00381\ \textcolor{comment}{\ *\ and\ in\ heavily\ loaded\ systems,\ the\ Free\ CSAs\ may\ be\ consumed\ faster}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00382}00382\ \textcolor{comment}{\ *\ than\ they\ can\ be\ freed\ assuming\ that\ tasks\ are\ being\ spawned\ and}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00383}00383\ \textcolor{comment}{\ *\ deleted\ frequently.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00384}00384\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00385}\mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_a439885284a5dd45017f84a4a80d03afc}{00385}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_a439885284a5dd45017f84a4a80d03afc}{vPortReclaimCSA}}(\ uint32\_t\ *\ pxTCB\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00386}00386\ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00387}00387\ \ \ \ \ uint32\_t\ pxHeadCSA,\ pxTailCSA,\ pxFreeCSA;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00388}00388\ \ \ \ \ uint32\_t\ *\ pulNextCSA;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00389}00389\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00390}00390\ \ \ \ \ \textcolor{comment}{/*\ A\ pointer\ to\ the\ first\ CSA\ in\ the\ list\ of\ CSAs\ consumed\ by\ the\ task\ is}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00391}00391\ \textcolor{comment}{\ \ \ \ \ *\ stored\ in\ the\ first\ element\ of\ the\ tasks\ TCB\ structure\ (where\ the\ stack}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00392}00392\ \textcolor{comment}{\ \ \ \ \ *\ pointer\ would\ be\ on\ a\ traditional\ stack\ based\ architecture).\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00393}00393\ \ \ \ \ pxHeadCSA\ =\ (\ *pxTCB\ )\ \&\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_a24b47f41a4ccf1c96020b4981fec5f98}{portCSA\_FCX\_MASK}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00394}00394\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00395}00395\ \ \ \ \ \textcolor{comment}{/*\ Mask\ off\ everything\ in\ the\ CSA\ link\ field\ other\ than\ the\ address.\ \ If}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00396}00396\ \textcolor{comment}{\ \ \ \ \ *\ the\ address\ is\ NULL,\ then\ the\ CSA\ is\ not\ linking\ anywhere\ and\ there\ is}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00397}00397\ \textcolor{comment}{\ \ \ \ \ *\ nothing\ to\ do.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00398}00398\ \ \ \ \ pxTailCSA\ =\ pxHeadCSA;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00399}00399\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00400}00400\ \ \ \ \ \textcolor{comment}{/*\ Convert\ the\ link\ value\ to\ contain\ just\ a\ raw\ address\ and\ store\ this}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00401}00401\ \textcolor{comment}{\ \ \ \ \ *\ in\ a\ local\ variable.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00402}00402\ \ \ \ \ pulNextCSA\ =\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2portmacro_8h_a7bfbb11e7993c09f2c131e50b65edbff}{portCSA\_TO\_ADDRESS}}(\ pxTailCSA\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00403}00403\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00404}00404\ \ \ \ \ \textcolor{comment}{/*\ Iterate\ over\ the\ CSAs\ that\ were\ consumed\ as\ part\ of\ the\ task.\ \ The}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00405}00405\ \textcolor{comment}{\ \ \ \ \ *\ first\ field\ in\ the\ CSA\ is\ the\ pointer\ to\ then\ next\ CSA.\ \ Mask\ off}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00406}00406\ \textcolor{comment}{\ \ \ \ \ *\ everything\ in\ the\ pointer\ to\ the\ next\ CSA,\ other\ than\ the\ link\ address.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00407}00407\ \textcolor{comment}{\ \ \ \ \ *\ If\ this\ is\ NULL,\ then\ the\ CSA\ currently\ being\ pointed\ to\ is\ the\ last\ in}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00408}00408\ \textcolor{comment}{\ \ \ \ \ *\ the\ chain.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00409}00409\ \ \ \ \ \textcolor{keywordflow}{while}(\ 0UL\ !=\ (\ pulNextCSA[\ 0\ ]\ \&\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_a24b47f41a4ccf1c96020b4981fec5f98}{portCSA\_FCX\_MASK}}\ )\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00410}00410\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00411}00411\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Clear\ all\ bits\ of\ the\ pointer\ to\ the\ next\ in\ the\ chain,\ other}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00412}00412\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ than\ the\ address\ bits\ themselves.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00413}00413\ \ \ \ \ \ \ \ \ pulNextCSA[\ 0\ ]\ =\ pulNextCSA[\ 0\ ]\ \&\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_a24b47f41a4ccf1c96020b4981fec5f98}{portCSA\_FCX\_MASK}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00414}00414\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00415}00415\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Move\ the\ pointer\ to\ point\ to\ the\ next\ CSA\ in\ the\ list.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00416}00416\ \ \ \ \ \ \ \ \ pxTailCSA\ =\ pulNextCSA[\ 0\ ];}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00417}00417\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00418}00418\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Update\ the\ local\ pointer\ to\ the\ CSA.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00419}00419\ \ \ \ \ \ \ \ \ pulNextCSA\ =\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2portmacro_8h_a7bfbb11e7993c09f2c131e50b65edbff}{portCSA\_TO\_ADDRESS}}(\ pxTailCSA\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00420}00420\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00421}00421\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00422}00422\ \ \ \ \ \_disable();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00423}00423\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00424}00424\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Look\ up\ the\ current\ free\ CSA\ head.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00425}00425\ \ \ \ \ \ \ \ \ \_dsync();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00426}00426\ \ \ \ \ \ \ \ \ pxFreeCSA\ =\ \_\_MFCR(\ \$FCX\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00427}00427\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00428}00428\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Join\ the\ current\ Free\ onto\ the\ Tail\ of\ what\ is\ being\ reclaimed.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00429}00429\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2portmacro_8h_a7bfbb11e7993c09f2c131e50b65edbff}{portCSA\_TO\_ADDRESS}}(\ pxTailCSA\ )[\ 0\ ]\ =\ pxFreeCSA;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00430}00430\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00431}00431\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Move\ the\ head\ of\ the\ reclaimed\ into\ the\ Free.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00432}00432\ \ \ \ \ \ \ \ \ \_dsync();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00433}00433\ \ \ \ \ \ \ \ \ \_mtcr(\ \$FCX,\ pxHeadCSA\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00434}00434\ \ \ \ \ \ \ \ \ \_isync();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00435}00435\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00436}00436\ \ \ \ \ \_enable();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00437}00437\ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00438}00438\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00439}00439\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00440}\mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{00440}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{vPortEndScheduler}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00441}00441\ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00442}00442\ \ \ \ \ \textcolor{comment}{/*\ Nothing\ to\ do.\ Unlikely\ to\ want\ to\ end.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00443}00443\ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00444}00444\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00445}00445\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00446}00446\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ prvTrapYield(\ \textcolor{keywordtype}{int}\ iTrapIdentification\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00447}00447\ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00448}00448\ \ \ \ \ uint32\_t\ *\ pxUpperCSA\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00449}00449\ \ \ \ \ uint32\_t\ xUpperCSA\ =\ 0UL;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00450}00450\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keyword}{volatile}\ uint32\_t\ *\ \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00451}00451\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00452}00452\ \ \ \ \ \textcolor{keywordflow}{switch}(\ iTrapIdentification\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00453}00453\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00454}00454\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2portmacro_8h_a29bb80ae7b67ad3a2d45e91dacb790bf}{portSYSCALL\_TASK\_YIELD}}:}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00455}00455\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00456}00456\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Save\ the\ context\ of\ a\ task.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00457}00457\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ The\ upper\ context\ is\ automatically\ saved\ when\ entering\ a\ trap\ or\ interrupt.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00458}00458\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ Need\ to\ save\ the\ lower\ context\ as\ well\ and\ copy\ the\ PCXI\ CSA\ ID\ into}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00459}00459\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ pxCurrentTCB-\/>pxTopOfStack.\ Only\ Lower\ Context\ CSA\ IDs\ may\ be\ saved\ to\ the}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00460}00460\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ TCB\ of\ a\ task.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00461}00461\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00462}00462\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ Call\ vTaskSwitchContext\ to\ select\ the\ next\ task,\ note\ that\ this\ changes\ the}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00463}00463\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ value\ of\ pxCurrentTCB\ so\ that\ it\ needs\ to\ be\ reloaded.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00464}00464\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00465}00465\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ Call\ vPortSetMPURegisterSetOne\ to\ change\ the\ MPU\ mapping\ for\ the\ task}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00466}00466\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ that\ has\ just\ been\ switched\ in.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00467}00467\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00468}00468\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ Load\ the\ context\ of\ the\ task.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00469}00469\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ Need\ to\ restore\ the\ lower\ context\ by\ loading\ the\ CSA\ from}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00470}00470\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ pxCurrentTCB-\/>pxTopOfStack\ into\ PCXI\ (effectively\ changing\ the\ call\ stack).}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00471}00471\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ In\ the\ Interrupt\ handler\ post-\/amble,\ RSLCX\ will\ restore\ the\ lower\ context}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00472}00472\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ of\ the\ task.\ RFE\ will\ restore\ the\ upper\ context\ of\ the\ task,\ jump\ to\ the}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00473}00473\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ return\ address\ and\ restore\ the\ previous\ state\ of\ interrupts\ being}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00474}00474\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ enabled/disabled.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00475}00475\ \ \ \ \ \ \ \ \ \ \ \ \ \_disable();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00476}00476\ \ \ \ \ \ \ \ \ \ \ \ \ \_dsync();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00477}00477\ \ \ \ \ \ \ \ \ \ \ \ \ xUpperCSA\ =\ \_\_MFCR(\ \$PCXI\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00478}00478\ \ \ \ \ \ \ \ \ \ \ \ \ pxUpperCSA\ =\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2portmacro_8h_a7bfbb11e7993c09f2c131e50b65edbff}{portCSA\_TO\_ADDRESS}}(\ xUpperCSA\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00479}00479\ \ \ \ \ \ \ \ \ \ \ \ \ *\mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}}\ =\ pxUpperCSA[\ 0\ ];}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00480}00480\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_a9c86137bc3c1cbffc39fff22627cb885}{vTaskSwitchContext}}();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00481}00481\ \ \ \ \ \ \ \ \ \ \ \ \ pxUpperCSA[\ 0\ ]\ =\ *\mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00482}00482\ \ \ \ \ \ \ \ \ \ \ \ \ CPU\_SRC0.bits.SETR\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00483}00483\ \ \ \ \ \ \ \ \ \ \ \ \ \_isync();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00484}00484\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00485}00485\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00486}00486\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00487}00487\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Unimplemented\ trap\ called.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00488}00488\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ (\ (\ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{void}\ *\ )\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00489}00489\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00490}00490\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00491}00491\ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00492}00492\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00493}00493\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00494}00494\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ prvInterruptYield(\ \textcolor{keywordtype}{int}\ iId\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00495}00495\ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00496}00496\ \ \ \ \ uint32\_t\ *\ pxUpperCSA\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00497}00497\ \ \ \ \ uint32\_t\ xUpperCSA\ =\ 0UL;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00498}00498\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keyword}{volatile}\ uint32\_t\ *\ \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00499}00499\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00500}00500\ \ \ \ \ \textcolor{comment}{/*\ Just\ to\ remove\ compiler\ warnings.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00501}00501\ \ \ \ \ (\ void\ )\ iId;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00502}00502\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00503}00503\ \ \ \ \ \textcolor{comment}{/*\ Save\ the\ context\ of\ a\ task.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00504}00504\ \textcolor{comment}{\ \ \ \ \ *\ The\ upper\ context\ is\ automatically\ saved\ when\ entering\ a\ trap\ or\ interrupt.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00505}00505\ \textcolor{comment}{\ \ \ \ \ *\ Need\ to\ save\ the\ lower\ context\ as\ well\ and\ copy\ the\ PCXI\ CSA\ ID\ into}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00506}00506\ \textcolor{comment}{\ \ \ \ \ *\ pxCurrentTCB-\/>pxTopOfStack.\ Only\ Lower\ Context\ CSA\ IDs\ may\ be\ saved\ to\ the}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00507}00507\ \textcolor{comment}{\ \ \ \ \ *\ TCB\ of\ a\ task.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00508}00508\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00509}00509\ \textcolor{comment}{\ \ \ \ \ *\ Call\ vTaskSwitchContext\ to\ select\ the\ next\ task,\ note\ that\ this\ changes\ the}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00510}00510\ \textcolor{comment}{\ \ \ \ \ *\ value\ of\ pxCurrentTCB\ so\ that\ it\ needs\ to\ be\ reloaded.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00511}00511\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00512}00512\ \textcolor{comment}{\ \ \ \ \ *\ Call\ vPortSetMPURegisterSetOne\ to\ change\ the\ MPU\ mapping\ for\ the\ task}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00513}00513\ \textcolor{comment}{\ \ \ \ \ *\ that\ has\ just\ been\ switched\ in.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00514}00514\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00515}00515\ \textcolor{comment}{\ \ \ \ \ *\ Load\ the\ context\ of\ the\ task.}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00516}00516\ \textcolor{comment}{\ \ \ \ \ *\ Need\ to\ restore\ the\ lower\ context\ by\ loading\ the\ CSA\ from}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00517}00517\ \textcolor{comment}{\ \ \ \ \ *\ pxCurrentTCB-\/>pxTopOfStack\ into\ PCXI\ (effectively\ changing\ the\ call\ stack).}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00518}00518\ \textcolor{comment}{\ \ \ \ \ *\ In\ the\ Interrupt\ handler\ post-\/amble,\ RSLCX\ will\ restore\ the\ lower\ context}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00519}00519\ \textcolor{comment}{\ \ \ \ \ *\ of\ the\ task.\ RFE\ will\ restore\ the\ upper\ context\ of\ the\ task,\ jump\ to\ the}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00520}00520\ \textcolor{comment}{\ \ \ \ \ *\ return\ address\ and\ restore\ the\ previous\ state\ of\ interrupts\ being}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00521}00521\ \textcolor{comment}{\ \ \ \ \ *\ enabled/disabled.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00522}00522\ \ \ \ \ \_disable();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00523}00523\ \ \ \ \ \_dsync();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00524}00524\ \ \ \ \ xUpperCSA\ =\ \_\_MFCR(\ \$PCXI\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00525}00525\ \ \ \ \ pxUpperCSA\ =\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2portmacro_8h_a7bfbb11e7993c09f2c131e50b65edbff}{portCSA\_TO\_ADDRESS}}(\ xUpperCSA\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00526}00526\ \ \ \ \ *\mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}}\ =\ pxUpperCSA[\ 0\ ];}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00527}00527\ \ \ \ \ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_a9c86137bc3c1cbffc39fff22627cb885}{vTaskSwitchContext}}();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00528}00528\ \ \ \ \ pxUpperCSA[\ 0\ ]\ =\ *\mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}};}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00529}00529\ \ \ \ \ CPU\_SRC0.bits.SETR\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00530}00530\ \ \ \ \ \_isync();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00531}00531\ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00532}00532\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00533}00533\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00534}\mbox{\hyperlink{_code_warrior_2_cold_fire___v1_2portmacro_8h_ad3b846f809a7cff169a8c3cb621ec1ee}{00534}}\ uint32\_t\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_ad2d8a18289cda8ec91acf0a4dce63e30}{uxPortSetInterruptMaskFromISR}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00535}00535\ \{}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00536}00536\ \ \ \ \ uint32\_t\ uxReturn\ =\ 0UL;}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00537}00537\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00538}00538\ \ \ \ \ \_disable();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00539}00539\ \ \ \ \ uxReturn\ =\ \_\_MFCR(\ \$ICR\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00540}00540\ \ \ \ \ \_mtcr(\ \$ICR,\ (\ (\ uxReturn\ \&\ \string~\mbox{\hyperlink{_g_c_c_2_tri_core__1782_2portmacro_8h_a0eec68f987bc22eeca0775242c24af6a}{portCCPN\_MASK}}\ )\ |\ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_a54bfc31c410ee452577a25a4552c3704}{configMAX\_SYSCALL\_INTERRUPT\_PRIORITY}}\ )\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00541}00541\ \ \ \ \ \_isync();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00542}00542\ \ \ \ \ \_enable();}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00543}00543\ }
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00544}00544\ \ \ \ \ \textcolor{comment}{/*\ Return\ just\ the\ interrupt\ mask\ bits.\ */}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00545}00545\ \ \ \ \ \textcolor{keywordflow}{return}(\ uxReturn\ \&\ \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2portmacro_8h_a0eec68f987bc22eeca0775242c24af6a}{portCCPN\_MASK}}\ );}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00546}00546\ \}}
+\DoxyCodeLine{\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_source_l00547}00547\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+
+\end{DoxyCode}

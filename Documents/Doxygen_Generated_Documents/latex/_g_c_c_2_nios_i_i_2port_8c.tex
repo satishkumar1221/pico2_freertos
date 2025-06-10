@@ -1,0 +1,108 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+GCC/\+Nios\+II/port.c File Reference}
+\hypertarget{_g_c_c_2_nios_i_i_2port_8c}{}\label{_g_c_c_2_nios_i_i_2port_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/NiosII/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/NiosII/port.c}}
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include "{}sys/alt\+\_\+irq.\+h"{}}\newline
+{\ttfamily \#include "{}sys/alt\+\_\+exceptions.\+h"{}}\newline
+{\ttfamily \#include "{}altera\+\_\+avalon\+\_\+timer\+\_\+regs.\+h"{}}\newline
+{\ttfamily \#include "{}priv/alt\+\_\+irq\+\_\+table.\+h"{}}\newline
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}task.\+h"{}}\newline
+Include dependency graph for port.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_nios_i_i_2port_8c_a48b9faaa951d933ea7146ac60b7cf7f1}{port\+INITIAL\+\_\+\+ESTATUS}}~( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x01
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{_g_c_c_2_nios_i_i_2port_8c_adc3194ce8d06d9effe2054bfca7288a6}{\+\_\+alt\+\_\+ic\+\_\+isr\+\_\+register}} (alt\+\_\+u32 ic\+\_\+id, alt\+\_\+u32 irq, alt\+\_\+isr\+\_\+func isr, void \texorpdfstring{$\ast$}{*}isr\+\_\+context, void \texorpdfstring{$\ast$}{*}flags)
+\item 
+void \mbox{\hyperlink{_g_c_c_2_nios_i_i_2port_8c_af1a9482c8637cbe236971c9eb0cd2863}{v\+Port\+Sys\+Tick\+Handler}} (void \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_afc222dc14cdd45ff7e72dec42824f2ac}{context}})
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_g_c_c_2_nios_i_i_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}{px\+Port\+Initialise\+Stack}} (\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}px\+Top\+Of\+Stack, \mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}} px\+Code, void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_g_c_c_2_nios_i_i_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{x\+Port\+Start\+Scheduler}} (void)
+\item 
+void \mbox{\hyperlink{_g_c_c_2_nios_i_i_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{v\+Port\+End\+Scheduler}} (void)
+\begin{DoxyCompactList}\small\item\em End the Free\+RTOS scheduler. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_g_c_c_2_nios_i_i_2port_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_g_c_c_2_nios_i_i_2port_8c_a48b9faaa951d933ea7146ac60b7cf7f1}\index{port.c@{port.c}!portINITIAL\_ESTATUS@{portINITIAL\_ESTATUS}}
+\index{portINITIAL\_ESTATUS@{portINITIAL\_ESTATUS}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portINITIAL\_ESTATUS}{portINITIAL\_ESTATUS}}
+{\footnotesize\ttfamily \label{_g_c_c_2_nios_i_i_2port_8c_a48b9faaa951d933ea7146ac60b7cf7f1} 
+\#define port\+INITIAL\+\_\+\+ESTATUS~( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x01}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_nios_i_i_2port_8c_source_l00048}{48}} of file \mbox{\hyperlink{_g_c_c_2_nios_i_i_2port_8c_source}{port.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_g_c_c_2_nios_i_i_2port_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_g_c_c_2_nios_i_i_2port_8c_adc3194ce8d06d9effe2054bfca7288a6}\index{port.c@{port.c}!\_alt\_ic\_isr\_register@{\_alt\_ic\_isr\_register}}
+\index{\_alt\_ic\_isr\_register@{\_alt\_ic\_isr\_register}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{\_alt\_ic\_isr\_register()}{\_alt\_ic\_isr\_register()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_nios_i_i_2port_8c_adc3194ce8d06d9effe2054bfca7288a6} 
+int \+\_\+alt\+\_\+ic\+\_\+isr\+\_\+register (\begin{DoxyParamCaption}\item[{alt\+\_\+u32}]{ic\+\_\+id}{, }\item[{alt\+\_\+u32}]{irq}{, }\item[{alt\+\_\+isr\+\_\+func}]{isr}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{isr\+\_\+context}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{flags}{}\end{DoxyParamCaption})}
+
+This function is a re-\/implementation of the Altera provided function. The function is re-\/implemented to prevent it from enabling an interrupt when it is registered. Interrupts should only be enabled after the Free\+RTOS.\+org kernel has its scheduler started so that contexts are saved and switched correctly. 
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_nios_i_i_2port_8c_source_l00186}{186}} of file \mbox{\hyperlink{_g_c_c_2_nios_i_i_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_nios_i_i_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}\index{port.c@{port.c}!pxPortInitialiseStack@{pxPortInitialiseStack}}
+\index{pxPortInitialiseStack@{pxPortInitialiseStack}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{pxPortInitialiseStack()}{pxPortInitialiseStack()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_nios_i_i_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} px\+Port\+Initialise\+Stack (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{px\+Top\+Of\+Stack}{, }\item[{\mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}}}]{px\+Code}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_nios_i_i_2port_8c_source_l00078}{78}} of file \mbox{\hyperlink{_g_c_c_2_nios_i_i_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_nios_i_i_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}\index{port.c@{port.c}!vPortEndScheduler@{vPortEndScheduler}}
+\index{vPortEndScheduler@{vPortEndScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEndScheduler()}{vPortEndScheduler()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_nios_i_i_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423} 
+void v\+Port\+End\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+End the Free\+RTOS scheduler. 
+
+Not implemented on this port. 
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_nios_i_i_2port_8c_source_l00134}{134}} of file \mbox{\hyperlink{_g_c_c_2_nios_i_i_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_nios_i_i_2port_8c_af1a9482c8637cbe236971c9eb0cd2863}\index{port.c@{port.c}!vPortSysTickHandler@{vPortSysTickHandler}}
+\index{vPortSysTickHandler@{vPortSysTickHandler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortSysTickHandler()}{vPortSysTickHandler()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_nios_i_i_2port_8c_af1a9482c8637cbe236971c9eb0cd2863} 
+void v\+Port\+Sys\+Tick\+Handler (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{context}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_nios_i_i_2port_8c_source_l00167}{167}} of file \mbox{\hyperlink{_g_c_c_2_nios_i_i_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{_g_c_c_2_nios_i_i_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}\index{port.c@{port.c}!xPortStartScheduler@{xPortStartScheduler}}
+\index{xPortStartScheduler@{xPortStartScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortStartScheduler()}{xPortStartScheduler()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_nios_i_i_2port_8c_ade5a8c6666e7413a0355cc252029c5c6} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Start\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_nios_i_i_2port_8c_source_l00119}{119}} of file \mbox{\hyperlink{_g_c_c_2_nios_i_i_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 2

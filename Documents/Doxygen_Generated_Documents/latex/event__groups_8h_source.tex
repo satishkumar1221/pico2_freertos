@@ -1,0 +1,160 @@
+\doxysection{event\+\_\+groups.\+h}
+\hypertarget{event__groups_8h_source}{}\label{event__groups_8h_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/event\_groups.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/event\_groups.h}}
+\mbox{\hyperlink{event__groups_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00029}00029\ \textcolor{preprocessor}{\#ifndef\ EVENT\_GROUPS\_H}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00030}00030\ \textcolor{preprocessor}{\#define\ EVENT\_GROUPS\_H}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00032}00032\ \textcolor{preprocessor}{\#ifndef\ INC\_FREERTOS\_H}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00033}00033\ \textcolor{preprocessor}{\ \ \ \ \#error\ "{}include\ FreeRTOS.h"{}\ must\ appear\ in\ source\ files\ before\ "{}include\ event\_groups.h"{}}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00034}00034\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00036}00036\ \textcolor{comment}{/*\ FreeRTOS\ includes.\ */}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00037}00037\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{timers_8h}{timers.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00039}00039\ \textcolor{comment}{/*\ The\ following\ bit\ fields\ convey\ control\ information\ in\ a\ task's\ event\ list}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00040}00040\ \textcolor{comment}{\ *\ item\ value.\ \ It\ is\ important\ they\ don't\ clash\ with\ the}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00041}00041\ \textcolor{comment}{\ *\ taskEVENT\_LIST\_ITEM\_VALUE\_IN\_USE\ definition.\ */}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00042}00042\ \textcolor{preprocessor}{\#if\ (\ configTICK\_TYPE\_WIDTH\_IN\_BITS\ ==\ TICK\_TYPE\_WIDTH\_16\_BITS\ )}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00043}\mbox{\hyperlink{event__groups_8h_a1404686af7c8070fa57675707c817abc}{00043}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ eventCLEAR\_EVENTS\_ON\_EXIT\_BIT\ \ \ \ (\ (\ uint16\_t\ )\ 0x0100U\ )}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00044}\mbox{\hyperlink{event__groups_8h_ab451d5ad95813d5ec7ff1784d69e9ec3}{00044}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ eventUNBLOCKED\_DUE\_TO\_BIT\_SET\ \ \ \ (\ (\ uint16\_t\ )\ 0x0200U\ )}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00045}\mbox{\hyperlink{event__groups_8h_ae98d5f1271845ad42742aef9659e1568}{00045}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ eventWAIT\_FOR\_ALL\_BITS\ \ \ \ \ \ \ \ \ \ \ (\ (\ uint16\_t\ )\ 0x0400U\ )}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00046}\mbox{\hyperlink{event__groups_8h_a46c8292a6ba88b017cca402f5baf670b}{00046}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ eventEVENT\_BITS\_CONTROL\_BYTES\ \ \ \ (\ (\ uint16\_t\ )\ 0xff00U\ )}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00047}00047\ \textcolor{preprocessor}{\#elif\ (\ configTICK\_TYPE\_WIDTH\_IN\_BITS\ ==\ TICK\_TYPE\_WIDTH\_32\_BITS\ )}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00048}00048\ \textcolor{preprocessor}{\ \ \ \ \#define\ eventCLEAR\_EVENTS\_ON\_EXIT\_BIT\ \ \ \ (\ (\ uint32\_t\ )\ 0x01000000U\ )}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00049}00049\ \textcolor{preprocessor}{\ \ \ \ \#define\ eventUNBLOCKED\_DUE\_TO\_BIT\_SET\ \ \ \ (\ (\ uint32\_t\ )\ 0x02000000U\ )}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00050}00050\ \textcolor{preprocessor}{\ \ \ \ \#define\ eventWAIT\_FOR\_ALL\_BITS\ \ \ \ \ \ \ \ \ \ \ (\ (\ uint32\_t\ )\ 0x04000000U\ )}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00051}00051\ \textcolor{preprocessor}{\ \ \ \ \#define\ eventEVENT\_BITS\_CONTROL\_BYTES\ \ \ \ (\ (\ uint32\_t\ )\ 0xff000000U\ )}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00052}00052\ \textcolor{preprocessor}{\#elif\ (\ configTICK\_TYPE\_WIDTH\_IN\_BITS\ ==\ TICK\_TYPE\_WIDTH\_64\_BITS\ )}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00053}00053\ \textcolor{preprocessor}{\ \ \ \ \#define\ eventCLEAR\_EVENTS\_ON\_EXIT\_BIT\ \ \ \ (\ (\ uint64\_t\ )\ 0x0100000000000000U\ )}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00054}00054\ \textcolor{preprocessor}{\ \ \ \ \#define\ eventUNBLOCKED\_DUE\_TO\_BIT\_SET\ \ \ \ (\ (\ uint64\_t\ )\ 0x0200000000000000U\ )}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00055}00055\ \textcolor{preprocessor}{\ \ \ \ \#define\ eventWAIT\_FOR\_ALL\_BITS\ \ \ \ \ \ \ \ \ \ \ (\ (\ uint64\_t\ )\ 0x0400000000000000U\ )}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00056}00056\ \textcolor{preprocessor}{\ \ \ \ \#define\ eventEVENT\_BITS\_CONTROL\_BYTES\ \ \ \ (\ (\ uint64\_t\ )\ 0xff00000000000000U\ )}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00057}00057\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ if\ (\ configTICK\_TYPE\_WIDTH\_IN\_BITS\ ==\ TICK\_TYPE\_WIDTH\_16\_BITS\ )\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00059}00059\ \textcolor{comment}{/*\ *INDENT-\/OFF*\ */}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00060}00060\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00061}00061\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00062}00062\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00063}00063\ \textcolor{comment}{/*\ *INDENT-\/ON*\ */}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00102}00102\ \textcolor{keyword}{struct\ }EventGroupDef\_t;}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00103}\mbox{\hyperlink{event__groups_8h_acab96e0b6a5cab7f7b29822b79cc78ed}{00103}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }EventGroupDef\_t\ \ \ *\ \mbox{\hyperlink{event__groups_8h_acab96e0b6a5cab7f7b29822b79cc78ed}{EventGroupHandle\_t}};}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00105}00105\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00106}00106\ \textcolor{comment}{\ *\ The\ type\ that\ holds\ event\ bits\ always\ matches\ TickType\_t\ -\/\ therefore\ the}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00107}00107\ \textcolor{comment}{\ *\ number\ of\ bits\ it\ holds\ is\ set\ by\ configTICK\_TYPE\_WIDTH\_IN\_BITS\ (16\ bits\ if\ set\ to\ 0,}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00108}00108\ \textcolor{comment}{\ *\ 32\ bits\ if\ set\ to\ 1,\ 64\ bits\ if\ set\ to\ 2.}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00109}00109\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00110}00110\ \textcolor{comment}{\ *\ \(\backslash\)defgroup\ EventBits\_t\ EventBits\_t}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00111}00111\ \textcolor{comment}{\ *\ \(\backslash\)ingroup\ EventGroup}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00112}00112\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00113}\mbox{\hyperlink{event__groups_8h_ab2f21b93db0b2a0ab64d7a81ff32ac2e}{00113}}\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{event__groups_8h_ab2f21b93db0b2a0ab64d7a81ff32ac2e}{EventBits\_t}};}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00171}00171\ \textcolor{preprocessor}{\#if\ (\ configSUPPORT\_DYNAMIC\_ALLOCATION\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00172}00172\ \ \ \ \ \mbox{\hyperlink{event__groups_8h_acab96e0b6a5cab7f7b29822b79cc78ed}{EventGroupHandle\_t}}\ xEventGroupCreate(\ \textcolor{keywordtype}{void}\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00173}00173\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00228}00228\ \textcolor{preprocessor}{\#if\ (\ configSUPPORT\_STATIC\_ALLOCATION\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00229}00229\ \ \ \ \ \mbox{\hyperlink{event__groups_8h_acab96e0b6a5cab7f7b29822b79cc78ed}{EventGroupHandle\_t}}\ xEventGroupCreateStatic(\ \mbox{\hyperlink{_free_r_t_o_s_8h_af87e218149130753afb4a7044e5569e6}{StaticEventGroup\_t}}\ *\ pxEventGroupBuffer\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00230}00230\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00231}00231\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00328}\mbox{\hyperlink{event__groups_8h_aab9d5b405bc57b7624dcabe9a9a503db}{00328}}\ \mbox{\hyperlink{event__groups_8h_ab2f21b93db0b2a0ab64d7a81ff32ac2e}{EventBits\_t}}\ \mbox{\hyperlink{event__groups_8h_aab9d5b405bc57b7624dcabe9a9a503db}{xEventGroupWaitBits}}(\ \mbox{\hyperlink{event__groups_8h_acab96e0b6a5cab7f7b29822b79cc78ed}{EventGroupHandle\_t}}\ xEventGroup,}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00329}00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{event__groups_8h_ab2f21b93db0b2a0ab64d7a81ff32ac2e}{EventBits\_t}}\ uxBitsToWaitFor,}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00330}00330\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xClearOnExit,}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00331}00331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xWaitForAllBits,}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00332}00332\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xTicksToWait\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00333}00333\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00392}\mbox{\hyperlink{event__groups_8h_a0fb72cfdd4f0d5f86d955fc3af448f2a}{00392}}\ \mbox{\hyperlink{event__groups_8h_ab2f21b93db0b2a0ab64d7a81ff32ac2e}{EventBits\_t}}\ \mbox{\hyperlink{event__groups_8h_a0fb72cfdd4f0d5f86d955fc3af448f2a}{xEventGroupClearBits}}(\ \mbox{\hyperlink{event__groups_8h_acab96e0b6a5cab7f7b29822b79cc78ed}{EventGroupHandle\_t}}\ xEventGroup,}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00393}00393\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{event__groups_8h_ab2f21b93db0b2a0ab64d7a81ff32ac2e}{EventBits\_t}}\ uxBitsToClear\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00394}00394\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00455}00455\ \textcolor{preprocessor}{\#if\ (\ configUSE\_TRACE\_FACILITY\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00456}00456\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{event__groups_8h_a3d7de214a697f33fe7b914e26a93f33a}{xEventGroupClearBitsFromISR}}(\ \mbox{\hyperlink{event__groups_8h_acab96e0b6a5cab7f7b29822b79cc78ed}{EventGroupHandle\_t}}\ xEventGroup,}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00457}00457\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{event__groups_8h_ab2f21b93db0b2a0ab64d7a81ff32ac2e}{EventBits\_t}}\ uxBitsToClear\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00458}00458\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00459}\mbox{\hyperlink{event__groups_8h_a3d7de214a697f33fe7b914e26a93f33a}{00459}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ xEventGroupClearBitsFromISR(\ xEventGroup,\ uxBitsToClear\ )\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00460}00460\ \textcolor{preprocessor}{\ \ \ \ xTimerPendFunctionCallFromISR(\ vEventGroupClearBitsCallback,\ (\ void\ *\ )\ (\ xEventGroup\ ),\ (\ uint32\_t\ )\ (\ uxBitsToClear\ ),\ NULL\ )}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00461}00461\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00462}00462\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00538}\mbox{\hyperlink{event__groups_8h_a02d7b3bb55f7e11d9c47116266c5fb2e}{00538}}\ \mbox{\hyperlink{event__groups_8h_ab2f21b93db0b2a0ab64d7a81ff32ac2e}{EventBits\_t}}\ \mbox{\hyperlink{event__groups_8h_a02d7b3bb55f7e11d9c47116266c5fb2e}{xEventGroupSetBits}}(\ \mbox{\hyperlink{event__groups_8h_acab96e0b6a5cab7f7b29822b79cc78ed}{EventGroupHandle\_t}}\ xEventGroup,}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00539}00539\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{event__groups_8h_ab2f21b93db0b2a0ab64d7a81ff32ac2e}{EventBits\_t}}\ uxBitsToSet\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00540}00540\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00613}00613\ \textcolor{preprocessor}{\#if\ (\ configUSE\_TRACE\_FACILITY\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00614}00614\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{event__groups_8h_a62b68278abac6358369ae8e390988a02}{xEventGroupSetBitsFromISR}}(\ \mbox{\hyperlink{event__groups_8h_acab96e0b6a5cab7f7b29822b79cc78ed}{EventGroupHandle\_t}}\ xEventGroup,}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00615}00615\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{event__groups_8h_ab2f21b93db0b2a0ab64d7a81ff32ac2e}{EventBits\_t}}\ uxBitsToSet,}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00616}00616\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ *\ pxHigherPriorityTaskWoken\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00617}00617\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00618}\mbox{\hyperlink{event__groups_8h_a62b68278abac6358369ae8e390988a02}{00618}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ xEventGroupSetBitsFromISR(\ xEventGroup,\ uxBitsToSet,\ pxHigherPriorityTaskWoken\ )\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00619}00619\ \textcolor{preprocessor}{\ \ \ \ xTimerPendFunctionCallFromISR(\ vEventGroupSetBitsCallback,\ (\ void\ *\ )\ (\ xEventGroup\ ),\ (\ uint32\_t\ )\ (\ uxBitsToSet\ ),\ (\ pxHigherPriorityTaskWoken\ )\ )}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00620}00620\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00621}00621\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00749}\mbox{\hyperlink{event__groups_8h_a869511456b86426f52e2eec898bff341}{00749}}\ \mbox{\hyperlink{event__groups_8h_ab2f21b93db0b2a0ab64d7a81ff32ac2e}{EventBits\_t}}\ \mbox{\hyperlink{event__groups_8h_a869511456b86426f52e2eec898bff341}{xEventGroupSync}}(\ \mbox{\hyperlink{event__groups_8h_acab96e0b6a5cab7f7b29822b79cc78ed}{EventGroupHandle\_t}}\ xEventGroup,}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00750}00750\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{event__groups_8h_ab2f21b93db0b2a0ab64d7a81ff32ac2e}{EventBits\_t}}\ uxBitsToSet,}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00751}00751\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{event__groups_8h_ab2f21b93db0b2a0ab64d7a81ff32ac2e}{EventBits\_t}}\ uxBitsToWaitFor,}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00752}00752\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xTicksToWait\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00753}00753\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00754}00754\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00774}\mbox{\hyperlink{event__groups_8h_a0ae86f092fb07ccb475ae938f9a12584}{00774}}\ \textcolor{preprocessor}{\#define\ xEventGroupGetBits(\ xEventGroup\ )\ \ \ \ xEventGroupClearBits(\ (\ xEventGroup\ ),\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00775}00775\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00794}\mbox{\hyperlink{event__groups_8h_a95822db4357d0b77c35aed0c7427eca0}{00794}}\ \mbox{\hyperlink{event__groups_8h_ab2f21b93db0b2a0ab64d7a81ff32ac2e}{EventBits\_t}}\ \mbox{\hyperlink{event__groups_8h_a95822db4357d0b77c35aed0c7427eca0}{xEventGroupGetBitsFromISR}}(\ \mbox{\hyperlink{event__groups_8h_acab96e0b6a5cab7f7b29822b79cc78ed}{EventGroupHandle\_t}}\ xEventGroup\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00795}00795\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00811}\mbox{\hyperlink{event__groups_8h_a50cb52d1c81b063fd8d94f5293dcfea9}{00811}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{event__groups_8h_a50cb52d1c81b063fd8d94f5293dcfea9}{vEventGroupDelete}}(\ \mbox{\hyperlink{event__groups_8h_acab96e0b6a5cab7f7b29822b79cc78ed}{EventGroupHandle\_t}}\ xEventGroup\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00812}00812\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00833}00833\ \textcolor{preprocessor}{\#if\ (\ configSUPPORT\_STATIC\_ALLOCATION\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00834}00834\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xEventGroupGetStaticBuffer(\ \mbox{\hyperlink{event__groups_8h_acab96e0b6a5cab7f7b29822b79cc78ed}{EventGroupHandle\_t}}\ xEventGroup,}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00835}00835\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_af87e218149130753afb4a7044e5569e6}{StaticEventGroup\_t}}\ **\ ppxEventGroupBuffer\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00836}00836\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ configSUPPORT\_STATIC\_ALLOCATION\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00837}00837\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00838}00838\ \textcolor{comment}{/*\ For\ internal\ use\ only.\ */}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00839}\mbox{\hyperlink{event__groups_8h_a397c0bccc26d30811149c7576ea280bc}{00839}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{event__groups_8h_a397c0bccc26d30811149c7576ea280bc}{vEventGroupSetBitsCallback}}(\ \textcolor{keywordtype}{void}\ *\ pvEventGroup,}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00840}00840\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ ulBitsToSet\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00841}\mbox{\hyperlink{event__groups_8h_a2af5f8908b86ab806ea0dd519297e62c}{00841}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{event__groups_8h_a2af5f8908b86ab806ea0dd519297e62c}{vEventGroupClearBitsCallback}}(\ \textcolor{keywordtype}{void}\ *\ pvEventGroup,}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00842}00842\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ ulBitsToClear\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00843}00843\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00844}00844\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00845}00845\ \textcolor{preprocessor}{\#if\ (\ configUSE\_TRACE\_FACILITY\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00846}00846\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxEventGroupGetNumber(\ \textcolor{keywordtype}{void}\ *\ xEventGroup\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00847}00847\ \ \ \ \ \textcolor{keywordtype}{void}\ vEventGroupSetNumber(\ \textcolor{keywordtype}{void}\ *\ xEventGroup,}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00848}00848\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxEventGroupNumber\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00849}00849\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00850}00850\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00851}00851\ \textcolor{comment}{/*\ *INDENT-\/OFF*\ */}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00852}00852\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00853}00853\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00854}00854\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00855}00855\ \textcolor{comment}{/*\ *INDENT-\/ON*\ */}}
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00856}00856\ }
+\DoxyCodeLine{\Hypertarget{event__groups_8h_source_l00857}00857\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ EVENT\_GROUPS\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

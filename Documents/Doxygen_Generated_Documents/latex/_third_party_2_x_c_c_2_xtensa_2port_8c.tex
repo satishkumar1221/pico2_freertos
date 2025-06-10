@@ -1,0 +1,156 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+Third\+Party/\+XCC/\+Xtensa/port.c File Reference}
+\hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c}{}\label{_third_party_2_x_c_c_2_xtensa_2port_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/XCC/Xtensa/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/XCC/Xtensa/port.c}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$xtensa/config/core.\+h$>$}\newline
+{\ttfamily \#include "{}xtensa\+\_\+rtos.\+h"{}}\newline
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}task.\+h"{}}\newline
+Include dependency graph for port.\+c\+:
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_a3e243af33c76d040107af9edc95178e3}{\+\_\+frxt\+\_\+tick\+\_\+timer\+\_\+init}} (void)
+\item 
+void \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_a3d96ea7532f08fcad740d813eed0ecae}{\+\_\+xt\+\_\+coproc\+\_\+init}} (void)
+\item 
+void \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_af05e6fd1516ecc374e4599910c687cb5}{\+\_\+xt\+\_\+user\+\_\+exit}} (void)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}{px\+Port\+Initialise\+Stack}} (\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}px\+Top\+Of\+Stack, \mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}} px\+Code, void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\item 
+void \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{v\+Port\+End\+Scheduler}} (void)
+\begin{DoxyCompactList}\small\item\em End the Free\+RTOS scheduler. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{x\+Port\+Start\+Scheduler}} (void)
+\begin{DoxyCompactList}\small\item\em start the freertos scheduler, go to the first task \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_a2e8cefb0ee710ce43352a659110ba9f3}{x\+Port\+Sys\+Tick\+Handler}} (void)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+volatile \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_af5b0f7452857787ed70ce2856ca74c4b}{TCB\+\_\+t}} \texorpdfstring{$\ast$}{*}volatile \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_af7b1fc0a36e224b885fb22b9936a03a2}{px\+Current\+TCB}}
+\item 
+unsigned \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_a64d19974e3c0b65e6ee8093dbd1745d0}{port\+\_\+x\+Scheduler\+Running}} = 0
+\item 
+unsigned \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_ac7b2c6e121f6ac2a2f1e547daf8d0987}{port\+\_\+interrupt\+Nesting}} = 0
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_a3e243af33c76d040107af9edc95178e3}\index{port.c@{port.c}!\_frxt\_tick\_timer\_init@{\_frxt\_tick\_timer\_init}}
+\index{\_frxt\_tick\_timer\_init@{\_frxt\_tick\_timer\_init}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{\_frxt\_tick\_timer\_init()}{\_frxt\_tick\_timer\_init()}}
+{\footnotesize\ttfamily \label{_third_party_2_x_c_c_2_xtensa_2port_8c_a3e243af33c76d040107af9edc95178e3} 
+void \+\_\+frxt\+\_\+tick\+\_\+timer\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+
+Here is the caller graph for this function\+:
+% FIG 1
+\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_a3d96ea7532f08fcad740d813eed0ecae}\index{port.c@{port.c}!\_xt\_coproc\_init@{\_xt\_coproc\_init}}
+\index{\_xt\_coproc\_init@{\_xt\_coproc\_init}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{\_xt\_coproc\_init()}{\_xt\_coproc\_init()}}
+{\footnotesize\ttfamily \label{_third_party_2_x_c_c_2_xtensa_2port_8c_a3d96ea7532f08fcad740d813eed0ecae} 
+void \+\_\+xt\+\_\+coproc\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+
+\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_af05e6fd1516ecc374e4599910c687cb5}\index{port.c@{port.c}!\_xt\_user\_exit@{\_xt\_user\_exit}}
+\index{\_xt\_user\_exit@{\_xt\_user\_exit}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{\_xt\_user\_exit()}{\_xt\_user\_exit()}}
+{\footnotesize\ttfamily \label{_third_party_2_x_c_c_2_xtensa_2port_8c_af05e6fd1516ecc374e4599910c687cb5} 
+void \+\_\+xt\+\_\+user\+\_\+exit (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}\index{port.c@{port.c}!pxPortInitialiseStack@{pxPortInitialiseStack}}
+\index{pxPortInitialiseStack@{pxPortInitialiseStack}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{pxPortInitialiseStack()}{pxPortInitialiseStack()}}
+{\footnotesize\ttfamily \label{_third_party_2_x_c_c_2_xtensa_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} px\+Port\+Initialise\+Stack (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{px\+Top\+Of\+Stack}{, }\item[{\mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}}}]{px\+Code}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+px\+Top\+Of\+Stack = 0x11;
+
+px\+Top\+Of\+Stack = 0x22;
+
+px\+Top\+Of\+Stack = 0x33;
+
+Definition at line \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00067}{67}} of file \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}\index{port.c@{port.c}!vPortEndScheduler@{vPortEndScheduler}}
+\index{vPortEndScheduler@{vPortEndScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEndScheduler()}{vPortEndScheduler()}}
+{\footnotesize\ttfamily \label{_third_party_2_x_c_c_2_xtensa_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423} 
+void v\+Port\+End\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+End the Free\+RTOS scheduler. 
+
+Not implemented on this port. 
+
+Definition at line \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00129}{129}} of file \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}\index{port.c@{port.c}!xPortStartScheduler@{xPortStartScheduler}}
+\index{xPortStartScheduler@{xPortStartScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortStartScheduler()}{xPortStartScheduler()}}
+{\footnotesize\ttfamily \label{_third_party_2_x_c_c_2_xtensa_2port_8c_ade5a8c6666e7413a0355cc252029c5c6} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Start\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+start the freertos scheduler, go to the first task 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00137}{137}} of file \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_a2e8cefb0ee710ce43352a659110ba9f3}\index{port.c@{port.c}!xPortSysTickHandler@{xPortSysTickHandler}}
+\index{xPortSysTickHandler@{xPortSysTickHandler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortSysTickHandler()}{xPortSysTickHandler()}}
+{\footnotesize\ttfamily \label{_third_party_2_x_c_c_2_xtensa_2port_8c_a2e8cefb0ee710ce43352a659110ba9f3} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Sys\+Tick\+Handler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00167}{167}} of file \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\label{doc-var-members}
+\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_ac7b2c6e121f6ac2a2f1e547daf8d0987}\index{port.c@{port.c}!port\_interruptNesting@{port\_interruptNesting}}
+\index{port\_interruptNesting@{port\_interruptNesting}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{port\_interruptNesting}{port\_interruptNesting}}
+{\footnotesize\ttfamily \label{_third_party_2_x_c_c_2_xtensa_2port_8c_ac7b2c6e121f6ac2a2f1e547daf8d0987} 
+unsigned port\+\_\+interrupt\+Nesting = 0}
+
+
+
+Definition at line \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00054}{54}} of file \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_a64d19974e3c0b65e6ee8093dbd1745d0}\index{port.c@{port.c}!port\_xSchedulerRunning@{port\_xSchedulerRunning}}
+\index{port\_xSchedulerRunning@{port\_xSchedulerRunning}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{port\_xSchedulerRunning}{port\_xSchedulerRunning}}
+{\footnotesize\ttfamily \label{_third_party_2_x_c_c_2_xtensa_2port_8c_a64d19974e3c0b65e6ee8093dbd1745d0} 
+unsigned port\+\_\+x\+Scheduler\+Running = 0}
+
+
+
+Definition at line \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00053}{53}} of file \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_af7b1fc0a36e224b885fb22b9936a03a2}\index{port.c@{port.c}!pxCurrentTCB@{pxCurrentTCB}}
+\index{pxCurrentTCB@{pxCurrentTCB}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{pxCurrentTCB}{pxCurrentTCB}}
+{\footnotesize\ttfamily \label{_third_party_2_x_c_c_2_xtensa_2port_8c_af7b1fc0a36e224b885fb22b9936a03a2} 
+volatile \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_af5b0f7452857787ed70ce2856ca74c4b}{TCB\+\_\+t}}\texorpdfstring{$\ast$}{*} volatile px\+Current\+TCB\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_source_l00067}{67}} of file \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_source}{ISR\+\_\+\+Support.\+h}}.
+

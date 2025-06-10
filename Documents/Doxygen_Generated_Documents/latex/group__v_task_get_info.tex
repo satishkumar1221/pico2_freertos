@@ -1,0 +1,63 @@
+\doxysection{v\+Task\+Get\+Info }
+\hypertarget{group__v_task_get_info}{}\label{group__v_task_get_info}\index{vTaskGetInfo@{vTaskGetInfo}}
+task. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{task_8h_a1749369458e2282a22e862a619a3892c}{eTaskState}}\ eTaskGetState(\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xTask\ );}
+
+\end{DoxyCode}
+
+
+INCLUDE\+\_\+e\+Task\+Get\+State must be defined as 1 for this function to be available. See the configuration section for more information.
+
+Obtain the state of any task. States are encoded by the \doxylink{task_8h_a1749369458e2282a22e862a619a3892c}{e\+Task\+State} enumerated type.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Task} & Handle of the task to be queried.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The state of x\+Task at the time the function was called. Note the state of the task might change between the function being called, and the functions return value being tested by the calling task. task. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vTaskGetInfo(\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xTask,\ \mbox{\hyperlink{task_8h_ae5c0c4b9b2c8af5836583b2984ef5b6e}{TaskStatus\_t}}\ *pxTaskStatus,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xGetFreeStackSpace,\ \mbox{\hyperlink{task_8h_a1749369458e2282a22e862a619a3892c}{eTaskState}}\ eState\ );}
+
+\end{DoxyCode}
+
+\end{DoxyReturn}
+config\+USE\+\_\+\+TRACE\+\_\+\+FACILITY must be defined as 1 for this function to be available. See the configuration section for more information.
+
+Populates a \doxylink{task_8h_ae5c0c4b9b2c8af5836583b2984ef5b6e}{Task\+Status\+\_\+t} structure with information about a task.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Task} & Handle of the task being queried. If x\+Task is NULL then information will be returned about the calling task.\\
+\hline
+{\em px\+Task\+Status} & A pointer to the \doxylink{task_8h_ae5c0c4b9b2c8af5836583b2984ef5b6e}{Task\+Status\+\_\+t} structure that will be filled with information about the task referenced by the handle passed using the x\+Task parameter.\\
+\hline
+{\em x\+Get\+Free\+Stack\+Space} & The \doxylink{task_8h_ae5c0c4b9b2c8af5836583b2984ef5b6e}{Task\+Status\+\_\+t} structure contains a member to report the stack high water mark of the task being queried. Calculating the stack high water mark takes a relatively long time, and can make the system temporarily unresponsive -\/ so the x\+Get\+Free\+Stack\+Space parameter is provided to allow the high water mark checking to be skipped. The high watermark value will only be written to the \doxylink{task_8h_ae5c0c4b9b2c8af5836583b2984ef5b6e}{Task\+Status\+\_\+t} structure if x\+Get\+Free\+Stack\+Space is not set to pd\+FALSE;\\
+\hline
+{\em e\+State} & The \doxylink{task_8h_ae5c0c4b9b2c8af5836583b2984ef5b6e}{Task\+Status\+\_\+t} structure contains a member to report the state of the task being queried. Obtaining the task state is not as fast as a simple assignment -\/ so the e\+State parameter is provided to allow the state information to be omitted from the \doxylink{task_8h_ae5c0c4b9b2c8af5836583b2984ef5b6e}{Task\+Status\+\_\+t} structure. To obtain state information then set e\+State to e\+Invalid -\/ otherwise the value passed in e\+State will be reported as the task state in the \doxylink{task_8h_ae5c0c4b9b2c8af5836583b2984ef5b6e}{Task\+Status\+\_\+t} structure.\\
+\hline
+\end{DoxyParams}
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vAFunction(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xHandle;}
+\DoxyCodeLine{\mbox{\hyperlink{task_8h_ae5c0c4b9b2c8af5836583b2984ef5b6e}{TaskStatus\_t}}\ xTaskDetails;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Obtain\ the\ handle\ of\ a\ task\ from\ its\ name.}}
+\DoxyCodeLine{\ xHandle\ =\ xTaskGetHandle(\ \textcolor{stringliteral}{"{}Task\_Name"{}}\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Check\ the\ handle\ is\ not\ NULL.}}
+\DoxyCodeLine{\ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ xHandle\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Use\ the\ handle\ to\ obtain\ further\ information\ about\ the\ task.}}
+\DoxyCodeLine{\ vTaskGetInfo(\ xHandle,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&xTaskDetails,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}},\ \textcolor{comment}{//\ Include\ the\ high\ water\ mark\ in\ xTaskDetails.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{task_8h_a1749369458e2282a22e862a619a3892cab32c771bb60dc8b502f65b81eef3bd86}{eInvalid}}\ );\ \textcolor{comment}{//\ Include\ the\ task\ state\ in\ xTaskDetails.}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

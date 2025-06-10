@@ -1,0 +1,106 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+Code\+Warrior/\+HCS12/port.c File Reference}
+\hypertarget{_code_warrior_2_h_c_s12_2port_8c}{}\label{_code_warrior_2_h_c_s12_2port_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/CodeWarrior/HCS12/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/CodeWarrior/HCS12/port.c}}
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}task.\+h"{}}\newline
+Include dependency graph for port.\+c\+:
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_g_c_c_2_m_s_p430_f449_2portmacro_8h_a2f6ab53974aa8a49d2db66834c6f8922}{interrupt}} \mbox{\hyperlink{_code_warrior_2_h_c_s12_2port_8c_aad7fc9aa6bc470c8d84a4078eb29bb96}{v\+Port\+Yield}} (void)
+\begin{DoxyCompactList}\small\item\em Yield the CPU. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_m_s_p430_f449_2portmacro_8h_a2f6ab53974aa8a49d2db66834c6f8922}{interrupt}} \mbox{\hyperlink{_code_warrior_2_h_c_s12_2port_8c_ae536a48b8cb683c5474b383aa811fd3e}{v\+Port\+Tick\+Interrupt}} (void)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_code_warrior_2_h_c_s12_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}{px\+Port\+Initialise\+Stack}} (\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}px\+Top\+Of\+Stack, \mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}} px\+Code, void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\item 
+void \mbox{\hyperlink{_code_warrior_2_h_c_s12_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{v\+Port\+End\+Scheduler}} (void)
+\begin{DoxyCompactList}\small\item\em End the Free\+RTOS scheduler. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_code_warrior_2_h_c_s12_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{x\+Port\+Start\+Scheduler}} (void)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+volatile \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} \mbox{\hyperlink{_code_warrior_2_h_c_s12_2port_8c_abf3b0e1cd9ee0a23eaf382bd87ff0744}{ux\+Critical\+Nesting}} = 0xff
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{_code_warrior_2_h_c_s12_2port_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_code_warrior_2_h_c_s12_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}\index{port.c@{port.c}!pxPortInitialiseStack@{pxPortInitialiseStack}}
+\index{pxPortInitialiseStack@{pxPortInitialiseStack}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{pxPortInitialiseStack()}{pxPortInitialiseStack()}}
+{\footnotesize\ttfamily \label{_code_warrior_2_h_c_s12_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} px\+Port\+Initialise\+Stack (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{px\+Top\+Of\+Stack}{, }\item[{\mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}}}]{px\+Code}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_code_warrior_2_h_c_s12_2port_8c_source_l00076}{76}} of file \mbox{\hyperlink{_code_warrior_2_h_c_s12_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_code_warrior_2_h_c_s12_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}\index{port.c@{port.c}!vPortEndScheduler@{vPortEndScheduler}}
+\index{vPortEndScheduler@{vPortEndScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEndScheduler()}{vPortEndScheduler()}}
+{\footnotesize\ttfamily \label{_code_warrior_2_h_c_s12_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423} 
+void v\+Port\+End\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+End the Free\+RTOS scheduler. 
+
+Not implemented on this port. 
+
+Definition at line \mbox{\hyperlink{_code_warrior_2_h_c_s12_2port_8c_source_l00144}{144}} of file \mbox{\hyperlink{_code_warrior_2_h_c_s12_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_code_warrior_2_h_c_s12_2port_8c_ae536a48b8cb683c5474b383aa811fd3e}\index{port.c@{port.c}!vPortTickInterrupt@{vPortTickInterrupt}}
+\index{vPortTickInterrupt@{vPortTickInterrupt}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortTickInterrupt()}{vPortTickInterrupt()}}
+{\footnotesize\ttfamily \label{_code_warrior_2_h_c_s12_2port_8c_ae536a48b8cb683c5474b383aa811fd3e} 
+void v\+Port\+Tick\+Interrupt (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_code_warrior_2_h_c_s12_2port_8c_source_l00209}{209}} of file \mbox{\hyperlink{_code_warrior_2_h_c_s12_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{_code_warrior_2_h_c_s12_2port_8c_aad7fc9aa6bc470c8d84a4078eb29bb96}\index{port.c@{port.c}!vPortYield@{vPortYield}}
+\index{vPortYield@{vPortYield}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortYield()}{vPortYield()}}
+{\footnotesize\ttfamily \label{_code_warrior_2_h_c_s12_2port_8c_aad7fc9aa6bc470c8d84a4078eb29bb96} 
+void \mbox{\hyperlink{_g_c_c_2_m_s_p430_f449_2portmacro_8h_a2f6ab53974aa8a49d2db66834c6f8922}{interrupt}} v\+Port\+Yield (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Yield the CPU. 
+
+
+
+Definition at line \mbox{\hyperlink{_code_warrior_2_h_c_s12_2port_8c_source_l00196}{196}} of file \mbox{\hyperlink{_code_warrior_2_h_c_s12_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{_code_warrior_2_h_c_s12_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}\index{port.c@{port.c}!xPortStartScheduler@{xPortStartScheduler}}
+\index{xPortStartScheduler@{xPortStartScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortStartScheduler()}{xPortStartScheduler()}}
+{\footnotesize\ttfamily \label{_code_warrior_2_h_c_s12_2port_8c_ade5a8c6666e7413a0355cc252029c5c6} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Start\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_code_warrior_2_h_c_s12_2port_8c_source_l00157}{157}} of file \mbox{\hyperlink{_code_warrior_2_h_c_s12_2port_8c_source}{port.\+c}}.
+
+
+
+\label{doc-var-members}
+\Hypertarget{_code_warrior_2_h_c_s12_2port_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_code_warrior_2_h_c_s12_2port_8c_abf3b0e1cd9ee0a23eaf382bd87ff0744}\index{port.c@{port.c}!uxCriticalNesting@{uxCriticalNesting}}
+\index{uxCriticalNesting@{uxCriticalNesting}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{uxCriticalNesting}{uxCriticalNesting}}
+{\footnotesize\ttfamily \label{_code_warrior_2_h_c_s12_2port_8c_abf3b0e1cd9ee0a23eaf382bd87ff0744} 
+volatile \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} ux\+Critical\+Nesting = 0xff}
+
+
+
+Definition at line \mbox{\hyperlink{_code_warrior_2_h_c_s12_2port_8c_source_l00069}{69}} of file \mbox{\hyperlink{_code_warrior_2_h_c_s12_2port_8c_source}{port.\+c}}.
+

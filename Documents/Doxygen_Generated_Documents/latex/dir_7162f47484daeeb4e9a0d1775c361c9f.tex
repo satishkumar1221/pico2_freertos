@@ -1,0 +1,84 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/examples/coverity Directory Reference}
+\hypertarget{dir_7162f47484daeeb4e9a0d1775c361c9f}{}\label{dir_7162f47484daeeb4e9a0d1775c361c9f}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/examples/coverity Directory Reference@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/examples/coverity Directory Reference}}
+Directory dependency graph for coverity\+:
+% FIG 0
+\doxysubsubsection*{Files}
+\begin{DoxyCompactItemize}
+\item 
+file \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h}{Free\+RTOSConfig.\+h}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{README.md_autotoc_md0}{}\doxysubsection{\texorpdfstring{MISRA Compliance for Free\+RTOS-\/\+Kernel}{MISRA Compliance for Free\+RTOS-\/\+Kernel}}\label{README.md_autotoc_md0}
+Free\+RTOS-\/\+Kernel is MISRA C\+:2012 compliant. This directory contains a project to run \href{https://www.synopsys.com/software-integrity/security-testing/static-analysis-sast.html}{\texttt{Synopsys Coverity}} for checking MISRA compliance.
+
+\begin{quote}
+{\bfseries{Note}} Coverity version 2023.\+6.\+1 incorrectly infers the type of {\ttfamily pd\+TRUE} and {\ttfamily pd\+FALSE} as boolean because of their names, resulting in multiple false positive warnings about type mismatch. We replace {\ttfamily pd\+TRUE} with {\ttfamily pd\+PASS} and {\ttfamily pd\+FALSE} with {\ttfamily pd\+FAIL} to avoid these false positive warnings. This workaround will not be needed after Coverity fixes the issue of incorrectly inferring the type of {\ttfamily pd\+TRUE} and {\ttfamily pd\+FALSE} as boolean. \end{quote}
+
+
+Deviations from the MISRA C\+:2012 guidelines are documented in \doxysectlink{md__d_1_2_projects_2_raspberrypi__pico_2pico__freertos__final_2freertos__pico2_2pico__freertos_2d95867e26e90c362d774b53c9e57a66f}{MISRA.md}{0} and \href{coverity_misra.config}{\texttt{coverity\+\_\+misra.\+config}} files.\hypertarget{README.md_autotoc_md1}{}\doxysubsection{\texorpdfstring{Getting Started}{Getting Started}}\label{README.md_autotoc_md1}
+\hypertarget{README.md_autotoc_md2}{}\doxysubsubsection{\texorpdfstring{Prerequisites}{Prerequisites}}\label{README.md_autotoc_md2}
+Coverity can be run on any platform mentioned \href{https://sig-docs.synopsys.com/polaris/topics/c_coverity-compatible-platforms.html}{\texttt{here}}. The following are the prerequisites to generate coverity report\+:
+
+
+\begin{DoxyEnumerate}
+\item CMake version \texorpdfstring{$>$}{>} 3.\+13.\+0 (You can check whether you have this by typing {\ttfamily cmake -\/-\/version}).
+\item GCC compiler.
+\begin{DoxyItemize}
+\item See download and installation instructions \href{https://gcc.gnu.org/install/}{\texttt{here}}.
+\end{DoxyItemize}
+\item Clone the repo using the following command\+:
+\begin{DoxyItemize}
+\item {\ttfamily git clone \href{https://github.com/FreeRTOS/FreeRTOS-Kernel.git}{\texttt{https\+://github.\+com/\+Free\+RTOS/\+Free\+RTOS-\/\+Kernel.\+git}} ./\+Free\+RTOS-\/\+Kernel}
+\end{DoxyItemize}
+\end{DoxyEnumerate}\hypertarget{README.md_autotoc_md3}{}\doxysubsubsection{\texorpdfstring{Generating Report}{Generating Report}}\label{README.md_autotoc_md3}
+Go to the root directory of the Free\+RTOS-\/\+Kernel repo and run the following commands in a terminal\+:
+\begin{DoxyEnumerate}
+\item Update the compiler configuration in Coverity\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cov-\/configure\ -\/-\/force\ -\/-\/compiler\ cc\ -\/-\/comptype\ gcc}
+
+\end{DoxyCode}
+
+\item Create the build files using CMake in a {\ttfamily build} directory\+:
+\end{DoxyEnumerate}
+
+Singe core Free\+RTOS\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cmake\ -\/B\ build\ -\/S\ examples/coverity}
+
+\end{DoxyCode}
+
+
+SMP Free\+RTOS\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cmake\ -\/B\ build\ -\/S\ examples/coverity\ -\/DFREERTOS\_SMP\_EXAMPLE=1}
+
+\end{DoxyCode}
+
+\begin{DoxyEnumerate}
+\item Build the (pseudo) application\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ build/}
+\DoxyCodeLine{cov-\/build\ -\/-\/emit-\/complementary-\/info\ -\/-\/dir\ cov-\/out\ make\ coverity}
+
+\end{DoxyCode}
+
+\item Go to the Coverity output directory ({\ttfamily cov-\/out}) and begin Coverity static analysis\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cov-\/analyze\ -\/-\/dir\ ./cov-\/out\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/-\/coding-\/standard-\/config\ ../examples/coverity/coverity\_misra.config\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/-\/tu-\/pattern\ "{}file('[A-\/Za-\/z\_]+\(\backslash\).c')\ \&\&\ (\ !\ file('main.c')\ )\ \&\&\ (\ !\ file('port.c')\ )"{}}
+
+\end{DoxyCode}
+
+\item Generate the HTML report\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cov-\/format-\/errors\ -\/-\/dir\ ./cov-\/out\ -\/-\/html-\/output\ html-\/output}
+
+\end{DoxyCode}
+
+\end{DoxyEnumerate}
+
+HTML report should now be generated in a directory named {\ttfamily html-\/output}. 

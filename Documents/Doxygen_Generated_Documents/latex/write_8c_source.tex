@@ -1,0 +1,114 @@
+\doxysection{write.\+c}
+\hypertarget{write_8c_source}{}\label{write_8c_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/IAR/AVR32\_UC3/write.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/IAR/AVR32\_UC3/write.c}}
+\mbox{\hyperlink{write_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT\ AND\ BSD-\/3-\/Clause}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00029}00029\ \textcolor{comment}{/*This\ file\ is\ prepared\ for\ Doxygen\ automatic\ documentation\ generation.*/}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00046}00046\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00047}00047\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2007,\ Atmel\ Corporation\ All\ rights\ reserved.}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00048}00048\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00049}00049\ \textcolor{comment}{\ *\ Redistribution\ and\ use\ in\ source\ and\ binary\ forms,\ with\ or\ without}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00050}00050\ \textcolor{comment}{\ *\ modification,\ are\ permitted\ provided\ that\ the\ following\ conditions\ are\ met:}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00051}00051\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00052}00052\ \textcolor{comment}{\ *\ 1.\ Redistributions\ of\ source\ code\ must\ retain\ the\ above\ copyright\ notice,}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00053}00053\ \textcolor{comment}{\ *\ this\ list\ of\ conditions\ and\ the\ following\ disclaimer.}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00054}00054\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00055}00055\ \textcolor{comment}{\ *\ 2.\ Redistributions\ in\ binary\ form\ must\ reproduce\ the\ above\ copyright\ notice,}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00056}00056\ \textcolor{comment}{\ *\ this\ list\ of\ conditions\ and\ the\ following\ disclaimer\ in\ the\ documentation}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00057}00057\ \textcolor{comment}{\ *\ and/or\ other\ materials\ provided\ with\ the\ distribution.}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00058}00058\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00059}00059\ \textcolor{comment}{\ *\ 3.\ The\ name\ of\ ATMEL\ may\ not\ be\ used\ to\ endorse\ or\ promote\ products\ derived}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00060}00060\ \textcolor{comment}{\ *\ from\ this\ software\ without\ specific\ prior\ written\ permission.}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00061}00061\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00062}00062\ \textcolor{comment}{\ *\ THIS\ SOFTWARE\ IS\ PROVIDED\ BY\ ATMEL\ \`{}\`{}AS\ IS''\ AND\ ANY\ EXPRESS\ OR\ IMPLIED}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00063}00063\ \textcolor{comment}{\ *\ WARRANTIES,\ INCLUDING,\ BUT\ NOT\ LIMITED\ TO,\ THE\ IMPLIED\ WARRANTIES\ OF}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00064}00064\ \textcolor{comment}{\ *\ MERCHANTABILITY\ AND\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE\ ARE\ EXPRESSLY\ AND}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00065}00065\ \textcolor{comment}{\ *\ SPECIFICALLY\ DISCLAIMED.\ IN\ NO\ EVENT\ SHALL\ ATMEL\ BE\ LIABLE\ FOR\ ANY\ DIRECT,}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00066}00066\ \textcolor{comment}{\ *\ INDIRECT,\ INCIDENTAL,\ SPECIAL,\ EXEMPLARY,\ OR\ CONSEQUENTIAL\ DAMAGES}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00067}00067\ \textcolor{comment}{\ *\ (INCLUDING,\ BUT\ NOT\ LIMITED\ TO,\ PROCUREMENT\ OF\ SUBSTITUTE\ GOODS\ OR\ SERVICES;}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00068}00068\ \textcolor{comment}{\ *\ LOSS\ OF\ USE,\ DATA,\ OR\ PROFITS;\ OR\ BUSINESS\ INTERRUPTION)\ HOWEVER\ CAUSED\ AND}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00069}00069\ \textcolor{comment}{\ *\ ON\ ANY\ THEORY\ OF\ LIABILITY,\ WHETHER\ IN\ CONTRACT,\ STRICT\ LIABILITY,\ OR\ TORT}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00070}00070\ \textcolor{comment}{\ *\ (INCLUDING\ NEGLIGENCE\ OR\ OTHERWISE)\ ARISING\ IN\ ANY\ WAY\ OUT\ OF\ THE\ USE\ OF}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00071}00071\ \textcolor{comment}{\ *\ THIS\ SOFTWARE,\ EVEN\ IF\ ADVISED\ OF\ THE\ POSSIBILITY\ OF\ SUCH\ DAMAGE.}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00072}00072\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00075}00075\ \textcolor{preprocessor}{\#include\ <yfuns.h>}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00076}00076\ \textcolor{preprocessor}{\#include\ <avr32/io.h>}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00077}00077\ \textcolor{preprocessor}{\#include\ "{}usart.h"{}}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00080}00080\ \_STD\_BEGIN}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00083}00083\ \textcolor{preprocessor}{\#pragma\ module\_name\ =\ "{}?\_\_write"{}}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00087}\mbox{\hyperlink{read_8c_a353b888a8672d114546f480996688dec}{00087}}\ \_\_no\_init\ \textcolor{keyword}{volatile}\ avr32\_usart\_t\ *\ \textcolor{keyword}{volatile}\ \mbox{\hyperlink{read_8c_a353b888a8672d114546f480996688dec}{stdio\_usart\_base}};}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00103}\mbox{\hyperlink{write_8c_ad0145c89238a86c1b59c1d4a62bf29d8}{00103}}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{write_8c_ad0145c89238a86c1b59c1d4a62bf29d8}{\_\_write}}(\ \textcolor{keywordtype}{int}\ handle,}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *\ buffer,}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ size\ )}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00106}00106\ \{}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00107}00107\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ nChars\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00109}00109\ \ \ \ \ \textcolor{keywordflow}{if}(\ buffer\ ==\ 0\ )}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00110}00110\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00111}00111\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ This\ means\ that\ we\ should\ flush\ internal\ buffers.\ */}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00112}00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00113}00113\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00115}00115\ \ \ \ \ \textcolor{comment}{/*\ This\ implementation\ only\ writes\ to\ stdout\ and\ stderr.\ */}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00116}00116\ \ \ \ \ \textcolor{comment}{/*\ For\ all\ other\ file\ handles,\ it\ returns\ failure.\ */}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00117}00117\ \ \ \ \ \textcolor{keywordflow}{if}(\ (\ handle\ !=\ \_LLIO\_STDOUT\ )\ \&\&\ (\ handle\ !=\ \_LLIO\_STDERR\ )\ )}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00118}00118\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00119}00119\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_LLIO\_ERROR;}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00120}00120\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00122}00122\ \ \ \ \ \textcolor{keywordflow}{for}(\ ;\ size\ !=\ 0;\ -\/-\/size\ )}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00123}00123\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00124}00124\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ usart\_putchar(\ \mbox{\hyperlink{read_8c_a353b888a8672d114546f480996688dec}{stdio\_usart\_base}},\ *buffer++\ )\ <\ 0\ )}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00125}00125\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_LLIO\_ERROR;}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00127}00127\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00129}00129\ \ \ \ \ \ \ \ \ ++nChars;}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00130}00130\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00132}00132\ \ \ \ \ \textcolor{keywordflow}{return}\ nChars;}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00133}00133\ \}}
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{write_8c_source_l00136}00136\ \_STD\_END}
+
+\end{DoxyCode}

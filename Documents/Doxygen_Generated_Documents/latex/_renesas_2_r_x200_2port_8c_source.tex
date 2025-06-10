@@ -1,0 +1,328 @@
+\doxysection{port.\+c}
+\hypertarget{_renesas_2_r_x200_2port_8c_source}{}\label{_renesas_2_r_x200_2port_8c_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/Renesas/RX200/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/Renesas/RX200/port.c}}
+\mbox{\hyperlink{_renesas_2_r_x200_2port_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00029}00029\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00030}00030\ \textcolor{comment}{\ *\ Implementation\ of\ functions\ defined\ in\ portable.h\ for\ the\ RX200\ port.}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00031}00031\ \textcolor{comment}{\ *-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00033}00033\ \textcolor{comment}{/*\ Scheduler\ includes.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00034}00034\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_free_r_t_o_s_8h}{FreeRTOS.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00035}00035\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{task_8h}{task.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00037}00037\ \textcolor{comment}{/*\ Library\ includes.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00038}00038\ \textcolor{preprocessor}{\#include\ "{}string.h"{}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00040}00040\ \textcolor{comment}{/*\ Hardware\ specifics.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00041}00041\ \textcolor{preprocessor}{\#include\ "{}iodefine.h"{}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00043}00043\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00045}00045\ \textcolor{comment}{/*\ Tasks\ should\ start\ with\ interrupts\ enabled\ and\ in\ Supervisor\ mode,\ therefore}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00046}00046\ \textcolor{comment}{PSW\ is\ set\ with\ U\ and\ I\ set,\ and\ PM\ and\ IPL\ clear.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00047}\mbox{\hyperlink{_renesas_2_r_x200_2port_8c_a3b89bf729488db5c18a40f8a016e3838}{00047}}\ \textcolor{preprocessor}{\#define\ portINITIAL\_PSW\ \ \ \ \ (\ (\ StackType\_t\ )\ 0x00030000\ )}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00049}00049\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00051}00051\ \textcolor{comment}{/*\ The\ following\ lines\ are\ to\ ensure\ vSoftwareInterruptEntry\ can\ be\ referenced,}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00052}00052\ \textcolor{comment}{\ and\ therefore\ installed\ in\ the\ vector\ table,\ when\ the\ FreeRTOS\ code\ is\ built}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00053}00053\ \textcolor{comment}{as\ a\ library.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00054}00054\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{_renesas_2_r_x100_2port_8c_a7ade8bf6610b9a777396aee010d2c025}{vSoftwareInterruptEntry}};}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00055}\mbox{\hyperlink{_renesas_2_r_x200_2port_8c_a0aed5e7cfd612d9bef585820d17cf47f}{00055}}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ *\ \mbox{\hyperlink{_renesas_2_r_x100_2port_8c_a0aed5e7cfd612d9bef585820d17cf47f}{p\_vSoftwareInterruptEntry}}\ =\ \&\mbox{\hyperlink{_renesas_2_r_x100_2port_8c_a7ade8bf6610b9a777396aee010d2c025}{vSoftwareInterruptEntry}};}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00057}00057\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00059}00059\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00060}00060\ \textcolor{comment}{\ *\ Function\ to\ start\ the\ first\ task\ executing\ -\/\ written\ in\ asm\ code\ as\ direct}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00061}00061\ \textcolor{comment}{\ *\ access\ to\ registers\ is\ required.}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00062}00062\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00063}00063\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_i_a_r_2_r_x100_2port_8c_aa62e48aea4d4d2ad3426bd1243dbc72a}{prvStartFirstTask}}(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00065}00065\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00066}00066\ \textcolor{comment}{\ *\ Software\ interrupt\ handler.\ \ Performs\ the\ actual\ context\ switch\ (saving\ and}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00067}00067\ \textcolor{comment}{\ *\ restoring\ of\ registers).\ \ Written\ in\ asm\ code\ as\ direct\ register\ access\ is}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00068}00068\ \textcolor{comment}{\ *\ required.}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00069}00069\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00070}00070\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ prvYieldHandler(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00072}00072\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00073}00073\ \textcolor{comment}{\ *\ The\ entry\ point\ for\ the\ software\ interrupt\ handler.\ \ This\ is\ the\ function}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00074}00074\ \textcolor{comment}{\ *\ that\ calls\ the\ inline\ asm\ function\ prvYieldHandler().\ \ It\ is\ installed\ in}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00075}00075\ \textcolor{comment}{\ *\ the\ vector\ table,\ but\ the\ code\ that\ installs\ it\ is\ in\ prvYieldHandler\ rather}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00076}00076\ \textcolor{comment}{\ *\ than\ using\ a\ \#pragma.}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00077}00077\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00078}00078\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_c_c_2_r_x200_2port_8c_a05b8170f6114a4798593860395d9e8fd}{vSoftwareInterruptISR}}(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00080}00080\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00082}00082\ \textcolor{comment}{/*\ This\ is\ accessed\ by\ the\ inline\ assembler\ functions\ so\ is\ file\ scope\ for}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00083}00083\ \textcolor{comment}{convenience.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00084}00084\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ *\mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}};}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00085}\mbox{\hyperlink{_renesas_2_r_x200_2port_8c_a9c86137bc3c1cbffc39fff22627cb885}{00085}}\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_a9c86137bc3c1cbffc39fff22627cb885}{vTaskSwitchContext}}(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00087}00087\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00089}00089\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00090}00090\ \textcolor{comment}{\ *\ See\ header\ file\ for\ description.}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00091}00091\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00092}\mbox{\hyperlink{_renesas_2_r_x200_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}{00092}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_aaa2085423d917cf1707f4770de3354e2}{pxPortInitialiseStack}}(\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *pxTopOfStack,\ \mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{TaskFunction\_t}}\ pxCode,\ \textcolor{keywordtype}{void}\ *pvParameters\ )}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00093}00093\ \{}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00094}00094\ \ \ \ \ \textcolor{comment}{/*\ Offset\ to\ end\ up\ on\ 8\ byte\ boundary.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00095}00095\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00097}00097\ \ \ \ \ \textcolor{comment}{/*\ R0\ is\ not\ included\ as\ it\ is\ the\ stack\ pointer.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00098}00098\ \ \ \ \ *pxTopOfStack\ =\ 0x00;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00099}00099\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00100}00100\ \ \ \ \ *pxTopOfStack\ =\ 0x00;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00101}00101\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00102}00102\ \ \ \ \ *pxTopOfStack\ =\ \mbox{\hyperlink{_g_c_c_2_r_x100_2port_8c_a3b89bf729488db5c18a40f8a016e3838}{portINITIAL\_PSW}};}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00103}00103\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00104}00104\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ pxCode;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00106}00106\ \ \ \ \ \textcolor{comment}{/*\ When\ debugging\ it\ can\ be\ useful\ if\ every\ register\ is\ set\ to\ a\ known}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00107}00107\ \textcolor{comment}{\ \ \ \ value.\ \ Otherwise\ code\ space\ can\ be\ saved\ by\ just\ setting\ the\ registers}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00108}00108\ \textcolor{comment}{\ \ \ \ that\ need\ to\ be\ set.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00109}00109\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ USE\_FULL\_REGISTER\_INITIALISATION}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00110}00110\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00111}00111\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00112}00112\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ 0x12345678;\ \textcolor{comment}{/*\ r15.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00113}00113\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00114}00114\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ 0xaaaabbbb;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00115}00115\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00116}00116\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ 0xdddddddd;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00117}00117\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00118}00118\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ 0xcccccccc;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00119}00119\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00120}00120\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ 0xbbbbbbbb;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00121}00121\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00122}00122\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ 0xaaaaaaaa;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00123}00123\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00124}00124\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ 0x99999999;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00125}00125\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00126}00126\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ 0x88888888;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00127}00127\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00128}00128\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ 0x77777777;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00129}00129\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00130}00130\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ 0x66666666;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00131}00131\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00132}00132\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ 0x55555555;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00133}00133\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00134}00134\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ 0x44444444;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00135}00135\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00136}00136\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ 0x33333333;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00137}00137\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00138}00138\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ 0x22222222;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00139}00139\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00140}00140\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00141}00141\ \textcolor{preprocessor}{\ \ \ \ \#else}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00142}00142\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00143}00143\ \ \ \ \ \ \ \ \ pxTopOfStack\ -\/=\ 15;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00144}00144\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00145}00145\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00147}00147\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ pvParameters;\ \textcolor{comment}{/*\ R1\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00148}00148\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00149}00149\ \ \ \ \ *pxTopOfStack\ =\ 0x12345678;\ \textcolor{comment}{/*\ Accumulator.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00150}00150\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00151}00151\ \ \ \ \ *pxTopOfStack\ =\ 0x87654321;\ \textcolor{comment}{/*\ Accumulator.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00153}00153\ \ \ \ \ \textcolor{keywordflow}{return}\ pxTopOfStack;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00154}00154\ \}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00155}00155\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00157}\mbox{\hyperlink{_renesas_2_r_x200_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{00157}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{xPortStartScheduler}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00158}00158\ \{}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00159}00159\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2portmacro_8h_af6c61ea6aaa9367ebdc5348c1b121aa7}{vApplicationSetupTimerInterrupt}}(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00160}00160\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00161}00161\ \ \ \ \ \textcolor{comment}{/*\ Use\ pxCurrentTCB\ just\ so\ it\ does\ not\ get\ optimised\ away.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00162}00162\ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}}\ !=\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00163}00163\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00164}00164\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Call\ an\ application\ function\ to\ set\ up\ the\ timer\ that\ will\ generate\ the}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00165}00165\ \textcolor{comment}{\ \ \ \ \ \ \ \ tick\ interrupt.\ \ This\ way\ the\ application\ can\ decide\ which\ peripheral\ to}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00166}00166\ \textcolor{comment}{\ \ \ \ \ \ \ \ use.\ \ A\ demo\ application\ is\ provided\ to\ show\ a\ suitable\ example.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00167}00167\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2portmacro_8h_af6c61ea6aaa9367ebdc5348c1b121aa7}{vApplicationSetupTimerInterrupt}}();}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00169}00169\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Enable\ the\ software\ interrupt.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00170}00170\ \ \ \ \ \ \ \ \ \_IEN(\ \_ICU\_SWINT\ )\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00171}00171\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00172}00172\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Ensure\ the\ software\ interrupt\ is\ clear.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00173}00173\ \ \ \ \ \ \ \ \ \_IR(\ \_ICU\_SWINT\ )\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00175}00175\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Ensure\ the\ software\ interrupt\ is\ set\ to\ the\ kernel\ priority.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00176}00176\ \ \ \ \ \ \ \ \ \_IPR(\ \_ICU\_SWINT\ )\ =\ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_ac42cff506ad61d4174fa23e952e3225e}{configKERNEL\_INTERRUPT\_PRIORITY}};}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00177}00177\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00178}00178\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Start\ the\ first\ task.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00179}00179\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_i_a_r_2_r_x100_2port_8c_aa62e48aea4d4d2ad3426bd1243dbc72a}{prvStartFirstTask}}();}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00180}00180\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00181}00181\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00182}00182\ \ \ \ \ \textcolor{comment}{/*\ Just\ to\ make\ sure\ the\ function\ is\ not\ optimised\ away.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00183}00183\ \ \ \ \ (\ void\ )\ \mbox{\hyperlink{_g_c_c_2_r_x200_2port_8c_a05b8170f6114a4798593860395d9e8fd}{vSoftwareInterruptISR}}();}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00184}00184\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00185}00185\ \ \ \ \ \textcolor{comment}{/*\ Should\ not\ get\ here.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00186}00186\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{projdefs_8h_a99e2866c8cf4fe86db87dab62e7d6aa6}{pdFAIL}};}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00187}00187\ \}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00188}00188\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00190}00190\ \textcolor{preprocessor}{\#pragma\ inline\_asm\ prvStartFirstTask}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00191}00191\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_i_a_r_2_r_x100_2port_8c_aa62e48aea4d4d2ad3426bd1243dbc72a}{prvStartFirstTask}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00192}00192\ \{}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00193}00193\ \ \ \ \ \textcolor{comment}{/*\ When\ starting\ the\ scheduler\ there\ is\ nothing\ that\ needs\ moving\ to\ the}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00194}00194\ \textcolor{comment}{\ \ \ \ interrupt\ stack\ because\ the\ function\ is\ not\ called\ from\ an\ interrupt.}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00195}00195\ \textcolor{comment}{\ \ \ \ Just\ ensure\ the\ current\ stack\ is\ the\ user\ stack.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00196}00196\ \ \ \ \ SETPSW\ \ U}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00198}00198\ \ \ \ \ \textcolor{comment}{/*\ Obtain\ the\ location\ of\ the\ stack\ associated\ with\ which\ ever\ task}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00199}00199\ \textcolor{comment}{\ \ \ \ pxCurrentTCB\ is\ currently\ pointing\ to.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00200}00200\ \ \ \ \ MOV.L\ \ \ \#\mbox{\hyperlink{_rowley_2_m_s_p430_f449_2portasm_8h_a2e7047e7ca4988756191e5189dbf3b19}{\_pxCurrentTCB}},\ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00201}00201\ \ \ \ \ MOV.L\ \ \ [\mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}],\ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00202}00202\ \ \ \ \ MOV.L\ \ \ [\mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}],\ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_ab71e6f94394636766ac73443d5268517}{R0}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00204}00204\ \ \ \ \ \textcolor{comment}{/*\ Restore\ the\ registers\ from\ the\ stack\ of\ the\ task\ pointed\ to\ by}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00205}00205\ \textcolor{comment}{\ \ \ \ pxCurrentTCB.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00206}00206\ \ \ \ \ POP\ \ \ \ \ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00207}00207\ \ \ \ \ MVTACLO\ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Accumulator\ low\ 32\ bits.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00208}00208\ \ \ \ \ POP\ \ \ \ \ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00209}00209\ \ \ \ \ MVTACHI\ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Accumulator\ high\ 32\ bits.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00210}00210\ \ \ \ \ POPM\ \ \ \ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_afebe3aefd826311303c4ae706848e691}{R1}}-\/\mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}\ \ \ \ \ \ \textcolor{comment}{/*\ R1\ to\ R15\ -\/\ R0\ is\ not\ included\ as\ it\ is\ the\ SP.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00211}00211\ \ \ \ \ RTE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ This\ pops\ the\ remaining\ registers.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00212}00212\ \ \ \ \ NOP}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00213}00213\ \ \ \ \ NOP}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00214}00214\ \}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00215}00215\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00216}00216\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00217}00217\ \textcolor{preprocessor}{\#pragma\ interrupt\ (\ vTickISR(\ vect\ =\ \_VECT(\ configTICK\_VECTOR\ ),\ enable\ )\ )}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00218}\mbox{\hyperlink{_renesas_2_r_x200_2port_8c_a502142367426395ab5c401b99204b437}{00218}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_a502142367426395ab5c401b99204b437}{vTickISR}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00219}00219\ \{}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00220}00220\ \ \ \ \ \textcolor{comment}{/*\ Increment\ the\ tick,\ and\ perform\ any\ processing\ the\ new\ tick\ value}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00221}00221\ \textcolor{comment}{\ \ \ \ necessitates.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00222}00222\ \ \ \ \ set\_ipl(\ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_a54bfc31c410ee452577a25a4552c3704}{configMAX\_SYSCALL\_INTERRUPT\_PRIORITY}}\ );}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00223}00223\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00224}00224\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{task_8h_a978e25460ac35706f9ad30b46d9403d8}{xTaskIncrementTick}}()\ !=\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}}\ )}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00225}00225\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{task_8h_a767e474430db1e60056e9678763f9202}{taskYIELD}}();}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00227}00227\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00228}00228\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00229}00229\ \ \ \ \ set\_ipl(\ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_ac42cff506ad61d4174fa23e952e3225e}{configKERNEL\_INTERRUPT\_PRIORITY}}\ );}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00230}00230\ \}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00231}00231\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00233}\mbox{\hyperlink{_renesas_2_r_x200_2port_8c_a05b8170f6114a4798593860395d9e8fd}{00233}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_c_c_2_r_x200_2port_8c_a05b8170f6114a4798593860395d9e8fd}{vSoftwareInterruptISR}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00234}00234\ \{}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00235}00235\ \ \ \ \ prvYieldHandler();}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00236}00236\ \}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00237}00237\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00239}00239\ \textcolor{preprocessor}{\#pragma\ inline\_asm\ prvYieldHandler}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00240}00240\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ prvYieldHandler(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00241}00241\ \{}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00242}00242\ \ \ \ \ \textcolor{comment}{/*\ Re-\/enable\ interrupts.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00243}00243\ \ \ \ \ SETPSW\ \ I}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00245}00245\ \ \ \ \ \textcolor{comment}{/*\ Move\ the\ data\ that\ was\ automatically\ pushed\ onto\ the\ interrupt\ stack\ when}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00246}00246\ \textcolor{comment}{\ \ \ \ the\ interrupt\ occurred\ from\ the\ interrupt\ stack\ to\ the\ user\ stack.}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00247}00247\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00248}00248\ \textcolor{comment}{\ \ \ \ R15\ is\ saved\ before\ it\ is\ clobbered.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00249}00249\ \ \ \ \ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a551efa3573f442f9676984d3b220c981}{PUSH}}.L\ \ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00251}00251\ \ \ \ \ \textcolor{comment}{/*\ Read\ the\ user\ stack\ pointer.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00252}00252\ \ \ \ \ MVFC\ \ \ \ USP,\ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00253}00253\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00254}00254\ \ \ \ \ \textcolor{comment}{/*\ Move\ the\ address\ down\ to\ the\ data\ being\ moved.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00255}00255\ \ \ \ \ SUB\ \ \ \ \ \#12,\ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00256}00256\ \ \ \ \ MVTC\ \ \ \ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}},\ USP}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00257}00257\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00258}00258\ \ \ \ \ \textcolor{comment}{/*\ Copy\ the\ data\ across.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00259}00259\ \ \ \ \ MOV.L\ \ \ [\ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_ab71e6f94394636766ac73443d5268517}{R0}}\ ],\ [\ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}\ ]\ ;\ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00260}00260\ \ \ \ \ MOV.L\ \ \ 4[\ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_ab71e6f94394636766ac73443d5268517}{R0}}\ ],\ 4[\ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}\ ]\ \ ;\ \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_a8c2d0d370cca772111890ac230f68c35}{PC}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00261}00261\ \ \ \ \ MOV.L\ \ \ 8[\ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_ab71e6f94394636766ac73443d5268517}{R0}}\ ],\ 8[\ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}\ ]\ \ ;\ PSW}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00262}00262\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00263}00263\ \ \ \ \ \textcolor{comment}{/*\ Move\ the\ interrupt\ stack\ pointer\ to\ its\ new\ correct\ position.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00264}00264\ \ \ \ \ ADD\ \#12,\ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_ab71e6f94394636766ac73443d5268517}{R0}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00265}00265\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00266}00266\ \ \ \ \ \textcolor{comment}{/*\ All\ the\ rest\ of\ the\ registers\ are\ saved\ directly\ to\ the\ user\ stack.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00267}00267\ \ \ \ \ SETPSW\ \ U}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00268}00268\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00269}00269\ \ \ \ \ \textcolor{comment}{/*\ Save\ the\ rest\ of\ the\ general\ registers\ (R15\ has\ been\ saved\ already).\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00270}00270\ \ \ \ \ PUSHM\ \ \ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_afebe3aefd826311303c4ae706848e691}{R1}}-\/R14}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00271}00271\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00272}00272\ \ \ \ \ \textcolor{comment}{/*\ Save\ the\ accumulator.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00273}00273\ \ \ \ \ MVFACHI\ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00274}00274\ \ \ \ \ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a551efa3573f442f9676984d3b220c981}{PUSH}}.L\ \ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00275}00275\ \ \ \ \ MVFACMI\ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}\ ;\ Middle\ order\ word.}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00276}00276\ \ \ \ \ SHLL\ \ \ \ \#16,\ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}\ ;\ Shifted\ left\ as\ it\ is\ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_af2f370d74dc13a2aab506bfae16bf7d6}{restored}}\ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a2556ddfc4320378f314de3661ceed4c2}{to}}\ \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}}\ low\ order\ word.}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00277}00277\ \ \ \ \ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a551efa3573f442f9676984d3b220c981}{PUSH}}.L\ \ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00278}00278\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00279}00279\ \ \ \ \ \textcolor{comment}{/*\ Save\ the\ stack\ pointer\ to\ the\ TCB.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00280}00280\ \ \ \ \ MOV.L\ \ \ \#\mbox{\hyperlink{_rowley_2_m_s_p430_f449_2portasm_8h_a2e7047e7ca4988756191e5189dbf3b19}{\_pxCurrentTCB}},\ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00281}00281\ \ \ \ \ MOV.L\ \ \ [\ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}\ ],\ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00282}00282\ \ \ \ \ MOV.L\ \ \ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_ab71e6f94394636766ac73443d5268517}{R0}},\ [\ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}\ ]}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00283}00283\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00284}00284\ \ \ \ \ \textcolor{comment}{/*\ Ensure\ the\ interrupt\ mask\ is\ set\ to\ the\ syscall\ priority\ while\ the\ kernel}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00285}00285\ \textcolor{comment}{\ \ \ \ structures\ are\ being\ accessed.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00286}00286\ \ \ \ \ MVTIPL\ \ \#\mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_a54bfc31c410ee452577a25a4552c3704}{configMAX\_SYSCALL\_INTERRUPT\_PRIORITY}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00287}00287\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00288}00288\ \ \ \ \ \textcolor{comment}{/*\ Select\ the\ next\ task\ to\ run.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00289}00289\ \ \ \ \ BSR.A\ \ \ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a226358b264a150d2f301bd21a3009bd0}{\_vTaskSwitchContext}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00290}00290\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00291}00291\ \ \ \ \ \textcolor{comment}{/*\ Reset\ the\ interrupt\ mask\ as\ no\ more\ data\ structure\ access\ is\ required.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00292}00292\ \ \ \ \ MVTIPL\ \ \#\mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_ac42cff506ad61d4174fa23e952e3225e}{configKERNEL\_INTERRUPT\_PRIORITY}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00293}00293\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00294}00294\ \ \ \ \ \textcolor{comment}{/*\ Load\ the\ stack\ pointer\ of\ the\ task\ that\ is\ now\ selected\ as\ the\ Running}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00295}00295\ \textcolor{comment}{\ \ \ \ state\ task\ from\ its\ TCB.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00296}00296\ \ \ \ \ MOV.L\ \ \ \#\mbox{\hyperlink{_rowley_2_m_s_p430_f449_2portasm_8h_a2e7047e7ca4988756191e5189dbf3b19}{\_pxCurrentTCB}},\mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00297}00297\ \ \ \ \ MOV.L\ \ \ [\ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}\ ],\ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00298}00298\ \ \ \ \ MOV.L\ \ \ [\ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}\ ],\ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_ab71e6f94394636766ac73443d5268517}{R0}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00299}00299\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00300}00300\ \ \ \ \ \textcolor{comment}{/*\ Restore\ the\ context\ of\ the\ new\ task.\ \ The\ PSW\ (Program\ Status\ Word)\ and}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00301}00301\ \textcolor{comment}{\ \ \ \ PC\ will\ be\ popped\ by\ the\ RTE\ instruction.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00302}00302\ \ \ \ \ POP\ \ \ \ \ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00303}00303\ \ \ \ \ MVTACLO\ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00304}00304\ \ \ \ \ POP\ \ \ \ \ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00305}00305\ \ \ \ \ MVTACHI\ \mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00306}00306\ \ \ \ \ POPM\ \ \ \ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_afebe3aefd826311303c4ae706848e691}{R1}}-\/\mbox{\hyperlink{_softune_2_m_b91460_2port_8c_a6378fc0abfbcc34330b7246b3e6ac96b}{R15}}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00307}00307\ \ \ \ \ RTE}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00308}00308\ \ \ \ \ NOP}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00309}00309\ \ \ \ \ NOP}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00310}00310\ \}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00311}00311\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00312}00312\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00313}\mbox{\hyperlink{_renesas_2_r_x200_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{00313}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{vPortEndScheduler}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00314}00314\ \{}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00315}00315\ \ \ \ \ \textcolor{comment}{/*\ Not\ implemented\ in\ ports\ where\ there\ is\ nothing\ to\ return\ to.}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00316}00316\ \textcolor{comment}{\ \ \ \ Artificially\ force\ an\ assert.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00317}00317\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}}\ ==\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ );}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00318}00318\ }
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00319}00319\ \ \ \ \ \textcolor{comment}{/*\ The\ following\ line\ is\ just\ to\ prevent\ the\ symbol\ getting\ optimised\ away.\ */}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00320}00320\ \ \ \ \ (\ void\ )\ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_a9c86137bc3c1cbffc39fff22627cb885}{vTaskSwitchContext}}();}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00321}00321\ \}}
+\DoxyCodeLine{\Hypertarget{_renesas_2_r_x200_2port_8c_source_l00322}00322\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+
+\end{DoxyCode}

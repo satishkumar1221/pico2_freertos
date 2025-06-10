@@ -1,0 +1,72 @@
+\doxysection{x\+Co\+Routine\+Create }
+\hypertarget{group__x_co_routine_create}{}\label{group__x_co_routine_create}\index{xCoRoutineCreate@{xCoRoutineCreate}}
+croutine. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{croutine_8h_ae0e03637a3d2c134e9b52006f353d8c0}{xCoRoutineCreate}}(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{croutine_8h_ac1dc8634ed2f2698ca66545571a195c4}{crCOROUTINE\_CODE}}\ pxCoRoutineCode,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxPriority,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxIndex}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
+
+\end{DoxyCode}
+
+
+Create a new co-\/routine and add it to the list of co-\/routines that are ready to run.
+
+
+\begin{DoxyParams}{Parameters}
+{\em px\+Co\+Routine\+Code} & Pointer to the co-\/routine function. Co-\/routine functions require special syntax -\/ see the co-\/routine section of the WEB documentation for more information.\\
+\hline
+{\em ux\+Priority} & The priority with respect to other co-\/routines at which the co-\/routine will run.\\
+\hline
+{\em ux\+Index} & Used to distinguish between different co-\/routines that execute the same function. See the example below and the co-\/routine section of the WEB documentation for further information.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pd\+PASS if the co-\/routine was successfully created and added to a ready list, otherwise an error code defined with \doxylink{projdefs_8h}{Proj\+Defs.\+h}.
+\end{DoxyReturn}
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Co-\/routine\ to\ be\ created.}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vFlashCoRoutine(\ \mbox{\hyperlink{croutine_8h_a33b9d058688c92258155b5756d9936dd}{CoRoutineHandle\_t}}\ xHandle,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxIndex\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{//\ Variables\ in\ co-\/routines\ must\ be\ declared\ static\ if\ they\ must\ maintain\ value\ across\ a\ blocking\ call.}}
+\DoxyCodeLine{\textcolor{comment}{//\ This\ may\ not\ be\ necessary\ for\ const\ variables.}}
+\DoxyCodeLine{\textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ cLedToFlash[\ 2\ ]\ =\ \{\ 5,\ 6\ \};}
+\DoxyCodeLine{\textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ uxFlashRates[\ 2\ ]\ =\ \{\ 200,\ 400\ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Must\ start\ every\ co-\/routine\ with\ a\ call\ to\ crSTART();}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{croutine_8h_a19a57a201a325e8af1207ed68c4aedde}{crSTART}}(\ xHandle\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\ ;;\ )}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ This\ co-\/routine\ just\ delays\ for\ a\ fixed\ period,\ then\ toggles}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ an\ LED.\ \ Two\ co-\/routines\ are\ created\ using\ this\ function,\ so}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ the\ uxIndex\ parameter\ is\ used\ to\ tell\ the\ co-\/routine\ which}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ LED\ to\ flash\ and\ how\ int32\_t\ to\ delay.\ \ This\ assumes\ xQueue\ has}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ already\ been\ created.}}
+\DoxyCodeLine{\ \ \ \ \ \ vParTestToggleLED(\ cLedToFlash[\ uxIndex\ ]\ );}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{croutine_8h_a05a06feb11028f2d1d440ea335f562ba}{crDELAY}}(\ xHandle,\ uxFlashRates[\ uxIndex\ ]\ );}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Must\ end\ every\ co-\/routine\ with\ a\ call\ to\ crEND();}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{croutine_8h_ae6038cc976689b50000475ebfc4e2f23}{crEND}}();}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Function\ that\ creates\ two\ co-\/routines.}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vOtherFunction(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{uint8\_t\ ucParameterToPass;}
+\DoxyCodeLine{\mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xHandle;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Create\ two\ co-\/routines\ at\ priority\ 0.\ \ The\ first\ is\ given\ index\ 0}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ so\ (from\ the\ code\ above)\ toggles\ LED\ 5\ every\ 200\ ticks.\ \ The\ second}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ is\ given\ index\ 1\ so\ toggles\ LED\ 6\ every\ 400\ ticks.}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\ uxIndex\ =\ 0;\ uxIndex\ <\ 2;\ uxIndex++\ )}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{croutine_8h_ae0e03637a3d2c134e9b52006f353d8c0}{xCoRoutineCreate}}(\ vFlashCoRoutine,\ 0,\ uxIndex\ );}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

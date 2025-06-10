@@ -1,0 +1,51 @@
+\doxysection{v\+Task\+Resume }
+\hypertarget{group__v_task_resume}{}\label{group__v_task_resume}\index{vTaskResume@{vTaskResume}}
+task. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{task_8h_a84a1584f29fb7736a1aa72ad5b3e9b44}{vTaskResume}}(\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xTaskToResume\ );}
+
+\end{DoxyCode}
+
+
+INCLUDE\+\_\+v\+Task\+Suspend must be defined as 1 for this function to be available. See the configuration section for more information.
+
+Resumes a suspended task.
+
+A task that has been suspended by one or more calls to v\+Task\+Suspend () will be made available for running again by a single call to v\+Task\+Resume ().
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Task\+To\+Resume} & Handle to the task being readied.\\
+\hline
+\end{DoxyParams}
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vAFunction(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xHandle;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Create\ a\ task,\ storing\ the\ handle.}}
+\DoxyCodeLine{\ \ xTaskCreate(\ vTaskCode,\ \textcolor{stringliteral}{"{}NAME"{}},\ STACK\_SIZE,\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}},\ \mbox{\hyperlink{task_8h_a94ed0b9b3b4e8ccc859c322f18583e67}{tskIDLE\_PRIORITY}},\ \&xHandle\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ ...}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Use\ the\ handle\ to\ suspend\ the\ created\ task.}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{task_8h_a84d4e660b04630be2939d91b3c2412f8}{vTaskSuspend}}(\ xHandle\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ ...}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ The\ created\ task\ will\ not\ run\ during\ this\ period,\ unless}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ another\ task\ calls\ vTaskResume(\ xHandle\ ).}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//...}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Resume\ the\ suspended\ task\ ourselves.}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{task_8h_a84a1584f29fb7736a1aa72ad5b3e9b44}{vTaskResume}}(\ xHandle\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ The\ created\ task\ will\ once\ again\ get\ microcontroller\ processing}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ time\ in\ accordance\ with\ its\ priority\ within\ the\ system.}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

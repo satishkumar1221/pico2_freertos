@@ -1,0 +1,178 @@
+\doxysection{port\+\_\+systick.\+c}
+\hypertarget{port__systick_8c_source}{}\label{port__systick_8c_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/Xtensa\_ESP32/port\_systick.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/Xtensa\_ESP32/port\_systick.c}}
+\mbox{\hyperlink{port__systick_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00002}00002\ \textcolor{comment}{\ *\ SPDX-\/FileCopyrightText:\ 2017-\/2022\ Espressif\ Systems\ (Shanghai)\ CO\ LTD}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00003}00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00004}00004\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00005}00005\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}soc/cpu.h"{}}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_free_r_t_o_s_8h}{FreeRTOS.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{task_8h}{task.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}esp\_intr\_alloc.h"{}}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}esp\_err.h"{}}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}esp\_log.h"{}}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}sdkconfig.h"{}}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00016}00016\ \textcolor{preprocessor}{\#ifdef\ CONFIG\_FREERTOS\_SYSTICK\_USES\_SYSTIMER}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00017}00017\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}soc/periph\_defs.h"{}}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00018}00018\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}soc/system\_reg.h"{}}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00019}00019\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}hal/systimer\_hal.h"{}}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00020}00020\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}hal/systimer\_ll.h"{}}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00021}00021\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00023}00023\ \textcolor{preprocessor}{\#ifdef\ CONFIG\_PM\_TRACE}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00024}00024\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}esp\_private/pm\_trace.h"{}}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00025}00025\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//CONFIG\_PM\_TRACE}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00027}00027\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{port__systick_8c_a2e8cefb0ee710ce43352a659110ba9f3}{xPortSysTickHandler}}(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00029}00029\ \textcolor{preprocessor}{\#ifdef\ CONFIG\_FREERTOS\_SYSTICK\_USES\_CCOUNT}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00030}00030\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_a3e243af33c76d040107af9edc95178e3}{\_frxt\_tick\_timer\_init}}(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00031}00031\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_c_c_2_xtensa___e_s_p32_2include_2xtensa__timer_8h_a698fa42e858f9941700aafc5bb68a6c9}{\_xt\_tick\_divisor\_init}}(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00033}00033\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ CONFIG\_FREERTOS\_CORETIMER\_0}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00034}00034\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ SYSTICK\_INTR\_ID\ \ \ \ (\ ETS\_INTERNAL\_TIMER0\_INTR\_SOURCE\ +\ ETS\_INTERNAL\_INTR\_SOURCE\_OFF\ )}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00035}00035\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00036}00036\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ CONFIG\_FREERTOS\_CORETIMER\_1}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00037}00037\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ SYSTICK\_INTR\_ID\ \ \ \ (\ ETS\_INTERNAL\_TIMER1\_INTR\_SOURCE\ +\ ETS\_INTERNAL\_INTR\_SOURCE\_OFF\ )}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00038}00038\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00044}00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{port__systick_8h_aff27f87c3d302bf0a1cbf2800b8db145}{vPortSetupTimer}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00045}00045\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Init\ the\ tick\ divisor\ value\ */}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00047}00047\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_g_c_c_2_xtensa___e_s_p32_2include_2xtensa__timer_8h_a698fa42e858f9941700aafc5bb68a6c9}{\_xt\_tick\_divisor\_init}}();}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00049}00049\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_a3e243af33c76d040107af9edc95178e3}{\_frxt\_tick\_timer\_init}}();}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00050}00050\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00053}00053\ \textcolor{preprocessor}{\#elif\ CONFIG\_FREERTOS\_SYSTICK\_USES\_SYSTIMER}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00055}00055\ \ \ \ \ \textcolor{keyword}{\_Static\_assert}(\ SOC\_CPU\_CORES\_NUM\ <=\ SOC\_SYSTIMER\_ALARM\_NUM\ -\/\ 1,\ \textcolor{stringliteral}{"{}the\ number\ of\ cores\ must\ match\ the\ number\ of\ core\ alarms\ in\ SYSTIMER"{}}\ );}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00057}00057\ \ \ \ \ \textcolor{keywordtype}{void}\ SysTickIsrHandler(\ \textcolor{keywordtype}{void}\ *\ arg\ );}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00059}00059\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ s\_handled\_systicks[\ portNUM\_PROCESSORS\ ]\ =\ \{\ 0\ \};}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00061}00061\ \textcolor{preprocessor}{\ \ \ \ \#define\ SYSTICK\_INTR\_ID\ \ \ \ (\ ETS\_SYSTIMER\_TARGET0\_EDGE\_INTR\_SOURCE\ )}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00070}00070\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{port__systick_8h_aff27f87c3d302bf0a1cbf2800b8db145}{vPortSetupTimer}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00071}00071\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ cpuid\ =\ xPortGetCoreID();}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00074}00074\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#ifdef\ CONFIG\_FREERTOS\_CORETIMER\_SYSTIMER\_LVL3}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ level\ =\ ESP\_INTR\_FLAG\_LEVEL3;}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00076}00076\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#else}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ level\ =\ ESP\_INTR\_FLAG\_LEVEL1;}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00078}00078\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Systimer\ HAL\ layer\ object\ */}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00080}00080\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ systimer\_hal\_context\_t\ systimer\_hal;}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00081}00081\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ set\ system\ timer\ interrupt\ vector\ */}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00082}00082\ \ \ \ \ \ \ \ \ ESP\_ERROR\_CHECK(\ esp\_intr\_alloc(\ ETS\_SYSTIMER\_TARGET0\_EDGE\_INTR\_SOURCE\ +\ cpuid,\ ESP\_INTR\_FLAG\_IRAM\ |\ level,\ SysTickIsrHandler,\ \&systimer\_hal,\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )\ );}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00084}00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ cpuid\ ==\ 0\ )}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00085}00085\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ systimer\_hal\_init(\ \&systimer\_hal\ );}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ systimer\_ll\_set\_counter\_value(\ systimer\_hal.dev,\ SYSTIMER\_LL\_COUNTER\_OS\_TICK,\ 0\ );}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ systimer\_ll\_apply\_counter\_value(\ systimer\_hal.dev,\ SYSTIMER\_LL\_COUNTER\_OS\_TICK\ );}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\ cpuid\ =\ 0;\ cpuid\ <\ SOC\_CPU\_CORES\_NUM;\ cpuid++\ )}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ systimer\_hal\_counter\_can\_stall\_by\_cpu(\ \&systimer\_hal,\ SYSTIMER\_LL\_COUNTER\_OS\_TICK,\ cpuid,\ \textcolor{keyword}{false}\ );}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\ cpuid\ =\ 0;\ cpuid\ <\ portNUM\_PROCESSORS;\ ++cpuid\ )}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ alarm\_id\ =\ SYSTIMER\_LL\_ALARM\_OS\_TICK\_CORE0\ +\ cpuid;}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ configure\ the\ timer\ */}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ systimer\_hal\_connect\_alarm\_counter(\ \&systimer\_hal,\ alarm\_id,\ SYSTIMER\_LL\_COUNTER\_OS\_TICK\ );}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ systimer\_hal\_set\_alarm\_period(\ \&systimer\_hal,\ alarm\_id,\ 1000000UL\ /\ CONFIG\_FREERTOS\_HZ\ );}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ systimer\_hal\_select\_alarm\_mode(\ \&systimer\_hal,\ alarm\_id,\ SYSTIMER\_ALARM\_MODE\_PERIOD\ );}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ systimer\_hal\_counter\_can\_stall\_by\_cpu(\ \&systimer\_hal,\ SYSTIMER\_LL\_COUNTER\_OS\_TICK,\ cpuid,\ \textcolor{keyword}{true}\ );}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ cpuid\ ==\ 0\ )}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ systimer\_hal\_enable\_alarm\_int(\ \&systimer\_hal,\ alarm\_id\ );}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ systimer\_hal\_enable\_counter(\ \&systimer\_hal,\ SYSTIMER\_LL\_COUNTER\_OS\_TICK\ );}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00109}00109\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#ifndef\ CONFIG\_FREERTOS\_UNICORE}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ SysTick\ of\ core\ 0\ and\ core\ 1\ are\ shifted\ by\ half\ of\ period\ */}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ systimer\_hal\_counter\_value\_advance(\ \&systimer\_hal,\ SYSTIMER\_LL\_COUNTER\_OS\_TICK,\ 1000000UL\ /\ CONFIG\_FREERTOS\_HZ\ /\ 2\ );}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00112}00112\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00115}00115\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00116}00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00117}00117\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ alarm\_id\ =\ SYSTIMER\_LL\_ALARM\_OS\_TICK\_CORE0\ +\ cpuid;}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ systimer\_hal\_enable\_alarm\_int(\ \&systimer\_hal,\ alarm\_id\ );}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00120}00120\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00121}00121\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00129}00129\ \ \ \ \ IRAM\_ATTR\ \textcolor{keywordtype}{void}\ SysTickIsrHandler(\ \textcolor{keywordtype}{void}\ *\ arg\ )}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00130}00130\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00131}00131\ \ \ \ \ \ \ \ \ uint32\_t\ cpuid\ =\ xPortGetCoreID();}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00132}00132\ \ \ \ \ \ \ \ \ systimer\_hal\_context\_t\ *\ systimer\_hal\ =\ (\ systimer\_hal\_context\_t\ *\ )\ arg;}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00134}00134\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#ifdef\ CONFIG\_PM\_TRACE}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ ESP\_PM\_TRACE\_ENTER(\ TICK,\ cpuid\ );}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00136}00136\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00138}00138\ \ \ \ \ \ \ \ \ uint32\_t\ alarm\_id\ =\ SYSTIMER\_LL\_ALARM\_OS\_TICK\_CORE0\ +\ cpuid;}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00140}00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00141}00141\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ systimer\_ll\_clear\_alarm\_int(\ systimer\_hal-\/>dev,\ alarm\_id\ );}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ diff\ =\ systimer\_hal\_get\_counter\_value(\ systimer\_hal,\ SYSTIMER\_LL\_COUNTER\_OS\_TICK\ )\ /\ systimer\_ll\_get\_alarm\_period(\ systimer\_hal-\/>dev,\ alarm\_id\ )\ -\/\ s\_handled\_systicks[\ cpuid\ ];}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ diff\ >\ 0\ )}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ s\_handled\_systicks[\ cpuid\ ]\ ==\ 0\ )}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ s\_handled\_systicks[\ cpuid\ ]\ =\ diff;}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ diff\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ s\_handled\_systicks[\ cpuid\ ]\ +=\ diff;}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00157}00157\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{port__systick_8c_a2e8cefb0ee710ce43352a659110ba9f3}{xPortSysTickHandler}}();}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}(\ -\/-\/diff\ );}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00163}00163\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}(\ systimer\_ll\_is\_alarm\_int\_fired(\ systimer\_hal-\/>dev,\ alarm\_id\ )\ );}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00165}00165\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#ifdef\ CONFIG\_PM\_TRACE}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ ESP\_PM\_TRACE\_EXIT(\ TICK,\ cpuid\ );}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00167}00167\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00168}00168\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00170}00170\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ CONFIG\_FREERTOS\_SYSTICK\_USES\_CCOUNT}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00171}00171\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00180}\mbox{\hyperlink{port__systick_8c_a2e8cefb0ee710ce43352a659110ba9f3}{00180}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{port__systick_8c_a2e8cefb0ee710ce43352a659110ba9f3}{xPortSysTickHandler}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00181}00181\ \{}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00182}00182\ \ \ \ \ \mbox{\hyperlink{_g_c_c_2_xtensa___e_s_p32_2include_2portbenchmark_8h_ac1b77f776e89914c4b217df8e03ad10d}{portbenchmarkIntLatency}}();}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00183}00183\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_ad4befa2ec2c1b3f6cb307b59ca04948b}{traceISR\_ENTER}}(\ SYSTICK\_INTR\_ID\ );}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00184}00184\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_ac252abdd57e002f8fa2085164a5b42b5}{ret}}\ =\ \mbox{\hyperlink{task_8h_a978e25460ac35706f9ad30b46d9403d8}{xTaskIncrementTick}}();}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00186}00186\ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_ac252abdd57e002f8fa2085164a5b42b5}{ret}}\ !=\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}}\ )}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00187}00187\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00188}00188\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_a1a9a26c417bef58f9ba1b0e77292f78d}{traceISR\_EXIT\_TO\_SCHEDULER}}();}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00189}00189\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_aac6850c66595efdc02a8bbb95fb4648e}{portYIELD\_FROM\_ISR}}();}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00190}00190\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00191}00191\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00192}00192\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00193}00193\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_a705a6289c9bbd73b2444f42aaf926d67}{traceISR\_EXIT}}();}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00194}00194\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00195}00195\ }
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00196}00196\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_ac252abdd57e002f8fa2085164a5b42b5}{ret}};}
+\DoxyCodeLine{\Hypertarget{port__systick_8c_source_l00197}00197\ \}}
+
+\end{DoxyCode}

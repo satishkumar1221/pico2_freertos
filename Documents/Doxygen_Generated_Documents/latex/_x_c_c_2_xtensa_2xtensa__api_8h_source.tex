@@ -1,0 +1,133 @@
+\doxysection{xtensa\+\_\+api.\+h}
+\hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source}{}\label{_x_c_c_2_xtensa_2xtensa__api_8h_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/XCC/Xtensa/xtensa\_api.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/XCC/Xtensa/xtensa\_api.h}}
+\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__api_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00001}00001\ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2015-\/2019\ Cadence\ Design\ Systems,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00004}00004\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00005}00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00006}00006\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00007}00007\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00008}00008\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00009}00009\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00010}00010\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00011}00011\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00012}00012\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00013}00013\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00014}00014\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00015}00015\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00016}00016\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00017}00017\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00018}00018\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00019}00019\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00020}00020\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00021}00021\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00022}00022\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00023}00023\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00024}00024\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00025}00025\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00026}00026\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00027}00027\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00028}00028\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00030}00030\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00031}00031\ \textcolor{comment}{\ *\ Xtensa-\/specific\ API\ for\ RTOS\ ports.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00032}00032\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00034}00034\ \textcolor{preprocessor}{\#ifndef\ \_\_XTENSA\_API\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00035}00035\ \textcolor{preprocessor}{\#define\ \_\_XTENSA\_API\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00037}00037\ \textcolor{preprocessor}{\#include\ <xtensa/hal.h>}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00039}00039\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h}{xtensa\_context.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00042}00042\ \textcolor{comment}{/*\ Typedef\ for\ C-\/callable\ interrupt\ handler\ function\ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00043}\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__api_8h_a831144a6bf94d7bacd1208c727c74b38}{00043}}\ \textcolor{keyword}{typedef}\ void\ (*\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__api_8h_a831144a6bf94d7bacd1208c727c74b38}{xt\_handler}})(\textcolor{keywordtype}{void}\ *);}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00045}00045\ \textcolor{comment}{/*\ Typedef\ for\ C-\/callable\ exception\ handler\ function\ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00046}\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__api_8h_a216adb513d8421eb21949c888ad95bb2}{00046}}\ \textcolor{keyword}{typedef}\ void\ (*\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__api_8h_a216adb513d8421eb21949c888ad95bb2}{xt\_exc\_handler}})(XtExcFrame\ *);}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00049}00049\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00050}00050\ \textcolor{comment}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00051}00051\ \textcolor{comment}{\ \ Call\ this\ function\ to\ set\ a\ handler\ for\ the\ specified\ exception.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00052}00052\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00053}00053\ \textcolor{comment}{\ \ \ \ n\ \ \ \ \ \ \ \ -\/\ Exception\ number\ (type)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00054}00054\ \textcolor{comment}{\ \ \ \ f\ \ \ \ \ \ \ \ -\/\ Handler\ function\ address,\ NULL\ to\ uninstall\ handler.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00055}00055\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00056}00056\ \textcolor{comment}{\ \ The\ handler\ will\ be\ passed\ a\ pointer\ to\ the\ exception\ frame,\ which\ is\ created}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00057}00057\ \textcolor{comment}{\ \ on\ the\ stack\ of\ the\ thread\ that\ caused\ the\ exception.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00058}00058\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00059}00059\ \textcolor{comment}{\ \ If\ the\ handler\ returns,\ the\ thread\ context\ will\ be\ restored\ and\ the\ faulting}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00060}00060\ \textcolor{comment}{\ \ instruction\ will\ be\ retried.\ Any\ values\ in\ the\ exception\ frame\ that\ are}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00061}00061\ \textcolor{comment}{\ \ modified\ by\ the\ handler\ will\ be\ restored\ as\ part\ of\ the\ context.\ For\ details}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00062}00062\ \textcolor{comment}{\ \ of\ the\ exception\ frame\ structure\ see\ xtensa\_context.h.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00063}00063\ \textcolor{comment}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00064}00064\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00065}\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__api_8h_ae2d4d1bc14c0f1adadbe8d1033c6ce7f}{00065}}\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__api_8h_a216adb513d8421eb21949c888ad95bb2}{xt\_exc\_handler}}\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__api_8h_ae2d4d1bc14c0f1adadbe8d1033c6ce7f}{xt\_set\_exception\_handler}}(\textcolor{keywordtype}{int}\ n,\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__api_8h_a216adb513d8421eb21949c888ad95bb2}{xt\_exc\_handler}}\ f);}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00068}00068\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00069}00069\ \textcolor{comment}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00070}00070\ \textcolor{comment}{\ \ Call\ this\ function\ to\ set\ a\ handler\ for\ the\ specified\ interrupt.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00071}00071\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00072}00072\ \textcolor{comment}{\ \ \ \ n\ \ \ \ \ \ \ \ -\/\ Interrupt\ number.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00073}00073\ \textcolor{comment}{\ \ \ \ f\ \ \ \ \ \ \ \ -\/\ Handler\ function\ address,\ NULL\ to\ uninstall\ handler.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00074}00074\ \textcolor{comment}{\ \ \ \ arg\ \ \ \ \ \ -\/\ Argument\ to\ be\ passed\ to\ handler.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00075}00075\ \textcolor{comment}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00076}00076\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00077}\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__api_8h_a62231e0a756d29c7aedebe9999d813c5}{00077}}\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__api_8h_a831144a6bf94d7bacd1208c727c74b38}{xt\_handler}}\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__api_8h_a62231e0a756d29c7aedebe9999d813c5}{xt\_set\_interrupt\_handler}}(\textcolor{keywordtype}{int}\ n,\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__api_8h_a831144a6bf94d7bacd1208c727c74b38}{xt\_handler}}\ f,\ \textcolor{keywordtype}{void}\ *\ arg);}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00080}00080\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00081}00081\ \textcolor{comment}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00082}00082\ \textcolor{comment}{\ \ Call\ this\ function\ to\ enable\ the\ specified\ interrupts.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00083}00083\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00084}00084\ \textcolor{comment}{\ \ \ \ mask\ \ \ \ \ -\/\ Bit\ mask\ of\ interrupts\ to\ be\ enabled.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00085}00085\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00086}00086\ \textcolor{comment}{\ \ Returns\ the\ previous\ state\ of\ the\ interrupt\ enables.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00087}00087\ \textcolor{comment}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00088}00088\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00089}\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__api_8h_abb52550cf9f1297a07cd385ee2c04c3c}{00089}}\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__api_8h_abb52550cf9f1297a07cd385ee2c04c3c}{xt\_ints\_on}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ mask);}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00092}00092\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00093}00093\ \textcolor{comment}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00094}00094\ \textcolor{comment}{\ \ Call\ this\ function\ to\ disable\ the\ specified\ interrupts.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00095}00095\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00096}00096\ \textcolor{comment}{\ \ \ \ mask\ \ \ \ \ -\/\ Bit\ mask\ of\ interrupts\ to\ be\ disabled.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00097}00097\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00098}00098\ \textcolor{comment}{\ \ Returns\ the\ previous\ state\ of\ the\ interrupt\ enables.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00099}00099\ \textcolor{comment}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00100}00100\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00101}\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__api_8h_a43eefb680e1964da5a1e2554bd50c517}{00101}}\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__api_8h_a43eefb680e1964da5a1e2554bd50c517}{xt\_ints\_off}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ mask);}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00104}00104\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00105}00105\ \textcolor{comment}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00106}00106\ \textcolor{comment}{\ \ Call\ this\ function\ to\ set\ the\ specified\ (s/w)\ interrupt.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00107}00107\ \textcolor{comment}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00108}00108\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00109}00109\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ xt\_set\_intset(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ arg)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00110}00110\ \{}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00111}00111\ \ \ \ \ xthal\_set\_intset(arg);}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00112}00112\ \}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00115}00115\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00116}00116\ \textcolor{comment}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00117}00117\ \textcolor{comment}{\ \ Call\ this\ function\ to\ clear\ the\ specified\ (s/w\ or\ edge-\/triggered)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00118}00118\ \textcolor{comment}{\ \ interrupt.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00119}00119\ \textcolor{comment}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00120}00120\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00121}00121\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ xt\_set\_intclear(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ arg)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00122}00122\ \{}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00123}00123\ \ \ \ \ xthal\_set\_intclear(arg);}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00124}00124\ \}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__api_8h_source_l00127}00127\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_XTENSA\_API\_H\_\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

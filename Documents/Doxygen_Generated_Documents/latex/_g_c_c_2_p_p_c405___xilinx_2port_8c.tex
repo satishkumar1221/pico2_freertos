@@ -1,0 +1,245 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+GCC/\+PPC405\+\_\+\+Xilinx/port.c File Reference}
+\hypertarget{_g_c_c_2_p_p_c405___xilinx_2port_8c}{}\label{_g_c_c_2_p_p_c405___xilinx_2port_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/PPC405\_Xilinx/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/PPC405\_Xilinx/port.c}}
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}task.\+h"{}}\newline
+{\ttfamily \#include "{}xtime\+\_\+l.\+h"{}}\newline
+{\ttfamily \#include "{}xintc.\+h"{}}\newline
+{\ttfamily \#include "{}xintc\+\_\+i.\+h"{}}\newline
+Include dependency graph for port.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_a065a98706f9d4e2c4c625ad9b6c915d6}{port\+CRITICAL\+\_\+\+INTERRUPT\+\_\+\+ENABLE}}~( 1UL $<$$<$ 17UL )
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_a6c8b65dc94bef6c8d9c90038947854c7}{port\+EXTERNAL\+\_\+\+INTERRUPT\+\_\+\+ENABLE}}~( 1UL $<$$<$ 15UL )
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_a586236030bf8572559f36668bc1dcbe8}{port\+MACHINE\+\_\+\+CHECK\+\_\+\+ENABLE}}~( 1UL $<$$<$ 12UL )
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_a337e21875dd3cc4341a2ade1005e7478}{port\+APU\+\_\+\+PRESENT}}~( 0\+UL )
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_aafdcd8ea420a9ebc46758212f6b3d4cd}{port\+FCM\+\_\+\+FPU\+\_\+\+PRESENT}}~( 0\+UL )
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_a3013c3600ebec76f204af107744d1391}{port\+INITIAL\+\_\+\+MSR}}~( \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_a065a98706f9d4e2c4c625ad9b6c915d6}{port\+CRITICAL\+\_\+\+INTERRUPT\+\_\+\+ENABLE}} \texorpdfstring{$\vert$}{|} \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_a6c8b65dc94bef6c8d9c90038947854c7}{port\+EXTERNAL\+\_\+\+INTERRUPT\+\_\+\+ENABLE}} \texorpdfstring{$\vert$}{|} \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_a586236030bf8572559f36668bc1dcbe8}{port\+MACHINE\+\_\+\+CHECK\+\_\+\+ENABLE}} \texorpdfstring{$\vert$}{|} \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_a337e21875dd3cc4341a2ade1005e7478}{port\+APU\+\_\+\+PRESENT}} \texorpdfstring{$\vert$}{|} \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_aafdcd8ea420a9ebc46758212f6b3d4cd}{port\+FCM\+\_\+\+FPU\+\_\+\+PRESENT}} )
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_a546d822c1cff528af19326d0fb49e7de}{v\+Port\+Tick\+ISR}} (void)
+\item 
+void \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_add01c927fb689f7ec170e42d47d27927}{v\+Port\+Yield}} (void)
+\begin{DoxyCompactList}\small\item\em Yield the CPU. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_a5cfc38319f17c8e804020ec247b6325d}{v\+Port\+Start\+First\+Task}} (void)
+\begin{DoxyCompactList}\small\item\em Start executing first task. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}{px\+Port\+Initialise\+Stack}} (\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}px\+Top\+Of\+Stack, \mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}} px\+Code, void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{x\+Port\+Start\+Scheduler}} (void)
+\item 
+void \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{v\+Port\+End\+Scheduler}} (void)
+\begin{DoxyCompactList}\small\item\em End the Free\+RTOS scheduler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_aa10a61d901fc5087e0dd9fba0a1e471f}{v\+Port\+ISRHandler}} (void \texorpdfstring{$\ast$}{*}pv\+Null\+Do\+Not\+Use)
+\item 
+void \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_ae5be4d9eedc1da804c76cf9356563377}{v\+Port\+Setup\+Interrupt\+Controller}} (void)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_a7e326747e8b11763013926ee724d5523}{x\+Port\+Install\+Interrupt\+Handler}} (uint8\+\_\+t uc\+Interrupt\+ID, XInterrupt\+Handler px\+Handler, void \texorpdfstring{$\ast$}{*}pv\+Call\+Back\+Ref)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const unsigned \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_a654f9a86791256da01ca2d0d7b075566}{\+\_\+\+SDA\+\_\+\+BASE\+\_\+}}
+\item 
+const unsigned \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_a81624ca490eba0c00f2891b2d0b41fe6}{\+\_\+\+SDA2\+\_\+\+BASE\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_g_c_c_2_p_p_c405___xilinx_2port_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_g_c_c_2_p_p_c405___xilinx_2port_8c_a337e21875dd3cc4341a2ade1005e7478}\index{port.c@{port.c}!portAPU\_PRESENT@{portAPU\_PRESENT}}
+\index{portAPU\_PRESENT@{portAPU\_PRESENT}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portAPU\_PRESENT}{portAPU\_PRESENT}}
+{\footnotesize\ttfamily \label{_g_c_c_2_p_p_c405___xilinx_2port_8c_a337e21875dd3cc4341a2ade1005e7478} 
+\#define port\+APU\+\_\+\+PRESENT~( 0\+UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_source_l00054}{54}} of file \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_p_p_c405___xilinx_2port_8c_a065a98706f9d4e2c4c625ad9b6c915d6}\index{port.c@{port.c}!portCRITICAL\_INTERRUPT\_ENABLE@{portCRITICAL\_INTERRUPT\_ENABLE}}
+\index{portCRITICAL\_INTERRUPT\_ENABLE@{portCRITICAL\_INTERRUPT\_ENABLE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portCRITICAL\_INTERRUPT\_ENABLE}{portCRITICAL\_INTERRUPT\_ENABLE}}
+{\footnotesize\ttfamily \label{_g_c_c_2_p_p_c405___xilinx_2port_8c_a065a98706f9d4e2c4c625ad9b6c915d6} 
+\#define port\+CRITICAL\+\_\+\+INTERRUPT\+\_\+\+ENABLE~( 1UL $<$$<$ 17UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_source_l00046}{46}} of file \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_p_p_c405___xilinx_2port_8c_a6c8b65dc94bef6c8d9c90038947854c7}\index{port.c@{port.c}!portEXTERNAL\_INTERRUPT\_ENABLE@{portEXTERNAL\_INTERRUPT\_ENABLE}}
+\index{portEXTERNAL\_INTERRUPT\_ENABLE@{portEXTERNAL\_INTERRUPT\_ENABLE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portEXTERNAL\_INTERRUPT\_ENABLE}{portEXTERNAL\_INTERRUPT\_ENABLE}}
+{\footnotesize\ttfamily \label{_g_c_c_2_p_p_c405___xilinx_2port_8c_a6c8b65dc94bef6c8d9c90038947854c7} 
+\#define port\+EXTERNAL\+\_\+\+INTERRUPT\+\_\+\+ENABLE~( 1UL $<$$<$ 15UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_source_l00047}{47}} of file \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_p_p_c405___xilinx_2port_8c_aafdcd8ea420a9ebc46758212f6b3d4cd}\index{port.c@{port.c}!portFCM\_FPU\_PRESENT@{portFCM\_FPU\_PRESENT}}
+\index{portFCM\_FPU\_PRESENT@{portFCM\_FPU\_PRESENT}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portFCM\_FPU\_PRESENT}{portFCM\_FPU\_PRESENT}}
+{\footnotesize\ttfamily \label{_g_c_c_2_p_p_c405___xilinx_2port_8c_aafdcd8ea420a9ebc46758212f6b3d4cd} 
+\#define port\+FCM\+\_\+\+FPU\+\_\+\+PRESENT~( 0\+UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_source_l00055}{55}} of file \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_p_p_c405___xilinx_2port_8c_a3013c3600ebec76f204af107744d1391}\index{port.c@{port.c}!portINITIAL\_MSR@{portINITIAL\_MSR}}
+\index{portINITIAL\_MSR@{portINITIAL\_MSR}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portINITIAL\_MSR}{portINITIAL\_MSR}}
+{\footnotesize\ttfamily \label{_g_c_c_2_p_p_c405___xilinx_2port_8c_a3013c3600ebec76f204af107744d1391} 
+\#define port\+INITIAL\+\_\+\+MSR~( \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_a065a98706f9d4e2c4c625ad9b6c915d6}{port\+CRITICAL\+\_\+\+INTERRUPT\+\_\+\+ENABLE}} \texorpdfstring{$\vert$}{|} \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_a6c8b65dc94bef6c8d9c90038947854c7}{port\+EXTERNAL\+\_\+\+INTERRUPT\+\_\+\+ENABLE}} \texorpdfstring{$\vert$}{|} \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_a586236030bf8572559f36668bc1dcbe8}{port\+MACHINE\+\_\+\+CHECK\+\_\+\+ENABLE}} \texorpdfstring{$\vert$}{|} \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_a337e21875dd3cc4341a2ade1005e7478}{port\+APU\+\_\+\+PRESENT}} \texorpdfstring{$\vert$}{|} \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_aafdcd8ea420a9ebc46758212f6b3d4cd}{port\+FCM\+\_\+\+FPU\+\_\+\+PRESENT}} )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_source_l00058}{58}} of file \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_p_p_c405___xilinx_2port_8c_a586236030bf8572559f36668bc1dcbe8}\index{port.c@{port.c}!portMACHINE\_CHECK\_ENABLE@{portMACHINE\_CHECK\_ENABLE}}
+\index{portMACHINE\_CHECK\_ENABLE@{portMACHINE\_CHECK\_ENABLE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portMACHINE\_CHECK\_ENABLE}{portMACHINE\_CHECK\_ENABLE}}
+{\footnotesize\ttfamily \label{_g_c_c_2_p_p_c405___xilinx_2port_8c_a586236030bf8572559f36668bc1dcbe8} 
+\#define port\+MACHINE\+\_\+\+CHECK\+\_\+\+ENABLE~( 1UL $<$$<$ 12UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_source_l00048}{48}} of file \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_source}{port.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_g_c_c_2_p_p_c405___xilinx_2port_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_g_c_c_2_p_p_c405___xilinx_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}\index{port.c@{port.c}!pxPortInitialiseStack@{pxPortInitialiseStack}}
+\index{pxPortInitialiseStack@{pxPortInitialiseStack}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{pxPortInitialiseStack()}{pxPortInitialiseStack()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_p_p_c405___xilinx_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} px\+Port\+Initialise\+Stack (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{px\+Top\+Of\+Stack}{, }\item[{\mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}}}]{px\+Code}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_source_l00100}{100}} of file \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{_g_c_c_2_p_p_c405___xilinx_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}\index{port.c@{port.c}!vPortEndScheduler@{vPortEndScheduler}}
+\index{vPortEndScheduler@{vPortEndScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEndScheduler()}{vPortEndScheduler()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_p_p_c405___xilinx_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423} 
+void v\+Port\+End\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+End the Free\+RTOS scheduler. 
+
+Not implemented on this port. 
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_source_l00160}{160}} of file \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_p_p_c405___xilinx_2port_8c_aa10a61d901fc5087e0dd9fba0a1e471f}\index{port.c@{port.c}!vPortISRHandler@{vPortISRHandler}}
+\index{vPortISRHandler@{vPortISRHandler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortISRHandler()}{vPortISRHandler()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_p_p_c405___xilinx_2port_8c_aa10a61d901fc5087e0dd9fba0a1e471f} 
+void v\+Port\+ISRHandler (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Null\+Do\+Not\+Use}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_source_l00190}{190}} of file \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_p_p_c405___xilinx_2port_8c_ae5be4d9eedc1da804c76cf9356563377}\index{port.c@{port.c}!vPortSetupInterruptController@{vPortSetupInterruptController}}
+\index{vPortSetupInterruptController@{vPortSetupInterruptController}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortSetupInterruptController()}{vPortSetupInterruptController()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_p_p_c405___xilinx_2port_8c_ae5be4d9eedc1da804c76cf9356563377} 
+void v\+Port\+Setup\+Interrupt\+Controller (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_source_l00232}{232}} of file \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_p_p_c405___xilinx_2port_8c_a5cfc38319f17c8e804020ec247b6325d}\index{port.c@{port.c}!vPortStartFirstTask@{vPortStartFirstTask}}
+\index{vPortStartFirstTask@{vPortStartFirstTask}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortStartFirstTask()}{vPortStartFirstTask()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_p_p_c405___xilinx_2port_8c_a5cfc38319f17c8e804020ec247b6325d} 
+void v\+Port\+Start\+First\+Task (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Start executing first task. 
+
+
+
+Definition at line \mbox{\hyperlink{_third_party_2_g_c_c_2_r_p2040_2port_8c_source_l00215}{215}} of file \mbox{\hyperlink{_third_party_2_g_c_c_2_r_p2040_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_p_p_c405___xilinx_2port_8c_a546d822c1cff528af19326d0fb49e7de}\index{port.c@{port.c}!vPortTickISR@{vPortTickISR}}
+\index{vPortTickISR@{vPortTickISR}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortTickISR()}{vPortTickISR()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_p_p_c405___xilinx_2port_8c_a546d822c1cff528af19326d0fb49e7de} 
+void v\+Port\+Tick\+ISR (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{_code_warrior_2_cold_fire___v1_2port_8c_source_l00167}{167}} of file \mbox{\hyperlink{_code_warrior_2_cold_fire___v1_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_p_p_c405___xilinx_2port_8c_add01c927fb689f7ec170e42d47d27927}\index{port.c@{port.c}!vPortYield@{vPortYield}}
+\index{vPortYield@{vPortYield}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortYield()}{vPortYield()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_p_p_c405___xilinx_2port_8c_add01c927fb689f7ec170e42d47d27927} 
+void v\+Port\+Yield (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Yield the CPU. 
+
+
+
+Definition at line \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_source_l00980}{980}} of file \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_p_p_c405___xilinx_2port_8c_a7e326747e8b11763013926ee724d5523}\index{port.c@{port.c}!xPortInstallInterruptHandler@{xPortInstallInterruptHandler}}
+\index{xPortInstallInterruptHandler@{xPortInstallInterruptHandler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortInstallInterruptHandler()}{xPortInstallInterruptHandler()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_p_p_c405___xilinx_2port_8c_a7e326747e8b11763013926ee724d5523} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Install\+Interrupt\+Handler (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{uc\+Interrupt\+ID}{, }\item[{XInterrupt\+Handler}]{px\+Handler}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Call\+Back\+Ref}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_source_l00251}{251}} of file \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_p_p_c405___xilinx_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}\index{port.c@{port.c}!xPortStartScheduler@{xPortStartScheduler}}
+\index{xPortStartScheduler@{xPortStartScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortStartScheduler()}{xPortStartScheduler()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_p_p_c405___xilinx_2port_8c_ade5a8c6666e7413a0355cc252029c5c6} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Start\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_source_l00149}{149}} of file \mbox{\hyperlink{_g_c_c_2_p_p_c405___xilinx_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-var-members}
+\Hypertarget{_g_c_c_2_p_p_c405___xilinx_2port_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_g_c_c_2_p_p_c405___xilinx_2port_8c_a81624ca490eba0c00f2891b2d0b41fe6}\index{port.c@{port.c}!\_SDA2\_BASE\_@{\_SDA2\_BASE\_}}
+\index{\_SDA2\_BASE\_@{\_SDA2\_BASE\_}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{\_SDA2\_BASE\_}{\_SDA2\_BASE\_}}
+{\footnotesize\ttfamily \label{_g_c_c_2_p_p_c405___xilinx_2port_8c_a81624ca490eba0c00f2891b2d0b41fe6} 
+const unsigned \+\_\+\+SDA2\+\_\+\+BASE\+\_\+\hspace{0.3cm}{\ttfamily [extern]}}
+
+\Hypertarget{_g_c_c_2_p_p_c405___xilinx_2port_8c_a654f9a86791256da01ca2d0d7b075566}\index{port.c@{port.c}!\_SDA\_BASE\_@{\_SDA\_BASE\_}}
+\index{\_SDA\_BASE\_@{\_SDA\_BASE\_}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{\_SDA\_BASE\_}{\_SDA\_BASE\_}}
+{\footnotesize\ttfamily \label{_g_c_c_2_p_p_c405___xilinx_2port_8c_a654f9a86791256da01ca2d0d7b075566} 
+const unsigned \+\_\+\+SDA\+\_\+\+BASE\+\_\+\hspace{0.3cm}{\ttfamily [extern]}}
+

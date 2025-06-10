@@ -1,0 +1,148 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+Third\+Party/\+GCC/\+Xtensa\+\_\+\+ESP32/include/\+Free\+RTOSConfig\+\_\+arch.h File Reference}
+\hypertarget{_free_r_t_o_s_config__arch_8h}{}\label{_free_r_t_o_s_config__arch_8h}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/Xtensa\_ESP32/include/FreeRTOSConfig\_arch.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/Xtensa\_ESP32/include/FreeRTOSConfig\_arch.h}}
+{\ttfamily \#include "{}sdkconfig.\+h"{}}\newline
+{\ttfamily \#include $<$xtensa\+\_\+config.\+h$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include "{}esp\+\_\+rom\+\_\+sys.\+h"{}}\newline
+Include dependency graph for Free\+RTOSConfig\+\_\+arch.\+h\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_aeeb11d652f7f8685a1d7e84643f3b148}{XT\+\_\+\+USE\+\_\+\+THREAD\+\_\+\+SAFE\+\_\+\+CLIB}}~0
+\item 
+\#define \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_adafcf91309f31387a8e6c3dc96f0726b}{XT\+\_\+\+CLOCK\+\_\+\+FREQ}}~( \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_ab4440ca844e09af984e871862ac3a603}{xt\+\_\+clock\+\_\+freq}}() )
+\item 
+\#define \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_a7f5de729bb3993a5fc84484ed8717be6}{UNTESTED\+\_\+\+FUNCTION}}()
+\item 
+\#define \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_a61c84d118699861ab25dd95293b1f6a3}{config\+XT\+\_\+\+BOARD}}~1           /\texorpdfstring{$\ast$}{*} Board mode \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_af38f4fd15326ef6e0b3281675c6eff7e}{config\+XT\+\_\+\+SIMULATOR}}~0
+\item 
+\#define \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_a54bfc31c410ee452577a25a4552c3704}{config\+MAX\+\_\+\+SYSCALL\+\_\+\+INTERRUPT\+\_\+\+PRIORITY}}~XCHAL\+\_\+\+EXCM\+\_\+\+LEVEL
+\item 
+\#define \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_a20ee483300de7a4f8a6805819c1b3600}{config\+STACK\+\_\+\+ALIGNMENT}}~16
+\item 
+\#define \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_a09130ab92a2b53d1952301ded0244a4d}{config\+ISR\+\_\+\+STACK\+\_\+\+SIZE}}~( ( CONFIG\+\_\+\+FREERTOS\+\_\+\+ISR\+\_\+\+STACKSIZE + \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_a20ee483300de7a4f8a6805819c1b3600}{config\+STACK\+\_\+\+ALIGNMENT}} -\/ 1 ) \& ( \texorpdfstring{$\sim$}{\string~}( \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_a20ee483300de7a4f8a6805819c1b3600}{config\+STACK\+\_\+\+ALIGNMENT}} -\/ 1 ) ) )
+\item 
+\#define \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_a66d4555d5de9eb3542d2463c331bfd45}{os\+\_\+task\+\_\+switch\+\_\+is\+\_\+pended}}(\+\_\+cpu\+\_\+)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_ab4440ca844e09af984e871862ac3a603}{xt\+\_\+clock\+\_\+freq}} (void) \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_ab35b2424ac8c0625cfdbbcf916c5e1c3}{\+\_\+\+\_\+attribute\+\_\+\+\_\+}}((deprecated))
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_free_r_t_o_s_config__arch_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_free_r_t_o_s_config__arch_8h_a09130ab92a2b53d1952301ded0244a4d}\index{FreeRTOSConfig\_arch.h@{FreeRTOSConfig\_arch.h}!configISR\_STACK\_SIZE@{configISR\_STACK\_SIZE}}
+\index{configISR\_STACK\_SIZE@{configISR\_STACK\_SIZE}!FreeRTOSConfig\_arch.h@{FreeRTOSConfig\_arch.h}}
+\doxysubsubsection{\texorpdfstring{configISR\_STACK\_SIZE}{configISR\_STACK\_SIZE}}
+{\footnotesize\ttfamily \label{_free_r_t_o_s_config__arch_8h_a09130ab92a2b53d1952301ded0244a4d} 
+\#define config\+ISR\+\_\+\+STACK\+\_\+\+SIZE~( ( CONFIG\+\_\+\+FREERTOS\+\_\+\+ISR\+\_\+\+STACKSIZE + \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_a20ee483300de7a4f8a6805819c1b3600}{config\+STACK\+\_\+\+ALIGNMENT}} -\/ 1 ) \& ( \texorpdfstring{$\sim$}{\string~}( \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_a20ee483300de7a4f8a6805819c1b3600}{config\+STACK\+\_\+\+ALIGNMENT}} -\/ 1 ) ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_source_l00127}{127}} of file \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_source}{Free\+RTOSConfig\+\_\+arch.\+h}}.
+
+\Hypertarget{_free_r_t_o_s_config__arch_8h_a54bfc31c410ee452577a25a4552c3704}\index{FreeRTOSConfig\_arch.h@{FreeRTOSConfig\_arch.h}!configMAX\_SYSCALL\_INTERRUPT\_PRIORITY@{configMAX\_SYSCALL\_INTERRUPT\_PRIORITY}}
+\index{configMAX\_SYSCALL\_INTERRUPT\_PRIORITY@{configMAX\_SYSCALL\_INTERRUPT\_PRIORITY}!FreeRTOSConfig\_arch.h@{FreeRTOSConfig\_arch.h}}
+\doxysubsubsection{\texorpdfstring{configMAX\_SYSCALL\_INTERRUPT\_PRIORITY}{configMAX\_SYSCALL\_INTERRUPT\_PRIORITY}}
+{\footnotesize\ttfamily \label{_free_r_t_o_s_config__arch_8h_a54bfc31c410ee452577a25a4552c3704} 
+\#define config\+MAX\+\_\+\+SYSCALL\+\_\+\+INTERRUPT\+\_\+\+PRIORITY~XCHAL\+\_\+\+EXCM\+\_\+\+LEVEL}
+
+
+
+Definition at line \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_source_l00115}{115}} of file \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_source}{Free\+RTOSConfig\+\_\+arch.\+h}}.
+
+\Hypertarget{_free_r_t_o_s_config__arch_8h_a20ee483300de7a4f8a6805819c1b3600}\index{FreeRTOSConfig\_arch.h@{FreeRTOSConfig\_arch.h}!configSTACK\_ALIGNMENT@{configSTACK\_ALIGNMENT}}
+\index{configSTACK\_ALIGNMENT@{configSTACK\_ALIGNMENT}!FreeRTOSConfig\_arch.h@{FreeRTOSConfig\_arch.h}}
+\doxysubsubsection{\texorpdfstring{configSTACK\_ALIGNMENT}{configSTACK\_ALIGNMENT}}
+{\footnotesize\ttfamily \label{_free_r_t_o_s_config__arch_8h_a20ee483300de7a4f8a6805819c1b3600} 
+\#define config\+STACK\+\_\+\+ALIGNMENT~16}
+
+
+
+Definition at line \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_source_l00118}{118}} of file \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_source}{Free\+RTOSConfig\+\_\+arch.\+h}}.
+
+\Hypertarget{_free_r_t_o_s_config__arch_8h_a61c84d118699861ab25dd95293b1f6a3}\index{FreeRTOSConfig\_arch.h@{FreeRTOSConfig\_arch.h}!configXT\_BOARD@{configXT\_BOARD}}
+\index{configXT\_BOARD@{configXT\_BOARD}!FreeRTOSConfig\_arch.h@{FreeRTOSConfig\_arch.h}}
+\doxysubsubsection{\texorpdfstring{configXT\_BOARD}{configXT\_BOARD}}
+{\footnotesize\ttfamily \label{_free_r_t_o_s_config__arch_8h_a61c84d118699861ab25dd95293b1f6a3} 
+\#define config\+XT\+\_\+\+BOARD~1           /\texorpdfstring{$\ast$}{*} Board mode \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_source_l00109}{109}} of file \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_source}{Free\+RTOSConfig\+\_\+arch.\+h}}.
+
+\Hypertarget{_free_r_t_o_s_config__arch_8h_af38f4fd15326ef6e0b3281675c6eff7e}\index{FreeRTOSConfig\_arch.h@{FreeRTOSConfig\_arch.h}!configXT\_SIMULATOR@{configXT\_SIMULATOR}}
+\index{configXT\_SIMULATOR@{configXT\_SIMULATOR}!FreeRTOSConfig\_arch.h@{FreeRTOSConfig\_arch.h}}
+\doxysubsubsection{\texorpdfstring{configXT\_SIMULATOR}{configXT\_SIMULATOR}}
+{\footnotesize\ttfamily \label{_free_r_t_o_s_config__arch_8h_af38f4fd15326ef6e0b3281675c6eff7e} 
+\#define config\+XT\+\_\+\+SIMULATOR~0}
+
+
+
+Definition at line \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_source_l00110}{110}} of file \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_source}{Free\+RTOSConfig\+\_\+arch.\+h}}.
+
+\Hypertarget{_free_r_t_o_s_config__arch_8h_a66d4555d5de9eb3542d2463c331bfd45}\index{FreeRTOSConfig\_arch.h@{FreeRTOSConfig\_arch.h}!os\_task\_switch\_is\_pended@{os\_task\_switch\_is\_pended}}
+\index{os\_task\_switch\_is\_pended@{os\_task\_switch\_is\_pended}!FreeRTOSConfig\_arch.h@{FreeRTOSConfig\_arch.h}}
+\doxysubsubsection{\texorpdfstring{os\_task\_switch\_is\_pended}{os\_task\_switch\_is\_pended}}
+{\footnotesize\ttfamily \label{_free_r_t_o_s_config__arch_8h_a66d4555d5de9eb3542d2463c331bfd45} 
+\#define os\+\_\+task\+\_\+switch\+\_\+is\+\_\+pended(\begin{DoxyParamCaption}\item[{}]{\+\_\+cpu\+\_\+}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a65e9886d74aaee76545e83dd09011727}{false}}\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_source_l00135}{135}} of file \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_source}{Free\+RTOSConfig\+\_\+arch.\+h}}.
+
+\Hypertarget{_free_r_t_o_s_config__arch_8h_a7f5de729bb3993a5fc84484ed8717be6}\index{FreeRTOSConfig\_arch.h@{FreeRTOSConfig\_arch.h}!UNTESTED\_FUNCTION@{UNTESTED\_FUNCTION}}
+\index{UNTESTED\_FUNCTION@{UNTESTED\_FUNCTION}!FreeRTOSConfig\_arch.h@{FreeRTOSConfig\_arch.h}}
+\doxysubsubsection{\texorpdfstring{UNTESTED\_FUNCTION}{UNTESTED\_FUNCTION}}
+{\footnotesize\ttfamily \label{_free_r_t_o_s_config__arch_8h_a7f5de729bb3993a5fc84484ed8717be6} 
+\#define UNTESTED\+\_\+\+FUNCTION(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_source_l00106}{106}} of file \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_source}{Free\+RTOSConfig\+\_\+arch.\+h}}.
+
+\Hypertarget{_free_r_t_o_s_config__arch_8h_adafcf91309f31387a8e6c3dc96f0726b}\index{FreeRTOSConfig\_arch.h@{FreeRTOSConfig\_arch.h}!XT\_CLOCK\_FREQ@{XT\_CLOCK\_FREQ}}
+\index{XT\_CLOCK\_FREQ@{XT\_CLOCK\_FREQ}!FreeRTOSConfig\_arch.h@{FreeRTOSConfig\_arch.h}}
+\doxysubsubsection{\texorpdfstring{XT\_CLOCK\_FREQ}{XT\_CLOCK\_FREQ}}
+{\footnotesize\ttfamily \label{_free_r_t_o_s_config__arch_8h_adafcf91309f31387a8e6c3dc96f0726b} 
+\#define XT\+\_\+\+CLOCK\+\_\+\+FREQ~( \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_ab4440ca844e09af984e871862ac3a603}{xt\+\_\+clock\+\_\+freq}}() )}
+
+
+
+Definition at line \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_source_l00066}{66}} of file \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_source}{Free\+RTOSConfig\+\_\+arch.\+h}}.
+
+\Hypertarget{_free_r_t_o_s_config__arch_8h_aeeb11d652f7f8685a1d7e84643f3b148}\index{FreeRTOSConfig\_arch.h@{FreeRTOSConfig\_arch.h}!XT\_USE\_THREAD\_SAFE\_CLIB@{XT\_USE\_THREAD\_SAFE\_CLIB}}
+\index{XT\_USE\_THREAD\_SAFE\_CLIB@{XT\_USE\_THREAD\_SAFE\_CLIB}!FreeRTOSConfig\_arch.h@{FreeRTOSConfig\_arch.h}}
+\doxysubsubsection{\texorpdfstring{XT\_USE\_THREAD\_SAFE\_CLIB}{XT\_USE\_THREAD\_SAFE\_CLIB}}
+{\footnotesize\ttfamily \label{_free_r_t_o_s_config__arch_8h_aeeb11d652f7f8685a1d7e84643f3b148} 
+\#define XT\+\_\+\+USE\+\_\+\+THREAD\+\_\+\+SAFE\+\_\+\+CLIB~0}
+
+
+
+Definition at line \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_source_l00047}{47}} of file \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_source}{Free\+RTOSConfig\+\_\+arch.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_free_r_t_o_s_config__arch_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_free_r_t_o_s_config__arch_8h_ab4440ca844e09af984e871862ac3a603}\index{FreeRTOSConfig\_arch.h@{FreeRTOSConfig\_arch.h}!xt\_clock\_freq@{xt\_clock\_freq}}
+\index{xt\_clock\_freq@{xt\_clock\_freq}!FreeRTOSConfig\_arch.h@{FreeRTOSConfig\_arch.h}}
+\doxysubsubsection{\texorpdfstring{xt\_clock\_freq()}{xt\_clock\_freq()}}
+{\footnotesize\ttfamily \label{_free_r_t_o_s_config__arch_8h_ab4440ca844e09af984e871862ac3a603} 
+int xt\+\_\+clock\+\_\+freq (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+This function is defined to provide a deprecation warning whenever XT\+\_\+\+CLOCK\+\_\+\+FREQ macro is used. Update the code to use esp\+\_\+clk\+\_\+cpu\+\_\+freq function instead. \begin{DoxyReturn}{Returns}
+current CPU clock frequency, in Hz 
+\end{DoxyReturn}

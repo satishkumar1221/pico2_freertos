@@ -1,0 +1,224 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+IAR/\+AVR32\+\_\+\+UC3/port.c File Reference}
+\hypertarget{_i_a_r_2_a_v_r32___u_c3_2port_8c}{}\label{_i_a_r_2_a_v_r32___u_c3_2port_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/IAR/AVR32\_UC3/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/IAR/AVR32\_UC3/port.c}}
+
+
+Free\+RTOS port source for AVR32 UC3.  
+
+
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}task.\+h"{}}\newline
+{\ttfamily \#include $<$avr32/io.\+h$>$}\newline
+{\ttfamily \#include $<$intrinsics.\+h$>$}\newline
+{\ttfamily \#include "{}gpio.\+h"{}}\newline
+Include dependency graph for port.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_a26624b2cf57368e3719a498832ecb658}{port\+INITIAL\+\_\+\+SR}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x00400000 ) /\texorpdfstring{$\ast$}{*} AVR32 \+: \mbox{[}M2\+:\+M0\mbox{]}=001 I1M=0 I0M=0, GM=0 \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_a4a09bb6297fbc0a50ed78a132ff9f0fe}{port\+INSTRUCTION\+\_\+\+SIZE}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0 )
+\item 
+\#define \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_ab7c7cbbda4fb9a253c7e5086071db162}{port\+NO\+\_\+\+CRITICAL\+\_\+\+NESTING}}~( ( uint32\+\_\+t ) 0 )
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_ac11843d93e41358f2d964f1bf2c94a1e}{\+\_\+\+\_\+low\+\_\+level\+\_\+init}} (void)
+\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_ae17fa46592d651d8fccbff4210716303}{pv\+Port\+Realloc}} (void \texorpdfstring{$\ast$}{*}pv, size\+\_\+t x\+Wanted\+Size)
+\item 
+void \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_ad547cf475a00f0c1a37dac99d82ef31d}{SCALLYield}} (void)
+\item 
+void \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_a2ed3554a3de09a3bd09d396ee081ab69}{v\+Port\+Enter\+Critical}} (void)
+\begin{DoxyCompactList}\small\item\em Enter critical section. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_aed20ada05b957181a0de042802a82a5b}{v\+Port\+Exit\+Critical}} (void)
+\begin{DoxyCompactList}\small\item\em Exit critical section. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}{px\+Port\+Initialise\+Stack}} (\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}px\+Top\+Of\+Stack, \mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}} px\+Code, void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{x\+Port\+Start\+Scheduler}} (void)
+\item 
+void \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{v\+Port\+End\+Scheduler}} (void)
+\begin{DoxyCompactList}\small\item\em End the Free\+RTOS scheduler. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+volatile uint32\+\_\+t \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_a4e719b187cba9cb244aeb611aca513f6}{ul\+Critical\+Nesting}} = 9999UL
+\begin{DoxyCompactList}\small\item\em Variable used to keep track of critical section nesting. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Free\+RTOS port source for AVR32 UC3. 
+
+
+\begin{DoxyItemize}
+\item Compiler\+: IAR EWAVR32
+\item Supported devices\+: All AVR32 devices can be used.
+\item App\+Note\+:
+\end{DoxyItemize}
+
+\begin{DoxyAuthor}{Author}
+Atmel Corporation (Now Microchip)\+: \href{https://www.microchip.com}{\texttt{https\+://www.\+microchip.\+com}} ~\newline
+ Support and FAQ\+: \href{https://www.microchip.com/support/}{\texttt{https\+://www.\+microchip.\+com/support/}} 
+\end{DoxyAuthor}
+
+
+Definition in file \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_source}{port.\+c}}.
+
+
+
+\label{doc-define-members}
+\Hypertarget{_i_a_r_2_a_v_r32___u_c3_2port_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_i_a_r_2_a_v_r32___u_c3_2port_8c_a26624b2cf57368e3719a498832ecb658}\index{port.c@{port.c}!portINITIAL\_SR@{portINITIAL\_SR}}
+\index{portINITIAL\_SR@{portINITIAL\_SR}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portINITIAL\_SR}{portINITIAL\_SR}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_v_r32___u_c3_2port_8c_a26624b2cf57368e3719a498832ecb658} 
+\#define port\+INITIAL\+\_\+\+SR~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x00400000 ) /\texorpdfstring{$\ast$}{*} AVR32 \+: \mbox{[}M2\+:\+M0\mbox{]}=001 I1M=0 I0M=0, GM=0 \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_source_l00092}{92}} of file \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_v_r32___u_c3_2port_8c_a4a09bb6297fbc0a50ed78a132ff9f0fe}\index{port.c@{port.c}!portINSTRUCTION\_SIZE@{portINSTRUCTION\_SIZE}}
+\index{portINSTRUCTION\_SIZE@{portINSTRUCTION\_SIZE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portINSTRUCTION\_SIZE}{portINSTRUCTION\_SIZE}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_v_r32___u_c3_2port_8c_a4a09bb6297fbc0a50ed78a132ff9f0fe} 
+\#define port\+INSTRUCTION\+\_\+\+SIZE~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0 )}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_source_l00093}{93}} of file \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_v_r32___u_c3_2port_8c_ab7c7cbbda4fb9a253c7e5086071db162}\index{port.c@{port.c}!portNO\_CRITICAL\_NESTING@{portNO\_CRITICAL\_NESTING}}
+\index{portNO\_CRITICAL\_NESTING@{portNO\_CRITICAL\_NESTING}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portNO\_CRITICAL\_NESTING}{portNO\_CRITICAL\_NESTING}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_v_r32___u_c3_2port_8c_ab7c7cbbda4fb9a253c7e5086071db162} 
+\#define port\+NO\+\_\+\+CRITICAL\+\_\+\+NESTING~( ( uint32\+\_\+t ) 0 )}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_source_l00096}{96}} of file \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_source}{port.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_i_a_r_2_a_v_r32___u_c3_2port_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_i_a_r_2_a_v_r32___u_c3_2port_8c_ac11843d93e41358f2d964f1bf2c94a1e}\index{port.c@{port.c}!\_\_low\_level\_init@{\_\_low\_level\_init}}
+\index{\_\_low\_level\_init@{\_\_low\_level\_init}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{\_\_low\_level\_init()}{\_\_low\_level\_init()}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_v_r32___u_c3_2port_8c_ac11843d93e41358f2d964f1bf2c94a1e} 
+int \+\_\+\+\_\+low\+\_\+level\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_source_l00114}{114}} of file \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_v_r32___u_c3_2port_8c_ae17fa46592d651d8fccbff4210716303}\index{port.c@{port.c}!pvPortRealloc@{pvPortRealloc}}
+\index{pvPortRealloc@{pvPortRealloc}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{pvPortRealloc()}{pvPortRealloc()}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_v_r32___u_c3_2port_8c_ae17fa46592d651d8fccbff4210716303} 
+void \texorpdfstring{$\ast$}{*} pv\+Port\+Realloc (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{pv}{, }\item[{size\+\_\+t}]{x\+Wanted\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_source_l00170}{170}} of file \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{_i_a_r_2_a_v_r32___u_c3_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}\index{port.c@{port.c}!pxPortInitialiseStack@{pxPortInitialiseStack}}
+\index{pxPortInitialiseStack@{pxPortInitialiseStack}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{pxPortInitialiseStack()}{pxPortInitialiseStack()}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_v_r32___u_c3_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} px\+Port\+Initialise\+Stack (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{px\+Top\+Of\+Stack}{, }\item[{\mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}}}]{px\+Code}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_source_l00266}{266}} of file \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_v_r32___u_c3_2port_8c_ad547cf475a00f0c1a37dac99d82ef31d}\index{port.c@{port.c}!SCALLYield@{SCALLYield}}
+\index{SCALLYield@{SCALLYield}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{SCALLYield()}{SCALLYield()}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_v_r32___u_c3_2port_8c_ad547cf475a00f0c1a37dac99d82ef31d} 
+void SCALLYield (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_source_l00218}{218}} of file \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{_i_a_r_2_a_v_r32___u_c3_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}\index{port.c@{port.c}!vPortEndScheduler@{vPortEndScheduler}}
+\index{vPortEndScheduler@{vPortEndScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEndScheduler()}{vPortEndScheduler()}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_v_r32___u_c3_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423} 
+void v\+Port\+End\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+End the Free\+RTOS scheduler. 
+
+Not implemented on this port. 
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_source_l00311}{311}} of file \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_v_r32___u_c3_2port_8c_a2ed3554a3de09a3bd09d396ee081ab69}\index{port.c@{port.c}!vPortEnterCritical@{vPortEnterCritical}}
+\index{vPortEnterCritical@{vPortEnterCritical}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEnterCritical()}{vPortEnterCritical()}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_v_r32___u_c3_2port_8c_a2ed3554a3de09a3bd09d396ee081ab69} 
+void v\+Port\+Enter\+Critical (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Enter critical section. 
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_source_l00232}{232}} of file \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_v_r32___u_c3_2port_8c_aed20ada05b957181a0de042802a82a5b}\index{port.c@{port.c}!vPortExitCritical@{vPortExitCritical}}
+\index{vPortExitCritical@{vPortExitCritical}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortExitCritical()}{vPortExitCritical()}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_v_r32___u_c3_2port_8c_aed20ada05b957181a0de042802a82a5b} 
+void v\+Port\+Exit\+Critical (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Exit critical section. 
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_source_l00245}{245}} of file \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_v_r32___u_c3_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}\index{port.c@{port.c}!xPortStartScheduler@{xPortStartScheduler}}
+\index{xPortStartScheduler@{xPortStartScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortStartScheduler()}{xPortStartScheduler()}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_v_r32___u_c3_2port_8c_ade5a8c6666e7413a0355cc252029c5c6} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Start\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_source_l00297}{297}} of file \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\label{doc-var-members}
+\Hypertarget{_i_a_r_2_a_v_r32___u_c3_2port_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_i_a_r_2_a_v_r32___u_c3_2port_8c_a4e719b187cba9cb244aeb611aca513f6}\index{port.c@{port.c}!ulCriticalNesting@{ulCriticalNesting}}
+\index{ulCriticalNesting@{ulCriticalNesting}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{ulCriticalNesting}{ulCriticalNesting}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_v_r32___u_c3_2port_8c_a4e719b187cba9cb244aeb611aca513f6} 
+volatile uint32\+\_\+t ul\+Critical\+Nesting = 9999UL}
+
+
+
+Variable used to keep track of critical section nesting. 
+
+This variable is stored as part of the task context and must be initialised to a non zero value to ensure interrupts don\textquotesingle{}t inadvertently become unmasked before the scheduler starts. As it is stored as part of the task context, it will be set to 0 when the first task is started. 
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_source_l00097}{97}} of file \mbox{\hyperlink{_i_a_r_2_a_v_r32___u_c3_2port_8c_source}{port.\+c}}.
+

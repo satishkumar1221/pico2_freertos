@@ -1,0 +1,57 @@
+\doxysection{x\+Semaphore\+Create\+Counting }
+\hypertarget{group__x_semaphore_create_counting}{}\label{group__x_semaphore_create_counting}\index{xSemaphoreCreateCounting@{xSemaphoreCreateCounting}}
+semphr. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{semphr_8h_ad88c6df4a04beedeac782918c8a332f5}{SemaphoreHandle\_t}}\ xSemaphoreCreateCounting(\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxMaxCount,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxInitialCount\ );}
+
+\end{DoxyCode}
+
+
+Creates a new counting semaphore instance, and returns a handle by which the new counting semaphore can be referenced.
+
+In many usage scenarios it is faster and more memory efficient to use a direct to task notification in place of a counting semaphore! \href{https://www.FreeRTOS.org/RTOS-task-notifications.html}{\texttt{https\+://www.\+Free\+RTOS.\+org/\+RTOS-\/task-\/notifications.\+html}}
+
+Internally, within the Free\+RTOS implementation, counting semaphores use a block of memory, in which the counting semaphore structure is stored. If a counting semaphore is created using x\+Semaphore\+Create\+Counting() then the required memory is automatically dynamically allocated inside the x\+Semaphore\+Create\+Counting() function. (see \href{https://www.FreeRTOS.org/a00111.html}{\texttt{https\+://www.\+Free\+RTOS.\+org/a00111.\+html}}). If a counting semaphore is created using x\+Semaphore\+Create\+Counting\+Static() then the application writer can instead optionally provide the memory that will get used by the counting semaphore. x\+Semaphore\+Create\+Counting\+Static() therefore allows a counting semaphore to be created without using any dynamic memory allocation.
+
+Counting semaphores are typically used for two things\+:
+
+1) Counting events.
+
+In this usage scenario an event handler will \textquotesingle{}give\textquotesingle{} a semaphore each time an event occurs (incrementing the semaphore count value), and a handler task will \textquotesingle{}take\textquotesingle{} a semaphore each time it processes an event (decrementing the semaphore count value). The count value is therefore the difference between the number of events that have occurred and the number that have been processed. In this case it is desirable for the initial count value to be zero.
+
+2) Resource management.
+
+In this usage scenario the count value indicates the number of resources available. To obtain control of a resource a task must first obtain a semaphore -\/ decrementing the semaphore count value. When the count value reaches zero there are no free resources. When a task finishes with the resource it \textquotesingle{}gives\textquotesingle{} the semaphore back -\/ incrementing the semaphore count value. In this case it is desirable for the initial count value to be equal to the maximum count value, indicating that all resources are free.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ux\+Max\+Count} & The maximum count value that can be reached. When the semaphore reaches this value it can no longer be \textquotesingle{}given\textquotesingle{}.\\
+\hline
+{\em ux\+Initial\+Count} & The count value assigned to the semaphore when it is created.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Handle to the created semaphore. Null if the semaphore could not be created.
+\end{DoxyReturn}
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{semphr_8h_ad88c6df4a04beedeac782918c8a332f5}{SemaphoreHandle\_t}}\ xSemaphore;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vATask(\ \textcolor{keywordtype}{void}\ *\ pvParameters\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\mbox{\hyperlink{semphr_8h_ad88c6df4a04beedeac782918c8a332f5}{SemaphoreHandle\_t}}\ xSemaphore\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Semaphore\ cannot\ be\ used\ before\ a\ call\ to\ xSemaphoreCreateCounting().}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ The\ max\ value\ to\ which\ the\ semaphore\ can\ count\ should\ be\ 10,\ and\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ initial\ value\ assigned\ to\ the\ count\ should\ be\ 0.}}
+\DoxyCodeLine{\ xSemaphore\ =\ xSemaphoreCreateCounting(\ 10,\ 0\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(\ xSemaphore\ !=\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ The\ semaphore\ was\ created\ successfully.}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ The\ semaphore\ can\ now\ be\ used.}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

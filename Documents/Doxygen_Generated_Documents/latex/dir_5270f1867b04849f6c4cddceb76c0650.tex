@@ -1,0 +1,189 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel Directory Reference}
+\hypertarget{dir_5270f1867b04849f6c4cddceb76c0650}{}\label{dir_5270f1867b04849f6c4cddceb76c0650}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel Directory Reference@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel Directory Reference}}
+Directory dependency graph for Free\+RTOS-\/\+Kernel\+:
+% FIG 0
+\doxysubsubsection*{Directories}
+\begin{DoxyCompactItemize}
+\item 
+directory \mbox{\hyperlink{dir_7cc5b5cc2be23764caa46fdfb5a67c60}{examples}}
+\item 
+directory \mbox{\hyperlink{dir_c69ece34c3f150cb2c6f1098178b172a}{include}}
+\item 
+directory \mbox{\hyperlink{dir_2901950e674b11bd625d37cd8c5cecca}{portable}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Files}
+\begin{DoxyCompactItemize}
+\item 
+file \mbox{\hyperlink{croutine_8c}{croutine.\+c}}
+\item 
+file \mbox{\hyperlink{event__groups_8c}{event\+\_\+groups.\+c}}
+\item 
+file \mbox{\hyperlink{list_8c}{list.\+c}}
+\item 
+file \mbox{\hyperlink{queue_8c}{queue.\+c}}
+\item 
+file \mbox{\hyperlink{stream__buffer_8c}{stream\+\_\+buffer.\+c}}
+\item 
+file \mbox{\hyperlink{tasks_8c}{tasks.\+c}}
+\item 
+file \mbox{\hyperlink{timers_8c}{timers.\+c}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{[}!\mbox{[}CMock Unit Tests\mbox{]}(\href{https://github.com/FreeRTOS/FreeRTOS-Kernel/actions/workflows/unit-tests.yml/badge.svg?branch=main&event=push}{\texttt{https\+://github.\+com/\+Free\+RTOS/\+Free\+RTOS-\/\+Kernel/actions/workflows/unit-\/tests.\+yml/badge.\+svg?branch=main\&event=push}})\mbox{]}(\href{https://github.com/FreeRTOS/FreeRTOS-Kernel/actions/workflows/unit-tests.yml?query=branch\%3Amain+event\%3Apush+workflow\%3A\%22CMock+Unit+Tests\%22++}{\texttt{https\+://github.\+com/\+Free\+RTOS/\+Free\+RTOS-\/\+Kernel/actions/workflows/unit-\/tests.\+yml?query=branch\%3\+Amain+event\%3\+Apush+workflow\%3\+A\%22\+CMock+\+Unit+\+Tests\%22++}}) \href{https://codecov.io/gh/FreeRTOS/FreeRTOS-Kernel}{\texttt{}}\hypertarget{README.md_autotoc_md53}{}\doxysubsubsection{\texorpdfstring{Getting started}{Getting started}}\label{README.md_autotoc_md53}
+This repository contains Free\+RTOS kernel source/header files and kernel ports only. This repository is referenced as a submodule in \href{https://github.com/FreeRTOS/FreeRTOS}{\texttt{Free\+RTOS/\+Free\+RTOS}} repository, which contains pre-\/configured demo application projects under 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/Demo}
+
+\end{DoxyCode}
+ directory.
+
+The easiest way to use Free\+RTOS is to start with one of the pre-\/configured demo application projects. That way you will have the correct Free\+RTOS source files included, and the correct include paths configured. Once a demo application is building and executing you can remove the demo application files, and start to add in your own application source files. See the \href{https://www.FreeRTOS.org/FreeRTOS-quick-start-guide.html}{\texttt{Free\+RTOS Kernel Quick Start Guide}} for detailed instructions and other useful links.
+
+Additionally, for Free\+RTOS kernel feature information refer to the \href{https://www.FreeRTOS.org/features.html}{\texttt{Developer Documentation}}, and \href{https://www.FreeRTOS.org/a00106.html}{\texttt{API Reference}}.
+
+Also for contributing and creating a Pull Request please refer to \href{.github/CONTRIBUTING.md\#contributing-via-pull-request}{\texttt{the instructions here}}.\hypertarget{README.md_autotoc_md54}{}\doxysubsubsubsection{\texorpdfstring{Getting help}{Getting help}}\label{README.md_autotoc_md54}
+If you have any questions or need assistance troubleshooting your Free\+RTOS project, we have an active community that can help on the \href{https://forums.freertos.org}{\texttt{Free\+RTOS Community Support Forum}}.\hypertarget{README.md_autotoc_md55}{}\doxysubsubsection{\texorpdfstring{To consume Free\+RTOS-\/\+Kernel}{To consume Free\+RTOS-\/\+Kernel}}\label{README.md_autotoc_md55}
+\hypertarget{README.md_autotoc_md56}{}\doxysubsubsubsection{\texorpdfstring{Consume with CMake}{Consume with CMake}}\label{README.md_autotoc_md56}
+If using CMake, it is recommended to use this repository using Fetch\+Content. Add the following into your project\textquotesingle{}s main or a subdirectory\textquotesingle{}s {\ttfamily CMake\+Lists.\+txt}\+:
+
+
+\begin{DoxyItemize}
+\item Define the source and version/tag you want to use\+:
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{FetchContent\_Declare(\ freertos\_kernel}
+\DoxyCodeLine{\ \ GIT\_REPOSITORY\ https://github.com/FreeRTOS/FreeRTOS-\/Kernel.git}
+\DoxyCodeLine{\ \ GIT\_TAG\ \ \ \ \ \ \ \ main\ \#Note:\ Best\ practice\ to\ use\ specific\ git-\/hash\ or\ tagged\ version}
+\DoxyCodeLine{)}
+
+\end{DoxyCode}
+
+
+In case you prefer to add it as a git submodule, do\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ submodule\ add\ https://github.com/FreeRTOS/FreeRTOS-\/Kernel.git\ <path\ of\ the\ submodule>}
+\DoxyCodeLine{git\ submodule\ update\ -\/-\/init}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Add a freertos\+\_\+config library (typically an INTERFACE library) The following assumes the directory structure\+:
+\begin{DoxyItemize}
+\item {\ttfamily include/\+Free\+RTOSConfig.\+h}
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{add\_library(freertos\_config\ INTERFACE)}
+\DoxyCodeLine{}
+\DoxyCodeLine{target\_include\_directories(freertos\_config\ SYSTEM}
+\DoxyCodeLine{INTERFACE}
+\DoxyCodeLine{\ \ \ \ include}
+\DoxyCodeLine{)}
+\DoxyCodeLine{}
+\DoxyCodeLine{target\_compile\_definitions(freertos\_config}
+\DoxyCodeLine{\ \ INTERFACE}
+\DoxyCodeLine{\ \ \ \ projCOVERAGE\_TEST=0}
+\DoxyCodeLine{)}
+
+\end{DoxyCode}
+
+
+In case you installed Free\+RTOS-\/\+Kernel as a submodule, you will have to add it as a subdirectory\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{add\_subdirectory(\$\{FREERTOS\_PATH\})}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Configure the Free\+RTOS-\/\+Kernel and make it available
+\begin{DoxyItemize}
+\item this particular example supports a native and cross-\/compiled build option.
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{set(\ FREERTOS\_HEAP\ "{}4"{}\ CACHE\ STRING\ "{}"{}\ FORCE)}
+\DoxyCodeLine{\#\ Select\ the\ native\ compile\ PORT}
+\DoxyCodeLine{set(\ FREERTOS\_PORT\ "{}GCC\_POSIX"{}\ CACHE\ STRING\ "{}"{}\ FORCE)}
+\DoxyCodeLine{\#\ Select\ the\ cross-\/compile\ PORT}
+\DoxyCodeLine{if\ (CMAKE\_CROSSCOMPILING)}
+\DoxyCodeLine{\ \ set(FREERTOS\_PORT\ "{}GCC\_ARM\_CA9"{}\ CACHE\ STRING\ "{}"{}\ FORCE)}
+\DoxyCodeLine{endif()}
+\DoxyCodeLine{}
+\DoxyCodeLine{FetchContent\_MakeAvailable(freertos\_kernel)}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item In case of cross compilation, you should also add the following to {\ttfamily freertos\+\_\+config}\+:
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{target\_compile\_definitions(freertos\_config\ INTERFACE\ \$\{definitions\})}
+\DoxyCodeLine{target\_compile\_options(freertos\_config\ INTERFACE\ \$\{options\})}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md57}{}\doxysubsubsubsection{\texorpdfstring{Consuming stand-\/alone -\/ Cloning this repository}{Consuming stand-\/alone -\/ Cloning this repository}}\label{README.md_autotoc_md57}
+To clone using HTTPS\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ clone\ https://github.com/FreeRTOS/FreeRTOS-\/Kernel.git}
+
+\end{DoxyCode}
+
+
+Using SSH\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ clone\ git@github.com:FreeRTOS/FreeRTOS-\/Kernel.git}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md58}{}\doxysubsubsection{\texorpdfstring{Repository structure}{Repository structure}}\label{README.md_autotoc_md58}
+
+\begin{DoxyItemize}
+\item The root of this repository contains the three files that are common to every port -\/ \doxylink{list_8c}{list.\+c}, \doxylink{queue_8c}{queue.\+c} and \doxylink{tasks_8c}{tasks.\+c}. The kernel is contained within these three files. \doxylink{croutine_8c}{croutine.\+c} implements the optional co-\/routine functionality -\/ which is normally only used on very memory limited systems.
+\item The {\ttfamily ./portable} directory contains the files that are specific to a particular microcontroller and/or compiler. See the readme file in the {\ttfamily ./portable} directory for more information.
+\item The {\ttfamily ./include} directory contains the real time kernel header files.
+\item The {\ttfamily ./template\+\_\+configuration} directory contains a sample {\ttfamily Free\+RTOSConfig.\+h} to help jumpstart a new project. See the \href{examples/template_configuration/FreeRTOSConfig.h}{\texttt{Free\+RTOSConfig.\+h}} file for instructions.
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md59}{}\doxysubsubsubsection{\texorpdfstring{Code Formatting}{Code Formatting}}\label{README.md_autotoc_md59}
+Free\+RTOS files are formatted using the "{}\mbox{[}uncrustify\mbox{]}(https\+://github.\+com/uncrustify/uncrustify)"{} tool. The configuration file used by uncrustify can be found in the \href{https://github.com/FreeRTOS/CI-CD-Github-Actions}{\texttt{Free\+RTOS/\+CI-\/\+CD-\/\+Git\+Hub-\/\+Actions\textquotesingle{}s}} \href{https://github.com/FreeRTOS/CI-CD-Github-Actions/tree/main/formatting}{\texttt{uncrustify.\+cfg}} file.\hypertarget{README.md_autotoc_md60}{}\doxysubsubsubsection{\texorpdfstring{Line Endings}{Line Endings}}\label{README.md_autotoc_md60}
+File checked into the Free\+RTOS-\/\+Kernel repository use unix-\/style LF line endings for the best compatibility with git.
+
+For optimal compatibility with Microsoft Windows tools, it is best to enable the git autocrlf feature. You can enable this setting for the current repository using the following command\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ config\ core.autocrlf\ true}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md61}{}\doxysubsubsubsection{\texorpdfstring{Git History Optimizations}{Git History Optimizations}}\label{README.md_autotoc_md61}
+Some commits in this repository perform large refactors which touch many lines and lead to unwanted behavior when using the {\ttfamily git blame} command. You can configure git to ignore the list of large refactor commits in this repository with the following command\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ config\ blame.ignoreRevsFile\ .git-\/blame-\/ignore-\/revs}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md62}{}\doxysubsubsubsection{\texorpdfstring{Spelling and Formatting}{Spelling and Formatting}}\label{README.md_autotoc_md62}
+We recommend using \href{https://code.visualstudio.com}{\texttt{Visual Studio Code}}, commonly referred to as VSCode, when working on the Free\+RTOS-\/\+Kernel. The Free\+RTOS-\/\+Kernel also uses \href{https://cspell.org/}{\texttt{c\+Spell}} as part of its spelling check. The config file for which can be found at \href{cspell.config.yaml}{\texttt{cspell.\+config.\+yaml}} There is additionally a \href{https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker}{\texttt{c\+Spell plugin for VSCode}} that can be used as well. {\itshape \href{.github/.cSpellWords.txt}{\texttt{.c\+Spell\+Words.\+txt}}} contains words that are not traditionally found in an English dictionary. It is used by the spellchecker to verify the various jargon, variable names, and other odd words used in the Free\+RTOS code base are correct. If your pull request fails to pass the spelling and you believe this is a mistake, then add the word to {\itshape \href{.github/.cSpellWords.txt}{\texttt{.c\+Spell\+Words.\+txt}}}. When adding a word please then sort the list, which can be done by running the bash command\+: {\ttfamily sort -\/u .c\+Spell\+Words.\+txt -\/o .c\+Spell\+Words.\+txt} Note that only the Free\+RTOS-\/\+Kernel Source Files, \mbox{[}include\mbox{]}(include), \href{portable/MemMang}{\texttt{portable/\+Mem\+Mang}}, and \href{portable/Common}{\texttt{portable/\+Common}} files are checked for proper spelling, and formatting at this time.\hypertarget{README.md_autotoc_md63}{}\doxysubsubsection{\texorpdfstring{Third Party Tools}{Third Party Tools}}\label{README.md_autotoc_md63}
+Visit this link for detailed information about third-\/party tools with Free\+RTOS support. 

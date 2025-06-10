@@ -1,0 +1,125 @@
+\doxysection{portmacro.\+h}
+\hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source}{}\label{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/CCS/ARM\_Cortex-\/R4/portmacro.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/CCS/ARM\_Cortex-\/R4/portmacro.h}}
+\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00029}00029\ \textcolor{preprocessor}{\#ifndef\ \_\_PORTMACRO\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00030}00030\ \textcolor{preprocessor}{\#define\ \_\_PORTMACRO\_H\_\_}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00032}00032\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00033}00033\ \textcolor{comment}{\ *\ Port\ specific\ definitions.}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00034}00034\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00035}00035\ \textcolor{comment}{\ *\ The\ settings\ in\ this\ file\ configure\ FreeRTOS\ correctly\ for\ the}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00036}00036\ \textcolor{comment}{\ *\ given\ hardware\ and\ compiler.}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00037}00037\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00038}00038\ \textcolor{comment}{\ *\ These\ settings\ should\ not\ be\ altered.}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00039}00039\ \textcolor{comment}{\ *-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00040}00040\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00042}00042\ \textcolor{comment}{/*\ Type\ definitions.\ */}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00043}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_add0bdbfef5abf241c7774f68bde42f1d}{00043}}\ \textcolor{preprocessor}{\#define\ portCHAR\ \ \ \ \ \ \ \ char}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00044}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_a1bbe1ef117ec274ef919e0a930c888ac}{00044}}\ \textcolor{preprocessor}{\#define\ portFLOAT\ \ \ \ \ \ \ float}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00045}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_a4711ce186a903a14bc8ea7c8650b4f61}{00045}}\ \textcolor{preprocessor}{\#define\ portDOUBLE\ \ \ \ \ \ double}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00046}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_a6bbebff6020ac333ab6ec2ffd7f77001}{00046}}\ \textcolor{preprocessor}{\#define\ portLONG\ \ \ \ \ \ \ \ long}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00047}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_a42e62d5881b12ff2a5c659576c64d003}{00047}}\ \textcolor{preprocessor}{\#define\ portSHORT\ \ \ \ \ \ \ short}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00048}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_ab0a294066ac7369b8f59a52d9491a92c}{00048}}\ \textcolor{preprocessor}{\#define\ portSTACK\_TYPE\ \ uint32\_t}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00049}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_a1ebe82d24d764ae4e352f7c3a9f92c01}{00049}}\ \textcolor{preprocessor}{\#define\ portBASE\_TYPE\ \ \ long}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00051}00051\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_ab0a294066ac7369b8f59a52d9491a92c}{portSTACK\_TYPE}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}};}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00052}00052\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}};}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00053}00053\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}};}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00055}00055\ \textcolor{preprocessor}{\#if\ (configTICK\_TYPE\_WIDTH\_IN\_BITS\ ==\ TICK\_TYPE\_WIDTH\_16\_BITS)}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00056}00056\ \ \ \ \ \textcolor{keyword}{typedef}\ uint16\_t\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}};}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00057}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_a72723ba1e4a85ca14f25c2b9e066613d}{00057}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ portMAX\_DELAY\ (TickType\_t)\ 0xFFFF}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00058}00058\ \textcolor{preprocessor}{\#elif\ (\ configTICK\_TYPE\_WIDTH\_IN\_BITS\ ==\ TICK\_TYPE\_WIDTH\_32\_BITS\ )}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00059}00059\ \ \ \ \ \textcolor{keyword}{typedef}\ uint32\_t\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}};}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00060}00060\ \textcolor{preprocessor}{\ \ \ \ \#define\ portMAX\_DELAY\ (TickType\_t)\ 0xFFFFFFFFF}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00062}00062\ \ \ \ \ \textcolor{comment}{/*\ 32-\/bit\ tick\ type\ on\ a\ 32-\/bit\ architecture,\ so\ reads\ of\ the\ tick\ count\ do}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00063}00063\ \textcolor{comment}{\ \ \ \ not\ need\ to\ be\ guarded\ with\ a\ critical\ section.\ */}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00064}00064\ \textcolor{preprocessor}{\ \ \ \ \#define\ portTICK\_TYPE\_IS\_ATOMIC\ 1}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00065}00065\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00066}00066\ \textcolor{preprocessor}{\ \ \ \ \#error\ configTICK\_TYPE\_WIDTH\_IN\_BITS\ set\ to\ unsupported\ tick\ type\ width.}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00067}00067\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00070}00070\ \textcolor{comment}{/*\ Architecture\ specifics.\ */}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00071}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_a21adaab1601f6a0f35ba550a43060830}{00071}}\ \textcolor{preprocessor}{\#define\ portSTACK\_GROWTH\ \ \ \ (-\/1)}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00072}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_a554d9322ce7f698a86a22b21234bd8cd}{00072}}\ \textcolor{preprocessor}{\#define\ portTICK\_PERIOD\_MS\ \ \ \ ((TickType\_t)\ 1000\ /\ configTICK\_RATE\_HZ)}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00073}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_ab9091ce3940d8bd93ec850122a2c6a1c}{00073}}\ \textcolor{preprocessor}{\#define\ portBYTE\_ALIGNMENT\ \ 8}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00075}00075\ \textcolor{comment}{/*\ Critical\ section\ handling.\ */}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00076}00076\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_c_c_s_2_a_r_m___c_m3_2portmacro_8h_a2ed3554a3de09a3bd09d396ee081ab69}{vPortEnterCritical}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00077}00077\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_c_c_s_2_a_r_m___c_m3_2portmacro_8h_aed20ada05b957181a0de042802a82a5b}{vPortExitCritical}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00078}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_a8a09321ad004019f3c8d0f2e4d7224c7}{00078}}\ \textcolor{preprocessor}{\#define\ portENTER\_CRITICAL()\ \ \ \ \ \ \ \ vPortEnterCritical()}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00079}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_a529358e6147881dd881c890ade21c9bd}{00079}}\ \textcolor{preprocessor}{\#define\ portEXIT\_CRITICAL()\ \ \ \ \ \ \ \ \ vPortExitCritical()}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00080}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_a6e3d10ee1a0734a647ca192523c2cfc1}{00080}}\ \textcolor{preprocessor}{\#define\ portDISABLE\_INTERRUPTS()\ \ \ \ asm(\ "{}\ CPSID\ I"{}\ )}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00081}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_abc47e85a6befbb47961ad5ee7aa57173}{00081}}\ \textcolor{preprocessor}{\#define\ portENABLE\_INTERRUPTS()\ \ \ \ \ asm(\ "{}\ CPSIE\ I"{}\ )}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00083}00083\ \textcolor{comment}{/*\ Scheduler\ utilities.\ */}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00084}00084\ \textcolor{preprocessor}{\#pragma\ SWI\_ALIAS(\ vPortYield,\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00085}00085\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_add01c927fb689f7ec170e42d47d27927}{vPortYield}}(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00086}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_ae1ff06193615f5130b5a97dc9e708fc7}{00086}}\ \textcolor{preprocessor}{\#define\ portYIELD()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vPortYield()}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00087}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_a184472c2250fcc96e2e6935ac47301f0}{00087}}\ \textcolor{preprocessor}{\#define\ portSYS\_SSIR1\_REG\ \ \ \ \ \ \ \ \ \ \ (\ *\ (\ (\ volatile\ uint32\_t\ *\ )\ 0xFFFFFFB0\ )\ )}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00088}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_ad501ea9fe336e813daa7a34e43697d2d}{00088}}\ \textcolor{preprocessor}{\#define\ portSYS\_SSIR1\_SSKEY\ \ \ \ \ \ \ \ \ (\ 0x7500UL\ )}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00089}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_a664746b0d63d7f84baf1092ff4feeef9}{00089}}\ \textcolor{preprocessor}{\#define\ portYIELD\_WITHIN\_API()\ \ \ \ \ \ \{\ portSYS\_SSIR1\_REG\ =\ portSYS\_SSIR1\_SSKEY;\ \ asm(\ "{}\ DSB\ "{}\ );\ asm(\ "{}\ ISB\ "{}\ );\ \}}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00090}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_aac6850c66595efdc02a8bbb95fb4648e}{00090}}\ \textcolor{preprocessor}{\#define\ portYIELD\_FROM\_ISR(\ x\ )\ \ \ \ \ do\ \{\ if(\ x\ !=\ pdFALSE\ )\ \{\ portSYS\_SSIR1\_REG\ =\ portSYS\_SSIR1\_SSKEY;\ \ (\ void\ )\ portSYS\_SSIR1\_REG;\ \}\ \}\ while(\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00092}00092\ \textcolor{preprocessor}{\#ifndef\ configUSE\_PORT\_OPTIMISED\_TASK\_SELECTION}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00093}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_aebb8c3a87d591f60f974772be0ee798d}{00093}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ configUSE\_PORT\_OPTIMISED\_TASK\_SELECTION\ 1}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00094}00094\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00096}00096\ \textcolor{comment}{/*\ Architecture\ specific\ optimisations.\ */}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00097}00097\ \textcolor{preprocessor}{\#if\ configUSE\_PORT\_OPTIMISED\_TASK\_SELECTION\ ==\ 1}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00099}00099\ \ \ \ \ \textcolor{comment}{/*\ Check\ the\ configuration.\ */}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00100}00100\ \textcolor{preprocessor}{\ \ \ \ \#if(\ configMAX\_PRIORITIES\ >\ 32\ )}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00101}00101\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#error\ configUSE\_PORT\_OPTIMISED\_TASK\_SELECTION\ can\ only\ be\ set\ to\ 1\ when\ configMAX\_PRIORITIES\ is\ less\ than\ or\ equal\ to\ 32.\ \ It\ is\ very\ rare\ that\ a\ system\ requires\ more\ than\ 10\ to\ 15\ difference\ priorities\ as\ tasks\ that\ share\ a\ priority\ will\ time\ slice.}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00102}00102\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00104}00104\ \ \ \ \ \textcolor{comment}{/*\ Store/clear\ the\ ready\ priorities\ in\ a\ bit\ map.\ */}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00105}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_a113cd9b8401284194da8ddc4569aa484}{00105}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ portRECORD\_READY\_PRIORITY(\ uxPriority,\ uxReadyPriorities\ )\ (\ uxReadyPriorities\ )\ |=\ (\ 1UL\ <<\ (\ uxPriority\ )\ )}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00106}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_aab771d12c0912d93d52a586628fb18a6}{00106}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ portRESET\_READY\_PRIORITY(\ uxPriority,\ uxReadyPriorities\ )\ (\ uxReadyPriorities\ )\ \&=\ \string~(\ 1UL\ <<\ (\ uxPriority\ )\ )}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00108}00108\ \ \ \ \ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00110}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_a5ed536be98084ed8c77c95d79a2688ee}{00110}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ portGET\_HIGHEST\_PRIORITY(\ uxTopPriority,\ uxReadyPriorities\ )\ uxTopPriority\ =\ (\ 31\ -\/\ \_\_clz(\ (\ uxReadyPriorities\ )\ )\ )}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00112}00112\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ configUSE\_PORT\_OPTIMISED\_TASK\_SELECTION\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00115}00115\ \textcolor{comment}{/*\ Task\ function\ macros\ as\ described\ on\ the\ FreeRTOS.org\ WEB\ site.\ */}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00116}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_a3a289793652f505c538abea27045ccdf}{00116}}\ \textcolor{preprocessor}{\#define\ portTASK\_FUNCTION(vFunction,\ pvParameters)\ \ \ \ \ \ \ void\ vFunction(void\ *pvParameters)}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00117}\mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_a2921e1c5a1f974dfa01ae44d1f665f14}{00117}}\ \textcolor{preprocessor}{\#define\ portTASK\_FUNCTION\_PROTO(vFunction,\ pvParameters)\ void\ vFunction(void\ *pvParameters)}}
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2portmacro_8h_source_l00119}00119\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_PORTMACRO\_H\_\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

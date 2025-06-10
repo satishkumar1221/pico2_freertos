@@ -1,0 +1,205 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+GCC/\+Tri\+Core\+\_\+1782/port.c File Reference}
+\hypertarget{_g_c_c_2_tri_core__1782_2port_8c}{}\label{_g_c_c_2_tri_core__1782_2port_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/TriCore\_1782/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/TriCore\_1782/port.c}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$tc1782.\+h$>$}\newline
+{\ttfamily \#include $<$machine/intrinsics.\+h$>$}\newline
+{\ttfamily \#include $<$machine/cint.\+h$>$}\newline
+{\ttfamily \#include $<$machine/wdtcon.\+h$>$}\newline
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}task.\+h"{}}\newline
+{\ttfamily \#include "{}list.\+h"{}}\newline
+Include dependency graph for port.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_a53c7e0018d578cc75a6de242b255efe7}{port\+SYSTEM\+\_\+\+PROGRAM\+\_\+\+STATUS\+\_\+\+WORD}}~( 0x000008\+FFUL ) /\texorpdfstring{$\ast$}{*} Supervisor \mbox{\hyperlink{ioat91sam7x256_8h_a2c3349c7d637bdca4752c232da5df71c}{Mode}}, MPU Register Set 0 and Call Depth Counting disabled. \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_aebaaca5ba9d52f6f5bf4710cf2e85cd5}{port\+INITIAL\+\_\+\+PRIVILEGED\+\_\+\+PROGRAM\+\_\+\+STATUS\+\_\+\+WORD}}~( 0x000014\+FFUL ) /\texorpdfstring{$\ast$}{*} IO Level 1, MPU Register Set 1 and Call Depth Counting disabled. \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_a03c1ebce1ade45e402edb73ceb8379aa}{port\+INITIAL\+\_\+\+UNPRIVILEGED\+\_\+\+PROGRAM\+\_\+\+STATUS\+\_\+\+WORD}}~( 0x000010\+FFUL ) /\texorpdfstring{$\ast$}{*} IO Level 0, MPU Register Set 1 and Call Depth Counting disabled. \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_a04fc64e05f3949f4ff4b5c276c036407}{port\+INITIAL\+\_\+\+PCXI\+\_\+\+UPPER\+\_\+\+CONTEXT\+\_\+\+WORD}}~( 0x00\+C00000\+UL ) /\texorpdfstring{$\ast$}{*} The lower 20 bits identify \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} CSA address. \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_ad00855b9a1ed5b492cea473aa43574af}{port\+INITIAL\+\_\+\+SYSCON}}~( 0x00000000\+UL ) /\texorpdfstring{$\ast$}{*} MPU Disable. \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_a24b47f41a4ccf1c96020b4981fec5f98}{port\+CSA\+\_\+\+FCX\+\_\+\+MASK}}~( 0x000\+FFFFFUL )
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_a8b8c4b80063cf1c2f6da57b93b66d595}{port\+RESTORE\+\_\+\+PSW\+\_\+\+MASK}}~( \texorpdfstring{$\sim$}{\string~}( 0x000000\+FFUL ) )
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_af46f8ef7814652af16a16ef746a6fe56}{port\+SYSCALL\+\_\+\+TRAP}}~( 6 )
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_ad3bc25f78b2c1da77824c18234353c71}{port\+NUM\+\_\+\+WORDS\+\_\+\+IN\+\_\+\+CSA}}~( 16 )
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_a1191455c4b11064d65717fc18324faac}{port\+ENABLE\+\_\+\+CPU\+\_\+\+INTERRUPT}}~( 1U $<$$<$ 12U )
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int32\+\_\+t \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_a42d48e1e07c99c055d4353dc3b38b466}{x\+Port\+Start\+Scheduler}} (void)
+\item 
+void \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_a439885284a5dd45017f84a4a80d03afc}{v\+Port\+Reclaim\+CSA}} (uint32\+\_\+t \texorpdfstring{$\ast$}{*}px\+TCB)
+\item 
+void \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{v\+Port\+End\+Scheduler}} (void)
+\begin{DoxyCompactList}\small\item\em End the Free\+RTOS scheduler. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_ad2d8a18289cda8ec91acf0a4dce63e30}{ux\+Port\+Set\+Interrupt\+Mask\+From\+ISR}} (void)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_a24b47f41a4ccf1c96020b4981fec5f98}\index{port.c@{port.c}!portCSA\_FCX\_MASK@{portCSA\_FCX\_MASK}}
+\index{portCSA\_FCX\_MASK@{portCSA\_FCX\_MASK}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portCSA\_FCX\_MASK}{portCSA\_FCX\_MASK}}
+{\footnotesize\ttfamily \label{_g_c_c_2_tri_core__1782_2port_8c_a24b47f41a4ccf1c96020b4981fec5f98} 
+\#define port\+CSA\+\_\+\+FCX\+\_\+\+MASK~( 0x000\+FFFFFUL )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source_l00060}{60}} of file \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_a1191455c4b11064d65717fc18324faac}\index{port.c@{port.c}!portENABLE\_CPU\_INTERRUPT@{portENABLE\_CPU\_INTERRUPT}}
+\index{portENABLE\_CPU\_INTERRUPT@{portENABLE\_CPU\_INTERRUPT}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portENABLE\_CPU\_INTERRUPT}{portENABLE\_CPU\_INTERRUPT}}
+{\footnotesize\ttfamily \label{_g_c_c_2_tri_core__1782_2port_8c_a1191455c4b11064d65717fc18324faac} 
+\#define port\+ENABLE\+\_\+\+CPU\+\_\+\+INTERRUPT~( 1U $<$$<$ 12U )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source_l00070}{70}} of file \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_a04fc64e05f3949f4ff4b5c276c036407}\index{port.c@{port.c}!portINITIAL\_PCXI\_UPPER\_CONTEXT\_WORD@{portINITIAL\_PCXI\_UPPER\_CONTEXT\_WORD}}
+\index{portINITIAL\_PCXI\_UPPER\_CONTEXT\_WORD@{portINITIAL\_PCXI\_UPPER\_CONTEXT\_WORD}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portINITIAL\_PCXI\_UPPER\_CONTEXT\_WORD}{portINITIAL\_PCXI\_UPPER\_CONTEXT\_WORD}}
+{\footnotesize\ttfamily \label{_g_c_c_2_tri_core__1782_2port_8c_a04fc64e05f3949f4ff4b5c276c036407} 
+\#define port\+INITIAL\+\_\+\+PCXI\+\_\+\+UPPER\+\_\+\+CONTEXT\+\_\+\+WORD~( 0x00\+C00000\+UL ) /\texorpdfstring{$\ast$}{*} The lower 20 bits identify \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} CSA address. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source_l00056}{56}} of file \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_aebaaca5ba9d52f6f5bf4710cf2e85cd5}\index{port.c@{port.c}!portINITIAL\_PRIVILEGED\_PROGRAM\_STATUS\_WORD@{portINITIAL\_PRIVILEGED\_PROGRAM\_STATUS\_WORD}}
+\index{portINITIAL\_PRIVILEGED\_PROGRAM\_STATUS\_WORD@{portINITIAL\_PRIVILEGED\_PROGRAM\_STATUS\_WORD}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portINITIAL\_PRIVILEGED\_PROGRAM\_STATUS\_WORD}{portINITIAL\_PRIVILEGED\_PROGRAM\_STATUS\_WORD}}
+{\footnotesize\ttfamily \label{_g_c_c_2_tri_core__1782_2port_8c_aebaaca5ba9d52f6f5bf4710cf2e85cd5} 
+\#define port\+INITIAL\+\_\+\+PRIVILEGED\+\_\+\+PROGRAM\+\_\+\+STATUS\+\_\+\+WORD~( 0x000014\+FFUL ) /\texorpdfstring{$\ast$}{*} IO Level 1, MPU Register Set 1 and Call Depth Counting disabled. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source_l00054}{54}} of file \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_ad00855b9a1ed5b492cea473aa43574af}\index{port.c@{port.c}!portINITIAL\_SYSCON@{portINITIAL\_SYSCON}}
+\index{portINITIAL\_SYSCON@{portINITIAL\_SYSCON}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portINITIAL\_SYSCON}{portINITIAL\_SYSCON}}
+{\footnotesize\ttfamily \label{_g_c_c_2_tri_core__1782_2port_8c_ad00855b9a1ed5b492cea473aa43574af} 
+\#define port\+INITIAL\+\_\+\+SYSCON~( 0x00000000\+UL ) /\texorpdfstring{$\ast$}{*} MPU Disable. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source_l00057}{57}} of file \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_a03c1ebce1ade45e402edb73ceb8379aa}\index{port.c@{port.c}!portINITIAL\_UNPRIVILEGED\_PROGRAM\_STATUS\_WORD@{portINITIAL\_UNPRIVILEGED\_PROGRAM\_STATUS\_WORD}}
+\index{portINITIAL\_UNPRIVILEGED\_PROGRAM\_STATUS\_WORD@{portINITIAL\_UNPRIVILEGED\_PROGRAM\_STATUS\_WORD}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portINITIAL\_UNPRIVILEGED\_PROGRAM\_STATUS\_WORD}{portINITIAL\_UNPRIVILEGED\_PROGRAM\_STATUS\_WORD}}
+{\footnotesize\ttfamily \label{_g_c_c_2_tri_core__1782_2port_8c_a03c1ebce1ade45e402edb73ceb8379aa} 
+\#define port\+INITIAL\+\_\+\+UNPRIVILEGED\+\_\+\+PROGRAM\+\_\+\+STATUS\+\_\+\+WORD~( 0x000010\+FFUL ) /\texorpdfstring{$\ast$}{*} IO Level 0, MPU Register Set 1 and Call Depth Counting disabled. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source_l00055}{55}} of file \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_ad3bc25f78b2c1da77824c18234353c71}\index{port.c@{port.c}!portNUM\_WORDS\_IN\_CSA@{portNUM\_WORDS\_IN\_CSA}}
+\index{portNUM\_WORDS\_IN\_CSA@{portNUM\_WORDS\_IN\_CSA}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portNUM\_WORDS\_IN\_CSA}{portNUM\_WORDS\_IN\_CSA}}
+{\footnotesize\ttfamily \label{_g_c_c_2_tri_core__1782_2port_8c_ad3bc25f78b2c1da77824c18234353c71} 
+\#define port\+NUM\+\_\+\+WORDS\+\_\+\+IN\+\_\+\+CSA~( 16 )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source_l00067}{67}} of file \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_a8b8c4b80063cf1c2f6da57b93b66d595}\index{port.c@{port.c}!portRESTORE\_PSW\_MASK@{portRESTORE\_PSW\_MASK}}
+\index{portRESTORE\_PSW\_MASK@{portRESTORE\_PSW\_MASK}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portRESTORE\_PSW\_MASK}{portRESTORE\_PSW\_MASK}}
+{\footnotesize\ttfamily \label{_g_c_c_2_tri_core__1782_2port_8c_a8b8c4b80063cf1c2f6da57b93b66d595} 
+\#define port\+RESTORE\+\_\+\+PSW\+\_\+\+MASK~( \texorpdfstring{$\sim$}{\string~}( 0x000000\+FFUL ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source_l00063}{63}} of file \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_af46f8ef7814652af16a16ef746a6fe56}\index{port.c@{port.c}!portSYSCALL\_TRAP@{portSYSCALL\_TRAP}}
+\index{portSYSCALL\_TRAP@{portSYSCALL\_TRAP}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portSYSCALL\_TRAP}{portSYSCALL\_TRAP}}
+{\footnotesize\ttfamily \label{_g_c_c_2_tri_core__1782_2port_8c_af46f8ef7814652af16a16ef746a6fe56} 
+\#define port\+SYSCALL\+\_\+\+TRAP~( 6 )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source_l00064}{64}} of file \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_a53c7e0018d578cc75a6de242b255efe7}\index{port.c@{port.c}!portSYSTEM\_PROGRAM\_STATUS\_WORD@{portSYSTEM\_PROGRAM\_STATUS\_WORD}}
+\index{portSYSTEM\_PROGRAM\_STATUS\_WORD@{portSYSTEM\_PROGRAM\_STATUS\_WORD}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portSYSTEM\_PROGRAM\_STATUS\_WORD}{portSYSTEM\_PROGRAM\_STATUS\_WORD}}
+{\footnotesize\ttfamily \label{_g_c_c_2_tri_core__1782_2port_8c_a53c7e0018d578cc75a6de242b255efe7} 
+\#define port\+SYSTEM\+\_\+\+PROGRAM\+\_\+\+STATUS\+\_\+\+WORD~( 0x000008\+FFUL ) /\texorpdfstring{$\ast$}{*} Supervisor \mbox{\hyperlink{ioat91sam7x256_8h_a2c3349c7d637bdca4752c232da5df71c}{Mode}}, MPU Register Set 0 and Call Depth Counting disabled. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source_l00053}{53}} of file \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source}{port.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_ad2d8a18289cda8ec91acf0a4dce63e30}\index{port.c@{port.c}!uxPortSetInterruptMaskFromISR@{uxPortSetInterruptMaskFromISR}}
+\index{uxPortSetInterruptMaskFromISR@{uxPortSetInterruptMaskFromISR}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{uxPortSetInterruptMaskFromISR()}{uxPortSetInterruptMaskFromISR()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_tri_core__1782_2port_8c_ad2d8a18289cda8ec91acf0a4dce63e30} 
+uint32\+\_\+t ux\+Port\+Set\+Interrupt\+Mask\+From\+ISR (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source_l00534}{534}} of file \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source}{port.\+c}}.
+
+Here is the caller graph for this function\+:
+% FIG 1
+\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}\index{port.c@{port.c}!vPortEndScheduler@{vPortEndScheduler}}
+\index{vPortEndScheduler@{vPortEndScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEndScheduler()}{vPortEndScheduler()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_tri_core__1782_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423} 
+void v\+Port\+End\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+End the Free\+RTOS scheduler. 
+
+Not implemented on this port. 
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source_l00440}{440}} of file \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_a439885284a5dd45017f84a4a80d03afc}\index{port.c@{port.c}!vPortReclaimCSA@{vPortReclaimCSA}}
+\index{vPortReclaimCSA@{vPortReclaimCSA}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortReclaimCSA()}{vPortReclaimCSA()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_tri_core__1782_2port_8c_a439885284a5dd45017f84a4a80d03afc} 
+void v\+Port\+Reclaim\+CSA (\begin{DoxyParamCaption}\item[{uint32\+\_\+t \texorpdfstring{$\ast$}{*}}]{px\+TCB}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source_l00385}{385}} of file \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_tri_core__1782_2port_8c_a42d48e1e07c99c055d4353dc3b38b466}\index{port.c@{port.c}!xPortStartScheduler@{xPortStartScheduler}}
+\index{xPortStartScheduler@{xPortStartScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortStartScheduler()}{xPortStartScheduler()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_tri_core__1782_2port_8c_a42d48e1e07c99c055d4353dc3b38b466} 
+int32\+\_\+t x\+Port\+Start\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source_l00184}{184}} of file \mbox{\hyperlink{_g_c_c_2_tri_core__1782_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 2

@@ -1,0 +1,316 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+GCC/\+ARM\+\_\+\+CM23/secure/secure\+\_\+heap.c File Reference}
+\hypertarget{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c}{}\label{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/ARM\_CM23/secure/secure\_heap.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/ARM\_CM23/secure/secure\_heap.c}}
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include "{}secure\+\_\+heap.\+h"{}}\newline
+{\ttfamily \#include "{}secure\+\_\+port\+\_\+macros.\+h"{}}\newline
+Include dependency graph for secure\+\_\+heap.\+c\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k}{A\+\_\+\+BLOCK\+\_\+\+LINK}}
+\begin{DoxyCompactList}\small\item\em The linked list structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_ac7459238c8114b55d18f88d1f731ea9a}{secureconfig\+TOTAL\+\_\+\+HEAP\+\_\+\+SIZE}}~( ( ( size\+\_\+t ) ( 10 \texorpdfstring{$\ast$}{*} 1024 ) ) )
+\begin{DoxyCompactList}\small\item\em Total heap size. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mt\+COVERAGE\+\_\+\+TEST\+\_\+\+MARKER}}()
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a7b7adb972133ffecbaddb8a8a4303e28}{trace\+MALLOC}}(pv\+Return,  x\+Wanted\+Size)
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a47dffc63f23004f444db7058604e4626}{trace\+FREE}}(pv,  x\+Block\+Size)
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a254cc5ef30ce05c8182a6a66aa8bee24}{secureheap\+MINIMUM\+\_\+\+BLOCK\+\_\+\+SIZE}}~( ( size\+\_\+t ) ( x\+Heap\+Struct\+Size $<$$<$ 1 ) )
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a56fc9978bbe112b45db6176aef25a403}{secureheap\+BITS\+\_\+\+PER\+\_\+\+BYTE}}~( ( size\+\_\+t ) 8 )
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_aa1f970a075e01ab1c7861e1ac730b026}{secureheap\+SIZE\+\_\+\+MAX}}~( \texorpdfstring{$\sim$}{\string~}( ( size\+\_\+t ) 0 ) )
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_ae5c7388baf75bb8bc7d989440601d0f3}{secureheap\+ADD\+\_\+\+WILL\+\_\+\+OVERFLOW}}(\mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_a79f1ee1a890da6b8d5ae0087f0a941b8}{a}},  b)
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a06c25db8ac03202ed1a0b1bcb66286b4}{secureheap\+BLOCK\+\_\+\+ALLOCATED\+\_\+\+BITMASK}}~( ( ( size\+\_\+t ) 1 ) $<$$<$ ( ( sizeof( size\+\_\+t ) \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a56fc9978bbe112b45db6176aef25a403}{secureheap\+BITS\+\_\+\+PER\+\_\+\+BYTE}} ) -\/ 1 ) )
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_ab46eb5ffc4904212c0d4a02afa78dc69}{secureheap\+BLOCK\+\_\+\+SIZE\+\_\+\+IS\+\_\+\+VALID}}(x\+Block\+Size)
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a9154f9d356f99eb4ca4c085cc4dd2094}{secureheap\+BLOCK\+\_\+\+IS\+\_\+\+ALLOCATED}}(px\+Block)
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_ad1d672bdaa4cd684a6b2c999605cf3a7}{secureheap\+ALLOCATE\+\_\+\+BLOCK}}(px\+Block)
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a799f87ee3b68fa03086bd681fc9de8c8}{secureheap\+FREE\+\_\+\+BLOCK}}(px\+Block)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k}{A\+\_\+\+BLOCK\+\_\+\+LINK}} \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a5867d4b64d89c6ab51e4783687f8960a}{Block\+Link\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em The linked list structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_ac56bcb7515f081a5b3df83935499fa4a}{pv\+Port\+Malloc}} (size\+\_\+t x\+Wanted\+Size)
+\begin{DoxyCompactList}\small\item\em Allocates memory from heap. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a1e7cea2fd1bc894ea3b5f5e8179d259b}{v\+Port\+Free}} (void \texorpdfstring{$\ast$}{*}pv)
+\begin{DoxyCompactList}\small\item\em Frees the previously allocated memory. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a0c28a12b313bc248be0cb7a37ed81bb7}{x\+Port\+Get\+Free\+Heap\+Size}} (void)
+\begin{DoxyCompactList}\small\item\em Get the free heap size. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_ab222e4545b8ff12b62fd000fea6b34eb}{x\+Port\+Get\+Minimum\+Ever\+Free\+Heap\+Size}} (void)
+\begin{DoxyCompactList}\small\item\em Get the minimum ever free heap size. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_ac77e2af1a6b0d38fbab36cf2aa96f1a8}\index{secure\_heap.c@{secure\_heap.c}!mtCOVERAGE\_TEST\_MARKER@{mtCOVERAGE\_TEST\_MARKER}}
+\index{mtCOVERAGE\_TEST\_MARKER@{mtCOVERAGE\_TEST\_MARKER}!secure\_heap.c@{secure\_heap.c}}
+\doxysubsubsection{\texorpdfstring{mtCOVERAGE\_TEST\_MARKER}{mtCOVERAGE\_TEST\_MARKER}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_ac77e2af1a6b0d38fbab36cf2aa96f1a8} 
+\#define mt\+COVERAGE\+\_\+\+TEST\+\_\+\+MARKER(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00047}{47}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source}{secure\+\_\+heap.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_ac7459238c8114b55d18f88d1f731ea9a}\index{secure\_heap.c@{secure\_heap.c}!secureconfigTOTAL\_HEAP\_SIZE@{secureconfigTOTAL\_HEAP\_SIZE}}
+\index{secureconfigTOTAL\_HEAP\_SIZE@{secureconfigTOTAL\_HEAP\_SIZE}!secure\_heap.c@{secure\_heap.c}}
+\doxysubsubsection{\texorpdfstring{secureconfigTOTAL\_HEAP\_SIZE}{secureconfigTOTAL\_HEAP\_SIZE}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_ac7459238c8114b55d18f88d1f731ea9a} 
+\#define secureconfig\+TOTAL\+\_\+\+HEAP\+\_\+\+SIZE~( ( ( size\+\_\+t ) ( 10 \texorpdfstring{$\ast$}{*} 1024 ) ) )}
+
+
+
+Total heap size. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00042}{42}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source}{secure\+\_\+heap.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_ae5c7388baf75bb8bc7d989440601d0f3}\index{secure\_heap.c@{secure\_heap.c}!secureheapADD\_WILL\_OVERFLOW@{secureheapADD\_WILL\_OVERFLOW}}
+\index{secureheapADD\_WILL\_OVERFLOW@{secureheapADD\_WILL\_OVERFLOW}!secure\_heap.c@{secure\_heap.c}}
+\doxysubsubsection{\texorpdfstring{secureheapADD\_WILL\_OVERFLOW}{secureheapADD\_WILL\_OVERFLOW}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_ae5c7388baf75bb8bc7d989440601d0f3} 
+\#define secureheap\+ADD\+\_\+\+WILL\+\_\+\+OVERFLOW(\begin{DoxyParamCaption}\item[{}]{\mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_a79f1ee1a890da6b8d5ae0087f0a941b8}{a}}}{, }\item[{}]{b}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\ (\ \mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_a79f1ee1a890da6b8d5ae0087f0a941b8}{a}}\ )\ >\ (\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_aa1f970a075e01ab1c7861e1ac730b026}{secureheapSIZE\_MAX}}\ -\/\ (\ b\ )\ )\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00070}{70}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source}{secure\+\_\+heap.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_ad1d672bdaa4cd684a6b2c999605cf3a7}\index{secure\_heap.c@{secure\_heap.c}!secureheapALLOCATE\_BLOCK@{secureheapALLOCATE\_BLOCK}}
+\index{secureheapALLOCATE\_BLOCK@{secureheapALLOCATE\_BLOCK}!secure\_heap.c@{secure\_heap.c}}
+\doxysubsubsection{\texorpdfstring{secureheapALLOCATE\_BLOCK}{secureheapALLOCATE\_BLOCK}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_ad1d672bdaa4cd684a6b2c999605cf3a7} 
+\#define secureheap\+ALLOCATE\+\_\+\+BLOCK(\begin{DoxyParamCaption}\item[{}]{px\+Block}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\ (\ pxBlock-\/>xBlockSize\ )\ |=\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a06c25db8ac03202ed1a0b1bcb66286b4}{secureheapBLOCK\_ALLOCATED\_BITMASK}}\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00079}{79}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source}{secure\+\_\+heap.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a56fc9978bbe112b45db6176aef25a403}\index{secure\_heap.c@{secure\_heap.c}!secureheapBITS\_PER\_BYTE@{secureheapBITS\_PER\_BYTE}}
+\index{secureheapBITS\_PER\_BYTE@{secureheapBITS\_PER\_BYTE}!secure\_heap.c@{secure\_heap.c}}
+\doxysubsubsection{\texorpdfstring{secureheapBITS\_PER\_BYTE}{secureheapBITS\_PER\_BYTE}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a56fc9978bbe112b45db6176aef25a403} 
+\#define secureheap\+BITS\+\_\+\+PER\+\_\+\+BYTE~( ( size\+\_\+t ) 8 )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00064}{64}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source}{secure\+\_\+heap.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a06c25db8ac03202ed1a0b1bcb66286b4}\index{secure\_heap.c@{secure\_heap.c}!secureheapBLOCK\_ALLOCATED\_BITMASK@{secureheapBLOCK\_ALLOCATED\_BITMASK}}
+\index{secureheapBLOCK\_ALLOCATED\_BITMASK@{secureheapBLOCK\_ALLOCATED\_BITMASK}!secure\_heap.c@{secure\_heap.c}}
+\doxysubsubsection{\texorpdfstring{secureheapBLOCK\_ALLOCATED\_BITMASK}{secureheapBLOCK\_ALLOCATED\_BITMASK}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a06c25db8ac03202ed1a0b1bcb66286b4} 
+\#define secureheap\+BLOCK\+\_\+\+ALLOCATED\+\_\+\+BITMASK~( ( ( size\+\_\+t ) 1 ) $<$$<$ ( ( sizeof( size\+\_\+t ) \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a56fc9978bbe112b45db6176aef25a403}{secureheap\+BITS\+\_\+\+PER\+\_\+\+BYTE}} ) -\/ 1 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00076}{76}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source}{secure\+\_\+heap.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a9154f9d356f99eb4ca4c085cc4dd2094}\index{secure\_heap.c@{secure\_heap.c}!secureheapBLOCK\_IS\_ALLOCATED@{secureheapBLOCK\_IS\_ALLOCATED}}
+\index{secureheapBLOCK\_IS\_ALLOCATED@{secureheapBLOCK\_IS\_ALLOCATED}!secure\_heap.c@{secure\_heap.c}}
+\doxysubsubsection{\texorpdfstring{secureheapBLOCK\_IS\_ALLOCATED}{secureheapBLOCK\_IS\_ALLOCATED}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a9154f9d356f99eb4ca4c085cc4dd2094} 
+\#define secureheap\+BLOCK\+\_\+\+IS\+\_\+\+ALLOCATED(\begin{DoxyParamCaption}\item[{}]{px\+Block}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\ (\ (\ pxBlock-\/>xBlockSize\ )\ \&\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a06c25db8ac03202ed1a0b1bcb66286b4}{secureheapBLOCK\_ALLOCATED\_BITMASK}}\ )\ !=\ 0\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00078}{78}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source}{secure\+\_\+heap.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_ab46eb5ffc4904212c0d4a02afa78dc69}\index{secure\_heap.c@{secure\_heap.c}!secureheapBLOCK\_SIZE\_IS\_VALID@{secureheapBLOCK\_SIZE\_IS\_VALID}}
+\index{secureheapBLOCK\_SIZE\_IS\_VALID@{secureheapBLOCK\_SIZE\_IS\_VALID}!secure\_heap.c@{secure\_heap.c}}
+\doxysubsubsection{\texorpdfstring{secureheapBLOCK\_SIZE\_IS\_VALID}{secureheapBLOCK\_SIZE\_IS\_VALID}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_ab46eb5ffc4904212c0d4a02afa78dc69} 
+\#define secureheap\+BLOCK\+\_\+\+SIZE\+\_\+\+IS\+\_\+\+VALID(\begin{DoxyParamCaption}\item[{}]{x\+Block\+Size}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\ (\ (\ xBlockSize\ )\ \&\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a06c25db8ac03202ed1a0b1bcb66286b4}{secureheapBLOCK\_ALLOCATED\_BITMASK}}\ )\ ==\ 0\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00077}{77}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source}{secure\+\_\+heap.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a799f87ee3b68fa03086bd681fc9de8c8}\index{secure\_heap.c@{secure\_heap.c}!secureheapFREE\_BLOCK@{secureheapFREE\_BLOCK}}
+\index{secureheapFREE\_BLOCK@{secureheapFREE\_BLOCK}!secure\_heap.c@{secure\_heap.c}}
+\doxysubsubsection{\texorpdfstring{secureheapFREE\_BLOCK}{secureheapFREE\_BLOCK}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a799f87ee3b68fa03086bd681fc9de8c8} 
+\#define secureheap\+FREE\+\_\+\+BLOCK(\begin{DoxyParamCaption}\item[{}]{px\+Block}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\ (\ pxBlock-\/>xBlockSize\ )\ \&=\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a06c25db8ac03202ed1a0b1bcb66286b4}{\string~secureheapBLOCK\_ALLOCATED\_BITMASK}}\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00080}{80}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source}{secure\+\_\+heap.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a254cc5ef30ce05c8182a6a66aa8bee24}\index{secure\_heap.c@{secure\_heap.c}!secureheapMINIMUM\_BLOCK\_SIZE@{secureheapMINIMUM\_BLOCK\_SIZE}}
+\index{secureheapMINIMUM\_BLOCK\_SIZE@{secureheapMINIMUM\_BLOCK\_SIZE}!secure\_heap.c@{secure\_heap.c}}
+\doxysubsubsection{\texorpdfstring{secureheapMINIMUM\_BLOCK\_SIZE}{secureheapMINIMUM\_BLOCK\_SIZE}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a254cc5ef30ce05c8182a6a66aa8bee24} 
+\#define secureheap\+MINIMUM\+\_\+\+BLOCK\+\_\+\+SIZE~( ( size\+\_\+t ) ( x\+Heap\+Struct\+Size $<$$<$ 1 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00061}{61}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source}{secure\+\_\+heap.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_aa1f970a075e01ab1c7861e1ac730b026}\index{secure\_heap.c@{secure\_heap.c}!secureheapSIZE\_MAX@{secureheapSIZE\_MAX}}
+\index{secureheapSIZE\_MAX@{secureheapSIZE\_MAX}!secure\_heap.c@{secure\_heap.c}}
+\doxysubsubsection{\texorpdfstring{secureheapSIZE\_MAX}{secureheapSIZE\_MAX}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_aa1f970a075e01ab1c7861e1ac730b026} 
+\#define secureheap\+SIZE\+\_\+\+MAX~( \texorpdfstring{$\sim$}{\string~}( ( size\+\_\+t ) 0 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00067}{67}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source}{secure\+\_\+heap.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a47dffc63f23004f444db7058604e4626}\index{secure\_heap.c@{secure\_heap.c}!traceFREE@{traceFREE}}
+\index{traceFREE@{traceFREE}!secure\_heap.c@{secure\_heap.c}}
+\doxysubsubsection{\texorpdfstring{traceFREE}{traceFREE}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a47dffc63f23004f444db7058604e4626} 
+\#define trace\+FREE(\begin{DoxyParamCaption}\item[{}]{pv}{, }\item[{}]{x\+Block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00057}{57}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source}{secure\+\_\+heap.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a7b7adb972133ffecbaddb8a8a4303e28}\index{secure\_heap.c@{secure\_heap.c}!traceMALLOC@{traceMALLOC}}
+\index{traceMALLOC@{traceMALLOC}!secure\_heap.c@{secure\_heap.c}}
+\doxysubsubsection{\texorpdfstring{traceMALLOC}{traceMALLOC}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a7b7adb972133ffecbaddb8a8a4303e28} 
+\#define trace\+MALLOC(\begin{DoxyParamCaption}\item[{}]{pv\+Return}{, }\item[{}]{x\+Wanted\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00052}{52}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source}{secure\+\_\+heap.\+c}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a5867d4b64d89c6ab51e4783687f8960a}\index{secure\_heap.c@{secure\_heap.c}!BlockLink\_t@{BlockLink\_t}}
+\index{BlockLink\_t@{BlockLink\_t}!secure\_heap.c@{secure\_heap.c}}
+\doxysubsubsection{\texorpdfstring{BlockLink\_t}{BlockLink\_t}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a5867d4b64d89c6ab51e4783687f8960a} 
+typedef struct \mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k}{A\+\_\+\+BLOCK\+\_\+\+LINK}} \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a5867d4b64d89c6ab51e4783687f8960a}{Block\+Link\+\_\+t}}}
+
+
+
+The linked list structure. 
+
+This is used to link free blocks in order of their memory address. 
+
+\label{doc-func-members}
+\Hypertarget{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_ac56bcb7515f081a5b3df83935499fa4a}\index{secure\_heap.c@{secure\_heap.c}!pvPortMalloc@{pvPortMalloc}}
+\index{pvPortMalloc@{pvPortMalloc}!secure\_heap.c@{secure\_heap.c}}
+\doxysubsubsection{\texorpdfstring{pvPortMalloc()}{pvPortMalloc()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_ac56bcb7515f081a5b3df83935499fa4a} 
+void \texorpdfstring{$\ast$}{*} pv\+Port\+Malloc (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{x\+Wanted\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Allocates memory from heap. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em x\+Wanted\+Size} & The size of the memory to be allocated.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the memory region if the allocation is successful, NULL otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00252}{252}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source}{secure\+\_\+heap.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a1e7cea2fd1bc894ea3b5f5e8179d259b}\index{secure\_heap.c@{secure\_heap.c}!vPortFree@{vPortFree}}
+\index{vPortFree@{vPortFree}!secure\_heap.c@{secure\_heap.c}}
+\doxysubsubsection{\texorpdfstring{vPortFree()}{vPortFree()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a1e7cea2fd1bc894ea3b5f5e8179d259b} 
+void v\+Port\+Free (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{pv}{}\end{DoxyParamCaption})}
+
+
+
+Frees the previously allocated memory. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em pv} & Pointer to the memory to be freed. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00424}{424}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source}{secure\+\_\+heap.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a0c28a12b313bc248be0cb7a37ed81bb7}\index{secure\_heap.c@{secure\_heap.c}!xPortGetFreeHeapSize@{xPortGetFreeHeapSize}}
+\index{xPortGetFreeHeapSize@{xPortGetFreeHeapSize}!secure\_heap.c@{secure\_heap.c}}
+\doxysubsubsection{\texorpdfstring{xPortGetFreeHeapSize()}{xPortGetFreeHeapSize()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_a0c28a12b313bc248be0cb7a37ed81bb7} 
+size\+\_\+t x\+Port\+Get\+Free\+Heap\+Size (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Get the free heap size. 
+
+\begin{DoxyReturn}{Returns}
+Free heap size. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00472}{472}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source}{secure\+\_\+heap.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_ab222e4545b8ff12b62fd000fea6b34eb}\index{secure\_heap.c@{secure\_heap.c}!xPortGetMinimumEverFreeHeapSize@{xPortGetMinimumEverFreeHeapSize}}
+\index{xPortGetMinimumEverFreeHeapSize@{xPortGetMinimumEverFreeHeapSize}!secure\_heap.c@{secure\_heap.c}}
+\doxysubsubsection{\texorpdfstring{xPortGetMinimumEverFreeHeapSize()}{xPortGetMinimumEverFreeHeapSize()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_ab222e4545b8ff12b62fd000fea6b34eb} 
+size\+\_\+t x\+Port\+Get\+Minimum\+Ever\+Free\+Heap\+Size (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Get the minimum ever free heap size. 
+
+\begin{DoxyReturn}{Returns}
+Minimum ever free heap size. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00478}{478}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m23_2secure_2secure__heap_8c_source}{secure\+\_\+heap.\+c}}.
+

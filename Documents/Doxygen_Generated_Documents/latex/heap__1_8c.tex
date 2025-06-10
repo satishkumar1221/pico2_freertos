@@ -1,0 +1,166 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+Mem\+Mang/heap\+\_\+1.c File Reference}
+\hypertarget{heap__1_8c}{}\label{heap__1_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/MemMang/heap\_1.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/MemMang/heap\_1.c}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}task.\+h"{}}\newline
+Include dependency graph for heap\+\_\+1.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{heap__1_8c_ab622d8c674f2a417a666a7ed89109e79}{MPU\+\_\+\+WRAPPERS\+\_\+\+INCLUDED\+\_\+\+FROM\+\_\+\+API\+\_\+\+FILE}}
+\item 
+\#define \mbox{\hyperlink{heap__1_8c_a3e68bebe7509a99550e1358cbca8e23f}{config\+ADJUSTED\+\_\+\+HEAP\+\_\+\+SIZE}}~( \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_a9f213227674effff0122a75d94d87938}{config\+TOTAL\+\_\+\+HEAP\+\_\+\+SIZE}} -\/ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_ab9091ce3940d8bd93ec850122a2c6a1c}{port\+BYTE\+\_\+\+ALIGNMENT}} )
+\item 
+\#define \mbox{\hyperlink{heap__1_8c_a44190865b2e28c843cfe20e23e946219}{heap\+SIZE\+\_\+\+MAX}}~( \texorpdfstring{$\sim$}{\string~}( ( size\+\_\+t ) 0 ) )
+\item 
+\#define \mbox{\hyperlink{heap__1_8c_a427b4999e850bf9bc628d6c48183baff}{heap\+ADD\+\_\+\+WILL\+\_\+\+OVERFLOW}}(\mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_a79f1ee1a890da6b8d5ae0087f0a941b8}{a}},  b)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{heap__1_8c_ac56bcb7515f081a5b3df83935499fa4a}{pv\+Port\+Malloc}} (size\+\_\+t x\+Wanted\+Size)
+\begin{DoxyCompactList}\small\item\em Allocates memory from heap. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{heap__1_8c_a1e7cea2fd1bc894ea3b5f5e8179d259b}{v\+Port\+Free}} (void \texorpdfstring{$\ast$}{*}pv)
+\begin{DoxyCompactList}\small\item\em Frees the previously allocated memory. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{heap__1_8c_a8bf103ce32ce8473574e9920af8b4eec}{v\+Port\+Initialise\+Blocks}} (void)
+\item 
+size\+\_\+t \mbox{\hyperlink{heap__1_8c_a0c28a12b313bc248be0cb7a37ed81bb7}{x\+Port\+Get\+Free\+Heap\+Size}} (void)
+\begin{DoxyCompactList}\small\item\em Get the free heap size. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{heap__1_8c_af44030217c31ad748406a5a72c2e7be0}{v\+Port\+Heap\+Reset\+State}} (void)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{heap__1_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{heap__1_8c_a3e68bebe7509a99550e1358cbca8e23f}\index{heap\_1.c@{heap\_1.c}!configADJUSTED\_HEAP\_SIZE@{configADJUSTED\_HEAP\_SIZE}}
+\index{configADJUSTED\_HEAP\_SIZE@{configADJUSTED\_HEAP\_SIZE}!heap\_1.c@{heap\_1.c}}
+\doxysubsubsection{\texorpdfstring{configADJUSTED\_HEAP\_SIZE}{configADJUSTED\_HEAP\_SIZE}}
+{\footnotesize\ttfamily \label{heap__1_8c_a3e68bebe7509a99550e1358cbca8e23f} 
+\#define config\+ADJUSTED\+\_\+\+HEAP\+\_\+\+SIZE~( \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_a9f213227674effff0122a75d94d87938}{config\+TOTAL\+\_\+\+HEAP\+\_\+\+SIZE}} -\/ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_ab9091ce3940d8bd93ec850122a2c6a1c}{port\+BYTE\+\_\+\+ALIGNMENT}} )}
+
+
+
+Definition at line \mbox{\hyperlink{heap__1_8c_source_l00054}{54}} of file \mbox{\hyperlink{heap__1_8c_source}{heap\+\_\+1.\+c}}.
+
+\Hypertarget{heap__1_8c_a427b4999e850bf9bc628d6c48183baff}\index{heap\_1.c@{heap\_1.c}!heapADD\_WILL\_OVERFLOW@{heapADD\_WILL\_OVERFLOW}}
+\index{heapADD\_WILL\_OVERFLOW@{heapADD\_WILL\_OVERFLOW}!heap\_1.c@{heap\_1.c}}
+\doxysubsubsection{\texorpdfstring{heapADD\_WILL\_OVERFLOW}{heapADD\_WILL\_OVERFLOW}}
+{\footnotesize\ttfamily \label{heap__1_8c_a427b4999e850bf9bc628d6c48183baff} 
+\#define heap\+ADD\+\_\+\+WILL\+\_\+\+OVERFLOW(\begin{DoxyParamCaption}\item[{}]{\mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_a79f1ee1a890da6b8d5ae0087f0a941b8}{a}}}{, }\item[{}]{b}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\ (\ \mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_a79f1ee1a890da6b8d5ae0087f0a941b8}{a}}\ )\ >\ (\ \mbox{\hyperlink{heap__1_8c_a44190865b2e28c843cfe20e23e946219}{heapSIZE\_MAX}}\ -\/\ (\ b\ )\ )\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{heap__1_8c_source_l00060}{60}} of file \mbox{\hyperlink{heap__1_8c_source}{heap\+\_\+1.\+c}}.
+
+\Hypertarget{heap__1_8c_a44190865b2e28c843cfe20e23e946219}\index{heap\_1.c@{heap\_1.c}!heapSIZE\_MAX@{heapSIZE\_MAX}}
+\index{heapSIZE\_MAX@{heapSIZE\_MAX}!heap\_1.c@{heap\_1.c}}
+\doxysubsubsection{\texorpdfstring{heapSIZE\_MAX}{heapSIZE\_MAX}}
+{\footnotesize\ttfamily \label{heap__1_8c_a44190865b2e28c843cfe20e23e946219} 
+\#define heap\+SIZE\+\_\+\+MAX~( \texorpdfstring{$\sim$}{\string~}( ( size\+\_\+t ) 0 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{heap__1_8c_source_l00057}{57}} of file \mbox{\hyperlink{heap__1_8c_source}{heap\+\_\+1.\+c}}.
+
+\Hypertarget{heap__1_8c_ab622d8c674f2a417a666a7ed89109e79}\index{heap\_1.c@{heap\_1.c}!MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE@{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}}
+\index{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE@{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}!heap\_1.c@{heap\_1.c}}
+\doxysubsubsection{\texorpdfstring{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}}
+{\footnotesize\ttfamily \label{heap__1_8c_ab622d8c674f2a417a666a7ed89109e79} 
+\#define MPU\+\_\+\+WRAPPERS\+\_\+\+INCLUDED\+\_\+\+FROM\+\_\+\+API\+\_\+\+FILE}
+
+
+
+Definition at line \mbox{\hyperlink{heap__1_8c_source_l00042}{42}} of file \mbox{\hyperlink{heap__1_8c_source}{heap\+\_\+1.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{heap__1_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{heap__1_8c_ac56bcb7515f081a5b3df83935499fa4a}\index{heap\_1.c@{heap\_1.c}!pvPortMalloc@{pvPortMalloc}}
+\index{pvPortMalloc@{pvPortMalloc}!heap\_1.c@{heap\_1.c}}
+\doxysubsubsection{\texorpdfstring{pvPortMalloc()}{pvPortMalloc()}}
+{\footnotesize\ttfamily \label{heap__1_8c_ac56bcb7515f081a5b3df83935499fa4a} 
+void \texorpdfstring{$\ast$}{*} pv\+Port\+Malloc (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{x\+Wanted\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Allocates memory from heap. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em x\+Wanted\+Size} & The size of the memory to be allocated.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the memory region if the allocation is successful, NULL otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{heap__1_8c_source_l00079}{79}} of file \mbox{\hyperlink{heap__1_8c_source}{heap\+\_\+1.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{heap__1_8c_a1e7cea2fd1bc894ea3b5f5e8179d259b}\index{heap\_1.c@{heap\_1.c}!vPortFree@{vPortFree}}
+\index{vPortFree@{vPortFree}!heap\_1.c@{heap\_1.c}}
+\doxysubsubsection{\texorpdfstring{vPortFree()}{vPortFree()}}
+{\footnotesize\ttfamily \label{heap__1_8c_a1e7cea2fd1bc894ea3b5f5e8179d259b} 
+void v\+Port\+Free (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{pv}{}\end{DoxyParamCaption})}
+
+
+
+Frees the previously allocated memory. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em pv} & Pointer to the memory to be freed. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{heap__1_8c_source_l00143}{143}} of file \mbox{\hyperlink{heap__1_8c_source}{heap\+\_\+1.\+c}}.
+
+\Hypertarget{heap__1_8c_af44030217c31ad748406a5a72c2e7be0}\index{heap\_1.c@{heap\_1.c}!vPortHeapResetState@{vPortHeapResetState}}
+\index{vPortHeapResetState@{vPortHeapResetState}!heap\_1.c@{heap\_1.c}}
+\doxysubsubsection{\texorpdfstring{vPortHeapResetState()}{vPortHeapResetState()}}
+{\footnotesize\ttfamily \label{heap__1_8c_af44030217c31ad748406a5a72c2e7be0} 
+void v\+Port\+Heap\+Reset\+State (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{heap__1_8c_source_l00174}{174}} of file \mbox{\hyperlink{heap__1_8c_source}{heap\+\_\+1.\+c}}.
+
+\Hypertarget{heap__1_8c_a8bf103ce32ce8473574e9920af8b4eec}\index{heap\_1.c@{heap\_1.c}!vPortInitialiseBlocks@{vPortInitialiseBlocks}}
+\index{vPortInitialiseBlocks@{vPortInitialiseBlocks}!heap\_1.c@{heap\_1.c}}
+\doxysubsubsection{\texorpdfstring{vPortInitialiseBlocks()}{vPortInitialiseBlocks()}}
+{\footnotesize\ttfamily \label{heap__1_8c_a8bf103ce32ce8473574e9920af8b4eec} 
+void v\+Port\+Initialise\+Blocks (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{heap__1_8c_source_l00155}{155}} of file \mbox{\hyperlink{heap__1_8c_source}{heap\+\_\+1.\+c}}.
+
+\Hypertarget{heap__1_8c_a0c28a12b313bc248be0cb7a37ed81bb7}\index{heap\_1.c@{heap\_1.c}!xPortGetFreeHeapSize@{xPortGetFreeHeapSize}}
+\index{xPortGetFreeHeapSize@{xPortGetFreeHeapSize}!heap\_1.c@{heap\_1.c}}
+\doxysubsubsection{\texorpdfstring{xPortGetFreeHeapSize()}{xPortGetFreeHeapSize()}}
+{\footnotesize\ttfamily \label{heap__1_8c_a0c28a12b313bc248be0cb7a37ed81bb7} 
+size\+\_\+t x\+Port\+Get\+Free\+Heap\+Size (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Get the free heap size. 
+
+\begin{DoxyReturn}{Returns}
+Free heap size. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{heap__1_8c_source_l00162}{162}} of file \mbox{\hyperlink{heap__1_8c_source}{heap\+\_\+1.\+c}}.
+

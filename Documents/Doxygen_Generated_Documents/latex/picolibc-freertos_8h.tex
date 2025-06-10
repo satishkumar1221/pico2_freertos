@@ -1,0 +1,126 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/include/picolibc-\/freertos.h File Reference}
+\hypertarget{picolibc-freertos_8h}{}\label{picolibc-freertos_8h}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/picolibc-\/freertos.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/picolibc-\/freertos.h}}
+{\ttfamily \#include $<$picotls.\+h$>$}\newline
+Include dependency graph for picolibc-\/freertos.h\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{picolibc-freertos_8h_a4807cda51a20b460daeedb131f6654dc}{config\+USE\+\_\+\+C\+\_\+\+RUNTIME\+\_\+\+TLS\+\_\+\+SUPPORT}}~1
+\item 
+\#define \mbox{\hyperlink{picolibc-freertos_8h_aafd9f168d1e58611a5d4517abda2c12b}{config\+TLS\+\_\+\+BLOCK\+\_\+\+TYPE}}~void \texorpdfstring{$\ast$}{*}
+\item 
+\#define \mbox{\hyperlink{picolibc-freertos_8h_a445c74bd671a7b437f68ac1b52411524}{picolibc\+TLS\+\_\+\+SIZE}}~( ( \mbox{\hyperlink{_free_r_t_o_s_8h_a53bae25f223b7156dce0fc6e6b1b2295}{port\+POINTER\+\_\+\+SIZE\+\_\+\+TYPE}} ) \+\_\+tls\+\_\+size() )
+\item 
+\#define \mbox{\hyperlink{picolibc-freertos_8h_a5ddfab7a61289006a9a963e132284ff4}{picolibc\+STACK\+\_\+\+ALIGNMENT\+\_\+\+MASK}}~( ( \mbox{\hyperlink{_free_r_t_o_s_8h_a53bae25f223b7156dce0fc6e6b1b2295}{port\+POINTER\+\_\+\+SIZE\+\_\+\+TYPE}} ) port\+BYTE\+\_\+\+ALIGNMENT\+\_\+\+MASK )
+\item 
+\#define \mbox{\hyperlink{picolibc-freertos_8h_a131184d98c0d1b52f52f64368f4d8a65}{picolibc\+TLS\+\_\+\+ALIGNMENT\+\_\+\+MASK}}~( ( \mbox{\hyperlink{_free_r_t_o_s_8h_a53bae25f223b7156dce0fc6e6b1b2295}{port\+POINTER\+\_\+\+SIZE\+\_\+\+TYPE}} ) port\+BYTE\+\_\+\+ALIGNMENT\+\_\+\+MASK )
+\item 
+\#define \mbox{\hyperlink{picolibc-freertos_8h_a0ec3ff910e465b074abe0d34584b433e}{config\+INIT\+\_\+\+TLS\+\_\+\+BLOCK}}(x\+TLSBlock,  px\+Top\+Of\+Stack)
+\item 
+\#define \mbox{\hyperlink{picolibc-freertos_8h_a570a14f4311409e74c87f22d977ee7af}{config\+SET\+\_\+\+TLS\+\_\+\+BLOCK}}(x\+TLSBlock)
+\item 
+\#define \mbox{\hyperlink{picolibc-freertos_8h_a78b23cee14ba1d8058e093a6a4920e85}{config\+DEINIT\+\_\+\+TLS\+\_\+\+BLOCK}}(x\+TLSBlock)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{picolibc-freertos_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{picolibc-freertos_8h_a78b23cee14ba1d8058e093a6a4920e85}\index{picolibc-\/freertos.h@{picolibc-\/freertos.h}!configDEINIT\_TLS\_BLOCK@{configDEINIT\_TLS\_BLOCK}}
+\index{configDEINIT\_TLS\_BLOCK@{configDEINIT\_TLS\_BLOCK}!picolibc-\/freertos.h@{picolibc-\/freertos.h}}
+\doxysubsubsection{\texorpdfstring{configDEINIT\_TLS\_BLOCK}{configDEINIT\_TLS\_BLOCK}}
+{\footnotesize\ttfamily \label{picolibc-freertos_8h_a78b23cee14ba1d8058e093a6a4920e85} 
+\#define config\+DEINIT\+\_\+\+TLS\+\_\+\+BLOCK(\begin{DoxyParamCaption}\item[{}]{x\+TLSBlock}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{picolibc-freertos_8h_source_l00089}{89}} of file \mbox{\hyperlink{picolibc-freertos_8h_source}{picolibc-\/freertos.\+h}}.
+
+\Hypertarget{picolibc-freertos_8h_a0ec3ff910e465b074abe0d34584b433e}\index{picolibc-\/freertos.h@{picolibc-\/freertos.h}!configINIT\_TLS\_BLOCK@{configINIT\_TLS\_BLOCK}}
+\index{configINIT\_TLS\_BLOCK@{configINIT\_TLS\_BLOCK}!picolibc-\/freertos.h@{picolibc-\/freertos.h}}
+\doxysubsubsection{\texorpdfstring{configINIT\_TLS\_BLOCK}{configINIT\_TLS\_BLOCK}}
+{\footnotesize\ttfamily \label{picolibc-freertos_8h_a0ec3ff910e465b074abe0d34584b433e} 
+\#define config\+INIT\+\_\+\+TLS\+\_\+\+BLOCK(\begin{DoxyParamCaption}\item[{}]{x\+TLSBlock}{, }\item[{}]{px\+Top\+Of\+Stack}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{do}\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ xTLSBlock\ =\ (\ \textcolor{keywordtype}{void}\ *\ )\ (\ (\ (\ \mbox{\hyperlink{_free_r_t_o_s_8h_a53bae25f223b7156dce0fc6e6b1b2295}{portPOINTER\_SIZE\_TYPE}}\ )\ pxTopOfStack\ +\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{picolibc-freertos_8h_a131184d98c0d1b52f52f64368f4d8a65}{picolibcTLS\_ALIGNMENT\_MASK}}\ )\ \&\ \string~\mbox{\hyperlink{picolibc-freertos_8h_a131184d98c0d1b52f52f64368f4d8a65}{picolibcTLS\_ALIGNMENT\_MASK}}\ );\ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *\ )\ (\ (\ (\ (\ (\ \mbox{\hyperlink{_free_r_t_o_s_8h_a53bae25f223b7156dce0fc6e6b1b2295}{portPOINTER\_SIZE\_TYPE}}\ )\ xTLSBlock\ )\ +\ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{picolibc-freertos_8h_a445c74bd671a7b437f68ac1b52411524}{picolibcTLS\_SIZE}}\ )\ +\ \mbox{\hyperlink{picolibc-freertos_8h_a5ddfab7a61289006a9a963e132284ff4}{picolibcSTACK\_ALIGNMENT\_MASK}}\ )\ \&\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \string~\mbox{\hyperlink{picolibc-freertos_8h_a5ddfab7a61289006a9a963e132284ff4}{picolibcSTACK\_ALIGNMENT\_MASK}}\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \_init\_tls(\ xTLSBlock\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{while}(\ 0\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{picolibc-freertos_8h_source_l00076}{76}} of file \mbox{\hyperlink{picolibc-freertos_8h_source}{picolibc-\/freertos.\+h}}.
+
+\Hypertarget{picolibc-freertos_8h_a570a14f4311409e74c87f22d977ee7af}\index{picolibc-\/freertos.h@{picolibc-\/freertos.h}!configSET\_TLS\_BLOCK@{configSET\_TLS\_BLOCK}}
+\index{configSET\_TLS\_BLOCK@{configSET\_TLS\_BLOCK}!picolibc-\/freertos.h@{picolibc-\/freertos.h}}
+\doxysubsubsection{\texorpdfstring{configSET\_TLS\_BLOCK}{configSET\_TLS\_BLOCK}}
+{\footnotesize\ttfamily \label{picolibc-freertos_8h_a570a14f4311409e74c87f22d977ee7af} 
+\#define config\+SET\+\_\+\+TLS\+\_\+\+BLOCK(\begin{DoxyParamCaption}\item[{}]{x\+TLSBlock}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\_set\_tls(\ xTLSBlock\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{picolibc-freertos_8h_source_l00087}{87}} of file \mbox{\hyperlink{picolibc-freertos_8h_source}{picolibc-\/freertos.\+h}}.
+
+\Hypertarget{picolibc-freertos_8h_aafd9f168d1e58611a5d4517abda2c12b}\index{picolibc-\/freertos.h@{picolibc-\/freertos.h}!configTLS\_BLOCK\_TYPE@{configTLS\_BLOCK\_TYPE}}
+\index{configTLS\_BLOCK\_TYPE@{configTLS\_BLOCK\_TYPE}!picolibc-\/freertos.h@{picolibc-\/freertos.h}}
+\doxysubsubsection{\texorpdfstring{configTLS\_BLOCK\_TYPE}{configTLS\_BLOCK\_TYPE}}
+{\footnotesize\ttfamily \label{picolibc-freertos_8h_aafd9f168d1e58611a5d4517abda2c12b} 
+\#define config\+TLS\+\_\+\+BLOCK\+\_\+\+TYPE~void \texorpdfstring{$\ast$}{*}}
+
+
+
+Definition at line \mbox{\hyperlink{picolibc-freertos_8h_source_l00044}{44}} of file \mbox{\hyperlink{picolibc-freertos_8h_source}{picolibc-\/freertos.\+h}}.
+
+\Hypertarget{picolibc-freertos_8h_a4807cda51a20b460daeedb131f6654dc}\index{picolibc-\/freertos.h@{picolibc-\/freertos.h}!configUSE\_C\_RUNTIME\_TLS\_SUPPORT@{configUSE\_C\_RUNTIME\_TLS\_SUPPORT}}
+\index{configUSE\_C\_RUNTIME\_TLS\_SUPPORT@{configUSE\_C\_RUNTIME\_TLS\_SUPPORT}!picolibc-\/freertos.h@{picolibc-\/freertos.h}}
+\doxysubsubsection{\texorpdfstring{configUSE\_C\_RUNTIME\_TLS\_SUPPORT}{configUSE\_C\_RUNTIME\_TLS\_SUPPORT}}
+{\footnotesize\ttfamily \label{picolibc-freertos_8h_a4807cda51a20b460daeedb131f6654dc} 
+\#define config\+USE\+\_\+\+C\+\_\+\+RUNTIME\+\_\+\+TLS\+\_\+\+SUPPORT~1}
+
+
+
+Definition at line \mbox{\hyperlink{picolibc-freertos_8h_source_l00042}{42}} of file \mbox{\hyperlink{picolibc-freertos_8h_source}{picolibc-\/freertos.\+h}}.
+
+\Hypertarget{picolibc-freertos_8h_a5ddfab7a61289006a9a963e132284ff4}\index{picolibc-\/freertos.h@{picolibc-\/freertos.h}!picolibcSTACK\_ALIGNMENT\_MASK@{picolibcSTACK\_ALIGNMENT\_MASK}}
+\index{picolibcSTACK\_ALIGNMENT\_MASK@{picolibcSTACK\_ALIGNMENT\_MASK}!picolibc-\/freertos.h@{picolibc-\/freertos.h}}
+\doxysubsubsection{\texorpdfstring{picolibcSTACK\_ALIGNMENT\_MASK}{picolibcSTACK\_ALIGNMENT\_MASK}}
+{\footnotesize\ttfamily \label{picolibc-freertos_8h_a5ddfab7a61289006a9a963e132284ff4} 
+\#define picolibc\+STACK\+\_\+\+ALIGNMENT\+\_\+\+MASK~( ( \mbox{\hyperlink{_free_r_t_o_s_8h_a53bae25f223b7156dce0fc6e6b1b2295}{port\+POINTER\+\_\+\+SIZE\+\_\+\+TYPE}} ) port\+BYTE\+\_\+\+ALIGNMENT\+\_\+\+MASK )}
+
+
+
+Definition at line \mbox{\hyperlink{picolibc-freertos_8h_source_l00047}{47}} of file \mbox{\hyperlink{picolibc-freertos_8h_source}{picolibc-\/freertos.\+h}}.
+
+\Hypertarget{picolibc-freertos_8h_a131184d98c0d1b52f52f64368f4d8a65}\index{picolibc-\/freertos.h@{picolibc-\/freertos.h}!picolibcTLS\_ALIGNMENT\_MASK@{picolibcTLS\_ALIGNMENT\_MASK}}
+\index{picolibcTLS\_ALIGNMENT\_MASK@{picolibcTLS\_ALIGNMENT\_MASK}!picolibc-\/freertos.h@{picolibc-\/freertos.h}}
+\doxysubsubsection{\texorpdfstring{picolibcTLS\_ALIGNMENT\_MASK}{picolibcTLS\_ALIGNMENT\_MASK}}
+{\footnotesize\ttfamily \label{picolibc-freertos_8h_a131184d98c0d1b52f52f64368f4d8a65} 
+\#define picolibc\+TLS\+\_\+\+ALIGNMENT\+\_\+\+MASK~( ( \mbox{\hyperlink{_free_r_t_o_s_8h_a53bae25f223b7156dce0fc6e6b1b2295}{port\+POINTER\+\_\+\+SIZE\+\_\+\+TYPE}} ) port\+BYTE\+\_\+\+ALIGNMENT\+\_\+\+MASK )}
+
+
+
+Definition at line \mbox{\hyperlink{picolibc-freertos_8h_source_l00057}{57}} of file \mbox{\hyperlink{picolibc-freertos_8h_source}{picolibc-\/freertos.\+h}}.
+
+\Hypertarget{picolibc-freertos_8h_a445c74bd671a7b437f68ac1b52411524}\index{picolibc-\/freertos.h@{picolibc-\/freertos.h}!picolibcTLS\_SIZE@{picolibcTLS\_SIZE}}
+\index{picolibcTLS\_SIZE@{picolibcTLS\_SIZE}!picolibc-\/freertos.h@{picolibc-\/freertos.h}}
+\doxysubsubsection{\texorpdfstring{picolibcTLS\_SIZE}{picolibcTLS\_SIZE}}
+{\footnotesize\ttfamily \label{picolibc-freertos_8h_a445c74bd671a7b437f68ac1b52411524} 
+\#define picolibc\+TLS\+\_\+\+SIZE~( ( \mbox{\hyperlink{_free_r_t_o_s_8h_a53bae25f223b7156dce0fc6e6b1b2295}{port\+POINTER\+\_\+\+SIZE\+\_\+\+TYPE}} ) \+\_\+tls\+\_\+size() )}
+
+
+
+Definition at line \mbox{\hyperlink{picolibc-freertos_8h_source_l00046}{46}} of file \mbox{\hyperlink{picolibc-freertos_8h_source}{picolibc-\/freertos.\+h}}.
+

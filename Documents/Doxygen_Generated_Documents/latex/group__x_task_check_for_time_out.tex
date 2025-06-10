@@ -1,0 +1,81 @@
+\doxysection{x\+Task\+Check\+For\+Time\+Out }
+\hypertarget{group__x_task_check_for_time_out}{}\label{group__x_task_check_for_time_out}\index{xTaskCheckForTimeOut@{xTaskCheckForTimeOut}}
+\doxylink{task_8h}{task.\+h} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{task_8h_a3b018a85d339e536a6c05748dd666a3a}{xTaskCheckForTimeOut}}(\ \mbox{\hyperlink{task_8h_a558b407b5433bee1696535e3c4816bdf}{TimeOut\_t}}\ *\ \textcolor{keyword}{const}\ pxTimeOut,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ *\ \textcolor{keyword}{const}\ pxTicksToWait\ );}
+
+\end{DoxyCode}
+
+
+Determines if px\+Ticks\+To\+Wait ticks has passed since a time was captured using a call to \doxylink{task_8h_a67155ad4ea2482b5f4597a69f2152be0}{v\+Task\+Set\+Time\+Out\+State()}. The captured time includes the tick count and the number of times the tick count has overflowed.
+
+
+\begin{DoxyParams}{Parameters}
+{\em px\+Time\+Out} & The time status as captured previously using v\+Task\+Set\+Time\+Out\+State. If the timeout has not yet occurred, it is updated to reflect the current time status. \\
+\hline
+{\em px\+Ticks\+To\+Wait} & The number of ticks to check for timeout i.\+e. if px\+Ticks\+To\+Wait ticks have passed since px\+Time\+Out was last updated (either by \doxylink{task_8h_a67155ad4ea2482b5f4597a69f2152be0}{v\+Task\+Set\+Time\+Out\+State()} or \doxylink{task_8h_a3b018a85d339e536a6c05748dd666a3a}{x\+Task\+Check\+For\+Time\+Out()}), the timeout has occurred. If the timeout has not occurred, px\+Ticks\+To\+Wait is updated to reflect the number of remaining ticks.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If timeout has occurred, pd\+TRUE is returned. Otherwise pd\+FALSE is returned and px\+Ticks\+To\+Wait is updated to reflect the number of remaining ticks.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\href{https://www.FreeRTOS.org/xTaskCheckForTimeOut.html}{\texttt{https\+://www.\+Free\+RTOS.\+org/x\+Task\+Check\+For\+Time\+Out.\+html}}
+\end{DoxySeeAlso}
+Example Usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Driver\ library\ function\ used\ to\ receive\ uxWantedBytes\ from\ an\ Rx\ buffer}}
+\DoxyCodeLine{\textcolor{comment}{//\ that\ is\ filled\ by\ a\ UART\ interrupt.\ If\ there\ are\ not\ enough\ bytes\ in\ the}}
+\DoxyCodeLine{\textcolor{comment}{//\ Rx\ buffer\ then\ the\ task\ enters\ the\ Blocked\ state\ until\ it\ is\ notified\ that}}
+\DoxyCodeLine{\textcolor{comment}{//\ more\ data\ has\ been\ placed\ into\ the\ buffer.\ If\ there\ is\ still\ not\ enough}}
+\DoxyCodeLine{\textcolor{comment}{//\ data\ then\ the\ task\ re-\/enters\ the\ Blocked\ state,\ and\ xTaskCheckForTimeOut()}}
+\DoxyCodeLine{\textcolor{comment}{//\ is\ used\ to\ re-\/calculate\ the\ Block\ time\ to\ ensure\ the\ total\ amount\ of\ time}}
+\DoxyCodeLine{\textcolor{comment}{//\ spent\ in\ the\ Blocked\ state\ does\ not\ exceed\ MAX\_TIME\_TO\_WAIT.\ This}}
+\DoxyCodeLine{\textcolor{comment}{//\ continues\ until\ either\ the\ buffer\ contains\ at\ least\ uxWantedBytes\ bytes,}}
+\DoxyCodeLine{\textcolor{comment}{//\ or\ the\ total\ amount\ of\ time\ spent\ in\ the\ Blocked\ state\ reaches}}
+\DoxyCodeLine{\textcolor{comment}{//\ MAX\_TIME\_TO\_WAIT\ -\/\ at\ which\ point\ the\ task\ reads\ however\ many\ bytes\ are}}
+\DoxyCodeLine{\textcolor{comment}{//\ available\ up\ to\ a\ maximum\ of\ uxWantedBytes.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{size\_t}\ xUART\_Receive(\ uint8\_t\ *pucBuffer,\ \textcolor{keywordtype}{size\_t}\ uxWantedBytes\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keywordtype}{size\_t}\ uxReceived\ =\ 0;}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xTicksToWait\ =\ MAX\_TIME\_TO\_WAIT;}
+\DoxyCodeLine{\mbox{\hyperlink{task_8h_a558b407b5433bee1696535e3c4816bdf}{TimeOut\_t}}\ xTimeOut;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Initialize\ xTimeOut.\ \ This\ records\ the\ time\ at\ which\ this\ function}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ was\ entered.}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{task_8h_a67155ad4ea2482b5f4597a69f2152be0}{vTaskSetTimeOutState}}(\ \&xTimeOut\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Loop\ until\ the\ buffer\ contains\ the\ wanted\ number\ of\ bytes,\ or\ a}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ timeout\ occurs.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{while}(\ UART\_bytes\_in\_rx\_buffer(\ pxUARTInstance\ )\ <\ uxWantedBytes\ )}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ buffer\ didn't\ contain\ enough\ data\ so\ this\ task\ is\ going\ to}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ enter\ the\ Blocked\ state.\ Adjusting\ xTicksToWait\ to\ account\ for}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ any\ time\ that\ has\ been\ spent\ in\ the\ Blocked\ state\ within\ this}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ function\ so\ far\ to\ ensure\ the\ total\ amount\ of\ time\ spent\ in\ the}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Blocked\ state\ does\ not\ exceed\ MAX\_TIME\_TO\_WAIT.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{task_8h_a3b018a85d339e536a6c05748dd666a3a}{xTaskCheckForTimeOut}}(\ \&xTimeOut,\ \&xTicksToWait\ )\ !=\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}}\ )}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Timed\ out\ before\ the\ wanted\ number\ of\ bytes\ were\ available,}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ exit\ the\ loop.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Wait\ for\ a\ maximum\ of\ xTicksToWait\ ticks\ to\ be\ notified\ that\ the}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ receive\ interrupt\ has\ placed\ more\ data\ into\ the\ buffer.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{task_8h_a725a2da114ef870747edd7fd19d77bab}{ulTaskNotifyTake}}(\ \mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}},\ xTicksToWait\ );}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Attempt\ to\ read\ uxWantedBytes\ from\ the\ receive\ buffer\ into\ pucBuffer.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ The\ actual\ number\ of\ bytes\ read\ (which\ might\ be\ less\ than}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ uxWantedBytes)\ is\ returned.}}
+\DoxyCodeLine{\ \ \ \ uxReceived\ =\ UART\_read\_from\_receive\_buffer(\ pxUARTInstance,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pucBuffer,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uxWantedBytes\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ uxReceived;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

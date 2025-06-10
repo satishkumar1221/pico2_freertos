@@ -1,0 +1,361 @@
+\doxysection{xtensa\+\_\+context.\+h}
+\hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source}{}\label{_x_c_c_2_xtensa_2xtensa__context_8h_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/XCC/Xtensa/xtensa\_context.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/XCC/Xtensa/xtensa\_context.h}}
+\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00001}00001\ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2015-\/2019\ Cadence\ Design\ Systems,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00004}00004\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00005}00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00006}00006\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00007}00007\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00008}00008\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00009}00009\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00010}00010\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00011}00011\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00012}00012\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00013}00013\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00014}00014\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00015}00015\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00016}00016\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00017}00017\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00018}00018\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00019}00019\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00020}00020\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00021}00021\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00022}00022\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00023}00023\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00024}00024\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00025}00025\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00026}00026\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00027}00027\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00028}00028\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00030}00030\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00031}00031\ \textcolor{comment}{\ *\ XTENSA\ CONTEXT\ FRAMES\ AND\ MACROS\ FOR\ RTOS\ ASSEMBLER\ SOURCES}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00032}00032\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00033}00033\ \textcolor{comment}{\ *\ This\ header\ contains\ definitions\ and\ macros\ for\ use\ primarily\ by\ Xtensa}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00034}00034\ \textcolor{comment}{\ *\ RTOS\ assembly\ coded\ source\ files.\ It\ includes\ and\ uses\ the\ Xtensa\ hardware}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00035}00035\ \textcolor{comment}{\ *\ abstraction\ layer\ (HAL)\ to\ deal\ with\ config\ specifics.\ It\ may\ also\ be}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00036}00036\ \textcolor{comment}{\ *\ included\ in\ C\ source\ files.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00037}00037\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00038}00038\ \textcolor{comment}{\ *\ !!\ Supports\ only\ Xtensa\ Exception\ Architecture\ 2\ (XEA2).\ XEA1\ not\ supported.\ !!}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00039}00039\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00040}00040\ \textcolor{comment}{\ *\ NOTE:\ The\ Xtensa\ architecture\ requires\ stack\ pointer\ alignment\ to\ 16\ bytes.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00041}00041\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00043}00043\ \textcolor{preprocessor}{\#ifndef\ XTENSA\_CONTEXT\_H}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00044}00044\ \textcolor{preprocessor}{\#define\ XTENSA\_CONTEXT\_H}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00046}00046\ \textcolor{preprocessor}{\#ifdef\ \_\_ASSEMBLER\_\_}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00047}00047\ \textcolor{preprocessor}{\#include\ \ \ \ <xtensa/coreasm.h>}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00048}00048\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00050}00050\ \textcolor{preprocessor}{\#include\ \ \ \ <xtensa/config/tie.h>}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00051}00051\ \textcolor{preprocessor}{\#include\ \ \ \ <xtensa/corebits.h>}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00052}00052\ \textcolor{preprocessor}{\#include\ \ \ \ <xtensa/config/system.h>}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00055}00055\ \textcolor{comment}{/*\ Align\ a\ value\ up\ to\ nearest\ n-\/byte\ boundary,\ where\ n\ is\ a\ power\ of\ 2.\ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00056}\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a34977a14c7dd347c6f3cd51a1bab93bc}{00056}}\ \textcolor{preprocessor}{\#define\ ALIGNUP(n,\ val)\ (((val)\ +\ (n)-\/1)\ \&\ -\/(n))}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00059}00059\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00060}00060\ \textcolor{comment}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00061}00061\ \textcolor{comment}{\ \ Macros\ that\ help\ define\ structures\ for\ both\ C\ and\ assembler.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00062}00062\ \textcolor{comment}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00063}00063\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00064}00064\ \textcolor{preprocessor}{\#if\ defined(\_ASMLANGUAGE)\ ||\ defined(\_\_ASSEMBLER\_\_)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00066}00066\ \textcolor{preprocessor}{\#define\ STRUCT\_BEGIN\ \ \ \ \ \ \ \ \ \ \ \ .pushsection\ .text;\ .struct\ 0}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00067}00067\ \textcolor{preprocessor}{\#define\ STRUCT\_FIELD(ctype,size,asname,name)\ \ \ \ asname:\ .space\ \ size}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00068}00068\ \textcolor{preprocessor}{\#define\ STRUCT\_AFIELD(ctype,size,asname,name,n)\ asname:\ .space\ \ (size)*(n)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00069}00069\ \textcolor{preprocessor}{\#define\ STRUCT\_END(sname)\ \ \ \ \ \ \ sname\#\#Size:;\ .popsection}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00071}00071\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00073}\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_aac9ce07ee697606d0040f8b668e3a7f3}{00073}}\ \textcolor{preprocessor}{\#define\ STRUCT\_BEGIN\ \ \ \ \ \ \ \ \ \ \ \ typedef\ struct\ \{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00074}\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{00074}}\ \textcolor{preprocessor}{\#define\ STRUCT\_FIELD(ctype,size,asname,name)\ \ \ \ ctype\ \ \ name;}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00075}\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a64bcea9bd5ce5ceaa0a08cf76a7d7cd6}{00075}}\ \textcolor{preprocessor}{\#define\ STRUCT\_AFIELD(ctype,size,asname,name,n)\ ctype\ \ \ name[n];}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00076}\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a7bd44c97a7dd92814fd2b5454d1594d7}{00076}}\ \textcolor{preprocessor}{\#define\ STRUCT\_END(sname)\ \ \ \ \ \ \ \}\ sname;}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00078}00078\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\_ASMLANGUAGE\ ||\ \_\_ASSEMBLER\_\_}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00081}00081\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00082}00082\ \textcolor{comment}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00083}00083\ \textcolor{comment}{\ \ INTERRUPT/EXCEPTION\ STACK\ FRAME\ FOR\ A\ THREAD\ OR\ NESTED\ INTERRUPT}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00084}00084\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00085}00085\ \textcolor{comment}{\ \ A\ stack\ frame\ of\ this\ structure\ is\ allocated\ for\ any\ interrupt\ or\ exception.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00086}00086\ \textcolor{comment}{\ \ It\ goes\ on\ the\ current\ stack.\ If\ the\ RTOS\ has\ a\ system\ stack\ for\ handling}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00087}00087\ \textcolor{comment}{\ \ interrupts,\ every\ thread\ stack\ must\ allow\ space\ for\ just\ one\ interrupt\ stack}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00088}00088\ \textcolor{comment}{\ \ frame,\ then\ nested\ interrupt\ stack\ frames\ go\ on\ the\ system\ stack.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00089}00089\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00090}00090\ \textcolor{comment}{\ \ The\ frame\ includes\ basic\ registers\ (explicit)\ and\ "{}extra"{}\ registers\ introduced}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00091}00091\ \textcolor{comment}{\ \ by\ user\ TIE\ or\ the\ use\ of\ the\ MAC16\ option\ in\ the\ user's\ Xtensa\ config.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00092}00092\ \textcolor{comment}{\ \ The\ frame\ size\ is\ minimized\ by\ omitting\ regs\ not\ applicable\ to\ user's\ config.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00093}00093\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00094}00094\ \textcolor{comment}{\ \ For\ Windowed\ ABI,\ this\ stack\ frame\ includes\ the\ interruptee's\ base\ save\ area,}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00095}00095\ \textcolor{comment}{\ \ another\ base\ save\ area\ to\ manage\ gcc\ nested\ functions,\ and\ a\ little\ temporary}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00096}00096\ \textcolor{comment}{\ \ space\ to\ help\ manage\ the\ spilling\ of\ the\ register\ windows.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00097}00097\ \textcolor{comment}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00098}00098\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00100}00100\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_aac9ce07ee697606d0040f8b668e3a7f3}{STRUCT\_BEGIN}}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00101}00101\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_EXIT,\ \ \ \ \ exit)\ \textcolor{comment}{/*\ exit\ point\ for\ dispatch\ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00102}00102\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_PC,\ \ \ \ \ \ \ pc)\ \ \ \textcolor{comment}{/*\ return\ PC\ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00103}00103\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_PS,\ \ \ \ \ \ \ ps)\ \ \ \textcolor{comment}{/*\ return\ PS\ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00104}00104\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_A0,\ \ \ \ \ \ \ \mbox{\hyperlink{_g_c_c_2_r_i_s_c-_v_2port_context_8h_ab6aed896eb662f3ca0c20eeaa436675f}{a0}})}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00105}00105\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_A1,\ \ \ \ \ \ \ \mbox{\hyperlink{_g_c_c_2_r_i_s_c-_v_2port_context_8h_a33aa9b7e835567d537b918d627212fee}{a1}})\ \ \ \textcolor{comment}{/*\ stack\ pointer\ before\ interrupt\ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00106}00106\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_A2,\ \ \ \ \ \ \ \mbox{\hyperlink{_m_p_l_a_b_2_p_i_c32_m_x_2_i_s_r___support_8h_a7902c6adaef543ab5f0434fed5ff916d}{a2}})}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00107}00107\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_A3,\ \ \ \ \ \ \ \mbox{\hyperlink{_m_p_l_a_b_2_p_i_c32_m_x_2_i_s_r___support_8h_a23cab93183afb06eaf3becc5ca3c1982}{a3}})}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00108}00108\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_A4,\ \ \ \ \ \ \ a4)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00109}00109\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_A5,\ \ \ \ \ \ \ a5)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00110}00110\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_A6,\ \ \ \ \ \ \ a6)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00111}00111\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_A7,\ \ \ \ \ \ \ a7)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00112}00112\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_A8,\ \ \ \ \ \ \ a8)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00113}00113\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_A9,\ \ \ \ \ \ \ a9)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00114}00114\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_A10,\ \ \ \ \ \ a10)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00115}00115\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_A11,\ \ \ \ \ \ a11)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00116}00116\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_A12,\ \ \ \ \ \ a12)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00117}00117\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_A13,\ \ \ \ \ \ a13)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00118}00118\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_A14,\ \ \ \ \ \ a14)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00119}00119\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_A15,\ \ \ \ \ \ a15)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00120}00120\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_SAR,\ \ \ \ \ \ sar)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00121}00121\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_EXCCAUSE,\ exccause)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00122}00122\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_EXCVADDR,\ excvaddr)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00123}00123\ \textcolor{preprocessor}{\#if\ XCHAL\_HAVE\_LOOPS}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00124}00124\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_LBEG,\ \ \ lbeg)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00125}00125\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_LEND,\ \ \ lend)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00126}00126\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_LCOUNT,\ lcount)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00127}00127\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00128}00128\ \textcolor{preprocessor}{\#ifndef\ \_\_XTENSA\_CALL0\_ABI\_\_}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00129}00129\ \textcolor{comment}{/*\ Temporary\ space\ for\ saving\ stuff\ during\ window\ spill\ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00130}00130\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_TMP0,\ \ \ tmp0)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00131}00131\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_TMP1,\ \ \ tmp1)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00132}00132\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_TMP2,\ \ \ tmp2)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00133}00133\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00134}00134\ \textcolor{preprocessor}{\#ifdef\ XT\_USE\_SWPRI}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00135}00135\ \textcolor{comment}{/*\ Storage\ for\ virtual\ priority\ mask\ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00136}00136\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_VPRI,\ \ \ vpri)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00137}00137\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00138}00138\ \textcolor{preprocessor}{\#ifdef\ XT\_USE\_OVLY}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00139}00139\ \textcolor{comment}{/*\ Storage\ for\ overlay\ state\ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00140}00140\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_STK\_OVLY,\ \ \ ovly)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00141}00141\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00142}00142\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a7bd44c97a7dd92814fd2b5454d1594d7}{STRUCT\_END}}(XtExcFrame)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00144}00144\ \textcolor{preprocessor}{\#if\ defined(\_ASMLANGUAGE)\ ||\ defined(\_\_ASSEMBLER\_\_)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00145}00145\ \textcolor{preprocessor}{\#define\ XT\_STK\_NEXT1\ \ \ \ \ \ XtExcFrameSize}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00146}00146\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00147}\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a270455c6d63dcff991ee0c0089484c86}{00147}}\ \textcolor{preprocessor}{\#define\ XT\_STK\_NEXT1\ \ \ \ \ \ sizeof(XtExcFrame)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00148}00148\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00150}00150\ \textcolor{comment}{/*\ Allocate\ extra\ storage\ if\ needed\ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00151}00151\ \textcolor{preprocessor}{\#if\ XCHAL\_EXTRA\_SA\_SIZE\ !=\ 0}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00153}00153\ \textcolor{preprocessor}{\#if\ XCHAL\_EXTRA\_SA\_ALIGN\ <=\ 16}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00154}00154\ \textcolor{preprocessor}{\#define\ XT\_STK\_EXTRA\ \ \ \ \ \ \ \ \ \ \ \ ALIGNUP(XCHAL\_EXTRA\_SA\_ALIGN,\ XT\_STK\_NEXT1)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00155}00155\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00156}00156\ \textcolor{comment}{/*\ If\ need\ more\ alignment\ than\ stack,\ add\ space\ for\ dynamic\ alignment\ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00157}00157\ \textcolor{preprocessor}{\#define\ XT\_STK\_EXTRA\ \ \ \ \ \ \ \ \ \ \ \ (ALIGNUP(XCHAL\_EXTRA\_SA\_ALIGN,\ XT\_STK\_NEXT1)\ +\ XCHAL\_EXTRA\_SA\_ALIGN)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00158}00158\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00159}00159\ \textcolor{preprocessor}{\#define\ XT\_STK\_NEXT2\ \ \ \ \ \ \ \ \ \ \ \ (XT\_STK\_EXTRA\ +\ XCHAL\_EXTRA\_SA\_SIZE)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00160}00160\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00161}00161\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00163}\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_adc636554ae24cba637d300bab053c1b9}{00163}}\ \textcolor{preprocessor}{\#define\ XT\_STK\_NEXT2\ \ \ \ \ \ \ \ \ \ \ \ XT\_STK\_NEXT1}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00165}00165\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00167}00167\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00168}00168\ \textcolor{comment}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00169}00169\ \textcolor{comment}{\ \ This\ is\ the\ frame\ size.\ Add\ space\ for\ 4\ registers\ (interruptee's\ base\ save}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00170}00170\ \textcolor{comment}{\ \ area)\ and\ some\ space\ for\ gcc\ nested\ functions\ if\ any.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00171}00171\ \textcolor{comment}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00172}00172\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00173}\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_aca91c7a44a40c0fc4e57b0534afa7f55}{00173}}\ \textcolor{preprocessor}{\#define\ XT\_STK\_FRMSZ\ \ \ \ \ \ \ \ \ \ \ \ (ALIGNUP(0x10,\ XT\_STK\_NEXT2)\ +\ 0x20)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00175}00175\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00176}00176\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00177}00177\ \textcolor{comment}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00178}00178\ \textcolor{comment}{\ \ SOLICITED\ STACK\ FRAME\ FOR\ A\ THREAD}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00179}00179\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00180}00180\ \textcolor{comment}{\ \ A\ stack\ frame\ of\ this\ structure\ is\ allocated\ whenever\ a\ thread\ enters\ the}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00181}00181\ \textcolor{comment}{\ \ RTOS\ kernel\ intentionally\ (and\ synchronously)\ to\ submit\ to\ thread\ scheduling.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00182}00182\ \textcolor{comment}{\ \ It\ goes\ on\ the\ current\ thread's\ stack.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00183}00183\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00184}00184\ \textcolor{comment}{\ \ The\ solicited\ frame\ only\ includes\ registers\ that\ are\ required\ to\ be\ preserved}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00185}00185\ \textcolor{comment}{\ \ by\ the\ callee\ according\ to\ the\ compiler's\ ABI\ conventions,\ some\ space\ to\ save}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00186}00186\ \textcolor{comment}{\ \ the\ return\ address\ for\ returning\ to\ the\ caller,\ and\ the\ caller's\ PS\ register.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00187}00187\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00188}00188\ \textcolor{comment}{\ \ For\ Windowed\ ABI,\ this\ stack\ frame\ includes\ the\ caller's\ base\ save\ area.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00189}00189\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00190}00190\ \textcolor{comment}{\ \ Note\ on\ XT\_SOL\_EXIT\ field:}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00191}00191\ \textcolor{comment}{\ \ \ \ \ \ It\ is\ necessary\ to\ distinguish\ a\ solicited\ from\ an\ interrupt\ stack\ frame.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00192}00192\ \textcolor{comment}{\ \ \ \ \ \ This\ field\ corresponds\ to\ XT\_STK\_EXIT\ in\ the\ interrupt\ stack\ frame\ and\ is}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00193}00193\ \textcolor{comment}{\ \ \ \ \ \ always\ at\ the\ same\ offset\ (0).\ It\ can\ be\ written\ with\ a\ code\ (usually\ 0)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00194}00194\ \textcolor{comment}{\ \ \ \ \ \ to\ distinguish\ a\ solicted\ frame\ from\ an\ interrupt\ frame.\ An\ RTOS\ port\ may}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00195}00195\ \textcolor{comment}{\ \ \ \ \ \ opt\ to\ ignore\ this\ field\ if\ it\ has\ another\ way\ of\ distinguishing\ frames.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00196}00196\ \textcolor{comment}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00197}00197\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00198}00198\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00199}00199\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_aac9ce07ee697606d0040f8b668e3a7f3}{STRUCT\_BEGIN}}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00200}00200\ \textcolor{preprocessor}{\#ifdef\ \_\_XTENSA\_CALL0\_ABI\_\_}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00201}00201\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_SOL\_EXIT,\ exit)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00202}00202\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_SOL\_PC,\ \ \ pc)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00203}00203\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_SOL\_PS,\ \ \ ps)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00204}00204\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_SOL\_NEXT,\ next)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00205}00205\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_SOL\_A12,\ \ a12)\ \ \ \ \textcolor{comment}{/*\ should\ be\ on\ 16-\/byte\ alignment\ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00206}00206\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_SOL\_A13,\ \ a13)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00207}00207\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_SOL\_A14,\ \ a14)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00208}00208\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_SOL\_A15,\ \ a15)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00209}00209\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00210}00210\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_SOL\_EXIT,\ exit)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00211}00211\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_SOL\_PC,\ \ \ pc)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00212}00212\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_SOL\_PS,\ \ \ ps)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00213}00213\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_SOL\_NEXT,\ next)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00214}00214\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_SOL\_A0,\ \ \ \mbox{\hyperlink{_g_c_c_2_r_i_s_c-_v_2port_context_8h_ab6aed896eb662f3ca0c20eeaa436675f}{a0}})\ \ \ \ \textcolor{comment}{/*\ should\ be\ on\ 16-\/byte\ alignment\ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00215}00215\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_SOL\_A1,\ \ \ \mbox{\hyperlink{_g_c_c_2_r_i_s_c-_v_2port_context_8h_a33aa9b7e835567d537b918d627212fee}{a1}})}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00216}00216\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_SOL\_A2,\ \ \ \mbox{\hyperlink{_m_p_l_a_b_2_p_i_c32_m_x_2_i_s_r___support_8h_a7902c6adaef543ab5f0434fed5ff916d}{a2}})}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00217}00217\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\_FIELD}}\ (\textcolor{keywordtype}{long},\ 4,\ XT\_SOL\_A3,\ \ \ \mbox{\hyperlink{_m_p_l_a_b_2_p_i_c32_m_x_2_i_s_r___support_8h_a23cab93183afb06eaf3becc5ca3c1982}{a3}})}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00218}00218\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00219}00219\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a7bd44c97a7dd92814fd2b5454d1594d7}{STRUCT\_END}}(XtSolFrame)}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00220}00220\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00221}00221\ \textcolor{comment}{/*\ Size\ of\ solicited\ stack\ frame\ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00222}\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a86f695f35df55abe30f3e3d7ac926526}{00222}}\ \textcolor{preprocessor}{\#define\ XT\_SOL\_FRMSZ\ \ \ \ \ \ \ \ \ \ \ \ ALIGNUP(0x10,\ XtSolFrameSize)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00223}00223\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00224}00224\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00225}00225\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00226}00226\ \textcolor{comment}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00227}00227\ \textcolor{comment}{\ \ CO-\/PROCESSOR\ STATE\ SAVE\ AREA\ FOR\ A\ THREAD}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00228}00228\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00229}00229\ \textcolor{comment}{\ \ The\ RTOS\ must\ provide\ an\ area\ per\ thread\ to\ save\ the\ state\ of\ co-\/processors}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00230}00230\ \textcolor{comment}{\ \ when\ that\ thread\ does\ not\ have\ control.\ Co-\/processors\ are\ context-\/switched}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00231}00231\ \textcolor{comment}{\ \ lazily\ (on\ demand)\ only\ when\ a\ new\ thread\ uses\ a\ co-\/processor\ instruction,}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00232}00232\ \textcolor{comment}{\ \ otherwise\ a\ thread\ retains\ ownership\ of\ the\ co-\/processor\ even\ when\ it\ loses}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00233}00233\ \textcolor{comment}{\ \ control\ of\ the\ processor.\ An\ Xtensa\ co-\/processor\ exception\ is\ triggered\ when}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00234}00234\ \textcolor{comment}{\ \ any\ co-\/processor\ instruction\ is\ executed\ by\ a\ thread\ that\ is\ not\ the\ owner,}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00235}00235\ \textcolor{comment}{\ \ and\ the\ context\ switch\ of\ that\ co-\/processor\ is\ then\ peformed\ by\ the\ handler.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00236}00236\ \textcolor{comment}{\ \ Ownership\ represents\ which\ thread's\ state\ is\ currently\ in\ the\ co-\/processor.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00237}00237\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00238}00238\ \textcolor{comment}{\ \ Co-\/processors\ may\ not\ be\ used\ by\ interrupt\ or\ exception\ handlers.\ If\ an}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00239}00239\ \textcolor{comment}{\ \ co-\/processor\ instruction\ is\ executed\ by\ an\ interrupt\ or\ exception\ handler,}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00240}00240\ \textcolor{comment}{\ \ the\ co-\/processor\ exception\ handler\ will\ trigger\ a\ kernel\ panic\ and\ freeze.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00241}00241\ \textcolor{comment}{\ \ This\ restriction\ is\ introduced\ to\ reduce\ the\ overhead\ of\ saving\ and\ restoring}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00242}00242\ \textcolor{comment}{\ \ co-\/processor\ state\ (which\ can\ be\ quite\ large)\ and\ in\ particular\ remove\ that}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00243}00243\ \textcolor{comment}{\ \ overhead\ from\ interrupt\ handlers.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00244}00244\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00245}00245\ \textcolor{comment}{\ \ The\ co-\/processor\ state\ save\ area\ may\ be\ in\ any\ convenient\ per-\/thread\ location}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00246}00246\ \textcolor{comment}{\ \ such\ as\ in\ the\ thread\ control\ block\ or\ above\ the\ thread\ stack\ area.\ It\ need}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00247}00247\ \textcolor{comment}{\ \ not\ be\ in\ the\ interrupt\ stack\ frame\ since\ interrupts\ don't\ use\ co-\/processors.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00248}00248\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00249}00249\ \textcolor{comment}{\ \ Along\ with\ the\ save\ area\ for\ each\ co-\/processor,\ two\ bitmasks\ with\ flags\ per}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00250}00250\ \textcolor{comment}{\ \ co-\/processor\ (laid\ out\ as\ in\ the\ CPENABLE\ reg)\ help\ manage\ context-\/switching}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00251}00251\ \textcolor{comment}{\ \ co-\/processors\ as\ efficiently\ as\ possible:}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00252}00252\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00253}00253\ \textcolor{comment}{\ \ XT\_CPENABLE}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00254}00254\ \textcolor{comment}{\ \ \ \ The\ contents\ of\ a\ non-\/running\ thread's\ CPENABLE\ register.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00255}00255\ \textcolor{comment}{\ \ \ \ It\ represents\ the\ co-\/processors\ owned\ (and\ whose\ state\ is\ still\ needed)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00256}00256\ \textcolor{comment}{\ \ \ \ by\ the\ thread.\ When\ a\ thread\ is\ preempted,\ its\ CPENABLE\ is\ saved\ here.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00257}00257\ \textcolor{comment}{\ \ \ \ When\ a\ thread\ solicits\ a\ context-\/switch,\ its\ CPENABLE\ is\ cleared\ -\/\ the}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00258}00258\ \textcolor{comment}{\ \ \ \ compiler\ has\ saved\ the\ (caller-\/saved)\ co-\/proc\ state\ if\ it\ needs\ to.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00259}00259\ \textcolor{comment}{\ \ \ \ When\ a\ non-\/running\ thread\ loses\ ownership\ of\ a\ CP,\ its\ bit\ is\ cleared.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00260}00260\ \textcolor{comment}{\ \ \ \ When\ a\ thread\ runs,\ it's\ XT\_CPENABLE\ is\ loaded\ into\ the\ CPENABLE\ reg.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00261}00261\ \textcolor{comment}{\ \ \ \ Avoids\ co-\/processor\ exceptions\ when\ no\ change\ of\ ownership\ is\ needed.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00262}00262\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00263}00263\ \textcolor{comment}{\ \ XT\_CPSTORED}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00264}00264\ \textcolor{comment}{\ \ \ \ A\ bitmask\ with\ the\ same\ layout\ as\ CPENABLE,\ a\ bit\ per\ co-\/processor.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00265}00265\ \textcolor{comment}{\ \ \ \ Indicates\ whether\ the\ state\ of\ each\ co-\/processor\ is\ saved\ in\ the\ state}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00266}00266\ \textcolor{comment}{\ \ \ \ save\ area.\ When\ a\ thread\ enters\ the\ kernel,\ only\ the\ state\ of\ co-\/procs}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00267}00267\ \textcolor{comment}{\ \ \ \ still\ enabled\ in\ CPENABLE\ is\ saved.\ When\ the\ co-\/processor\ exception}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00268}00268\ \textcolor{comment}{\ \ \ \ handler\ assigns\ ownership\ of\ a\ co-\/processor\ to\ a\ thread,\ it\ restores}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00269}00269\ \textcolor{comment}{\ \ \ \ the\ saved\ state\ only\ if\ this\ bit\ is\ set,\ and\ clears\ this\ bit.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00270}00270\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00271}00271\ \textcolor{comment}{\ \ XT\_CP\_CS\_ST}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00272}00272\ \textcolor{comment}{\ \ \ \ A\ bitmask\ with\ the\ same\ layout\ as\ CPENABLE,\ a\ bit\ per\ co-\/processor.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00273}00273\ \textcolor{comment}{\ \ \ \ Indicates\ whether\ callee-\/saved\ state\ is\ saved\ in\ the\ state\ save\ area.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00274}00274\ \textcolor{comment}{\ \ \ \ Callee-\/saved\ state\ is\ saved\ by\ itself\ on\ a\ solicited\ context\ switch,}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00275}00275\ \textcolor{comment}{\ \ \ \ and\ restored\ when\ needed\ by\ the\ coprocessor\ exception\ handler.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00276}00276\ \textcolor{comment}{\ \ \ \ Unsolicited\ switches\ will\ cause\ the\ entire\ coprocessor\ to\ be\ saved}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00277}00277\ \textcolor{comment}{\ \ \ \ when\ necessary.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00278}00278\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00279}00279\ \textcolor{comment}{\ \ XT\_CP\_ASA}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00280}00280\ \textcolor{comment}{\ \ \ \ Pointer\ to\ the\ aligned\ save\ area.\ \ Allows\ it\ to\ be\ aligned\ more\ than}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00281}00281\ \textcolor{comment}{\ \ \ \ the\ overall\ save\ area\ (which\ might\ only\ be\ stack-\/aligned\ or\ TCB-\/aligned).}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00282}00282\ \textcolor{comment}{\ \ \ \ Especially\ relevant\ for\ Xtensa\ cores\ configured\ with\ a\ very\ large\ data}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00283}00283\ \textcolor{comment}{\ \ \ \ path\ that\ requires\ alignment\ greater\ than\ 16\ bytes\ (ABI\ stack\ alignment).}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00284}00284\ \textcolor{comment}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00285}00285\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00286}00286\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00287}00287\ \textcolor{preprocessor}{\#if\ XCHAL\_CP\_NUM\ >\ 0}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00288}00288\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00289}00289\ \textcolor{comment}{/*\ \ Offsets\ of\ each\ coprocessor\ save\ area\ within\ the\ 'aligned\ save\ area':\ \ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00290}00290\ \textcolor{preprocessor}{\#define\ XT\_CP0\_SA\ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00291}00291\ \textcolor{preprocessor}{\#define\ XT\_CP1\_SA\ \ \ ALIGNUP(XCHAL\_CP1\_SA\_ALIGN,\ XT\_CP0\_SA\ +\ XCHAL\_CP0\_SA\_SIZE)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00292}00292\ \textcolor{preprocessor}{\#define\ XT\_CP2\_SA\ \ \ ALIGNUP(XCHAL\_CP2\_SA\_ALIGN,\ XT\_CP1\_SA\ +\ XCHAL\_CP1\_SA\_SIZE)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00293}00293\ \textcolor{preprocessor}{\#define\ XT\_CP3\_SA\ \ \ ALIGNUP(XCHAL\_CP3\_SA\_ALIGN,\ XT\_CP2\_SA\ +\ XCHAL\_CP2\_SA\_SIZE)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00294}00294\ \textcolor{preprocessor}{\#define\ XT\_CP4\_SA\ \ \ ALIGNUP(XCHAL\_CP4\_SA\_ALIGN,\ XT\_CP3\_SA\ +\ XCHAL\_CP3\_SA\_SIZE)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00295}00295\ \textcolor{preprocessor}{\#define\ XT\_CP5\_SA\ \ \ ALIGNUP(XCHAL\_CP5\_SA\_ALIGN,\ XT\_CP4\_SA\ +\ XCHAL\_CP4\_SA\_SIZE)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00296}00296\ \textcolor{preprocessor}{\#define\ XT\_CP6\_SA\ \ \ ALIGNUP(XCHAL\_CP6\_SA\_ALIGN,\ XT\_CP5\_SA\ +\ XCHAL\_CP5\_SA\_SIZE)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00297}00297\ \textcolor{preprocessor}{\#define\ XT\_CP7\_SA\ \ \ ALIGNUP(XCHAL\_CP7\_SA\_ALIGN,\ XT\_CP6\_SA\ +\ XCHAL\_CP6\_SA\_SIZE)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00298}00298\ \textcolor{preprocessor}{\#define\ XT\_CP\_SA\_SIZE\ \ \ ALIGNUP(16,\ XT\_CP7\_SA\ +\ XCHAL\_CP7\_SA\_SIZE)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00299}00299\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00300}00300\ \textcolor{comment}{/*\ \ Offsets\ within\ the\ overall\ save\ area:\ \ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00301}00301\ \textcolor{preprocessor}{\#define\ XT\_CPENABLE\ 0\ \ \ }\textcolor{comment}{/*\ (2\ bytes)\ coprocessors\ active\ for\ this\ thread\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00302}00302\ \textcolor{preprocessor}{\#define\ XT\_CPSTORED\ 2\ \ \ }\textcolor{comment}{/*\ (2\ bytes)\ coprocessors\ saved\ for\ this\ thread\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00303}00303\ \textcolor{preprocessor}{\#define\ XT\_CP\_CS\_ST\ 4\ \ \ }\textcolor{comment}{/*\ (2\ bytes)\ coprocessor\ callee-\/saved\ regs\ stored\ for\ this\ thread\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00304}00304\ \textcolor{preprocessor}{\#define\ XT\_CP\_ASA\ \ \ 8\ \ \ }\textcolor{comment}{/*\ (4\ bytes)\ ptr\ to\ aligned\ save\ area\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00305}00305\ \textcolor{comment}{/*\ \ Overall\ size\ allows\ for\ dynamic\ alignment:\ \ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00306}00306\ \textcolor{preprocessor}{\#define\ XT\_CP\_SIZE\ \ (12\ +\ XT\_CP\_SA\_SIZE\ +\ XCHAL\_TOTAL\_SA\_ALIGN)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00307}00307\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00308}\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_ad73af7f50fc61a294a619bcad6ab20d4}{00308}}\ \textcolor{preprocessor}{\#define\ XT\_CP\_SIZE\ \ 0}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00309}00309\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00310}00310\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00311}00311\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00312}00312\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00313}00313\ \textcolor{comment}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00314}00314\ \textcolor{comment}{\ \ MACROS\ TO\ HANDLE\ ABI\ SPECIFICS\ OF\ FUNCTION\ ENTRY\ AND\ RETURN}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00315}00315\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00316}00316\ \textcolor{comment}{\ \ Convenient\ where\ the\ frame\ size\ requirements\ are\ the\ same\ for\ both\ ABIs.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00317}00317\ \textcolor{comment}{\ \ \ \ ENTRY(sz),\ RET(sz)\ are\ for\ framed\ functions\ (have\ locals\ or\ make\ calls).}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00318}00318\ \textcolor{comment}{\ \ \ \ ENTRY0,\ \ \ \ RET0\ \ \ \ are\ for\ frameless\ functions\ (no\ locals,\ no\ calls).}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00319}00319\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00320}00320\ \textcolor{comment}{\ \ where\ size\ =\ size\ of\ stack\ frame\ in\ bytes\ (must\ be\ >0\ and\ aligned\ to\ 16).}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00321}00321\ \textcolor{comment}{\ \ For\ framed\ functions\ the\ frame\ is\ created\ and\ the\ return\ address\ saved\ at}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00322}00322\ \textcolor{comment}{\ \ base\ of\ frame\ (Call0\ ABI)\ or\ as\ determined\ by\ hardware\ (Windowed\ ABI).}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00323}00323\ \textcolor{comment}{\ \ For\ frameless\ functions,\ there\ is\ no\ frame\ and\ return\ address\ remains\ in\ a0.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00324}00324\ \textcolor{comment}{\ \ Note:\ Because\ CPP\ macros\ expand\ to\ a\ single\ line,\ macros\ requiring\ multi-\/line}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00325}00325\ \textcolor{comment}{\ \ expansions\ are\ implemented\ as\ assembler\ macros.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00326}00326\ \textcolor{comment}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00327}00327\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00328}00328\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00329}00329\ \textcolor{preprocessor}{\#ifdef\ \_\_ASSEMBLER\_\_}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00330}00330\ \textcolor{preprocessor}{\#ifdef\ \_\_XTENSA\_CALL0\_ABI\_\_}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00331}00331\ \ \ \textcolor{comment}{/*\ Call0\ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00332}00332\ \textcolor{preprocessor}{\ \ \#define\ ENTRY(sz)\ \ \ \ \ entry1\ \ sz}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00333}00333\ \ \ \ \ .macro\ \ entry1\ size=0x10}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00334}00334\ \ \ \ \ addi\ \ \ \ \mbox{\hyperlink{_g_c_c_2_r_i_s_c-_v_2chip__specific__extensions_2_pulpino___vega___r_v32_m1_r_m_2freertos__risc_42330ed41578e3246f3d21d6cb759dc2_a699b7084df75437444a9e8885fa2c693}{sp}},\ \mbox{\hyperlink{_g_c_c_2_r_i_s_c-_v_2chip__specific__extensions_2_pulpino___vega___r_v32_m1_r_m_2freertos__risc_42330ed41578e3246f3d21d6cb759dc2_a699b7084df75437444a9e8885fa2c693}{sp}},\ -\/\(\backslash\)size}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00335}00335\ \ \ \ \ s32i\ \ \ \ \mbox{\hyperlink{_g_c_c_2_r_i_s_c-_v_2port_context_8h_ab6aed896eb662f3ca0c20eeaa436675f}{a0}},\ \mbox{\hyperlink{_g_c_c_2_r_i_s_c-_v_2chip__specific__extensions_2_pulpino___vega___r_v32_m1_r_m_2freertos__risc_42330ed41578e3246f3d21d6cb759dc2_a699b7084df75437444a9e8885fa2c693}{sp}},\ 0}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00336}00336\ \ \ \ \ .endm}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00337}00337\ \textcolor{preprocessor}{\ \ \#define\ ENTRY0}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00338}00338\ \textcolor{preprocessor}{\ \ \#define\ RET(sz)\ \ \ \ \ \ \ ret1\ \ \ \ sz}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00339}00339\ \ \ \ \ .macro\ \ ret1\ size=0x10}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00340}00340\ \ \ \ \ l32i\ \ \ \ \mbox{\hyperlink{_g_c_c_2_r_i_s_c-_v_2port_context_8h_ab6aed896eb662f3ca0c20eeaa436675f}{a0}},\ \mbox{\hyperlink{_g_c_c_2_r_i_s_c-_v_2chip__specific__extensions_2_pulpino___vega___r_v32_m1_r_m_2freertos__risc_42330ed41578e3246f3d21d6cb759dc2_a699b7084df75437444a9e8885fa2c693}{sp}},\ 0}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00341}00341\ \ \ \ \ addi\ \ \ \ \mbox{\hyperlink{_g_c_c_2_r_i_s_c-_v_2chip__specific__extensions_2_pulpino___vega___r_v32_m1_r_m_2freertos__risc_42330ed41578e3246f3d21d6cb759dc2_a699b7084df75437444a9e8885fa2c693}{sp}},\ \mbox{\hyperlink{_g_c_c_2_r_i_s_c-_v_2chip__specific__extensions_2_pulpino___vega___r_v32_m1_r_m_2freertos__risc_42330ed41578e3246f3d21d6cb759dc2_a699b7084df75437444a9e8885fa2c693}{sp}},\ \(\backslash\)size}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00342}00342\ \ \ \ \ \mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_ac252abdd57e002f8fa2085164a5b42b5}{ret}}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00343}00343\ \ \ \ \ .endm}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00344}00344\ \textcolor{preprocessor}{\ \ \#define\ RET0\ \ \ \ \ \ \ \ \ \ ret}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00345}00345\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00346}00346\ \ \ \textcolor{comment}{/*\ Windowed\ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00347}00347\ \textcolor{preprocessor}{\ \ \#define\ ENTRY(sz)\ \ \ \ \ entry\ \ \ sp,\ sz}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00348}00348\ \textcolor{preprocessor}{\ \ \#define\ ENTRY0\ \ \ \ \ \ \ \ entry\ \ \ sp,\ 0x10}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00349}00349\ \textcolor{preprocessor}{\ \ \#define\ RET(sz)\ \ \ \ \ \ \ retw}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00350}00350\ \textcolor{preprocessor}{\ \ \#define\ RET0\ \ \ \ \ \ \ \ \ \ retw}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00351}00351\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00352}00352\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00353}00353\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00354}00354\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00355}00355\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ XTENSA\_CONTEXT\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

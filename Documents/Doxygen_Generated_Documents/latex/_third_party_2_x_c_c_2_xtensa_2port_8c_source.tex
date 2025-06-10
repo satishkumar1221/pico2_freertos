@@ -1,0 +1,215 @@
+\doxysection{port.\+c}
+\hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source}{}\label{_third_party_2_x_c_c_2_xtensa_2port_8c_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/XCC/Xtensa/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/XCC/Xtensa/port.c}}
+\mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2015-\/2019\ Cadence\ Design\ Systems,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00004}00004\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00005}00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00006}00006\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00007}00007\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00008}00008\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00009}00009\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00010}00010\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00011}00011\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00012}00012\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00013}00013\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00014}00014\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00015}00015\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00016}00016\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00017}00017\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00018}00018\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00019}00019\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00020}00020\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00021}00021\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00022}00022\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00023}00023\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00024}00024\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00025}00025\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00026}00026\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00027}00027\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00028}00028\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00030}00030\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00031}00031\ \textcolor{preprocessor}{\#include\ <xtensa/config/core.h>}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00033}00033\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h}{xtensa\_rtos.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00035}00035\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_free_r_t_o_s_8h}{FreeRTOS.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00036}00036\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{task_8h}{task.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00039}00039\ \textcolor{comment}{/*\ Defined\ in\ portasm.h\ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00040}\mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_a3e243af33c76d040107af9edc95178e3}{00040}}\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_a3e243af33c76d040107af9edc95178e3}{\_frxt\_tick\_timer\_init}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00042}00042\ \textcolor{comment}{/*\ Defined\ in\ xtensa\_context.S\ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00043}\mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_a3d96ea7532f08fcad740d813eed0ecae}{00043}}\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a3d96ea7532f08fcad740d813eed0ecae}{\_xt\_coproc\_init}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00046}00046\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00048}00048\ \textcolor{comment}{/*\ We\ require\ the\ address\ of\ the\ pxCurrentTCB\ variable,\ but\ don't\ want\ to\ know}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00049}00049\ \textcolor{comment}{any\ details\ of\ its\ type.\ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00050}00050\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_af5b0f7452857787ed70ce2856ca74c4b}{TCB\_t}};}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00051}00051\ \textcolor{keyword}{extern}\ \textcolor{keyword}{volatile}\ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_af5b0f7452857787ed70ce2856ca74c4b}{TCB\_t}}\ *\ \textcolor{keyword}{volatile}\ \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}};}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00053}\mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_a64d19974e3c0b65e6ee8093dbd1745d0}{00053}}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_aba355329d1f37d32fd6c5dc0500cc53c}{port\_xSchedulerRunning}}\ =\ 0;\ \textcolor{comment}{//\ Duplicate\ of\ inaccessible\ xSchedulerRunning;\ needed\ at\ startup\ to\ avoid\ counting\ nesting}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00054}\mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_ac7b2c6e121f6ac2a2f1e547daf8d0987}{00054}}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a78e796fddbe189a894cb7262490ecf4a}{port\_interruptNesting}}\ =\ 0;\ \ \textcolor{comment}{//\ Interrupt\ nesting\ level}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00056}00056\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00058}00058\ \textcolor{comment}{//\ User\ exception\ dispatcher\ when\ exiting}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00059}\mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_af05e6fd1516ecc374e4599910c687cb5}{00059}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_af05e6fd1516ecc374e4599910c687cb5}{\_xt\_user\_exit}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00061}00061\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00062}00062\ \textcolor{comment}{\ *\ Stack\ initialization}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00063}00063\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00064}00064\ \textcolor{preprocessor}{\#if\ portUSING\_MPU\_WRAPPERS}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00065}00065\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_aaa2085423d917cf1707f4770de3354e2}{pxPortInitialiseStack}}(\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *pxTopOfStack,\ \mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{TaskFunction\_t}}\ pxCode,\ \textcolor{keywordtype}{void}\ *pvParameters,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xRunPrivileged\ )}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00066}00066\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00067}\mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}{00067}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_aaa2085423d917cf1707f4770de3354e2}{pxPortInitialiseStack}}(\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *pxTopOfStack,\ \mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{TaskFunction\_t}}\ pxCode,\ \textcolor{keywordtype}{void}\ *pvParameters\ )}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00068}00068\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00069}00069\ \{}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00070}00070\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *\ \mbox{\hyperlink{_g_c_c_2_r_i_s_c-_v_2chip__specific__extensions_2_pulpino___vega___r_v32_m1_r_m_2freertos__risc_42330ed41578e3246f3d21d6cb759dc2_a699b7084df75437444a9e8885fa2c693}{sp}};}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00071}00071\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *\ tp;}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00072}00072\ \ \ \ \ XtExcFrame\ *\ frame;}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00074}00074\ \textcolor{preprocessor}{\ \ \ \ \#if\ XCHAL\_CP\_NUM\ >\ 0}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00075}00075\ \ \ \ \ \ \ \ \ uint32\_t\ *\ p;}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00076}00076\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00078}00078\ \ \ \ \ \textcolor{comment}{/*\ Create\ interrupt\ stack\ frame\ aligned\ to\ 16\ byte\ boundary\ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00079}00079\ \ \ \ \ \mbox{\hyperlink{_g_c_c_2_r_i_s_c-_v_2chip__specific__extensions_2_pulpino___vega___r_v32_m1_r_m_2freertos__risc_42330ed41578e3246f3d21d6cb759dc2_a699b7084df75437444a9e8885fa2c693}{sp}}\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *\ )\ (\ (\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ )\ pxTopOfStack\ -\/\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_ad73af7f50fc61a294a619bcad6ab20d4}{XT\_CP\_SIZE}}\ -\/\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_aca91c7a44a40c0fc4e57b0534afa7f55}{XT\_STK\_FRMSZ}}\ )\ \&\ \string~0xf\ );}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00081}00081\ \ \ \ \ \textcolor{comment}{/*\ Clear\ the\ entire\ frame\ (do\ not\ use\ memset()\ because\ we\ don't\ depend\ on\ C\ library)\ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00082}00082\ \ \ \ \ \textcolor{keywordflow}{for}(\ tp\ =\ \mbox{\hyperlink{_g_c_c_2_r_i_s_c-_v_2chip__specific__extensions_2_pulpino___vega___r_v32_m1_r_m_2freertos__risc_42330ed41578e3246f3d21d6cb759dc2_a699b7084df75437444a9e8885fa2c693}{sp}};\ tp\ <=\ pxTopOfStack;\ ++tp\ )}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00083}00083\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00084}00084\ \ \ \ \ \ \ \ \ *tp\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00085}00085\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00087}00087\ \ \ \ \ frame\ =\ (\ XtExcFrame\ *\ )\ \mbox{\hyperlink{_g_c_c_2_r_i_s_c-_v_2chip__specific__extensions_2_pulpino___vega___r_v32_m1_r_m_2freertos__risc_42330ed41578e3246f3d21d6cb759dc2_a699b7084df75437444a9e8885fa2c693}{sp}};}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00089}00089\ \ \ \ \ \textcolor{comment}{/*\ Explicitly\ initialize\ certain\ saved\ registers\ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00090}00090\ \ \ \ \ frame-\/>pc\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ )\ pxCode;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ task\ entrypoint\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00091}00091\ \ \ \ \ frame-\/>a0\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ to\ terminate\ GDB\ backtrace\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00092}00092\ \ \ \ \ frame-\/>a1\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ )\ \mbox{\hyperlink{_g_c_c_2_r_i_s_c-_v_2chip__specific__extensions_2_pulpino___vega___r_v32_m1_r_m_2freertos__risc_42330ed41578e3246f3d21d6cb759dc2_a699b7084df75437444a9e8885fa2c693}{sp}}\ +\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_aca91c7a44a40c0fc4e57b0534afa7f55}{XT\_STK\_FRMSZ}};\ \ \textcolor{comment}{/*\ physical\ top\ of\ stack\ frame\ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00093}00093\ \ \ \ \ frame-\/>exit\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ )\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_af05e6fd1516ecc374e4599910c687cb5}{\_xt\_user\_exit}};\ \ \ \ \textcolor{comment}{/*\ user\ exception\ exit\ dispatcher\ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00095}00095\ \ \ \ \ \textcolor{comment}{/*\ Set\ initial\ PS\ to\ int\ level\ 0,\ EXCM\ disabled\ ('rfe'\ will\ enable),\ user\ mode.\ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00096}00096\ \ \ \ \ \textcolor{comment}{/*\ Also\ set\ entry\ point\ argument\ parameter.\ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00097}00097\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ \_\_XTENSA\_CALL0\_ABI\_\_}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00098}00098\ \ \ \ \ \ \ \ \ frame-\/>a2\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ )\ pvParameters;}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00099}00099\ \ \ \ \ \ \ \ \ frame-\/>ps\ =\ PS\_UM\ |\ PS\_EXCM;}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00100}00100\ \textcolor{preprocessor}{\ \ \ \ \#else}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00101}00101\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ +\ for\ windowed\ ABI\ also\ set\ WOE\ and\ CALLINC\ (pretend\ task\ was\ 'call4'd).\ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00102}00102\ \ \ \ \ \ \ \ \ frame-\/>a6\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ )\ pvParameters;}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00103}00103\ \ \ \ \ \ \ \ \ frame-\/>ps\ =\ PS\_UM\ |\ PS\_EXCM\ |\ PS\_WOE\ |\ PS\_CALLINC(\ 1\ );}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00104}00104\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00106}00106\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ XT\_USE\_SWPRI}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00107}00107\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Set\ the\ initial\ virtual\ priority\ mask\ value\ to\ all\ 1's.\ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00108}00108\ \ \ \ \ \ \ \ \ frame-\/>vpri\ =\ 0xFFFFFFFF;}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00109}00109\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00111}00111\ \textcolor{preprocessor}{\ \ \ \ \#if\ XCHAL\_CP\_NUM\ >\ 0}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00112}00112\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Init\ the\ coprocessor\ save\ area\ (see\ xtensa\_context.h)\ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00114}00114\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ No\ access\ to\ TCB\ here,\ so\ derive\ indirectly.\ Stack\ growth\ is\ top\ to\ bottom.}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00115}00115\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ //p\ =\ (uint32\_t\ *)\ xMPUSettings-\/>coproc\_area;}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00116}00116\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00117}00117\ \ \ \ \ \ \ \ \ p\ =\ (\ uint32\_t\ *\ )\ (\ (\ (\ uint32\_t\ )\ pxTopOfStack\ -\/\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_ad73af7f50fc61a294a619bcad6ab20d4}{XT\_CP\_SIZE}}\ )\ \&\ \string~0xf\ );}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00118}00118\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ (\ uint32\_t\ )\ p\ >=\ frame-\/>a1\ );}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00119}00119\ \ \ \ \ \ \ \ \ p[\ 0\ ]\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00120}00120\ \ \ \ \ \ \ \ \ p[\ 1\ ]\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00121}00121\ \ \ \ \ \ \ \ \ p[\ 2\ ]\ =\ (\ (\ (\ uint32\_t\ )\ p\ )\ +\ 12\ +\ XCHAL\_TOTAL\_SA\_ALIGN\ -\/\ 1\ )\ \&\ -\/XCHAL\_TOTAL\_SA\_ALIGN;}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00122}00122\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00124}00124\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{_g_c_c_2_r_i_s_c-_v_2chip__specific__extensions_2_pulpino___vega___r_v32_m1_r_m_2freertos__risc_42330ed41578e3246f3d21d6cb759dc2_a699b7084df75437444a9e8885fa2c693}{sp}};}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00125}00125\ \}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00127}00127\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00129}\mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{00129}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{vPortEndScheduler}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00130}00130\ \{}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00131}00131\ \ \ \ \ \textcolor{comment}{/*\ It\ is\ unlikely\ that\ the\ Xtensa\ port\ will\ get\ stopped.\ \ If\ required\ simply}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00132}00132\ \textcolor{comment}{\ \ \ \ disable\ the\ tick\ interrupt\ here.\ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00133}00133\ \}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00135}00135\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00137}\mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{00137}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{xPortStartScheduler}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00138}00138\ \{}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00139}00139\ \ \ \ \ \textcolor{comment}{//\ Interrupts\ are\ disabled\ at\ this\ point\ and\ stack\ contains\ PS\ with\ enabled\ interrupts\ when\ task\ context\ is\ restored}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00141}00141\ \textcolor{preprocessor}{\ \ \ \ \#if\ XCHAL\_CP\_NUM\ >\ 0}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00142}00142\ \ \ \ \ \textcolor{comment}{/*\ Initialize\ co-\/processor\ management\ for\ tasks.\ Leave\ CPENABLE\ alone.\ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00143}00143\ \ \ \ \ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a3d96ea7532f08fcad740d813eed0ecae}{\_xt\_coproc\_init}}();}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00144}00144\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00146}00146\ \ \ \ \ \textcolor{comment}{/*\ Init\ the\ tick\ divisor\ value\ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00147}00147\ \ \ \ \ \mbox{\hyperlink{_g_c_c_2_xtensa___e_s_p32_2include_2xtensa__timer_8h_a698fa42e858f9941700aafc5bb68a6c9}{\_xt\_tick\_divisor\_init}}();}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00149}00149\ \ \ \ \ \textcolor{comment}{/*\ Setup\ the\ hardware\ to\ generate\ the\ tick.\ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00150}00150\ \ \ \ \ \mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_a3e243af33c76d040107af9edc95178e3}{\_frxt\_tick\_timer\_init}}();}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00152}00152\ \textcolor{preprocessor}{\ \ \ \ \#if\ XT\_USE\_THREAD\_SAFE\_CLIB}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00153}00153\ \ \ \ \ \textcolor{comment}{//\ Init\ C\ library}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00154}00154\ \ \ \ \ vPortClibInit();}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00155}00155\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00157}00157\ \ \ \ \ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_aba355329d1f37d32fd6c5dc0500cc53c}{port\_xSchedulerRunning}}\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00159}00159\ \ \ \ \ \textcolor{comment}{//\ Cannot\ be\ directly\ called\ from\ C;\ never\ returns}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00160}00160\ \ \ \ \ \mbox{\hyperlink{_g_c_c_2_nios_i_i_2portmacro_8h_a43a63aec8a4dd5165a86947c1f3563be}{\_\_asm\_\_}}\ \textcolor{keyword}{volatile}\ (\textcolor{stringliteral}{"{}call0\ \ \ \ \_frxt\_dispatch\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00162}00162\ \ \ \ \ \textcolor{comment}{/*\ Should\ not\ get\ here.\ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00163}00163\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}};}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00164}00164\ \}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00165}00165\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00167}\mbox{\hyperlink{_third_party_2_x_c_c_2_xtensa_2port_8c_a2e8cefb0ee710ce43352a659110ba9f3}{00167}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{_c_c_s_2_a_r_m___c_m3_2port_8c_a78100b2d36913d0b45565be8975e5de8}{xPortSysTickHandler}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00168}00168\ \{}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00169}00169\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_ac252abdd57e002f8fa2085164a5b42b5}{ret}};}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00170}00170\ \ \ \ \ uint32\_t\ interruptMask;}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00171}00171\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00172}00172\ \ \ \ \ \mbox{\hyperlink{_g_c_c_2_xtensa___e_s_p32_2include_2portbenchmark_8h_ac1b77f776e89914c4b217df8e03ad10d}{portbenchmarkIntLatency}}();}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00173}00173\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00174}00174\ \ \ \ \ \textcolor{comment}{/*\ Interrupts\ upto\ configMAX\_SYSCALL\_INTERRUPT\_PRIORITY\ must\ be}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00175}00175\ \textcolor{comment}{\ \ \ \ \ *\ disabled\ before\ calling\ xTaskIncrementTick\ as\ it\ access\ the}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00176}00176\ \textcolor{comment}{\ \ \ \ \ *\ kernel\ lists.\ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00177}00177\ \ \ \ \ interruptMask\ =\ \mbox{\hyperlink{_free_r_t_o_s_8h_a31b4260dbc1823ba80b578f86eb15a98}{portSET\_INTERRUPT\_MASK\_FROM\_ISR}}();}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00178}00178\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00179}00179\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_ac252abdd57e002f8fa2085164a5b42b5}{ret}}\ =\ \mbox{\hyperlink{task_8h_a978e25460ac35706f9ad30b46d9403d8}{xTaskIncrementTick}}();}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00180}00180\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00181}00181\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_a2661e2c5a4e4afe5bef2ebe9872e28b3}{portCLEAR\_INTERRUPT\_MASK\_FROM\_ISR}}(\ interruptMask\ );}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00183}00183\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_aac6850c66595efdc02a8bbb95fb4648e}{portYIELD\_FROM\_ISR}}(\ \mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_ac252abdd57e002f8fa2085164a5b42b5}{ret}}\ );}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00184}00184\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00185}00185\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_ac252abdd57e002f8fa2085164a5b42b5}{ret}};}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00186}00186\ \}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00187}00187\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00188}00188\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00189}00189\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00190}00190\ \textcolor{comment}{\ *\ Used\ to\ set\ coprocessor\ area\ in\ stack.\ Current\ hack\ is\ to\ reuse\ MPU\ pointer\ for\ coprocessor\ area.}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00191}00191\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00192}00192\ \textcolor{preprocessor}{\#if\ portUSING\_MPU\_WRAPPERS}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00194}00194\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m3___m_p_u_2port_8c_a911aa5915537b19a087674a0c6d792a2}{vPortStoreTaskMPUSettings}}(\ \mbox{\hyperlink{structx_m_p_u___s_e_t_t_i_n_g_s}{xMPU\_SETTINGS}}\ *\ xMPUSettings,}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{struct}\ \mbox{\hyperlink{structx_m_e_m_o_r_y___r_e_g_i_o_n}{xMEMORY\_REGION}}\ *\ \textcolor{keyword}{const}\ xRegions,}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *\ pxBottomOfStack,}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_ae4e85bffd36d76cf2796092f0ccd784a}{configSTACK\_DEPTH\_TYPE}}\ uxStackDepth\ )}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00198}00198\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00199}00199\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ XCHAL\_CP\_NUM\ >\ 0}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ xMPUSettings-\/>coproc\_area\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *\ )\ (\ (\ uint32\_t\ )\ (\ pxBottomOfStack\ +\ uxStackDepth\ -\/\ 1\ )\ );}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ xMPUSettings-\/>coproc\_area\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *\ )\ (\ (\ (\ \mbox{\hyperlink{_free_r_t_o_s_8h_a53bae25f223b7156dce0fc6e6b1b2295}{portPOINTER\_SIZE\_TYPE}}\ )\ xMPUSettings-\/>coproc\_area\ )\ \&\ (\ \string~(\ (\ \mbox{\hyperlink{_free_r_t_o_s_8h_a53bae25f223b7156dce0fc6e6b1b2295}{portPOINTER\_SIZE\_TYPE}}\ )\ portBYTE\_ALIGNMENT\_MASK\ )\ )\ );}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ xMPUSettings-\/>coproc\_area\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *\ )\ (\ (\ (\ uint32\_t\ )\ xMPUSettings-\/>coproc\_area\ -\/\ \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_ad73af7f50fc61a294a619bcad6ab20d4}{XT\_CP\_SIZE}}\ )\ \&\ \string~0xf\ );}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ NOTE:\ we\ cannot\ initialize\ the\ coprocessor\ save\ area\ here\ because\ FreeRTOS\ is\ going\ to}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00205}00205\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ clear\ the\ stack\ area\ after\ we\ return.\ This\ is\ done\ in\ pxPortInitialiseStack().}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00206}00206\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00207}00207\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00208}00208\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_third_party_2_x_c_c_2_xtensa_2port_8c_source_l00209}00209\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ if\ portUSING\_MPU\_WRAPPERS\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

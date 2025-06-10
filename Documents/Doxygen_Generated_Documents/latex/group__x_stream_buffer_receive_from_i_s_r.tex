@@ -1,0 +1,70 @@
+\doxysection{x\+Stream\+Buffer\+Receive\+From\+ISR }
+\hypertarget{group__x_stream_buffer_receive_from_i_s_r}{}\label{group__x_stream_buffer_receive_from_i_s_r}\index{xStreamBufferReceiveFromISR@{xStreamBufferReceiveFromISR}}
+\doxylink{stream__buffer_8h}{stream\+\_\+buffer.\+h}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{stream__buffer_8h_a6c882a1d9f26c40f93f271bd1b844b3b}{xStreamBufferReceiveFromISR}}(\ \mbox{\hyperlink{stream__buffer_8h_a8b80974e2278f073412293e6580ce56f}{StreamBufferHandle\_t}}\ xStreamBuffer,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *pvRxData,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ xBufferLengthBytes,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ *pxHigherPriorityTaskWoken\ );}
+
+\end{DoxyCode}
+
+
+An interrupt safe version of the API function that receives bytes from a stream buffer.
+
+Use \doxylink{stream__buffer_8h_a55efc144b988598d84a6087d3e20b507}{x\+Stream\+Buffer\+Receive()} to read bytes from a stream buffer from a task. Use \doxylink{stream__buffer_8h_a6c882a1d9f26c40f93f271bd1b844b3b}{x\+Stream\+Buffer\+Receive\+From\+ISR()} to read bytes from a stream buffer from an interrupt service routine (ISR).
+
+config\+USE\+\_\+\+STREAM\+\_\+\+BUFFERS must be set to 1 in for Free\+RTOSConfig.\+h for \doxylink{stream__buffer_8h_a6c882a1d9f26c40f93f271bd1b844b3b}{x\+Stream\+Buffer\+Receive\+From\+ISR()} to be available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Stream\+Buffer} & The handle of the stream buffer from which a stream is being received.\\
+\hline
+{\em pv\+Rx\+Data} & A pointer to the buffer into which the received bytes are copied.\\
+\hline
+{\em x\+Buffer\+Length\+Bytes} & The length of the buffer pointed to by the pv\+Rx\+Data parameter. This sets the maximum number of bytes to receive in one call. x\+Stream\+Buffer\+Receive will return as many bytes as possible up to a maximum set by x\+Buffer\+Length\+Bytes.\\
+\hline
+{\em px\+Higher\+Priority\+Task\+Woken} & It is possible that a stream buffer will have a task blocked on it waiting for space to become available. Calling \doxylink{stream__buffer_8h_a6c882a1d9f26c40f93f271bd1b844b3b}{x\+Stream\+Buffer\+Receive\+From\+ISR()} can make space available, and so cause a task that is waiting for space to leave the Blocked state. If calling \doxylink{stream__buffer_8h_a6c882a1d9f26c40f93f271bd1b844b3b}{x\+Stream\+Buffer\+Receive\+From\+ISR()} causes a task to leave the Blocked state, and the unblocked task has a priority higher than the currently executing task (the task that was interrupted), then, internally, \doxylink{stream__buffer_8h_a6c882a1d9f26c40f93f271bd1b844b3b}{x\+Stream\+Buffer\+Receive\+From\+ISR()} will set \texorpdfstring{$\ast$}{*}px\+Higher\+Priority\+Task\+Woken to pd\+TRUE. If \doxylink{stream__buffer_8h_a6c882a1d9f26c40f93f271bd1b844b3b}{x\+Stream\+Buffer\+Receive\+From\+ISR()} sets this value to pd\+TRUE, then normally a context switch should be performed before the interrupt is exited. That will ensure the interrupt returns directly to the highest priority Ready state task. \texorpdfstring{$\ast$}{*}px\+Higher\+Priority\+Task\+Woken should be set to pd\+FALSE before it is passed into the function. See the code example below for an example.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of bytes read from the stream buffer, if any.
+\end{DoxyReturn}
+Example use\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ A\ stream\ buffer\ that\ has\ already\ been\ created.}}
+\DoxyCodeLine{StreamBuffer\_t\ xStreamBuffer;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vAnInterruptServiceRoutine(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{uint8\_t\ ucRxData[\ 20\ ];}
+\DoxyCodeLine{\textcolor{keywordtype}{size\_t}\ xReceivedBytes;}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xHigherPriorityTaskWoken\ =\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}};\ \ \textcolor{comment}{//\ Initialised\ to\ pdFALSE.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Receive\ the\ next\ stream\ from\ the\ stream\ buffer.}}
+\DoxyCodeLine{\ xReceivedBytes\ =\ \mbox{\hyperlink{stream__buffer_8h_a6c882a1d9f26c40f93f271bd1b844b3b}{xStreamBufferReceiveFromISR}}(\ xStreamBuffer,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ \textcolor{keywordtype}{void}\ *\ )\ ucRxData,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{sizeof}(\ ucRxData\ ),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&xHigherPriorityTaskWoken\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(\ xReceivedBytes\ >\ 0\ )}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ ucRxData\ contains\ xReceivedBytes\ read\ from\ the\ stream\ buffer.}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Process\ the\ stream\ here....}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ If\ xHigherPriorityTaskWoken\ was\ set\ to\ pdTRUE\ inside}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ xStreamBufferReceiveFromISR()\ then\ a\ task\ that\ has\ a\ priority\ above\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ priority\ of\ the\ currently\ executing\ task\ was\ unblocked\ and\ a\ context}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ switch\ should\ be\ performed\ to\ ensure\ the\ ISR\ returns\ to\ the\ unblocked}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ task.\ \ In\ most\ FreeRTOS\ ports\ this\ is\ done\ by\ simply\ passing}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ xHigherPriorityTaskWoken\ into\ portYIELD\_FROM\_ISR(),\ which\ will\ test\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ variables\ value,\ and\ perform\ the\ context\ switch\ if\ necessary.\ \ Check\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ documentation\ for\ the\ port\ in\ use\ for\ port\ specific\ instructions.}}
+\DoxyCodeLine{\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_aac6850c66595efdc02a8bbb95fb4648e}{portYIELD\_FROM\_ISR}}(\ xHigherPriorityTaskWoken\ );}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

@@ -1,0 +1,71 @@
+\doxysection{ux\+Task\+Priority\+Get }
+\hypertarget{group__ux_task_priority_get}{}\label{group__ux_task_priority_get}\index{uxTaskPriorityGet@{uxTaskPriorityGet}}
+task. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ \mbox{\hyperlink{task_8h_a18d1148c845f5c4bff3b9e5b2077e058}{uxTaskPriorityGet}}(\ \textcolor{keyword}{const}\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xTask\ );}
+
+\end{DoxyCode}
+
+
+INCLUDE\+\_\+ux\+Task\+Priority\+Get must be defined as 1 for this function to be available. See the configuration section for more information.
+
+Obtain the priority of any task.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Task} & Handle of the task to be queried. Passing a NULL handle results in the priority of the calling task being returned.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The priority of x\+Task.
+\end{DoxyReturn}
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vAFunction(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xHandle;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Create\ a\ task,\ storing\ the\ handle.}}
+\DoxyCodeLine{\ \ xTaskCreate(\ vTaskCode,\ \textcolor{stringliteral}{"{}NAME"{}},\ STACK\_SIZE,\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}},\ \mbox{\hyperlink{task_8h_a94ed0b9b3b4e8ccc859c322f18583e67}{tskIDLE\_PRIORITY}},\ \&xHandle\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ ...}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Use\ the\ handle\ to\ obtain\ the\ priority\ of\ the\ created\ task.}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ It\ was\ created\ with\ tskIDLE\_PRIORITY,\ but\ may\ have\ changed}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ it\ itself.}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{task_8h_a18d1148c845f5c4bff3b9e5b2077e058}{uxTaskPriorityGet}}(\ xHandle\ )\ !=\ \mbox{\hyperlink{task_8h_a94ed0b9b3b4e8ccc859c322f18583e67}{tskIDLE\_PRIORITY}}\ )}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ The\ task\ has\ changed\ it's\ priority.}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ ...}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Is\ our\ priority\ higher\ than\ the\ created\ task?}}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{task_8h_a18d1148c845f5c4bff3b9e5b2077e058}{uxTaskPriorityGet}}(\ xHandle\ )\ <\ \mbox{\hyperlink{task_8h_a18d1148c845f5c4bff3b9e5b2077e058}{uxTaskPriorityGet}}(\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )\ )}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Our\ priority\ (obtained\ using\ NULL\ handle)\ is\ higher.}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+task. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ \mbox{\hyperlink{task_8h_acb925b8502076e24c060cd0799178d54}{uxTaskBasePriorityGet}}(\ \textcolor{keyword}{const}\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xTask\ );}
+
+\end{DoxyCode}
+
+
+INCLUDE\+\_\+ux\+Task\+Priority\+Get and config\+USE\+\_\+\+MUTEXES must be defined as 1 for this function to be available. See the configuration section for more information.
+
+Obtain the base priority of any task.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Task} & Handle of the task to be queried. Passing a NULL handle results in the base priority of the calling task being returned.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The base priority of x\+Task. 
+\end{DoxyReturn}

@@ -1,0 +1,70 @@
+\doxysection{x\+Task\+Create\+Restricted }
+\hypertarget{group__x_task_create_restricted}{}\label{group__x_task_create_restricted}\index{xTaskCreateRestricted@{xTaskCreateRestricted}}
+task. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xTaskCreateRestricted(\ \mbox{\hyperlink{task_8h_a388dc3e95bc2a93a2841a8d1e49634f3}{TaskParameters\_t}}\ *pxTaskDefinition,\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ *pxCreatedTask\ );}
+
+\end{DoxyCode}
+
+
+Only available when config\+SUPPORT\+\_\+\+DYNAMIC\+\_\+\+ALLOCATION is set to 1.
+
+x\+Task\+Create\+Restricted() should only be used in systems that include an MPU implementation.
+
+Create a new task and add it to the list of tasks that are ready to run. The function parameters define the memory regions and associated access permissions allocated to the task.
+
+See x\+Task\+Create\+Restricted\+Static() for a version that does not use any dynamic memory allocation.
+
+
+\begin{DoxyParams}{Parameters}
+{\em px\+Task\+Definition} & Pointer to a structure that contains a member for each of the normal x\+Task\+Create() parameters (see the x\+Task\+Create() API documentation) plus an optional stack buffer and the memory region definitions.\\
+\hline
+{\em px\+Created\+Task} & Used to pass back a handle by which the created task can be referenced.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pd\+PASS if the task was successfully created and added to a ready list, otherwise an error code defined in the file \doxylink{projdefs_8h}{projdefs.\+h}
+\end{DoxyReturn}
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Create\ an\ TaskParameters\_t\ structure\ that\ defines\ the\ task\ to\ be\ created.}}
+\DoxyCodeLine{\textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{task_8h_a388dc3e95bc2a93a2841a8d1e49634f3}{TaskParameters\_t}}\ xCheckTaskParameters\ =}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ vATask,\ \ \ \ \ \textcolor{comment}{//\ pvTaskCode\ -\/\ the\ function\ that\ implements\ the\ task.}}
+\DoxyCodeLine{\ \textcolor{stringliteral}{"{}ATask"{}},\ \ \ \ \textcolor{comment}{//\ pcName\ -\/\ just\ a\ text\ name\ for\ the\ task\ to\ assist\ debugging.}}
+\DoxyCodeLine{\ 100,\ \ \ \ \ \ \ \ \textcolor{comment}{//\ uxStackDepth\ -\/\ the\ stack\ size\ DEFINED\ IN\ WORDS.}}
+\DoxyCodeLine{\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}},\ \ \ \ \ \ \ \textcolor{comment}{//\ pvParameters\ -\/\ passed\ into\ the\ task\ function\ as\ the\ function\ parameters.}}
+\DoxyCodeLine{\ (\ 1U\ |\ \mbox{\hyperlink{_free_r_t_o_s_8h_a27b7e11718b2ec5b5217e60f3b9e8aec}{portPRIVILEGE\_BIT}}\ ),\textcolor{comment}{//\ uxPriority\ -\/\ task\ priority,\ set\ the\ portPRIVILEGE\_BIT\ if\ the\ task\ should\ run\ in\ a\ privileged\ state.}}
+\DoxyCodeLine{\ cStackBuffer,\textcolor{comment}{//\ puxStackBuffer\ -\/\ the\ buffer\ to\ be\ used\ as\ the\ task\ stack.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ xRegions\ -\/\ Allocate\ up\ to\ three\ separate\ memory\ regions\ for\ access\ by}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ the\ task,\ with\ appropriate\ access\ permissions.\ \ Different\ processors\ have}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ different\ memory\ alignment\ requirements\ -\/\ refer\ to\ the\ FreeRTOS\ documentation}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ for\ full\ information.}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Base\ address\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Length\ \ Parameters}}
+\DoxyCodeLine{\ \ \ \ \ \{\ cReadWriteArray,\ \ \ \ \ \ \ \ \ \ \ \ \ \ 32,\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a5734e533fa14ffe54fcc68374f85b7f6}{portMPU\_REGION\_READ\_WRITE}}\ \},}
+\DoxyCodeLine{\ \ \ \ \ \{\ cReadOnlyArray,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 32,\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a8e5e113fc0e10d7bc0197f2c6a498ec2}{portMPU\_REGION\_READ\_ONLY}}\ \},}
+\DoxyCodeLine{\ \ \ \ \ \{\ cPrivilegedOnlyAccessArray,\ \ \ 128,\ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_aa97df55904d7519d4b749d9b51a4afd5}{portMPU\_REGION\_PRIVILEGED\_READ\_WRITE}}\ \}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{main_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xHandle;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ a\ task\ from\ the\ const\ structure\ defined\ above.\ \ The\ task\ handle}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ is\ requested\ (the\ second\ parameter\ is\ not\ NULL)\ but\ in\ this\ case\ just\ for}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ demonstration\ purposes\ as\ its\ not\ actually\ used.}}
+\DoxyCodeLine{\ xTaskCreateRestricted(\ \&xRegTest1Parameters,\ \&xHandle\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Start\ the\ scheduler.}}
+\DoxyCodeLine{\ \mbox{\hyperlink{task_8h_aaf9dca1065c60abdeb309d56ab7293cb}{vTaskStartScheduler}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Will\ only\ get\ here\ if\ there\ was\ insufficient\ memory\ to\ create\ the\ idle}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ and/or\ timer\ task.}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(\ ;;\ );}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

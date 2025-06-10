@@ -1,0 +1,119 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+Paradigm/\+Tern\+\_\+\+EE/large\+\_\+untested/port.c File Reference}
+\hypertarget{_paradigm_2_tern___e_e_2large__untested_2port_8c}{}\label{_paradigm_2_tern___e_e_2large__untested_2port_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/Paradigm/Tern\_EE/large\_untested/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/Paradigm/Tern\_EE/large\_untested/port.c}}
+{\ttfamily \#include $<$embedded.\+h$>$}\newline
+{\ttfamily \#include $<$ae.\+h$>$}\newline
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}task.\+h"{}}\newline
+{\ttfamily \#include "{}portasm.\+h"{}}\newline
+Include dependency graph for port.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_paradigm_2_tern___e_e_2large__untested_2port_8c_a667b66698ef968aa3366347de9237eb6}{port\+TIMER\+\_\+\+COMPARE}}~( uint16\+\_\+t ) ( ( \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_aa68082df879e6fc96bcb9b26513639e7}{config\+CPU\+\_\+\+CLOCK\+\_\+\+HZ}} / \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_a2f0258dd1e3b877e5bc013be54c2db6a}{config\+TICK\+\_\+\+RATE\+\_\+\+HZ}} ) / ( uint32\+\_\+t ) 4 )
+\item 
+\#define \mbox{\hyperlink{_paradigm_2_tern___e_e_2large__untested_2port_8c_a73bf8cc1167027f79abbbf9bfadc7f6e}{port\+ENABLE\+\_\+\+TIMER\+\_\+\+AND\+\_\+\+INTERRUPT}}~( uint16\+\_\+t ) 0xe001
+\item 
+\#define \mbox{\hyperlink{_paradigm_2_tern___e_e_2large__untested_2port_8c_a48ad4cb27fa77c11e4d44bb07afdfdfa}{port\+EIO\+\_\+\+REGISTER}}~0xff22
+\item 
+\#define \mbox{\hyperlink{_paradigm_2_tern___e_e_2large__untested_2port_8c_a41c305a87d25b69d2460a0731b70c576}{port\+CLEAR\+\_\+\+INTERRUPT}}~0x0008
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_paradigm_2_tern___e_e_2large__untested_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}{px\+Port\+Initialise\+Stack}} (\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}px\+Top\+Of\+Stack, \mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}} px\+Code, void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_paradigm_2_tern___e_e_2large__untested_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{x\+Port\+Start\+Scheduler}} (void)
+\item 
+void \mbox{\hyperlink{_paradigm_2_tern___e_e_2large__untested_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{v\+Port\+End\+Scheduler}} (void)
+\begin{DoxyCompactList}\small\item\em End the Free\+RTOS scheduler. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_paradigm_2_tern___e_e_2large__untested_2port_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_paradigm_2_tern___e_e_2large__untested_2port_8c_a41c305a87d25b69d2460a0731b70c576}\index{port.c@{port.c}!portCLEAR\_INTERRUPT@{portCLEAR\_INTERRUPT}}
+\index{portCLEAR\_INTERRUPT@{portCLEAR\_INTERRUPT}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portCLEAR\_INTERRUPT}{portCLEAR\_INTERRUPT}}
+{\footnotesize\ttfamily \label{_paradigm_2_tern___e_e_2large__untested_2port_8c_a41c305a87d25b69d2460a0731b70c576} 
+\#define port\+CLEAR\+\_\+\+INTERRUPT~0x0008}
+
+
+
+Definition at line \mbox{\hyperlink{_paradigm_2_tern___e_e_2large__untested_2port_8c_source_l00052}{52}} of file \mbox{\hyperlink{_paradigm_2_tern___e_e_2large__untested_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_paradigm_2_tern___e_e_2large__untested_2port_8c_a48ad4cb27fa77c11e4d44bb07afdfdfa}\index{port.c@{port.c}!portEIO\_REGISTER@{portEIO\_REGISTER}}
+\index{portEIO\_REGISTER@{portEIO\_REGISTER}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portEIO\_REGISTER}{portEIO\_REGISTER}}
+{\footnotesize\ttfamily \label{_paradigm_2_tern___e_e_2large__untested_2port_8c_a48ad4cb27fa77c11e4d44bb07afdfdfa} 
+\#define port\+EIO\+\_\+\+REGISTER~0xff22}
+
+
+
+Definition at line \mbox{\hyperlink{_paradigm_2_tern___e_e_2large__untested_2port_8c_source_l00051}{51}} of file \mbox{\hyperlink{_paradigm_2_tern___e_e_2large__untested_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_paradigm_2_tern___e_e_2large__untested_2port_8c_a73bf8cc1167027f79abbbf9bfadc7f6e}\index{port.c@{port.c}!portENABLE\_TIMER\_AND\_INTERRUPT@{portENABLE\_TIMER\_AND\_INTERRUPT}}
+\index{portENABLE\_TIMER\_AND\_INTERRUPT@{portENABLE\_TIMER\_AND\_INTERRUPT}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portENABLE\_TIMER\_AND\_INTERRUPT}{portENABLE\_TIMER\_AND\_INTERRUPT}}
+{\footnotesize\ttfamily \label{_paradigm_2_tern___e_e_2large__untested_2port_8c_a73bf8cc1167027f79abbbf9bfadc7f6e} 
+\#define port\+ENABLE\+\_\+\+TIMER\+\_\+\+AND\+\_\+\+INTERRUPT~( uint16\+\_\+t ) 0xe001}
+
+
+
+Definition at line \mbox{\hyperlink{_paradigm_2_tern___e_e_2large__untested_2port_8c_source_l00048}{48}} of file \mbox{\hyperlink{_paradigm_2_tern___e_e_2large__untested_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_paradigm_2_tern___e_e_2large__untested_2port_8c_a667b66698ef968aa3366347de9237eb6}\index{port.c@{port.c}!portTIMER\_COMPARE@{portTIMER\_COMPARE}}
+\index{portTIMER\_COMPARE@{portTIMER\_COMPARE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portTIMER\_COMPARE}{portTIMER\_COMPARE}}
+{\footnotesize\ttfamily \label{_paradigm_2_tern___e_e_2large__untested_2port_8c_a667b66698ef968aa3366347de9237eb6} 
+\#define port\+TIMER\+\_\+\+COMPARE~( uint16\+\_\+t ) ( ( \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_aa68082df879e6fc96bcb9b26513639e7}{config\+CPU\+\_\+\+CLOCK\+\_\+\+HZ}} / \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_a2f0258dd1e3b877e5bc013be54c2db6a}{config\+TICK\+\_\+\+RATE\+\_\+\+HZ}} ) / ( uint32\+\_\+t ) 4 )}
+
+
+
+Definition at line \mbox{\hyperlink{_paradigm_2_tern___e_e_2large__untested_2port_8c_source_l00045}{45}} of file \mbox{\hyperlink{_paradigm_2_tern___e_e_2large__untested_2port_8c_source}{port.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_paradigm_2_tern___e_e_2large__untested_2port_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_paradigm_2_tern___e_e_2large__untested_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}\index{port.c@{port.c}!pxPortInitialiseStack@{pxPortInitialiseStack}}
+\index{pxPortInitialiseStack@{pxPortInitialiseStack}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{pxPortInitialiseStack()}{pxPortInitialiseStack()}}
+{\footnotesize\ttfamily \label{_paradigm_2_tern___e_e_2large__untested_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} px\+Port\+Initialise\+Stack (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{px\+Top\+Of\+Stack}{, }\item[{\mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}}}]{px\+Code}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+px\+Top\+Of\+Stack = 0x11;
+
+px\+Top\+Of\+Stack = 0x22;
+
+px\+Top\+Of\+Stack = 0x33;
+
+Definition at line \mbox{\hyperlink{_paradigm_2_tern___e_e_2large__untested_2port_8c_source_l00079}{79}} of file \mbox{\hyperlink{_paradigm_2_tern___e_e_2large__untested_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_paradigm_2_tern___e_e_2large__untested_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}\index{port.c@{port.c}!vPortEndScheduler@{vPortEndScheduler}}
+\index{vPortEndScheduler@{vPortEndScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEndScheduler()}{vPortEndScheduler()}}
+{\footnotesize\ttfamily \label{_paradigm_2_tern___e_e_2large__untested_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423} 
+void v\+Port\+End\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+End the Free\+RTOS scheduler. 
+
+Not implemented on this port. 
+
+Definition at line \mbox{\hyperlink{_paradigm_2_tern___e_e_2large__untested_2port_8c_source_l00206}{206}} of file \mbox{\hyperlink{_paradigm_2_tern___e_e_2large__untested_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_paradigm_2_tern___e_e_2large__untested_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}\index{port.c@{port.c}!xPortStartScheduler@{xPortStartScheduler}}
+\index{xPortStartScheduler@{xPortStartScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortStartScheduler()}{xPortStartScheduler()}}
+{\footnotesize\ttfamily \label{_paradigm_2_tern___e_e_2large__untested_2port_8c_ade5a8c6666e7413a0355cc252029c5c6} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Start\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_paradigm_2_tern___e_e_2large__untested_2port_8c_source_l00143}{143}} of file \mbox{\hyperlink{_paradigm_2_tern___e_e_2large__untested_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 1

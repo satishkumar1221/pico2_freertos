@@ -1,0 +1,164 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+GCC/\+H8\+S2329/port.c File Reference}
+\hypertarget{_g_c_c_2_h8_s2329_2port_8c}{}\label{_g_c_c_2_h8_s2329_2port_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/H8S2329/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/H8S2329/port.c}}
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}task.\+h"{}}\newline
+Include dependency graph for port.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_a0677f77a93ea90b6bccecfc25416ca9a}{port\+INITIAL\+\_\+\+CCR}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x00 )
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_a238cfbc8ea364a52a2ea05906e3e0c53}{port\+CLEAR\+\_\+\+ON\+\_\+\+TGRA\+\_\+\+COMPARE\+\_\+\+MATCH}}~( ( uint8\+\_\+t ) 0x20 )
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_a42bd5c1e21fe1adcbec3265e69bb946f}{port\+CLOCK\+\_\+\+DIV\+\_\+64}}~( ( uint8\+\_\+t ) 0x03 )
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_a363f045d923b7d8aaa639eafb84dfd68}{port\+CLOCK\+\_\+\+DIV}}~( ( uint32\+\_\+t ) 64 )
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_afe0ea69ad567da041df8314878628868}{port\+TGRA\+\_\+\+INTERRUPT\+\_\+\+ENABLE}}~( ( uint8\+\_\+t ) 0x01 )
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_aefcc5de5ebc27ff7ba1f4f7ddb37ccef}{port\+TIMER\+\_\+\+CHANNEL}}~( ( uint8\+\_\+t ) 0x02 )
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_a9d6eac6ae680aefca228c8adab048f1e}{port\+MSTP13}}~( ( uint16\+\_\+t ) 0x2000 )
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_add01c927fb689f7ec170e42d47d27927}{v\+Port\+Yield}} (void)
+\begin{DoxyCompactList}\small\item\em Yield the CPU. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{x\+Port\+Start\+Scheduler}} (void)
+\item 
+void \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{v\+Port\+End\+Scheduler}} (void)
+\begin{DoxyCompactList}\small\item\em End the Free\+RTOS scheduler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_a502142367426395ab5c401b99204b437}{v\+Tick\+ISR}} (void)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_g_c_c_2_h8_s2329_2port_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_g_c_c_2_h8_s2329_2port_8c_a238cfbc8ea364a52a2ea05906e3e0c53}\index{port.c@{port.c}!portCLEAR\_ON\_TGRA\_COMPARE\_MATCH@{portCLEAR\_ON\_TGRA\_COMPARE\_MATCH}}
+\index{portCLEAR\_ON\_TGRA\_COMPARE\_MATCH@{portCLEAR\_ON\_TGRA\_COMPARE\_MATCH}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portCLEAR\_ON\_TGRA\_COMPARE\_MATCH}{portCLEAR\_ON\_TGRA\_COMPARE\_MATCH}}
+{\footnotesize\ttfamily \label{_g_c_c_2_h8_s2329_2port_8c_a238cfbc8ea364a52a2ea05906e3e0c53} 
+\#define port\+CLEAR\+\_\+\+ON\+\_\+\+TGRA\+\_\+\+COMPARE\+\_\+\+MATCH~( ( uint8\+\_\+t ) 0x20 )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_source_l00045}{45}} of file \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_h8_s2329_2port_8c_a363f045d923b7d8aaa639eafb84dfd68}\index{port.c@{port.c}!portCLOCK\_DIV@{portCLOCK\_DIV}}
+\index{portCLOCK\_DIV@{portCLOCK\_DIV}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portCLOCK\_DIV}{portCLOCK\_DIV}}
+{\footnotesize\ttfamily \label{_g_c_c_2_h8_s2329_2port_8c_a363f045d923b7d8aaa639eafb84dfd68} 
+\#define port\+CLOCK\+\_\+\+DIV~( ( uint32\+\_\+t ) 64 )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_source_l00047}{47}} of file \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_h8_s2329_2port_8c_a42bd5c1e21fe1adcbec3265e69bb946f}\index{port.c@{port.c}!portCLOCK\_DIV\_64@{portCLOCK\_DIV\_64}}
+\index{portCLOCK\_DIV\_64@{portCLOCK\_DIV\_64}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portCLOCK\_DIV\_64}{portCLOCK\_DIV\_64}}
+{\footnotesize\ttfamily \label{_g_c_c_2_h8_s2329_2port_8c_a42bd5c1e21fe1adcbec3265e69bb946f} 
+\#define port\+CLOCK\+\_\+\+DIV\+\_\+64~( ( uint8\+\_\+t ) 0x03 )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_source_l00046}{46}} of file \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_h8_s2329_2port_8c_a0677f77a93ea90b6bccecfc25416ca9a}\index{port.c@{port.c}!portINITIAL\_CCR@{portINITIAL\_CCR}}
+\index{portINITIAL\_CCR@{portINITIAL\_CCR}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portINITIAL\_CCR}{portINITIAL\_CCR}}
+{\footnotesize\ttfamily \label{_g_c_c_2_h8_s2329_2port_8c_a0677f77a93ea90b6bccecfc25416ca9a} 
+\#define port\+INITIAL\+\_\+\+CCR~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x00 )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_source_l00042}{42}} of file \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_h8_s2329_2port_8c_a9d6eac6ae680aefca228c8adab048f1e}\index{port.c@{port.c}!portMSTP13@{portMSTP13}}
+\index{portMSTP13@{portMSTP13}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portMSTP13}{portMSTP13}}
+{\footnotesize\ttfamily \label{_g_c_c_2_h8_s2329_2port_8c_a9d6eac6ae680aefca228c8adab048f1e} 
+\#define port\+MSTP13~( ( uint16\+\_\+t ) 0x2000 )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_source_l00050}{50}} of file \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_h8_s2329_2port_8c_afe0ea69ad567da041df8314878628868}\index{port.c@{port.c}!portTGRA\_INTERRUPT\_ENABLE@{portTGRA\_INTERRUPT\_ENABLE}}
+\index{portTGRA\_INTERRUPT\_ENABLE@{portTGRA\_INTERRUPT\_ENABLE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portTGRA\_INTERRUPT\_ENABLE}{portTGRA\_INTERRUPT\_ENABLE}}
+{\footnotesize\ttfamily \label{_g_c_c_2_h8_s2329_2port_8c_afe0ea69ad567da041df8314878628868} 
+\#define port\+TGRA\+\_\+\+INTERRUPT\+\_\+\+ENABLE~( ( uint8\+\_\+t ) 0x01 )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_source_l00048}{48}} of file \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_h8_s2329_2port_8c_aefcc5de5ebc27ff7ba1f4f7ddb37ccef}\index{port.c@{port.c}!portTIMER\_CHANNEL@{portTIMER\_CHANNEL}}
+\index{portTIMER\_CHANNEL@{portTIMER\_CHANNEL}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portTIMER\_CHANNEL}{portTIMER\_CHANNEL}}
+{\footnotesize\ttfamily \label{_g_c_c_2_h8_s2329_2port_8c_aefcc5de5ebc27ff7ba1f4f7ddb37ccef} 
+\#define port\+TIMER\+\_\+\+CHANNEL~( ( uint8\+\_\+t ) 0x02 )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_source_l00049}{49}} of file \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_source}{port.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_g_c_c_2_h8_s2329_2port_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_g_c_c_2_h8_s2329_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}\index{port.c@{port.c}!vPortEndScheduler@{vPortEndScheduler}}
+\index{vPortEndScheduler@{vPortEndScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEndScheduler()}{vPortEndScheduler()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_h8_s2329_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423} 
+void v\+Port\+End\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+End the Free\+RTOS scheduler. 
+
+Not implemented on this port. 
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_source_l00218}{218}} of file \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_h8_s2329_2port_8c_add01c927fb689f7ec170e42d47d27927}\index{port.c@{port.c}!vPortYield@{vPortYield}}
+\index{vPortYield@{vPortYield}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortYield()}{vPortYield()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_h8_s2329_2port_8c_add01c927fb689f7ec170e42d47d27927} 
+void v\+Port\+Yield (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Yield the CPU. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_source_l00060}{60}} of file \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_h8_s2329_2port_8c_a502142367426395ab5c401b99204b437}\index{port.c@{port.c}!vTickISR@{vTickISR}}
+\index{vTickISR@{vTickISR}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vTickISR()}{vTickISR()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_h8_s2329_2port_8c_a502142367426395ab5c401b99204b437} 
+void v\+Tick\+ISR (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_source_l00271}{271}} of file \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_h8_s2329_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}\index{port.c@{port.c}!xPortStartScheduler@{xPortStartScheduler}}
+\index{xPortStartScheduler@{xPortStartScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortStartScheduler()}{xPortStartScheduler()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_h8_s2329_2port_8c_ade5a8c6666e7413a0355cc252029c5c6} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Start\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_source_l00192}{192}} of file \mbox{\hyperlink{_g_c_c_2_h8_s2329_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 1

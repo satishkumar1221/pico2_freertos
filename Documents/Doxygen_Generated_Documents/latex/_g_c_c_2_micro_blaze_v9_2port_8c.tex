@@ -1,0 +1,239 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+GCC/\+Micro\+Blaze\+V9/port.c File Reference}
+\hypertarget{_g_c_c_2_micro_blaze_v9_2port_8c}{}\label{_g_c_c_2_micro_blaze_v9_2port_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/MicroBlazeV9/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/MicroBlazeV9/port.c}}
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}task.\+h"{}}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$xintc\+\_\+i.\+h$>$}\newline
+{\ttfamily \#include $<$xil\+\_\+exception.\+h$>$}\newline
+{\ttfamily \#include $<$microblaze\+\_\+exceptions\+\_\+g.\+h$>$}\newline
+{\ttfamily \#include $<$microblaze\+\_\+instructions.\+h$>$}\newline
+Include dependency graph for port.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_aaf4c6392598146ee2b2903d18c9b16dd}{port\+INITIAL\+\_\+\+NESTING\+\_\+\+VALUE}}~( 0xff )
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_a059b21a5b3a22d23d07cb9d748f2dd45}{port\+MSR\+\_\+\+IE}}~( 0x02U )
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_ada2b09e5e8732dcb5fda3aed3b25518c}{port\+MSR\+\_\+\+EE}}~( 0x100U )
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_a269fe189a2f2e945a456492c37d1169e}{port\+INITIAL\+\_\+\+FSR}}~( 0U )
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}{px\+Port\+Initialise\+Stack}} (\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}px\+Top\+Of\+Stack, \mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}} px\+Code, void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{x\+Port\+Start\+Scheduler}} (void)
+\item 
+void \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{v\+Port\+End\+Scheduler}} (void)
+\begin{DoxyCompactList}\small\item\em End the Free\+RTOS scheduler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_add01c927fb689f7ec170e42d47d27927}{v\+Port\+Yield}} (void)
+\begin{DoxyCompactList}\small\item\em Yield the CPU. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_a0471656744e861f8982a1f5397a27838}{v\+Port\+Enable\+Interrupt}} (uint8\+\_\+t uc\+Interrupt\+ID)
+\item 
+void \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_a46aef84bd9c309576be51201c6f09741}{v\+Port\+Disable\+Interrupt}} (uint8\+\_\+t uc\+Interrupt\+ID)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_a7e326747e8b11763013926ee724d5523}{x\+Port\+Install\+Interrupt\+Handler}} (uint8\+\_\+t uc\+Interrupt\+ID, XInterrupt\+Handler px\+Handler, void \texorpdfstring{$\ast$}{*}pv\+Call\+Back\+Ref)
+\item 
+void \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_ac043504001be8027aeb9dfcfbab334e6}{v\+Port\+Remove\+Interrupt\+Handler}} (uint8\+\_\+t uc\+Interrupt\+ID)
+\item 
+void \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_a1065eac33ef6a9f310236e5f51d25156}{v\+Port\+Tick\+ISR}} (void \texorpdfstring{$\ast$}{*}pv\+Unused)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+volatile \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_abf3b0e1cd9ee0a23eaf382bd87ff0744}{ux\+Critical\+Nesting}} = \mbox{\hyperlink{_g_c_c_2_micro_blaze_2port_8c_aaf4c6392598146ee2b2903d18c9b16dd}{port\+INITIAL\+\_\+\+NESTING\+\_\+\+VALUE}}
+\item 
+uint32\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_a60d3684649a523b5843b5286b5643f75}{pul\+ISRStack}}
+\item 
+volatile uint32\+\_\+t \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_a142558b17027233797220c49c71c4f1f}{ul\+Task\+Switch\+Requested}} = 0\+UL
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_g_c_c_2_micro_blaze_v9_2port_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_g_c_c_2_micro_blaze_v9_2port_8c_a269fe189a2f2e945a456492c37d1169e}\index{port.c@{port.c}!portINITIAL\_FSR@{portINITIAL\_FSR}}
+\index{portINITIAL\_FSR@{portINITIAL\_FSR}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portINITIAL\_FSR}{portINITIAL\_FSR}}
+{\footnotesize\ttfamily \label{_g_c_c_2_micro_blaze_v9_2port_8c_a269fe189a2f2e945a456492c37d1169e} 
+\#define port\+INITIAL\+\_\+\+FSR~( 0U )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source_l00061}{61}} of file \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_micro_blaze_v9_2port_8c_aaf4c6392598146ee2b2903d18c9b16dd}\index{port.c@{port.c}!portINITIAL\_NESTING\_VALUE@{portINITIAL\_NESTING\_VALUE}}
+\index{portINITIAL\_NESTING\_VALUE@{portINITIAL\_NESTING\_VALUE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portINITIAL\_NESTING\_VALUE}{portINITIAL\_NESTING\_VALUE}}
+{\footnotesize\ttfamily \label{_g_c_c_2_micro_blaze_v9_2port_8c_aaf4c6392598146ee2b2903d18c9b16dd} 
+\#define port\+INITIAL\+\_\+\+NESTING\+\_\+\+VALUE~( 0xff )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source_l00050}{50}} of file \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_micro_blaze_v9_2port_8c_ada2b09e5e8732dcb5fda3aed3b25518c}\index{port.c@{port.c}!portMSR\_EE@{portMSR\_EE}}
+\index{portMSR\_EE@{portMSR\_EE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portMSR\_EE}{portMSR\_EE}}
+{\footnotesize\ttfamily \label{_g_c_c_2_micro_blaze_v9_2port_8c_ada2b09e5e8732dcb5fda3aed3b25518c} 
+\#define port\+MSR\+\_\+\+EE~( 0x100U )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source_l00055}{55}} of file \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_micro_blaze_v9_2port_8c_a059b21a5b3a22d23d07cb9d748f2dd45}\index{port.c@{port.c}!portMSR\_IE@{portMSR\_IE}}
+\index{portMSR\_IE@{portMSR\_IE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portMSR\_IE}{portMSR\_IE}}
+{\footnotesize\ttfamily \label{_g_c_c_2_micro_blaze_v9_2port_8c_a059b21a5b3a22d23d07cb9d748f2dd45} 
+\#define port\+MSR\+\_\+\+IE~( 0x02U )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source_l00054}{54}} of file \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source}{port.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_g_c_c_2_micro_blaze_v9_2port_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_g_c_c_2_micro_blaze_v9_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}\index{port.c@{port.c}!pxPortInitialiseStack@{pxPortInitialiseStack}}
+\index{pxPortInitialiseStack@{pxPortInitialiseStack}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{pxPortInitialiseStack()}{pxPortInitialiseStack()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_micro_blaze_v9_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} px\+Port\+Initialise\+Stack (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{px\+Top\+Of\+Stack}{, }\item[{\mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}}}]{px\+Code}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source_l00122}{122}} of file \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_micro_blaze_v9_2port_8c_a46aef84bd9c309576be51201c6f09741}\index{port.c@{port.c}!vPortDisableInterrupt@{vPortDisableInterrupt}}
+\index{vPortDisableInterrupt@{vPortDisableInterrupt}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortDisableInterrupt()}{vPortDisableInterrupt()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_micro_blaze_v9_2port_8c_a46aef84bd9c309576be51201c6f09741} 
+void v\+Port\+Disable\+Interrupt (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{uc\+Interrupt\+ID}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source_l00355}{355}} of file \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_micro_blaze_v9_2port_8c_a0471656744e861f8982a1f5397a27838}\index{port.c@{port.c}!vPortEnableInterrupt@{vPortEnableInterrupt}}
+\index{vPortEnableInterrupt@{vPortEnableInterrupt}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEnableInterrupt()}{vPortEnableInterrupt()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_micro_blaze_v9_2port_8c_a0471656744e861f8982a1f5397a27838} 
+void v\+Port\+Enable\+Interrupt (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{uc\+Interrupt\+ID}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source_l00331}{331}} of file \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_micro_blaze_v9_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}\index{port.c@{port.c}!vPortEndScheduler@{vPortEndScheduler}}
+\index{vPortEndScheduler@{vPortEndScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEndScheduler()}{vPortEndScheduler()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_micro_blaze_v9_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423} 
+void v\+Port\+End\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+End the Free\+RTOS scheduler. 
+
+Not implemented on this port. 
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source_l00297}{297}} of file \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_micro_blaze_v9_2port_8c_ac043504001be8027aeb9dfcfbab334e6}\index{port.c@{port.c}!vPortRemoveInterruptHandler@{vPortRemoveInterruptHandler}}
+\index{vPortRemoveInterruptHandler@{vPortRemoveInterruptHandler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortRemoveInterruptHandler()}{vPortRemoveInterruptHandler()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_micro_blaze_v9_2port_8c_ac043504001be8027aeb9dfcfbab334e6} 
+void v\+Port\+Remove\+Interrupt\+Handler (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{uc\+Interrupt\+ID}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source_l00400}{400}} of file \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_micro_blaze_v9_2port_8c_a1065eac33ef6a9f310236e5f51d25156}\index{port.c@{port.c}!vPortTickISR@{vPortTickISR}}
+\index{vPortTickISR@{vPortTickISR}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortTickISR()}{vPortTickISR()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_micro_blaze_v9_2port_8c_a1065eac33ef6a9f310236e5f51d25156} 
+void v\+Port\+Tick\+ISR (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Unused}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source_l00447}{447}} of file \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{_g_c_c_2_micro_blaze_v9_2port_8c_add01c927fb689f7ec170e42d47d27927}\index{port.c@{port.c}!vPortYield@{vPortYield}}
+\index{vPortYield@{vPortYield}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortYield()}{vPortYield()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_micro_blaze_v9_2port_8c_add01c927fb689f7ec170e42d47d27927} 
+void v\+Port\+Yield (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Yield the CPU. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source_l00308}{308}} of file \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_micro_blaze_v9_2port_8c_a7e326747e8b11763013926ee724d5523}\index{port.c@{port.c}!xPortInstallInterruptHandler@{xPortInstallInterruptHandler}}
+\index{xPortInstallInterruptHandler@{xPortInstallInterruptHandler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortInstallInterruptHandler()}{xPortInstallInterruptHandler()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_micro_blaze_v9_2port_8c_a7e326747e8b11763013926ee724d5523} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Install\+Interrupt\+Handler (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{uc\+Interrupt\+ID}{, }\item[{XInterrupt\+Handler}]{px\+Handler}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Call\+Back\+Ref}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source_l00373}{373}} of file \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_micro_blaze_v9_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}\index{port.c@{port.c}!xPortStartScheduler@{xPortStartScheduler}}
+\index{xPortStartScheduler@{xPortStartScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortStartScheduler()}{xPortStartScheduler()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_micro_blaze_v9_2port_8c_ade5a8c6666e7413a0355cc252029c5c6} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Start\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source_l00265}{265}} of file \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-var-members}
+\Hypertarget{_g_c_c_2_micro_blaze_v9_2port_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_g_c_c_2_micro_blaze_v9_2port_8c_a60d3684649a523b5843b5286b5643f75}\index{port.c@{port.c}!pulISRStack@{pulISRStack}}
+\index{pulISRStack@{pulISRStack}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{pulISRStack}{pulISRStack}}
+{\footnotesize\ttfamily \label{_g_c_c_2_micro_blaze_v9_2port_8c_a60d3684649a523b5843b5286b5643f75} 
+uint32\+\_\+t\texorpdfstring{$\ast$}{*} pul\+ISRStack}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source_l00092}{92}} of file \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_micro_blaze_v9_2port_8c_a142558b17027233797220c49c71c4f1f}\index{port.c@{port.c}!ulTaskSwitchRequested@{ulTaskSwitchRequested}}
+\index{ulTaskSwitchRequested@{ulTaskSwitchRequested}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{ulTaskSwitchRequested}{ulTaskSwitchRequested}}
+{\footnotesize\ttfamily \label{_g_c_c_2_micro_blaze_v9_2port_8c_a142558b17027233797220c49c71c4f1f} 
+volatile uint32\+\_\+t ul\+Task\+Switch\+Requested = 0\+UL}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source_l00102}{102}} of file \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_micro_blaze_v9_2port_8c_abf3b0e1cd9ee0a23eaf382bd87ff0744}\index{port.c@{port.c}!uxCriticalNesting@{uxCriticalNesting}}
+\index{uxCriticalNesting@{uxCriticalNesting}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{uxCriticalNesting}{uxCriticalNesting}}
+{\footnotesize\ttfamily \label{_g_c_c_2_micro_blaze_v9_2port_8c_abf3b0e1cd9ee0a23eaf382bd87ff0744} 
+volatile \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} ux\+Critical\+Nesting = \mbox{\hyperlink{_g_c_c_2_micro_blaze_2port_8c_aaf4c6392598146ee2b2903d18c9b16dd}{port\+INITIAL\+\_\+\+NESTING\+\_\+\+VALUE}}}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source_l00087}{87}} of file \mbox{\hyperlink{_g_c_c_2_micro_blaze_v9_2port_8c_source}{port.\+c}}.
+

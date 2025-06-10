@@ -1,0 +1,206 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+IAR/\+ARM\+\_\+\+CM35\+P/secure/secure\+\_\+context.h File Reference}
+\hypertarget{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h}{}\label{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/IAR/ARM\_CM35P/secure/secure\_context.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/IAR/ARM\_CM35P/secure/secure\_context.h}}
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include "{}Free\+RTOSConfig.\+h"{}}\newline
+Include dependency graph for secure\+\_\+context.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_secure_context}{Secure\+Context}}
+\begin{DoxyCompactList}\small\item\em Structure to represent a secure context. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_a00b34b63c73013bf50cae797e804f0b7}{securecontext\+NO\+\_\+\+STACK}}~0x0
+\begin{DoxyCompactList}\small\item\em PSP value when no secure context is loaded. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_a22a04e7207eb68aa19af18c04adc8e3c}{securecontext\+INVALID\+\_\+\+CONTEXT\+\_\+\+ID}}~0\+UL
+\begin{DoxyCompactList}\small\item\em Invalid context ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{struct_secure_context}{Secure\+Context}} \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_aaf290b187b04214d847b38025741aadf}{Secure\+Context\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Structure to represent a secure context. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_a71a2db1852e759f5fe546abbe1a1d44b}{Secure\+Context\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Initializes the secure context management system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8h_a83fe8bdca5c412852d8ec8614215449b}{Secure\+Context\+Handle\+\_\+t}} \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_a127529333ac38338895ca5c603496a07}{Secure\+Context\+\_\+\+Allocate\+Context}} (uint32\+\_\+t ul\+Secure\+Stack\+Size, void \texorpdfstring{$\ast$}{*}pv\+Task\+Handle)
+\begin{DoxyCompactList}\small\item\em Allocates a context on the secure side. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_adde7e52206ea77d127c9d4a3b107c2a3}{Secure\+Context\+\_\+\+Free\+Context}} (\mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8h_a83fe8bdca5c412852d8ec8614215449b}{Secure\+Context\+Handle\+\_\+t}} x\+Secure\+Context\+Handle, void \texorpdfstring{$\ast$}{*}pv\+Task\+Handle)
+\begin{DoxyCompactList}\small\item\em Frees the given context. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_a46ef65c47ef65055ffa13a84912e20fa}{Secure\+Context\+\_\+\+Load\+Context}} (\mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8h_a83fe8bdca5c412852d8ec8614215449b}{Secure\+Context\+Handle\+\_\+t}} x\+Secure\+Context\+Handle, void \texorpdfstring{$\ast$}{*}pv\+Task\+Handle)
+\begin{DoxyCompactList}\small\item\em Loads the given context. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_a6a01909a9af76aa7aaf240c3bb2c9d7d}{Secure\+Context\+\_\+\+Save\+Context}} (\mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8h_a83fe8bdca5c412852d8ec8614215449b}{Secure\+Context\+Handle\+\_\+t}} x\+Secure\+Context\+Handle, void \texorpdfstring{$\ast$}{*}pv\+Task\+Handle)
+\begin{DoxyCompactList}\small\item\em Saves the given context. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_a22a04e7207eb68aa19af18c04adc8e3c}\index{secure\_context.h@{secure\_context.h}!securecontextINVALID\_CONTEXT\_ID@{securecontextINVALID\_CONTEXT\_ID}}
+\index{securecontextINVALID\_CONTEXT\_ID@{securecontextINVALID\_CONTEXT\_ID}!secure\_context.h@{secure\_context.h}}
+\doxysubsubsection{\texorpdfstring{securecontextINVALID\_CONTEXT\_ID}{securecontextINVALID\_CONTEXT\_ID}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_a22a04e7207eb68aa19af18c04adc8e3c} 
+\#define securecontext\+INVALID\+\_\+\+CONTEXT\+\_\+\+ID~0\+UL}
+
+
+
+Invalid context ID. 
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_source_l00046}{46}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_source}{secure\+\_\+context.\+h}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_a00b34b63c73013bf50cae797e804f0b7}\index{secure\_context.h@{secure\_context.h}!securecontextNO\_STACK@{securecontextNO\_STACK}}
+\index{securecontextNO\_STACK@{securecontextNO\_STACK}!secure\_context.h@{secure\_context.h}}
+\doxysubsubsection{\texorpdfstring{securecontextNO\_STACK}{securecontextNO\_STACK}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_a00b34b63c73013bf50cae797e804f0b7} 
+\#define securecontext\+NO\+\_\+\+STACK~0x0}
+
+
+
+PSP value when no secure context is loaded. 
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_source_l00041}{41}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_source}{secure\+\_\+context.\+h}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_aaf290b187b04214d847b38025741aadf}\index{secure\_context.h@{secure\_context.h}!SecureContext\_t@{SecureContext\_t}}
+\index{SecureContext\_t@{SecureContext\_t}!secure\_context.h@{secure\_context.h}}
+\doxysubsubsection{\texorpdfstring{SecureContext\_t}{SecureContext\_t}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_aaf290b187b04214d847b38025741aadf} 
+typedef struct \mbox{\hyperlink{struct_secure_context}{Secure\+Context}} \mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8h_aaf290b187b04214d847b38025741aadf}{Secure\+Context\+\_\+t}}}
+
+
+
+Structure to represent a secure context. 
+
+\begin{DoxyNote}{Note}
+Since stack grows down, puc\+Stack\+Start is the highest address while puc\+Stack\+Limit is the first address of the allocated memory. 
+\end{DoxyNote}
+
+
+\label{doc-func-members}
+\Hypertarget{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_a127529333ac38338895ca5c603496a07}\index{secure\_context.h@{secure\_context.h}!SecureContext\_AllocateContext@{SecureContext\_AllocateContext}}
+\index{SecureContext\_AllocateContext@{SecureContext\_AllocateContext}!secure\_context.h@{secure\_context.h}}
+\doxysubsubsection{\texorpdfstring{SecureContext\_AllocateContext()}{SecureContext\_AllocateContext()}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_a127529333ac38338895ca5c603496a07} 
+\mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8h_a83fe8bdca5c412852d8ec8614215449b}{Secure\+Context\+Handle\+\_\+t}} Secure\+Context\+\_\+\+Allocate\+Context (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{ul\+Secure\+Stack\+Size}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Task\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Allocates a context on the secure side. 
+
+\begin{DoxyNote}{Note}
+This function must be called in the handler mode. It is no-\/op if called in the thread mode.
+\end{DoxyNote}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em ul\+Secure\+Stack\+Size} & Size of the stack to allocate on secure side. \\
+\hline
+\mbox{\texttt{in}}  & {\em ul\+Is\+Task\+Privileged} & 1 if the calling task is privileged, 0 otherwise.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Opaque context handle if context is successfully allocated, NULL otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8c_source_l00186}{186}} of file \mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8c_source}{secure\+\_\+context.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_adde7e52206ea77d127c9d4a3b107c2a3}\index{secure\_context.h@{secure\_context.h}!SecureContext\_FreeContext@{SecureContext\_FreeContext}}
+\index{SecureContext\_FreeContext@{SecureContext\_FreeContext}!secure\_context.h@{secure\_context.h}}
+\doxysubsubsection{\texorpdfstring{SecureContext\_FreeContext()}{SecureContext\_FreeContext()}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_adde7e52206ea77d127c9d4a3b107c2a3} 
+void Secure\+Context\+\_\+\+Free\+Context (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8h_a83fe8bdca5c412852d8ec8614215449b}{Secure\+Context\+Handle\+\_\+t}}}]{x\+Secure\+Context\+Handle}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Task\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Frees the given context. 
+
+\begin{DoxyNote}{Note}
+This function must be called in the handler mode. It is no-\/op if called in the thread mode.
+\end{DoxyNote}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em x\+Secure\+Context\+Handle} & Context handle corresponding to the context to be freed. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8c_source_l00278}{278}} of file \mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8c_source}{secure\+\_\+context.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_a71a2db1852e759f5fe546abbe1a1d44b}\index{secure\_context.h@{secure\_context.h}!SecureContext\_Init@{SecureContext\_Init}}
+\index{SecureContext\_Init@{SecureContext\_Init}!secure\_context.h@{secure\_context.h}}
+\doxysubsubsection{\texorpdfstring{SecureContext\_Init()}{SecureContext\_Init()}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_a71a2db1852e759f5fe546abbe1a1d44b} 
+void Secure\+Context\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the secure context management system. 
+
+PSP is set to NULL and therefore a task must allocate and load a context before calling any secure side function in the thread mode.
+
+\begin{DoxyNote}{Note}
+This function must be called in the handler mode. It is no-\/op if called in the thread mode. 
+\end{DoxyNote}
+
+
+Definition at line \mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8c_source_l00138}{138}} of file \mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8c_source}{secure\+\_\+context.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_a46ef65c47ef65055ffa13a84912e20fa}\index{secure\_context.h@{secure\_context.h}!SecureContext\_LoadContext@{SecureContext\_LoadContext}}
+\index{SecureContext\_LoadContext@{SecureContext\_LoadContext}!secure\_context.h@{secure\_context.h}}
+\doxysubsubsection{\texorpdfstring{SecureContext\_LoadContext()}{SecureContext\_LoadContext()}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_a46ef65c47ef65055ffa13a84912e20fa} 
+void Secure\+Context\+\_\+\+Load\+Context (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8h_a83fe8bdca5c412852d8ec8614215449b}{Secure\+Context\+Handle\+\_\+t}}}]{x\+Secure\+Context\+Handle}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Task\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Loads the given context. 
+
+\begin{DoxyNote}{Note}
+This function must be called in the handler mode. It is no-\/op if called in the thread mode.
+\end{DoxyNote}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em x\+Secure\+Context\+Handle} & Context handle corresponding to the context to be loaded. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8c_source_l00310}{310}} of file \mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8c_source}{secure\+\_\+context.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_a6a01909a9af76aa7aaf240c3bb2c9d7d}\index{secure\_context.h@{secure\_context.h}!SecureContext\_SaveContext@{SecureContext\_SaveContext}}
+\index{SecureContext\_SaveContext@{SecureContext\_SaveContext}!secure\_context.h@{secure\_context.h}}
+\doxysubsubsection{\texorpdfstring{SecureContext\_SaveContext()}{SecureContext\_SaveContext()}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h_a6a01909a9af76aa7aaf240c3bb2c9d7d} 
+void Secure\+Context\+\_\+\+Save\+Context (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8h_a83fe8bdca5c412852d8ec8614215449b}{Secure\+Context\+Handle\+\_\+t}}}]{x\+Secure\+Context\+Handle}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Task\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Saves the given context. 
+
+\begin{DoxyNote}{Note}
+This function must be called in the handler mode. It is no-\/op if called in the thread mode.
+\end{DoxyNote}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em x\+Secure\+Context\+Handle} & Context handle corresponding to the context to be saved. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8c_source_l00333}{333}} of file \mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8c_source}{secure\+\_\+context.\+c}}.
+

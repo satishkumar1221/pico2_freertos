@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['securecontext_5ft_0',['SecureContext_t',['../_a_r_mv8_m_2secure_2context_2secure__context_8h.html#aaf290b187b04214d847b38025741aadf',1,'SecureContext_t:&#160;secure_context.h'],['../_g_c_c_2_a_r_m___c_m23_2secure_2secure__context_8h.html#aaf290b187b04214d847b38025741aadf',1,'SecureContext_t:&#160;secure_context.h'],['../_g_c_c_2_a_r_m___c_m33_2secure_2secure__context_8h.html#aaf290b187b04214d847b38025741aadf',1,'SecureContext_t:&#160;secure_context.h'],['../_g_c_c_2_a_r_m___c_m35_p_2secure_2secure__context_8h.html#aaf290b187b04214d847b38025741aadf',1,'SecureContext_t:&#160;secure_context.h'],['../_g_c_c_2_a_r_m___c_m55_2secure_2secure__context_8h.html#aaf290b187b04214d847b38025741aadf',1,'SecureContext_t:&#160;secure_context.h'],['../_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8h.html#aaf290b187b04214d847b38025741aadf',1,'SecureContext_t:&#160;secure_context.h'],['../_i_a_r_2_a_r_m___c_m23_2secure_2secure__context_8h.html#aaf290b187b04214d847b38025741aadf',1,'SecureContext_t:&#160;secure_context.h'],['../_i_a_r_2_a_r_m___c_m33_2secure_2secure__context_8h.html#aaf290b187b04214d847b38025741aadf',1,'SecureContext_t:&#160;secure_context.h'],['../_i_a_r_2_a_r_m___c_m35_p_2secure_2secure__context_8h.html#aaf290b187b04214d847b38025741aadf',1,'SecureContext_t:&#160;secure_context.h'],['../_i_a_r_2_a_r_m___c_m55_2secure_2secure__context_8h.html#aaf290b187b04214d847b38025741aadf',1,'SecureContext_t:&#160;secure_context.h'],['../_i_a_r_2_a_r_m___c_m85_2secure_2secure__context_8h.html#aaf290b187b04214d847b38025741aadf',1,'SecureContext_t:&#160;secure_context.h']]],
+  ['securecontexthandle_5ft_1',['SecureContextHandle_t',['../_a_r_mv8_m_2secure_2context_2secure__context_8h.html#a83fe8bdca5c412852d8ec8614215449b',1,'secure_context.h']]],
+  ['semaphoredata_5ft_2',['SemaphoreData_t',['../queue_8c.html#a8806dcfc511df585a0b4daf54a9a909a',1,'queue.c']]],
+  ['semaphorehandle_5ft_3',['SemaphoreHandle_t',['../semphr_8h.html#ad88c6df4a04beedeac782918c8a332f5',1,'semphr.h']]],
+  ['stacktype_5ft_4',['StackType_t',['../_a_r_mv8_m_2non__secure_2portmacrocommon_8h.html#a84e9a8ba132feed0b2401c1f4e2ac63c',1,'StackType_t:&#160;portmacrocommon.h'],['../_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h.html#aa73b01e0200940d619095fb74fb3030b',1,'StackType_t:&#160;portmacro.h'],['../_third_party_2_g_c_c_2_a_tmega_2portmacro_8h.html#a0653e870c10f40dbbc69a6d4227cdc4b',1,'StackType_t:&#160;portmacro.h']]],
+  ['staticeventgroup_5ft_5',['StaticEventGroup_t',['../_free_r_t_o_s_8h.html#af87e218149130753afb4a7044e5569e6',1,'FreeRTOS.h']]],
+  ['staticlist_5ft_6',['StaticList_t',['../_free_r_t_o_s_8h.html#aabf8e8548f4ffaef73c3470172c4c8de',1,'FreeRTOS.h']]],
+  ['staticlistitem_5ft_7',['StaticListItem_t',['../_free_r_t_o_s_8h.html#a1d31bc0472385a87424518da484d9e09',1,'FreeRTOS.h']]],
+  ['staticmessagebuffer_5ft_8',['StaticMessageBuffer_t',['../_free_r_t_o_s_8h.html#aebe27a051714571e9051a8e33fe40bd9',1,'FreeRTOS.h']]],
+  ['staticminilistitem_5ft_9',['StaticMiniListItem_t',['../_free_r_t_o_s_8h.html#a9097f48f4dfa56e8e01d9179462c7994',1,'FreeRTOS.h']]],
+  ['staticqueue_5ft_10',['StaticQueue_t',['../_free_r_t_o_s_8h.html#a22e8979e2849d002747c0dd4c7c37908',1,'FreeRTOS.h']]],
+  ['staticsemaphore_5ft_11',['StaticSemaphore_t',['../_free_r_t_o_s_8h.html#a5899eefbfd03bc6eb83c9accffc8975e',1,'FreeRTOS.h']]],
+  ['staticstreambuffer_5ft_12',['StaticStreamBuffer_t',['../_free_r_t_o_s_8h.html#a3675ce07f6d3e0e7130bc6ea01162d34',1,'FreeRTOS.h']]],
+  ['statictask_5ft_13',['StaticTask_t',['../_free_r_t_o_s_8h.html#af0002e4ad72220b34b95fcdf43bcd82d',1,'FreeRTOS.h']]],
+  ['statictimer_5ft_14',['StaticTimer_t',['../_free_r_t_o_s_8h.html#a85fc227d111ec21647641e0deddcccc6',1,'FreeRTOS.h']]],
+  ['streambuffercallbackfunction_5ft_15',['StreamBufferCallbackFunction_t',['../stream__buffer_8h.html#a3fa0171a4f35fbb965cb152b91a97fc5',1,'stream_buffer.h']]],
+  ['streambufferhandle_5ft_16',['StreamBufferHandle_t',['../stream__buffer_8h.html#a8b80974e2278f073412293e6580ce56f',1,'stream_buffer.h']]]
+];

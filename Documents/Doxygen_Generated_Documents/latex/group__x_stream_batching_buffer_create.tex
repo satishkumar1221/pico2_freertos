@@ -1,0 +1,60 @@
+\doxysection{x\+Stream\+Batching\+Buffer\+Create }
+\hypertarget{group__x_stream_batching_buffer_create}{}\label{group__x_stream_batching_buffer_create}\index{xStreamBatchingBufferCreate@{xStreamBatchingBufferCreate}}
+\doxylink{stream__buffer_8h}{stream\+\_\+buffer.\+h}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{stream__buffer_8h_a8b80974e2278f073412293e6580ce56f}{StreamBufferHandle\_t}}\ \mbox{\hyperlink{stream__buffer_8h_ad5102d8ba15e29862d8664b19426eabe}{xStreamBatchingBufferCreate}}(\ \textcolor{keywordtype}{size\_t}\ xBufferSizeBytes,\ \textcolor{keywordtype}{size\_t}\ xTriggerLevelBytes\ );}
+
+\end{DoxyCode}
+
+
+Creates a new stream batching buffer using dynamically allocated memory. See \doxylink{stream__buffer_8h_a25174eaf07f71c7932490c235e77c531}{x\+Stream\+Batching\+Buffer\+Create\+Static()} for a version that uses statically allocated memory (memory that is allocated at compile time).
+
+config\+SUPPORT\+\_\+\+DYNAMIC\+\_\+\+ALLOCATION must be set to 1 or left undefined in Free\+RTOSConfig.\+h for \doxylink{stream__buffer_8h_ad5102d8ba15e29862d8664b19426eabe}{x\+Stream\+Batching\+Buffer\+Create()} to be available. config\+USE\+\_\+\+STREAM\+\_\+\+BUFFERS must be set to 1 in for Free\+RTOSConfig.\+h for \doxylink{stream__buffer_8h_ad5102d8ba15e29862d8664b19426eabe}{x\+Stream\+Batching\+Buffer\+Create()} to be available.
+
+The difference between a stream buffer and a stream batching buffer is when a task performs read on a non-\/empty buffer\+:
+\begin{DoxyItemize}
+\item The task reading from a non-\/empty stream buffer returns immediately regardless of the amount of data in the buffer.
+\item The task reading from a non-\/empty steam batching buffer blocks until the amount of data in the buffer exceeds the trigger level or the block time expires.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Buffer\+Size\+Bytes} & The total number of bytes the stream batching buffer will be able to hold at any one time.\\
+\hline
+{\em x\+Trigger\+Level\+Bytes} & The number of bytes that must be in the stream batching buffer to unblock a task calling x\+Stream\+Buffer\+Receive before the block time expires.\\
+\hline
+{\em px\+Send\+Completed\+Callback} & Callback invoked when number of bytes at least equal to trigger level is sent to the stream batching buffer. If the parameter is NULL, it will use the default implementation provided by sb\+SEND\+\_\+\+COMPLETED macro. To enable the callback, config\+USE\+\_\+\+SB\+\_\+\+COMPLETED\+\_\+\+CALLBACK must be set to 1 in Free\+RTOSConfig.\+h.\\
+\hline
+{\em px\+Receive\+Completed\+Callback} & Callback invoked when more than zero bytes are read from a stream batching buffer. If the parameter is NULL, it will use the default implementation provided by sb\+RECEIVE\+\_\+\+COMPLETED macro. To enable the callback, config\+USE\+\_\+\+SB\+\_\+\+COMPLETED\+\_\+\+CALLBACK must be set to 1 in Free\+RTOSConfig.\+h.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If NULL is returned, then the stream batching buffer cannot be created because there is insufficient heap memory available for Free\+RTOS to allocate the stream batching buffer data structures and storage area. A non-\/\+NULL value being returned indicates that the stream batching buffer has been created successfully -\/ the returned value should be stored as the handle to the created stream batching buffer.
+\end{DoxyReturn}
+Example use\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vAFunction(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\mbox{\hyperlink{stream__buffer_8h_a8b80974e2278f073412293e6580ce56f}{StreamBufferHandle\_t}}\ xStreamBatchingBuffer;}
+\DoxyCodeLine{\textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ xStreamBufferSizeBytes\ =\ 100,\ xTriggerLevel\ =\ 10;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ a\ stream\ batching\ buffer\ that\ can\ hold\ 100\ bytes.\ \ The\ memory\ used}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ to\ hold\ both\ the\ stream\ batching\ buffer\ structure\ and\ the\ data\ in\ the\ stream}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ batching\ buffer\ is\ allocated\ dynamically.}}
+\DoxyCodeLine{\ xStreamBatchingBuffer\ =\ \mbox{\hyperlink{stream__buffer_8h_ad5102d8ba15e29862d8664b19426eabe}{xStreamBatchingBufferCreate}}(\ xStreamBufferSizeBytes,\ xTriggerLevel\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(\ xStreamBatchingBuffer\ ==\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ There\ was\ not\ enough\ heap\ memory\ space\ available\ to\ create\ the}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ stream\ batching\ buffer.}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ The\ stream\ batching\ buffer\ was\ created\ successfully\ and\ can\ now\ be\ used.}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

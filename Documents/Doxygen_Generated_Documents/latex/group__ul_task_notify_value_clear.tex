@@ -1,0 +1,33 @@
+\doxysection{ul\+Task\+Notify\+Value\+Clear }
+\hypertarget{group__ul_task_notify_value_clear}{}\label{group__ul_task_notify_value_clear}\index{ulTaskNotifyValueClear@{ulTaskNotifyValueClear}}
+task. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{uint32\_t\ \mbox{\hyperlink{task_8h_a2ddeedf4178bc20d8eb2addd461cdc49}{ulTaskNotifyValueClearIndexed}}(\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xTask,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxIndexToClear,\ uint32\_t\ ulBitsToClear\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{uint32\_t\ \mbox{\hyperlink{task_8h_a3b7cf88f6c77b78a01fcf4b0d624d573}{ulTaskNotifyValueClear}}(\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xTask,\ uint32\_t\ ulBitsToClear\ );}
+
+\end{DoxyCode}
+
+
+See \href{https://www.FreeRTOS.org/RTOS-task-notifications.html}{\texttt{https\+://www.\+Free\+RTOS.\+org/\+RTOS-\/task-\/notifications.\+html}} for details.
+
+config\+USE\+\_\+\+TASK\+\_\+\+NOTIFICATIONS must be undefined or defined as 1 for these functions to be available.
+
+Each task has a private array of "{}notification values"{} (or \textquotesingle{}notifications\textquotesingle{}), each of which is a 32-\/bit unsigned integer (uint32\+\_\+t). The constant config\+TASK\+\_\+\+NOTIFICATION\+\_\+\+ARRAY\+\_\+\+ENTRIES sets the number of indexes in the array, and (for backward compatibility) defaults to 1 if left undefined. Prior to Free\+RTOS V10.\+4.\+0 there was only one notification value per task.
+
+\doxylink{task_8h_a2ddeedf4178bc20d8eb2addd461cdc49}{ul\+Task\+Notify\+Value\+Clear\+Indexed()} clears the bits specified by the ul\+Bits\+To\+Clear bit mask in the notification value at array index ux\+Index\+To\+Clear of the task referenced by x\+Task.
+
+Backward compatibility information\+: Prior to Free\+RTOS V10.\+4.\+0 each task had a single "{}notification value"{}, and all task notification API functions operated on that value. Replacing the single notification value with an array of notification values necessitated a new set of API functions that could address specific notifications within the array. \doxylink{task_8h_a3b7cf88f6c77b78a01fcf4b0d624d573}{ul\+Task\+Notify\+Value\+Clear()} is the original API function, and remains backward compatible by always operating on the notification value at index 0 within the array. Calling \doxylink{task_8h_a3b7cf88f6c77b78a01fcf4b0d624d573}{ul\+Task\+Notify\+Value\+Clear()} is equivalent to calling \doxylink{task_8h_a2ddeedf4178bc20d8eb2addd461cdc49}{ul\+Task\+Notify\+Value\+Clear\+Indexed()} with the ux\+Index\+To\+Clear parameter set to 0.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Task} & The handle of the RTOS task that will have bits in one of its notification values cleared. Set x\+Task to NULL to clear bits in a notification value of the calling task. To obtain a task\textquotesingle{}s handle create the task using x\+Task\+Create() and make use of the px\+Created\+Task parameter, or create the task using x\+Task\+Create\+Static() and store the returned value, or use the task\textquotesingle{}s name in a call to x\+Task\+Get\+Handle().\\
+\hline
+{\em ux\+Index\+To\+Clear} & The index within the target task\textquotesingle{}s array of notification values in which to clear the bits. ux\+Index\+To\+Clear must be less than config\+TASK\+\_\+\+NOTIFICATION\+\_\+\+ARRAY\+\_\+\+ENTRIES. \doxylink{task_8h_a3b7cf88f6c77b78a01fcf4b0d624d573}{ul\+Task\+Notify\+Value\+Clear()} does not have this parameter and always clears bits in the notification value at index 0.\\
+\hline
+{\em ul\+Bits\+To\+Clear} & Bit mask of the bits to clear in the notification value of x\+Task. Set a bit to 1 to clear the corresponding bits in the task\textquotesingle{}s notification value. Set ul\+Bits\+To\+Clear to 0xffffffff (UINT\+\_\+\+MAX on 32-\/bit architectures) to clear the notification value to 0. Set ul\+Bits\+To\+Clear to 0 to query the task\textquotesingle{}s notification value without clearing any bits.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value of the target task\textquotesingle{}s notification value before the bits specified by ul\+Bits\+To\+Clear were cleared. 
+\end{DoxyReturn}

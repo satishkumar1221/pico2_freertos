@@ -1,0 +1,160 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+RVDS/\+ARM\+\_\+\+CM4\+\_\+\+MPU/mpu\+\_\+wrappers\+\_\+v2\+\_\+asm.c File Reference}
+\hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c}{}\label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/RVDS/ARM\_CM4\_MPU/mpu\_wrappers\_v2\_asm.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/RVDS/ARM\_CM4\_MPU/mpu\_wrappers\_v2\_asm.c}}
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}task.\+h"{}}\newline
+{\ttfamily \#include "{}queue.\+h"{}}\newline
+{\ttfamily \#include "{}timers.\+h"{}}\newline
+{\ttfamily \#include "{}event\+\_\+groups.\+h"{}}\newline
+{\ttfamily \#include "{}stream\+\_\+buffer.\+h"{}}\newline
+{\ttfamily \#include "{}mpu\+\_\+prototypes.\+h"{}}\newline
+{\ttfamily \#include "{}mpu\+\_\+syscall\+\_\+numbers.\+h"{}}\newline
+Include dependency graph for mpu\+\_\+wrappers\+\_\+v2\+\_\+asm.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_ab622d8c674f2a417a666a7ed89109e79}{MPU\+\_\+\+WRAPPERS\+\_\+\+INCLUDED\+\_\+\+FROM\+\_\+\+API\+\_\+\+FILE}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}} \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_a3b24e0327b39b868b91ff031fbdab048}{MPU\+\_\+x\+Task\+Get\+Tick\+Count}} (void)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_a46b9dfbf8afce7ac947cb5be9bf381fa}{MPU\+\_\+ux\+Task\+Get\+Number\+Of\+Tasks}} (void)
+\item 
+void \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_ace70e5eeb78a37b7d151400cf84ac11c}{MPU\+\_\+v\+Task\+Set\+Time\+Out\+State}} (\mbox{\hyperlink{task_8h_a558b407b5433bee1696535e3c4816bdf}{Time\+Out\+\_\+t}} \texorpdfstring{$\ast$}{*}const px\+Time\+Out) \mbox{\hyperlink{mpu__wrappers_8h_a89028881b88837beb0733993c8ce5f2b}{FREERTOS\+\_\+\+SYSTEM\+\_\+\+CALL}}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_a6a32c460aa7ea2dd09aaec9df8c1cf13}{MPU\+\_\+x\+Task\+Check\+For\+Time\+Out}} (\mbox{\hyperlink{task_8h_a558b407b5433bee1696535e3c4816bdf}{Time\+Out\+\_\+t}} \texorpdfstring{$\ast$}{*}const px\+Time\+Out, \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}const px\+Ticks\+To\+Wait) \mbox{\hyperlink{mpu__wrappers_8h_a89028881b88837beb0733993c8ce5f2b}{FREERTOS\+\_\+\+SYSTEM\+\_\+\+CALL}}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_a8bdf259f59261ca4aa1e558754b4aea1}{MPU\+\_\+x\+Queue\+Generic\+Send}} (\mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{Queue\+Handle\+\_\+t}} x\+Queue, const void \texorpdfstring{$\ast$}{*}const pv\+Item\+To\+Queue, \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}} x\+Ticks\+To\+Wait, const \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Copy\+Position) \mbox{\hyperlink{mpu__wrappers_8h_a89028881b88837beb0733993c8ce5f2b}{FREERTOS\+\_\+\+SYSTEM\+\_\+\+CALL}}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_a7db460ed658e169261ecca82fabf277e}{MPU\+\_\+ux\+Queue\+Messages\+Waiting}} (const \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{Queue\+Handle\+\_\+t}} x\+Queue) \mbox{\hyperlink{mpu__wrappers_8h_a89028881b88837beb0733993c8ce5f2b}{FREERTOS\+\_\+\+SYSTEM\+\_\+\+CALL}}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_a67aec1ebd939c5f98116a8ff03b2ed58}{MPU\+\_\+ux\+Queue\+Spaces\+Available}} (const \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{Queue\+Handle\+\_\+t}} x\+Queue) \mbox{\hyperlink{mpu__wrappers_8h_a89028881b88837beb0733993c8ce5f2b}{FREERTOS\+\_\+\+SYSTEM\+\_\+\+CALL}}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_ad4f20d999158d27585199f957650ceda}{MPU\+\_\+x\+Queue\+Receive}} (\mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{Queue\+Handle\+\_\+t}} x\+Queue, void \texorpdfstring{$\ast$}{*}const pv\+Buffer, \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}} x\+Ticks\+To\+Wait) \mbox{\hyperlink{mpu__wrappers_8h_a89028881b88837beb0733993c8ce5f2b}{FREERTOS\+\_\+\+SYSTEM\+\_\+\+CALL}}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_ab43f2a1eabbc923c4f7cea113c29c2a8}{MPU\+\_\+x\+Queue\+Peek}} (\mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{Queue\+Handle\+\_\+t}} x\+Queue, void \texorpdfstring{$\ast$}{*}const pv\+Buffer, \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}} x\+Ticks\+To\+Wait) \mbox{\hyperlink{mpu__wrappers_8h_a89028881b88837beb0733993c8ce5f2b}{FREERTOS\+\_\+\+SYSTEM\+\_\+\+CALL}}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_a4109a6df9e1ff8f7469cfe94b4258fe0}{MPU\+\_\+x\+Queue\+Semaphore\+Take}} (\mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{Queue\+Handle\+\_\+t}} x\+Queue, \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}} x\+Ticks\+To\+Wait) \mbox{\hyperlink{mpu__wrappers_8h_a89028881b88837beb0733993c8ce5f2b}{FREERTOS\+\_\+\+SYSTEM\+\_\+\+CALL}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_ab622d8c674f2a417a666a7ed89109e79}\index{mpu\_wrappers\_v2\_asm.c@{mpu\_wrappers\_v2\_asm.c}!MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE@{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}}
+\index{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE@{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}!mpu\_wrappers\_v2\_asm.c@{mpu\_wrappers\_v2\_asm.c}}
+\doxysubsubsection{\texorpdfstring{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_ab622d8c674f2a417a666a7ed89109e79} 
+\#define MPU\+\_\+\+WRAPPERS\+\_\+\+INCLUDED\+\_\+\+FROM\+\_\+\+API\+\_\+\+FILE}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_source_l00032}{32}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_source}{mpu\+\_\+wrappers\+\_\+v2\+\_\+asm.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_a7db460ed658e169261ecca82fabf277e}\index{mpu\_wrappers\_v2\_asm.c@{mpu\_wrappers\_v2\_asm.c}!MPU\_uxQueueMessagesWaiting@{MPU\_uxQueueMessagesWaiting}}
+\index{MPU\_uxQueueMessagesWaiting@{MPU\_uxQueueMessagesWaiting}!mpu\_wrappers\_v2\_asm.c@{mpu\_wrappers\_v2\_asm.c}}
+\doxysubsubsection{\texorpdfstring{MPU\_uxQueueMessagesWaiting()}{MPU\_uxQueueMessagesWaiting()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_a7db460ed658e169261ecca82fabf277e} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} MPU\+\_\+ux\+Queue\+Messages\+Waiting (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{Queue\+Handle\+\_\+t}}}]{x\+Queue}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_source_l00805}{805}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_source}{mpu\+\_\+wrappers\+\_\+v2\+\_\+asm.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_a67aec1ebd939c5f98116a8ff03b2ed58}\index{mpu\_wrappers\_v2\_asm.c@{mpu\_wrappers\_v2\_asm.c}!MPU\_uxQueueSpacesAvailable@{MPU\_uxQueueSpacesAvailable}}
+\index{MPU\_uxQueueSpacesAvailable@{MPU\_uxQueueSpacesAvailable}!mpu\_wrappers\_v2\_asm.c@{mpu\_wrappers\_v2\_asm.c}}
+\doxysubsubsection{\texorpdfstring{MPU\_uxQueueSpacesAvailable()}{MPU\_uxQueueSpacesAvailable()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_a67aec1ebd939c5f98116a8ff03b2ed58} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} MPU\+\_\+ux\+Queue\+Spaces\+Available (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{Queue\+Handle\+\_\+t}}}]{x\+Queue}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_source_l00824}{824}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_source}{mpu\+\_\+wrappers\+\_\+v2\+\_\+asm.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_a46b9dfbf8afce7ac947cb5be9bf381fa}\index{mpu\_wrappers\_v2\_asm.c@{mpu\_wrappers\_v2\_asm.c}!MPU\_uxTaskGetNumberOfTasks@{MPU\_uxTaskGetNumberOfTasks}}
+\index{MPU\_uxTaskGetNumberOfTasks@{MPU\_uxTaskGetNumberOfTasks}!mpu\_wrappers\_v2\_asm.c@{mpu\_wrappers\_v2\_asm.c}}
+\doxysubsubsection{\texorpdfstring{MPU\_uxTaskGetNumberOfTasks()}{MPU\_uxTaskGetNumberOfTasks()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_a46b9dfbf8afce7ac947cb5be9bf381fa} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} MPU\+\_\+ux\+Task\+Get\+Number\+Of\+Tasks (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_source_l00283}{283}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_source}{mpu\+\_\+wrappers\+\_\+v2\+\_\+asm.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_ace70e5eeb78a37b7d151400cf84ac11c}\index{mpu\_wrappers\_v2\_asm.c@{mpu\_wrappers\_v2\_asm.c}!MPU\_vTaskSetTimeOutState@{MPU\_vTaskSetTimeOutState}}
+\index{MPU\_vTaskSetTimeOutState@{MPU\_vTaskSetTimeOutState}!mpu\_wrappers\_v2\_asm.c@{mpu\_wrappers\_v2\_asm.c}}
+\doxysubsubsection{\texorpdfstring{MPU\_vTaskSetTimeOutState()}{MPU\_vTaskSetTimeOutState()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_ace70e5eeb78a37b7d151400cf84ac11c} 
+void MPU\+\_\+v\+Task\+Set\+Time\+Out\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{task_8h_a558b407b5433bee1696535e3c4816bdf}{Time\+Out\+\_\+t}} \texorpdfstring{$\ast$}{*}const}]{px\+Time\+Out}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_source_l00615}{615}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_source}{mpu\+\_\+wrappers\+\_\+v2\+\_\+asm.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_a8bdf259f59261ca4aa1e558754b4aea1}\index{mpu\_wrappers\_v2\_asm.c@{mpu\_wrappers\_v2\_asm.c}!MPU\_xQueueGenericSend@{MPU\_xQueueGenericSend}}
+\index{MPU\_xQueueGenericSend@{MPU\_xQueueGenericSend}!mpu\_wrappers\_v2\_asm.c@{mpu\_wrappers\_v2\_asm.c}}
+\doxysubsubsection{\texorpdfstring{MPU\_xQueueGenericSend()}{MPU\_xQueueGenericSend()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_a8bdf259f59261ca4aa1e558754b4aea1} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} MPU\+\_\+x\+Queue\+Generic\+Send (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{Queue\+Handle\+\_\+t}}}]{x\+Queue}{, }\item[{const void \texorpdfstring{$\ast$}{*}const}]{pv\+Item\+To\+Queue}{, }\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}}}]{x\+Ticks\+To\+Wait}{, }\item[{const \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}}}]{x\+Copy\+Position}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_source_l00783}{783}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_source}{mpu\+\_\+wrappers\+\_\+v2\+\_\+asm.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_ab43f2a1eabbc923c4f7cea113c29c2a8}\index{mpu\_wrappers\_v2\_asm.c@{mpu\_wrappers\_v2\_asm.c}!MPU\_xQueuePeek@{MPU\_xQueuePeek}}
+\index{MPU\_xQueuePeek@{MPU\_xQueuePeek}!mpu\_wrappers\_v2\_asm.c@{mpu\_wrappers\_v2\_asm.c}}
+\doxysubsubsection{\texorpdfstring{MPU\_xQueuePeek()}{MPU\_xQueuePeek()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_ab43f2a1eabbc923c4f7cea113c29c2a8} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} MPU\+\_\+x\+Queue\+Peek (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{Queue\+Handle\+\_\+t}}}]{x\+Queue}{, }\item[{void \texorpdfstring{$\ast$}{*}const}]{pv\+Buffer}{, }\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}}}]{x\+Ticks\+To\+Wait}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_source_l00868}{868}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_source}{mpu\+\_\+wrappers\+\_\+v2\+\_\+asm.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_ad4f20d999158d27585199f957650ceda}\index{mpu\_wrappers\_v2\_asm.c@{mpu\_wrappers\_v2\_asm.c}!MPU\_xQueueReceive@{MPU\_xQueueReceive}}
+\index{MPU\_xQueueReceive@{MPU\_xQueueReceive}!mpu\_wrappers\_v2\_asm.c@{mpu\_wrappers\_v2\_asm.c}}
+\doxysubsubsection{\texorpdfstring{MPU\_xQueueReceive()}{MPU\_xQueueReceive()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_ad4f20d999158d27585199f957650ceda} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} MPU\+\_\+x\+Queue\+Receive (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{Queue\+Handle\+\_\+t}}}]{x\+Queue}{, }\item[{void \texorpdfstring{$\ast$}{*}const}]{pv\+Buffer}{, }\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}}}]{x\+Ticks\+To\+Wait}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_source_l00845}{845}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_source}{mpu\+\_\+wrappers\+\_\+v2\+\_\+asm.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_a4109a6df9e1ff8f7469cfe94b4258fe0}\index{mpu\_wrappers\_v2\_asm.c@{mpu\_wrappers\_v2\_asm.c}!MPU\_xQueueSemaphoreTake@{MPU\_xQueueSemaphoreTake}}
+\index{MPU\_xQueueSemaphoreTake@{MPU\_xQueueSemaphoreTake}!mpu\_wrappers\_v2\_asm.c@{mpu\_wrappers\_v2\_asm.c}}
+\doxysubsubsection{\texorpdfstring{MPU\_xQueueSemaphoreTake()}{MPU\_xQueueSemaphoreTake()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_a4109a6df9e1ff8f7469cfe94b4258fe0} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} MPU\+\_\+x\+Queue\+Semaphore\+Take (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{Queue\+Handle\+\_\+t}}}]{x\+Queue}{, }\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}}}]{x\+Ticks\+To\+Wait}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_source_l00890}{890}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_source}{mpu\+\_\+wrappers\+\_\+v2\+\_\+asm.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_a6a32c460aa7ea2dd09aaec9df8c1cf13}\index{mpu\_wrappers\_v2\_asm.c@{mpu\_wrappers\_v2\_asm.c}!MPU\_xTaskCheckForTimeOut@{MPU\_xTaskCheckForTimeOut}}
+\index{MPU\_xTaskCheckForTimeOut@{MPU\_xTaskCheckForTimeOut}!mpu\_wrappers\_v2\_asm.c@{mpu\_wrappers\_v2\_asm.c}}
+\doxysubsubsection{\texorpdfstring{MPU\_xTaskCheckForTimeOut()}{MPU\_xTaskCheckForTimeOut()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_a6a32c460aa7ea2dd09aaec9df8c1cf13} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} MPU\+\_\+x\+Task\+Check\+For\+Time\+Out (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{task_8h_a558b407b5433bee1696535e3c4816bdf}{Time\+Out\+\_\+t}} \texorpdfstring{$\ast$}{*}const}]{px\+Time\+Out}{, }\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}const}]{px\+Ticks\+To\+Wait}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_source_l00635}{635}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_source}{mpu\+\_\+wrappers\+\_\+v2\+\_\+asm.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_a3b24e0327b39b868b91ff031fbdab048}\index{mpu\_wrappers\_v2\_asm.c@{mpu\_wrappers\_v2\_asm.c}!MPU\_xTaskGetTickCount@{MPU\_xTaskGetTickCount}}
+\index{MPU\_xTaskGetTickCount@{MPU\_xTaskGetTickCount}!mpu\_wrappers\_v2\_asm.c@{mpu\_wrappers\_v2\_asm.c}}
+\doxysubsubsection{\texorpdfstring{MPU\_xTaskGetTickCount()}{MPU\_xTaskGetTickCount()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_a3b24e0327b39b868b91ff031fbdab048} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}} MPU\+\_\+x\+Task\+Get\+Tick\+Count (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_source_l00264}{264}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2mpu__wrappers__v2__asm_8c_source}{mpu\+\_\+wrappers\+\_\+v2\+\_\+asm.\+c}}.
+

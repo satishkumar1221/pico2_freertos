@@ -1,0 +1,310 @@
+\doxysection{port.\+c}
+\hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source}{}\label{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/IAR/ARM\_CA5\_No\_GIC/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/IAR/ARM\_CA5\_No\_GIC/port.c}}
+\mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00029}00029\ \textcolor{comment}{/*\ IAR\ includes.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00030}00030\ \textcolor{preprocessor}{\#include\ <intrinsics.h>}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00032}00032\ \textcolor{comment}{/*\ Scheduler\ includes.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00033}00033\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_free_r_t_o_s_8h}{FreeRTOS.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00034}00034\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{task_8h}{task.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00036}00036\ \textcolor{preprocessor}{\#if\ configUSE\_PORT\_OPTIMISED\_TASK\_SELECTION\ ==\ 1}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00037}00037\ \ \ \ \ \textcolor{comment}{/*\ Check\ the\ configuration.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00038}00038\ \textcolor{preprocessor}{\ \ \ \ \#if\ (\ configMAX\_PRIORITIES\ >\ 32\ )}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00039}00039\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#error\ configUSE\_PORT\_OPTIMISED\_TASK\_SELECTION\ can\ only\ be\ set\ to\ 1\ when\ configMAX\_PRIORITIES\ is\ less\ than\ or\ equal\ to\ 32.\ \ It\ is\ very\ rare\ that\ a\ system\ requires\ more\ than\ 10\ to\ 15\ difference\ priorities\ as\ tasks\ that\ share\ a\ priority\ will\ time\ slice.}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00040}00040\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00041}00041\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ configUSE\_PORT\_OPTIMISED\_TASK\_SELECTION\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00043}00043\ \textcolor{preprocessor}{\#ifndef\ configSETUP\_TICK\_INTERRUPT}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00044}00044\ \textcolor{preprocessor}{\ \ \ \ \#error\ configSETUP\_TICK\_INTERRUPT()\ must\ be\ defined\ in\ FreeRTOSConfig.h\ to\ call\ the\ function\ that\ sets\ up\ the\ tick\ interrupt.\ \ A\ default\ that\ uses\ the\ PIT\ is\ provided\ in\ the\ official\ demo\ application.}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00045}00045\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00047}00047\ \textcolor{preprocessor}{\#ifndef\ configCLEAR\_TICK\_INTERRUPT}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00048}00048\ \textcolor{preprocessor}{\ \ \ \ \#error\ configCLEAR\_TICK\_INTERRUPT\ must\ be\ defined\ in\ FreeRTOSConfig.h\ to\ clear\ which\ ever\ interrupt\ was\ used\ to\ generate\ the\ tick\ interrupt.\ \ A\ default\ that\ uses\ the\ PIT\ is\ provided\ in\ the\ official\ demo\ application.}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00049}00049\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00051}00051\ \textcolor{comment}{/*\ A\ critical\ section\ is\ exited\ when\ the\ critical\ section\ nesting\ count\ reaches}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00052}00052\ \textcolor{comment}{\ *\ this\ value.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00053}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_ab7c7cbbda4fb9a253c7e5086071db162}{00053}}\ \textcolor{preprocessor}{\#define\ portNO\_CRITICAL\_NESTING\ \ \ \ \ \ \ \ \ \ (\ (\ uint32\_t\ )\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00055}00055\ \textcolor{comment}{/*\ Tasks\ are\ not\ created\ with\ a\ floating\ point\ context,\ but\ can\ be\ given\ a}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00056}00056\ \textcolor{comment}{\ *\ floating\ point\ context\ after\ they\ have\ been\ created.\ \ A\ variable\ is\ stored\ as}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00057}00057\ \textcolor{comment}{\ *\ part\ of\ the\ tasks\ context\ that\ holds\ portNO\_FLOATING\_POINT\_CONTEXT\ if\ the\ task}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00058}00058\ \textcolor{comment}{\ *\ does\ not\ have\ an\ FPU\ context,\ or\ any\ other\ value\ if\ the\ task\ does\ have\ an\ FPU}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00059}00059\ \textcolor{comment}{\ *\ context.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00060}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_a20b80621f4d4ec9522bd510f89641cf3}{00060}}\ \textcolor{preprocessor}{\#define\ portNO\_FLOATING\_POINT\_CONTEXT\ \ \ \ (\ (\ StackType\_t\ )\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00062}00062\ \textcolor{comment}{/*\ Constants\ required\ to\ setup\ the\ initial\ task\ context.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00063}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_a153b1b0b2476d5fea865a32e6d27027d}{00063}}\ \textcolor{preprocessor}{\#define\ portINITIAL\_SPSR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ (\ StackType\_t\ )\ 0x1f\ )\ }\textcolor{comment}{/*\ System\ mode,\ ARM\ mode,\ interrupts\ enabled.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00064}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_a156ba74bc35da2293a2482ab4195183b}{00064}}\ \textcolor{preprocessor}{\#define\ portTHUMB\_MODE\_BIT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ (\ StackType\_t\ )\ 0x20\ )}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00065}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_adbfdd867a19042b41457005b761fe7ee}{00065}}\ \textcolor{preprocessor}{\#define\ portTHUMB\_MODE\_ADDRESS\ \ \ \ \ \ \ \ \ \ \ (\ 0x01UL\ )}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00067}00067\ \textcolor{comment}{/*\ Masks\ all\ bits\ in\ the\ APSR\ other\ than\ the\ mode\ bits.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00068}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_a22f68e4b19d3c26b3cf77a143b8359d6}{00068}}\ \textcolor{preprocessor}{\#define\ portAPSR\_MODE\_BITS\_MASK\ \ \ \ \ \ \ \ \ \ (\ 0x1F\ )}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00070}00070\ \textcolor{comment}{/*\ The\ value\ of\ the\ mode\ bits\ in\ the\ APSR\ when\ the\ CPU\ is\ executing\ in\ user}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00071}00071\ \textcolor{comment}{\ *\ mode.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00072}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_af61c327cb0579039d84e213f28406965}{00072}}\ \textcolor{preprocessor}{\#define\ portAPSR\_USER\_MODE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x10\ )}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00074}00074\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00076}00076\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00077}00077\ \textcolor{comment}{\ *\ Starts\ the\ first\ task\ executing.\ \ This\ function\ is\ necessarily\ written\ in}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00078}00078\ \textcolor{comment}{\ *\ assembly\ code\ so\ is\ implemented\ in\ portASM.s.}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00079}00079\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00080}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_a222aec9e4494ebf3fdbda864b5cb3a4b}{00080}}\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_a222aec9e4494ebf3fdbda864b5cb3a4b}{vPortRestoreTaskContext}}(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00082}00082\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00083}00083\ \textcolor{comment}{\ *\ Used\ to\ catch\ tasks\ that\ attempt\ to\ return\ from\ their\ implementing\ function.}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00084}00084\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00085}00085\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a813e8227aedfc6bd83c66c4a9b8e4f41}{prvTaskExitError}}(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00087}00087\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00089}00089\ \textcolor{comment}{/*\ A\ variable\ is\ used\ to\ keep\ track\ of\ the\ critical\ section\ nesting.\ \ This}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00090}00090\ \textcolor{comment}{\ *\ variable\ has\ to\ be\ stored\ as\ part\ of\ the\ task\ context\ and\ must\ be\ initialised\ to}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00091}00091\ \textcolor{comment}{\ *\ a\ non\ zero\ value\ to\ ensure\ interrupts\ don't\ inadvertently\ become\ unmasked\ before}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00092}00092\ \textcolor{comment}{\ *\ the\ scheduler\ starts.\ \ As\ it\ is\ stored\ as\ part\ of\ the\ task\ context\ it\ will}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00093}00093\ \textcolor{comment}{\ *\ automatically\ be\ set\ to\ 0\ when\ the\ first\ task\ is\ started.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00094}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_a4e719b187cba9cb244aeb611aca513f6}{00094}}\ \textcolor{keyword}{volatile}\ uint32\_t\ \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_abd5c4f2fdb773b389a89cf1bb14f22c8}{ulCriticalNesting}}\ =\ 9999UL;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00096}00096\ \textcolor{comment}{/*\ Saved\ as\ part\ of\ the\ task\ context.\ \ If\ ulPortTaskHasFPUContext\ is\ non-\/zero}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00097}00097\ \textcolor{comment}{\ *\ then\ a\ floating\ point\ context\ must\ be\ saved\ and\ restored\ for\ the\ task.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00098}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_ae4a55da8ab678a0e134b887e1ed4833c}{00098}}\ uint32\_t\ \mbox{\hyperlink{_g_c_c_2_a_r_m___c_a9_2port_8c_afab45f3043d66e5177f6f6a6d820ad85}{ulPortTaskHasFPUContext}}\ =\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00100}00100\ \textcolor{comment}{/*\ Set\ to\ 1\ to\ pend\ a\ context\ switch\ from\ an\ ISR.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00101}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_a422bbb3ce640108f9e2f9fe3b0455e25}{00101}}\ uint32\_t\ \mbox{\hyperlink{_g_c_c_2_a_r_m___c_a9_2port_8c_af7379f3a7e701dee1645676d390894cd}{ulPortYieldRequired}}\ =\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00103}00103\ \textcolor{comment}{/*\ Counts\ the\ interrupt\ nesting\ depth.\ \ A\ context\ switch\ is\ only\ performed\ if}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00104}00104\ \textcolor{comment}{\ *\ if\ the\ nesting\ depth\ is\ 0.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00105}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_a0c0a4141463b0f10bb8c7b583b9f6fd2}{00105}}\ uint32\_t\ \mbox{\hyperlink{_g_c_c_2_a_r_m___c_a9_2port_8c_a40868ecf19f715525b20ccca1933c03e}{ulPortInterruptNesting}}\ =\ 0UL;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00108}00108\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00110}00110\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00111}00111\ \textcolor{comment}{\ *\ See\ header\ file\ for\ description.}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00112}00112\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00113}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}{00113}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_aaa2085423d917cf1707f4770de3354e2}{pxPortInitialiseStack}}(\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *\ pxTopOfStack,}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{TaskFunction\_t}}\ pxCode,}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *\ pvParameters\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00116}00116\ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00117}00117\ \ \ \ \ \textcolor{comment}{/*\ Setup\ the\ initial\ stack\ of\ the\ task.\ \ The\ stack\ is\ set\ exactly\ as}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00118}00118\ \textcolor{comment}{\ \ \ \ \ *\ expected\ by\ the\ portRESTORE\_CONTEXT()\ macro.}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00119}00119\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00120}00120\ \textcolor{comment}{\ \ \ \ \ *\ The\ fist\ real\ value\ on\ the\ stack\ is\ the\ status\ register,\ which\ is\ set\ for}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00121}00121\ \textcolor{comment}{\ \ \ \ \ *\ system\ mode,\ with\ interrupts\ enabled.\ \ A\ few\ NULLs\ are\ added\ first\ to\ ensure}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00122}00122\ \textcolor{comment}{\ \ \ \ \ *\ GDB\ does\ not\ try\ decoding\ a\ non-\/existent\ return\ address.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00123}00123\ \ \ \ \ *pxTopOfStack\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00124}00124\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00125}00125\ \ \ \ \ *pxTopOfStack\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00126}00126\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00127}00127\ \ \ \ \ *pxTopOfStack\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00128}00128\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00129}00129\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a153b1b0b2476d5fea865a32e6d27027d}{portINITIAL\_SPSR}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00131}00131\ \ \ \ \ \textcolor{keywordflow}{if}(\ (\ (\ uint32\_t\ )\ pxCode\ \&\ \mbox{\hyperlink{_g_c_c_2_a_r_m___c_a9_2port_8c_adbfdd867a19042b41457005b761fe7ee}{portTHUMB\_MODE\_ADDRESS}}\ )\ !=\ 0x00UL\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00132}00132\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00133}00133\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ The\ task\ will\ start\ in\ THUMB\ mode.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00134}00134\ \ \ \ \ \ \ \ \ *pxTopOfStack\ |=\ \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a156ba74bc35da2293a2482ab4195183b}{portTHUMB\_MODE\_BIT}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00135}00135\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00137}00137\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00139}00139\ \ \ \ \ \textcolor{comment}{/*\ Next\ the\ return\ address,\ which\ in\ this\ case\ is\ the\ start\ of\ the\ task.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00140}00140\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ pxCode;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00141}00141\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00143}00143\ \ \ \ \ \textcolor{comment}{/*\ Next\ all\ the\ registers\ other\ than\ the\ stack\ pointer.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00144}00144\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ prvTaskExitError;\ \textcolor{comment}{/*\ R14\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00145}00145\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00146}00146\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x12121212;\ \ \ \ \ \ \ \textcolor{comment}{/*\ R12\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00147}00147\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00148}00148\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x11111111;\ \ \ \ \ \ \ \textcolor{comment}{/*\ R11\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00149}00149\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00150}00150\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x10101010;\ \ \ \ \ \ \ \textcolor{comment}{/*\ R10\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00151}00151\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00152}00152\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x09090909;\ \ \ \ \ \ \ \textcolor{comment}{/*\ R9\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00153}00153\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00154}00154\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x08080808;\ \ \ \ \ \ \ \textcolor{comment}{/*\ R8\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00155}00155\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00156}00156\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x07070707;\ \ \ \ \ \ \ \textcolor{comment}{/*\ R7\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00157}00157\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00158}00158\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x06060606;\ \ \ \ \ \ \ \textcolor{comment}{/*\ R6\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00159}00159\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00160}00160\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x05050505;\ \ \ \ \ \ \ \textcolor{comment}{/*\ R5\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00161}00161\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00162}00162\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x04040404;\ \ \ \ \ \ \ \textcolor{comment}{/*\ R4\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00163}00163\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00164}00164\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x03030303;\ \ \ \ \ \ \ \textcolor{comment}{/*\ R3\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00165}00165\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00166}00166\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x02020202;\ \ \ \ \ \ \ \textcolor{comment}{/*\ R2\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00167}00167\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00168}00168\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x01010101;\ \ \ \ \ \ \ \textcolor{comment}{/*\ R1\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00169}00169\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00170}00170\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ pvParameters;\ \ \ \ \ \textcolor{comment}{/*\ R0\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00171}00171\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00173}00173\ \ \ \ \ \textcolor{comment}{/*\ The\ task\ will\ start\ with\ a\ critical\ nesting\ count\ of\ 0\ as\ interrupts\ are}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00174}00174\ \textcolor{comment}{\ \ \ \ \ *\ enabled.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00175}00175\ \ \ \ \ *pxTopOfStack\ =\ \mbox{\hyperlink{_a_r_m7___a_t91_f_r40008_2port_i_s_r_8c_ab7c7cbbda4fb9a253c7e5086071db162}{portNO\_CRITICAL\_NESTING}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00176}00176\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00177}00177\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00178}00178\ \ \ \ \ \textcolor{comment}{/*\ The\ task\ will\ start\ without\ a\ floating\ point\ context.\ \ A\ task\ that\ uses}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00179}00179\ \textcolor{comment}{\ \ \ \ \ *\ the\ floating\ point\ hardware\ must\ call\ vPortTaskUsesFPU()\ before\ executing}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00180}00180\ \textcolor{comment}{\ \ \ \ \ *\ any\ floating\ point\ instructions.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00181}00181\ \ \ \ \ *pxTopOfStack\ =\ \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_a20b80621f4d4ec9522bd510f89641cf3}{portNO\_FLOATING\_POINT\_CONTEXT}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00183}00183\ \ \ \ \ \textcolor{keywordflow}{return}\ pxTopOfStack;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00184}00184\ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00185}00185\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00187}00187\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a813e8227aedfc6bd83c66c4a9b8e4f41}{prvTaskExitError}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00188}00188\ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00189}00189\ \ \ \ \ \textcolor{comment}{/*\ A\ function\ that\ implements\ a\ task\ must\ not\ exit\ or\ attempt\ to\ return\ to}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00190}00190\ \textcolor{comment}{\ \ \ \ \ *\ its\ caller\ as\ there\ is\ nothing\ to\ return\ to.\ \ If\ a\ task\ wants\ to\ exit\ it}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00191}00191\ \textcolor{comment}{\ \ \ \ \ *\ should\ instead\ call\ vTaskDelete(\ NULL\ ).}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00192}00192\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00193}00193\ \textcolor{comment}{\ \ \ \ \ *\ Artificially\ force\ an\ assert()\ to\ be\ triggered\ if\ configASSERT()\ is}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00194}00194\ \textcolor{comment}{\ \ \ \ \ *\ defined,\ then\ stop\ here\ so\ application\ writers\ can\ catch\ the\ error.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00195}00195\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ \mbox{\hyperlink{_g_c_c_2_a_r_m___c_a9_2port_8c_a40868ecf19f715525b20ccca1933c03e}{ulPortInterruptNesting}}\ ==\ \string~0UL\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00196}00196\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portable_2_g_c_c_2_a_r_m___c_m23_2portmacro_8h_a6e3d10ee1a0734a647ca192523c2cfc1}{portDISABLE\_INTERRUPTS}}();}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00198}00198\ \ \ \ \ \textcolor{keywordflow}{for}(\ ;\ ;\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00199}00199\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00200}00200\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00201}00201\ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00202}00202\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00204}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{00204}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{xPortStartScheduler}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00205}00205\ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00206}00206\ \ \ \ \ uint32\_t\ ulAPSR;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00207}00207\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00208}00208\ \ \ \ \ \textcolor{comment}{/*\ Only\ continue\ if\ the\ CPU\ is\ not\ in\ User\ mode.\ \ The\ CPU\ must\ be\ in\ a}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00209}00209\ \textcolor{comment}{\ \ \ \ \ *\ Privileged\ mode\ for\ the\ scheduler\ to\ start.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00210}00210\ \ \ \ \ \_\_asm\ \textcolor{keyword}{volatile}\ (\ \textcolor{stringliteral}{"{}MRS\ \%0,\ APSR"{}}\ :\ \textcolor{stringliteral}{"{}=r"{}}\ (\ ulAPSR\ )\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00212}00212\ \ \ \ \ ulAPSR\ \&=\ \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_a22f68e4b19d3c26b3cf77a143b8359d6}{portAPSR\_MODE\_BITS\_MASK}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00213}00213\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ ulAPSR\ !=\ \mbox{\hyperlink{_g_c_c_2_a_r_m___c_a9_2port_8c_af61c327cb0579039d84e213f28406965}{portAPSR\_USER\_MODE}}\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00215}00215\ \ \ \ \ \textcolor{keywordflow}{if}(\ ulAPSR\ !=\ \mbox{\hyperlink{_g_c_c_2_a_r_m___c_a9_2port_8c_af61c327cb0579039d84e213f28406965}{portAPSR\_USER\_MODE}}\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00216}00216\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00217}00217\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Start\ the\ timer\ that\ generates\ the\ tick\ ISR.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00218}00218\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_g_c_c_2_r_x100_2port_8c_a316888897c1314ce850ff136a2bc7d82}{configSETUP\_TICK\_INTERRUPT}}();}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00219}00219\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_a222aec9e4494ebf3fdbda864b5cb3a4b}{vPortRestoreTaskContext}}();}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00220}00220\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00222}00222\ \ \ \ \ \textcolor{comment}{/*\ Will\ only\ get\ here\ if\ vTaskStartScheduler()\ was\ called\ with\ the\ CPU\ in}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00223}00223\ \textcolor{comment}{\ \ \ \ \ *\ a\ non-\/privileged\ mode\ or\ the\ binary\ point\ register\ was\ not\ set\ to\ its\ lowest}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00224}00224\ \textcolor{comment}{\ \ \ \ \ *\ possible\ value.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00225}00225\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00226}00226\ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00227}00227\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00228}00228\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00229}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{00229}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{vPortEndScheduler}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00230}00230\ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00231}00231\ \ \ \ \ \textcolor{comment}{/*\ Not\ implemented\ in\ ports\ where\ there\ is\ nothing\ to\ return\ to.}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00232}00232\ \textcolor{comment}{\ \ \ \ \ *\ Artificially\ force\ an\ assert.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00233}00233\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_abd5c4f2fdb773b389a89cf1bb14f22c8}{ulCriticalNesting}}\ ==\ 1000UL\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00234}00234\ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00235}00235\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00237}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_a2ed3554a3de09a3bd09d396ee081ab69}{00237}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_a2ed3554a3de09a3bd09d396ee081ab69}{vPortEnterCritical}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00238}00238\ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00239}00239\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portable_2_g_c_c_2_a_r_m___c_m23_2portmacro_8h_a6e3d10ee1a0734a647ca192523c2cfc1}{portDISABLE\_INTERRUPTS}}();}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00240}00240\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00241}00241\ \ \ \ \ \textcolor{comment}{/*\ Now\ that\ interrupts\ are\ disabled,\ ulCriticalNesting\ can\ be\ accessed}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00242}00242\ \textcolor{comment}{\ \ \ \ \ *\ directly.\ \ Increment\ ulCriticalNesting\ to\ keep\ a\ count\ of\ how\ many\ times}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00243}00243\ \textcolor{comment}{\ \ \ \ \ *\ portENTER\_CRITICAL()\ has\ been\ called.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00244}00244\ \ \ \ \ \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_abd5c4f2fdb773b389a89cf1bb14f22c8}{ulCriticalNesting}}++;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00245}00245\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00246}00246\ \ \ \ \ \textcolor{comment}{/*\ This\ is\ not\ the\ interrupt\ safe\ version\ of\ the\ enter\ critical\ function\ so}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00247}00247\ \textcolor{comment}{\ \ \ \ \ *\ assert()\ if\ it\ is\ being\ called\ from\ an\ interrupt\ context.\ \ Only\ API}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00248}00248\ \textcolor{comment}{\ \ \ \ \ *\ functions\ that\ end\ in\ "{}FromISR"{}\ can\ be\ used\ in\ an\ interrupt.\ \ Only\ assert\ if}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00249}00249\ \textcolor{comment}{\ \ \ \ \ *\ the\ critical\ nesting\ count\ is\ 1\ to\ protect\ against\ recursive\ calls\ if\ the}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00250}00250\ \textcolor{comment}{\ \ \ \ \ *\ assert\ function\ also\ uses\ a\ critical\ section.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00251}00251\ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_abd5c4f2fdb773b389a89cf1bb14f22c8}{ulCriticalNesting}}\ ==\ 1\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00252}00252\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00253}00253\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ \mbox{\hyperlink{_g_c_c_2_a_r_m___c_a9_2port_8c_a40868ecf19f715525b20ccca1933c03e}{ulPortInterruptNesting}}\ ==\ 0\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00254}00254\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00255}00255\ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00256}00256\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00257}00257\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00258}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_aed20ada05b957181a0de042802a82a5b}{00258}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_aed20ada05b957181a0de042802a82a5b}{vPortExitCritical}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00259}00259\ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00260}00260\ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_abd5c4f2fdb773b389a89cf1bb14f22c8}{ulCriticalNesting}}\ >\ \mbox{\hyperlink{_a_r_m7___a_t91_f_r40008_2port_i_s_r_8c_ab7c7cbbda4fb9a253c7e5086071db162}{portNO\_CRITICAL\_NESTING}}\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00261}00261\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00262}00262\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Decrement\ the\ nesting\ count\ as\ the\ critical\ section\ is\ being}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00263}00263\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ exited.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00264}00264\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_abd5c4f2fdb773b389a89cf1bb14f22c8}{ulCriticalNesting}}-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00265}00265\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00266}00266\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ If\ the\ nesting\ level\ has\ reached\ zero\ then\ all\ interrupt}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00267}00267\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ priorities\ must\ be\ re-\/enabled.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00268}00268\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_abd5c4f2fdb773b389a89cf1bb14f22c8}{ulCriticalNesting}}\ ==\ \mbox{\hyperlink{_a_r_m7___a_t91_f_r40008_2port_i_s_r_8c_ab7c7cbbda4fb9a253c7e5086071db162}{portNO\_CRITICAL\_NESTING}}\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00269}00269\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Critical\ nesting\ has\ reached\ zero\ so\ all\ interrupt\ priorities}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00271}00271\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ should\ be\ unmasked.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00272}00272\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portable_2_g_c_c_2_a_r_m___c_m23_2portmacro_8h_abc47e85a6befbb47961ad5ee7aa57173}{portENABLE\_INTERRUPTS}}();}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00273}00273\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00274}00274\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00275}00275\ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00276}00276\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00277}00277\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00278}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_a3853f6eea7b62957ada2e0feba299037}{00278}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_a3853f6eea7b62957ada2e0feba299037}{FreeRTOS\_Tick\_Handler}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00279}00279\ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00280}00280\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portable_2_g_c_c_2_a_r_m___c_m23_2portmacro_8h_a6e3d10ee1a0734a647ca192523c2cfc1}{portDISABLE\_INTERRUPTS}}();}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00281}00281\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00282}00282\ \ \ \ \ \textcolor{comment}{/*\ Increment\ the\ RTOS\ tick.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00283}00283\ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{task_8h_a978e25460ac35706f9ad30b46d9403d8}{xTaskIncrementTick}}()\ !=\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}}\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00284}00284\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00285}00285\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_g_c_c_2_a_r_m___c_a9_2port_8c_af7379f3a7e701dee1645676d390894cd}{ulPortYieldRequired}}\ =\ \mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00286}00286\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00287}00287\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00288}00288\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portable_2_g_c_c_2_a_r_m___c_m23_2portmacro_8h_abc47e85a6befbb47961ad5ee7aa57173}{portENABLE\_INTERRUPTS}}();}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00289}00289\ \ \ \ \ \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_a3fa0e1f577a34f688d80f58d51d937f2}{configCLEAR\_TICK\_INTERRUPT}}();}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00290}00290\ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00291}00291\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00292}00292\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00293}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_a4c83c3bee8f08f0a7247571845b56d65}{00293}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_a4c83c3bee8f08f0a7247571845b56d65}{vPortTaskUsesFPU}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00294}00294\ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00295}00295\ \ \ \ \ uint32\_t\ ulInitialFPSCR\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00296}00296\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00297}00297\ \ \ \ \ \textcolor{comment}{/*\ A\ task\ is\ registering\ the\ fact\ that\ it\ needs\ an\ FPU\ context.\ \ Set\ the}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00298}00298\ \textcolor{comment}{\ \ \ \ \ *\ FPU\ flag\ (which\ is\ saved\ as\ part\ of\ the\ task\ context).\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00299}00299\ \ \ \ \ \mbox{\hyperlink{_g_c_c_2_a_r_m___c_a9_2port_8c_afab45f3043d66e5177f6f6a6d820ad85}{ulPortTaskHasFPUContext}}\ =\ \mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00300}00300\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00301}00301\ \ \ \ \ \textcolor{comment}{/*\ Initialise\ the\ floating\ point\ status\ register.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00302}00302\ \ \ \ \ \_\_asm(\ \textcolor{stringliteral}{"{}FMXR\ \ \ \ FPSCR,\ \%0"{}}\ ::\textcolor{stringliteral}{"{}r"{}}\ (\ ulInitialFPSCR\ )\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00303}00303\ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2port_8c_source_l00304}00304\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+
+\end{DoxyCode}

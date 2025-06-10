@@ -1,0 +1,114 @@
+\doxysection{wait\+\_\+for\+\_\+event.\+c}
+\hypertarget{wait__for__event_8c_source}{}\label{wait__for__event_8c_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/Posix/utils/wait\_for\_event.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/Posix/utils/wait\_for\_event.c}}
+\mbox{\hyperlink{wait__for__event_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00029}00029\ \textcolor{preprocessor}{\#include\ <pthread.h>}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00030}00030\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00031}00031\ \textcolor{preprocessor}{\#include\ <errno.h>}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00033}00033\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{wait__for__event_8h}{wait\_for\_event.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00035}\mbox{\hyperlink{structevent}{00035}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structevent}{event}}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00036}00036\ \{}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00037}\mbox{\hyperlink{structevent_a2f6413c912a397ad2ca600e012f97a52}{00037}}\ \ \ \ \ pthread\_mutex\_t\ \mbox{\hyperlink{structevent_a2f6413c912a397ad2ca600e012f97a52}{mutex}};}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00038}\mbox{\hyperlink{structevent_ade6197c565083764ad188de47a92d590}{00038}}\ \ \ \ \ pthread\_cond\_t\ \mbox{\hyperlink{structevent_ade6197c565083764ad188de47a92d590}{cond}};}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00039}\mbox{\hyperlink{structevent_add27fbbf1d4a5911a94a5cad433a8e7f}{00039}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structevent_add27fbbf1d4a5911a94a5cad433a8e7f}{event\_triggered}};}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00040}00040\ \};}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00042}\mbox{\hyperlink{wait__for__event_8c_ae3a74d1f24366ee5a3c4b2d186f151e4}{00042}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structevent}{event}}\ *\ \mbox{\hyperlink{wait__for__event_8c_ae3a74d1f24366ee5a3c4b2d186f151e4}{event\_create}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00043}00043\ \{}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00044}00044\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structevent}{event}}\ *\ ev\ =\ malloc(\ \textcolor{keyword}{sizeof}(\ \textcolor{keyword}{struct}\ \mbox{\hyperlink{structevent}{event}}\ )\ );}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00046}00046\ \ \ \ \ \textcolor{keywordflow}{if}(\ ev\ !=\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00047}00047\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00048}00048\ \ \ \ \ \ \ \ \ ev-\/>\mbox{\hyperlink{structevent_add27fbbf1d4a5911a94a5cad433a8e7f}{event\_triggered}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00049}00049\ \ \ \ \ \ \ \ \ pthread\_mutex\_init(\ \&ev-\/>\mbox{\hyperlink{structevent_a2f6413c912a397ad2ca600e012f97a52}{mutex}},\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ );}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00050}00050\ \ \ \ \ \ \ \ \ pthread\_cond\_init(\ \&ev-\/>\mbox{\hyperlink{structevent_ade6197c565083764ad188de47a92d590}{cond}},\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ );}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00051}00051\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00053}00053\ \ \ \ \ \textcolor{keywordflow}{return}\ ev;}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00054}00054\ \}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00056}\mbox{\hyperlink{wait__for__event_8c_a4a47e53de0a0bdb9be69b95628828cd9}{00056}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{wait__for__event_8c_a4a47e53de0a0bdb9be69b95628828cd9}{event\_delete}}(\ \textcolor{keyword}{struct}\ \mbox{\hyperlink{structevent}{event}}\ *\ ev\ )}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00057}00057\ \{}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00058}00058\ \ \ \ \ pthread\_mutex\_destroy(\ \&ev-\/>\mbox{\hyperlink{structevent_a2f6413c912a397ad2ca600e012f97a52}{mutex}}\ );}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00059}00059\ \ \ \ \ pthread\_cond\_destroy(\ \&ev-\/>\mbox{\hyperlink{structevent_ade6197c565083764ad188de47a92d590}{cond}}\ );}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00060}00060\ \ \ \ \ free(\ ev\ );}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00061}00061\ \}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00063}\mbox{\hyperlink{wait__for__event_8c_a913ef59916275e6d1b46782f543514d9}{00063}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{wait__for__event_8c_a913ef59916275e6d1b46782f543514d9}{event\_wait}}(\ \textcolor{keyword}{struct}\ \mbox{\hyperlink{structevent}{event}}\ *\ ev\ )}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00064}00064\ \{}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00065}00065\ \ \ \ \ pthread\_mutex\_lock(\ \&ev-\/>\mbox{\hyperlink{structevent_a2f6413c912a397ad2ca600e012f97a52}{mutex}}\ );}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00067}00067\ \ \ \ \ \textcolor{keywordflow}{while}(\ ev-\/>\mbox{\hyperlink{structevent_add27fbbf1d4a5911a94a5cad433a8e7f}{event\_triggered}}\ ==\ \textcolor{keyword}{false}\ )}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00068}00068\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00069}00069\ \ \ \ \ \ \ \ \ pthread\_cond\_wait(\ \&ev-\/>\mbox{\hyperlink{structevent_ade6197c565083764ad188de47a92d590}{cond}},\ \&ev-\/>\mbox{\hyperlink{structevent_a2f6413c912a397ad2ca600e012f97a52}{mutex}}\ );}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00070}00070\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00072}00072\ \ \ \ \ ev-\/>\mbox{\hyperlink{structevent_add27fbbf1d4a5911a94a5cad433a8e7f}{event\_triggered}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00073}00073\ \ \ \ \ pthread\_mutex\_unlock(\ \&ev-\/>\mbox{\hyperlink{structevent_a2f6413c912a397ad2ca600e012f97a52}{mutex}}\ );}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00074}00074\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00075}00075\ \}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00076}\mbox{\hyperlink{wait__for__event_8c_af49357008d87712f5635d6481ad36545}{00076}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{wait__for__event_8c_af49357008d87712f5635d6481ad36545}{event\_wait\_timed}}(\ \textcolor{keyword}{struct}\ \mbox{\hyperlink{structevent}{event}}\ *\ ev,}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ time\_t\ ms\ )}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00078}00078\ \{}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00079}00079\ \ \ \ \ \textcolor{keyword}{struct\ }timespec\ ts;}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00080}00080\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_ac252abdd57e002f8fa2085164a5b42b5}{ret}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00082}00082\ \ \ \ \ clock\_gettime(\ CLOCK\_REALTIME,\ \&ts\ );}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00083}00083\ \ \ \ \ ts.tv\_sec\ +=\ ms\ /\ 1000;}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00084}00084\ \ \ \ \ ts.tv\_nsec\ +=\ (\ (\ ms\ \%\ 1000\ )\ *\ 1000000\ );}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00085}00085\ \ \ \ \ pthread\_mutex\_lock(\ \&ev-\/>\mbox{\hyperlink{structevent_a2f6413c912a397ad2ca600e012f97a52}{mutex}}\ );}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00087}00087\ \ \ \ \ \textcolor{keywordflow}{while}(\ (\ ev-\/>\mbox{\hyperlink{structevent_add27fbbf1d4a5911a94a5cad433a8e7f}{event\_triggered}}\ ==\ \textcolor{keyword}{false}\ )\ \&\&\ (\ \mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_ac252abdd57e002f8fa2085164a5b42b5}{ret}}\ ==\ 0\ )\ )}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00088}00088\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00089}00089\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_ac252abdd57e002f8fa2085164a5b42b5}{ret}}\ =\ pthread\_cond\_timedwait(\ \&ev-\/>\mbox{\hyperlink{structevent_ade6197c565083764ad188de47a92d590}{cond}},\ \&ev-\/>\mbox{\hyperlink{structevent_a2f6413c912a397ad2ca600e012f97a52}{mutex}},\ \&ts\ );}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00091}00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ (\ \mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_ac252abdd57e002f8fa2085164a5b42b5}{ret}}\ ==\ -\/1\ )\ \&\&\ (\ errno\ ==\ ETIMEDOUT\ )\ )}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00092}00092\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00094}00094\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00095}00095\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00097}00097\ \ \ \ \ ev-\/>\mbox{\hyperlink{structevent_add27fbbf1d4a5911a94a5cad433a8e7f}{event\_triggered}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00098}00098\ \ \ \ \ pthread\_mutex\_unlock(\ \&ev-\/>\mbox{\hyperlink{structevent_a2f6413c912a397ad2ca600e012f97a52}{mutex}}\ );}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00099}00099\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00100}00100\ \}}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00102}\mbox{\hyperlink{wait__for__event_8c_aff17cff73df8230c562038d0ca4af0e8}{00102}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{wait__for__event_8c_aff17cff73df8230c562038d0ca4af0e8}{event\_signal}}(\ \textcolor{keyword}{struct}\ \mbox{\hyperlink{structevent}{event}}\ *\ ev\ )}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00103}00103\ \{}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00104}00104\ \ \ \ \ pthread\_mutex\_lock(\ \&ev-\/>\mbox{\hyperlink{structevent_a2f6413c912a397ad2ca600e012f97a52}{mutex}}\ );}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00105}00105\ \ \ \ \ ev-\/>\mbox{\hyperlink{structevent_add27fbbf1d4a5911a94a5cad433a8e7f}{event\_triggered}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00106}00106\ \ \ \ \ pthread\_cond\_signal(\ \&ev-\/>\mbox{\hyperlink{structevent_ade6197c565083764ad188de47a92d590}{cond}}\ );}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00107}00107\ \ \ \ \ pthread\_mutex\_unlock(\ \&ev-\/>\mbox{\hyperlink{structevent_a2f6413c912a397ad2ca600e012f97a52}{mutex}}\ );}
+\DoxyCodeLine{\Hypertarget{wait__for__event_8c_source_l00108}00108\ \}}
+
+\end{DoxyCode}

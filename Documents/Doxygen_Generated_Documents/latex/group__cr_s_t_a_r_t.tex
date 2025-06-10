@@ -1,0 +1,65 @@
+\doxysection{cr\+START }
+\hypertarget{group__cr_s_t_a_r_t}{}\label{group__cr_s_t_a_r_t}\index{crSTART@{crSTART}}
+croutine. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{croutine_8h_a19a57a201a325e8af1207ed68c4aedde}{crSTART}}(\ \mbox{\hyperlink{croutine_8h_a33b9d058688c92258155b5756d9936dd}{CoRoutineHandle\_t}}\ xHandle\ );}
+
+\end{DoxyCode}
+
+
+This macro MUST always be called at the start of a co-\/routine function.
+
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Co-\/routine\ to\ be\ created.}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vACoRoutine(\ \mbox{\hyperlink{croutine_8h_a33b9d058688c92258155b5756d9936dd}{CoRoutineHandle\_t}}\ xHandle,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxIndex\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{//\ Variables\ in\ co-\/routines\ must\ be\ declared\ static\ if\ they\ must\ maintain\ value\ across\ a\ blocking\ call.}}
+\DoxyCodeLine{\textcolor{keyword}{static}\ int32\_t\ ulAVariable;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Must\ start\ every\ co-\/routine\ with\ a\ call\ to\ crSTART();}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{croutine_8h_a19a57a201a325e8af1207ed68c4aedde}{crSTART}}(\ xHandle\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\ ;;\ )}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Co-\/routine\ functionality\ goes\ here.}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Must\ end\ every\ co-\/routine\ with\ a\ call\ to\ crEND();}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{croutine_8h_ae6038cc976689b50000475ebfc4e2f23}{crEND}}();}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+croutine. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{croutine_8h_ae6038cc976689b50000475ebfc4e2f23}{crEND}}();}
+
+\end{DoxyCode}
+
+
+This macro MUST always be called at the end of a co-\/routine function.
+
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Co-\/routine\ to\ be\ created.}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vACoRoutine(\ \mbox{\hyperlink{croutine_8h_a33b9d058688c92258155b5756d9936dd}{CoRoutineHandle\_t}}\ xHandle,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxIndex\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{//\ Variables\ in\ co-\/routines\ must\ be\ declared\ static\ if\ they\ must\ maintain\ value\ across\ a\ blocking\ call.}}
+\DoxyCodeLine{\textcolor{keyword}{static}\ int32\_t\ ulAVariable;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Must\ start\ every\ co-\/routine\ with\ a\ call\ to\ crSTART();}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{croutine_8h_a19a57a201a325e8af1207ed68c4aedde}{crSTART}}(\ xHandle\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\ ;;\ )}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Co-\/routine\ functionality\ goes\ here.}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Must\ end\ every\ co-\/routine\ with\ a\ call\ to\ crEND();}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{croutine_8h_ae6038cc976689b50000475ebfc4e2f23}{crEND}}();}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

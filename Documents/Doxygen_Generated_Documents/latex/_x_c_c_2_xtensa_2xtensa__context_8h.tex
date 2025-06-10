@@ -1,0 +1,157 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+Third\+Party/\+XCC/\+Xtensa/xtensa\+\_\+context.h File Reference}
+\hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h}{}\label{_x_c_c_2_xtensa_2xtensa__context_8h}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/XCC/Xtensa/xtensa\_context.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/XCC/Xtensa/xtensa\_context.h}}
+{\ttfamily \#include $<$xtensa/config/tie.\+h$>$}\newline
+{\ttfamily \#include $<$xtensa/corebits.\+h$>$}\newline
+{\ttfamily \#include $<$xtensa/config/system.\+h$>$}\newline
+Include dependency graph for xtensa\+\_\+context.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a34977a14c7dd347c6f3cd51a1bab93bc}{ALIGNUP}}(n,  val)
+\item 
+\#define \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_aac9ce07ee697606d0040f8b668e3a7f3}{STRUCT\+\_\+\+BEGIN}}~typedef struct \{
+\item 
+\#define \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}{STRUCT\+\_\+\+FIELD}}(ctype,  size,  asname,  name)
+\item 
+\#define \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a64bcea9bd5ce5ceaa0a08cf76a7d7cd6}{STRUCT\+\_\+\+AFIELD}}(ctype,  size,  asname,  name,  n)
+\item 
+\#define \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a7bd44c97a7dd92814fd2b5454d1594d7}{STRUCT\+\_\+\+END}}(sname)
+\item 
+\#define \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a270455c6d63dcff991ee0c0089484c86}{XT\+\_\+\+STK\+\_\+\+NEXT1}}~sizeof(Xt\+Exc\+Frame)
+\item 
+\#define \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_adc636554ae24cba637d300bab053c1b9}{XT\+\_\+\+STK\+\_\+\+NEXT2}}~\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a270455c6d63dcff991ee0c0089484c86}{XT\+\_\+\+STK\+\_\+\+NEXT1}}
+\item 
+\#define \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_aca91c7a44a40c0fc4e57b0534afa7f55}{XT\+\_\+\+STK\+\_\+\+FRMSZ}}~(\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a34977a14c7dd347c6f3cd51a1bab93bc}{ALIGNUP}}(0x10, \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_adc636554ae24cba637d300bab053c1b9}{XT\+\_\+\+STK\+\_\+\+NEXT2}}) + 0x20)
+\item 
+\#define \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a86f695f35df55abe30f3e3d7ac926526}{XT\+\_\+\+SOL\+\_\+\+FRMSZ}}~\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a34977a14c7dd347c6f3cd51a1bab93bc}{ALIGNUP}}(0x10, Xt\+Sol\+Frame\+Size)
+\item 
+\#define \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_ad73af7f50fc61a294a619bcad6ab20d4}{XT\+\_\+\+CP\+\_\+\+SIZE}}~0
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_a34977a14c7dd347c6f3cd51a1bab93bc}\index{xtensa\_context.h@{xtensa\_context.h}!ALIGNUP@{ALIGNUP}}
+\index{ALIGNUP@{ALIGNUP}!xtensa\_context.h@{xtensa\_context.h}}
+\doxysubsubsection{\texorpdfstring{ALIGNUP}{ALIGNUP}}
+{\footnotesize\ttfamily \label{_x_c_c_2_xtensa_2xtensa__context_8h_a34977a14c7dd347c6f3cd51a1bab93bc} 
+\#define ALIGNUP(\begin{DoxyParamCaption}\item[{}]{n}{, }\item[{}]{val}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(((val)\ +\ (n)-\/1)\ \&\ -\/(n))}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00056}{56}} of file \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_source}{xtensa\+\_\+context.\+h}}.
+
+\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_a64bcea9bd5ce5ceaa0a08cf76a7d7cd6}\index{xtensa\_context.h@{xtensa\_context.h}!STRUCT\_AFIELD@{STRUCT\_AFIELD}}
+\index{STRUCT\_AFIELD@{STRUCT\_AFIELD}!xtensa\_context.h@{xtensa\_context.h}}
+\doxysubsubsection{\texorpdfstring{STRUCT\_AFIELD}{STRUCT\_AFIELD}}
+{\footnotesize\ttfamily \label{_x_c_c_2_xtensa_2xtensa__context_8h_a64bcea9bd5ce5ceaa0a08cf76a7d7cd6} 
+\#define STRUCT\+\_\+\+AFIELD(\begin{DoxyParamCaption}\item[{}]{ctype}{, }\item[{}]{size}{, }\item[{}]{asname}{, }\item[{}]{name}{, }\item[{}]{n}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ctype\ \ \ name[n];}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00075}{75}} of file \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_source}{xtensa\+\_\+context.\+h}}.
+
+\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_aac9ce07ee697606d0040f8b668e3a7f3}\index{xtensa\_context.h@{xtensa\_context.h}!STRUCT\_BEGIN@{STRUCT\_BEGIN}}
+\index{STRUCT\_BEGIN@{STRUCT\_BEGIN}!xtensa\_context.h@{xtensa\_context.h}}
+\doxysubsubsection{\texorpdfstring{STRUCT\_BEGIN}{STRUCT\_BEGIN}}
+{\footnotesize\ttfamily \label{_x_c_c_2_xtensa_2xtensa__context_8h_aac9ce07ee697606d0040f8b668e3a7f3} 
+\#define STRUCT\+\_\+\+BEGIN~typedef struct \{}
+
+
+
+Definition at line \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00073}{73}} of file \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_source}{xtensa\+\_\+context.\+h}}.
+
+\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_a7bd44c97a7dd92814fd2b5454d1594d7}\index{xtensa\_context.h@{xtensa\_context.h}!STRUCT\_END@{STRUCT\_END}}
+\index{STRUCT\_END@{STRUCT\_END}!xtensa\_context.h@{xtensa\_context.h}}
+\doxysubsubsection{\texorpdfstring{STRUCT\_END}{STRUCT\_END}}
+{\footnotesize\ttfamily \label{_x_c_c_2_xtensa_2xtensa__context_8h_a7bd44c97a7dd92814fd2b5454d1594d7} 
+\#define STRUCT\+\_\+\+END(\begin{DoxyParamCaption}\item[{}]{sname}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\}\ sname;}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00076}{76}} of file \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_source}{xtensa\+\_\+context.\+h}}.
+
+\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4}\index{xtensa\_context.h@{xtensa\_context.h}!STRUCT\_FIELD@{STRUCT\_FIELD}}
+\index{STRUCT\_FIELD@{STRUCT\_FIELD}!xtensa\_context.h@{xtensa\_context.h}}
+\doxysubsubsection{\texorpdfstring{STRUCT\_FIELD}{STRUCT\_FIELD}}
+{\footnotesize\ttfamily \label{_x_c_c_2_xtensa_2xtensa__context_8h_a655eeff2115421e2bdbf2cd120eb64e4} 
+\#define STRUCT\+\_\+\+FIELD(\begin{DoxyParamCaption}\item[{}]{ctype}{, }\item[{}]{size}{, }\item[{}]{asname}{, }\item[{}]{name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ctype\ \ \ name;}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00074}{74}} of file \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_source}{xtensa\+\_\+context.\+h}}.
+
+\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_ad73af7f50fc61a294a619bcad6ab20d4}\index{xtensa\_context.h@{xtensa\_context.h}!XT\_CP\_SIZE@{XT\_CP\_SIZE}}
+\index{XT\_CP\_SIZE@{XT\_CP\_SIZE}!xtensa\_context.h@{xtensa\_context.h}}
+\doxysubsubsection{\texorpdfstring{XT\_CP\_SIZE}{XT\_CP\_SIZE}}
+{\footnotesize\ttfamily \label{_x_c_c_2_xtensa_2xtensa__context_8h_ad73af7f50fc61a294a619bcad6ab20d4} 
+\#define XT\+\_\+\+CP\+\_\+\+SIZE~0}
+
+
+
+Definition at line \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00308}{308}} of file \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_source}{xtensa\+\_\+context.\+h}}.
+
+\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_a86f695f35df55abe30f3e3d7ac926526}\index{xtensa\_context.h@{xtensa\_context.h}!XT\_SOL\_FRMSZ@{XT\_SOL\_FRMSZ}}
+\index{XT\_SOL\_FRMSZ@{XT\_SOL\_FRMSZ}!xtensa\_context.h@{xtensa\_context.h}}
+\doxysubsubsection{\texorpdfstring{XT\_SOL\_FRMSZ}{XT\_SOL\_FRMSZ}}
+{\footnotesize\ttfamily \label{_x_c_c_2_xtensa_2xtensa__context_8h_a86f695f35df55abe30f3e3d7ac926526} 
+\#define XT\+\_\+\+SOL\+\_\+\+FRMSZ~\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a34977a14c7dd347c6f3cd51a1bab93bc}{ALIGNUP}}(0x10, Xt\+Sol\+Frame\+Size)}
+
+
+
+Definition at line \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00222}{222}} of file \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_source}{xtensa\+\_\+context.\+h}}.
+
+\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_aca91c7a44a40c0fc4e57b0534afa7f55}\index{xtensa\_context.h@{xtensa\_context.h}!XT\_STK\_FRMSZ@{XT\_STK\_FRMSZ}}
+\index{XT\_STK\_FRMSZ@{XT\_STK\_FRMSZ}!xtensa\_context.h@{xtensa\_context.h}}
+\doxysubsubsection{\texorpdfstring{XT\_STK\_FRMSZ}{XT\_STK\_FRMSZ}}
+{\footnotesize\ttfamily \label{_x_c_c_2_xtensa_2xtensa__context_8h_aca91c7a44a40c0fc4e57b0534afa7f55} 
+\#define XT\+\_\+\+STK\+\_\+\+FRMSZ~(\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a34977a14c7dd347c6f3cd51a1bab93bc}{ALIGNUP}}(0x10, \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_adc636554ae24cba637d300bab053c1b9}{XT\+\_\+\+STK\+\_\+\+NEXT2}}) + 0x20)}
+
+
+
+Definition at line \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00173}{173}} of file \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_source}{xtensa\+\_\+context.\+h}}.
+
+\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_a270455c6d63dcff991ee0c0089484c86}\index{xtensa\_context.h@{xtensa\_context.h}!XT\_STK\_NEXT1@{XT\_STK\_NEXT1}}
+\index{XT\_STK\_NEXT1@{XT\_STK\_NEXT1}!xtensa\_context.h@{xtensa\_context.h}}
+\doxysubsubsection{\texorpdfstring{XT\_STK\_NEXT1}{XT\_STK\_NEXT1}}
+{\footnotesize\ttfamily \label{_x_c_c_2_xtensa_2xtensa__context_8h_a270455c6d63dcff991ee0c0089484c86} 
+\#define XT\+\_\+\+STK\+\_\+\+NEXT1~sizeof(Xt\+Exc\+Frame)}
+
+
+
+Definition at line \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00147}{147}} of file \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_source}{xtensa\+\_\+context.\+h}}.
+
+\Hypertarget{_x_c_c_2_xtensa_2xtensa__context_8h_adc636554ae24cba637d300bab053c1b9}\index{xtensa\_context.h@{xtensa\_context.h}!XT\_STK\_NEXT2@{XT\_STK\_NEXT2}}
+\index{XT\_STK\_NEXT2@{XT\_STK\_NEXT2}!xtensa\_context.h@{xtensa\_context.h}}
+\doxysubsubsection{\texorpdfstring{XT\_STK\_NEXT2}{XT\_STK\_NEXT2}}
+{\footnotesize\ttfamily \label{_x_c_c_2_xtensa_2xtensa__context_8h_adc636554ae24cba637d300bab053c1b9} 
+\#define XT\+\_\+\+STK\+\_\+\+NEXT2~\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_a270455c6d63dcff991ee0c0089484c86}{XT\+\_\+\+STK\+\_\+\+NEXT1}}}
+
+
+
+Definition at line \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_source_l00163}{163}} of file \mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__context_8h_source}{xtensa\+\_\+context.\+h}}.
+

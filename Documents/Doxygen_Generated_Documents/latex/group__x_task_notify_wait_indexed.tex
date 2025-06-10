@@ -1,0 +1,47 @@
+\doxysection{x\+Task\+Notify\+Wait\+Indexed }
+\hypertarget{group__x_task_notify_wait_indexed}{}\label{group__x_task_notify_wait_indexed}\index{xTaskNotifyWaitIndexed@{xTaskNotifyWaitIndexed}}
+task. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{task_8h_a5bcd5a5b7d7c41dd782a38093be1b7c9}{xTaskNotifyWaitIndexed}}(\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxIndexToWaitOn,\ uint32\_t\ ulBitsToClearOnEntry,\ uint32\_t\ ulBitsToClearOnExit,\ uint32\_t\ *pulNotificationValue,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xTicksToWait\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{task_8h_a212928744c3d5e0ccc56f1324a3c26f3}{xTaskNotifyWait}}(\ uint32\_t\ ulBitsToClearOnEntry,\ uint32\_t\ ulBitsToClearOnExit,\ uint32\_t\ *pulNotificationValue,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xTicksToWait\ );}
+
+\end{DoxyCode}
+
+
+Waits for a direct to task notification to be pending at a given index within an array of direct to task notifications.
+
+See \href{https://www.FreeRTOS.org/RTOS-task-notifications.html}{\texttt{https\+://www.\+Free\+RTOS.\+org/\+RTOS-\/task-\/notifications.\+html}} for details.
+
+config\+USE\+\_\+\+TASK\+\_\+\+NOTIFICATIONS must be undefined or defined as 1 for this function to be available.
+
+Each task has a private array of "{}notification values"{} (or \textquotesingle{}notifications\textquotesingle{}), each of which is a 32-\/bit unsigned integer (uint32\+\_\+t). The constant config\+TASK\+\_\+\+NOTIFICATION\+\_\+\+ARRAY\+\_\+\+ENTRIES sets the number of indexes in the array, and (for backward compatibility) defaults to 1 if left undefined. Prior to Free\+RTOS V10.\+4.\+0 there was only one notification value per task.
+
+Events can be sent to a task using an intermediary object. Examples of such objects are queues, semaphores, mutexes and event groups. Task notifications are a method of sending an event directly to a task without the need for such an intermediary object.
+
+A notification sent to a task can optionally perform an action, such as update, overwrite or increment one of the task\textquotesingle{}s notification values. In that way task notifications can be used to send data to a task, or be used as light weight and fast binary or counting semaphores.
+
+A notification sent to a task will remain pending until it is cleared by the task calling \doxylink{task_8h_a5bcd5a5b7d7c41dd782a38093be1b7c9}{x\+Task\+Notify\+Wait\+Indexed()} or \doxylink{task_8h_a4f42982425f3b106e1a9f19b41ba4124}{ul\+Task\+Notify\+Take\+Indexed()} (or their un-\/indexed equivalents). If the task was already in the Blocked state to wait for a notification when the notification arrives then the task will automatically be removed from the Blocked state (unblocked) and the notification cleared.
+
+A task can use \doxylink{task_8h_a5bcd5a5b7d7c41dd782a38093be1b7c9}{x\+Task\+Notify\+Wait\+Indexed()} to \mbox{[}optionally\mbox{]} block to wait for a notification to be pending, or \doxylink{task_8h_a4f42982425f3b106e1a9f19b41ba4124}{ul\+Task\+Notify\+Take\+Indexed()} to \mbox{[}optionally\mbox{]} block to wait for a notification value to have a non-\/zero value. The task does not consume any CPU time while it is in the Blocked state.
+
+{\bfseries{NOTE}} Each notification within the array operates independently -\/ a task can only block on one notification within the array at a time and will not be unblocked by a notification sent to any other array index.
+
+Backward compatibility information\+: Prior to Free\+RTOS V10.\+4.\+0 each task had a single "{}notification value"{}, and all task notification API functions operated on that value. Replacing the single notification value with an array of notification values necessitated a new set of API functions that could address specific notifications within the array. \doxylink{task_8h_a212928744c3d5e0ccc56f1324a3c26f3}{x\+Task\+Notify\+Wait()} is the original API function, and remains backward compatible by always operating on the notification value at index 0 in the array. Calling \doxylink{task_8h_a212928744c3d5e0ccc56f1324a3c26f3}{x\+Task\+Notify\+Wait()} is equivalent to calling \doxylink{task_8h_a5bcd5a5b7d7c41dd782a38093be1b7c9}{x\+Task\+Notify\+Wait\+Indexed()} with the ux\+Index\+To\+Wait\+On parameter set to 0.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ux\+Index\+To\+Wait\+On} & The index within the calling task\textquotesingle{}s array of notification values on which the calling task will wait for a notification to be received. ux\+Index\+To\+Wait\+On must be less than config\+TASK\+\_\+\+NOTIFICATION\+\_\+\+ARRAY\+\_\+\+ENTRIES. \doxylink{task_8h_a212928744c3d5e0ccc56f1324a3c26f3}{x\+Task\+Notify\+Wait()} does not have this parameter and always waits for notifications on index 0.\\
+\hline
+{\em ul\+Bits\+To\+Clear\+On\+Entry} & Bits that are set in ul\+Bits\+To\+Clear\+On\+Entry value will be cleared in the calling task\textquotesingle{}s notification value before the task checks to see if any notifications are pending, and optionally blocks if no notifications are pending. Setting ul\+Bits\+To\+Clear\+On\+Entry to ULONG\+\_\+\+MAX (if limits.\+h is included) or 0xffffffffU (if limits.\+h is not included) will have the effect of resetting the task\textquotesingle{}s notification value to 0. Setting ul\+Bits\+To\+Clear\+On\+Entry to 0 will leave the task\textquotesingle{}s notification value unchanged.\\
+\hline
+{\em ul\+Bits\+To\+Clear\+On\+Exit} & If a notification is pending or received before the calling task exits the \doxylink{task_8h_a212928744c3d5e0ccc56f1324a3c26f3}{x\+Task\+Notify\+Wait()} function then the task\textquotesingle{}s notification value (see the \doxylink{task_8h_a0d2d54fb8a64011dfbb54983e4ed06bd}{x\+Task\+Notify()} API function) is passed out using the pul\+Notification\+Value parameter. Then any bits that are set in ul\+Bits\+To\+Clear\+On\+Exit will be cleared in the task\textquotesingle{}s notification value (note \texorpdfstring{$\ast$}{*}pul\+Notification\+Value is set before any bits are cleared). Setting ul\+Bits\+To\+Clear\+On\+Exit to ULONG\+\_\+\+MAX (if limits.\+h is included) or 0xffffffff\+UL (if limits.\+h is not included) will have the effect of resetting the task\textquotesingle{}s notification value to 0 before the function exits. Setting ul\+Bits\+To\+Clear\+On\+Exit to 0 will leave the task\textquotesingle{}s notification value unchanged when the function exits (in which case the value passed out in pul\+Notification\+Value will match the task\textquotesingle{}s notification value).\\
+\hline
+{\em pul\+Notification\+Value} & Used to pass the task\textquotesingle{}s notification value out of the function. Note the value passed out will not be effected by the clearing of any bits caused by ul\+Bits\+To\+Clear\+On\+Exit being non-\/zero.\\
+\hline
+{\em x\+Ticks\+To\+Wait} & The maximum amount of time that the task should wait in the Blocked state for a notification to be received, should a notification not already be pending when \doxylink{task_8h_a212928744c3d5e0ccc56f1324a3c26f3}{x\+Task\+Notify\+Wait()} was called. The task will not consume any processing time while it is in the Blocked state. This is specified in kernel ticks, the macro \doxylink{projdefs_8h_a353d0f62b82a402cb3db63706c81ec3f}{pd\+MS\+\_\+\+TO\+\_\+\+TICKS( value\+\_\+in\+\_\+ms )} can be used to convert a time specified in milliseconds to a time specified in ticks.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If a notification was received (including notifications that were already pending when x\+Task\+Notify\+Wait was called) then pd\+PASS is returned. Otherwise pd\+FAIL is returned. 
+\end{DoxyReturn}

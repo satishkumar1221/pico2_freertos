@@ -1,0 +1,41 @@
+\doxysection{x\+Event\+Group\+Create }
+\hypertarget{group__x_event_group_create}{}\label{group__x_event_group_create}\index{xEventGroupCreate@{xEventGroupCreate}}
+\doxylink{event__groups_8h}{event\+\_\+groups.\+h} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{event__groups_8h_acab96e0b6a5cab7f7b29822b79cc78ed}{EventGroupHandle\_t}}\ xEventGroupCreate(\ \textcolor{keywordtype}{void}\ );}
+
+\end{DoxyCode}
+
+
+Create a new event group.
+
+Internally, within the Free\+RTOS implementation, event groups use a \mbox{[}small\mbox{]} block of memory, in which the event group\textquotesingle{}s structure is stored. If an event groups is created using x\+Event\+Group\+Create() then the required memory is automatically dynamically allocated inside the x\+Event\+Group\+Create() function. (see \href{https://www.FreeRTOS.org/a00111.html}{\texttt{https\+://www.\+Free\+RTOS.\+org/a00111.\+html}}). If an event group is created using x\+Event\+Group\+Create\+Static() then the application writer must instead provide the memory that will get used by the event group. x\+Event\+Group\+Create\+Static() therefore allows an event group to be created without using any dynamic memory allocation.
+
+Although event groups are not related to ticks, for internal implementation reasons the number of bits available for use in an event group is dependent on the config\+TICK\+\_\+\+TYPE\+\_\+\+WIDTH\+\_\+\+IN\+\_\+\+BITS setting in Free\+RTOSConfig.\+h. If config\+TICK\+\_\+\+TYPE\+\_\+\+WIDTH\+\_\+\+IN\+\_\+\+BITS is 0 then each event group contains 8 usable bits (bit 0 to bit 7). If config\+TICK\+\_\+\+TYPE\+\_\+\+WIDTH\+\_\+\+IN\+\_\+\+BITS is set to 1 then each event group has 24 usable bits (bit 0 to bit 23). If config\+TICK\+\_\+\+TYPE\+\_\+\+WIDTH\+\_\+\+IN\+\_\+\+BITS is set to 2 then each event group has 56 usable bits (bit 0 to bit 53). The \doxylink{event__groups_8h_ab2f21b93db0b2a0ab64d7a81ff32ac2e}{Event\+Bits\+\_\+t} type is used to store event bits within an event group.
+
+The config\+USE\+\_\+\+EVENT\+\_\+\+GROUPS configuration constant must be set to 1 for x\+Event\+Group\+Create() to be available.
+
+\begin{DoxyReturn}{Returns}
+If the event group was created then a handle to the event group is returned. If there was insufficient Free\+RTOS heap available to create the event group then NULL is returned. See \href{https://www.FreeRTOS.org/a00111.html}{\texttt{https\+://www.\+Free\+RTOS.\+org/a00111.\+html}}
+\end{DoxyReturn}
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Declare\ a\ variable\ to\ hold\ the\ created\ event\ group.}}
+\DoxyCodeLine{\mbox{\hyperlink{event__groups_8h_acab96e0b6a5cab7f7b29822b79cc78ed}{EventGroupHandle\_t}}\ xCreatedEventGroup;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Attempt\ to\ create\ the\ event\ group.}}
+\DoxyCodeLine{xCreatedEventGroup\ =\ xEventGroupCreate();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Was\ the\ event\ group\ created\ successfully?}}
+\DoxyCodeLine{\textcolor{keywordflow}{if}(\ xCreatedEventGroup\ ==\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ The\ event\ group\ was\ not\ created\ because\ there\ was\ insufficient}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ FreeRTOS\ heap\ available.}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{keywordflow}{else}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ The\ event\ group\ was\ created.}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

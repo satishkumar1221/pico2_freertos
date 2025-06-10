@@ -1,0 +1,253 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+IAR/\+ARM\+\_\+\+CM33/secure/secure\+\_\+init.c File Reference}
+\hypertarget{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c}{}\label{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/IAR/ARM\_CM33/secure/secure\_init.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/IAR/ARM\_CM33/secure/secure\_init.c}}
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include "{}secure\+\_\+init.\+h"{}}\newline
+{\ttfamily \#include "{}secure\+\_\+port\+\_\+macros.\+h"{}}\newline
+Include dependency graph for secure\+\_\+init.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a73f153df2315a244f2e0bb6736d12612}{secureinit\+SCB\+\_\+\+AIRCR}}~( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000ed0c )  /\texorpdfstring{$\ast$}{*} Application Interrupt and Reset Control Register. \texorpdfstring{$\ast$}{*}/
+\begin{DoxyCompactList}\small\item\em Constants required to manipulate the SCB. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_aa52b306e9bf3ffbb6a9e7d453792d900}{secureinit\+SCB\+\_\+\+AIRCR\+\_\+\+VECTKEY\+\_\+\+POS}}~( 16UL )
+\item 
+\#define \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a1869111ffa0bb988dd703ca87c048577}{secureinit\+SCB\+\_\+\+AIRCR\+\_\+\+VECTKEY\+\_\+\+MASK}}~( 0x\+FFFFUL $<$$<$ \mbox{\hyperlink{_a_r_mv8_m_2secure_2init_2secure__init_8c_aa52b306e9bf3ffbb6a9e7d453792d900}{secureinit\+SCB\+\_\+\+AIRCR\+\_\+\+VECTKEY\+\_\+\+POS}} )
+\item 
+\#define \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_af2b39a662169cb8763e6f4beb16d1b4d}{secureinit\+SCB\+\_\+\+AIRCR\+\_\+\+PRIS\+\_\+\+POS}}~( 14UL )
+\item 
+\#define \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_aee129b9a4ae1d52e10d01d2e42a7ad85}{secureinit\+SCB\+\_\+\+AIRCR\+\_\+\+PRIS\+\_\+\+MASK}}~( 1UL $<$$<$ \mbox{\hyperlink{_a_r_mv8_m_2secure_2init_2secure__init_8c_af2b39a662169cb8763e6f4beb16d1b4d}{secureinit\+SCB\+\_\+\+AIRCR\+\_\+\+PRIS\+\_\+\+POS}} )
+\item 
+\#define \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a7f00c28913367ee316f2c79cc8cfb18b}{secureinit\+FPCCR}}~( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000ef34 )  /\texorpdfstring{$\ast$}{*} Floating Point Context Control Register. \texorpdfstring{$\ast$}{*}/
+\begin{DoxyCompactList}\small\item\em Constants required to manipulate the FPU. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a8912f8906dc3036c9a015b5206f73501}{secureinit\+FPCCR\+\_\+\+LSPENS\+\_\+\+POS}}~( 29UL )
+\item 
+\#define \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a6ea5f09c427f542cade034e363bde004}{secureinit\+FPCCR\+\_\+\+LSPENS\+\_\+\+MASK}}~( 1UL $<$$<$ \mbox{\hyperlink{_a_r_mv8_m_2secure_2init_2secure__init_8c_a8912f8906dc3036c9a015b5206f73501}{secureinit\+FPCCR\+\_\+\+LSPENS\+\_\+\+POS}} )
+\item 
+\#define \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a901cc5f582ef1791dea2c63856c8916d}{secureinit\+FPCCR\+\_\+\+TS\+\_\+\+POS}}~( 26UL )
+\item 
+\#define \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a6910c788119f85ee8727b5f3f9c38b8d}{secureinit\+FPCCR\+\_\+\+TS\+\_\+\+MASK}}~( 1UL $<$$<$ \mbox{\hyperlink{_a_r_mv8_m_2secure_2init_2secure__init_8c_a901cc5f582ef1791dea2c63856c8916d}{secureinit\+FPCCR\+\_\+\+TS\+\_\+\+POS}} )
+\item 
+\#define \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a59b730a730d16a8566e611fa55e16c59}{secureinit\+NSACR}}~( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000ed8c )  /\texorpdfstring{$\ast$}{*} Non-\/secure Access Control Register. \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_ae2059b80576d902aa37641fad9cd7b51}{secureinit\+NSACR\+\_\+\+CP10\+\_\+\+POS}}~( 10\+UL )
+\item 
+\#define \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_abf3878deee913785a7194fb2fcb4cdf5}{secureinit\+NSACR\+\_\+\+CP10\+\_\+\+MASK}}~( 1UL $<$$<$ \mbox{\hyperlink{_a_r_mv8_m_2secure_2init_2secure__init_8c_ae2059b80576d902aa37641fad9cd7b51}{secureinit\+NSACR\+\_\+\+CP10\+\_\+\+POS}} )
+\item 
+\#define \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a8b50350d1af46343691087355a182b7e}{secureinit\+NSACR\+\_\+\+CP11\+\_\+\+POS}}~( 11UL )
+\item 
+\#define \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a7f6c3286e2bb9f2359385b1324b37601}{secureinit\+NSACR\+\_\+\+CP11\+\_\+\+MASK}}~( 1UL $<$$<$ \mbox{\hyperlink{_a_r_mv8_m_2secure_2init_2secure__init_8c_a8b50350d1af46343691087355a182b7e}{secureinit\+NSACR\+\_\+\+CP11\+\_\+\+POS}} )
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_a13646350e58b5033103457103f2db55c}{secureport\+NON\+\_\+\+SECURE\+\_\+\+CALLABLE}} void \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_ae0fb1c1ad66a0349c3e6bca3eec6e28f}{Secure\+Init\+\_\+\+De\+Prioritize\+NSExceptions}} (void)
+\begin{DoxyCompactList}\small\item\em De-\/prioritizes the non-\/secure exceptions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_a13646350e58b5033103457103f2db55c}{secureport\+NON\+\_\+\+SECURE\+\_\+\+CALLABLE}} void \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_ae9cc476072457a58392e0b7385d3deb3}{Secure\+Init\+\_\+\+Enable\+NSFPUAccess}} (void)
+\begin{DoxyCompactList}\small\item\em Sets up the Floating Point Unit (FPU) for Non-\/\+Secure access. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a7f00c28913367ee316f2c79cc8cfb18b}\index{secure\_init.c@{secure\_init.c}!secureinitFPCCR@{secureinitFPCCR}}
+\index{secureinitFPCCR@{secureinitFPCCR}!secure\_init.c@{secure\_init.c}}
+\doxysubsubsection{\texorpdfstring{secureinitFPCCR}{secureinitFPCCR}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a7f00c28913367ee316f2c79cc8cfb18b} 
+\#define secureinit\+FPCCR~( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000ef34 )  /\texorpdfstring{$\ast$}{*} Floating Point Context Control Register. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Constants required to manipulate the FPU. 
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source_l00050}{50}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source}{secure\+\_\+init.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a6ea5f09c427f542cade034e363bde004}\index{secure\_init.c@{secure\_init.c}!secureinitFPCCR\_LSPENS\_MASK@{secureinitFPCCR\_LSPENS\_MASK}}
+\index{secureinitFPCCR\_LSPENS\_MASK@{secureinitFPCCR\_LSPENS\_MASK}!secure\_init.c@{secure\_init.c}}
+\doxysubsubsection{\texorpdfstring{secureinitFPCCR\_LSPENS\_MASK}{secureinitFPCCR\_LSPENS\_MASK}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a6ea5f09c427f542cade034e363bde004} 
+\#define secureinit\+FPCCR\+\_\+\+LSPENS\+\_\+\+MASK~( 1UL $<$$<$ \mbox{\hyperlink{_a_r_mv8_m_2secure_2init_2secure__init_8c_a8912f8906dc3036c9a015b5206f73501}{secureinit\+FPCCR\+\_\+\+LSPENS\+\_\+\+POS}} )}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source_l00052}{52}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source}{secure\+\_\+init.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a8912f8906dc3036c9a015b5206f73501}\index{secure\_init.c@{secure\_init.c}!secureinitFPCCR\_LSPENS\_POS@{secureinitFPCCR\_LSPENS\_POS}}
+\index{secureinitFPCCR\_LSPENS\_POS@{secureinitFPCCR\_LSPENS\_POS}!secure\_init.c@{secure\_init.c}}
+\doxysubsubsection{\texorpdfstring{secureinitFPCCR\_LSPENS\_POS}{secureinitFPCCR\_LSPENS\_POS}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a8912f8906dc3036c9a015b5206f73501} 
+\#define secureinit\+FPCCR\+\_\+\+LSPENS\+\_\+\+POS~( 29UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source_l00051}{51}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source}{secure\+\_\+init.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a6910c788119f85ee8727b5f3f9c38b8d}\index{secure\_init.c@{secure\_init.c}!secureinitFPCCR\_TS\_MASK@{secureinitFPCCR\_TS\_MASK}}
+\index{secureinitFPCCR\_TS\_MASK@{secureinitFPCCR\_TS\_MASK}!secure\_init.c@{secure\_init.c}}
+\doxysubsubsection{\texorpdfstring{secureinitFPCCR\_TS\_MASK}{secureinitFPCCR\_TS\_MASK}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a6910c788119f85ee8727b5f3f9c38b8d} 
+\#define secureinit\+FPCCR\+\_\+\+TS\+\_\+\+MASK~( 1UL $<$$<$ \mbox{\hyperlink{_a_r_mv8_m_2secure_2init_2secure__init_8c_a901cc5f582ef1791dea2c63856c8916d}{secureinit\+FPCCR\+\_\+\+TS\+\_\+\+POS}} )}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source_l00054}{54}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source}{secure\+\_\+init.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a901cc5f582ef1791dea2c63856c8916d}\index{secure\_init.c@{secure\_init.c}!secureinitFPCCR\_TS\_POS@{secureinitFPCCR\_TS\_POS}}
+\index{secureinitFPCCR\_TS\_POS@{secureinitFPCCR\_TS\_POS}!secure\_init.c@{secure\_init.c}}
+\doxysubsubsection{\texorpdfstring{secureinitFPCCR\_TS\_POS}{secureinitFPCCR\_TS\_POS}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a901cc5f582ef1791dea2c63856c8916d} 
+\#define secureinit\+FPCCR\+\_\+\+TS\+\_\+\+POS~( 26UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source_l00053}{53}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source}{secure\+\_\+init.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a59b730a730d16a8566e611fa55e16c59}\index{secure\_init.c@{secure\_init.c}!secureinitNSACR@{secureinitNSACR}}
+\index{secureinitNSACR@{secureinitNSACR}!secure\_init.c@{secure\_init.c}}
+\doxysubsubsection{\texorpdfstring{secureinitNSACR}{secureinitNSACR}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a59b730a730d16a8566e611fa55e16c59} 
+\#define secureinit\+NSACR~( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000ed8c )  /\texorpdfstring{$\ast$}{*} Non-\/secure Access Control Register. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source_l00056}{56}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source}{secure\+\_\+init.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_abf3878deee913785a7194fb2fcb4cdf5}\index{secure\_init.c@{secure\_init.c}!secureinitNSACR\_CP10\_MASK@{secureinitNSACR\_CP10\_MASK}}
+\index{secureinitNSACR\_CP10\_MASK@{secureinitNSACR\_CP10\_MASK}!secure\_init.c@{secure\_init.c}}
+\doxysubsubsection{\texorpdfstring{secureinitNSACR\_CP10\_MASK}{secureinitNSACR\_CP10\_MASK}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_abf3878deee913785a7194fb2fcb4cdf5} 
+\#define secureinit\+NSACR\+\_\+\+CP10\+\_\+\+MASK~( 1UL $<$$<$ \mbox{\hyperlink{_a_r_mv8_m_2secure_2init_2secure__init_8c_ae2059b80576d902aa37641fad9cd7b51}{secureinit\+NSACR\+\_\+\+CP10\+\_\+\+POS}} )}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source_l00058}{58}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source}{secure\+\_\+init.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_ae2059b80576d902aa37641fad9cd7b51}\index{secure\_init.c@{secure\_init.c}!secureinitNSACR\_CP10\_POS@{secureinitNSACR\_CP10\_POS}}
+\index{secureinitNSACR\_CP10\_POS@{secureinitNSACR\_CP10\_POS}!secure\_init.c@{secure\_init.c}}
+\doxysubsubsection{\texorpdfstring{secureinitNSACR\_CP10\_POS}{secureinitNSACR\_CP10\_POS}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_ae2059b80576d902aa37641fad9cd7b51} 
+\#define secureinit\+NSACR\+\_\+\+CP10\+\_\+\+POS~( 10\+UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source_l00057}{57}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source}{secure\+\_\+init.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a7f6c3286e2bb9f2359385b1324b37601}\index{secure\_init.c@{secure\_init.c}!secureinitNSACR\_CP11\_MASK@{secureinitNSACR\_CP11\_MASK}}
+\index{secureinitNSACR\_CP11\_MASK@{secureinitNSACR\_CP11\_MASK}!secure\_init.c@{secure\_init.c}}
+\doxysubsubsection{\texorpdfstring{secureinitNSACR\_CP11\_MASK}{secureinitNSACR\_CP11\_MASK}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a7f6c3286e2bb9f2359385b1324b37601} 
+\#define secureinit\+NSACR\+\_\+\+CP11\+\_\+\+MASK~( 1UL $<$$<$ \mbox{\hyperlink{_a_r_mv8_m_2secure_2init_2secure__init_8c_a8b50350d1af46343691087355a182b7e}{secureinit\+NSACR\+\_\+\+CP11\+\_\+\+POS}} )}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source_l00060}{60}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source}{secure\+\_\+init.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a8b50350d1af46343691087355a182b7e}\index{secure\_init.c@{secure\_init.c}!secureinitNSACR\_CP11\_POS@{secureinitNSACR\_CP11\_POS}}
+\index{secureinitNSACR\_CP11\_POS@{secureinitNSACR\_CP11\_POS}!secure\_init.c@{secure\_init.c}}
+\doxysubsubsection{\texorpdfstring{secureinitNSACR\_CP11\_POS}{secureinitNSACR\_CP11\_POS}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a8b50350d1af46343691087355a182b7e} 
+\#define secureinit\+NSACR\+\_\+\+CP11\+\_\+\+POS~( 11UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source_l00059}{59}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source}{secure\+\_\+init.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a73f153df2315a244f2e0bb6736d12612}\index{secure\_init.c@{secure\_init.c}!secureinitSCB\_AIRCR@{secureinitSCB\_AIRCR}}
+\index{secureinitSCB\_AIRCR@{secureinitSCB\_AIRCR}!secure\_init.c@{secure\_init.c}}
+\doxysubsubsection{\texorpdfstring{secureinitSCB\_AIRCR}{secureinitSCB\_AIRCR}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a73f153df2315a244f2e0bb6736d12612} 
+\#define secureinit\+SCB\+\_\+\+AIRCR~( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000ed0c )  /\texorpdfstring{$\ast$}{*} Application Interrupt and Reset Control Register. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Constants required to manipulate the SCB. 
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source_l00041}{41}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source}{secure\+\_\+init.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_aee129b9a4ae1d52e10d01d2e42a7ad85}\index{secure\_init.c@{secure\_init.c}!secureinitSCB\_AIRCR\_PRIS\_MASK@{secureinitSCB\_AIRCR\_PRIS\_MASK}}
+\index{secureinitSCB\_AIRCR\_PRIS\_MASK@{secureinitSCB\_AIRCR\_PRIS\_MASK}!secure\_init.c@{secure\_init.c}}
+\doxysubsubsection{\texorpdfstring{secureinitSCB\_AIRCR\_PRIS\_MASK}{secureinitSCB\_AIRCR\_PRIS\_MASK}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_aee129b9a4ae1d52e10d01d2e42a7ad85} 
+\#define secureinit\+SCB\+\_\+\+AIRCR\+\_\+\+PRIS\+\_\+\+MASK~( 1UL $<$$<$ \mbox{\hyperlink{_a_r_mv8_m_2secure_2init_2secure__init_8c_af2b39a662169cb8763e6f4beb16d1b4d}{secureinit\+SCB\+\_\+\+AIRCR\+\_\+\+PRIS\+\_\+\+POS}} )}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source_l00045}{45}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source}{secure\+\_\+init.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_af2b39a662169cb8763e6f4beb16d1b4d}\index{secure\_init.c@{secure\_init.c}!secureinitSCB\_AIRCR\_PRIS\_POS@{secureinitSCB\_AIRCR\_PRIS\_POS}}
+\index{secureinitSCB\_AIRCR\_PRIS\_POS@{secureinitSCB\_AIRCR\_PRIS\_POS}!secure\_init.c@{secure\_init.c}}
+\doxysubsubsection{\texorpdfstring{secureinitSCB\_AIRCR\_PRIS\_POS}{secureinitSCB\_AIRCR\_PRIS\_POS}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_af2b39a662169cb8763e6f4beb16d1b4d} 
+\#define secureinit\+SCB\+\_\+\+AIRCR\+\_\+\+PRIS\+\_\+\+POS~( 14UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source_l00044}{44}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source}{secure\+\_\+init.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a1869111ffa0bb988dd703ca87c048577}\index{secure\_init.c@{secure\_init.c}!secureinitSCB\_AIRCR\_VECTKEY\_MASK@{secureinitSCB\_AIRCR\_VECTKEY\_MASK}}
+\index{secureinitSCB\_AIRCR\_VECTKEY\_MASK@{secureinitSCB\_AIRCR\_VECTKEY\_MASK}!secure\_init.c@{secure\_init.c}}
+\doxysubsubsection{\texorpdfstring{secureinitSCB\_AIRCR\_VECTKEY\_MASK}{secureinitSCB\_AIRCR\_VECTKEY\_MASK}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_a1869111ffa0bb988dd703ca87c048577} 
+\#define secureinit\+SCB\+\_\+\+AIRCR\+\_\+\+VECTKEY\+\_\+\+MASK~( 0x\+FFFFUL $<$$<$ \mbox{\hyperlink{_a_r_mv8_m_2secure_2init_2secure__init_8c_aa52b306e9bf3ffbb6a9e7d453792d900}{secureinit\+SCB\+\_\+\+AIRCR\+\_\+\+VECTKEY\+\_\+\+POS}} )}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source_l00043}{43}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source}{secure\+\_\+init.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_aa52b306e9bf3ffbb6a9e7d453792d900}\index{secure\_init.c@{secure\_init.c}!secureinitSCB\_AIRCR\_VECTKEY\_POS@{secureinitSCB\_AIRCR\_VECTKEY\_POS}}
+\index{secureinitSCB\_AIRCR\_VECTKEY\_POS@{secureinitSCB\_AIRCR\_VECTKEY\_POS}!secure\_init.c@{secure\_init.c}}
+\doxysubsubsection{\texorpdfstring{secureinitSCB\_AIRCR\_VECTKEY\_POS}{secureinitSCB\_AIRCR\_VECTKEY\_POS}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_aa52b306e9bf3ffbb6a9e7d453792d900} 
+\#define secureinit\+SCB\+\_\+\+AIRCR\+\_\+\+VECTKEY\+\_\+\+POS~( 16UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source_l00042}{42}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source}{secure\+\_\+init.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_ae0fb1c1ad66a0349c3e6bca3eec6e28f}\index{secure\_init.c@{secure\_init.c}!SecureInit\_DePrioritizeNSExceptions@{SecureInit\_DePrioritizeNSExceptions}}
+\index{SecureInit\_DePrioritizeNSExceptions@{SecureInit\_DePrioritizeNSExceptions}!secure\_init.c@{secure\_init.c}}
+\doxysubsubsection{\texorpdfstring{SecureInit\_DePrioritizeNSExceptions()}{SecureInit\_DePrioritizeNSExceptions()}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_ae0fb1c1ad66a0349c3e6bca3eec6e28f} 
+\mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_a13646350e58b5033103457103f2db55c}{secureport\+NON\+\_\+\+SECURE\+\_\+\+CALLABLE}} void Secure\+Init\+\_\+\+De\+Prioritize\+NSExceptions (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+De-\/prioritizes the non-\/secure exceptions. 
+
+This is needed to ensure that the non-\/secure Pend\+SV runs at the lowest priority. Context switch is done in the non-\/secure Pend\+SV handler.
+
+\begin{DoxyNote}{Note}
+This function must be called in the handler mode. It is no-\/op if called in the thread mode. 
+\end{DoxyNote}
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source_l00063}{63}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source}{secure\+\_\+init.\+c}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_ae9cc476072457a58392e0b7385d3deb3}\index{secure\_init.c@{secure\_init.c}!SecureInit\_EnableNSFPUAccess@{SecureInit\_EnableNSFPUAccess}}
+\index{SecureInit\_EnableNSFPUAccess@{SecureInit\_EnableNSFPUAccess}!secure\_init.c@{secure\_init.c}}
+\doxysubsubsection{\texorpdfstring{SecureInit\_EnableNSFPUAccess()}{SecureInit\_EnableNSFPUAccess()}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_ae9cc476072457a58392e0b7385d3deb3} 
+\mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_a13646350e58b5033103457103f2db55c}{secureport\+NON\+\_\+\+SECURE\+\_\+\+CALLABLE}} void Secure\+Init\+\_\+\+Enable\+NSFPUAccess (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Sets up the Floating Point Unit (FPU) for Non-\/\+Secure access. 
+
+Also sets FPCCR.\+TS=1 to ensure that the content of the Floating Point Registers are not leaked to the non-\/secure side.
+
+\begin{DoxyNote}{Note}
+This function must be called in the handler mode. It is no-\/op if called in the thread mode. 
+\end{DoxyNote}
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source_l00081}{81}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_m33_2secure_2secure__init_8c_source}{secure\+\_\+init.\+c}}.
+

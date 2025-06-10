@@ -1,0 +1,1212 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+GCC/\+ARM\+\_\+\+CRx\+\_\+\+MPU/portmacro\+\_\+asm.h File Reference}
+\hypertarget{portmacro__asm_8h}{}\label{portmacro__asm_8h}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/ARM\_CRx\_MPU/portmacro\_asm.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/ARM\_CRx\_MPU/portmacro\_asm.h}}
+{\ttfamily \#include "{}Free\+RTOSConfig.\+h"{}}\newline
+Include dependency graph for portmacro\+\_\+asm.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a8c0327c63db06fda2294df6965508791}{config\+ENABLE\+\_\+\+FPU}}~1
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_ac702041d75d0430e48d9ba9269ae1e9b}{port\+ENABLE\+\_\+\+FPU}}~\mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a8c0327c63db06fda2294df6965508791}{config\+ENABLE\+\_\+\+FPU}}
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a4590bc240c9d6d928eecc7484553c2e7}{USER\+\_\+\+MODE}}~0x10U
+\begin{DoxyCompactList}\small\item\em CPSR bits for various processor modes. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_ad53b2deac028f5b71d1cdddda17c4ea0}{FIQ\+\_\+\+MODE}}~0x11U
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a015e07338bc15a48ad76695362eea25f}{IRQ\+\_\+\+MODE}}~0x12U
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a312ff1d5550cc17c9907a153b04e0efa}{SVC\+\_\+\+MODE}}~0x13U
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a738e69e29b8e5165a11dd6a337370390}{MON\+\_\+\+MODE}}~0x16U
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a71f290cd91ad5ba6e3e183306fd9a0cb}{ABT\+\_\+\+MODE}}~0x17U
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a551e7752c79eb8cdf721efa7b680ad99}{HYP\+\_\+\+MODE}}~0x1\+AU
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a050eda1514ebd401d55cd61d2f7f78d7}{UND\+\_\+\+MODE}}~0x1\+BU
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_ae62d91253c85a3dff6a838244f460f70}{SYS\+\_\+\+MODE}}~0x1\+FU
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a868b2006b5ce8f6a2642ad13ab5332ad}{port\+TASK\+\_\+\+IS\+\_\+\+PRIVILEGED\+\_\+\+FLAG}}~( 1UL $<$$<$ 1UL )
+\begin{DoxyCompactList}\small\item\em Flag used to mark that a Free\+RTOS Task is privileged. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a176834b4b22e63f73e0220d6fb65f7a5}{port\+SVC\+\_\+\+YIELD}}~0x0100U
+\begin{DoxyCompactList}\small\item\em SVC numbers for various scheduler operations. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_aceca58fbf3e70153879a43200a523344}{port\+SVC\+\_\+\+SYSTEM\+\_\+\+CALL\+\_\+\+EXIT}}~0x0104U
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a504d28f3716fcbb1b0c65a9871afeb67}{port\+MPU\+\_\+\+SUBREGION\+\_\+0\+\_\+\+DISABLE}}~( 0x1\+UL $<$$<$ 8UL )
+\begin{DoxyCompactList}\small\item\em Macros required to manipulate MPU. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a2c3984be95a7dc28de873e8a53319b44}{port\+MPU\+\_\+\+SUBREGION\+\_\+1\+\_\+\+DISABLE}}~( 0x1\+UL $<$$<$ 9UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a18c08846f905a6b00cb8a616e111353a}{port\+MPU\+\_\+\+SUBREGION\+\_\+2\+\_\+\+DISABLE}}~( 0x1\+UL $<$$<$ 10\+UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a11ccda0a3982b95f9c328f8cb33f22f8}{port\+MPU\+\_\+\+SUBREGION\+\_\+3\+\_\+\+DISABLE}}~( 0x1\+UL $<$$<$ 11UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a4d79fd15bb7c478da380558ccf348425}{port\+MPU\+\_\+\+SUBREGION\+\_\+4\+\_\+\+DISABLE}}~( 0x1\+UL $<$$<$ 12UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a2afe5c62e0047c0a19310a91b6d0086c}{port\+MPU\+\_\+\+SUBREGION\+\_\+5\+\_\+\+DISABLE}}~( 0x1\+UL $<$$<$ 13UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_ae835a1bf15407ed6e3b66376904c9903}{port\+MPU\+\_\+\+SUBREGION\+\_\+6\+\_\+\+DISABLE}}~( 0x1\+UL $<$$<$ 14UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a6db5e9863bb7065cdd15f4f22eff98d3}{port\+MPU\+\_\+\+SUBREGION\+\_\+7\+\_\+\+DISABLE}}~( 0x1\+UL $<$$<$ 15UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a7c87d488b9742426ef09ae95c75e1f43}{port\+FIRST\+\_\+\+CONFIGURABLE\+\_\+\+REGION}}~( 0 )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_aef7f2f8670e4dcc37d13e55236cc8c12}{port\+LAST\+\_\+\+CONFIGURABLE\+\_\+\+REGION}}~( port\+MPU\+\_\+\+TOTAL\+\_\+\+REGIONS -\/ 5UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a1b0959d7e83d42f6c1dccbfe2535e3d5}{port\+STACK\+\_\+\+REGION}}~( port\+MPU\+\_\+\+TOTAL\+\_\+\+REGIONS -\/ 4UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a98374efce189d3a6a0ec99d80ba1619e}{port\+UNPRIVILEGED\+\_\+\+FLASH\+\_\+\+REGION}}~( port\+MPU\+\_\+\+TOTAL\+\_\+\+REGIONS -\/ 3UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a05e35f210f0e58fe583100a87cb16719}{port\+PRIVILEGED\+\_\+\+FLASH\+\_\+\+REGION}}~( port\+MPU\+\_\+\+TOTAL\+\_\+\+REGIONS -\/ 2UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a32c2c550dd5989c7edc9a951c2e19fe1}{port\+PRIVILEGED\+\_\+\+RAM\+\_\+\+REGION}}~( port\+MPU\+\_\+\+TOTAL\+\_\+\+REGIONS -\/ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_aca7e1a8a568a38b74cc9db10c8efebda}{port\+NUM\+\_\+\+CONFIGURABLE\+\_\+\+REGIONS}}~    ( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_aef7f2f8670e4dcc37d13e55236cc8c12}{port\+LAST\+\_\+\+CONFIGURABLE\+\_\+\+REGION}} -\/ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a7c87d488b9742426ef09ae95c75e1f43}{port\+FIRST\+\_\+\+CONFIGURABLE\+\_\+\+REGION}} ) + 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_aee11e56d6fbdceb943ca29b686c4c322}{port\+TOTAL\+\_\+\+NUM\+\_\+\+REGIONS\+\_\+\+IN\+\_\+\+TCB}}~( \mbox{\hyperlink{portable_8h_aca7e1a8a568a38b74cc9db10c8efebda}{port\+NUM\+\_\+\+CONFIGURABLE\+\_\+\+REGIONS}} + 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_aaab5d1ee2ecb41dde317fb72879aee65}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+32B}}~( 0x04\+UL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_afff023e4493279a56fe951751a31557d}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+64B}}~( 0x05\+UL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_adf1cf0546e27921ace057d93cbf0687f}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+128B}}~( 0x06\+UL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a657afa0f1ec4022bbe8ac09c22e3993c}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+256B}}~( 0x07\+UL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a6550d5d9272028532d3b090dfee42379}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+512B}}~( 0x08\+UL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a36fb99a1b33bde929fdb75b7d5d4157c}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+1\+KB}}~( 0x09\+UL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a67ed97b7b3aaaa1b3fd78766eeb80752}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+2\+KB}}~( 0x0\+AUL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a7518dd89dfe63ad6527a71cc78bf1a67}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+4\+KB}}~( 0x0\+BUL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a8e0abfa5fbf4c6ed7a0530d6fe4559fc}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+8\+KB}}~( 0x0\+CUL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a76cd97cca65ae8e26530f87e8cea2fa4}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+16\+KB}}~( 0x0\+DUL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a52582af09fe3197356a0929c6fd6b297}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+32\+KB}}~( 0x0\+EUL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_af4e90e240b0165263a94eaaa80359fc4}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+64\+KB}}~( 0x0\+FUL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_ac6905353be6234217a5683d5a74ccba5}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+128\+KB}}~( 0x10\+UL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a3d4f0909556a7ed918192ab7bf8f71cc}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+256\+KB}}~( 0x11\+UL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a319485fb54d521a901790c7cd3a642d8}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+512\+KB}}~( 0x12\+UL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_ac1202723ce0ae734becf0e768ef6b7ed}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+1\+MB}}~( 0x13\+UL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a680b3b51d7ef3babbb758110d9958286}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+2\+MB}}~( 0x14\+UL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a4ccef4b1a686298fe506178a5efa43ba}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+4\+MB}}~( 0x15\+UL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a593db55ac857c53cbac68964157bcf84}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+8\+MB}}~( 0x16\+UL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a5a9a8ed55c3a5d1b609f643c7b39821c}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+16\+MB}}~( 0x17\+UL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a0e1fc23e5a2bb133ee4d918bb4a038f3}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+32\+MB}}~( 0x18\+UL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a5e7c51b2a04ab366ef504dd25d2cea71}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+64\+MB}}~( 0x19\+UL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a9e825ad529e6e4a72e316cb30cc318f1}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+128\+MB}}~( 0x1\+AUL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a76af9f653e2edffe81049d287787bed1}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+256\+MB}}~( 0x1\+BUL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a66d1e622e1199806948950044325ef69}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+512\+MB}}~( 0x1\+CUL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_ad1c4eeb095651dd96b1539597ecb1aa2}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+1\+GB}}~( 0x1\+DUL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_ab7a9acc786926eea770d9217191e63af}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+2\+GB}}~( 0x1\+EUL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_af6febbcd5c50694b24f820ff38d84fb1}{port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+4\+GB}}~( 0x1\+FUL $<$$<$ 1UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_af87b4039d350b8478ad3ca6c1b8c519e}{port\+MPU\+\_\+\+REGION\+\_\+\+STRONGLY\+\_\+\+ORDERED\+\_\+\+SHAREABLE}}~( 0x00\+UL ) /\texorpdfstring{$\ast$}{*} TEX=000, S=NA, C=0, B=0. \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a4d866f8ddda62e4c331f95268c0d95b1}{port\+MPU\+\_\+\+REGION\+\_\+\+DEVICE\+\_\+\+SHAREABLE}}~( 0x01\+UL ) /\texorpdfstring{$\ast$}{*} TEX=000, S=NA, C=0, B=1. \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_af2b39e4ea31a4adc0564e96773981374}{port\+MPU\+\_\+\+REGION\+\_\+\+NORMAL\+\_\+\+OIWTNOWA\+\_\+\+NONSHARED}}~( 0x02\+UL ) /\texorpdfstring{$\ast$}{*} TEX=000, S=0, C=1, B=0. \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_aa7f6a5e72795497e7608d0dbb59302a9}{port\+MPU\+\_\+\+REGION\+\_\+\+NORMAL\+\_\+\+OIWTNOWA\+\_\+\+SHARED}}~( 0x06\+UL ) /\texorpdfstring{$\ast$}{*} TEX=000, S=1, C=1, B=0. \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a952c1d24e2cc7762cc1120dd5e41ed91}{port\+MPU\+\_\+\+REGION\+\_\+\+NORMAL\+\_\+\+OIWBNOWA\+\_\+\+NONSHARED}}~( 0x03\+UL ) /\texorpdfstring{$\ast$}{*} TEX=000, S=0, C=1, B=1. \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_adc641debc8412c1d7c02dd8ff9485b5e}{port\+MPU\+\_\+\+REGION\+\_\+\+NORMAL\+\_\+\+OIWBNOWA\+\_\+\+SHARED}}~( 0x07\+UL ) /\texorpdfstring{$\ast$}{*} TEX=000, S=1, C=1, B=1. \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_aeeb38e03b64830a01fc7a996609c9e92}{port\+MPU\+\_\+\+REGION\+\_\+\+NORMAL\+\_\+\+OINC\+\_\+\+NONSHARED}}~( 0x08\+UL ) /\texorpdfstring{$\ast$}{*} TEX=001, S=0, C=0, B=0. \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_af904bd9e631a4439f7bcc252a1f7a111}{port\+MPU\+\_\+\+REGION\+\_\+\+NORMAL\+\_\+\+OINC\+\_\+\+SHARED}}~( 0x0\+CUL ) /\texorpdfstring{$\ast$}{*} TEX=001, S=1, C=0, B=0. \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a9eeb366decf164e616f933699420b300}{port\+MPU\+\_\+\+REGION\+\_\+\+NORMAL\+\_\+\+OIWBWA\+\_\+\+NONSHARED}}~( 0x0\+BUL ) /\texorpdfstring{$\ast$}{*} TEX=001, S=0, C=1, B=1. \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a0aea7a47bcce14aa7bc50ee6bff4ec01}{port\+MPU\+\_\+\+REGION\+\_\+\+NORMAL\+\_\+\+OIWBWA\+\_\+\+SHARED}}~( 0x0\+FUL ) /\texorpdfstring{$\ast$}{*} TEX=001, S=1, C=1, B=1. \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a415829ff9b052b869b3d311273b9c0da}{port\+MPU\+\_\+\+REGION\+\_\+\+DEVICE\+\_\+\+NONSHAREABLE}}~( 0x10\+UL ) /\texorpdfstring{$\ast$}{*} TEX=010, S=NA, C=0, B=0. \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_aa28f38c7a1a921b8e56b84fa3d7c134b}{port\+MPU\+\_\+\+REGION\+\_\+\+AP\+\_\+\+BITMASK}}~( 0x07\+UL $<$$<$ 8UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_afcca2a6fcf80c4d60271230d6133a12c}{port\+MPU\+\_\+\+REGION\+\_\+\+XN\+\_\+\+BITMASK}}~( 0x01\+UL $<$$<$ 12UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a248e0728a48b67f51e2e3b9a6dc6493b}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+NA\+\_\+\+USER\+\_\+\+NA}}~( 0x00\+UL $<$$<$ 8UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a480fd4b912b4fad4a59c3559b79c4d82}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+NA\+\_\+\+USER\+\_\+\+NA\+\_\+\+EXEC}}~( \mbox{\hyperlink{portmacro__asm_8h_a248e0728a48b67f51e2e3b9a6dc6493b}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+NA\+\_\+\+USER\+\_\+\+NA}} ) /\texorpdfstring{$\ast$}{*} Priv\+: \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_a836d136c5cf9b95192920ca0affa917e}{X}}, Unpriv\+: X. \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a94f252e0b504247f70545b918e7172e9}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+NA\+\_\+\+USER\+\_\+\+NA\+\_\+\+NOEXEC}}
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a06d1c4ba2b6c2e92fe4c93320e05cc10}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RW\+\_\+\+USER\+\_\+\+NA}}~( 0x01\+UL $<$$<$ 8UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_add646a87abc38f9dd969d59cfd44c0f9}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RW\+\_\+\+USER\+\_\+\+NA\+\_\+\+EXEC}}~( \mbox{\hyperlink{portmacro__asm_8h_a06d1c4ba2b6c2e92fe4c93320e05cc10}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RW\+\_\+\+USER\+\_\+\+NA}} ) /\texorpdfstring{$\ast$}{*} Priv\+: RWX, Unpriv\+: X. \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a7c69af3767a52360e3cba4009b0c576b}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RW\+\_\+\+USER\+\_\+\+NA\+\_\+\+NOEXEC}}
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a85c95a89455585d1359283980528617a}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RW\+\_\+\+USER\+\_\+\+RO}}~( 0x02\+UL $<$$<$ 8UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a19cedc6e6e790d453b658057e86d88b7}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RW\+\_\+\+USER\+\_\+\+RO\+\_\+\+EXEC}}~( \mbox{\hyperlink{portmacro__asm_8h_a85c95a89455585d1359283980528617a}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RW\+\_\+\+USER\+\_\+\+RO}} ) /\texorpdfstring{$\ast$}{*} Priv\+: RWX, Unpriv\+: RX. \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_ad89ba304ac92d35013b0fa35609e247a}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RW\+\_\+\+USER\+\_\+\+RO\+\_\+\+NOEXEC}}
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a5a93d92ec6758f1b2a5906934fd9ae59}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RW\+\_\+\+USER\+\_\+\+RW}}~( 0x03\+UL $<$$<$ 8UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_aed11e6b1f02ed2bd91b038aec6582da8}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RW\+\_\+\+USER\+\_\+\+RW\+\_\+\+EXEC}}~( \mbox{\hyperlink{portmacro__asm_8h_a5a93d92ec6758f1b2a5906934fd9ae59}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RW\+\_\+\+USER\+\_\+\+RW}} ) /\texorpdfstring{$\ast$}{*} Priv\+: RWX, Unpriv\+: RWX. \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_af1baf35099afd1eb770ef4aa15585cb0}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RW\+\_\+\+USER\+\_\+\+RW\+\_\+\+NOEXEC}}
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a5876074a59bc14b4a208d2e8182cda1c}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RO\+\_\+\+USER\+\_\+\+NA}}~( 0x05\+UL $<$$<$ 8UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a1cd7fc2425bdba6fec731695175c6412}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RO\+\_\+\+USER\+\_\+\+NA\+\_\+\+EXEC}}~( \mbox{\hyperlink{portmacro__asm_8h_a5876074a59bc14b4a208d2e8182cda1c}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RO\+\_\+\+USER\+\_\+\+NA}} ) /\texorpdfstring{$\ast$}{*} Priv\+: RX, Unpriv\+: X. \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_ad131b0ef93f11d93b4867706774d42b2}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RO\+\_\+\+USER\+\_\+\+NA\+\_\+\+NOEXEC}}
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a5d028119417601b597ea67b30d9b4256}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RO\+\_\+\+USER\+\_\+\+RO}}~( 0x06\+UL $<$$<$ 8UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a725cdb61215e91cf0322183895d29ead}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RO\+\_\+\+USER\+\_\+\+RO\+\_\+\+EXEC}}~( \mbox{\hyperlink{portmacro__asm_8h_a5d028119417601b597ea67b30d9b4256}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RO\+\_\+\+USER\+\_\+\+RO}} ) /\texorpdfstring{$\ast$}{*} Priv\+: RX, Unpriv\+: RX. \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a3e102be6d390b4b675a4e2e43aad3a35}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RO\+\_\+\+USER\+\_\+\+RO\+\_\+\+NOEXEC}}
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a60a2ba380940d5cdf6ee27f2dce08c6a}{port\+MPU\+\_\+\+REGION\+\_\+\+EXECUTE\+\_\+\+NEVER}}~( 0x01\+UL $<$$<$ 12UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a6323908daa39345ab5a7ed0b72619c5c}{port\+MPU\+\_\+\+REGION\+\_\+\+ENABLE}}~( 0x01\+UL )
+\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a1c5c9d4bb3418209e1fa76041b9d2189}{CONTEXT\+\_\+\+SIZE}}~51U
+\begin{DoxyCompactList}\small\item\em The size (in words) of a task context. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{portmacro__asm_8h_a6871bad2d35a54d438084505d31bd22b}{port\+SYSTEM\+\_\+\+CALL\+\_\+\+INFO\+\_\+\+OFFSET}}
+\begin{DoxyCompactList}\small\item\em Offset of x\+System\+Call\+Stack\+Info from the start of a TCB. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{portmacro__asm_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{portmacro__asm_8h_a71f290cd91ad5ba6e3e183306fd9a0cb}\index{portmacro\_asm.h@{portmacro\_asm.h}!ABT\_MODE@{ABT\_MODE}}
+\index{ABT\_MODE@{ABT\_MODE}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{ABT\_MODE}{ABT\_MODE}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a71f290cd91ad5ba6e3e183306fd9a0cb} 
+\#define ABT\+\_\+\+MODE~0x17U}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00084}{84}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a8c0327c63db06fda2294df6965508791}\index{portmacro\_asm.h@{portmacro\_asm.h}!configENABLE\_FPU@{configENABLE\_FPU}}
+\index{configENABLE\_FPU@{configENABLE\_FPU}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{configENABLE\_FPU}{configENABLE\_FPU}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a8c0327c63db06fda2294df6965508791} 
+\#define config\+ENABLE\+\_\+\+FPU~1}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00060}{60}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a1c5c9d4bb3418209e1fa76041b9d2189}\index{portmacro\_asm.h@{portmacro\_asm.h}!CONTEXT\_SIZE@{CONTEXT\_SIZE}}
+\index{CONTEXT\_SIZE@{CONTEXT\_SIZE}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{CONTEXT\_SIZE}{CONTEXT\_SIZE}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a1c5c9d4bb3418209e1fa76041b9d2189} 
+\#define CONTEXT\+\_\+\+SIZE~51U}
+
+
+
+The size (in words) of a task context. 
+
+An array of this size is allocated in TCB where a task\textquotesingle{}s context is saved when it is switched out.
+
+Information about Floating Point Unit (FPU)\+: \href{https://developer.arm.com/documentation/den0042/a/Floating-Point}{\texttt{https\+://developer.\+arm.\+com/documentation/den0042/a/\+Floating-\/\+Point}}
+
+Additional information related to the Cortex R4-\/F\textquotesingle{}s FPU Implementation\+: \href{https://developer.arm.com/documentation/ddi0363/e/fpu-programmer-s-model}{\texttt{https\+://developer.\+arm.\+com/documentation/ddi0363/e/fpu-\/programmer-\/s-\/model}}
+
+Additional information related to the Cortex R5-\/F\textquotesingle{}s FPU Implementation\+: \href{https://developer.arm.com/documentation/ddi0460/d/FPU-Programmers-Model}{\texttt{https\+://developer.\+arm.\+com/documentation/ddi0460/d/\+FPU-\/\+Programmers-\/\+Model}}
+
+Additional information related to the Arm\+V7-\/R CPSR\+: \href{https://developer.arm.com/documentation/ddi0406/cb/Application-Level-Architecture/Application-Level-Programmers&ndash;Model/The-Application-Program-Status-Register&ndash;APSR-?lang=en}{\texttt{https\+://developer.\+arm.\+com/documentation/ddi0406/cb/\+Application-\/\+Level-\/\+Architecture/\+Application-\/\+Level-\/\+Programmers--\+Model/\+The-\/\+Application-\/\+Program-\/\+Status-\/\+Register--\+APSR-\/?lang=en}}
+
+Additional information related to the GPRs\+: \href{https://developer.arm.com/documentation/ddi0406/cb/System-Level-Architecture/The-System-Level-Programmers&ndash;Model/ARM-processor-modes-and-ARM-core-registers/ARM-core-registers?lang=en}{\texttt{https\+://developer.\+arm.\+com/documentation/ddi0406/cb/\+System-\/\+Level-\/\+Architecture/\+The-\/\+System-\/\+Level-\/\+Programmers--\+Model/\+ARM-\/processor-\/modes-\/and-\/\+ARM-\/core-\/registers/\+ARM-\/core-\/registers?lang=en}} 
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00253}{253}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_ad53b2deac028f5b71d1cdddda17c4ea0}\index{portmacro\_asm.h@{portmacro\_asm.h}!FIQ\_MODE@{FIQ\_MODE}}
+\index{FIQ\_MODE@{FIQ\_MODE}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{FIQ\_MODE}{FIQ\_MODE}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_ad53b2deac028f5b71d1cdddda17c4ea0} 
+\#define FIQ\+\_\+\+MODE~0x11U}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00080}{80}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a551e7752c79eb8cdf721efa7b680ad99}\index{portmacro\_asm.h@{portmacro\_asm.h}!HYP\_MODE@{HYP\_MODE}}
+\index{HYP\_MODE@{HYP\_MODE}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{HYP\_MODE}{HYP\_MODE}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a551e7752c79eb8cdf721efa7b680ad99} 
+\#define HYP\+\_\+\+MODE~0x1\+AU}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00085}{85}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a015e07338bc15a48ad76695362eea25f}\index{portmacro\_asm.h@{portmacro\_asm.h}!IRQ\_MODE@{IRQ\_MODE}}
+\index{IRQ\_MODE@{IRQ\_MODE}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{IRQ\_MODE}{IRQ\_MODE}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a015e07338bc15a48ad76695362eea25f} 
+\#define IRQ\+\_\+\+MODE~0x12U}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00081}{81}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a738e69e29b8e5165a11dd6a337370390}\index{portmacro\_asm.h@{portmacro\_asm.h}!MON\_MODE@{MON\_MODE}}
+\index{MON\_MODE@{MON\_MODE}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{MON\_MODE}{MON\_MODE}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a738e69e29b8e5165a11dd6a337370390} 
+\#define MON\+\_\+\+MODE~0x16U}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00083}{83}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_ac702041d75d0430e48d9ba9269ae1e9b}\index{portmacro\_asm.h@{portmacro\_asm.h}!portENABLE\_FPU@{portENABLE\_FPU}}
+\index{portENABLE\_FPU@{portENABLE\_FPU}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portENABLE\_FPU}{portENABLE\_FPU}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_ac702041d75d0430e48d9ba9269ae1e9b} 
+\#define port\+ENABLE\+\_\+\+FPU~\mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a8c0327c63db06fda2294df6965508791}{config\+ENABLE\+\_\+\+FPU}}}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00063}{63}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a7c87d488b9742426ef09ae95c75e1f43}\index{portmacro\_asm.h@{portmacro\_asm.h}!portFIRST\_CONFIGURABLE\_REGION@{portFIRST\_CONFIGURABLE\_REGION}}
+\index{portFIRST\_CONFIGURABLE\_REGION@{portFIRST\_CONFIGURABLE\_REGION}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portFIRST\_CONFIGURABLE\_REGION}{portFIRST\_CONFIGURABLE\_REGION}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a7c87d488b9742426ef09ae95c75e1f43} 
+\#define port\+FIRST\+\_\+\+CONFIGURABLE\+\_\+\+REGION~( 0 )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00126}{126}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_aef7f2f8670e4dcc37d13e55236cc8c12}\index{portmacro\_asm.h@{portmacro\_asm.h}!portLAST\_CONFIGURABLE\_REGION@{portLAST\_CONFIGURABLE\_REGION}}
+\index{portLAST\_CONFIGURABLE\_REGION@{portLAST\_CONFIGURABLE\_REGION}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portLAST\_CONFIGURABLE\_REGION}{portLAST\_CONFIGURABLE\_REGION}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_aef7f2f8670e4dcc37d13e55236cc8c12} 
+\#define port\+LAST\+\_\+\+CONFIGURABLE\+\_\+\+REGION~( port\+MPU\+\_\+\+TOTAL\+\_\+\+REGIONS -\/ 5UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00127}{127}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_aa28f38c7a1a921b8e56b84fa3d7c134b}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_AP\_BITMASK@{portMPU\_REGION\_AP\_BITMASK}}
+\index{portMPU\_REGION\_AP\_BITMASK@{portMPU\_REGION\_AP\_BITMASK}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_AP\_BITMASK}{portMPU\_REGION\_AP\_BITMASK}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_aa28f38c7a1a921b8e56b84fa3d7c134b} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+AP\+\_\+\+BITMASK~( 0x07\+UL $<$$<$ 8UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00184}{184}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a415829ff9b052b869b3d311273b9c0da}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_DEVICE\_NONSHAREABLE@{portMPU\_REGION\_DEVICE\_NONSHAREABLE}}
+\index{portMPU\_REGION\_DEVICE\_NONSHAREABLE@{portMPU\_REGION\_DEVICE\_NONSHAREABLE}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_DEVICE\_NONSHAREABLE}{portMPU\_REGION\_DEVICE\_NONSHAREABLE}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a415829ff9b052b869b3d311273b9c0da} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+DEVICE\+\_\+\+NONSHAREABLE~( 0x10\+UL ) /\texorpdfstring{$\ast$}{*} TEX=010, S=NA, C=0, B=0. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00180}{180}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a4d866f8ddda62e4c331f95268c0d95b1}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_DEVICE\_SHAREABLE@{portMPU\_REGION\_DEVICE\_SHAREABLE}}
+\index{portMPU\_REGION\_DEVICE\_SHAREABLE@{portMPU\_REGION\_DEVICE\_SHAREABLE}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_DEVICE\_SHAREABLE}{portMPU\_REGION\_DEVICE\_SHAREABLE}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a4d866f8ddda62e4c331f95268c0d95b1} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+DEVICE\+\_\+\+SHAREABLE~( 0x01\+UL ) /\texorpdfstring{$\ast$}{*} TEX=000, S=NA, C=0, B=1. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00171}{171}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a6323908daa39345ab5a7ed0b72619c5c}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_ENABLE@{portMPU\_REGION\_ENABLE}}
+\index{portMPU\_REGION\_ENABLE@{portMPU\_REGION\_ENABLE}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_ENABLE}{portMPU\_REGION\_ENABLE}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a6323908daa39345ab5a7ed0b72619c5c} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+ENABLE~( 0x01\+UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00219}{219}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a60a2ba380940d5cdf6ee27f2dce08c6a}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_EXECUTE\_NEVER@{portMPU\_REGION\_EXECUTE\_NEVER}}
+\index{portMPU\_REGION\_EXECUTE\_NEVER@{portMPU\_REGION\_EXECUTE\_NEVER}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_EXECUTE\_NEVER}{portMPU\_REGION\_EXECUTE\_NEVER}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a60a2ba380940d5cdf6ee27f2dce08c6a} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+EXECUTE\+\_\+\+NEVER~( 0x01\+UL $<$$<$ 12UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00218}{218}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_aeeb38e03b64830a01fc7a996609c9e92}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_NORMAL\_OINC\_NONSHARED@{portMPU\_REGION\_NORMAL\_OINC\_NONSHARED}}
+\index{portMPU\_REGION\_NORMAL\_OINC\_NONSHARED@{portMPU\_REGION\_NORMAL\_OINC\_NONSHARED}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_NORMAL\_OINC\_NONSHARED}{portMPU\_REGION\_NORMAL\_OINC\_NONSHARED}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_aeeb38e03b64830a01fc7a996609c9e92} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+NORMAL\+\_\+\+OINC\+\_\+\+NONSHARED~( 0x08\+UL ) /\texorpdfstring{$\ast$}{*} TEX=001, S=0, C=0, B=0. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00176}{176}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_af904bd9e631a4439f7bcc252a1f7a111}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_NORMAL\_OINC\_SHARED@{portMPU\_REGION\_NORMAL\_OINC\_SHARED}}
+\index{portMPU\_REGION\_NORMAL\_OINC\_SHARED@{portMPU\_REGION\_NORMAL\_OINC\_SHARED}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_NORMAL\_OINC\_SHARED}{portMPU\_REGION\_NORMAL\_OINC\_SHARED}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_af904bd9e631a4439f7bcc252a1f7a111} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+NORMAL\+\_\+\+OINC\+\_\+\+SHARED~( 0x0\+CUL ) /\texorpdfstring{$\ast$}{*} TEX=001, S=1, C=0, B=0. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00177}{177}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a952c1d24e2cc7762cc1120dd5e41ed91}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_NORMAL\_OIWBNOWA\_NONSHARED@{portMPU\_REGION\_NORMAL\_OIWBNOWA\_NONSHARED}}
+\index{portMPU\_REGION\_NORMAL\_OIWBNOWA\_NONSHARED@{portMPU\_REGION\_NORMAL\_OIWBNOWA\_NONSHARED}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_NORMAL\_OIWBNOWA\_NONSHARED}{portMPU\_REGION\_NORMAL\_OIWBNOWA\_NONSHARED}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a952c1d24e2cc7762cc1120dd5e41ed91} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+NORMAL\+\_\+\+OIWBNOWA\+\_\+\+NONSHARED~( 0x03\+UL ) /\texorpdfstring{$\ast$}{*} TEX=000, S=0, C=1, B=1. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00174}{174}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_adc641debc8412c1d7c02dd8ff9485b5e}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_NORMAL\_OIWBNOWA\_SHARED@{portMPU\_REGION\_NORMAL\_OIWBNOWA\_SHARED}}
+\index{portMPU\_REGION\_NORMAL\_OIWBNOWA\_SHARED@{portMPU\_REGION\_NORMAL\_OIWBNOWA\_SHARED}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_NORMAL\_OIWBNOWA\_SHARED}{portMPU\_REGION\_NORMAL\_OIWBNOWA\_SHARED}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_adc641debc8412c1d7c02dd8ff9485b5e} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+NORMAL\+\_\+\+OIWBNOWA\+\_\+\+SHARED~( 0x07\+UL ) /\texorpdfstring{$\ast$}{*} TEX=000, S=1, C=1, B=1. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00175}{175}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a9eeb366decf164e616f933699420b300}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_NORMAL\_OIWBWA\_NONSHARED@{portMPU\_REGION\_NORMAL\_OIWBWA\_NONSHARED}}
+\index{portMPU\_REGION\_NORMAL\_OIWBWA\_NONSHARED@{portMPU\_REGION\_NORMAL\_OIWBWA\_NONSHARED}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_NORMAL\_OIWBWA\_NONSHARED}{portMPU\_REGION\_NORMAL\_OIWBWA\_NONSHARED}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a9eeb366decf164e616f933699420b300} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+NORMAL\+\_\+\+OIWBWA\+\_\+\+NONSHARED~( 0x0\+BUL ) /\texorpdfstring{$\ast$}{*} TEX=001, S=0, C=1, B=1. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00178}{178}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a0aea7a47bcce14aa7bc50ee6bff4ec01}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_NORMAL\_OIWBWA\_SHARED@{portMPU\_REGION\_NORMAL\_OIWBWA\_SHARED}}
+\index{portMPU\_REGION\_NORMAL\_OIWBWA\_SHARED@{portMPU\_REGION\_NORMAL\_OIWBWA\_SHARED}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_NORMAL\_OIWBWA\_SHARED}{portMPU\_REGION\_NORMAL\_OIWBWA\_SHARED}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a0aea7a47bcce14aa7bc50ee6bff4ec01} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+NORMAL\+\_\+\+OIWBWA\+\_\+\+SHARED~( 0x0\+FUL ) /\texorpdfstring{$\ast$}{*} TEX=001, S=1, C=1, B=1. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00179}{179}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_af2b39e4ea31a4adc0564e96773981374}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_NORMAL\_OIWTNOWA\_NONSHARED@{portMPU\_REGION\_NORMAL\_OIWTNOWA\_NONSHARED}}
+\index{portMPU\_REGION\_NORMAL\_OIWTNOWA\_NONSHARED@{portMPU\_REGION\_NORMAL\_OIWTNOWA\_NONSHARED}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_NORMAL\_OIWTNOWA\_NONSHARED}{portMPU\_REGION\_NORMAL\_OIWTNOWA\_NONSHARED}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_af2b39e4ea31a4adc0564e96773981374} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+NORMAL\+\_\+\+OIWTNOWA\+\_\+\+NONSHARED~( 0x02\+UL ) /\texorpdfstring{$\ast$}{*} TEX=000, S=0, C=1, B=0. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00172}{172}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_aa7f6a5e72795497e7608d0dbb59302a9}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_NORMAL\_OIWTNOWA\_SHARED@{portMPU\_REGION\_NORMAL\_OIWTNOWA\_SHARED}}
+\index{portMPU\_REGION\_NORMAL\_OIWTNOWA\_SHARED@{portMPU\_REGION\_NORMAL\_OIWTNOWA\_SHARED}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_NORMAL\_OIWTNOWA\_SHARED}{portMPU\_REGION\_NORMAL\_OIWTNOWA\_SHARED}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_aa7f6a5e72795497e7608d0dbb59302a9} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+NORMAL\+\_\+\+OIWTNOWA\+\_\+\+SHARED~( 0x06\+UL ) /\texorpdfstring{$\ast$}{*} TEX=000, S=1, C=1, B=0. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00173}{173}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a248e0728a48b67f51e2e3b9a6dc6493b}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_PRIV\_NA\_USER\_NA@{portMPU\_REGION\_PRIV\_NA\_USER\_NA}}
+\index{portMPU\_REGION\_PRIV\_NA\_USER\_NA@{portMPU\_REGION\_PRIV\_NA\_USER\_NA}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_PRIV\_NA\_USER\_NA}{portMPU\_REGION\_PRIV\_NA\_USER\_NA}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a248e0728a48b67f51e2e3b9a6dc6493b} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+NA\+\_\+\+USER\+\_\+\+NA~( 0x00\+UL $<$$<$ 8UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00187}{187}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a480fd4b912b4fad4a59c3559b79c4d82}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_PRIV\_NA\_USER\_NA\_EXEC@{portMPU\_REGION\_PRIV\_NA\_USER\_NA\_EXEC}}
+\index{portMPU\_REGION\_PRIV\_NA\_USER\_NA\_EXEC@{portMPU\_REGION\_PRIV\_NA\_USER\_NA\_EXEC}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_PRIV\_NA\_USER\_NA\_EXEC}{portMPU\_REGION\_PRIV\_NA\_USER\_NA\_EXEC}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a480fd4b912b4fad4a59c3559b79c4d82} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+NA\+\_\+\+USER\+\_\+\+NA\+\_\+\+EXEC~( \mbox{\hyperlink{portmacro__asm_8h_a248e0728a48b67f51e2e3b9a6dc6493b}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+NA\+\_\+\+USER\+\_\+\+NA}} ) /\texorpdfstring{$\ast$}{*} Priv\+: \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_a836d136c5cf9b95192920ca0affa917e}{X}}, Unpriv\+: X. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00188}{188}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a94f252e0b504247f70545b918e7172e9}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_PRIV\_NA\_USER\_NA\_NOEXEC@{portMPU\_REGION\_PRIV\_NA\_USER\_NA\_NOEXEC}}
+\index{portMPU\_REGION\_PRIV\_NA\_USER\_NA\_NOEXEC@{portMPU\_REGION\_PRIV\_NA\_USER\_NA\_NOEXEC}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_PRIV\_NA\_USER\_NA\_NOEXEC}{portMPU\_REGION\_PRIV\_NA\_USER\_NA\_NOEXEC}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a94f252e0b504247f70545b918e7172e9} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+NA\+\_\+\+USER\+\_\+\+NA\+\_\+\+NOEXEC}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ \mbox{\hyperlink{portmacro__asm_8h_a248e0728a48b67f51e2e3b9a6dc6493b}{portMPU\_REGION\_PRIV\_NA\_USER\_NA}}\ |\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmacro__asm_8h_afcca2a6fcf80c4d60271230d6133a12c}{portMPU\_REGION\_XN\_BITMASK}}\ )\ \textcolor{comment}{/*\ Priv:\ No\ Access,\ Unpriv:\ No\ Access.\ */}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00189}{189}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a5876074a59bc14b4a208d2e8182cda1c}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_PRIV\_RO\_USER\_NA@{portMPU\_REGION\_PRIV\_RO\_USER\_NA}}
+\index{portMPU\_REGION\_PRIV\_RO\_USER\_NA@{portMPU\_REGION\_PRIV\_RO\_USER\_NA}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_PRIV\_RO\_USER\_NA}{portMPU\_REGION\_PRIV\_RO\_USER\_NA}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a5876074a59bc14b4a208d2e8182cda1c} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RO\+\_\+\+USER\+\_\+\+NA~( 0x05\+UL $<$$<$ 8UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00207}{207}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a1cd7fc2425bdba6fec731695175c6412}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_PRIV\_RO\_USER\_NA\_EXEC@{portMPU\_REGION\_PRIV\_RO\_USER\_NA\_EXEC}}
+\index{portMPU\_REGION\_PRIV\_RO\_USER\_NA\_EXEC@{portMPU\_REGION\_PRIV\_RO\_USER\_NA\_EXEC}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_PRIV\_RO\_USER\_NA\_EXEC}{portMPU\_REGION\_PRIV\_RO\_USER\_NA\_EXEC}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a1cd7fc2425bdba6fec731695175c6412} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RO\+\_\+\+USER\+\_\+\+NA\+\_\+\+EXEC~( \mbox{\hyperlink{portmacro__asm_8h_a5876074a59bc14b4a208d2e8182cda1c}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RO\+\_\+\+USER\+\_\+\+NA}} ) /\texorpdfstring{$\ast$}{*} Priv\+: RX, Unpriv\+: X. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00208}{208}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_ad131b0ef93f11d93b4867706774d42b2}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_PRIV\_RO\_USER\_NA\_NOEXEC@{portMPU\_REGION\_PRIV\_RO\_USER\_NA\_NOEXEC}}
+\index{portMPU\_REGION\_PRIV\_RO\_USER\_NA\_NOEXEC@{portMPU\_REGION\_PRIV\_RO\_USER\_NA\_NOEXEC}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_PRIV\_RO\_USER\_NA\_NOEXEC}{portMPU\_REGION\_PRIV\_RO\_USER\_NA\_NOEXEC}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_ad131b0ef93f11d93b4867706774d42b2} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RO\+\_\+\+USER\+\_\+\+NA\+\_\+\+NOEXEC}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ \mbox{\hyperlink{portmacro__asm_8h_a5876074a59bc14b4a208d2e8182cda1c}{portMPU\_REGION\_PRIV\_RO\_USER\_NA}}\ |\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmacro__asm_8h_afcca2a6fcf80c4d60271230d6133a12c}{portMPU\_REGION\_XN\_BITMASK}}\ )\ \textcolor{comment}{/*\ Priv:\ R,\ Unpriv:\ No\ access.\ */}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00209}{209}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a5d028119417601b597ea67b30d9b4256}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_PRIV\_RO\_USER\_RO@{portMPU\_REGION\_PRIV\_RO\_USER\_RO}}
+\index{portMPU\_REGION\_PRIV\_RO\_USER\_RO@{portMPU\_REGION\_PRIV\_RO\_USER\_RO}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_PRIV\_RO\_USER\_RO}{portMPU\_REGION\_PRIV\_RO\_USER\_RO}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a5d028119417601b597ea67b30d9b4256} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RO\+\_\+\+USER\+\_\+\+RO~( 0x06\+UL $<$$<$ 8UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00212}{212}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a725cdb61215e91cf0322183895d29ead}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_PRIV\_RO\_USER\_RO\_EXEC@{portMPU\_REGION\_PRIV\_RO\_USER\_RO\_EXEC}}
+\index{portMPU\_REGION\_PRIV\_RO\_USER\_RO\_EXEC@{portMPU\_REGION\_PRIV\_RO\_USER\_RO\_EXEC}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_PRIV\_RO\_USER\_RO\_EXEC}{portMPU\_REGION\_PRIV\_RO\_USER\_RO\_EXEC}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a725cdb61215e91cf0322183895d29ead} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RO\+\_\+\+USER\+\_\+\+RO\+\_\+\+EXEC~( \mbox{\hyperlink{portmacro__asm_8h_a5d028119417601b597ea67b30d9b4256}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RO\+\_\+\+USER\+\_\+\+RO}} ) /\texorpdfstring{$\ast$}{*} Priv\+: RX, Unpriv\+: RX. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00213}{213}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a3e102be6d390b4b675a4e2e43aad3a35}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_PRIV\_RO\_USER\_RO\_NOEXEC@{portMPU\_REGION\_PRIV\_RO\_USER\_RO\_NOEXEC}}
+\index{portMPU\_REGION\_PRIV\_RO\_USER\_RO\_NOEXEC@{portMPU\_REGION\_PRIV\_RO\_USER\_RO\_NOEXEC}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_PRIV\_RO\_USER\_RO\_NOEXEC}{portMPU\_REGION\_PRIV\_RO\_USER\_RO\_NOEXEC}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a3e102be6d390b4b675a4e2e43aad3a35} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RO\+\_\+\+USER\+\_\+\+RO\+\_\+\+NOEXEC}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ \mbox{\hyperlink{portmacro__asm_8h_a5d028119417601b597ea67b30d9b4256}{portMPU\_REGION\_PRIV\_RO\_USER\_RO}}\ |\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmacro__asm_8h_afcca2a6fcf80c4d60271230d6133a12c}{portMPU\_REGION\_XN\_BITMASK}}\ )\ \textcolor{comment}{/*\ Priv:\ R,\ Unpriv:\ R.\ */}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00214}{214}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a06d1c4ba2b6c2e92fe4c93320e05cc10}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_PRIV\_RW\_USER\_NA@{portMPU\_REGION\_PRIV\_RW\_USER\_NA}}
+\index{portMPU\_REGION\_PRIV\_RW\_USER\_NA@{portMPU\_REGION\_PRIV\_RW\_USER\_NA}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_PRIV\_RW\_USER\_NA}{portMPU\_REGION\_PRIV\_RW\_USER\_NA}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a06d1c4ba2b6c2e92fe4c93320e05cc10} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RW\+\_\+\+USER\+\_\+\+NA~( 0x01\+UL $<$$<$ 8UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00192}{192}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_add646a87abc38f9dd969d59cfd44c0f9}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_PRIV\_RW\_USER\_NA\_EXEC@{portMPU\_REGION\_PRIV\_RW\_USER\_NA\_EXEC}}
+\index{portMPU\_REGION\_PRIV\_RW\_USER\_NA\_EXEC@{portMPU\_REGION\_PRIV\_RW\_USER\_NA\_EXEC}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_PRIV\_RW\_USER\_NA\_EXEC}{portMPU\_REGION\_PRIV\_RW\_USER\_NA\_EXEC}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_add646a87abc38f9dd969d59cfd44c0f9} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RW\+\_\+\+USER\+\_\+\+NA\+\_\+\+EXEC~( \mbox{\hyperlink{portmacro__asm_8h_a06d1c4ba2b6c2e92fe4c93320e05cc10}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RW\+\_\+\+USER\+\_\+\+NA}} ) /\texorpdfstring{$\ast$}{*} Priv\+: RWX, Unpriv\+: X. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00193}{193}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a7c69af3767a52360e3cba4009b0c576b}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_PRIV\_RW\_USER\_NA\_NOEXEC@{portMPU\_REGION\_PRIV\_RW\_USER\_NA\_NOEXEC}}
+\index{portMPU\_REGION\_PRIV\_RW\_USER\_NA\_NOEXEC@{portMPU\_REGION\_PRIV\_RW\_USER\_NA\_NOEXEC}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_PRIV\_RW\_USER\_NA\_NOEXEC}{portMPU\_REGION\_PRIV\_RW\_USER\_NA\_NOEXEC}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a7c69af3767a52360e3cba4009b0c576b} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RW\+\_\+\+USER\+\_\+\+NA\+\_\+\+NOEXEC}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ \mbox{\hyperlink{portmacro__asm_8h_a06d1c4ba2b6c2e92fe4c93320e05cc10}{portMPU\_REGION\_PRIV\_RW\_USER\_NA}}\ |\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmacro__asm_8h_afcca2a6fcf80c4d60271230d6133a12c}{portMPU\_REGION\_XN\_BITMASK}}\ )\ \textcolor{comment}{/*\ Priv:\ RW,\ Unpriv:\ No\ access.\ */}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00194}{194}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a85c95a89455585d1359283980528617a}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_PRIV\_RW\_USER\_RO@{portMPU\_REGION\_PRIV\_RW\_USER\_RO}}
+\index{portMPU\_REGION\_PRIV\_RW\_USER\_RO@{portMPU\_REGION\_PRIV\_RW\_USER\_RO}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_PRIV\_RW\_USER\_RO}{portMPU\_REGION\_PRIV\_RW\_USER\_RO}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a85c95a89455585d1359283980528617a} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RW\+\_\+\+USER\+\_\+\+RO~( 0x02\+UL $<$$<$ 8UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00197}{197}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a19cedc6e6e790d453b658057e86d88b7}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_PRIV\_RW\_USER\_RO\_EXEC@{portMPU\_REGION\_PRIV\_RW\_USER\_RO\_EXEC}}
+\index{portMPU\_REGION\_PRIV\_RW\_USER\_RO\_EXEC@{portMPU\_REGION\_PRIV\_RW\_USER\_RO\_EXEC}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_PRIV\_RW\_USER\_RO\_EXEC}{portMPU\_REGION\_PRIV\_RW\_USER\_RO\_EXEC}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a19cedc6e6e790d453b658057e86d88b7} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RW\+\_\+\+USER\+\_\+\+RO\+\_\+\+EXEC~( \mbox{\hyperlink{portmacro__asm_8h_a85c95a89455585d1359283980528617a}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RW\+\_\+\+USER\+\_\+\+RO}} ) /\texorpdfstring{$\ast$}{*} Priv\+: RWX, Unpriv\+: RX. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00198}{198}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_ad89ba304ac92d35013b0fa35609e247a}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_PRIV\_RW\_USER\_RO\_NOEXEC@{portMPU\_REGION\_PRIV\_RW\_USER\_RO\_NOEXEC}}
+\index{portMPU\_REGION\_PRIV\_RW\_USER\_RO\_NOEXEC@{portMPU\_REGION\_PRIV\_RW\_USER\_RO\_NOEXEC}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_PRIV\_RW\_USER\_RO\_NOEXEC}{portMPU\_REGION\_PRIV\_RW\_USER\_RO\_NOEXEC}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_ad89ba304ac92d35013b0fa35609e247a} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RW\+\_\+\+USER\+\_\+\+RO\+\_\+\+NOEXEC}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ \mbox{\hyperlink{portmacro__asm_8h_a85c95a89455585d1359283980528617a}{portMPU\_REGION\_PRIV\_RW\_USER\_RO}}\ |\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmacro__asm_8h_afcca2a6fcf80c4d60271230d6133a12c}{portMPU\_REGION\_XN\_BITMASK}}\ )\ \textcolor{comment}{/*\ Priv:\ RW,\ Unpriv:\ R.\ */}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00199}{199}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a5a93d92ec6758f1b2a5906934fd9ae59}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_PRIV\_RW\_USER\_RW@{portMPU\_REGION\_PRIV\_RW\_USER\_RW}}
+\index{portMPU\_REGION\_PRIV\_RW\_USER\_RW@{portMPU\_REGION\_PRIV\_RW\_USER\_RW}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_PRIV\_RW\_USER\_RW}{portMPU\_REGION\_PRIV\_RW\_USER\_RW}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a5a93d92ec6758f1b2a5906934fd9ae59} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RW\+\_\+\+USER\+\_\+\+RW~( 0x03\+UL $<$$<$ 8UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00202}{202}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_aed11e6b1f02ed2bd91b038aec6582da8}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_PRIV\_RW\_USER\_RW\_EXEC@{portMPU\_REGION\_PRIV\_RW\_USER\_RW\_EXEC}}
+\index{portMPU\_REGION\_PRIV\_RW\_USER\_RW\_EXEC@{portMPU\_REGION\_PRIV\_RW\_USER\_RW\_EXEC}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_PRIV\_RW\_USER\_RW\_EXEC}{portMPU\_REGION\_PRIV\_RW\_USER\_RW\_EXEC}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_aed11e6b1f02ed2bd91b038aec6582da8} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RW\+\_\+\+USER\+\_\+\+RW\+\_\+\+EXEC~( \mbox{\hyperlink{portmacro__asm_8h_a5a93d92ec6758f1b2a5906934fd9ae59}{port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RW\+\_\+\+USER\+\_\+\+RW}} ) /\texorpdfstring{$\ast$}{*} Priv\+: RWX, Unpriv\+: RWX. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00203}{203}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_af1baf35099afd1eb770ef4aa15585cb0}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_PRIV\_RW\_USER\_RW\_NOEXEC@{portMPU\_REGION\_PRIV\_RW\_USER\_RW\_NOEXEC}}
+\index{portMPU\_REGION\_PRIV\_RW\_USER\_RW\_NOEXEC@{portMPU\_REGION\_PRIV\_RW\_USER\_RW\_NOEXEC}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_PRIV\_RW\_USER\_RW\_NOEXEC}{portMPU\_REGION\_PRIV\_RW\_USER\_RW\_NOEXEC}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_af1baf35099afd1eb770ef4aa15585cb0} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+PRIV\+\_\+\+RW\+\_\+\+USER\+\_\+\+RW\+\_\+\+NOEXEC}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ \mbox{\hyperlink{portmacro__asm_8h_a5a93d92ec6758f1b2a5906934fd9ae59}{portMPU\_REGION\_PRIV\_RW\_USER\_RW}}\ |\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmacro__asm_8h_afcca2a6fcf80c4d60271230d6133a12c}{portMPU\_REGION\_XN\_BITMASK}}\ )\ \textcolor{comment}{/*\ Priv:\ RW,\ Unpriv:\ RW.\ */}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00204}{204}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_adf1cf0546e27921ace057d93cbf0687f}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_128B@{portMPU\_REGION\_SIZE\_128B}}
+\index{portMPU\_REGION\_SIZE\_128B@{portMPU\_REGION\_SIZE\_128B}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_128B}{portMPU\_REGION\_SIZE\_128B}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_adf1cf0546e27921ace057d93cbf0687f} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+128B~( 0x06\+UL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00141}{141}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_ac6905353be6234217a5683d5a74ccba5}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_128KB@{portMPU\_REGION\_SIZE\_128KB}}
+\index{portMPU\_REGION\_SIZE\_128KB@{portMPU\_REGION\_SIZE\_128KB}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_128KB}{portMPU\_REGION\_SIZE\_128KB}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_ac6905353be6234217a5683d5a74ccba5} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+128\+KB~( 0x10\+UL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00151}{151}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a9e825ad529e6e4a72e316cb30cc318f1}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_128MB@{portMPU\_REGION\_SIZE\_128MB}}
+\index{portMPU\_REGION\_SIZE\_128MB@{portMPU\_REGION\_SIZE\_128MB}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_128MB}{portMPU\_REGION\_SIZE\_128MB}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a9e825ad529e6e4a72e316cb30cc318f1} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+128\+MB~( 0x1\+AUL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00161}{161}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a76cd97cca65ae8e26530f87e8cea2fa4}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_16KB@{portMPU\_REGION\_SIZE\_16KB}}
+\index{portMPU\_REGION\_SIZE\_16KB@{portMPU\_REGION\_SIZE\_16KB}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_16KB}{portMPU\_REGION\_SIZE\_16KB}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a76cd97cca65ae8e26530f87e8cea2fa4} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+16\+KB~( 0x0\+DUL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00148}{148}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a5a9a8ed55c3a5d1b609f643c7b39821c}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_16MB@{portMPU\_REGION\_SIZE\_16MB}}
+\index{portMPU\_REGION\_SIZE\_16MB@{portMPU\_REGION\_SIZE\_16MB}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_16MB}{portMPU\_REGION\_SIZE\_16MB}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a5a9a8ed55c3a5d1b609f643c7b39821c} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+16\+MB~( 0x17\+UL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00158}{158}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_ad1c4eeb095651dd96b1539597ecb1aa2}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_1GB@{portMPU\_REGION\_SIZE\_1GB}}
+\index{portMPU\_REGION\_SIZE\_1GB@{portMPU\_REGION\_SIZE\_1GB}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_1GB}{portMPU\_REGION\_SIZE\_1GB}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_ad1c4eeb095651dd96b1539597ecb1aa2} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+1\+GB~( 0x1\+DUL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00164}{164}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a36fb99a1b33bde929fdb75b7d5d4157c}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_1KB@{portMPU\_REGION\_SIZE\_1KB}}
+\index{portMPU\_REGION\_SIZE\_1KB@{portMPU\_REGION\_SIZE\_1KB}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_1KB}{portMPU\_REGION\_SIZE\_1KB}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a36fb99a1b33bde929fdb75b7d5d4157c} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+1\+KB~( 0x09\+UL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00144}{144}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_ac1202723ce0ae734becf0e768ef6b7ed}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_1MB@{portMPU\_REGION\_SIZE\_1MB}}
+\index{portMPU\_REGION\_SIZE\_1MB@{portMPU\_REGION\_SIZE\_1MB}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_1MB}{portMPU\_REGION\_SIZE\_1MB}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_ac1202723ce0ae734becf0e768ef6b7ed} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+1\+MB~( 0x13\+UL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00154}{154}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a657afa0f1ec4022bbe8ac09c22e3993c}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_256B@{portMPU\_REGION\_SIZE\_256B}}
+\index{portMPU\_REGION\_SIZE\_256B@{portMPU\_REGION\_SIZE\_256B}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_256B}{portMPU\_REGION\_SIZE\_256B}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a657afa0f1ec4022bbe8ac09c22e3993c} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+256B~( 0x07\+UL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00142}{142}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a3d4f0909556a7ed918192ab7bf8f71cc}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_256KB@{portMPU\_REGION\_SIZE\_256KB}}
+\index{portMPU\_REGION\_SIZE\_256KB@{portMPU\_REGION\_SIZE\_256KB}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_256KB}{portMPU\_REGION\_SIZE\_256KB}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a3d4f0909556a7ed918192ab7bf8f71cc} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+256\+KB~( 0x11\+UL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00152}{152}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a76af9f653e2edffe81049d287787bed1}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_256MB@{portMPU\_REGION\_SIZE\_256MB}}
+\index{portMPU\_REGION\_SIZE\_256MB@{portMPU\_REGION\_SIZE\_256MB}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_256MB}{portMPU\_REGION\_SIZE\_256MB}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a76af9f653e2edffe81049d287787bed1} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+256\+MB~( 0x1\+BUL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00162}{162}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_ab7a9acc786926eea770d9217191e63af}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_2GB@{portMPU\_REGION\_SIZE\_2GB}}
+\index{portMPU\_REGION\_SIZE\_2GB@{portMPU\_REGION\_SIZE\_2GB}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_2GB}{portMPU\_REGION\_SIZE\_2GB}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_ab7a9acc786926eea770d9217191e63af} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+2\+GB~( 0x1\+EUL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00165}{165}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a67ed97b7b3aaaa1b3fd78766eeb80752}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_2KB@{portMPU\_REGION\_SIZE\_2KB}}
+\index{portMPU\_REGION\_SIZE\_2KB@{portMPU\_REGION\_SIZE\_2KB}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_2KB}{portMPU\_REGION\_SIZE\_2KB}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a67ed97b7b3aaaa1b3fd78766eeb80752} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+2\+KB~( 0x0\+AUL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00145}{145}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a680b3b51d7ef3babbb758110d9958286}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_2MB@{portMPU\_REGION\_SIZE\_2MB}}
+\index{portMPU\_REGION\_SIZE\_2MB@{portMPU\_REGION\_SIZE\_2MB}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_2MB}{portMPU\_REGION\_SIZE\_2MB}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a680b3b51d7ef3babbb758110d9958286} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+2\+MB~( 0x14\+UL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00155}{155}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_aaab5d1ee2ecb41dde317fb72879aee65}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_32B@{portMPU\_REGION\_SIZE\_32B}}
+\index{portMPU\_REGION\_SIZE\_32B@{portMPU\_REGION\_SIZE\_32B}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_32B}{portMPU\_REGION\_SIZE\_32B}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_aaab5d1ee2ecb41dde317fb72879aee65} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+32B~( 0x04\+UL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00139}{139}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a52582af09fe3197356a0929c6fd6b297}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_32KB@{portMPU\_REGION\_SIZE\_32KB}}
+\index{portMPU\_REGION\_SIZE\_32KB@{portMPU\_REGION\_SIZE\_32KB}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_32KB}{portMPU\_REGION\_SIZE\_32KB}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a52582af09fe3197356a0929c6fd6b297} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+32\+KB~( 0x0\+EUL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00149}{149}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a0e1fc23e5a2bb133ee4d918bb4a038f3}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_32MB@{portMPU\_REGION\_SIZE\_32MB}}
+\index{portMPU\_REGION\_SIZE\_32MB@{portMPU\_REGION\_SIZE\_32MB}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_32MB}{portMPU\_REGION\_SIZE\_32MB}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a0e1fc23e5a2bb133ee4d918bb4a038f3} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+32\+MB~( 0x18\+UL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00159}{159}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_af6febbcd5c50694b24f820ff38d84fb1}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_4GB@{portMPU\_REGION\_SIZE\_4GB}}
+\index{portMPU\_REGION\_SIZE\_4GB@{portMPU\_REGION\_SIZE\_4GB}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_4GB}{portMPU\_REGION\_SIZE\_4GB}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_af6febbcd5c50694b24f820ff38d84fb1} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+4\+GB~( 0x1\+FUL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00166}{166}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a7518dd89dfe63ad6527a71cc78bf1a67}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_4KB@{portMPU\_REGION\_SIZE\_4KB}}
+\index{portMPU\_REGION\_SIZE\_4KB@{portMPU\_REGION\_SIZE\_4KB}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_4KB}{portMPU\_REGION\_SIZE\_4KB}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a7518dd89dfe63ad6527a71cc78bf1a67} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+4\+KB~( 0x0\+BUL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00146}{146}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a4ccef4b1a686298fe506178a5efa43ba}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_4MB@{portMPU\_REGION\_SIZE\_4MB}}
+\index{portMPU\_REGION\_SIZE\_4MB@{portMPU\_REGION\_SIZE\_4MB}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_4MB}{portMPU\_REGION\_SIZE\_4MB}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a4ccef4b1a686298fe506178a5efa43ba} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+4\+MB~( 0x15\+UL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00156}{156}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a6550d5d9272028532d3b090dfee42379}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_512B@{portMPU\_REGION\_SIZE\_512B}}
+\index{portMPU\_REGION\_SIZE\_512B@{portMPU\_REGION\_SIZE\_512B}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_512B}{portMPU\_REGION\_SIZE\_512B}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a6550d5d9272028532d3b090dfee42379} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+512B~( 0x08\+UL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00143}{143}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a319485fb54d521a901790c7cd3a642d8}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_512KB@{portMPU\_REGION\_SIZE\_512KB}}
+\index{portMPU\_REGION\_SIZE\_512KB@{portMPU\_REGION\_SIZE\_512KB}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_512KB}{portMPU\_REGION\_SIZE\_512KB}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a319485fb54d521a901790c7cd3a642d8} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+512\+KB~( 0x12\+UL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00153}{153}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a66d1e622e1199806948950044325ef69}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_512MB@{portMPU\_REGION\_SIZE\_512MB}}
+\index{portMPU\_REGION\_SIZE\_512MB@{portMPU\_REGION\_SIZE\_512MB}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_512MB}{portMPU\_REGION\_SIZE\_512MB}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a66d1e622e1199806948950044325ef69} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+512\+MB~( 0x1\+CUL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00163}{163}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_afff023e4493279a56fe951751a31557d}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_64B@{portMPU\_REGION\_SIZE\_64B}}
+\index{portMPU\_REGION\_SIZE\_64B@{portMPU\_REGION\_SIZE\_64B}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_64B}{portMPU\_REGION\_SIZE\_64B}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_afff023e4493279a56fe951751a31557d} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+64B~( 0x05\+UL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00140}{140}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_af4e90e240b0165263a94eaaa80359fc4}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_64KB@{portMPU\_REGION\_SIZE\_64KB}}
+\index{portMPU\_REGION\_SIZE\_64KB@{portMPU\_REGION\_SIZE\_64KB}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_64KB}{portMPU\_REGION\_SIZE\_64KB}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_af4e90e240b0165263a94eaaa80359fc4} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+64\+KB~( 0x0\+FUL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00150}{150}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a5e7c51b2a04ab366ef504dd25d2cea71}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_64MB@{portMPU\_REGION\_SIZE\_64MB}}
+\index{portMPU\_REGION\_SIZE\_64MB@{portMPU\_REGION\_SIZE\_64MB}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_64MB}{portMPU\_REGION\_SIZE\_64MB}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a5e7c51b2a04ab366ef504dd25d2cea71} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+64\+MB~( 0x19\+UL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00160}{160}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a8e0abfa5fbf4c6ed7a0530d6fe4559fc}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_8KB@{portMPU\_REGION\_SIZE\_8KB}}
+\index{portMPU\_REGION\_SIZE\_8KB@{portMPU\_REGION\_SIZE\_8KB}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_8KB}{portMPU\_REGION\_SIZE\_8KB}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a8e0abfa5fbf4c6ed7a0530d6fe4559fc} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+8\+KB~( 0x0\+CUL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00147}{147}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a593db55ac857c53cbac68964157bcf84}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_SIZE\_8MB@{portMPU\_REGION\_SIZE\_8MB}}
+\index{portMPU\_REGION\_SIZE\_8MB@{portMPU\_REGION\_SIZE\_8MB}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_SIZE\_8MB}{portMPU\_REGION\_SIZE\_8MB}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a593db55ac857c53cbac68964157bcf84} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+SIZE\+\_\+8\+MB~( 0x16\+UL $<$$<$ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00157}{157}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_af87b4039d350b8478ad3ca6c1b8c519e}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_STRONGLY\_ORDERED\_SHAREABLE@{portMPU\_REGION\_STRONGLY\_ORDERED\_SHAREABLE}}
+\index{portMPU\_REGION\_STRONGLY\_ORDERED\_SHAREABLE@{portMPU\_REGION\_STRONGLY\_ORDERED\_SHAREABLE}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_STRONGLY\_ORDERED\_SHAREABLE}{portMPU\_REGION\_STRONGLY\_ORDERED\_SHAREABLE}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_af87b4039d350b8478ad3ca6c1b8c519e} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+STRONGLY\+\_\+\+ORDERED\+\_\+\+SHAREABLE~( 0x00\+UL ) /\texorpdfstring{$\ast$}{*} TEX=000, S=NA, C=0, B=0. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00170}{170}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_afcca2a6fcf80c4d60271230d6133a12c}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_REGION\_XN\_BITMASK@{portMPU\_REGION\_XN\_BITMASK}}
+\index{portMPU\_REGION\_XN\_BITMASK@{portMPU\_REGION\_XN\_BITMASK}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_XN\_BITMASK}{portMPU\_REGION\_XN\_BITMASK}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_afcca2a6fcf80c4d60271230d6133a12c} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+XN\+\_\+\+BITMASK~( 0x01\+UL $<$$<$ 12UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00185}{185}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a504d28f3716fcbb1b0c65a9871afeb67}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_SUBREGION\_0\_DISABLE@{portMPU\_SUBREGION\_0\_DISABLE}}
+\index{portMPU\_SUBREGION\_0\_DISABLE@{portMPU\_SUBREGION\_0\_DISABLE}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_SUBREGION\_0\_DISABLE}{portMPU\_SUBREGION\_0\_DISABLE}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a504d28f3716fcbb1b0c65a9871afeb67} 
+\#define port\+MPU\+\_\+\+SUBREGION\+\_\+0\+\_\+\+DISABLE~( 0x1\+UL $<$$<$ 8UL )}
+
+
+
+Macros required to manipulate MPU. 
+
+Further information about MPU can be found in Arm\textquotesingle{}s documentation \href{https://developer.arm.com/documentation/ddi0363/g/System-Control/Register-descriptions/c6&ndash;MPU-memory-region-programming-registers}{\texttt{https\+://developer.\+arm.\+com/documentation/ddi0363/g/\+System-\/\+Control/\+Register-\/descriptions/c6--\+MPU-\/memory-\/region-\/programming-\/registers}} 
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00116}{116}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a2c3984be95a7dc28de873e8a53319b44}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_SUBREGION\_1\_DISABLE@{portMPU\_SUBREGION\_1\_DISABLE}}
+\index{portMPU\_SUBREGION\_1\_DISABLE@{portMPU\_SUBREGION\_1\_DISABLE}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_SUBREGION\_1\_DISABLE}{portMPU\_SUBREGION\_1\_DISABLE}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a2c3984be95a7dc28de873e8a53319b44} 
+\#define port\+MPU\+\_\+\+SUBREGION\+\_\+1\+\_\+\+DISABLE~( 0x1\+UL $<$$<$ 9UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00117}{117}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a18c08846f905a6b00cb8a616e111353a}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_SUBREGION\_2\_DISABLE@{portMPU\_SUBREGION\_2\_DISABLE}}
+\index{portMPU\_SUBREGION\_2\_DISABLE@{portMPU\_SUBREGION\_2\_DISABLE}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_SUBREGION\_2\_DISABLE}{portMPU\_SUBREGION\_2\_DISABLE}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a18c08846f905a6b00cb8a616e111353a} 
+\#define port\+MPU\+\_\+\+SUBREGION\+\_\+2\+\_\+\+DISABLE~( 0x1\+UL $<$$<$ 10\+UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00118}{118}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a11ccda0a3982b95f9c328f8cb33f22f8}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_SUBREGION\_3\_DISABLE@{portMPU\_SUBREGION\_3\_DISABLE}}
+\index{portMPU\_SUBREGION\_3\_DISABLE@{portMPU\_SUBREGION\_3\_DISABLE}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_SUBREGION\_3\_DISABLE}{portMPU\_SUBREGION\_3\_DISABLE}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a11ccda0a3982b95f9c328f8cb33f22f8} 
+\#define port\+MPU\+\_\+\+SUBREGION\+\_\+3\+\_\+\+DISABLE~( 0x1\+UL $<$$<$ 11UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00119}{119}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a4d79fd15bb7c478da380558ccf348425}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_SUBREGION\_4\_DISABLE@{portMPU\_SUBREGION\_4\_DISABLE}}
+\index{portMPU\_SUBREGION\_4\_DISABLE@{portMPU\_SUBREGION\_4\_DISABLE}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_SUBREGION\_4\_DISABLE}{portMPU\_SUBREGION\_4\_DISABLE}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a4d79fd15bb7c478da380558ccf348425} 
+\#define port\+MPU\+\_\+\+SUBREGION\+\_\+4\+\_\+\+DISABLE~( 0x1\+UL $<$$<$ 12UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00120}{120}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a2afe5c62e0047c0a19310a91b6d0086c}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_SUBREGION\_5\_DISABLE@{portMPU\_SUBREGION\_5\_DISABLE}}
+\index{portMPU\_SUBREGION\_5\_DISABLE@{portMPU\_SUBREGION\_5\_DISABLE}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_SUBREGION\_5\_DISABLE}{portMPU\_SUBREGION\_5\_DISABLE}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a2afe5c62e0047c0a19310a91b6d0086c} 
+\#define port\+MPU\+\_\+\+SUBREGION\+\_\+5\+\_\+\+DISABLE~( 0x1\+UL $<$$<$ 13UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00121}{121}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_ae835a1bf15407ed6e3b66376904c9903}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_SUBREGION\_6\_DISABLE@{portMPU\_SUBREGION\_6\_DISABLE}}
+\index{portMPU\_SUBREGION\_6\_DISABLE@{portMPU\_SUBREGION\_6\_DISABLE}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_SUBREGION\_6\_DISABLE}{portMPU\_SUBREGION\_6\_DISABLE}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_ae835a1bf15407ed6e3b66376904c9903} 
+\#define port\+MPU\+\_\+\+SUBREGION\+\_\+6\+\_\+\+DISABLE~( 0x1\+UL $<$$<$ 14UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00122}{122}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a6db5e9863bb7065cdd15f4f22eff98d3}\index{portmacro\_asm.h@{portmacro\_asm.h}!portMPU\_SUBREGION\_7\_DISABLE@{portMPU\_SUBREGION\_7\_DISABLE}}
+\index{portMPU\_SUBREGION\_7\_DISABLE@{portMPU\_SUBREGION\_7\_DISABLE}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portMPU\_SUBREGION\_7\_DISABLE}{portMPU\_SUBREGION\_7\_DISABLE}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a6db5e9863bb7065cdd15f4f22eff98d3} 
+\#define port\+MPU\+\_\+\+SUBREGION\+\_\+7\+\_\+\+DISABLE~( 0x1\+UL $<$$<$ 15UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00123}{123}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_aca7e1a8a568a38b74cc9db10c8efebda}\index{portmacro\_asm.h@{portmacro\_asm.h}!portNUM\_CONFIGURABLE\_REGIONS@{portNUM\_CONFIGURABLE\_REGIONS}}
+\index{portNUM\_CONFIGURABLE\_REGIONS@{portNUM\_CONFIGURABLE\_REGIONS}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portNUM\_CONFIGURABLE\_REGIONS}{portNUM\_CONFIGURABLE\_REGIONS}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_aca7e1a8a568a38b74cc9db10c8efebda} 
+\#define port\+NUM\+\_\+\+CONFIGURABLE\+\_\+\+REGIONS~    ( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_aef7f2f8670e4dcc37d13e55236cc8c12}{port\+LAST\+\_\+\+CONFIGURABLE\+\_\+\+REGION}} -\/ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a7c87d488b9742426ef09ae95c75e1f43}{port\+FIRST\+\_\+\+CONFIGURABLE\+\_\+\+REGION}} ) + 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00132}{132}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a05e35f210f0e58fe583100a87cb16719}\index{portmacro\_asm.h@{portmacro\_asm.h}!portPRIVILEGED\_FLASH\_REGION@{portPRIVILEGED\_FLASH\_REGION}}
+\index{portPRIVILEGED\_FLASH\_REGION@{portPRIVILEGED\_FLASH\_REGION}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portPRIVILEGED\_FLASH\_REGION}{portPRIVILEGED\_FLASH\_REGION}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a05e35f210f0e58fe583100a87cb16719} 
+\#define port\+PRIVILEGED\+\_\+\+FLASH\+\_\+\+REGION~( port\+MPU\+\_\+\+TOTAL\+\_\+\+REGIONS -\/ 2UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00130}{130}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a32c2c550dd5989c7edc9a951c2e19fe1}\index{portmacro\_asm.h@{portmacro\_asm.h}!portPRIVILEGED\_RAM\_REGION@{portPRIVILEGED\_RAM\_REGION}}
+\index{portPRIVILEGED\_RAM\_REGION@{portPRIVILEGED\_RAM\_REGION}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portPRIVILEGED\_RAM\_REGION}{portPRIVILEGED\_RAM\_REGION}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a32c2c550dd5989c7edc9a951c2e19fe1} 
+\#define port\+PRIVILEGED\+\_\+\+RAM\+\_\+\+REGION~( port\+MPU\+\_\+\+TOTAL\+\_\+\+REGIONS -\/ 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00131}{131}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a1b0959d7e83d42f6c1dccbfe2535e3d5}\index{portmacro\_asm.h@{portmacro\_asm.h}!portSTACK\_REGION@{portSTACK\_REGION}}
+\index{portSTACK\_REGION@{portSTACK\_REGION}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portSTACK\_REGION}{portSTACK\_REGION}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a1b0959d7e83d42f6c1dccbfe2535e3d5} 
+\#define port\+STACK\+\_\+\+REGION~( port\+MPU\+\_\+\+TOTAL\+\_\+\+REGIONS -\/ 4UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00128}{128}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_aceca58fbf3e70153879a43200a523344}\index{portmacro\_asm.h@{portmacro\_asm.h}!portSVC\_SYSTEM\_CALL\_EXIT@{portSVC\_SYSTEM\_CALL\_EXIT}}
+\index{portSVC\_SYSTEM\_CALL\_EXIT@{portSVC\_SYSTEM\_CALL\_EXIT}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portSVC\_SYSTEM\_CALL\_EXIT}{portSVC\_SYSTEM\_CALL\_EXIT}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_aceca58fbf3e70153879a43200a523344} 
+\#define port\+SVC\+\_\+\+SYSTEM\+\_\+\+CALL\+\_\+\+EXIT~0x0104U}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00104}{104}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a176834b4b22e63f73e0220d6fb65f7a5}\index{portmacro\_asm.h@{portmacro\_asm.h}!portSVC\_YIELD@{portSVC\_YIELD}}
+\index{portSVC\_YIELD@{portSVC\_YIELD}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portSVC\_YIELD}{portSVC\_YIELD}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a176834b4b22e63f73e0220d6fb65f7a5} 
+\#define port\+SVC\+\_\+\+YIELD~0x0100U}
+
+
+
+SVC numbers for various scheduler operations. 
+
+\begin{DoxyNote}{Note}
+These value must not be used in \doxylink{mpu__syscall__numbers_8h}{mpu\+\_\+syscall\+\_\+numbers.\+h}. 
+\end{DoxyNote}
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00103}{103}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a6871bad2d35a54d438084505d31bd22b}\index{portmacro\_asm.h@{portmacro\_asm.h}!portSYSTEM\_CALL\_INFO\_OFFSET@{portSYSTEM\_CALL\_INFO\_OFFSET}}
+\index{portSYSTEM\_CALL\_INFO\_OFFSET@{portSYSTEM\_CALL\_INFO\_OFFSET}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portSYSTEM\_CALL\_INFO\_OFFSET}{portSYSTEM\_CALL\_INFO\_OFFSET}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a6871bad2d35a54d438084505d31bd22b} 
+\#define port\+SYSTEM\+\_\+\+CALL\+\_\+\+INFO\+\_\+\+OFFSET}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ (\ (\ 1U\ \textcolor{comment}{/*\ pxTopOfStack.\ */}\ +\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ (\ \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m3___m_p_u_2portmacro_8h_aee11e56d6fbdceb943ca29b686c4c322}{portTOTAL\_NUM\_REGIONS\_IN\_TCB}}\ *\ 3U\ )\ +\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ 1U\ \textcolor{comment}{/*\ ulTaskFlags.\ */}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ )\ *\ 4U\ )}
+
+\end{DoxyCode}
+
+
+Offset of x\+System\+Call\+Stack\+Info from the start of a TCB. 
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00269}{269}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a868b2006b5ce8f6a2642ad13ab5332ad}\index{portmacro\_asm.h@{portmacro\_asm.h}!portTASK\_IS\_PRIVILEGED\_FLAG@{portTASK\_IS\_PRIVILEGED\_FLAG}}
+\index{portTASK\_IS\_PRIVILEGED\_FLAG@{portTASK\_IS\_PRIVILEGED\_FLAG}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portTASK\_IS\_PRIVILEGED\_FLAG}{portTASK\_IS\_PRIVILEGED\_FLAG}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a868b2006b5ce8f6a2642ad13ab5332ad} 
+\#define port\+TASK\+\_\+\+IS\+\_\+\+PRIVILEGED\+\_\+\+FLAG~( 1UL $<$$<$ 1UL )}
+
+
+
+Flag used to mark that a Free\+RTOS Task is privileged. 
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00094}{94}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_aee11e56d6fbdceb943ca29b686c4c322}\index{portmacro\_asm.h@{portmacro\_asm.h}!portTOTAL\_NUM\_REGIONS\_IN\_TCB@{portTOTAL\_NUM\_REGIONS\_IN\_TCB}}
+\index{portTOTAL\_NUM\_REGIONS\_IN\_TCB@{portTOTAL\_NUM\_REGIONS\_IN\_TCB}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portTOTAL\_NUM\_REGIONS\_IN\_TCB}{portTOTAL\_NUM\_REGIONS\_IN\_TCB}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_aee11e56d6fbdceb943ca29b686c4c322} 
+\#define port\+TOTAL\+\_\+\+NUM\+\_\+\+REGIONS\+\_\+\+IN\+\_\+\+TCB~( \mbox{\hyperlink{portable_8h_aca7e1a8a568a38b74cc9db10c8efebda}{port\+NUM\+\_\+\+CONFIGURABLE\+\_\+\+REGIONS}} + 1UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00135}{135}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a98374efce189d3a6a0ec99d80ba1619e}\index{portmacro\_asm.h@{portmacro\_asm.h}!portUNPRIVILEGED\_FLASH\_REGION@{portUNPRIVILEGED\_FLASH\_REGION}}
+\index{portUNPRIVILEGED\_FLASH\_REGION@{portUNPRIVILEGED\_FLASH\_REGION}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{portUNPRIVILEGED\_FLASH\_REGION}{portUNPRIVILEGED\_FLASH\_REGION}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a98374efce189d3a6a0ec99d80ba1619e} 
+\#define port\+UNPRIVILEGED\+\_\+\+FLASH\+\_\+\+REGION~( port\+MPU\+\_\+\+TOTAL\+\_\+\+REGIONS -\/ 3UL )}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00129}{129}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a312ff1d5550cc17c9907a153b04e0efa}\index{portmacro\_asm.h@{portmacro\_asm.h}!SVC\_MODE@{SVC\_MODE}}
+\index{SVC\_MODE@{SVC\_MODE}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{SVC\_MODE}{SVC\_MODE}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a312ff1d5550cc17c9907a153b04e0efa} 
+\#define SVC\+\_\+\+MODE~0x13U}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00082}{82}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_ae62d91253c85a3dff6a838244f460f70}\index{portmacro\_asm.h@{portmacro\_asm.h}!SYS\_MODE@{SYS\_MODE}}
+\index{SYS\_MODE@{SYS\_MODE}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{SYS\_MODE}{SYS\_MODE}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_ae62d91253c85a3dff6a838244f460f70} 
+\#define SYS\+\_\+\+MODE~0x1\+FU}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00087}{87}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a050eda1514ebd401d55cd61d2f7f78d7}\index{portmacro\_asm.h@{portmacro\_asm.h}!UND\_MODE@{UND\_MODE}}
+\index{UND\_MODE@{UND\_MODE}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{UND\_MODE}{UND\_MODE}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a050eda1514ebd401d55cd61d2f7f78d7} 
+\#define UND\+\_\+\+MODE~0x1\+BU}
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00086}{86}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+
+\Hypertarget{portmacro__asm_8h_a4590bc240c9d6d928eecc7484553c2e7}\index{portmacro\_asm.h@{portmacro\_asm.h}!USER\_MODE@{USER\_MODE}}
+\index{USER\_MODE@{USER\_MODE}!portmacro\_asm.h@{portmacro\_asm.h}}
+\doxysubsubsection{\texorpdfstring{USER\_MODE}{USER\_MODE}}
+{\footnotesize\ttfamily \label{portmacro__asm_8h_a4590bc240c9d6d928eecc7484553c2e7} 
+\#define USER\+\_\+\+MODE~0x10U}
+
+
+
+CPSR bits for various processor modes. 
+
+
+
+Definition at line \mbox{\hyperlink{portmacro__asm_8h_source_l00079}{79}} of file \mbox{\hyperlink{portmacro__asm_8h_source}{portmacro\+\_\+asm.\+h}}.
+

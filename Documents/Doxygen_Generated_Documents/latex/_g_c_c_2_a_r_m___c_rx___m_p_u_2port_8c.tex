@@ -1,0 +1,314 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+GCC/\+ARM\+\_\+\+CRx\+\_\+\+MPU/port.c File Reference}
+\hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c}{}\label{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/ARM\_CRx\_MPU/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/ARM\_CRx\_MPU/port.c}}
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}portmacro.\+h"{}}\newline
+{\ttfamily \#include "{}task.\+h"{}}\newline
+{\ttfamily \#include "{}mpu\+\_\+syscall\+\_\+numbers.\+h"{}}\newline
+Include dependency graph for port.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_ab622d8c674f2a417a666a7ed89109e79}{MPU\+\_\+\+WRAPPERS\+\_\+\+INCLUDED\+\_\+\+FROM\+\_\+\+API\+\_\+\+FILE}}
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_ae18dd907c689d62c6fa18011b0499f7c}{port\+UINT32\+\_\+\+MAX}}~( \texorpdfstring{$\sim$}{\string~}( ( uint32\+\_\+t ) 0 ) )
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a2a9b0b46310abdc43c0aaf33e70b07a7}{port\+ADD\+\_\+\+UINT32\+\_\+\+WILL\+\_\+\+OVERFLOW}}(\mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_a79f1ee1a890da6b8d5ae0087f0a941b8}{a}},  b)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}} void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a7b67773eb34a6e6d069bbd01617dba30}{v\+Port\+Enter\+Critical}} (void)
+\begin{DoxyCompactList}\small\item\em Enter critical section. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}} void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a9374ff6292665d59f4469211a199272a}{v\+Port\+Exit\+Critical}} (void)
+\begin{DoxyCompactList}\small\item\em Exit critical section. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_acb1f64c1ae2f804fd4abc17bbad619d6}{px\+Port\+Initialise\+Stack}} (\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}px\+Top\+Of\+Stack, \mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}} px\+Code, void \texorpdfstring{$\ast$}{*}pv\+Parameters, \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Run\+Privileged, \mbox{\hyperlink{structx_m_p_u___s_e_t_t_i_n_g_s}{x\+MPU\+\_\+\+SETTINGS}} \texorpdfstring{$\ast$}{*}x\+MPUSettings)
+\begin{DoxyCompactList}\small\item\em Setup a Free\+RTOS task\textquotesingle{}s initial context. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a67ff6f07b6f326aaef810791955a7b64}{v\+Port\+Store\+Task\+MPUSettings}} (\mbox{\hyperlink{structx_m_p_u___s_e_t_t_i_n_g_s}{x\+MPU\+\_\+\+SETTINGS}} \texorpdfstring{$\ast$}{*}x\+MPUSettings, const struct \mbox{\hyperlink{structx_m_e_m_o_r_y___r_e_g_i_o_n}{x\+MEMORY\+\_\+\+REGION}} \texorpdfstring{$\ast$}{*}const x\+Regions, \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}px\+Bottom\+Of\+Stack, uint32\+\_\+t ul\+Stack\+Depth)
+\begin{DoxyCompactList}\small\item\em Store a Free\+RTOS task\textquotesingle{}s MPU settings in its TCB. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a21335221c26ff106b4f5e87edf6567aa}{x\+Port\+Is\+Task\+Privileged}} (void)
+\begin{DoxyCompactList}\small\item\em Checks whether or not a task is privileged. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{x\+Port\+Start\+Scheduler}} (void)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_ac0ef06e97192d35ffbb89e04a8cef668}{x\+Port\+Is\+Authorized\+To\+Access\+Buffer}} (const void \texorpdfstring{$\ast$}{*}pv\+Buffer, uint32\+\_\+t ul\+Buffer\+Length, uint32\+\_\+t ul\+Access\+Requested)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a687076084d0a903ebb72f9694e118b4e}{x\+Port\+Is\+Authorized\+To\+Access\+Kernel\+Object}} (int32\+\_\+t l\+Internal\+Index\+Of\+Kernel\+Object)
+\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a813e8227aedfc6bd83c66c4a9b8e4f41}{prv\+Task\+Exit\+Error}} (void)
+\begin{DoxyCompactList}\small\item\em Default return address for tasks. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{v\+Port\+End\+Scheduler}} (void)
+\begin{DoxyCompactList}\small\item\em End the Free\+RTOS scheduler. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{mpu__wrappers_8h_a56a0b54ca924c56d192d4389ba585ed5}{PRIVILEGED\+\_\+\+DATA}} volatile \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a63864d1cdd84e598096e72ddd3cb41f3}{ul\+Critical\+Nesting}} = 0x\+FFFF
+\begin{DoxyCompactList}\small\item\em Variable used to keep track of critical section nesting. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{mpu__wrappers_8h_a56a0b54ca924c56d192d4389ba585ed5}{PRIVILEGED\+\_\+\+DATA}} volatile \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a3fd4caafa183ca522d206785554d841d}{ul\+Port\+Yield\+Required}} = \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pd\+FALSE}}
+\begin{DoxyCompactList}\small\item\em Set to 1 to pend a context switch from an ISR. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{mpu__wrappers_8h_a56a0b54ca924c56d192d4389ba585ed5}{PRIVILEGED\+\_\+\+DATA}} volatile \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_aca1d0af3aeb9ffd2c5fb26c64fdf2f2a}{ul\+Port\+Interrupt\+Nesting}} = 0\+UL
+\begin{DoxyCompactList}\small\item\em Interrupt nesting depth, used to count the number of interrupts to unwind. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_ab622d8c674f2a417a666a7ed89109e79}\index{port.c@{port.c}!MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE@{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}}
+\index{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE@{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_ab622d8c674f2a417a666a7ed89109e79} 
+\#define MPU\+\_\+\+WRAPPERS\+\_\+\+INCLUDED\+\_\+\+FROM\+\_\+\+API\+\_\+\+FILE}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source_l00036}{36}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a2a9b0b46310abdc43c0aaf33e70b07a7}\index{port.c@{port.c}!portADD\_UINT32\_WILL\_OVERFLOW@{portADD\_UINT32\_WILL\_OVERFLOW}}
+\index{portADD\_UINT32\_WILL\_OVERFLOW@{portADD\_UINT32\_WILL\_OVERFLOW}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portADD\_UINT32\_WILL\_OVERFLOW}{portADD\_UINT32\_WILL\_OVERFLOW}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a2a9b0b46310abdc43c0aaf33e70b07a7} 
+\#define port\+ADD\+\_\+\+UINT32\+\_\+\+WILL\+\_\+\+OVERFLOW(\begin{DoxyParamCaption}\item[{}]{\mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_a79f1ee1a890da6b8d5ae0087f0a941b8}{a}}}{, }\item[{}]{b}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\ (\ \mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_a79f1ee1a890da6b8d5ae0087f0a941b8}{a}}\ )\ >\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_ae18dd907c689d62c6fa18011b0499f7c}{portUINT32\_MAX}}\ -\/\ (\ b\ )\ )\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source_l00051}{51}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_ae18dd907c689d62c6fa18011b0499f7c}\index{port.c@{port.c}!portUINT32\_MAX@{portUINT32\_MAX}}
+\index{portUINT32\_MAX@{portUINT32\_MAX}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portUINT32\_MAX}{portUINT32\_MAX}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_ae18dd907c689d62c6fa18011b0499f7c} 
+\#define port\+UINT32\+\_\+\+MAX~( \texorpdfstring{$\sim$}{\string~}( ( uint32\+\_\+t ) 0 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source_l00048}{48}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source}{port.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a813e8227aedfc6bd83c66c4a9b8e4f41}\index{port.c@{port.c}!prvTaskExitError@{prvTaskExitError}}
+\index{prvTaskExitError@{prvTaskExitError}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{prvTaskExitError()}{prvTaskExitError()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a813e8227aedfc6bd83c66c4a9b8e4f41} 
+void prv\+Task\+Exit\+Error (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Default return address for tasks. 
+
+Used to catch tasks that attempt to return from their implementing function.
+
+\begin{DoxyNote}{Note}
+This function is used as the default return address for tasks if config\+TASK\+\_\+\+RETURN\+\_\+\+ADDRESS is not defined in Free\+RTOSConfig.\+h. 
+\end{DoxyNote}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source_l00777}{777}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source}{port.\+c}}.
+
+Here is the caller graph for this function\+:
+% FIG 1
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_acb1f64c1ae2f804fd4abc17bbad619d6}\index{port.c@{port.c}!pxPortInitialiseStack@{pxPortInitialiseStack}}
+\index{pxPortInitialiseStack@{pxPortInitialiseStack}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{pxPortInitialiseStack()}{pxPortInitialiseStack()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_acb1f64c1ae2f804fd4abc17bbad619d6} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} px\+Port\+Initialise\+Stack (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{px\+Top\+Of\+Stack}{, }\item[{\mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}}}]{px\+Code}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{, }\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}}}]{x\+Run\+Privileged}{, }\item[{\mbox{\hyperlink{structx_m_p_u___s_e_t_t_i_n_g_s}{x\+MPU\+\_\+\+SETTINGS}} \texorpdfstring{$\ast$}{*}}]{x\+MPUSettings}{}\end{DoxyParamCaption})}
+
+
+
+Setup a Free\+RTOS task\textquotesingle{}s initial context. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em px\+Top\+Of\+Stack} & Top of stack. \\
+\hline
+{\em px\+Code} & The task function. \\
+\hline
+{\em pv\+Parameters} & Argument passed to the task function. \\
+\hline
+{\em x\+Run\+Privileged} & Marks if the task is privileged. \\
+\hline
+{\em x\+MPUSettings} & MPU settings of the task.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Location where to restore the task\textquotesingle{}s context from. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source_l00162}{162}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}\index{port.c@{port.c}!vPortEndScheduler@{vPortEndScheduler}}
+\index{vPortEndScheduler@{vPortEndScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEndScheduler()}{vPortEndScheduler()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423} 
+void v\+Port\+End\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+End the Free\+RTOS scheduler. 
+
+Not implemented on this port. 
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source_l00794}{794}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a7b67773eb34a6e6d069bbd01617dba30}\index{port.c@{port.c}!vPortEnterCritical@{vPortEnterCritical}}
+\index{vPortEnterCritical@{vPortEnterCritical}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEnterCritical()}{vPortEnterCritical()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a7b67773eb34a6e6d069bbd01617dba30} 
+\mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}} void v\+Port\+Enter\+Critical (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Enter critical section. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source_l00805}{805}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a9374ff6292665d59f4469211a199272a}\index{port.c@{port.c}!vPortExitCritical@{vPortExitCritical}}
+\index{vPortExitCritical@{vPortExitCritical}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortExitCritical()}{vPortExitCritical()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a9374ff6292665d59f4469211a199272a} 
+\mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}} void v\+Port\+Exit\+Critical (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Exit critical section. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source_l00827}{827}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a67ff6f07b6f326aaef810791955a7b64}\index{port.c@{port.c}!vPortStoreTaskMPUSettings@{vPortStoreTaskMPUSettings}}
+\index{vPortStoreTaskMPUSettings@{vPortStoreTaskMPUSettings}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortStoreTaskMPUSettings()}{vPortStoreTaskMPUSettings()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a67ff6f07b6f326aaef810791955a7b64} 
+void v\+Port\+Store\+Task\+MPUSettings (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structx_m_p_u___s_e_t_t_i_n_g_s}{x\+MPU\+\_\+\+SETTINGS}} \texorpdfstring{$\ast$}{*}}]{x\+MPUSettings}{, }\item[{const struct \mbox{\hyperlink{structx_m_e_m_o_r_y___r_e_g_i_o_n}{x\+MEMORY\+\_\+\+REGION}} \texorpdfstring{$\ast$}{*}const}]{x\+Regions}{, }\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{px\+Bottom\+Of\+Stack}{, }\item[{uint32\+\_\+t}]{ul\+Stack\+Depth}{}\end{DoxyParamCaption})}
+
+
+
+Store a Free\+RTOS task\textquotesingle{}s MPU settings in its TCB. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+MPUSettings} & The MPU settings in TCB. \\
+\hline
+{\em x\+Regions} & The updated MPU settings requested by the task. \\
+\hline
+{\em px\+Bottom\+Of\+Stack} & The base address of the task\textquotesingle{}s Stack. \\
+\hline
+{\em ul\+Stack\+Depth} & The length of the task\textquotesingle{}s stack. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source_l00338}{338}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_ac0ef06e97192d35ffbb89e04a8cef668}\index{port.c@{port.c}!xPortIsAuthorizedToAccessBuffer@{xPortIsAuthorizedToAccessBuffer}}
+\index{xPortIsAuthorizedToAccessBuffer@{xPortIsAuthorizedToAccessBuffer}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortIsAuthorizedToAccessBuffer()}{xPortIsAuthorizedToAccessBuffer()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_ac0ef06e97192d35ffbb89e04a8cef668} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Is\+Authorized\+To\+Access\+Buffer (\begin{DoxyParamCaption}\item[{const void \texorpdfstring{$\ast$}{*}}]{pv\+Buffer}{, }\item[{uint32\+\_\+t}]{ul\+Buffer\+Length}{, }\item[{uint32\+\_\+t}]{ul\+Access\+Requested}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source_l00624}{624}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a687076084d0a903ebb72f9694e118b4e}\index{port.c@{port.c}!xPortIsAuthorizedToAccessKernelObject@{xPortIsAuthorizedToAccessKernelObject}}
+\index{xPortIsAuthorizedToAccessKernelObject@{xPortIsAuthorizedToAccessKernelObject}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortIsAuthorizedToAccessKernelObject()}{xPortIsAuthorizedToAccessKernelObject()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a687076084d0a903ebb72f9694e118b4e} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Is\+Authorized\+To\+Access\+Kernel\+Object (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{l\+Internal\+Index\+Of\+Kernel\+Object}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source_l00718}{718}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a21335221c26ff106b4f5e87edf6567aa}\index{port.c@{port.c}!xPortIsTaskPrivileged@{xPortIsTaskPrivileged}}
+\index{xPortIsTaskPrivileged@{xPortIsTaskPrivileged}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortIsTaskPrivileged()}{xPortIsTaskPrivileged()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a21335221c26ff106b4f5e87edf6567aa} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Is\+Task\+Privileged (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Checks whether or not a task is privileged. 
+
+\begin{DoxyNote}{Note}
+A task\textquotesingle{}s privilege level is associated with the task and is different from the processor\textquotesingle{}s privilege level returned by x\+Port\+Is\+Privileged. For example, the processor is privileged when an unprivileged task executes a system call.
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+pd\+TRUE if the task is privileged, pd\+FALSE otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source_l00431}{431}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}\index{port.c@{port.c}!xPortStartScheduler@{xPortStartScheduler}}
+\index{xPortStartScheduler@{xPortStartScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortStartScheduler()}{xPortStartScheduler()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_ade5a8c6666e7413a0355cc252029c5c6} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Start\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source_l00449}{449}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\label{doc-var-members}
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a63864d1cdd84e598096e72ddd3cb41f3}\index{port.c@{port.c}!ulCriticalNesting@{ulCriticalNesting}}
+\index{ulCriticalNesting@{ulCriticalNesting}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{ulCriticalNesting}{ulCriticalNesting}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a63864d1cdd84e598096e72ddd3cb41f3} 
+\mbox{\hyperlink{mpu__wrappers_8h_a56a0b54ca924c56d192d4389ba585ed5}{PRIVILEGED\+\_\+\+DATA}} volatile \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} ul\+Critical\+Nesting = 0x\+FFFF}
+
+
+
+Variable used to keep track of critical section nesting. 
+
+This variable is stored as part of the task context and must be initialised to a non zero value to ensure interrupts don\textquotesingle{}t inadvertently become unmasked before the scheduler starts. As it is stored as part of the task context, it will be set to 0 when the first task is started. 
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source_l00064}{64}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_aca1d0af3aeb9ffd2c5fb26c64fdf2f2a}\index{port.c@{port.c}!ulPortInterruptNesting@{ulPortInterruptNesting}}
+\index{ulPortInterruptNesting@{ulPortInterruptNesting}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{ulPortInterruptNesting}{ulPortInterruptNesting}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_aca1d0af3aeb9ffd2c5fb26c64fdf2f2a} 
+\mbox{\hyperlink{mpu__wrappers_8h_a56a0b54ca924c56d192d4389ba585ed5}{PRIVILEGED\+\_\+\+DATA}} volatile \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} ul\+Port\+Interrupt\+Nesting = 0\+UL}
+
+
+
+Interrupt nesting depth, used to count the number of interrupts to unwind. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source_l00078}{78}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a3fd4caafa183ca522d206785554d841d}\index{port.c@{port.c}!ulPortYieldRequired@{ulPortYieldRequired}}
+\index{ulPortYieldRequired@{ulPortYieldRequired}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{ulPortYieldRequired}{ulPortYieldRequired}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_a3fd4caafa183ca522d206785554d841d} 
+\mbox{\hyperlink{mpu__wrappers_8h_a56a0b54ca924c56d192d4389ba585ed5}{PRIVILEGED\+\_\+\+DATA}} volatile \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} ul\+Port\+Yield\+Required = \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pd\+FALSE}}}
+
+
+
+Set to 1 to pend a context switch from an ISR. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source_l00071}{71}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source}{port.\+c}}.
+

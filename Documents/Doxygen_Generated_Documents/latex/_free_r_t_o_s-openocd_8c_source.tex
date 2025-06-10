@@ -1,0 +1,33 @@
+\doxysection{Free\+RTOS-\/openocd.c}
+\hypertarget{_free_r_t_o_s-openocd_8c_source}{}\label{_free_r_t_o_s-openocd_8c_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/Xtensa\_ESP32/FreeRTOS-\/openocd.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/Xtensa\_ESP32/FreeRTOS-\/openocd.c}}
+\mbox{\hyperlink{_free_r_t_o_s-openocd_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00002}00002\ \textcolor{comment}{\ *\ Since\ at\ least\ FreeRTOS\ V7.5.3\ uxTopUsedPriority\ is\ no\ longer}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00003}00003\ \textcolor{comment}{\ *\ present\ in\ the\ kernel,\ so\ it\ has\ to\ be\ supplied\ by\ other\ means\ for}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00004}00004\ \textcolor{comment}{\ *\ OpenOCD's\ threads\ awareness.}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00005}00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00006}00006\ \textcolor{comment}{\ *\ Add\ this\ file\ to\ your\ project,\ and,\ if\ you're\ using\ -\/-\/gc-\/sections,}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00007}00007\ \textcolor{comment}{\ *\ \`{}\`{}-\/-\/undefined=uxTopUsedPriority''\ (or}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00008}00008\ \textcolor{comment}{\ *\ \`{}\`{}-\/Wl,-\/-\/undefined=uxTopUsedPriority''\ when\ using\ gcc\ for\ final}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00009}00009\ \textcolor{comment}{\ *\ linking)\ to\ your\ LDFLAGS;\ same\ with\ all\ the\ other\ symbols\ you\ need.}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00010}00010\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_free_r_t_o_s_8h}{FreeRTOS.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}esp\_attr.h"{}}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}sdkconfig.h"{}}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00016}00016\ \textcolor{preprocessor}{\#ifdef\ \_\_GNUC\_\_}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00017}00017\ \textcolor{preprocessor}{\ \ \ \ \#define\ USED\ \ \ \ \_\_attribute\_\_(\ (\ used\ )\ )}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00018}00018\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00019}\mbox{\hyperlink{_free_r_t_o_s-openocd_8c_abcd0a22ee4346cad5706adb6d2119429}{00019}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ USED}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00020}00020\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00022}00022\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00023}00023\ \textcolor{comment}{\ *\ This\ file\ is\ no\ longer\ needed\ as\ AFTER\ FreeRTOS\ V10.14.1\ OpenOCD\ is\ fixed\ in\ the\ kernel.}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00024}00024\ \textcolor{comment}{\ *\ \#ifdef\ CONFIG\_ESP32\_DEBUG\_OCDAWARE}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00025}00025\ \textcolor{comment}{\ *\ \ \ const\ int\ USED\ DRAM\_ATTR\ uxTopUsedPriority\ =\ configMAX\_PRIORITIES\ -\/\ 1;}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00026}00026\ \textcolor{comment}{\ *\ \#endif}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s-openocd_8c_source_l00027}00027\ \textcolor{comment}{\ */}}
+
+\end{DoxyCode}

@@ -1,0 +1,722 @@
+\doxysection{port.\+c}
+\hypertarget{_m_s_v_c-_ming_w_2port_8c_source}{}\label{_m_s_v_c-_ming_w_2port_8c_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/MSVC-\/MingW/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/MSVC-\/MingW/port.c}}
+\mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00029}00029\ \textcolor{comment}{/*\ Standard\ includes.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00030}00030\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{stdio_8h}{stdio.h}}>}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00032}00032\ \textcolor{comment}{/*\ Scheduler\ includes.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00033}00033\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_free_r_t_o_s_8h}{FreeRTOS.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00034}00034\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{task_8h}{task.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00036}00036\ \textcolor{preprocessor}{\#ifdef\ \_\_GNUC\_\_}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00037}00037\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}mmsystem.h"{}}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00038}00038\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00039}00039\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ comment(lib,\ "{}winmm.lib"{})}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00040}00040\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00042}\mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_aecc0af206233a1ecf6e7b01daa73591d}{00042}}\ \textcolor{preprocessor}{\#define\ portMAX\_INTERRUPTS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ (\ uint32\_t\ )\ sizeof(\ uint32\_t\ )\ *\ 8UL\ )\ }\textcolor{comment}{/*\ The\ number\ of\ bits\ in\ an\ uint32\_t.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00043}\mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_ab7c7cbbda4fb9a253c7e5086071db162}{00043}}\ \textcolor{preprocessor}{\#define\ portNO\_CRITICAL\_NESTING\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ (\ uint32\_t\ )\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00045}00045\ \textcolor{comment}{/*\ The\ priorities\ at\ which\ the\ various\ components\ of\ the\ simulation\ execute.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00046}\mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_afbc387bb21b715c4e863be795b45cd46}{00046}}\ \textcolor{preprocessor}{\#define\ portDELETE\_SELF\_THREAD\_PRIORITY\ \ \ \ \ \ \ \ \ \ \ \ \ THREAD\_PRIORITY\_TIME\_CRITICAL\ }\textcolor{comment}{/*\ Must\ be\ highest.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00047}\mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_a31f6d42078ab01c6c46d81b7b3a4704f}{00047}}\ \textcolor{preprocessor}{\#define\ portSIMULATED\_INTERRUPTS\_THREAD\_PRIORITY\ \ \ \ THREAD\_PRIORITY\_TIME\_CRITICAL}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00048}\mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_aef0dc5e5ce01b116dc1d12fb7bde7cef}{00048}}\ \textcolor{preprocessor}{\#define\ portSIMULATED\_TIMER\_THREAD\_PRIORITY\ \ \ \ \ \ \ \ \ THREAD\_PRIORITY\_HIGHEST}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00049}\mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_ab021565a458c203011a2558d51a88938}{00049}}\ \textcolor{preprocessor}{\#define\ portTASK\_THREAD\_PRIORITY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ THREAD\_PRIORITY\_ABOVE\_NORMAL}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00051}00051\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00052}00052\ \textcolor{comment}{\ *\ Created\ as\ a\ high\ priority\ thread,\ this\ function\ uses\ a\ timer\ to\ simulate}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00053}00053\ \textcolor{comment}{\ *\ a\ tick\ interrupt\ being\ generated\ on\ an\ embedded\ target.\ \ In\ this\ Windows}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00054}00054\ \textcolor{comment}{\ *\ environment\ the\ timer\ does\ not\ achieve\ anything\ approaching\ real\ time}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00055}00055\ \textcolor{comment}{\ *\ performance\ though.}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00056}00056\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00057}00057\ \textcolor{keyword}{static}\ DWORD\ WINAPI\ prvSimulatedPeripheralTimer(\ LPVOID\ lpParameter\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00059}00059\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00060}00060\ \textcolor{comment}{\ *\ Process\ all\ the\ simulated\ interrupts\ -\/\ each\ represented\ by\ a\ bit\ in}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00061}00061\ \textcolor{comment}{\ *\ ulPendingInterrupts\ variable.}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00062}00062\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00063}00063\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ prvProcessSimulatedInterrupts(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00065}00065\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00066}00066\ \textcolor{comment}{\ *\ Interrupt\ handlers\ used\ by\ the\ kernel\ itself.\ \ These\ are\ executed\ from\ the}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00067}00067\ \textcolor{comment}{\ *\ simulated\ interrupt\ handler\ thread.}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00068}00068\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00069}00069\ \textcolor{keyword}{static}\ uint32\_t\ prvProcessYieldInterrupt(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00070}00070\ \textcolor{keyword}{static}\ uint32\_t\ prvProcessTickInterrupt(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00072}00072\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00073}00073\ \textcolor{comment}{\ *\ Exiting\ a\ critical\ section\ will\ cause\ the\ calling\ task\ to\ block\ on\ yield}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00074}00074\ \textcolor{comment}{\ *\ event\ to\ wait\ for\ an\ interrupt\ to\ process\ if\ an\ interrupt\ was\ pended\ while}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00075}00075\ \textcolor{comment}{\ *\ inside\ the\ critical\ section.\ \ This\ variable\ protects\ against\ a\ recursive}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00076}00076\ \textcolor{comment}{\ *\ attempt\ to\ obtain\ pvInterruptEventMutex\ if\ a\ critical\ section\ is\ used\ inside}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00077}00077\ \textcolor{comment}{\ *\ an\ interrupt\ handler\ itself.}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00078}00078\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00079}\mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_a38f2792360dd63dd47785b2d4529d45e}{00079}}\ \textcolor{keyword}{volatile}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_a38f2792360dd63dd47785b2d4529d45e}{xInsideInterrupt}}\ =\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00081}00081\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00082}00082\ \textcolor{comment}{\ *\ Called\ when\ the\ process\ exits\ to\ let\ Windows\ know\ the\ high\ timer\ resolution}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00083}00083\ \textcolor{comment}{\ *\ is\ no\ longer\ required.}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00084}00084\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00085}00085\ \textcolor{keyword}{static}\ BOOL\ WINAPI\ prvEndProcess(\ DWORD\ dwCtrlType\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00087}00087\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00089}00089\ \textcolor{comment}{/*\ The\ WIN32\ simulator\ runs\ each\ task\ in\ a\ thread.\ \ The\ context\ switching\ is}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00090}00090\ \textcolor{comment}{\ *\ managed\ by\ the\ threads,\ so\ the\ task\ stack\ does\ not\ have\ to\ be\ managed\ directly,}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00091}00091\ \textcolor{comment}{\ *\ although\ the\ task\ stack\ is\ still\ used\ to\ hold\ an\ xThreadState\ structure\ this\ is}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00092}00092\ \textcolor{comment}{\ *\ the\ only\ thing\ it\ will\ ever\ hold.\ \ The\ structure\ indirectly\ maps\ the\ task\ handle}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00093}00093\ \textcolor{comment}{\ *\ to\ a\ thread\ handle.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00094}\mbox{\hyperlink{struct_thread_state__t}{00094}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00095}00095\ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00096}00096\ \ \ \ \ \textcolor{comment}{/*\ Handle\ of\ the\ thread\ that\ executes\ the\ task.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00097}\mbox{\hyperlink{struct_thread_state__t_a4e758048496d1e8708fb160c7408fe56}{00097}}\ \ \ \ \ \textcolor{keywordtype}{void}\ *\ \mbox{\hyperlink{struct_thread_state__t_a4e758048496d1e8708fb160c7408fe56}{pvThread}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00099}00099\ \ \ \ \ \textcolor{comment}{/*\ Event\ used\ to\ make\ sure\ the\ thread\ does\ not\ execute\ past\ a\ yield\ point}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00100}00100\ \textcolor{comment}{\ \ \ \ \ *\ between\ the\ call\ to\ SuspendThread()\ to\ suspend\ the\ thread\ and\ the}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00101}00101\ \textcolor{comment}{\ \ \ \ \ *\ asynchronous\ SuspendThread()\ operation\ actually\ being\ performed.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00102}\mbox{\hyperlink{struct_thread_state__t_a66dabab1702692cf3cf2884beb81cd21}{00102}}\ \ \ \ \ \textcolor{keywordtype}{void}\ *\ \mbox{\hyperlink{struct_thread_state__t_a66dabab1702692cf3cf2884beb81cd21}{pvYieldEvent}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00103}00103\ \}\ \mbox{\hyperlink{struct_thread_state__t}{ThreadState\_t}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00105}00105\ \textcolor{comment}{/*\ Simulated\ interrupts\ waiting\ to\ be\ processed.\ \ This\ is\ a\ bit\ mask\ where\ each}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00106}00106\ \textcolor{comment}{\ *\ bit\ represents\ one\ interrupt,\ so\ a\ maximum\ of\ 32\ interrupts\ can\ be\ simulated.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00107}00107\ \textcolor{keyword}{static}\ \textcolor{keyword}{volatile}\ uint32\_t\ ulPendingInterrupts\ =\ 0UL;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00109}00109\ \textcolor{comment}{/*\ An\ event\ used\ to\ inform\ the\ simulated\ interrupt\ processing\ thread\ (a\ high}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00110}00110\ \textcolor{comment}{\ *\ priority\ thread\ that\ simulated\ interrupt\ processing)\ that\ an\ interrupt\ is}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00111}00111\ \textcolor{comment}{\ *\ pending.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00112}00112\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ *\ pvInterruptEvent\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00114}00114\ \textcolor{comment}{/*\ Mutex\ used\ to\ protect\ all\ the\ simulated\ interrupt\ variables\ that\ are\ accessed}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00115}00115\ \textcolor{comment}{\ *\ by\ multiple\ threads.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00116}00116\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ *\ pvInterruptEventMutex\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00118}00118\ \textcolor{comment}{/*\ The\ critical\ nesting\ count\ for\ the\ currently\ executing\ task.\ \ This\ is}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00119}00119\ \textcolor{comment}{\ *\ initialised\ to\ a\ non-\/zero\ value\ so\ interrupts\ do\ not\ become\ enabled\ during}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00120}00120\ \textcolor{comment}{\ *\ the\ initialisation\ phase.\ \ As\ each\ task\ has\ its\ own\ critical\ nesting\ value}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00121}00121\ \textcolor{comment}{\ *\ ulCriticalNesting\ will\ get\ set\ to\ zero\ when\ the\ first\ task\ runs.\ \ This}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00122}00122\ \textcolor{comment}{\ *\ initialisation\ is\ probably\ not\ critical\ in\ this\ simulated\ environment\ as\ the}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00123}00123\ \textcolor{comment}{\ *\ simulated\ interrupt\ handlers\ do\ not\ get\ created\ until\ the\ FreeRTOS\ scheduler\ is}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00124}00124\ \textcolor{comment}{\ *\ started\ anyway.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00125}00125\ \textcolor{keyword}{static}\ \textcolor{keyword}{volatile}\ uint32\_t\ \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_abd5c4f2fdb773b389a89cf1bb14f22c8}{ulCriticalNesting}}\ =\ 9999UL;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00127}00127\ \textcolor{comment}{/*\ Handlers\ for\ all\ the\ simulated\ software\ interrupts.\ \ The\ first\ two\ positions}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00128}00128\ \textcolor{comment}{\ *\ are\ used\ for\ the\ Yield\ and\ Tick\ interrupts\ so\ are\ handled\ slightly\ differently,}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00129}00129\ \textcolor{comment}{\ *\ all\ the\ other\ interrupts\ can\ be\ user\ defined.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00130}00130\ \textcolor{keyword}{static}\ uint32\_t\ (*\ ulIsrHandler[\ \mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_aecc0af206233a1ecf6e7b01daa73591d}{portMAX\_INTERRUPTS}}\ ])(\ void\ )\ =\ \{\ 0\ \};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00132}00132\ \textcolor{comment}{/*\ Pointer\ to\ the\ TCB\ of\ the\ currently\ executing\ task.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00133}00133\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ *\ \textcolor{keyword}{volatile}\ \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00135}00135\ \textcolor{comment}{/*\ Used\ to\ ensure\ nothing\ is\ processed\ during\ the\ startup\ sequence.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00136}00136\ \textcolor{keyword}{static}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xPortRunning\ =\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00138}00138\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00140}00140\ \textcolor{keyword}{static}\ DWORD\ WINAPI\ prvSimulatedPeripheralTimer(\ LPVOID\ lpParameter\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00141}00141\ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00142}00142\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xMinimumWindowsBlockTime;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00143}00143\ \ \ \ \ TIMECAPS\ xTimeCaps;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00145}00145\ \ \ \ \ \textcolor{comment}{/*\ Set\ the\ timer\ resolution\ to\ the\ maximum\ possible.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00146}00146\ \ \ \ \ \textcolor{keywordflow}{if}(\ timeGetDevCaps(\ \&xTimeCaps,\ \textcolor{keyword}{sizeof}(\ xTimeCaps\ )\ )\ ==\ MMSYSERR\_NOERROR\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00147}00147\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00148}00148\ \ \ \ \ \ \ \ \ xMinimumWindowsBlockTime\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ )\ xTimeCaps.wPeriodMin;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00149}00149\ \ \ \ \ \ \ \ \ timeBeginPeriod(\ xTimeCaps.wPeriodMin\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00151}00151\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Register\ an\ exit\ handler\ so\ the\ timeBeginPeriod()\ function\ can\ be}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00152}00152\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ matched\ with\ a\ timeEndPeriod()\ when\ the\ application\ exits.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00153}00153\ \ \ \ \ \ \ \ \ SetConsoleCtrlHandler(\ prvEndProcess,\ TRUE\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00154}00154\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00155}00155\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00156}00156\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00157}00157\ \ \ \ \ \ \ \ \ xMinimumWindowsBlockTime\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ )\ 20;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00158}00158\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00160}00160\ \ \ \ \ \textcolor{comment}{/*\ Just\ to\ prevent\ compiler\ warnings.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00161}00161\ \ \ \ \ (\ void\ )\ lpParameter;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00163}00163\ \ \ \ \ \textcolor{keywordflow}{while}(\ xPortRunning\ ==\ \mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00164}00164\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00165}00165\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Wait\ until\ the\ timer\ expires\ and\ we\ can\ access\ the\ simulated\ interrupt}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00166}00166\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ variables.\ \ *NOTE*\ this\ is\ not\ a\ 'real\ time'\ way\ of\ generating\ tick}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00167}00167\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ events\ as\ the\ next\ wake\ time\ should\ be\ relative\ to\ the\ previous\ wake}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00168}00168\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ time,\ not\ the\ time\ that\ Sleep()\ is\ called.\ \ It\ is\ done\ this\ way\ to}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00169}00169\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ prevent\ overruns\ in\ this\ very\ non\ real\ time\ simulated/emulated}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00170}00170\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ environment.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00171}00171\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a554d9322ce7f698a86a22b21234bd8cd}{portTICK\_PERIOD\_MS}}\ <\ xMinimumWindowsBlockTime\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00172}00172\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ Sleep(\ xMinimumWindowsBlockTime\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00174}00174\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00175}00175\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00176}00176\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ Sleep(\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a554d9322ce7f698a86a22b21234bd8cd}{portTICK\_PERIOD\_MS}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00178}00178\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00180}00180\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_a2e74179bfe844a7e5b809726666aa93a}{vPortGenerateSimulatedInterruptFromWindowsThread}}(\ \mbox{\hyperlink{_m_s_v_c-_ming_w_2portmacro_8h_a6be5f7ce924302129a4184caf180a607}{portINTERRUPT\_TICK}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00181}00181\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00183}00183\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00184}00184\ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00185}00185\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00187}00187\ \textcolor{keyword}{static}\ BOOL\ WINAPI\ prvEndProcess(\ DWORD\ dwCtrlType\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00188}00188\ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00189}00189\ \ \ \ \ TIMECAPS\ xTimeCaps;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00191}00191\ \ \ \ \ (\ void\ )\ dwCtrlType;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00192}00192\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00193}00193\ \ \ \ \ \textcolor{keywordflow}{if}(\ timeGetDevCaps(\ \&xTimeCaps,\ \textcolor{keyword}{sizeof}(\ xTimeCaps\ )\ )\ ==\ MMSYSERR\_NOERROR\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00194}00194\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00195}00195\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Match\ the\ call\ to\ timeBeginPeriod(\ xTimeCaps.wPeriodMin\ )\ made\ when}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00196}00196\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ the\ process\ started\ with\ a\ timeEndPeriod()\ as\ the\ process\ exits.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00197}00197\ \ \ \ \ \ \ \ \ timeEndPeriod(\ xTimeCaps.wPeriodMin\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00198}00198\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00199}00199\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00200}00200\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00201}00201\ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00202}00202\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00204}\mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}{00204}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_aaa2085423d917cf1707f4770de3354e2}{pxPortInitialiseStack}}(\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *\ pxTopOfStack,}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{TaskFunction\_t}}\ pxCode,}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *\ pvParameters\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00207}00207\ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00208}00208\ \ \ \ \ \mbox{\hyperlink{struct_thread_state__t}{ThreadState\_t}}\ *\ pxThreadState\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00209}00209\ \ \ \ \ int8\_t\ *\ pcTopOfStack\ =\ (\ int8\_t\ *\ )\ pxTopOfStack;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00210}00210\ \ \ \ \ \textcolor{keyword}{const}\ SIZE\_T\ xStackSize\ =\ 1024;\ \textcolor{comment}{/*\ Set\ the\ size\ to\ a\ small\ number\ which\ will\ get\ rounded\ up\ to\ the\ minimum\ possible.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00212}00212\ \ \ \ \ \textcolor{comment}{/*\ In\ this\ simulated\ case\ a\ stack\ is\ not\ initialised,\ but\ instead\ a\ thread}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00213}00213\ \textcolor{comment}{\ \ \ \ \ *\ is\ created\ that\ will\ execute\ the\ task\ being\ created.\ \ The\ thread\ handles}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00214}00214\ \textcolor{comment}{\ \ \ \ \ *\ the\ context\ switching\ itself.\ \ The\ ThreadState\_t\ object\ is\ placed\ onto}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00215}00215\ \textcolor{comment}{\ \ \ \ \ *\ the\ stack\ that\ was\ created\ for\ the\ task\ -\/\ so\ the\ stack\ buffer\ is\ still}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00216}00216\ \textcolor{comment}{\ \ \ \ \ *\ used,\ just\ not\ in\ the\ conventional\ way.\ \ It\ will\ not\ be\ used\ for\ anything}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00217}00217\ \textcolor{comment}{\ \ \ \ \ *\ other\ than\ holding\ this\ structure.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00218}00218\ \ \ \ \ pxThreadState\ =\ (\ \mbox{\hyperlink{struct_thread_state__t}{ThreadState\_t}}\ *\ )\ (\ pcTopOfStack\ -\/\ \textcolor{keyword}{sizeof}(\ \mbox{\hyperlink{struct_thread_state__t}{ThreadState\_t}}\ )\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00219}00219\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00220}00220\ \ \ \ \ \textcolor{comment}{/*\ Create\ the\ event\ used\ to\ prevent\ the\ thread\ from\ executing\ past\ its\ yield}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00221}00221\ \textcolor{comment}{\ \ \ \ \ *\ point\ if\ the\ SuspendThread()\ call\ that\ suspends\ the\ thread\ does\ not\ take}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00222}00222\ \textcolor{comment}{\ \ \ \ \ *\ effect\ immediately\ (it\ is\ an\ asynchronous\ call).\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00223}00223\ \ \ \ \ pxThreadState-\/>\mbox{\hyperlink{struct_thread_state__t_a66dabab1702692cf3cf2884beb81cd21}{pvYieldEvent}}\ =\ CreateEvent(\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}},\ \ \ \textcolor{comment}{/*\ Default\ security\ attributes.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FALSE,\ \ \textcolor{comment}{/*\ Auto\ reset.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FALSE,\ \ \textcolor{comment}{/*\ Start\ not\ signalled.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ );\ \textcolor{comment}{/*\ No\ name.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00227}00227\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00228}00228\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00229}00229\ \textcolor{preprocessor}{\#ifdef\ \_\_GNUC\_\_}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00230}00230\ \ \ \ \ \textcolor{comment}{/*\ GCC\ reports\ the\ warning\ for\ the\ cast\ operation\ from\ TaskFunction\_t\ to\ LPTHREAD\_START\_ROUTINE.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00231}00231\ \ \ \ \ \textcolor{comment}{/*\ Disable\ this\ warning\ here\ by\ the\ \#pragma\ option.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00232}00232\ \textcolor{preprocessor}{\#pragma\ GCC\ diagnostic\ push}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00233}00233\ \textcolor{preprocessor}{\#pragma\ GCC\ diagnostic\ ignored\ "{}-\/Wcast-\/function-\/type"{}}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00234}00234\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00235}00235\ \ \ \ \ \textcolor{comment}{/*\ Create\ the\ thread\ itself.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00236}00236\ \ \ \ \ pxThreadState-\/>\mbox{\hyperlink{struct_thread_state__t_a4e758048496d1e8708fb160c7408fe56}{pvThread}}\ =\ CreateThread(\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}},\ xStackSize,\ (\ LPTHREAD\_START\_ROUTINE\ )\ pxCode,\ pvParameters,\ CREATE\_SUSPENDED\ |\ STACK\_SIZE\_PARAM\_IS\_A\_RESERVATION,\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00237}00237\ \textcolor{preprocessor}{\#ifdef\ \_\_GNUC\_\_}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00238}00238\ \textcolor{preprocessor}{\#pragma\ GCC\ diagnostic\ pop}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00239}00239\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00240}00240\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00241}00241\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ pxThreadState-\/>\mbox{\hyperlink{struct_thread_state__t_a4e758048496d1e8708fb160c7408fe56}{pvThread}}\ );\ \textcolor{comment}{/*\ See\ comment\ where\ TerminateThread()\ is\ called.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00242}00242\ \ \ \ \ SetThreadAffinityMask(\ pxThreadState-\/>\mbox{\hyperlink{struct_thread_state__t_a4e758048496d1e8708fb160c7408fe56}{pvThread}},\ 0x01\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00243}00243\ \ \ \ \ SetThreadPriorityBoost(\ pxThreadState-\/>\mbox{\hyperlink{struct_thread_state__t_a4e758048496d1e8708fb160c7408fe56}{pvThread}},\ TRUE\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00244}00244\ \ \ \ \ SetThreadPriority(\ pxThreadState-\/>\mbox{\hyperlink{struct_thread_state__t_a4e758048496d1e8708fb160c7408fe56}{pvThread}},\ \mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_ab021565a458c203011a2558d51a88938}{portTASK\_THREAD\_PRIORITY}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00245}00245\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00246}00246\ \ \ \ \ \textcolor{keywordflow}{return}\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *\ )\ pxThreadState;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00247}00247\ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00248}00248\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00249}00249\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00250}\mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{00250}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{xPortStartScheduler}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00251}00251\ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00252}00252\ \ \ \ \ \textcolor{keywordtype}{void}\ *\ pvHandle\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00253}00253\ \ \ \ \ int32\_t\ lSuccess;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00254}00254\ \ \ \ \ \mbox{\hyperlink{struct_thread_state__t}{ThreadState\_t}}\ *\ pxThreadState\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00255}00255\ \ \ \ \ SYSTEM\_INFO\ xSystemInfo;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00256}00256\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00257}00257\ \ \ \ \ \textcolor{comment}{/*\ This\ port\ runs\ windows\ threads\ with\ extremely\ high\ priority.\ \ All\ the}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00258}00258\ \textcolor{comment}{\ \ \ \ \ *\ threads\ execute\ on\ the\ same\ core\ -\/\ to\ prevent\ locking\ up\ the\ host\ only\ start}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00259}00259\ \textcolor{comment}{\ \ \ \ \ *\ if\ the\ host\ has\ multiple\ cores.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00260}00260\ \ \ \ \ GetSystemInfo(\ \&xSystemInfo\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00261}00261\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00262}00262\ \ \ \ \ \textcolor{keywordflow}{if}(\ xSystemInfo.dwNumberOfProcessors\ <=\ 1\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00263}00263\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00264}00264\ \ \ \ \ \ \ \ \ printf(\ \textcolor{stringliteral}{"{}This\ version\ of\ the\ FreeRTOS\ Windows\ port\ can\ only\ be\ used\ on\ multi-\/core\ hosts.\(\backslash\)r\(\backslash\)n"{}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00265}00265\ \ \ \ \ \ \ \ \ lSuccess\ =\ \mbox{\hyperlink{projdefs_8h_a99e2866c8cf4fe86db87dab62e7d6aa6}{pdFAIL}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00266}00266\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00267}00267\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00268}00268\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00269}00269\ \ \ \ \ \ \ \ \ lSuccess\ =\ \mbox{\hyperlink{projdefs_8h_a07848d3078849bd32353c69d30a479b3}{pdPASS}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00270}00270\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00271}00271\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ The\ highest\ priority\ class\ is\ used\ to\ [try\ to]\ prevent\ other\ Windows}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00272}00272\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ activity\ interfering\ with\ FreeRTOS\ timing\ too\ much.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00273}00273\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ SetPriorityClass(\ GetCurrentProcess(),\ REALTIME\_PRIORITY\_CLASS\ )\ ==\ 0\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00274}00274\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00275}00275\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\ \textcolor{stringliteral}{"{}SetPriorityClass()\ failed\(\backslash\)r\(\backslash\)n"{}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00276}00276\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00277}00277\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00278}00278\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Install\ the\ interrupt\ handlers\ used\ by\ the\ scheduler\ itself.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00279}00279\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_a35b5d3a9b147da8e3adda2a2cc7b6cc0}{vPortSetInterruptHandler}}(\ \mbox{\hyperlink{_m_s_v_c-_ming_w_2portmacro_8h_ae86b9ac3969c84a0e5db6d2debeba7cb}{portINTERRUPT\_YIELD}},\ prvProcessYieldInterrupt\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00280}00280\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_a35b5d3a9b147da8e3adda2a2cc7b6cc0}{vPortSetInterruptHandler}}(\ \mbox{\hyperlink{_m_s_v_c-_ming_w_2portmacro_8h_a6be5f7ce924302129a4184caf180a607}{portINTERRUPT\_TICK}},\ prvProcessTickInterrupt\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00281}00281\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00282}00282\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Create\ the\ events\ and\ mutexes\ that\ are\ used\ to\ synchronise\ all\ the}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00283}00283\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ threads.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00284}00284\ \ \ \ \ \ \ \ \ pvInterruptEventMutex\ =\ CreateMutex(\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}},\ FALSE,\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00285}00285\ \ \ \ \ \ \ \ \ pvInterruptEvent\ =\ CreateEvent(\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}},\ FALSE,\ FALSE,\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00286}00286\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00287}00287\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ (\ pvInterruptEventMutex\ ==\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )\ ||\ (\ pvInterruptEvent\ ==\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00288}00288\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00289}00289\ \ \ \ \ \ \ \ \ \ \ \ \ lSuccess\ =\ \mbox{\hyperlink{projdefs_8h_a99e2866c8cf4fe86db87dab62e7d6aa6}{pdFAIL}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00290}00290\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00291}00291\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00292}00292\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Set\ the\ priority\ of\ this\ thread\ such\ that\ it\ is\ above\ the\ priority\ of}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00293}00293\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ the\ threads\ that\ run\ tasks.\ \ This\ higher\ priority\ is\ required\ to\ ensure}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00294}00294\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ simulated\ interrupts\ take\ priority\ over\ tasks.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00295}00295\ \ \ \ \ \ \ \ \ pvHandle\ =\ GetCurrentThread();}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00296}00296\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00297}00297\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ pvHandle\ ==\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00298}00298\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ lSuccess\ =\ \mbox{\hyperlink{projdefs_8h_a99e2866c8cf4fe86db87dab62e7d6aa6}{pdFAIL}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00300}00300\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00301}00301\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00302}00302\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00303}00303\ \ \ \ \ \textcolor{keywordflow}{if}(\ lSuccess\ ==\ \mbox{\hyperlink{projdefs_8h_a07848d3078849bd32353c69d30a479b3}{pdPASS}}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00304}00304\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00305}00305\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ SetThreadPriority(\ pvHandle,\ \mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_a31f6d42078ab01c6c46d81b7b3a4704f}{portSIMULATED\_INTERRUPTS\_THREAD\_PRIORITY}}\ )\ ==\ 0\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00306}00306\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00307}00307\ \ \ \ \ \ \ \ \ \ \ \ \ lSuccess\ =\ \mbox{\hyperlink{projdefs_8h_a99e2866c8cf4fe86db87dab62e7d6aa6}{pdFAIL}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00308}00308\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00309}00309\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00310}00310\ \ \ \ \ \ \ \ \ SetThreadPriorityBoost(\ pvHandle,\ TRUE\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00311}00311\ \ \ \ \ \ \ \ \ SetThreadAffinityMask(\ pvHandle,\ 0x01\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00312}00312\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00313}00313\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00314}00314\ \ \ \ \ \textcolor{keywordflow}{if}(\ lSuccess\ ==\ \mbox{\hyperlink{projdefs_8h_a07848d3078849bd32353c69d30a479b3}{pdPASS}}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00315}00315\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00316}00316\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Start\ the\ thread\ that\ simulates\ the\ timer\ peripheral\ to\ generate}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00317}00317\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ tick\ interrupts.\ \ The\ priority\ is\ set\ below\ that\ of\ the\ simulated}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00318}00318\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ interrupt\ handler\ so\ the\ interrupt\ event\ mutex\ is\ used\ for\ the}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00319}00319\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ handshake\ /\ overrun\ protection.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00320}00320\ \ \ \ \ \ \ \ \ pvHandle\ =\ CreateThread(\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}},\ 0,\ prvSimulatedPeripheralTimer,\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}},\ CREATE\_SUSPENDED,\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00321}00321\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00322}00322\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ pvHandle\ !=\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00323}00323\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00324}00324\ \ \ \ \ \ \ \ \ \ \ \ \ SetThreadPriority(\ pvHandle,\ \mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_aef0dc5e5ce01b116dc1d12fb7bde7cef}{portSIMULATED\_TIMER\_THREAD\_PRIORITY}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00325}00325\ \ \ \ \ \ \ \ \ \ \ \ \ SetThreadPriorityBoost(\ pvHandle,\ TRUE\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00326}00326\ \ \ \ \ \ \ \ \ \ \ \ \ SetThreadAffinityMask(\ pvHandle,\ 0x01\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00327}00327\ \ \ \ \ \ \ \ \ \ \ \ \ ResumeThread(\ pvHandle\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00328}00328\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00329}00329\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00330}00330\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Start\ the\ highest\ priority\ task\ by\ obtaining\ its\ associated\ thread}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00331}00331\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ state\ structure,\ in\ which\ is\ stored\ the\ thread\ handle.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00332}00332\ \ \ \ \ \ \ \ \ pxThreadState\ =\ (\ \mbox{\hyperlink{struct_thread_state__t}{ThreadState\_t}}\ *\ )\ *(\ (\ \textcolor{keywordtype}{size\_t}\ *\ )\ \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00333}00333\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_abd5c4f2fdb773b389a89cf1bb14f22c8}{ulCriticalNesting}}\ =\ \mbox{\hyperlink{_a_r_m7___a_t91_f_r40008_2port_i_s_r_8c_ab7c7cbbda4fb9a253c7e5086071db162}{portNO\_CRITICAL\_NESTING}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00334}00334\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00335}00335\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ The\ scheduler\ is\ now\ running.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00336}00336\ \ \ \ \ \ \ \ \ xPortRunning\ =\ \mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00337}00337\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00338}00338\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Start\ the\ first\ task.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00339}00339\ \ \ \ \ \ \ \ \ ResumeThread(\ pxThreadState-\/>\mbox{\hyperlink{struct_thread_state__t_a4e758048496d1e8708fb160c7408fe56}{pvThread}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00340}00340\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00341}00341\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Handle\ all\ simulated\ interrupts\ -\/\ including\ yield\ requests\ and}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00342}00342\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ simulated\ ticks.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00343}00343\ \ \ \ \ \ \ \ \ prvProcessSimulatedInterrupts();}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00344}00344\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00345}00345\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00346}00346\ \ \ \ \ \textcolor{comment}{/*\ Would\ not\ expect\ to\ return\ from\ prvProcessSimulatedInterrupts(),\ so\ should}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00347}00347\ \textcolor{comment}{\ \ \ \ \ *\ not\ get\ here.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00348}00348\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00349}00349\ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00350}00350\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00351}00351\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00352}00352\ \textcolor{keyword}{static}\ uint32\_t\ prvProcessYieldInterrupt(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00353}00353\ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00354}00354\ \ \ \ \ \textcolor{comment}{/*\ Always\ return\ true\ as\ this\ is\ a\ yield.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00355}00355\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00356}00356\ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00357}00357\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00358}00358\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00359}00359\ \textcolor{keyword}{static}\ uint32\_t\ prvProcessTickInterrupt(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00360}00360\ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00361}00361\ \ \ \ \ uint32\_t\ ulSwitchRequired;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00362}00362\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00363}00363\ \ \ \ \ \textcolor{comment}{/*\ Process\ the\ tick\ itself.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00364}00364\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ xPortRunning\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00365}00365\ \ \ \ \ ulSwitchRequired\ =\ (\ uint32\_t\ )\ \mbox{\hyperlink{task_8h_a978e25460ac35706f9ad30b46d9403d8}{xTaskIncrementTick}}();}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00366}00366\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00367}00367\ \ \ \ \ \textcolor{keywordflow}{return}\ ulSwitchRequired;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00368}00368\ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00369}00369\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00370}00370\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00371}00371\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ prvProcessSimulatedInterrupts(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00372}00372\ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00373}00373\ \ \ \ \ uint32\_t\ ulSwitchRequired,\ i;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00374}00374\ \ \ \ \ \mbox{\hyperlink{struct_thread_state__t}{ThreadState\_t}}\ *\ pxThreadState;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00375}00375\ \ \ \ \ \textcolor{keywordtype}{void}\ *\ pvObjectList[\ 2\ ];}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00376}00376\ \ \ \ \ CONTEXT\ xContext;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00377}00377\ \ \ \ \ DWORD\ xWinApiResult;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00378}00378\ \ \ \ \ \textcolor{keyword}{const}\ DWORD\ xTimeoutMilliseconds\ =\ 1000;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00379}00379\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00380}00380\ \ \ \ \ \textcolor{comment}{/*\ Going\ to\ block\ on\ the\ mutex\ that\ ensured\ exclusive\ access\ to\ the\ simulated}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00381}00381\ \textcolor{comment}{\ \ \ \ \ *\ interrupt\ objects,\ and\ the\ event\ that\ signals\ that\ a\ simulated\ interrupt}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00382}00382\ \textcolor{comment}{\ \ \ \ \ *\ should\ be\ processed.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00383}00383\ \ \ \ \ pvObjectList[\ 0\ ]\ =\ pvInterruptEventMutex;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00384}00384\ \ \ \ \ pvObjectList[\ 1\ ]\ =\ pvInterruptEvent;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00385}00385\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00386}00386\ \ \ \ \ \textcolor{comment}{/*\ Create\ a\ pending\ tick\ to\ ensure\ the\ first\ task\ is\ started\ as\ soon\ as}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00387}00387\ \textcolor{comment}{\ \ \ \ \ *\ this\ thread\ pends.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00388}00388\ \ \ \ \ ulPendingInterrupts\ |=\ (\ 1\ <<\ \mbox{\hyperlink{_m_s_v_c-_ming_w_2portmacro_8h_a6be5f7ce924302129a4184caf180a607}{portINTERRUPT\_TICK}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00389}00389\ \ \ \ \ SetEvent(\ pvInterruptEvent\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00390}00390\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00391}00391\ \ \ \ \ \textcolor{keywordflow}{while}(\ xPortRunning\ ==\ \mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00392}00392\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00393}00393\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_a38f2792360dd63dd47785b2d4529d45e}{xInsideInterrupt}}\ =\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00394}00394\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00395}00395\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Wait\ with\ timeout\ so\ that\ we\ can\ exit\ from\ this\ loop\ when}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00396}00396\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ the\ scheduler\ is\ stopped\ by\ calling\ vPortEndScheduler.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00397}00397\ \ \ \ \ \ \ \ \ xWinApiResult\ =\ WaitForMultipleObjects(\ \textcolor{keyword}{sizeof}(\ pvObjectList\ )\ /\ \textcolor{keyword}{sizeof}(\ \textcolor{keywordtype}{void}\ *\ ),\ pvObjectList,\ TRUE,\ xTimeoutMilliseconds\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00398}00398\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00399}00399\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ xWinApiResult\ !=\ WAIT\_TIMEOUT\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00400}00400\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00401}00401\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Cannot\ be\ in\ a\ critical\ section\ to\ get\ here.\ \ Tasks\ that\ exit\ a}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00402}00402\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ critical\ section\ will\ block\ on\ a\ yield\ mutex\ to\ wait\ for\ an\ interrupt\ to}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00403}00403\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ process\ if\ an\ interrupt\ was\ set\ pending\ while\ the\ task\ was\ inside\ the}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00404}00404\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ critical\ section.\ \ xInsideInterrupt\ prevents\ interrupts\ that\ contain}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00405}00405\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ critical\ sections\ from\ doing\ the\ same.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00406}00406\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_a38f2792360dd63dd47785b2d4529d45e}{xInsideInterrupt}}\ =\ \mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00407}00407\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00408}00408\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Used\ to\ indicate\ whether\ the\ simulated\ interrupt\ processing\ has}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00409}00409\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ necessitated\ a\ context\ switch\ to\ another\ task/thread.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00410}00410\ \ \ \ \ \ \ \ \ \ \ \ \ ulSwitchRequired\ =\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00411}00411\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00412}00412\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ For\ each\ interrupt\ we\ are\ interested\ in\ processing,\ each\ of\ which\ is}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00413}00413\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ represented\ by\ a\ bit\ in\ the\ 32bit\ ulPendingInterrupts\ variable.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00414}00414\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_aecc0af206233a1ecf6e7b01daa73591d}{portMAX\_INTERRUPTS}};\ i++\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00415}00415\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00416}00416\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Is\ the\ simulated\ interrupt\ pending?\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00417}00417\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ (\ ulPendingInterrupts\ \&\ (\ 1UL\ <<\ i\ )\ )\ !=\ 0\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00418}00418\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00419}00419\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Is\ a\ handler\ installed?\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00420}00420\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ ulIsrHandler[\ i\ ]\ !=\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00421}00421\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00422}00422\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Run\ the\ actual\ handler.\ \ Handlers\ return\ pdTRUE\ if\ they}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00423}00423\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ necessitate\ a\ context\ switch.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00424}00424\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ ulIsrHandler[\ i\ ]()\ !=\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00425}00425\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00426}00426\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ A\ bit\ mask\ is\ used\ purely\ to\ help\ debugging.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00427}00427\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ulSwitchRequired\ |=\ (\ 1\ <<\ i\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00428}00428\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00429}00429\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00430}00430\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00431}00431\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Clear\ the\ interrupt\ pending\ bit.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00432}00432\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ulPendingInterrupts\ \&=\ \string~(\ 1UL\ <<\ i\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00433}00433\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00434}00434\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00435}00435\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00436}00436\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ ulSwitchRequired\ !=\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00437}00437\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00438}00438\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Suspend\ the\ old\ thread.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00439}00439\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pxThreadState\ =\ (\ \mbox{\hyperlink{struct_thread_state__t}{ThreadState\_t}}\ *\ )\ *(\ (\ \textcolor{keywordtype}{size\_t}\ *\ )\ \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00440}00440\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SuspendThread(\ pxThreadState-\/>\mbox{\hyperlink{struct_thread_state__t_a4e758048496d1e8708fb160c7408fe56}{pvThread}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00441}00441\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00442}00442\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Ensure\ the\ thread\ is\ actually\ suspended\ by\ performing\ a}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00443}00443\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ synchronous\ operation\ that\ can\ only\ complete\ when\ the\ thread}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00444}00444\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ is\ actually\ suspended.\ The\ below\ code\ asks\ for\ dummy\ register}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00445}00445\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ data.\ Experimentation\ shows\ that\ these\ two\ lines\ don't\ appear}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00446}00446\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ to\ do\ anything\ now,\ but\ according\ to}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00447}00447\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ https://devblogs.microsoft.com/oldnewthing/20150205-\/00/?p=44743}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00448}00448\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ they\ do\ -\/\ so\ as\ they\ do\ not\ harm\ (slight\ run-\/time\ hit).\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00449}00449\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ xContext.ContextFlags\ =\ CONTEXT\_INTEGER;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00450}00450\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ void\ )\ GetThreadContext(\ pxThreadState-\/>\mbox{\hyperlink{struct_thread_state__t_a4e758048496d1e8708fb160c7408fe56}{pvThread}},\ \&xContext\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00451}00451\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00452}00452\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Select\ the\ next\ task\ to\ run.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00453}00453\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_a9c86137bc3c1cbffc39fff22627cb885}{vTaskSwitchContext}}();}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00454}00454\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00455}00455\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Obtain\ the\ state\ of\ the\ task\ now\ selected\ to\ enter\ the}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00456}00456\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ Running\ state.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00457}00457\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pxThreadState\ =\ (\ \mbox{\hyperlink{struct_thread_state__t}{ThreadState\_t}}\ *\ )\ (\ *(\ \textcolor{keywordtype}{size\_t}\ *\ )\ \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00458}00458\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00459}00459\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ pxThreadState-\/>pvThread\ can\ be\ NULL\ if\ the\ task\ deleted}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00460}00460\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ itself\ -\/\ but\ a\ deleted\ task\ should\ never\ be\ resumed\ here.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00461}00461\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ pxThreadState-\/>\mbox{\hyperlink{struct_thread_state__t_a4e758048496d1e8708fb160c7408fe56}{pvThread}}\ !=\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00462}00462\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ResumeThread(\ pxThreadState-\/>\mbox{\hyperlink{struct_thread_state__t_a4e758048496d1e8708fb160c7408fe56}{pvThread}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00463}00463\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00464}00464\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00465}00465\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ If\ the\ thread\ that\ is\ about\ to\ be\ resumed\ stopped\ running}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00466}00466\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ because\ it\ yielded\ then\ it\ will\ wait\ on\ an\ event\ when\ it\ resumed}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00467}00467\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ (to\ ensure\ it\ does\ not\ continue\ running\ after\ the\ call\ to}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00468}00468\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ SuspendThread()\ above\ as\ SuspendThread()\ is\ asynchronous).}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00469}00469\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ Signal\ the\ event\ to\ ensure\ the\ thread\ can\ proceed\ now\ it\ is}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00470}00470\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ valid\ for\ it\ to\ do\ so.\ \ Signaling\ the\ event\ is\ benign\ in\ the\ case\ that}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00471}00471\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ the\ task\ was\ switched\ out\ asynchronously\ by\ an\ interrupt\ as\ the\ event}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00472}00472\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ is\ reset\ before\ the\ task\ blocks\ on\ it.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00473}00473\ \ \ \ \ \ \ \ \ \ \ \ \ pxThreadState\ =\ (\ \mbox{\hyperlink{struct_thread_state__t}{ThreadState\_t}}\ *\ )\ (\ *(\ \textcolor{keywordtype}{size\_t}\ *\ )\ \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00474}00474\ \ \ \ \ \ \ \ \ \ \ \ \ SetEvent(\ pxThreadState-\/>\mbox{\hyperlink{struct_thread_state__t_a66dabab1702692cf3cf2884beb81cd21}{pvYieldEvent}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00475}00475\ \ \ \ \ \ \ \ \ \ \ \ \ ReleaseMutex(\ pvInterruptEventMutex\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00476}00476\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00477}00477\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00478}00478\ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00479}00479\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00480}00480\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00481}\mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_acf1c499e470a756717e0ba8203260a32}{00481}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_acf1c499e470a756717e0ba8203260a32}{vPortDeleteThread}}(\ \textcolor{keywordtype}{void}\ *\ pvTaskToDelete\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00482}00482\ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00483}00483\ \ \ \ \ \mbox{\hyperlink{struct_thread_state__t}{ThreadState\_t}}\ *\ pxThreadState;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00484}00484\ \ \ \ \ uint32\_t\ ulErrorCode;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00485}00485\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00486}00486\ \ \ \ \ \textcolor{comment}{/*\ Remove\ compiler\ warnings\ if\ configASSERT()\ is\ not\ defined.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00487}00487\ \ \ \ \ (\ void\ )\ ulErrorCode;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00488}00488\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00489}00489\ \ \ \ \ \textcolor{comment}{/*\ Find\ the\ handle\ of\ the\ thread\ being\ deleted.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00490}00490\ \ \ \ \ pxThreadState\ =\ (\ \mbox{\hyperlink{struct_thread_state__t}{ThreadState\_t}}\ *\ )\ (\ *(\ \textcolor{keywordtype}{size\_t}\ *\ )\ pvTaskToDelete\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00491}00491\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00492}00492\ \ \ \ \ \textcolor{comment}{/*\ Check\ that\ the\ thread\ is\ still\ valid,\ it\ might\ have\ been\ closed\ by}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00493}00493\ \textcolor{comment}{\ \ \ \ \ *\ vPortCloseRunningThread()\ -\/\ which\ will\ be\ the\ case\ if\ the\ task\ associated}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00494}00494\ \textcolor{comment}{\ \ \ \ \ *\ with\ the\ thread\ originally\ deleted\ itself\ rather\ than\ being\ deleted\ by\ a}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00495}00495\ \textcolor{comment}{\ \ \ \ \ *\ different\ task.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00496}00496\ \ \ \ \ \textcolor{keywordflow}{if}(\ pxThreadState-\/>\mbox{\hyperlink{struct_thread_state__t_a4e758048496d1e8708fb160c7408fe56}{pvThread}}\ !=\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00497}00497\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00498}00498\ \ \ \ \ \ \ \ \ WaitForSingleObject(\ pvInterruptEventMutex,\ INFINITE\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00499}00499\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00500}00500\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ !!!\ This\ is\ not\ a\ nice\ way\ to\ terminate\ a\ thread,\ and\ will\ eventually}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00501}00501\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ result\ in\ resources\ being\ depleted\ if\ tasks\ frequently\ delete\ other}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00502}00502\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ tasks\ (rather\ than\ deleting\ themselves)\ as\ the\ task\ stacks\ will\ not\ be}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00503}00503\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ freed.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00504}00504\ \ \ \ \ \ \ \ \ ulErrorCode\ =\ TerminateThread(\ pxThreadState-\/>\mbox{\hyperlink{struct_thread_state__t_a4e758048496d1e8708fb160c7408fe56}{pvThread}},\ 0\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00505}00505\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ ulErrorCode\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00506}00506\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00507}00507\ \ \ \ \ \ \ \ \ ulErrorCode\ =\ CloseHandle(\ pxThreadState-\/>\mbox{\hyperlink{struct_thread_state__t_a4e758048496d1e8708fb160c7408fe56}{pvThread}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00508}00508\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ ulErrorCode\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00509}00509\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00510}00510\ \ \ \ \ \ \ \ \ ReleaseMutex(\ pvInterruptEventMutex\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00511}00511\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00512}00512\ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00513}00513\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00514}00514\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00515}\mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_ad3564ae551c470eeb87262ed6c2f3cee}{00515}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_ad3564ae551c470eeb87262ed6c2f3cee}{vPortCloseRunningThread}}(\ \textcolor{keywordtype}{void}\ *\ pvTaskToDelete,}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00516}00516\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{volatile}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ *\ pxPendYield\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00517}00517\ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00518}00518\ \ \ \ \ \mbox{\hyperlink{struct_thread_state__t}{ThreadState\_t}}\ *\ pxThreadState;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00519}00519\ \ \ \ \ \textcolor{keywordtype}{void}\ *\ pvThread;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00520}00520\ \ \ \ \ uint32\_t\ ulErrorCode;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00521}00521\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00522}00522\ \ \ \ \ \textcolor{comment}{/*\ Remove\ compiler\ warnings\ if\ configASSERT()\ is\ not\ defined.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00523}00523\ \ \ \ \ (\ void\ )\ ulErrorCode;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00524}00524\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00525}00525\ \ \ \ \ \textcolor{comment}{/*\ Find\ the\ handle\ of\ the\ thread\ being\ deleted.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00526}00526\ \ \ \ \ pxThreadState\ =\ (\ \mbox{\hyperlink{struct_thread_state__t}{ThreadState\_t}}\ *\ )\ (\ *(\ \textcolor{keywordtype}{size\_t}\ *\ )\ pvTaskToDelete\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00527}00527\ \ \ \ \ pvThread\ =\ pxThreadState-\/>\mbox{\hyperlink{struct_thread_state__t_a4e758048496d1e8708fb160c7408fe56}{pvThread}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00528}00528\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00529}00529\ \ \ \ \ \textcolor{comment}{/*\ Raise\ the\ Windows\ priority\ of\ the\ thread\ to\ ensure\ the\ FreeRTOS\ scheduler}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00530}00530\ \textcolor{comment}{\ \ \ \ \ *\ does\ not\ run\ and\ swap\ it\ out\ before\ it\ is\ closed.\ \ If\ that\ were\ to\ happen}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00531}00531\ \textcolor{comment}{\ \ \ \ \ *\ the\ thread\ would\ never\ run\ again\ and\ effectively\ be\ a\ thread\ handle\ and}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00532}00532\ \textcolor{comment}{\ \ \ \ \ *\ memory\ leak.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00533}00533\ \ \ \ \ SetThreadPriority(\ pvThread,\ \mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_afbc387bb21b715c4e863be795b45cd46}{portDELETE\_SELF\_THREAD\_PRIORITY}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00534}00534\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00535}00535\ \ \ \ \ \textcolor{comment}{/*\ This\ function\ will\ not\ return,\ therefore\ a\ yield\ is\ set\ as\ pending\ to}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00536}00536\ \textcolor{comment}{\ \ \ \ \ *\ ensure\ a\ context\ switch\ occurs\ away\ from\ this\ thread\ on\ the\ next\ tick.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00537}00537\ \ \ \ \ *pxPendYield\ =\ \mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00538}00538\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00539}00539\ \ \ \ \ \textcolor{comment}{/*\ Mark\ the\ thread\ associated\ with\ this\ task\ as\ invalid\ so}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00540}00540\ \textcolor{comment}{\ \ \ \ \ *\ vPortDeleteThread()\ does\ not\ try\ to\ terminate\ it.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00541}00541\ \ \ \ \ pxThreadState-\/>\mbox{\hyperlink{struct_thread_state__t_a4e758048496d1e8708fb160c7408fe56}{pvThread}}\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00542}00542\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00543}00543\ \ \ \ \ \textcolor{comment}{/*\ Close\ the\ thread.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00544}00544\ \ \ \ \ ulErrorCode\ =\ CloseHandle(\ pvThread\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00545}00545\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ ulErrorCode\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00546}00546\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00547}00547\ \ \ \ \ \textcolor{comment}{/*\ This\ is\ called\ from\ a\ critical\ section,\ which\ must\ be\ exited\ before\ the}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00548}00548\ \textcolor{comment}{\ \ \ \ \ *\ thread\ stops.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00549}00549\ \ \ \ \ \mbox{\hyperlink{task_8h_aac8f36abc45ac4ee714bd6b81e3b1643}{taskEXIT\_CRITICAL}}();}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00550}00550\ \ \ \ \ CloseHandle(\ pxThreadState-\/>\mbox{\hyperlink{struct_thread_state__t_a66dabab1702692cf3cf2884beb81cd21}{pvYieldEvent}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00551}00551\ \ \ \ \ ExitThread(\ 0\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00552}00552\ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00553}00553\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00554}00554\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00555}\mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{00555}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{vPortEndScheduler}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00556}00556\ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00557}00557\ \ \ \ \ xPortRunning\ =\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00558}00558\ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00559}00559\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00560}00560\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00561}\mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_a42248a1986691ed4d9344fd75789d69c}{00561}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_a42248a1986691ed4d9344fd75789d69c}{vPortGenerateSimulatedInterrupt}}(\ uint32\_t\ ulInterruptNumber\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00562}00562\ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00563}00563\ \ \ \ \ \mbox{\hyperlink{struct_thread_state__t}{ThreadState\_t}}\ *\ pxThreadState\ =\ (\ \mbox{\hyperlink{struct_thread_state__t}{ThreadState\_t}}\ *\ )\ *(\ (\ \textcolor{keywordtype}{size\_t}\ *\ )\ \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00564}00564\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00565}00565\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ xPortRunning\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00566}00566\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00567}00567\ \ \ \ \ \textcolor{keywordflow}{if}(\ (\ ulInterruptNumber\ <\ \mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_aecc0af206233a1ecf6e7b01daa73591d}{portMAX\_INTERRUPTS}}\ )\ \&\&\ (\ pvInterruptEventMutex\ !=\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00568}00568\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00569}00569\ \ \ \ \ \ \ \ \ WaitForSingleObject(\ pvInterruptEventMutex,\ INFINITE\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00570}00570\ \ \ \ \ \ \ \ \ ulPendingInterrupts\ |=\ (\ 1\ <<\ ulInterruptNumber\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00571}00571\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00572}00572\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ The\ simulated\ interrupt\ is\ now\ held\ pending,\ but\ don't\ actually}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00573}00573\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ process\ it\ yet\ if\ this\ call\ is\ within\ a\ critical\ section.\ \ It\ is}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00574}00574\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ possible\ for\ this\ to\ be\ in\ a\ critical\ section\ as\ calls\ to\ wait\ for}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00575}00575\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ mutexes\ are\ accumulative.\ \ If\ in\ a\ critical\ section\ then\ the\ event}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00576}00576\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ will\ get\ set\ when\ the\ critical\ section\ nesting\ count\ is\ wound\ back}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00577}00577\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ down\ to\ zero.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00578}00578\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_abd5c4f2fdb773b389a89cf1bb14f22c8}{ulCriticalNesting}}\ ==\ \mbox{\hyperlink{_a_r_m7___a_t91_f_r40008_2port_i_s_r_8c_ab7c7cbbda4fb9a253c7e5086071db162}{portNO\_CRITICAL\_NESTING}}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00579}00579\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00580}00580\ \ \ \ \ \ \ \ \ \ \ \ \ SetEvent(\ pvInterruptEvent\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00581}00581\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00582}00582\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Going\ to\ wait\ for\ an\ event\ -\/\ make\ sure\ the\ event\ is\ not\ already}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00583}00583\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ signaled.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00584}00584\ \ \ \ \ \ \ \ \ \ \ \ \ ResetEvent(\ pxThreadState-\/>\mbox{\hyperlink{struct_thread_state__t_a66dabab1702692cf3cf2884beb81cd21}{pvYieldEvent}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00585}00585\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00586}00586\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00587}00587\ \ \ \ \ \ \ \ \ ReleaseMutex(\ pvInterruptEventMutex\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00588}00588\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00589}00589\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_abd5c4f2fdb773b389a89cf1bb14f22c8}{ulCriticalNesting}}\ ==\ \mbox{\hyperlink{_a_r_m7___a_t91_f_r40008_2port_i_s_r_8c_ab7c7cbbda4fb9a253c7e5086071db162}{portNO\_CRITICAL\_NESTING}}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00590}00590\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00591}00591\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ An\ interrupt\ was\ pended\ so\ ensure\ to\ block\ to\ allow\ it\ to}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00592}00592\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ execute.\ \ In\ most\ cases\ the\ (simulated)\ interrupt\ will\ have}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00593}00593\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ executed\ before\ the\ next\ line\ is\ reached\ -\/\ so\ this\ is\ just\ to\ make}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00594}00594\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ sure.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00595}00595\ \ \ \ \ \ \ \ \ \ \ \ \ WaitForSingleObject(\ pxThreadState-\/>\mbox{\hyperlink{struct_thread_state__t_a66dabab1702692cf3cf2884beb81cd21}{pvYieldEvent}},\ INFINITE\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00596}00596\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00597}00597\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00598}00598\ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00599}00599\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00600}00600\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00601}\mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_a2e74179bfe844a7e5b809726666aa93a}{00601}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_a2e74179bfe844a7e5b809726666aa93a}{vPortGenerateSimulatedInterruptFromWindowsThread}}(\ uint32\_t\ ulInterruptNumber\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00602}00602\ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00603}00603\ \ \ \ \ \textcolor{keywordflow}{if}(\ xPortRunning\ ==\ \mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00604}00604\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00605}00605\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Can't\ proceed\ if\ in\ a\ critical\ section\ as\ pvInterruptEventMutex\ won't}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00606}00606\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ be\ available.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00607}00607\ \ \ \ \ \ \ \ \ WaitForSingleObject(\ pvInterruptEventMutex,\ INFINITE\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00608}00608\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00609}00609\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Pending\ a\ user\ defined\ interrupt\ to\ be\ handled\ in\ simulated\ interrupt}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00610}00610\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ handler\ thread.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00611}00611\ \ \ \ \ \ \ \ \ ulPendingInterrupts\ |=\ (\ 1\ <<\ ulInterruptNumber\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00612}00612\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00613}00613\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ The\ interrupt\ is\ now\ pending\ -\/\ notify\ the\ simulated\ interrupt}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00614}00614\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ handler\ thread.\ \ Must\ be\ outside\ of\ a\ critical\ section\ to\ get\ here\ so}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00615}00615\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ the\ handler\ thread\ can\ execute\ immediately\ pvInterruptEventMutex\ is}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00616}00616\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ released.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00617}00617\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_abd5c4f2fdb773b389a89cf1bb14f22c8}{ulCriticalNesting}}\ ==\ 0UL\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00618}00618\ \ \ \ \ \ \ \ \ SetEvent(\ pvInterruptEvent\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00619}00619\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00620}00620\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Give\ back\ the\ mutex\ so\ the\ simulated\ interrupt\ handler\ unblocks}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00621}00621\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ and\ can\ access\ the\ interrupt\ handler\ variables.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00622}00622\ \ \ \ \ \ \ \ \ ReleaseMutex(\ pvInterruptEventMutex\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00623}00623\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00624}00624\ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00625}00625\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00626}00626\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00627}\mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_a35b5d3a9b147da8e3adda2a2cc7b6cc0}{00627}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_a35b5d3a9b147da8e3adda2a2cc7b6cc0}{vPortSetInterruptHandler}}(\ uint32\_t\ ulInterruptNumber,}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00628}00628\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ (\ *\ pvHandler\ )(\ \textcolor{keywordtype}{void}\ )\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00629}00629\ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00630}00630\ \ \ \ \ \textcolor{keywordflow}{if}(\ ulInterruptNumber\ <\ \mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_aecc0af206233a1ecf6e7b01daa73591d}{portMAX\_INTERRUPTS}}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00631}00631\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00632}00632\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ pvInterruptEventMutex\ !=\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00633}00633\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00634}00634\ \ \ \ \ \ \ \ \ \ \ \ \ WaitForSingleObject(\ pvInterruptEventMutex,\ INFINITE\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00635}00635\ \ \ \ \ \ \ \ \ \ \ \ \ ulIsrHandler[\ ulInterruptNumber\ ]\ =\ pvHandler;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00636}00636\ \ \ \ \ \ \ \ \ \ \ \ \ ReleaseMutex(\ pvInterruptEventMutex\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00637}00637\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00638}00638\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00639}00639\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00640}00640\ \ \ \ \ \ \ \ \ \ \ \ \ ulIsrHandler[\ ulInterruptNumber\ ]\ =\ pvHandler;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00641}00641\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00642}00642\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00643}00643\ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00644}00644\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00645}00645\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00646}\mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_a2ed3554a3de09a3bd09d396ee081ab69}{00646}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_a2ed3554a3de09a3bd09d396ee081ab69}{vPortEnterCritical}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00647}00647\ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00648}00648\ \ \ \ \ \textcolor{keywordflow}{if}(\ xPortRunning\ ==\ \mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00649}00649\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00650}00650\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ The\ interrupt\ event\ mutex\ is\ held\ for\ the\ entire\ critical\ section,}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00651}00651\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ effectively\ disabling\ (simulated)\ interrupts.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00652}00652\ \ \ \ \ \ \ \ \ WaitForSingleObject(\ pvInterruptEventMutex,\ INFINITE\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00653}00653\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00654}00654\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00655}00655\ \ \ \ \ \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_abd5c4f2fdb773b389a89cf1bb14f22c8}{ulCriticalNesting}}++;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00656}00656\ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00657}00657\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00658}00658\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00659}\mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_aed20ada05b957181a0de042802a82a5b}{00659}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_aed20ada05b957181a0de042802a82a5b}{vPortExitCritical}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00660}00660\ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00661}00661\ \ \ \ \ int32\_t\ lMutexNeedsReleasing;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00662}00662\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00663}00663\ \ \ \ \ \textcolor{comment}{/*\ The\ interrupt\ event\ mutex\ should\ already\ be\ held\ by\ this\ thread\ as\ it\ was}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00664}00664\ \textcolor{comment}{\ \ \ \ \ *\ obtained\ on\ entry\ to\ the\ critical\ section.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00665}00665\ \ \ \ \ lMutexNeedsReleasing\ =\ \mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00666}00666\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00667}00667\ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_abd5c4f2fdb773b389a89cf1bb14f22c8}{ulCriticalNesting}}\ >\ \mbox{\hyperlink{_a_r_m7___a_t91_f_r40008_2port_i_s_r_8c_ab7c7cbbda4fb9a253c7e5086071db162}{portNO\_CRITICAL\_NESTING}}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00668}00668\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00669}00669\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_abd5c4f2fdb773b389a89cf1bb14f22c8}{ulCriticalNesting}}-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00670}00670\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00671}00671\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Don't\ need\ to\ wait\ for\ any\ pending\ interrupts\ to\ execute\ if\ the}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00672}00672\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ critical\ section\ was\ exited\ from\ inside\ an\ interrupt.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00673}00673\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ (\ \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_abd5c4f2fdb773b389a89cf1bb14f22c8}{ulCriticalNesting}}\ ==\ \mbox{\hyperlink{_a_r_m7___a_t91_f_r40008_2port_i_s_r_8c_ab7c7cbbda4fb9a253c7e5086071db162}{portNO\_CRITICAL\_NESTING}}\ )\ \&\&\ (\ \mbox{\hyperlink{_m_s_v_c-_ming_w_2port_8c_a38f2792360dd63dd47785b2d4529d45e}{xInsideInterrupt}}\ ==\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}}\ )\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00674}00674\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00675}00675\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Were\ any\ interrupts\ set\ to\ pending\ while\ interrupts\ were}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00676}00676\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ (simulated)\ disabled?\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00677}00677\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ ulPendingInterrupts\ !=\ 0UL\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00678}00678\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00679}00679\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_thread_state__t}{ThreadState\_t}}\ *\ pxThreadState\ =\ (\ \mbox{\hyperlink{struct_thread_state__t}{ThreadState\_t}}\ *\ )\ *(\ (\ \textcolor{keywordtype}{size\_t}\ *\ )\ \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00680}00680\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00681}00681\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ xPortRunning\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00682}00682\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00683}00683\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ The\ interrupt\ won't\ actually\ executed\ until}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00684}00684\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ pvInterruptEventMutex\ is\ released\ as\ it\ waits\ on\ both}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00685}00685\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ pvInterruptEventMutex\ and\ pvInterruptEvent.}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00686}00686\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ pvInterruptEvent\ is\ only\ set\ when\ the\ simulated}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00687}00687\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ interrupt\ is\ pended\ if\ the\ interrupt\ is\ pended}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00688}00688\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ from\ outside\ a\ critical\ section\ -\/\ hence\ it\ is\ set}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00689}00689\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ here.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00690}00690\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SetEvent(\ pvInterruptEvent\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00691}00691\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00692}00692\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ The\ calling\ task\ is\ going\ to\ wait\ for\ an\ event\ to\ ensure\ the}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00693}00693\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ interrupt\ that\ is\ pending\ executes\ immediately\ after\ the}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00694}00694\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ critical\ section\ is\ exited\ -\/\ so\ make\ sure\ the\ event\ is\ not}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00695}00695\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ already\ signaled.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00696}00696\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ResetEvent(\ pxThreadState-\/>\mbox{\hyperlink{struct_thread_state__t_a66dabab1702692cf3cf2884beb81cd21}{pvYieldEvent}}\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00697}00697\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00698}00698\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Mutex\ will\ be\ released\ now\ so\ the\ (simulated)\ interrupt\ can}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00699}00699\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ execute,\ so\ does\ not\ require\ releasing\ on\ function\ exit.\ */}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00700}00700\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lMutexNeedsReleasing\ =\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}};}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00701}00701\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ReleaseMutex(\ pvInterruptEventMutex\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00702}00702\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ WaitForSingleObject(\ pxThreadState-\/>\mbox{\hyperlink{struct_thread_state__t_a66dabab1702692cf3cf2884beb81cd21}{pvYieldEvent}},\ INFINITE\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00703}00703\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00704}00704\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00705}00705\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00706}00706\ }
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00707}00707\ \ \ \ \ \textcolor{keywordflow}{if}(\ pvInterruptEventMutex\ !=\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00708}00708\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00709}00709\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ lMutexNeedsReleasing\ ==\ \mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}}\ )}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00710}00710\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00711}00711\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}{configASSERT}}(\ xPortRunning\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00712}00712\ \ \ \ \ \ \ \ \ \ \ \ \ ReleaseMutex(\ pvInterruptEventMutex\ );}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00713}00713\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00714}00714\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00715}00715\ \}}
+\DoxyCodeLine{\Hypertarget{_m_s_v_c-_ming_w_2port_8c_source_l00716}00716\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+
+\end{DoxyCode}

@@ -1,0 +1,54 @@
+\doxysection{x\+Task\+Resume\+All }
+\hypertarget{group__x_task_resume_all}{}\label{group__x_task_resume_all}\index{xTaskResumeAll@{xTaskResumeAll}}
+task. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{task_8h_a003f8ae6d649225abd030cc76e1c7d0e}{xTaskResumeAll}}(\ \textcolor{keywordtype}{void}\ );}
+
+\end{DoxyCode}
+
+
+Resumes scheduler activity after it was suspended by a call to \doxylink{task_8h_a366b302eba79d10b5ee2a3756f0fcc43}{v\+Task\+Suspend\+All()}.
+
+\doxylink{task_8h_a003f8ae6d649225abd030cc76e1c7d0e}{x\+Task\+Resume\+All()} only resumes the scheduler. It does not unsuspend tasks that were previously suspended by a call to \doxylink{task_8h_a84d4e660b04630be2939d91b3c2412f8}{v\+Task\+Suspend()}.
+
+\begin{DoxyReturn}{Returns}
+If resuming the scheduler caused a context switch then pd\+TRUE is returned, otherwise pd\+FALSE is returned.
+\end{DoxyReturn}
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vTask1(\ \textcolor{keywordtype}{void}\ *\ pvParameters\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\ ;;\ )}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Task\ code\ goes\ here.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ ...}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ At\ some\ point\ the\ task\ wants\ to\ perform\ a\ long\ operation\ during}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ which\ it\ does\ not\ want\ to\ get\ swapped\ out.\ \ It\ cannot\ use}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ taskENTER\_CRITICAL\ ()/taskEXIT\_CRITICAL\ ()\ as\ the\ length\ of\ the}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ operation\ may\ cause\ interrupts\ to\ be\ missed\ -\/\ including\ the}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ ticks.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Prevent\ the\ real\ time\ kernel\ swapping\ out\ the\ task.}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{task_8h_a366b302eba79d10b5ee2a3756f0fcc43}{vTaskSuspendAll}}\ ();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Perform\ the\ operation\ here.\ \ There\ is\ no\ need\ to\ use\ critical}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ sections\ as\ we\ have\ all\ the\ microcontroller\ processing\ time.}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ During\ this\ time\ interrupts\ will\ still\ operate\ and\ the\ real}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ time\ kernel\ tick\ count\ will\ be\ maintained.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ ...}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ The\ operation\ is\ complete.\ \ Restart\ the\ kernel.\ \ We\ want\ to\ force}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ a\ context\ switch\ -\/\ but\ there\ is\ no\ point\ if\ resuming\ the\ scheduler}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ caused\ a\ context\ switch\ already.}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{if}(\ !\mbox{\hyperlink{task_8h_a003f8ae6d649225abd030cc76e1c7d0e}{xTaskResumeAll}}\ ()\ )}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{task_8h_a767e474430db1e60056e9678763f9202}{taskYIELD}}\ ();}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

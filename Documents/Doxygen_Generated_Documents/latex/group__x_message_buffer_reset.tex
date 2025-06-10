@@ -1,0 +1,25 @@
+\doxysection{x\+Message\+Buffer\+Reset }
+\hypertarget{group__x_message_buffer_reset}{}\label{group__x_message_buffer_reset}\index{xMessageBufferReset@{xMessageBufferReset}}
+\doxylink{message__buffer_8h}{message\+\_\+buffer.\+h} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{message__buffer_8h_a6d22ac0fd0463b202f2e22674380a41c}{xMessageBufferReset}}(\ \mbox{\hyperlink{message__buffer_8h_a6c510e0a4aeb3a08df4af49c1d651057}{MessageBufferHandle\_t}}\ xMessageBuffer\ );}
+
+\end{DoxyCode}
+
+
+Resets a message buffer to its initial empty state, discarding any message it contained.
+
+A message buffer can only be reset if there are no tasks blocked on it.
+
+Use \doxylink{message__buffer_8h_a6d22ac0fd0463b202f2e22674380a41c}{x\+Message\+Buffer\+Reset()} to reset a message buffer from a task. Use \doxylink{message__buffer_8h_aae899c9f189cb5e6400545e6ddffb247}{x\+Message\+Buffer\+Reset\+From\+ISR()} to reset a message buffer from an interrupt service routine (ISR).
+
+config\+USE\+\_\+\+STREAM\+\_\+\+BUFFERS must be set to 1 in for Free\+RTOSConfig.\+h for \doxylink{message__buffer_8h_a6d22ac0fd0463b202f2e22674380a41c}{x\+Message\+Buffer\+Reset()} to be available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Message\+Buffer} & The handle of the message buffer being reset.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If the message buffer was reset then pd\+PASS is returned. If the message buffer could not be reset because either there was a task blocked on the message queue to wait for space to become available, or to wait for a a message to be available, then pd\+FAIL is returned. 
+\end{DoxyReturn}

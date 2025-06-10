@@ -1,0 +1,19 @@
+\doxysection{x\+Message\+Buffer\+Next\+Length\+Bytes }
+\hypertarget{group__x_message_buffer_next_length_bytes}{}\label{group__x_message_buffer_next_length_bytes}\index{xMessageBufferNextLengthBytes@{xMessageBufferNextLengthBytes}}
+\doxylink{message__buffer_8h}{message\+\_\+buffer.\+h} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{message__buffer_8h_ae2b56b6564cf2476891394231a31ecad}{xMessageBufferNextLengthBytes}}(\ \mbox{\hyperlink{message__buffer_8h_a6c510e0a4aeb3a08df4af49c1d651057}{MessageBufferHandle\_t}}\ xMessageBuffer\ );}
+
+\end{DoxyCode}
+ Returns the length (in bytes) of the next message in a message buffer. Useful if \doxylink{message__buffer_8h_af12a227ba511a95cbea5aa81c7f3ba12}{x\+Message\+Buffer\+Receive()} returned 0 because the size of the buffer passed into \doxylink{message__buffer_8h_af12a227ba511a95cbea5aa81c7f3ba12}{x\+Message\+Buffer\+Receive()} was too small to hold the next message.
+
+config\+USE\+\_\+\+STREAM\+\_\+\+BUFFERS must be set to 1 in for Free\+RTOSConfig.\+h for \doxylink{message__buffer_8h_ae2b56b6564cf2476891394231a31ecad}{x\+Message\+Buffer\+Next\+Length\+Bytes()} to be available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Message\+Buffer} & The handle of the message buffer being queried.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The length (in bytes) of the next message in the message buffer, or 0 if the message buffer is empty. 
+\end{DoxyReturn}

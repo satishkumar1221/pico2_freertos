@@ -1,0 +1,89 @@
+\doxysection{x\+Semaphore\+Give\+From\+ISR }
+\hypertarget{group__x_semaphore_give_from_i_s_r}{}\label{group__x_semaphore_give_from_i_s_r}\index{xSemaphoreGiveFromISR@{xSemaphoreGiveFromISR}}
+semphr. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{semphr_8h_a68aa43df8b2a0dbe17d05fad74670ef0}{xSemaphoreGiveFromISR}}(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{semphr_8h_ad88c6df4a04beedeac782918c8a332f5}{SemaphoreHandle\_t}}\ xSemaphore,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ *pxHigherPriorityTaskWoken}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
+
+\end{DoxyCode}
+
+
+{\itshape Macro} to release a semaphore. The semaphore must have previously been created with a call to x\+Semaphore\+Create\+Binary() or x\+Semaphore\+Create\+Counting().
+
+Mutex type semaphores (those created using a call to x\+Semaphore\+Create\+Mutex()) must not be used with this macro.
+
+This macro can be used from an ISR.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Semaphore} & A handle to the semaphore being released. This is the handle returned when the semaphore was created.\\
+\hline
+{\em px\+Higher\+Priority\+Task\+Woken} & \doxylink{semphr_8h_a68aa43df8b2a0dbe17d05fad74670ef0}{x\+Semaphore\+Give\+From\+ISR()} will set \texorpdfstring{$\ast$}{*}px\+Higher\+Priority\+Task\+Woken to pd\+TRUE if giving the semaphore caused a task to unblock, and the unblocked task has a priority higher than the currently running task. If \doxylink{semphr_8h_a68aa43df8b2a0dbe17d05fad74670ef0}{x\+Semaphore\+Give\+From\+ISR()} sets this value to pd\+TRUE then a context switch should be requested before the interrupt is exited.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pd\+TRUE if the semaphore was successfully given, otherwise err\+QUEUE\+\_\+\+FULL.
+\end{DoxyReturn}
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\(\backslash\)\#define\ LONG\_TIME\ 0xffff}
+\DoxyCodeLine{\(\backslash\)\#define\ TICKS\_TO\_WAIT\ 10}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{semphr_8h_ad88c6df4a04beedeac782918c8a332f5}{SemaphoreHandle\_t}}\ xSemaphore\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Repetitive\ task.}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{void}\ vATask(\ \textcolor{keywordtype}{void}\ *\ pvParameters\ )}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{for}(\ ;;\ )}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ We\ want\ this\ task\ to\ run\ every\ 10\ ticks\ of\ a\ timer.\ \ The\ semaphore}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ was\ created\ before\ this\ task\ was\ started.}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Block\ waiting\ for\ the\ semaphore\ to\ become\ available.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{semphr_8h_af116e436d2a5ae5bd72dbade2b5ea930}{xSemaphoreTake}}(\ xSemaphore,\ LONG\_TIME\ )\ ==\ \mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}}\ )}
+\DoxyCodeLine{\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ It\ is\ time\ to\ execute.}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ...}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ We\ have\ finished\ our\ task.\ \ Return\ to\ the\ top\ of\ the\ loop\ where}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ we\ will\ block\ on\ the\ semaphore\ until\ it\ is\ time\ to\ execute}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ again.\ \ Note\ when\ using\ the\ semaphore\ for\ synchronisation\ with\ an}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ISR\ in\ this\ manner\ there\ is\ no\ need\ to\ 'give'\ the\ semaphore\ back.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Timer\ ISR}}
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{void}\ vTimerISR(\ \textcolor{keywordtype}{void}\ *\ pvParameters\ )}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \textcolor{keyword}{static}\ uint8\_t\ ucLocalTickCount\ =\ 0;}
+\DoxyCodeLine{\ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xHigherPriorityTaskWoken;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ A\ timer\ tick\ has\ occurred.}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ ...\ Do\ other\ time\ functions.}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Is\ it\ time\ for\ vATask\ ()\ to\ run?}}
+\DoxyCodeLine{\ \ \ xHigherPriorityTaskWoken\ =\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}};}
+\DoxyCodeLine{\ \ \ ucLocalTickCount++;}
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(\ ucLocalTickCount\ >=\ TICKS\_TO\_WAIT\ )}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Unblock\ the\ task\ by\ releasing\ the\ semaphore.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \mbox{\hyperlink{semphr_8h_a68aa43df8b2a0dbe17d05fad74670ef0}{xSemaphoreGiveFromISR}}(\ xSemaphore,\ \&xHigherPriorityTaskWoken\ );}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ Reset\ the\ count\ so\ we\ release\ the\ semaphore\ again\ in\ 10\ ticks\ time.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ ucLocalTickCount\ =\ 0;}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \ \textcolor{keywordflow}{if}(\ xHigherPriorityTaskWoken\ !=\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}}\ )}
+\DoxyCodeLine{\ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ We\ can\ force\ a\ context\ switch\ here.\ \ Context\ switching\ from\ an}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ ISR\ uses\ port\ specific\ syntax.\ \ Check\ the\ demo\ task\ for\ your\ port}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \textcolor{comment}{//\ to\ find\ the\ syntax\ required.}}
+\DoxyCodeLine{\ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+ 

@@ -1,0 +1,24 @@
+\doxysection{v\+Stream\+Buffer\+Set\+Stream\+Buffer\+Notification\+Index }
+\hypertarget{group__v_stream_buffer_set_stream_buffer_notification_index}{}\label{group__v_stream_buffer_set_stream_buffer_notification_index}\index{vStreamBufferSetStreamBufferNotificationIndex@{vStreamBufferSetStreamBufferNotificationIndex}}
+\doxylink{stream__buffer_8h}{stream\+\_\+buffer.\+h}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{stream__buffer_8h_a124138e319c5bbf7da2baaf8eaeeec7a}{vStreamBufferSetStreamBufferNotificationIndex}}\ (\ StreamBuffer\_t\ xStreamBuffer,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxNotificationIndex\ );}
+
+\end{DoxyCode}
+
+
+Set the task notification index used for the supplied stream buffer. Successive calls to stream buffer APIs (like x\+Stream\+Buffer\+Send or x\+Stream\+Buffer\+Receive) for this stream buffer will use this new index for their task notifications.
+
+If this function is not called, the default index (tsk\+DEFAULT\+\_\+\+INDEX\+\_\+\+TO\+\_\+\+NOTIFY) is used for task notifications. It is recommended to call this function before attempting to send or receive data from the stream buffer to avoid inconsistencies.
+
+config\+USE\+\_\+\+STREAM\+\_\+\+BUFFERS must be set to 1 in for Free\+RTOSConfig.\+h for \doxylink{stream__buffer_8h_a124138e319c5bbf7da2baaf8eaeeec7a}{v\+Stream\+Buffer\+Set\+Stream\+Buffer\+Notification\+Index()} to be available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Stream\+Buffer} & The handle of the stream buffer for which the task notification index is set.\\
+\hline
+{\em ux\+Notification\+Index} & The task notification index to set. \\
+\hline
+\end{DoxyParams}

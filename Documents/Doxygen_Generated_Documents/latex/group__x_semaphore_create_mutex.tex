@@ -1,0 +1,43 @@
+\doxysection{x\+Semaphore\+Create\+Mutex }
+\hypertarget{group__x_semaphore_create_mutex}{}\label{group__x_semaphore_create_mutex}\index{xSemaphoreCreateMutex@{xSemaphoreCreateMutex}}
+semphr. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{semphr_8h_ad88c6df4a04beedeac782918c8a332f5}{SemaphoreHandle\_t}}\ xSemaphoreCreateMutex(\ \textcolor{keywordtype}{void}\ );}
+
+\end{DoxyCode}
+
+
+Creates a new mutex type semaphore instance, and returns a handle by which the new mutex can be referenced.
+
+Internally, within the Free\+RTOS implementation, mutex semaphores use a block of memory, in which the mutex structure is stored. If a mutex is created using x\+Semaphore\+Create\+Mutex() then the required memory is automatically dynamically allocated inside the x\+Semaphore\+Create\+Mutex() function. (see \href{https://www.FreeRTOS.org/a00111.html}{\texttt{https\+://www.\+Free\+RTOS.\+org/a00111.\+html}}). If a mutex is created using x\+Semaphore\+Create\+Mutex\+Static() then the application writer must provided the memory. x\+Semaphore\+Create\+Mutex\+Static() therefore allows a mutex to be created without using any dynamic memory allocation.
+
+Mutexes created using this function can be accessed using the \doxylink{semphr_8h_af116e436d2a5ae5bd72dbade2b5ea930}{x\+Semaphore\+Take()} and \doxylink{semphr_8h_aae55761cabfa9bf85c8f4430f78c0953}{x\+Semaphore\+Give()} macros. The x\+Semaphore\+Take\+Recursive() and x\+Semaphore\+Give\+Recursive() macros must not be used.
+
+This type of semaphore uses a priority inheritance mechanism so a task \textquotesingle{}taking\textquotesingle{} a semaphore MUST ALWAYS \textquotesingle{}give\textquotesingle{} the semaphore back once the semaphore it is no longer required.
+
+Mutex type semaphores cannot be used from within interrupt service routines.
+
+See x\+Semaphore\+Create\+Binary() for an alternative implementation that can be used for pure synchronisation (where one task or interrupt always \textquotesingle{}gives\textquotesingle{} the semaphore and another always \textquotesingle{}takes\textquotesingle{} the semaphore) and from within interrupt service routines.
+
+\begin{DoxyReturn}{Returns}
+If the mutex was successfully created then a handle to the created semaphore is returned. If there was not enough heap to allocate the mutex data structures then NULL is returned.
+\end{DoxyReturn}
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{semphr_8h_ad88c6df4a04beedeac782918c8a332f5}{SemaphoreHandle\_t}}\ xSemaphore;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vATask(\ \textcolor{keywordtype}{void}\ *\ pvParameters\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Semaphore\ cannot\ be\ used\ before\ a\ call\ to\ xSemaphoreCreateMutex().}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ This\ is\ a\ macro\ so\ pass\ the\ variable\ in\ directly.}}
+\DoxyCodeLine{\ xSemaphore\ =\ xSemaphoreCreateMutex();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(\ xSemaphore\ !=\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ The\ semaphore\ was\ created\ successfully.}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ The\ semaphore\ can\ now\ be\ used.}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

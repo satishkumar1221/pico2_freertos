@@ -1,0 +1,77 @@
+\doxysection{freertos\+\_\+os\+\_\+wrapper.\+cpp}
+\hypertarget{freertos__os__wrapper_8cpp_source}{}\label{freertos__os__wrapper_8cpp_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/freertos\_os\_wrapper.cpp@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/freertos\_os\_wrapper.cpp}}
+\mbox{\hyperlink{freertos__os__wrapper_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{stdio_8h}{stdio.h}}>}}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}pico/stdlib.h"{}}}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00004}00004\ \textcolor{comment}{/*Fix\ me\ :\ As\ of\ now\ only\ included\ in\ this\ file.\ Including\ in\ other\ files\ causes\ erros\ .\ Hence\ scheduler\ function\ have\ to\ written\ here.\ */}}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_free_r_t_o_s_8h}{FreeRTOS.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{mpu__wrappers_8h}{mpu\_wrappers.h}}"{}}\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{task_8h}{task.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00008}00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_os__usr_8h}{Os\_usr.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00010}00010\ \textcolor{comment}{//xTaskCreate(temp\_func,\ "{}temp"{},\ 1024,\ NULL,\ 4,\ NULL);}}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00011}\mbox{\hyperlink{structsttag__task__config__struct}{00011}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00012}00012\ \{}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00013}\mbox{\hyperlink{structsttag__task__config__struct_ad53ea1aca54556f7b442b1f3dc7be319}{00013}}\ \ \ \ \mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{TaskFunction\_t}}\ \mbox{\hyperlink{structsttag__task__config__struct_ad53ea1aca54556f7b442b1f3dc7be319}{func\_ptr\_task}};}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00014}\mbox{\hyperlink{structsttag__task__config__struct_aebe0c4527b38ad15fad0650b5dad6a62}{00014}}\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{structsttag__task__config__struct_aebe0c4527b38ad15fad0650b5dad6a62}{pc\_name}};\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00015}\mbox{\hyperlink{structsttag__task__config__struct_a63e245895a35fb67031be5d779677a4c}{00015}}\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{structsttag__task__config__struct_a63e245895a35fb67031be5d779677a4c}{stack\_depth}};\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00016}\mbox{\hyperlink{structsttag__task__config__struct_adc01c7318e71ed133fccbcff6648e929}{00016}}\ \ \ \ \ \textcolor{keywordtype}{void}\ *\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structsttag__task__config__struct_adc01c7318e71ed133fccbcff6648e929}{pvParameters}};}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00017}\mbox{\hyperlink{structsttag__task__config__struct_a54a900690ae847df8f0fed16a726cf89}{00017}}\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{structsttag__task__config__struct_a54a900690ae847df8f0fed16a726cf89}{uxPriority}};}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00018}\mbox{\hyperlink{structsttag__task__config__struct_aee0eb1c08b058b17c498af840f90dcc1}{00018}}\ \ \ \ \ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ *\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structsttag__task__config__struct_aee0eb1c08b058b17c498af840f90dcc1}{pxCreatedTask}};\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00019}00019\ \}\mbox{\hyperlink{structsttag__task__config__struct}{sttag\_task\_config\_struct}};\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00022}\mbox{\hyperlink{freertos__os__wrapper_8cpp_ac3a8566f6869f11563c32885f774e036}{00022}}\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ \mbox{\hyperlink{freertos__os__wrapper_8cpp_ac3a8566f6869f11563c32885f774e036}{V\_taskhandle\_c0}}[\mbox{\hyperlink{_os__usr_8h_ad6f8271ee331d5573e97a464aec80e14ad21140a310edd21dccc8849f11779c00}{TOTAL\_NUMBER\_OF\_TASKS\_C0}}];\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00023}\mbox{\hyperlink{freertos__os__wrapper_8cpp_a4756549b71410d057413c0dd54ff6c0b}{00023}}\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ \mbox{\hyperlink{freertos__os__wrapper_8cpp_a4756549b71410d057413c0dd54ff6c0b}{V\_taskhandle\_c1}}[\mbox{\hyperlink{_os__usr_8h_aac116a17f50913615fe0a3cdf91876b5a9a3fe59b93a08624a68963b7eb8f4c9b}{TOTAL\_NUMBER\_OF\_TASKS\_C1}}];}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00024}00024\ \textcolor{comment}{//fix\ me\ :\ have\ to\ make\ it\ more\ better\ based\ \ }}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00025}00025\ \textcolor{comment}{//xTaskCreate(temp\_func,\ "{}temp"{},\ 1024,\ NULL,\ 4,\ NULL);}}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00027}\mbox{\hyperlink{freertos__os__wrapper_8cpp_a5346d669f846c881c90d154cf9ba41d0}{00027}}\ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structsttag__task__config__struct}{sttag\_task\_config\_struct}}\ \mbox{\hyperlink{freertos__os__wrapper_8cpp_a5346d669f846c881c90d154cf9ba41d0}{C\_OS\_Cyclictasks}}[\mbox{\hyperlink{_os__usr_8h_ad6f8271ee331d5573e97a464aec80e14ad21140a310edd21dccc8849f11779c00}{TOTAL\_NUMBER\_OF\_TASKS\_C0}}]\ =\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00028}00028\ \ \{}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00029}00029\ \ \ \ \ \textcolor{comment}{/*core\ 0\ related\ tasks*/}}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00030}00030\ \ \ \ \ \{\mbox{\hyperlink{_os__usr_8h_a1948ddc3124d28639a63c15b165f19da}{Os}}(20,0)\ \ ,\textcolor{stringliteral}{"{}20ms\_task"{}},\ \mbox{\hyperlink{_os__usr_8h_afa60aa7fdbc1d635efdcb2101532c85e}{TASK\_STACK\_DEPTH}}(20,0)\ \ \ ,\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ ,\ \mbox{\hyperlink{_os__usr_8h_ac9152e150a3b508cf8102cb5e8ac7888}{TASK\_Prio}}(20,0)\ \ \ ,\ \&\mbox{\hyperlink{freertos__os__wrapper_8cpp_ac3a8566f6869f11563c32885f774e036}{V\_taskhandle\_c0}}[\mbox{\hyperlink{_os__usr_8h_ad6f8271ee331d5573e97a464aec80e14af191f2ea09116b4d93f733e8abdc0988}{task\_20ms\_c0}}]\ \ \ \},}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00031}00031\ \ \ \ \ \{\mbox{\hyperlink{_os__usr_8h_a1948ddc3124d28639a63c15b165f19da}{Os}}(50,0)\ \ ,\ \textcolor{stringliteral}{"{}50ms\_task"{}},\mbox{\hyperlink{_os__usr_8h_afa60aa7fdbc1d635efdcb2101532c85e}{TASK\_STACK\_DEPTH}}(50,0)\ \ \ ,\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ ,\ \mbox{\hyperlink{_os__usr_8h_ac9152e150a3b508cf8102cb5e8ac7888}{TASK\_Prio}}(50,0)\ \ \ ,\ \&\mbox{\hyperlink{freertos__os__wrapper_8cpp_ac3a8566f6869f11563c32885f774e036}{V\_taskhandle\_c0}}[\mbox{\hyperlink{_os__usr_8h_ad6f8271ee331d5573e97a464aec80e14a4b85645be580ae5ac18315acdc81838c}{task\_50ms\_c0}}]\ \ \ \},}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00032}00032\ \ \ \ \ \{\mbox{\hyperlink{_os__usr_8h_a1948ddc3124d28639a63c15b165f19da}{Os}}(100,0)\ ,\ \textcolor{stringliteral}{"{}100ms\_task"{}},\mbox{\hyperlink{_os__usr_8h_afa60aa7fdbc1d635efdcb2101532c85e}{TASK\_STACK\_DEPTH}}(100,0)\ \ ,\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ ,\ \mbox{\hyperlink{_os__usr_8h_ac9152e150a3b508cf8102cb5e8ac7888}{TASK\_Prio}}(100,0)\ \ ,\ \&\mbox{\hyperlink{freertos__os__wrapper_8cpp_ac3a8566f6869f11563c32885f774e036}{V\_taskhandle\_c0}}[\mbox{\hyperlink{_os__usr_8h_ad6f8271ee331d5573e97a464aec80e14a4f259e1d9aa346185b3b24a189af895a}{task\_100ms\_c0}}]\ \ \},\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00033}00033\ \ \ \ \ \{\mbox{\hyperlink{_os__usr_8h_a1948ddc3124d28639a63c15b165f19da}{Os}}(1000,0),\ \textcolor{stringliteral}{"{}1000ms\_task"{}},\mbox{\hyperlink{_os__usr_8h_afa60aa7fdbc1d635efdcb2101532c85e}{TASK\_STACK\_DEPTH}}(1000,0)\ ,\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ ,\ \mbox{\hyperlink{_os__usr_8h_ac9152e150a3b508cf8102cb5e8ac7888}{TASK\_Prio}}(1000,0)\ ,\ \&\mbox{\hyperlink{freertos__os__wrapper_8cpp_ac3a8566f6869f11563c32885f774e036}{V\_taskhandle\_c0}}[\mbox{\hyperlink{_os__usr_8h_ad6f8271ee331d5573e97a464aec80e14ac49962eb73515dc51f1b3dfaadafaa4e}{task\_1000ms\_c0}}]\ \},\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00034}00034\ \ \ \ \ \{\mbox{\hyperlink{_os__usr_8h_a1948ddc3124d28639a63c15b165f19da}{Os}}(2000,0),\ \textcolor{stringliteral}{"{}2000ms\_task"{}},\ \mbox{\hyperlink{_os__usr_8h_afa60aa7fdbc1d635efdcb2101532c85e}{TASK\_STACK\_DEPTH}}(2000,0)\ ,\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ ,\ \mbox{\hyperlink{_os__usr_8h_ac9152e150a3b508cf8102cb5e8ac7888}{TASK\_Prio}}(2000,0)\ ,\ \&\mbox{\hyperlink{freertos__os__wrapper_8cpp_ac3a8566f6869f11563c32885f774e036}{V\_taskhandle\_c0}}[\mbox{\hyperlink{_os__usr_8h_ad6f8271ee331d5573e97a464aec80e14a98e2be34b60acc1f46587c3c413f6cb7}{task\_2000ms\_c0}}]\ \}}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00035}00035\ \ \ \ \ \textcolor{comment}{/*core\ 1\ related\ tasks*/}}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00036}00036\ \ \};}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00039}00039\ \ \ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00041}\mbox{\hyperlink{class_o_s__start_a673a89159dfee24c2b8b524978fef1df}{00041}}\ \mbox{\hyperlink{class_o_s__start_a673a89159dfee24c2b8b524978fef1df}{OS\_start::OS\_start}}()}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00042}00042\ \{}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00043}00043\ \ \ \ \ \mbox{\hyperlink{class_o_s__start_a8778f80d1193c31ba954e3d739c1bf43}{OS\_startup\_code}}();}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00045}00045\ \}}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00047}00047\ \textcolor{keywordtype}{void}\ OS\_start::\ start\_scheduler()}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00048}00048\ \{}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00049}00049\ \ \ \ \ \textcolor{keywordtype}{int}\ core\_num\ =\ get\_core\_num();\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00050}00050\ \ \ \ \ uint8\_t\ itr\ =\ 0;\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00051}00051\ \ \ \ \ \textcolor{keywordflow}{if}(core\_num\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00052}00052\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00053}00053\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(itr\ \ =\ 0\ ;\ itr<\ \mbox{\hyperlink{_os__usr_8h_ad6f8271ee331d5573e97a464aec80e14ad21140a310edd21dccc8849f11779c00}{TOTAL\_NUMBER\_OF\_TASKS\_C0}}\ ;\ itr++)}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00054}00054\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \ xTaskCreate(\mbox{\hyperlink{freertos__os__wrapper_8cpp_a5346d669f846c881c90d154cf9ba41d0}{C\_OS\_Cyclictasks}}[itr].func\_ptr\_task\ ,\ \mbox{\hyperlink{freertos__os__wrapper_8cpp_a5346d669f846c881c90d154cf9ba41d0}{C\_OS\_Cyclictasks}}[itr].pc\_name\ ,\ \mbox{\hyperlink{freertos__os__wrapper_8cpp_a5346d669f846c881c90d154cf9ba41d0}{C\_OS\_Cyclictasks}}[itr].stack\_depth\ ,\ \mbox{\hyperlink{freertos__os__wrapper_8cpp_a5346d669f846c881c90d154cf9ba41d0}{C\_OS\_Cyclictasks}}[itr].pvParameters,}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{freertos__os__wrapper_8cpp_a5346d669f846c881c90d154cf9ba41d0}{C\_OS\_Cyclictasks}}[itr].uxPriority\ \ \ ,\ \ \mbox{\hyperlink{freertos__os__wrapper_8cpp_a5346d669f846c881c90d154cf9ba41d0}{C\_OS\_Cyclictasks}}[itr].pxCreatedTask);}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00057}00057\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00059}00059\ \ \ \ \ \ \ \ \mbox{\hyperlink{task_8h_aaf9dca1065c60abdeb309d56ab7293cb}{vTaskStartScheduler}}();\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00060}00060\ \ \ \ \ \ \ \ \textcolor{comment}{/*the\ control\ should\ not\ come\ here\ */}}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (1)\ \{}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00063}00063\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00064}00064\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00065}00065\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00066}00066\ \}}
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{freertos__os__wrapper_8cpp_source_l00071}00071\ }
+
+\end{DoxyCode}

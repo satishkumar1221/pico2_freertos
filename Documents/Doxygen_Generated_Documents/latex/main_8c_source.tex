@@ -1,0 +1,110 @@
+\doxysection{main.\+c}
+\hypertarget{main_8c_source}{}\label{main_8c_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/examples/cmake\_example/main.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/examples/cmake\_example/main.c}}
+\mbox{\hyperlink{main_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00029}00029\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00030}00030\ \textcolor{comment}{\ *\ This\ is\ a\ simple\ main\ that\ will\ start\ the\ FreeRTOS-\/Kernel\ and\ run\ a\ periodic\ task}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00031}00031\ \textcolor{comment}{\ *\ that\ only\ delays\ if\ compiled\ with\ the\ template\ port,\ this\ project\ will\ do\ nothing.}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00032}00032\ \textcolor{comment}{\ *\ For\ more\ information\ on\ getting\ started\ please\ look\ here:}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00033}00033\ \textcolor{comment}{\ *\ https://freertos.org/FreeRTOS-\/quick-\/start-\/guide.html}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00034}00034\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00036}00036\ \textcolor{comment}{/*\ FreeRTOS\ includes.\ */}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00037}00037\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{_free_r_t_o_s_8h}{FreeRTOS.h}}>}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00038}00038\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{task_8h}{task.h}}>}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00039}00039\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{queue_8h}{queue.h}}>}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00040}00040\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{timers_8h}{timers.h}}>}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00041}00041\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{semphr_8h}{semphr.h}}>}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00043}00043\ \textcolor{comment}{/*\ Standard\ includes.\ */}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00044}00044\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{stdio_8h}{stdio.h}}>}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00046}00046\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00048}00048\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ exampleTask(\ \textcolor{keywordtype}{void}\ *\ parameters\ )\ \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_ab35b2424ac8c0625cfdbbcf916c5e1c3}{\_\_attribute\_\_}}(\ (\ noreturn\ )\ );}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00050}00050\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00052}00052\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ exampleTask(\ \textcolor{keywordtype}{void}\ *\ parameters\ )}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00053}00053\ \{}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00054}00054\ \ \ \ \ \textcolor{comment}{/*\ Unused\ parameters.\ */}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00055}00055\ \ \ \ \ (\ void\ )\ parameters;}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00057}00057\ \ \ \ \ \textcolor{keywordflow}{for}(\ ;\ ;\ )}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00058}00058\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Example\ Task\ Code\ */}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00060}00060\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{task_8h_aa154068cecd7f31446a7a84af44ab1a3}{vTaskDelay}}(\ 100\ );\ \textcolor{comment}{/*\ delay\ 100\ ticks\ */}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00061}00061\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00062}00062\ \}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00063}00063\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00065}\mbox{\hyperlink{main_8c_a840291bc02cba5474a4cb46a9b9566fe}{00065}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{main_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00066}00066\ \{}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00067}00067\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{_free_r_t_o_s_8h_af0002e4ad72220b34b95fcdf43bcd82d}{StaticTask\_t}}\ exampleTaskTCB;}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00068}00068\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ exampleTaskStack[\ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_a6c534a6cf8a00528fe0be42083484f9a}{configMINIMAL\_STACK\_SIZE}}\ ];}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00070}00070\ \ \ \ \ (\ void\ )\ printf(\ \textcolor{stringliteral}{"{}Example\ FreeRTOS\ Project\(\backslash\)n"{}}\ );}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00072}00072\ \ \ \ \ (\ void\ )\ xTaskCreateStatic(\ exampleTask,}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}example"{}},}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_a6c534a6cf8a00528fe0be42083484f9a}{configMINIMAL\_STACK\_SIZE}},}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}},}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_a9a78f5ac61e6cb172dadf2a51f11db38}{configMAX\_PRIORITIES}}\ -\/\ 1U,}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&(\ exampleTaskStack[\ 0\ ]\ ),}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&(\ exampleTaskTCB\ )\ );}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00080}00080\ \ \ \ \ \textcolor{comment}{/*\ Start\ the\ scheduler.\ */}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00081}00081\ \ \ \ \ \mbox{\hyperlink{task_8h_aaf9dca1065c60abdeb309d56ab7293cb}{vTaskStartScheduler}}();}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00083}00083\ \ \ \ \ \textcolor{keywordflow}{for}(\ ;\ ;\ )}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00084}00084\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00085}00085\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Should\ not\ reach\ here.\ */}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00086}00086\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00088}00088\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00089}00089\ \}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00090}00090\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00092}00092\ \textcolor{preprocessor}{\#if\ (\ configCHECK\_FOR\_STACK\_OVERFLOW\ >\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00094}00094\ \ \ \ \ \textcolor{keywordtype}{void}\ vApplicationStackOverflowHook(\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xTask,}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ *\ pcTaskName\ )}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00096}00096\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00097}00097\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Check\ pcTaskName\ for\ the\ name\ of\ the\ offending\ task,}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00098}00098\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ or\ pxCurrentTCB\ if\ pcTaskName\ has\ itself\ been\ corrupted.\ */}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00099}00099\ \ \ \ \ \ \ \ \ (\ void\ )\ xTask;}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00100}00100\ \ \ \ \ \ \ \ \ (\ void\ )\ pcTaskName;}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00101}00101\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00103}00103\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \#if\ (\ configCHECK\_FOR\_STACK\_OVERFLOW\ >\ 0\ )\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00104}00104\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+
+\end{DoxyCode}

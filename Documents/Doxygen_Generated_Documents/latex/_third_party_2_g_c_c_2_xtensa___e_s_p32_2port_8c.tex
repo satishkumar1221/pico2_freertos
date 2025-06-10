@@ -1,0 +1,349 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+Third\+Party/\+GCC/\+Xtensa\+\_\+\+ESP32/port.c File Reference}
+\hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c}{}\label{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/Xtensa\_ESP32/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/Xtensa\_ESP32/port.c}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$xtensa/config/core.\+h$>$}\newline
+{\ttfamily \#include "{}xtensa\+\_\+rtos.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+idf\+\_\+version.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+private/panic\+\_\+reason.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+debug\+\_\+helpers.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+private/crosscore\+\_\+int.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+log.\+h"{}}\newline
+{\ttfamily \#include "{}soc/cpu.\+h"{}}\newline
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}task.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+heap\+\_\+caps.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+intr\+\_\+alloc.\+h"{}}\newline
+{\ttfamily \#include "{}port\+\_\+systick.\+h"{}}\newline
+{\ttfamily \#include "{}portmux\+\_\+impl.\+h"{}}\newline
+Include dependency graph for port.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a5f94db16c6f51a777d284103e2962f45}{STACK\+\_\+\+WATCH\+\_\+\+AREA\+\_\+\+SIZE}}~( 32 )
+\item 
+\#define \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_afcfaa13baa9b2f76ca6dbbba4d1db568}{STACK\+\_\+\+WATCH\+\_\+\+POINT\+\_\+\+NUMBER}}~( SOC\+\_\+\+CPU\+\_\+\+WATCHPOINTS\+\_\+\+NUM -\/ 1 )
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a3d96ea7532f08fcad740d813eed0ecae}{\+\_\+xt\+\_\+coproc\+\_\+init}} (void)
+\item 
+void \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_af05e6fd1516ecc374e4599910c687cb5}{\+\_\+xt\+\_\+user\+\_\+exit}} (void)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}{px\+Port\+Initialise\+Stack}} (\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}px\+Top\+Of\+Stack, \mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}} px\+Code, void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\item 
+void \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{v\+Port\+End\+Scheduler}} (void)
+\begin{DoxyCompactList}\small\item\em End the Free\+RTOS scheduler. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{x\+Port\+Start\+Scheduler}} (void)
+\begin{DoxyCompactList}\small\item\em start the freertos scheduler, go to the first task \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a875b1abb7b60f82558b9af02bddebd9c}{v\+Port\+Yield\+Other\+Core}} (\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} coreid)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_aa70417906047bc0c96b84ed59031929e}{x\+Port\+In\+Isr\+Context}} ()
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} IRAM\+\_\+\+ATTR \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a82a4d01ffb198da22adff74d2391eb46}{x\+Port\+Interrupted\+From\+ISRContext}} ()
+\item 
+void IRAM\+\_\+\+ATTR \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a8e999b46e542f17cbccc12d10e29c0e2}{v\+Port\+Evaluate\+Yield\+From\+ISR}} (int argc,...)
+\item 
+void \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_aa38afdaafc5cae2f07ca2b6198b6bee8}{v\+Port\+Assert\+If\+In\+ISR}} ()
+\item 
+void \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a4793b62a11bbe763374a0eca87bd6351}{v\+Port\+CPUInitialize\+Mutex}} (\mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_ac9f8cff2c1e657fd97da40661a59013d}{port\+MUX\+\_\+\+TYPE}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}})
+\item 
+void \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a17c88e213d32e67d3fca43e627397154}{v\+Port\+CPUAcquire\+Mutex}} (\mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_ac9f8cff2c1e657fd97da40661a59013d}{port\+MUX\+\_\+\+TYPE}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}})
+\item 
+bool \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a418add7f2fda447134047a41fb83ac92}{v\+Port\+CPUAcquire\+Mutex\+Timeout}} (\mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_ac9f8cff2c1e657fd97da40661a59013d}{port\+MUX\+\_\+\+TYPE}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}, int \mbox{\hyperlink{portmux__impl_8inc_8h_afc3883f40d43226571e900129d15fae2}{timeout\+\_\+cycles}})
+\begin{DoxyCompactList}\small\item\em Acquire a portmux spinlock with a timeout. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a515ba399b7ed27c5e4464ad41ac58db4}{v\+Port\+CPURelease\+Mutex}} (\mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_ac9f8cff2c1e657fd97da40661a59013d}{port\+MUX\+\_\+\+TYPE}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}})
+\item 
+void \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a9b6e7b82f316d0b3560f04dbd2b21c83}{v\+Port\+Set\+Stack\+Watchpoint}} (void \texorpdfstring{$\ast$}{*}px\+Stack\+Start)
+\item 
+uint32\+\_\+t \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_af671860d458e8d885299b85db2b3ddc7}{x\+Port\+Get\+Tick\+Rate\+Hz}} (void)
+\item 
+void \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a765536cb3658e8044320544315adbf32}{esp\+\_\+startup\+\_\+start\+\_\+app\+\_\+common}} (void)
+\item 
+void \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a21ae412a3f8e9a58f76651cc0f1f4d98}{esp\+\_\+startup\+\_\+start\+\_\+app}} (void)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+volatile int \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_aba355329d1f37d32fd6c5dc0500cc53c}{port\+\_\+x\+Scheduler\+Running}} \mbox{[}port\+NUM\+\_\+\+PROCESSORS\mbox{]}
+\item 
+unsigned \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a78e796fddbe189a894cb7262490ecf4a}{port\+\_\+interrupt\+Nesting}} \mbox{[}port\+NUM\+\_\+\+PROCESSORS\mbox{]} = \{ 0 \}
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a5f94db16c6f51a777d284103e2962f45}\index{port.c@{port.c}!STACK\_WATCH\_AREA\_SIZE@{STACK\_WATCH\_AREA\_SIZE}}
+\index{STACK\_WATCH\_AREA\_SIZE@{STACK\_WATCH\_AREA\_SIZE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{STACK\_WATCH\_AREA\_SIZE}{STACK\_WATCH\_AREA\_SIZE}}
+{\footnotesize\ttfamily \label{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a5f94db16c6f51a777d284103e2962f45} 
+\#define STACK\+\_\+\+WATCH\+\_\+\+AREA\+\_\+\+SIZE~( 32 )}
+
+
+
+Definition at line \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source_l00484}{484}} of file \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_afcfaa13baa9b2f76ca6dbbba4d1db568}\index{port.c@{port.c}!STACK\_WATCH\_POINT\_NUMBER@{STACK\_WATCH\_POINT\_NUMBER}}
+\index{STACK\_WATCH\_POINT\_NUMBER@{STACK\_WATCH\_POINT\_NUMBER}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{STACK\_WATCH\_POINT\_NUMBER}{STACK\_WATCH\_POINT\_NUMBER}}
+{\footnotesize\ttfamily \label{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_afcfaa13baa9b2f76ca6dbbba4d1db568} 
+\#define STACK\+\_\+\+WATCH\+\_\+\+POINT\+\_\+\+NUMBER~( SOC\+\_\+\+CPU\+\_\+\+WATCHPOINTS\+\_\+\+NUM -\/ 1 )}
+
+
+
+Definition at line \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source_l00485}{485}} of file \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source}{port.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a3d96ea7532f08fcad740d813eed0ecae}\index{port.c@{port.c}!\_xt\_coproc\_init@{\_xt\_coproc\_init}}
+\index{\_xt\_coproc\_init@{\_xt\_coproc\_init}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{\_xt\_coproc\_init()}{\_xt\_coproc\_init()}}
+{\footnotesize\ttfamily \label{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a3d96ea7532f08fcad740d813eed0ecae} 
+void \+\_\+xt\+\_\+coproc\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+
+Here is the caller graph for this function\+:
+% FIG 1
+\Hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_af05e6fd1516ecc374e4599910c687cb5}\index{port.c@{port.c}!\_xt\_user\_exit@{\_xt\_user\_exit}}
+\index{\_xt\_user\_exit@{\_xt\_user\_exit}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{\_xt\_user\_exit()}{\_xt\_user\_exit()}}
+{\footnotesize\ttfamily \label{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_af05e6fd1516ecc374e4599910c687cb5} 
+void \+\_\+xt\+\_\+user\+\_\+exit (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+% FIG 2
+\Hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a21ae412a3f8e9a58f76651cc0f1f4d98}\index{port.c@{port.c}!esp\_startup\_start\_app@{esp\_startup\_start\_app}}
+\index{esp\_startup\_start\_app@{esp\_startup\_start\_app}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{esp\_startup\_start\_app()}{esp\_startup\_start\_app()}}
+{\footnotesize\ttfamily \label{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a21ae412a3f8e9a58f76651cc0f1f4d98} 
+void esp\+\_\+startup\+\_\+start\+\_\+app (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source_l00560}{560}} of file \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a765536cb3658e8044320544315adbf32}\index{port.c@{port.c}!esp\_startup\_start\_app\_common@{esp\_startup\_start\_app\_common}}
+\index{esp\_startup\_start\_app\_common@{esp\_startup\_start\_app\_common}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{esp\_startup\_start\_app\_common()}{esp\_startup\_start\_app\_common()}}
+{\footnotesize\ttfamily \label{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a765536cb3658e8044320544315adbf32} 
+void esp\+\_\+startup\+\_\+start\+\_\+app\+\_\+common (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{port__common_8c_source_l00064}{64}} of file \mbox{\hyperlink{port__common_8c_source}{port\+\_\+common.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 4
+Here is the caller graph for this function\+:
+% FIG 5
+\Hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}\index{port.c@{port.c}!pxPortInitialiseStack@{pxPortInitialiseStack}}
+\index{pxPortInitialiseStack@{pxPortInitialiseStack}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{pxPortInitialiseStack()}{pxPortInitialiseStack()}}
+{\footnotesize\ttfamily \label{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} px\+Port\+Initialise\+Stack (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{px\+Top\+Of\+Stack}{, }\item[{\mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}}}]{px\+Code}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+px\+Top\+Of\+Stack = 0x11;
+
+px\+Top\+Of\+Stack = 0x22;
+
+px\+Top\+Of\+Stack = 0x33;
+
+Definition at line \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source_l00134}{134}} of file \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_aa38afdaafc5cae2f07ca2b6198b6bee8}\index{port.c@{port.c}!vPortAssertIfInISR@{vPortAssertIfInISR}}
+\index{vPortAssertIfInISR@{vPortAssertIfInISR}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortAssertIfInISR()}{vPortAssertIfInISR()}}
+{\footnotesize\ttfamily \label{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_aa38afdaafc5cae2f07ca2b6198b6bee8} 
+void v\+Port\+Assert\+If\+In\+ISR (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source_l00386}{386}} of file \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a17c88e213d32e67d3fca43e627397154}\index{port.c@{port.c}!vPortCPUAcquireMutex@{vPortCPUAcquireMutex}}
+\index{vPortCPUAcquireMutex@{vPortCPUAcquireMutex}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortCPUAcquireMutex()}{vPortCPUAcquireMutex()}}
+{\footnotesize\ttfamily \label{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a17c88e213d32e67d3fca43e627397154} 
+void v\+Port\+CPUAcquire\+Mutex (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_ac9f8cff2c1e657fd97da40661a59013d}{port\+MUX\+\_\+\+TYPE}} \texorpdfstring{$\ast$}{*}}]{mux}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source_l00439}{439}} of file \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a418add7f2fda447134047a41fb83ac92}\index{port.c@{port.c}!vPortCPUAcquireMutexTimeout@{vPortCPUAcquireMutexTimeout}}
+\index{vPortCPUAcquireMutexTimeout@{vPortCPUAcquireMutexTimeout}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortCPUAcquireMutexTimeout()}{vPortCPUAcquireMutexTimeout()}}
+{\footnotesize\ttfamily \label{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a418add7f2fda447134047a41fb83ac92} 
+bool v\+Port\+CPUAcquire\+Mutex\+Timeout (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_ac9f8cff2c1e657fd97da40661a59013d}{port\+MUX\+\_\+\+TYPE}} \texorpdfstring{$\ast$}{*}}]{mux}{, }\item[{int}]{timeout\+\_\+cycles}{}\end{DoxyParamCaption})}
+
+
+
+Acquire a portmux spinlock with a timeout. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mux} & Pointer to portmux to acquire. \\
+\hline
+{\em timeout\+\_\+cycles} & Timeout to spin, in CPU cycles. Pass port\+MUX\+\_\+\+NO\+\_\+\+TIMEOUT to wait forever, port\+MUX\+\_\+\+TRY\+\_\+\+LOCK to try a single time to acquire the lock.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if mutex is successfully acquired, false on timeout. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source_l00447}{447}} of file \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a4793b62a11bbe763374a0eca87bd6351}\index{port.c@{port.c}!vPortCPUInitializeMutex@{vPortCPUInitializeMutex}}
+\index{vPortCPUInitializeMutex@{vPortCPUInitializeMutex}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortCPUInitializeMutex()}{vPortCPUInitializeMutex()}}
+{\footnotesize\ttfamily \label{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a4793b62a11bbe763374a0eca87bd6351} 
+void v\+Port\+CPUInitialize\+Mutex (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_ac9f8cff2c1e657fd97da40661a59013d}{port\+MUX\+\_\+\+TYPE}} \texorpdfstring{$\ast$}{*}}]{mux}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source_l00399}{399}} of file \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a515ba399b7ed27c5e4464ad41ac58db4}\index{port.c@{port.c}!vPortCPUReleaseMutex@{vPortCPUReleaseMutex}}
+\index{vPortCPUReleaseMutex@{vPortCPUReleaseMutex}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortCPUReleaseMutex()}{vPortCPUReleaseMutex()}}
+{\footnotesize\ttfamily \label{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a515ba399b7ed27c5e4464ad41ac58db4} 
+void v\+Port\+CPURelease\+Mutex (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_ac9f8cff2c1e657fd97da40661a59013d}{port\+MUX\+\_\+\+TYPE}} \texorpdfstring{$\ast$}{*}}]{mux}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source_l00475}{475}} of file \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}\index{port.c@{port.c}!vPortEndScheduler@{vPortEndScheduler}}
+\index{vPortEndScheduler@{vPortEndScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEndScheduler()}{vPortEndScheduler()}}
+{\footnotesize\ttfamily \label{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423} 
+void v\+Port\+End\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+End the Free\+RTOS scheduler. 
+
+Not implemented on this port. 
+
+Definition at line \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source_l00251}{251}} of file \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a8e999b46e542f17cbccc12d10e29c0e2}\index{port.c@{port.c}!vPortEvaluateYieldFromISR@{vPortEvaluateYieldFromISR}}
+\index{vPortEvaluateYieldFromISR@{vPortEvaluateYieldFromISR}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEvaluateYieldFromISR()}{vPortEvaluateYieldFromISR()}}
+{\footnotesize\ttfamily \label{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a8e999b46e542f17cbccc12d10e29c0e2} 
+void IRAM\+\_\+\+ATTR v\+Port\+Evaluate\+Yield\+From\+ISR (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{}]{...}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source_l00356}{356}} of file \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a9b6e7b82f316d0b3560f04dbd2b21c83}\index{port.c@{port.c}!vPortSetStackWatchpoint@{vPortSetStackWatchpoint}}
+\index{vPortSetStackWatchpoint@{vPortSetStackWatchpoint}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortSetStackWatchpoint()}{vPortSetStackWatchpoint()}}
+{\footnotesize\ttfamily \label{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a9b6e7b82f316d0b3560f04dbd2b21c83} 
+void v\+Port\+Set\+Stack\+Watchpoint (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{px\+Stack\+Start}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source_l00487}{487}} of file \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a875b1abb7b60f82558b9af02bddebd9c}\index{port.c@{port.c}!vPortYieldOtherCore@{vPortYieldOtherCore}}
+\index{vPortYieldOtherCore@{vPortYieldOtherCore}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortYieldOtherCore()}{vPortYieldOtherCore()}}
+{\footnotesize\ttfamily \label{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a875b1abb7b60f82558b9af02bddebd9c} 
+void v\+Port\+Yield\+Other\+Core (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}}}]{coreid}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source_l00297}{297}} of file \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_af671860d458e8d885299b85db2b3ddc7}\index{port.c@{port.c}!xPortGetTickRateHz@{xPortGetTickRateHz}}
+\index{xPortGetTickRateHz@{xPortGetTickRateHz}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortGetTickRateHz()}{xPortGetTickRateHz()}}
+{\footnotesize\ttfamily \label{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_af671860d458e8d885299b85db2b3ddc7} 
+uint32\+\_\+t x\+Port\+Get\+Tick\+Rate\+Hz (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source_l00544}{544}} of file \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_aa70417906047bc0c96b84ed59031929e}\index{port.c@{port.c}!xPortInIsrContext@{xPortInIsrContext}}
+\index{xPortInIsrContext@{xPortInIsrContext}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortInIsrContext()}{xPortInIsrContext()}}
+{\footnotesize\ttfamily \label{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_aa70417906047bc0c96b84ed59031929e} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+In\+Isr\+Context (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source_l00336}{336}} of file \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source}{port.\+c}}.
+
+Here is the caller graph for this function\+:
+% FIG 9
+\Hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a82a4d01ffb198da22adff74d2391eb46}\index{port.c@{port.c}!xPortInterruptedFromISRContext@{xPortInterruptedFromISRContext}}
+\index{xPortInterruptedFromISRContext@{xPortInterruptedFromISRContext}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortInterruptedFromISRContext()}{xPortInterruptedFromISRContext()}}
+{\footnotesize\ttfamily \label{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a82a4d01ffb198da22adff74d2391eb46} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} IRAM\+\_\+\+ATTR x\+Port\+Interrupted\+From\+ISRContext (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source_l00351}{351}} of file \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}\index{port.c@{port.c}!xPortStartScheduler@{xPortStartScheduler}}
+\index{xPortStartScheduler@{xPortStartScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortStartScheduler()}{xPortStartScheduler()}}
+{\footnotesize\ttfamily \label{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_ade5a8c6666e7413a0355cc252029c5c6} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Start\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+start the freertos scheduler, go to the first task 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source_l00260}{260}} of file \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 10
+
+
+\label{doc-var-members}
+\Hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a78e796fddbe189a894cb7262490ecf4a}\index{port.c@{port.c}!port\_interruptNesting@{port\_interruptNesting}}
+\index{port\_interruptNesting@{port\_interruptNesting}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{port\_interruptNesting}{port\_interruptNesting}}
+{\footnotesize\ttfamily \label{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_a78e796fddbe189a894cb7262490ecf4a} 
+unsigned port\+\_\+interrupt\+Nesting\mbox{[}port\+NUM\+\_\+\+PROCESSORS\mbox{]} = \{ 0 \}}
+
+
+
+Definition at line \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source_l00104}{104}} of file \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_aba355329d1f37d32fd6c5dc0500cc53c}\index{port.c@{port.c}!port\_xSchedulerRunning@{port\_xSchedulerRunning}}
+\index{port\_xSchedulerRunning@{port\_xSchedulerRunning}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{port\_xSchedulerRunning}{port\_xSchedulerRunning}}
+{\footnotesize\ttfamily \label{_third_party_2_g_c_c_2_xtensa___e_s_p32_2port_8c_aba355329d1f37d32fd6c5dc0500cc53c} 
+volatile int port\+\_\+x\+Scheduler\+Running\mbox{[}port\+NUM\+\_\+\+PROCESSORS\mbox{]}\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{port__common_8c_source_l00045}{45}} of file \mbox{\hyperlink{port__common_8c_source}{port\+\_\+common.\+c}}.
+

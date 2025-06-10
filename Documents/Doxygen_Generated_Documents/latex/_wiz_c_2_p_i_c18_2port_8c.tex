@@ -1,0 +1,202 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+Wiz\+C/\+PIC18/port.c File Reference}
+\hypertarget{_wiz_c_2_p_i_c18_2port_8c}{}\label{_wiz_c_2_p_i_c18_2port_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/WizC/PIC18/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/WizC/PIC18/port.c}}
+{\ttfamily \#include $<$Free\+RTOS.\+h$>$}\newline
+{\ttfamily \#include $<$task.\+h$>$}\newline
+{\ttfamily \#include $<$malloc.\+h$>$}\newline
+Include dependency graph for port.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_ab7d48d78c121cbce8c56c8c5ea718cc7}{port\+STACK\+\_\+\+FSR\+\_\+\+BYTES}}~( 13 )
+\item 
+\#define \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_ab70a8c67e03dccfd3ff3969e47914c26}{port\+STACK\+\_\+\+CALLRETURN\+\_\+\+ENTRY\+\_\+\+SIZE}}~(  2 )
+\item 
+\#define \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_a5f7dacda939c7178e6f34b487c0e9b6b}{port\+STACK\+\_\+\+MINIMAL\+\_\+\+CALLRETURN\+\_\+\+DEPTH}}~( 10 )
+\item 
+\#define \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_a536fc6b7f541db3c479d0bea67ef769e}{port\+STACK\+\_\+\+OTHER\+\_\+\+BYTES}}~( 20 )
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}{px\+Port\+Initialise\+Stack}} (\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}px\+Top\+Of\+Stack, \mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}} px\+Code, void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\item 
+uint16\+\_\+t \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_abe6e2085dc6bb0fd8c05826c23100b9d}{us\+Port\+CALCULATE\+\_\+\+MINIMAL\+\_\+\+STACK\+\_\+\+SIZE}} (void)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{x\+Port\+Start\+Scheduler}} (void)
+\begin{DoxyCompactList}\small\item\em start the freertos scheduler, go to the first task \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{v\+Port\+End\+Scheduler}} (void)
+\begin{DoxyCompactList}\small\item\em End the Free\+RTOS scheduler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_add01c927fb689f7ec170e42d47d27927}{v\+Port\+Yield}} (void)
+\begin{DoxyCompactList}\small\item\em Yield the CPU. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+volatile \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_af5b0f7452857787ed70ce2856ca74c4b}{TCB\+\_\+t}} \texorpdfstring{$\ast$}{*}volatile \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_af7b1fc0a36e224b885fb22b9936a03a2}{px\+Current\+TCB}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_a5f67b08d7049dd71e936c3ee65ab9781}{us\+Calc\+Min\+Stack\+Size}} = 0
+\item 
+\mbox{\hyperlink{_r_v_d_s_2_a_r_m7___l_p_c21xx_2portmacro_8h_a24ac627a7839caecddfc66f1d46033f0}{register}} uint8\+\_\+t \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_a638db86126df5ea71c530954f21162bb}{uc\+Critical\+Nesting}} = 0x7F
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_wiz_c_2_p_i_c18_2port_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_wiz_c_2_p_i_c18_2port_8c_ab70a8c67e03dccfd3ff3969e47914c26}\index{port.c@{port.c}!portSTACK\_CALLRETURN\_ENTRY\_SIZE@{portSTACK\_CALLRETURN\_ENTRY\_SIZE}}
+\index{portSTACK\_CALLRETURN\_ENTRY\_SIZE@{portSTACK\_CALLRETURN\_ENTRY\_SIZE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portSTACK\_CALLRETURN\_ENTRY\_SIZE}{portSTACK\_CALLRETURN\_ENTRY\_SIZE}}
+{\footnotesize\ttfamily \label{_wiz_c_2_p_i_c18_2port_8c_ab70a8c67e03dccfd3ff3969e47914c26} 
+\#define port\+STACK\+\_\+\+CALLRETURN\+\_\+\+ENTRY\+\_\+\+SIZE~(  2 )}
+
+
+
+Definition at line \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_source_l00085}{85}} of file \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_wiz_c_2_p_i_c18_2port_8c_ab7d48d78c121cbce8c56c8c5ea718cc7}\index{port.c@{port.c}!portSTACK\_FSR\_BYTES@{portSTACK\_FSR\_BYTES}}
+\index{portSTACK\_FSR\_BYTES@{portSTACK\_FSR\_BYTES}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portSTACK\_FSR\_BYTES}{portSTACK\_FSR\_BYTES}}
+{\footnotesize\ttfamily \label{_wiz_c_2_p_i_c18_2port_8c_ab7d48d78c121cbce8c56c8c5ea718cc7} 
+\#define port\+STACK\+\_\+\+FSR\+\_\+\+BYTES~( 13 )}
+
+
+
+Definition at line \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_source_l00084}{84}} of file \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_wiz_c_2_p_i_c18_2port_8c_a5f7dacda939c7178e6f34b487c0e9b6b}\index{port.c@{port.c}!portSTACK\_MINIMAL\_CALLRETURN\_DEPTH@{portSTACK\_MINIMAL\_CALLRETURN\_DEPTH}}
+\index{portSTACK\_MINIMAL\_CALLRETURN\_DEPTH@{portSTACK\_MINIMAL\_CALLRETURN\_DEPTH}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portSTACK\_MINIMAL\_CALLRETURN\_DEPTH}{portSTACK\_MINIMAL\_CALLRETURN\_DEPTH}}
+{\footnotesize\ttfamily \label{_wiz_c_2_p_i_c18_2port_8c_a5f7dacda939c7178e6f34b487c0e9b6b} 
+\#define port\+STACK\+\_\+\+MINIMAL\+\_\+\+CALLRETURN\+\_\+\+DEPTH~( 10 )}
+
+
+
+Definition at line \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_source_l00088}{88}} of file \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_wiz_c_2_p_i_c18_2port_8c_a536fc6b7f541db3c479d0bea67ef769e}\index{port.c@{port.c}!portSTACK\_OTHER\_BYTES@{portSTACK\_OTHER\_BYTES}}
+\index{portSTACK\_OTHER\_BYTES@{portSTACK\_OTHER\_BYTES}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portSTACK\_OTHER\_BYTES}{portSTACK\_OTHER\_BYTES}}
+{\footnotesize\ttfamily \label{_wiz_c_2_p_i_c18_2port_8c_a536fc6b7f541db3c479d0bea67ef769e} 
+\#define port\+STACK\+\_\+\+OTHER\+\_\+\+BYTES~( 20 )}
+
+
+
+Definition at line \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_source_l00089}{89}} of file \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_source}{port.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_wiz_c_2_p_i_c18_2port_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_wiz_c_2_p_i_c18_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}\index{port.c@{port.c}!pxPortInitialiseStack@{pxPortInitialiseStack}}
+\index{pxPortInitialiseStack@{pxPortInitialiseStack}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{pxPortInitialiseStack()}{pxPortInitialiseStack()}}
+{\footnotesize\ttfamily \label{_wiz_c_2_p_i_c18_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} px\+Port\+Initialise\+Stack (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{px\+Top\+Of\+Stack}{, }\item[{\mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}}}]{px\+Code}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+px\+Top\+Of\+Stack = 0x11;
+
+px\+Top\+Of\+Stack = 0x22;
+
+px\+Top\+Of\+Stack = 0x33;
+
+Definition at line \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_source_l00109}{109}} of file \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_wiz_c_2_p_i_c18_2port_8c_abe6e2085dc6bb0fd8c05826c23100b9d}\index{port.c@{port.c}!usPortCALCULATE\_MINIMAL\_STACK\_SIZE@{usPortCALCULATE\_MINIMAL\_STACK\_SIZE}}
+\index{usPortCALCULATE\_MINIMAL\_STACK\_SIZE@{usPortCALCULATE\_MINIMAL\_STACK\_SIZE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{usPortCALCULATE\_MINIMAL\_STACK\_SIZE()}{usPortCALCULATE\_MINIMAL\_STACK\_SIZE()}}
+{\footnotesize\ttfamily \label{_wiz_c_2_p_i_c18_2port_8c_abe6e2085dc6bb0fd8c05826c23100b9d} 
+uint16\+\_\+t us\+Port\+CALCULATE\+\_\+\+MINIMAL\+\_\+\+STACK\+\_\+\+SIZE (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_source_l00204}{204}} of file \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_wiz_c_2_p_i_c18_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}\index{port.c@{port.c}!vPortEndScheduler@{vPortEndScheduler}}
+\index{vPortEndScheduler@{vPortEndScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEndScheduler()}{vPortEndScheduler()}}
+{\footnotesize\ttfamily \label{_wiz_c_2_p_i_c18_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423} 
+void v\+Port\+End\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+End the Free\+RTOS scheduler. 
+
+Not implemented on this port. 
+
+Definition at line \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_source_l00249}{249}} of file \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_source}{port.\+c}}.
+
+Here is the caller graph for this function\+:
+% FIG 1
+\Hypertarget{_wiz_c_2_p_i_c18_2port_8c_add01c927fb689f7ec170e42d47d27927}\index{port.c@{port.c}!vPortYield@{vPortYield}}
+\index{vPortYield@{vPortYield}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortYield()}{vPortYield()}}
+{\footnotesize\ttfamily \label{_wiz_c_2_p_i_c18_2port_8c_add01c927fb689f7ec170e42d47d27927} 
+void v\+Port\+Yield (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Yield the CPU. 
+
+
+
+Definition at line \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_source_l00266}{266}} of file \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{_wiz_c_2_p_i_c18_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}\index{port.c@{port.c}!xPortStartScheduler@{xPortStartScheduler}}
+\index{xPortStartScheduler@{xPortStartScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortStartScheduler()}{xPortStartScheduler()}}
+{\footnotesize\ttfamily \label{_wiz_c_2_p_i_c18_2port_8c_ade5a8c6666e7413a0355cc252029c5c6} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Start\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+start the freertos scheduler, go to the first task 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_source_l00227}{227}} of file \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+Here is the caller graph for this function\+:
+% FIG 4
+
+
+\label{doc-var-members}
+\Hypertarget{_wiz_c_2_p_i_c18_2port_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_wiz_c_2_p_i_c18_2port_8c_af7b1fc0a36e224b885fb22b9936a03a2}\index{port.c@{port.c}!pxCurrentTCB@{pxCurrentTCB}}
+\index{pxCurrentTCB@{pxCurrentTCB}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{pxCurrentTCB}{pxCurrentTCB}}
+{\footnotesize\ttfamily \label{_wiz_c_2_p_i_c18_2port_8c_af7b1fc0a36e224b885fb22b9936a03a2} 
+volatile \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_af5b0f7452857787ed70ce2856ca74c4b}{TCB\+\_\+t}}\texorpdfstring{$\ast$}{*} volatile px\+Current\+TCB\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_source_l00067}{67}} of file \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_source}{ISR\+\_\+\+Support.\+h}}.
+
+\Hypertarget{_wiz_c_2_p_i_c18_2port_8c_a638db86126df5ea71c530954f21162bb}\index{port.c@{port.c}!ucCriticalNesting@{ucCriticalNesting}}
+\index{ucCriticalNesting@{ucCriticalNesting}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{ucCriticalNesting}{ucCriticalNesting}}
+{\footnotesize\ttfamily \label{_wiz_c_2_p_i_c18_2port_8c_a638db86126df5ea71c530954f21162bb} 
+\mbox{\hyperlink{_r_v_d_s_2_a_r_m7___l_p_c21xx_2portmacro_8h_a24ac627a7839caecddfc66f1d46033f0}{register}} uint8\+\_\+t uc\+Critical\+Nesting = 0x7F}
+
+
+
+Definition at line \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_source_l00101}{101}} of file \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_wiz_c_2_p_i_c18_2port_8c_a5f67b08d7049dd71e936c3ee65ab9781}\index{port.c@{port.c}!usCalcMinStackSize@{usCalcMinStackSize}}
+\index{usCalcMinStackSize@{usCalcMinStackSize}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{usCalcMinStackSize}{usCalcMinStackSize}}
+{\footnotesize\ttfamily \label{_wiz_c_2_p_i_c18_2port_8c_a5f67b08d7049dd71e936c3ee65ab9781} 
+uint16\+\_\+t us\+Calc\+Min\+Stack\+Size = 0}
+
+
+
+Definition at line \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_source_l00091}{91}} of file \mbox{\hyperlink{_wiz_c_2_p_i_c18_2port_8c_source}{port.\+c}}.
+

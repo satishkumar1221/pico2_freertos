@@ -1,0 +1,151 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+IAR/\+Atmel\+SAM7\+S64/\+ISR\+\_\+\+Support.h File Reference}
+\hypertarget{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h}{}\label{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/IAR/AtmelSAM7S64/ISR\_Support.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/IAR/AtmelSAM7S64/ISR\_Support.h}}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+EXTERN \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{px\+Current\+TCB}} EXTERN \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_abddaf7d1779826a770c7c3b2e2a9d37f}{ul\+Critical\+Nesting}}
+\begin{DoxyCompactList}\small\item\em Variable used to keep track of critical section nesting. \end{DoxyCompactList}\item 
+Context save and restore \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a65c8432cac2434a5fc857e7562a4715e}{macro}} \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_a2fdfb760bca82b5282e098a230f10532}{definitions}}
+\item 
+\mbox{\hyperlink{_code_warrior_2_cold_fire___v2_2port_8c_a798f37b250502b49763c54a56b3aa4b0}{port\+SAVE\+\_\+\+CONTEXT}} \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_a5cad46a34d0a2cb6cf8bf513b9487216}{MACRO}}
+\item 
+Push \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_ab71e6f94394636766ac73443d5268517}{R0}} as we are going \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a2556ddfc4320378f314de3661ceed4c2}{to}} use \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} \mbox{\hyperlink{_r_v_d_s_2_a_r_m7___l_p_c21xx_2portmacro_8h_a24ac627a7839caecddfc66f1d46033f0}{register}} STMDB \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_a85224ff891d5fa22f8aa26c3eaca34f1}{SP}}
+\item 
+Push R0 as we are going \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a2556ddfc4320378f314de3661ceed4c2}{to}} use \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} \mbox{\hyperlink{_r_v_d_s_2_a_r_m7___l_p_c21xx_2portmacro_8h_a24ac627a7839caecddfc66f1d46033f0}{register}} STMDB LDMIA Push \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} return address onto \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_ab327b64f028ec1b108340d3378d45d45}{stack}} STMDB \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_ae1fdf286159156293fa65008651e485b}{R0}}
+\item 
+Pop \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_ab71e6f94394636766ac73443d5268517}{R0}} so we can save it onto \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} system mode \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_ab327b64f028ec1b108340d3378d45d45}{stack}} LDMIA \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aea250a9501de6f05bc594cf2e82287ea}{LR}}
+\item 
+Set \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aea250a9501de6f05bc594cf2e82287ea}{LR}} \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a2556ddfc4320378f314de3661ceed4c2}{to}} \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} task \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_ab327b64f028ec1b108340d3378d45d45}{stack}} LDR \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aff27e396da762779404affb9cf6aef61}{R1}}
+\item 
+Set \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aea250a9501de6f05bc594cf2e82287ea}{LR}} \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a2556ddfc4320378f314de3661ceed4c2}{to}} \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} task stack LDR LDR The critical nesting depth is \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} first item on \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aaec180425e780b8769116ab4f2d3ec06}{stack}}
+\item 
+Restore all system mode \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_a3de5611e92ac83d85441f23bf7c14cf7}{registers}} for the task LDMFD Restore the return address LDR And return correcting the \mbox{\hyperlink{_m_p_l_a_b_2_p_i_c32_m_z_2_i_s_r___support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset}} in the \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aea250a9501de6f05bc594cf2e82287ea}{LR}} \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a2556ddfc4320378f314de3661ceed4c2}{to}} obtain \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}}
+\item 
+correct address SUBS \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_a8c2d0d370cca772111890ac230f68c35}{PC}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-var-members}
+\Hypertarget{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_a2fdfb760bca82b5282e098a230f10532}\index{ISR\_Support.h@{ISR\_Support.h}!definitions@{definitions}}
+\index{definitions@{definitions}!ISR\_Support.h@{ISR\_Support.h}}
+\doxysubsubsection{\texorpdfstring{definitions}{definitions}}
+{\footnotesize\ttfamily \label{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_a2fdfb760bca82b5282e098a230f10532} 
+Context save and restore \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a65c8432cac2434a5fc857e7562a4715e}{macro}} definitions}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_source_l00033}{33}} of file \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_source}{ISR\+\_\+\+Support.\+h}}.
+
+\Hypertarget{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aea250a9501de6f05bc594cf2e82287ea}\index{ISR\_Support.h@{ISR\_Support.h}!LR@{LR}}
+\index{LR@{LR}!ISR\_Support.h@{ISR\_Support.h}}
+\doxysubsubsection{\texorpdfstring{LR}{LR}}
+{\footnotesize\ttfamily \label{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aea250a9501de6f05bc594cf2e82287ea} 
+correct address SUBS LR}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_ab71e6f94394636766ac73443d5268517}{R0}}\ -\/\ R14}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\string^}
+\DoxyCodeLine{NOP}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_source_l00077}{77}} of file \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_source}{ISR\+\_\+\+Support.\+h}}.
+
+\Hypertarget{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_a5cad46a34d0a2cb6cf8bf513b9487216}\index{ISR\_Support.h@{ISR\_Support.h}!MACRO@{MACRO}}
+\index{MACRO@{MACRO}!ISR\_Support.h@{ISR\_Support.h}}
+\doxysubsubsection{\texorpdfstring{MACRO}{MACRO}}
+{\footnotesize\ttfamily \label{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_a5cad46a34d0a2cb6cf8bf513b9487216} 
+Pop \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_ab71e6f94394636766ac73443d5268517}{R0}} so we can save it onto \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} system mode \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_ab327b64f028ec1b108340d3378d45d45}{stack}} LDMIA Push \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} SPSR onto \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} task \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_ab327b64f028ec1b108340d3378d45d45}{stack}} MRS SPSR STMDB STMDB STR \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_a4a7122bee868af09d2aa6d0b7d3ea3c9}{ENDM}} \mbox{\hyperlink{_code_warrior_2_cold_fire___v2_2port_8c_a8d3a167375b5b57944a57df23d45b39e}{port\+RESTORE\+\_\+\+CONTEXT}} MACRO}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_source_l00036}{36}} of file \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_source}{ISR\+\_\+\+Support.\+h}}.
+
+\Hypertarget{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_a8c2d0d370cca772111890ac230f68c35}\index{ISR\_Support.h@{ISR\_Support.h}!PC@{PC}}
+\index{PC@{PC}!ISR\_Support.h@{ISR\_Support.h}}
+\doxysubsubsection{\texorpdfstring{PC}{PC}}
+{\footnotesize\ttfamily \label{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_a8c2d0d370cca772111890ac230f68c35} 
+correct address SUBS PC}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_source_l00149}{149}} of file \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_source}{ISR\+\_\+\+Support.\+h}}.
+
+\Hypertarget{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_ae1fdf286159156293fa65008651e485b}\index{ISR\_Support.h@{ISR\_Support.h}!R0@{R0}}
+\index{R0@{R0}!ISR\_Support.h@{ISR\_Support.h}}
+\doxysubsubsection{\texorpdfstring{R0}{R0}}
+{\footnotesize\ttfamily \label{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_ae1fdf286159156293fa65008651e485b} 
+Load it into \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_abd5c4f2fdb773b389a89cf1bb14f22c8}{ul\+Critical\+Nesting}} variable LDR Get \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} SPSR from \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_ab327b64f028ec1b108340d3378d45d45}{stack}} LDMFD R0}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_ab71e6f94394636766ac73443d5268517}{R0}}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_source_l00057}{57}} of file \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_source}{ISR\+\_\+\+Support.\+h}}.
+
+\Hypertarget{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aff27e396da762779404affb9cf6aef61}\index{ISR\_Support.h@{ISR\_Support.h}!R1@{R1}}
+\index{R1@{R1}!ISR\_Support.h@{ISR\_Support.h}}
+\doxysubsubsection{\texorpdfstring{R1}{R1}}
+{\footnotesize\ttfamily \label{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aff27e396da762779404affb9cf6aef61} 
+Set \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aea250a9501de6f05bc594cf2e82287ea}{LR}} \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a2556ddfc4320378f314de3661ceed4c2}{to}} \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} task \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_ab327b64f028ec1b108340d3378d45d45}{stack}} LDR R1}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_source_l00106}{106}} of file \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_source}{ISR\+\_\+\+Support.\+h}}.
+
+\Hypertarget{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_a85224ff891d5fa22f8aa26c3eaca34f1}\index{ISR\_Support.h@{ISR\_Support.h}!SP@{SP}}
+\index{SP@{SP}!ISR\_Support.h@{ISR\_Support.h}}
+\doxysubsubsection{\texorpdfstring{SP}{SP}}
+{\footnotesize\ttfamily \label{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_a85224ff891d5fa22f8aa26c3eaca34f1} 
+Pop \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_ab71e6f94394636766ac73443d5268517}{R0}} so we can save it onto \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} system mode \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_ab327b64f028ec1b108340d3378d45d45}{stack}} LDMIA SP}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_source_l00040}{40}} of file \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_source}{ISR\+\_\+\+Support.\+h}}.
+
+\Hypertarget{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aaec180425e780b8769116ab4f2d3ec06}\index{ISR\_Support.h@{ISR\_Support.h}!stack@{stack}}
+\index{stack@{stack}!ISR\_Support.h@{ISR\_Support.h}}
+\doxysubsubsection{\texorpdfstring{stack}{stack}}
+{\footnotesize\ttfamily \label{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aaec180425e780b8769116ab4f2d3ec06} 
+Set \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aea250a9501de6f05bc594cf2e82287ea}{LR}} \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a2556ddfc4320378f314de3661ceed4c2}{to}} \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} task stack LDR LDR The critical nesting depth is \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} first item on \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} stack}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_source_l00111}{111}} of file \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_source}{ISR\+\_\+\+Support.\+h}}.
+
+\Hypertarget{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}\index{ISR\_Support.h@{ISR\_Support.h}!the@{the}}
+\index{the@{the}!ISR\_Support.h@{ISR\_Support.h}}
+\doxysubsubsection{\texorpdfstring{the}{the}}
+{\footnotesize\ttfamily \label{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753} 
+Restore all system mode \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_a3de5611e92ac83d85441f23bf7c14cf7}{registers}} for the task LDMFD Restore the return address LDR And return correcting the \mbox{\hyperlink{_m_p_l_a_b_2_p_i_c32_m_z_2_i_s_r___support_8h_a12a5aed8a193ebbf9a641104a310610d}{offset}} in the \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aea250a9501de6f05bc594cf2e82287ea}{LR}} \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a2556ddfc4320378f314de3661ceed4c2}{to}} obtain the}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_source_l00145}{145}} of file \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_source}{ISR\+\_\+\+Support.\+h}}.
+
+\Hypertarget{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_abddaf7d1779826a770c7c3b2e2a9d37f}\index{ISR\_Support.h@{ISR\_Support.h}!ulCriticalNesting@{ulCriticalNesting}}
+\index{ulCriticalNesting@{ulCriticalNesting}!ISR\_Support.h@{ISR\_Support.h}}
+\doxysubsubsection{\texorpdfstring{ulCriticalNesting}{ulCriticalNesting}}
+{\footnotesize\ttfamily \label{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_abddaf7d1779826a770c7c3b2e2a9d37f} 
+EXTERN \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{px\+Current\+TCB}} EXTERN ul\+Critical\+Nesting}
+
+
+
+Variable used to keep track of critical section nesting. 
+
+This variable is stored as part of the task context and must be initialised to a non zero value to ensure interrupts don\textquotesingle{}t inadvertently become unmasked before the scheduler starts. As it is stored as part of the task context, it will be set to 0 when the first task is started. 
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_source_l00030}{30}} of file \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_source}{ISR\+\_\+\+Support.\+h}}.
+

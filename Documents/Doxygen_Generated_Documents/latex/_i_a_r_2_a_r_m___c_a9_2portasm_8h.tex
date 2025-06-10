@@ -1,0 +1,249 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+IAR/\+ARM\+\_\+\+CA9/port\+ASM.h File Reference}
+\hypertarget{_i_a_r_2_a_r_m___c_a9_2portasm_8h}{}\label{_i_a_r_2_a_r_m___c_a9_2portasm_8h}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/IAR/ARM\_CA9/portASM.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/IAR/ARM\_CA9/portASM.h}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Restore \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} critical section nesting depth LDR Ensure \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} priority mask is correct for \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} critical nesting depth LDR MOVEQ LDRNE Restore all system mode \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_a3de5611e92ac83d85441f23bf7c14cf7}{registers}} other than \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a0194b321b94941c1522f3b8df9def469}{SP}} (which is already ;being used) POP
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+EXTERN \mbox{\hyperlink{task_8h_a580b31b3cf28480574d5aba8b22e913a}{v\+Task\+Switch\+Context}} EXTERN \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_abd5c4f2fdb773b389a89cf1bb14f22c8}{ul\+Critical\+Nesting}} EXTERN \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{px\+Current\+TCB}} EXTERN \mbox{\hyperlink{_g_c_c_2_a_r_m___c_a9_2port_8c_afab45f3043d66e5177f6f6a6d820ad85}{ul\+Port\+Task\+Has\+FPUContext}} EXTERN ul\+Asm\+APIPriority\+Mask \mbox{\hyperlink{_code_warrior_2_cold_fire___v2_2port_8c_a798f37b250502b49763c54a56b3aa4b0}{port\+SAVE\+\_\+\+CONTEXT}} \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a65c8432cac2434a5fc857e7562a4715e}{macro}}
+\item 
+Save \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aea250a9501de6f05bc594cf2e82287ea}{LR}} and SPSR onto \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} system mode \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_ab327b64f028ec1b108340d3378d45d45}{stack}} before switching \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a2556ddfc4320378f314de3661ceed4c2}{to}}
+\item 
+system mode \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a2556ddfc4320378f314de3661ceed4c2}{to}} save \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} remaining system mode \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_a3de5611e92ac83d85441f23bf7c14cf7}{registers}} SRSDB \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_abd0f97f9715ae1997bfef0d7a956d3af}{sp}}
+\item 
+system mode \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a2556ddfc4320378f314de3661ceed4c2}{to}} save \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} remaining system mode \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_a3de5611e92ac83d85441f23bf7c14cf7}{registers}} SRSDB CPS \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a551efa3573f442f9676984d3b220c981}{PUSH}} \{\mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_ab71e6f94394636766ac73443d5268517}{R0}}-\/\mbox{\hyperlink{_softune_2_m_b91460_2port_8c_aa5184d8570bd98fbb9bda19114c8352e}{R12}}, R14\}
+\item 
+Push \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} critical nesting \mbox{\hyperlink{portmux__impl_8inc_8h_a8a4394c1a6850583aa442709d0d22d4e}{count}} LDR \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a7da3e62cba9eadca9ed570eac0843617}{R2}}
+\item 
+Does \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} task have \mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_a79f1ee1a890da6b8d5ae0087f0a941b8}{a}} floating point \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_afc222dc14cdd45ff7e72dec42824f2ac}{context}} that needs saving \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_ae2187eab120811c05bc976e27dc27659}{If}}
+\item 
+\mbox{\hyperlink{_g_c_c_2_a_r_m___c_a9_2port_8c_afab45f3043d66e5177f6f6a6d820ad85}{ul\+Port\+Task\+Has\+FPUContext}} is then no LDR CMP \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a9d6073e1659ff122b82809943e2856e2}{R3}}
+\item 
+\mbox{\hyperlink{_g_c_c_2_a_r_m___c_a9_2port_8c_afab45f3043d66e5177f6f6a6d820ad85}{ul\+Port\+Task\+Has\+FPUContext}} is then no LDR CMP Save \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} floating point \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_afc222dc14cdd45ff7e72dec42824f2ac}{context}}
+\item 
+\mbox{\hyperlink{_g_c_c_2_a_r_m___c_a9_2port_8c_afab45f3043d66e5177f6f6a6d820ad85}{ul\+Port\+Task\+Has\+FPUContext}} is then no LDR CMP Save \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} floating point \mbox{\hyperlink{portmux__impl_8inc_8h_a6a71db7a53957c030bb05d588ffc97cc}{if}} any FMRXNE \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_afebe3aefd826311303c4ae706848e691}{R1}}
+\item 
+\mbox{\hyperlink{_g_c_c_2_a_r_m___c_a9_2port_8c_afab45f3043d66e5177f6f6a6d820ad85}{ul\+Port\+Task\+Has\+FPUContext}} is then no LDR CMP Save \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} floating point \mbox{\hyperlink{portmux__impl_8inc_8h_a6a71db7a53957c030bb05d588ffc97cc}{if}} any FMRXNE FPSCR \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_ac1f0caafd87acb8e19f01959cddb3086}{VPUSHNE}}
+\item 
+Save \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_ab327b64f028ec1b108340d3378d45d45}{stack}} pointer in \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} TCB LDR \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a1fbd6fc1c0ad77c0b1457b914b9ad8c7}{R0}}
+\item 
+Save \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_ab327b64f028ec1b108340d3378d45d45}{stack}} pointer in \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} TCB LDR STR \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a757e31f42bdf5445401a2a614a2b11e3}{SP}}
+\item 
+Save \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_ab327b64f028ec1b108340d3378d45d45}{stack}} pointer in \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} TCB LDR STR \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_aaec09ef8da6454489ef6003fd8a9e2a1}{endm}}
+\item 
+Set \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a85224ff891d5fa22f8aa26c3eaca34f1}{SP}} \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a2556ddfc4320378f314de3661ceed4c2}{to}} point \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a2556ddfc4320378f314de3661ceed4c2}{to}} \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_ab327b64f028ec1b108340d3378d45d45}{stack}} of \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} task being restored LDR LDR Is there \mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_a79f1ee1a890da6b8d5ae0087f0a941b8}{a}} floating point \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_afc222dc14cdd45ff7e72dec42824f2ac}{context}} \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a2556ddfc4320378f314de3661ceed4c2}{to}} restore \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_ae2187eab120811c05bc976e27dc27659}{If}} \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_af2f370d74dc13a2aab506bfae16bf7d6}{restored}}
+\item 
+\mbox{\hyperlink{_g_c_c_2_a_r_m___c_a9_2port_8c_afab45f3043d66e5177f6f6a6d820ad85}{ul\+Port\+Task\+Has\+FPUContext}} is \mbox{\hyperlink{_m_p_l_a_b_2_p_i_c32_m_x_2_i_s_r___support_8h_a347048e5bc50180def38f835d93b3b96}{zero}} then no LDR CMP Restore \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} floating point \mbox{\hyperlink{portmux__impl_8inc_8h_a6a71db7a53957c030bb05d588ffc97cc}{if}} any \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_abf06153efedc0566eae02d8f33319c34}{POPNE}}
+\item 
+Restore \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} critical section nesting depth LDR Ensure \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} priority mask is correct for \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} critical nesting depth LDR MOVEQ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_adcaedb2f7265d9167d15c65fa3cd44ac}{R4}}
+\item 
+Return \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a2556ddfc4320378f314de3661ceed4c2}{to}} \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} task \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a5e7bc35a62ac30c5f6932e801290c9e4}{code}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{_i_a_r_2_a_r_m___c_a9_2portasm_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a0194b321b94941c1522f3b8df9def469}\index{portASM.h@{portASM.h}!SP@{SP}}
+\index{SP@{SP}!portASM.h@{portASM.h}}
+\doxysubsubsection{\texorpdfstring{SP()}{SP()}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a0194b321b94941c1522f3b8df9def469} 
+Restore \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} critical section nesting depth LDR Ensure \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} priority mask is correct for \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} critical nesting depth LDR MOVEQ LDRNE Restore all system mode \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_a3de5611e92ac83d85441f23bf7c14cf7}{registers}} other than \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} SP (\begin{DoxyParamCaption}\item[{which is already ;being}]{used}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source_l00104}{104}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source}{port\+ASM.\+h}}.
+
+
+
+\label{doc-var-members}
+\Hypertarget{_i_a_r_2_a_r_m___c_a9_2portasm_8h_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a5e7bc35a62ac30c5f6932e801290c9e4}\index{portASM.h@{portASM.h}!code@{code}}
+\index{code@{code}!portASM.h@{portASM.h}}
+\doxysubsubsection{\texorpdfstring{code}{code}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a5e7bc35a62ac30c5f6932e801290c9e4} 
+Return \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a2556ddfc4320378f314de3661ceed4c2}{to}} \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} task code}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source_l00108}{108}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source}{port\+ASM.\+h}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_a9_2portasm_8h_afc222dc14cdd45ff7e72dec42824f2ac}\index{portASM.h@{portASM.h}!context@{context}}
+\index{context@{context}!portASM.h@{portASM.h}}
+\doxysubsubsection{\texorpdfstring{context}{context}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_a9_2portasm_8h_afc222dc14cdd45ff7e72dec42824f2ac} 
+\mbox{\hyperlink{_g_c_c_2_a_r_m___c_a9_2port_8c_afab45f3043d66e5177f6f6a6d820ad85}{ul\+Port\+Task\+Has\+FPUContext}} is \mbox{\hyperlink{_m_p_l_a_b_2_p_i_c32_m_x_2_i_s_r___support_8h_a347048e5bc50180def38f835d93b3b96}{zero}} then no LDR CMP Restore \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} floating point context}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source_l00054}{54}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source}{port\+ASM.\+h}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_a9_2portasm_8h_aaec09ef8da6454489ef6003fd8a9e2a1}\index{portASM.h@{portASM.h}!endm@{endm}}
+\index{endm@{endm}!portASM.h@{portASM.h}}
+\doxysubsubsection{\texorpdfstring{endm}{endm}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_a9_2portasm_8h_aaec09ef8da6454489ef6003fd8a9e2a1} 
+Save \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_ab327b64f028ec1b108340d3378d45d45}{stack}} pointer in \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} TCB LDR STR endm}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source_l00068}{68}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source}{port\+ASM.\+h}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_a9_2portasm_8h_ae2187eab120811c05bc976e27dc27659}\index{portASM.h@{portASM.h}!If@{If}}
+\index{If@{If}!portASM.h@{portASM.h}}
+\doxysubsubsection{\texorpdfstring{If}{If}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_a9_2portasm_8h_ae2187eab120811c05bc976e27dc27659} 
+Does \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} task have \mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_a79f1ee1a890da6b8d5ae0087f0a941b8}{a}} floating point \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_afc222dc14cdd45ff7e72dec42824f2ac}{context}} that needs saving If}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source_l00048}{48}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source}{port\+ASM.\+h}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a65c8432cac2434a5fc857e7562a4715e}\index{portASM.h@{portASM.h}!macro@{macro}}
+\index{macro@{macro}!portASM.h@{portASM.h}}
+\doxysubsubsection{\texorpdfstring{macro}{macro}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a65c8432cac2434a5fc857e7562a4715e} 
+\mbox{\hyperlink{_code_warrior_2_cold_fire___v2_2port_8c_a8d3a167375b5b57944a57df23d45b39e}{port\+RESTORE\+\_\+\+CONTEXT}} macro}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source_l00035}{35}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source}{port\+ASM.\+h}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_a9_2portasm_8h_abf06153efedc0566eae02d8f33319c34}\index{portASM.h@{portASM.h}!POPNE@{POPNE}}
+\index{POPNE@{POPNE}!portASM.h@{portASM.h}}
+\doxysubsubsection{\texorpdfstring{POPNE}{POPNE}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_a9_2portasm_8h_abf06153efedc0566eae02d8f33319c34} 
+\mbox{\hyperlink{_g_c_c_2_a_r_m___c_a9_2port_8c_afab45f3043d66e5177f6f6a6d820ad85}{ul\+Port\+Task\+Has\+FPUContext}} is \mbox{\hyperlink{_m_p_l_a_b_2_p_i_c32_m_x_2_i_s_r___support_8h_a347048e5bc50180def38f835d93b3b96}{zero}} then no LDR CMP Restore \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} floating point \mbox{\hyperlink{portmux__impl_8inc_8h_a6a71db7a53957c030bb05d588ffc97cc}{if}} any POPNE}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{\mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_ab71e6f94394636766ac73443d5268517}{R0}}\}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_ab94ba6f4c4736851b5e994a3b749d4e8}{VPOPNE}}\ \ \{D16-\/D31\}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_ab94ba6f4c4736851b5e994a3b749d4e8}{VPOPNE}}\ \ \{D0-\/D15\}}
+\DoxyCodeLine{\ \ \ \ VMSRNE\ \ FPSCR}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source_l00087}{87}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source}{port\+ASM.\+h}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a551efa3573f442f9676984d3b220c981}\index{portASM.h@{portASM.h}!PUSH@{PUSH}}
+\index{PUSH@{PUSH}!portASM.h@{portASM.h}}
+\doxysubsubsection{\texorpdfstring{PUSH}{PUSH}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a551efa3573f442f9676984d3b220c981} 
+Save \mbox{\hyperlink{_g_c_c_2_a_r_m___c_a9_2port_8c_afab45f3043d66e5177f6f6a6d820ad85}{ul\+Port\+Task\+Has\+FPUContext}} itself PUSH \{\mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_ab71e6f94394636766ac73443d5268517}{R0}}-\/\mbox{\hyperlink{_softune_2_m_b91460_2port_8c_aa5184d8570bd98fbb9bda19114c8352e}{R12}}, R14\}}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source_l00041}{41}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source}{port\+ASM.\+h}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a1fbd6fc1c0ad77c0b1457b914b9ad8c7}\index{portASM.h@{portASM.h}!R0@{R0}}
+\index{R0@{R0}!portASM.h@{portASM.h}}
+\doxysubsubsection{\texorpdfstring{R0}{R0}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a1fbd6fc1c0ad77c0b1457b914b9ad8c7} 
+Restore \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} critical section nesting depth LDR R0}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source_l00064}{64}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source}{port\+ASM.\+h}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_a9_2portasm_8h_afebe3aefd826311303c4ae706848e691}\index{portASM.h@{portASM.h}!R1@{R1}}
+\index{R1@{R1}!portASM.h@{portASM.h}}
+\doxysubsubsection{\texorpdfstring{R1}{R1}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_a9_2portasm_8h_afebe3aefd826311303c4ae706848e691} 
+\mbox{\hyperlink{_g_c_c_2_a_r_m___c_a9_2port_8c_afab45f3043d66e5177f6f6a6d820ad85}{ul\+Port\+Task\+Has\+FPUContext}} is \mbox{\hyperlink{_m_p_l_a_b_2_p_i_c32_m_x_2_i_s_r___support_8h_a347048e5bc50180def38f835d93b3b96}{zero}} then no LDR CMP R1}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source_l00055}{55}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source}{port\+ASM.\+h}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a7da3e62cba9eadca9ed570eac0843617}\index{portASM.h@{portASM.h}!R2@{R2}}
+\index{R2@{R2}!portASM.h@{portASM.h}}
+\doxysubsubsection{\texorpdfstring{R2}{R2}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a7da3e62cba9eadca9ed570eac0843617} 
+Restore \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} critical section nesting depth LDR Ensure \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} priority mask is correct for \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} critical nesting depth LDR R2}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source_l00044}{44}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source}{port\+ASM.\+h}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a9d6073e1659ff122b82809943e2856e2}\index{portASM.h@{portASM.h}!R3@{R3}}
+\index{R3@{R3}!portASM.h@{portASM.h}}
+\doxysubsubsection{\texorpdfstring{R3}{R3}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a9d6073e1659ff122b82809943e2856e2} 
+\mbox{\hyperlink{_g_c_c_2_a_r_m___c_a9_2port_8c_afab45f3043d66e5177f6f6a6d820ad85}{ul\+Port\+Task\+Has\+FPUContext}} is then no LDR CMP R3}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source_l00052}{52}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source}{port\+ASM.\+h}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_a9_2portasm_8h_adcaedb2f7265d9167d15c65fa3cd44ac}\index{portASM.h@{portASM.h}!R4@{R4}}
+\index{R4@{R4}!portASM.h@{portASM.h}}
+\doxysubsubsection{\texorpdfstring{R4}{R4}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_a9_2portasm_8h_adcaedb2f7265d9167d15c65fa3cd44ac} 
+Restore \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} critical section nesting depth LDR Ensure \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} priority mask is correct for \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} critical nesting depth LDR MOVEQ LDRNE R4}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source_l00100}{100}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source}{port\+ASM.\+h}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_a9_2portasm_8h_af2f370d74dc13a2aab506bfae16bf7d6}\index{portASM.h@{portASM.h}!restored@{restored}}
+\index{restored@{restored}!portASM.h@{portASM.h}}
+\doxysubsubsection{\texorpdfstring{restored}{restored}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_a9_2portasm_8h_af2f370d74dc13a2aab506bfae16bf7d6} 
+Set \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a85224ff891d5fa22f8aa26c3eaca34f1}{SP}} \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a2556ddfc4320378f314de3661ceed4c2}{to}} point \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a2556ddfc4320378f314de3661ceed4c2}{to}} \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_ab327b64f028ec1b108340d3378d45d45}{stack}} of \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} task being restored LDR LDR Is there \mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_a79f1ee1a890da6b8d5ae0087f0a941b8}{a}} floating point \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_afc222dc14cdd45ff7e72dec42824f2ac}{context}} \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a2556ddfc4320378f314de3661ceed4c2}{to}} restore \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_ae2187eab120811c05bc976e27dc27659}{If}} \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} restored}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source_l00079}{79}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source}{port\+ASM.\+h}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a757e31f42bdf5445401a2a614a2b11e3}\index{portASM.h@{portASM.h}!SP@{SP}}
+\index{SP@{SP}!portASM.h@{portASM.h}}
+\doxysubsubsection{\texorpdfstring{SP}{SP}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a757e31f42bdf5445401a2a614a2b11e3} 
+Set \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} SP \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a2556ddfc4320378f314de3661ceed4c2}{to}} point \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a2556ddfc4320378f314de3661ceed4c2}{to}} \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_ab327b64f028ec1b108340d3378d45d45}{stack}} of \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} task being \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_af2f370d74dc13a2aab506bfae16bf7d6}{restored}} LDR LDR SP}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source_l00066}{66}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source}{port\+ASM.\+h}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_a9_2portasm_8h_abd0f97f9715ae1997bfef0d7a956d3af}\index{portASM.h@{portASM.h}!sp@{sp}}
+\index{sp@{sp}!portASM.h@{portASM.h}}
+\doxysubsubsection{\texorpdfstring{sp}{sp}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_a9_2portasm_8h_abd0f97f9715ae1997bfef0d7a956d3af} 
+system mode \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_a2556ddfc4320378f314de3661ceed4c2}{to}} save \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} remaining system mode \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_a3de5611e92ac83d85441f23bf7c14cf7}{registers}} SRSDB sp}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source_l00039}{39}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source}{port\+ASM.\+h}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a2556ddfc4320378f314de3661ceed4c2}\index{portASM.h@{portASM.h}!to@{to}}
+\index{to@{to}!portASM.h@{portASM.h}}
+\doxysubsubsection{\texorpdfstring{to}{to}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_a9_2portasm_8h_a2556ddfc4320378f314de3661ceed4c2} 
+Save \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aea250a9501de6f05bc594cf2e82287ea}{LR}} and SPSR onto \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} system mode \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_ab327b64f028ec1b108340d3378d45d45}{stack}} before switching to}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source_l00037}{37}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source}{port\+ASM.\+h}}.
+
+\Hypertarget{_i_a_r_2_a_r_m___c_a9_2portasm_8h_ac1f0caafd87acb8e19f01959cddb3086}\index{portASM.h@{portASM.h}!VPUSHNE@{VPUSHNE}}
+\index{VPUSHNE@{VPUSHNE}!portASM.h@{portASM.h}}
+\doxysubsubsection{\texorpdfstring{VPUSHNE}{VPUSHNE}}
+{\footnotesize\ttfamily \label{_i_a_r_2_a_r_m___c_a9_2portasm_8h_ac1f0caafd87acb8e19f01959cddb3086} 
+\mbox{\hyperlink{_g_c_c_2_a_r_m___c_a9_2port_8c_afab45f3043d66e5177f6f6a6d820ad85}{ul\+Port\+Task\+Has\+FPUContext}} is then no LDR CMP Save \mbox{\hyperlink{_i_a_r_2_atmel_s_a_m7_s64_2_i_s_r___support_8h_aef4e93322d3b4e7f5270e9b89fe30753}{the}} floating point \mbox{\hyperlink{portmux__impl_8inc_8h_a6a71db7a53957c030bb05d588ffc97cc}{if}} any FMRXNE FPSCR VPUSHNE}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{D0-\/D15\}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_ac1f0caafd87acb8e19f01959cddb3086}{VPUSHNE}}\ \{D16-\/D31\}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_aec2a4e78935eb84bcebd8d26d9c6545c}{PUSHNE}}\ \ \{\mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_afebe3aefd826311303c4ae706848e691}{R1}}\}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source_l00056}{56}} of file \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a9_2portasm_8h_source}{port\+ASM.\+h}}.
+

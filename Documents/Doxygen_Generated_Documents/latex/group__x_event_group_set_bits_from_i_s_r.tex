@@ -1,0 +1,60 @@
+\doxysection{x\+Event\+Group\+Set\+Bits\+From\+ISR }
+\hypertarget{group__x_event_group_set_bits_from_i_s_r}{}\label{group__x_event_group_set_bits_from_i_s_r}\index{xEventGroupSetBitsFromISR@{xEventGroupSetBitsFromISR}}
+\doxylink{event__groups_8h}{event\+\_\+groups.\+h} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{event__groups_8h_a62b68278abac6358369ae8e390988a02}{xEventGroupSetBitsFromISR}}(\ \mbox{\hyperlink{event__groups_8h_acab96e0b6a5cab7f7b29822b79cc78ed}{EventGroupHandle\_t}}\ xEventGroup,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{event__groups_8h_ab2f21b93db0b2a0ab64d7a81ff32ac2e}{EventBits\_t}}\ uxBitsToSet,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ *pxHigherPriorityTaskWoken\ );}
+
+\end{DoxyCode}
+
+
+A version of \doxylink{event__groups_8h_a02d7b3bb55f7e11d9c47116266c5fb2e}{x\+Event\+Group\+Set\+Bits()} that can be called from an interrupt.
+
+Setting bits in an event group is not a deterministic operation because there are an unknown number of tasks that may be waiting for the bit or bits being set. Free\+RTOS does not allow nondeterministic operations to be performed in interrupts or from critical sections. Therefore \doxylink{event__groups_8h_a62b68278abac6358369ae8e390988a02}{x\+Event\+Group\+Set\+Bits\+From\+ISR()} sends a message to the timer task to have the set operation performed in the context of the timer task -\/ where a scheduler lock is used in place of a critical section.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Event\+Group} & The event group in which the bits are to be set.\\
+\hline
+{\em ux\+Bits\+To\+Set} & A bitwise value that indicates the bit or bits to set. For example, to set bit 3 only, set ux\+Bits\+To\+Set to 0x08. To set bit 3 and bit 0 set ux\+Bits\+To\+Set to 0x09.\\
+\hline
+{\em px\+Higher\+Priority\+Task\+Woken} & As mentioned above, calling this function will result in a message being sent to the timer daemon task. If the priority of the timer daemon task is higher than the priority of the currently running task (the task the interrupt interrupted) then \texorpdfstring{$\ast$}{*}px\+Higher\+Priority\+Task\+Woken will be set to pd\+TRUE by \doxylink{event__groups_8h_a62b68278abac6358369ae8e390988a02}{x\+Event\+Group\+Set\+Bits\+From\+ISR()}, indicating that a context switch should be requested before the interrupt exits. For that reason \texorpdfstring{$\ast$}{*}px\+Higher\+Priority\+Task\+Woken must be initialised to pd\+FALSE. See the example code below.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If the request to execute the function was posted successfully then pd\+PASS is returned, otherwise pd\+FALSE is returned. pd\+FALSE will be returned if the timer service queue was full.
+\end{DoxyReturn}
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BIT\_0\ (\ 1\ <<\ 0\ )}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BIT\_4\ (\ 1\ <<\ 4\ )}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ An\ event\ group\ which\ it\ is\ assumed\ has\ already\ been\ created\ by\ a\ call\ to}}
+\DoxyCodeLine{\textcolor{comment}{//\ xEventGroupCreate().}}
+\DoxyCodeLine{\mbox{\hyperlink{event__groups_8h_acab96e0b6a5cab7f7b29822b79cc78ed}{EventGroupHandle\_t}}\ xEventGroup;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ anInterruptHandler(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xHigherPriorityTaskWoken,\ xResult;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ xHigherPriorityTaskWoken\ must\ be\ initialised\ to\ pdFALSE.}}
+\DoxyCodeLine{\ \ \ \ \ xHigherPriorityTaskWoken\ =\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Set\ bit\ 0\ and\ bit\ 4\ in\ xEventGroup.}}
+\DoxyCodeLine{\ \ \ \ \ xResult\ =\ \mbox{\hyperlink{event__groups_8h_a62b68278abac6358369ae8e390988a02}{xEventGroupSetBitsFromISR}}(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ xEventGroup,\ \ \ \ \textcolor{comment}{//\ The\ event\ group\ being\ updated.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ BIT\_0\ |\ BIT\_4\ \ \ \textcolor{comment}{//\ The\ bits\ being\ set.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&xHigherPriorityTaskWoken\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Was\ the\ message\ posted\ successfully?}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(\ xResult\ ==\ \mbox{\hyperlink{projdefs_8h_a07848d3078849bd32353c69d30a479b3}{pdPASS}}\ )}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ xHigherPriorityTaskWoken\ is\ now\ set\ to\ pdTRUE\ then\ a\ context}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ switch\ should\ be\ requested.\ \ The\ macro\ used\ is\ port\ specific\ and}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ will\ be\ either\ portYIELD\_FROM\_ISR()\ or\ portEND\_SWITCHING\_ISR()\ -\/}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ refer\ to\ the\ documentation\ page\ for\ the\ port\ being\ used.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_aac6850c66595efdc02a8bbb95fb4648e}{portYIELD\_FROM\_ISR}}(\ xHigherPriorityTaskWoken\ );}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

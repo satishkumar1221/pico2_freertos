@@ -1,0 +1,118 @@
+\doxysection{os\+\_\+wrapper\+\_\+freertos.\+c}
+\hypertarget{os__wrapper__freertos_8c_source}{}\label{os__wrapper__freertos_8c_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/ARM\_TFM/os\_wrapper\_freertos.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/ARM\_TFM/os\_wrapper\_freertos.c}}
+\mbox{\hyperlink{os__wrapper__freertos_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00002}00002\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2019-\/2024,\ Arm\ Limited.\ All\ rights\ reserved.}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00003}00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00004}00004\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00005}00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00006}00006\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00007}00007\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00008}00008\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00009}00009\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00010}00010\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00011}00011\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00012}00012\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00013}00013\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00014}00014\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00015}00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00016}00016\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00017}00017\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00018}00018\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00019}00019\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00020}00020\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00021}00021\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00022}00022\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00023}00023\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00025}00025\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00026}00026\ \textcolor{comment}{\ *\ This\ file\ contains\ the\ implementation\ of\ APIs\ which\ are\ defined\ in}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00027}00027\ \textcolor{comment}{\ *\ \(\backslash\)interface/include/os\_wrapper/mutex.h\ by\ TF-\/M(tag:\ TF-\/Mv2.0.0).}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00028}00028\ \textcolor{comment}{\ *\ The\ implementation\ is\ based\ on\ FreeRTOS\ mutex\ type\ semaphore.}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00029}00029\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00031}00031\ \textcolor{preprocessor}{\#include\ "{}os\_wrapper/mutex.h"{}}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00033}00033\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_free_r_t_o_s_8h}{FreeRTOS.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00034}00034\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{semphr_8h}{semphr.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00035}00035\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{mpu__wrappers_8h}{mpu\_wrappers.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00037}00037\ \textcolor{preprocessor}{\#if\ (\ configSUPPORT\_STATIC\_ALLOCATION\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00039}00039\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00040}00040\ \textcolor{comment}{\ *\ In\ the\ static\ allocation,\ the\ RAM\ is\ required\ to\ hold\ the\ semaphore's}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00041}00041\ \textcolor{comment}{\ *\ state.}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00042}00042\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00043}00043\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_a5899eefbfd03bc6eb83c9accffc8975e}{StaticSemaphore\_t}}\ xSecureMutexBuffer;}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00044}00044\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00046}\mbox{\hyperlink{os__wrapper__freertos_8c_a06c2205e50fdd040b53a159ad19b81c9}{00046}}\ \textcolor{keywordtype}{void}\ *\ \mbox{\hyperlink{os__wrapper__freertos_8c_a06c2205e50fdd040b53a159ad19b81c9}{os\_wrapper\_mutex\_create}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00047}00047\ \{}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00048}00048\ \ \ \ \ \mbox{\hyperlink{semphr_8h_ad88c6df4a04beedeac782918c8a332f5}{SemaphoreHandle\_t}}\ xMutexHandle\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00050}00050\ \textcolor{preprocessor}{\ \ \ \ \#if\ (\ configSUPPORT\_DYNAMIC\_ALLOCATION\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00051}00051\ \ \ \ \ \ \ \ \ xMutexHandle\ =\ xSemaphoreCreateMutex();}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00052}00052\ \textcolor{preprocessor}{\ \ \ \ \#elif\ (\ configSUPPORT\_STATIC\_ALLOCATION\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00053}00053\ \ \ \ \ \ \ \ \ xMutexHandle\ =\ xSemaphoreCreateMutexStatic(\ \&xSecureMutexBuffer\ );}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00054}00054\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00055}00055\ \ \ \ \ \textcolor{keywordflow}{return}\ (\ \textcolor{keywordtype}{void}\ *\ )\ xMutexHandle;}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00056}00056\ \}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00057}00057\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00059}\mbox{\hyperlink{os__wrapper__freertos_8c_af316cc28a773373d05f7199d4639cd4c}{00059}}\ uint32\_t\ \mbox{\hyperlink{os__wrapper__freertos_8c_af316cc28a773373d05f7199d4639cd4c}{os\_wrapper\_mutex\_acquire}}(\ \textcolor{keywordtype}{void}\ *\ handle,}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ timeout\ )}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00061}00061\ \{}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00062}00062\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xRet;}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00064}00064\ \ \ \ \ \textcolor{keywordflow}{if}(\ !handle\ )}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00065}00065\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ OS\_WRAPPER\_ERROR;}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00067}00067\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00069}00069\ \ \ \ \ xRet\ =\ \mbox{\hyperlink{semphr_8h_af116e436d2a5ae5bd72dbade2b5ea930}{xSemaphoreTake}}(\ (\ \mbox{\hyperlink{semphr_8h_ad88c6df4a04beedeac782918c8a332f5}{SemaphoreHandle\_t}}\ )\ handle,}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ timeout\ ==\ OS\_WRAPPER\_WAIT\_FOREVER\ )\ ?}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a72723ba1e4a85ca14f25c2b9e066613d}{portMAX\_DELAY}}\ :\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ )\ timeout\ );}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00073}00073\ \ \ \ \ \textcolor{keywordflow}{if}(\ xRet\ !=\ \mbox{\hyperlink{projdefs_8h_a07848d3078849bd32353c69d30a479b3}{pdPASS}}\ )}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00074}00074\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ OS\_WRAPPER\_ERROR;}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00076}00076\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00077}00077\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00078}00078\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ OS\_WRAPPER\_SUCCESS;}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00080}00080\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00081}00081\ \}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00082}00082\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00084}\mbox{\hyperlink{os__wrapper__freertos_8c_a177a970936b6d47d313b2a6b82fba7a0}{00084}}\ uint32\_t\ \mbox{\hyperlink{os__wrapper__freertos_8c_a177a970936b6d47d313b2a6b82fba7a0}{os\_wrapper\_mutex\_release}}(\ \textcolor{keywordtype}{void}\ *\ handle\ )}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00085}00085\ \{}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00086}00086\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xRet;}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00088}00088\ \ \ \ \ \textcolor{keywordflow}{if}(\ !handle\ )}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00089}00089\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00090}00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ OS\_WRAPPER\_ERROR;}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00091}00091\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00093}00093\ \ \ \ \ xRet\ =\ \mbox{\hyperlink{semphr_8h_aae55761cabfa9bf85c8f4430f78c0953}{xSemaphoreGive}}(\ (\ \mbox{\hyperlink{semphr_8h_ad88c6df4a04beedeac782918c8a332f5}{SemaphoreHandle\_t}}\ )\ handle\ );}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00095}00095\ \ \ \ \ \textcolor{keywordflow}{if}(\ xRet\ !=\ \mbox{\hyperlink{projdefs_8h_a07848d3078849bd32353c69d30a479b3}{pdPASS}}\ )}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00096}00096\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00097}00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ OS\_WRAPPER\_ERROR;}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00098}00098\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00099}00099\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00100}00100\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00101}00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ OS\_WRAPPER\_SUCCESS;}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00102}00102\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00103}00103\ \}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00104}00104\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00106}\mbox{\hyperlink{os__wrapper__freertos_8c_a7025cb9ae3c97942597c3e28586e1234}{00106}}\ uint32\_t\ \mbox{\hyperlink{os__wrapper__freertos_8c_a7025cb9ae3c97942597c3e28586e1234}{os\_wrapper\_mutex\_delete}}(\ \textcolor{keywordtype}{void}\ *\ handle\ )}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00107}00107\ \{}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00108}00108\ \ \ \ \ \mbox{\hyperlink{semphr_8h_acd7d0eda0923d7caeeaaee9202c43eab}{vSemaphoreDelete}}(\ (\ \mbox{\hyperlink{semphr_8h_ad88c6df4a04beedeac782918c8a332f5}{SemaphoreHandle\_t}}\ )\ handle\ );}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00110}00110\ \ \ \ \ \textcolor{keywordflow}{return}\ OS\_WRAPPER\_SUCCESS;}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00111}00111\ \}}
+\DoxyCodeLine{\Hypertarget{os__wrapper__freertos_8c_source_l00112}00112\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+
+\end{DoxyCode}

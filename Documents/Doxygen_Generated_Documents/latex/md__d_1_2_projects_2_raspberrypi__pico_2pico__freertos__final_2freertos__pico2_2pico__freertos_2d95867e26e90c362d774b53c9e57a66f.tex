@@ -1,0 +1,82 @@
+\chapter{MISRA Compliance }
+\hypertarget{md__d_1_2_projects_2_raspberrypi__pico_2pico__freertos__final_2freertos__pico2_2pico__freertos_2d95867e26e90c362d774b53c9e57a66f}{}\label{md__d_1_2_projects_2_raspberrypi__pico_2pico__freertos__final_2freertos__pico2_2pico__freertos_2d95867e26e90c362d774b53c9e57a66f}\index{MISRA Compliance@{MISRA Compliance}}
+\label{md__d_1_2_projects_2_raspberrypi__pico_2pico__freertos__final_2freertos__pico2_2pico__freertos_2d95867e26e90c362d774b53c9e57a66f_autotoc_md9}%
+\Hypertarget{md__d_1_2_projects_2_raspberrypi__pico_2pico__freertos__final_2freertos__pico2_2pico__freertos_2d95867e26e90c362d774b53c9e57a66f_autotoc_md9}%
+
+
+Free\+RTOS-\/\+Kernel conforms to \href{https://www.misra.org.uk/misra-c}{\texttt{MISRA C\+:2012}} guidelines, with the deviations listed below. Compliance is checked with Coverity static analysis version 2023.\+6.\+1. Since the Free\+RTOS kernel is designed for small-\/embedded devices, it needs to have a very small memory footprint and has to be efficient. To achieve that and to increase the performance, it deviates from some MISRA rules. The specific deviations, suppressed inline, are listed below.
+
+Additionally, \href{examples/coverity/coverity_misra.config}{\texttt{MISRA configuration file}} contains project wide deviations.\hypertarget{md__d_1_2_projects_2_raspberrypi__pico_2pico__freertos__final_2freertos__pico2_2pico__freertos_2d95867e26e90c362d774b53c9e57a66f_autotoc_md10}{}\doxysubsection{\texorpdfstring{Suppressed with Coverity Comments}{Suppressed with Coverity Comments}}\label{md__d_1_2_projects_2_raspberrypi__pico_2pico__freertos__final_2freertos__pico2_2pico__freertos_2d95867e26e90c362d774b53c9e57a66f_autotoc_md10}
+To find the violation references in the source files run grep on the source code with ( Assuming rule 8.\+4 violation; with justification in point 1 )\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{grep\ 'MISRA\ Ref\ 8.4.1'\ .\ -\/rI}
+
+\end{DoxyCode}
+\hypertarget{md__d_1_2_projects_2_raspberrypi__pico_2pico__freertos__final_2freertos__pico2_2pico__freertos_2d95867e26e90c362d774b53c9e57a66f_autotoc_md11}{}\doxysubsubsection{\texorpdfstring{Dir 4.\+7}{Dir 4.\+7}}\label{md__d_1_2_projects_2_raspberrypi__pico_2pico__freertos__final_2freertos__pico2_2pico__freertos_2d95867e26e90c362d774b53c9e57a66f_autotoc_md11}
+MISRA C\+:2012 Dir 4.\+7\+: If a function returns error information, then that error information shall be tested.
+
+{\itshape Ref 4.\+7.\+1}
+\begin{DoxyItemize}
+\item {\ttfamily task\+ENTER\+\_\+\+CRITICAL\+\_\+\+FROM\+\_\+\+ISR} returns the interrupt mask and not any error information. Therefore, there is no need test the return value.
+\end{DoxyItemize}\hypertarget{md__d_1_2_projects_2_raspberrypi__pico_2pico__freertos__final_2freertos__pico2_2pico__freertos_2d95867e26e90c362d774b53c9e57a66f_autotoc_md12}{}\doxysubsubsection{\texorpdfstring{Rule 8.\+4}{Rule 8.\+4}}\label{md__d_1_2_projects_2_raspberrypi__pico_2pico__freertos__final_2freertos__pico2_2pico__freertos_2d95867e26e90c362d774b53c9e57a66f_autotoc_md12}
+MISRA C\+:2012 Rule 8.\+4\+: A compatible declaration shall be visible when an object or function with external linkage is defined.
+
+{\itshape Ref 8.\+4.\+1}
+\begin{DoxyItemize}
+\item \doxylink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{px\+Current\+TCB(s)} is defined with external linkage but it is only referenced from the assembly code in the port files. Therefore, adding a declaration in header file is not useful as the assembly code will still need to declare it separately.
+\end{DoxyItemize}
+
+{\itshape Ref 8.\+4.\+2}
+\begin{DoxyItemize}
+\item x\+Queue\+Registry is defined with external linkage because it is accessed by the kernel unit tests. It is not meant to be directly accessed by the application and therefore, not declared in a header file.
+\end{DoxyItemize}\hypertarget{md__d_1_2_projects_2_raspberrypi__pico_2pico__freertos__final_2freertos__pico2_2pico__freertos_2d95867e26e90c362d774b53c9e57a66f_autotoc_md13}{}\doxysubsubsection{\texorpdfstring{Rule 8.\+6}{Rule 8.\+6}}\label{md__d_1_2_projects_2_raspberrypi__pico_2pico__freertos__final_2freertos__pico2_2pico__freertos_2d95867e26e90c362d774b53c9e57a66f_autotoc_md13}
+MISRA C\+:2012 Rule 8.\+6\+: An identifier with external linkage shall have exactly one external definition.
+
+{\itshape Ref 8.\+6.\+1}
+\begin{DoxyItemize}
+\item This rule prohibits an identifier with external linkage to have multiple definitions or no definition. Free\+RTOS hook functions are implemented in the application and therefore, have no definition in the Kernel code.
+\end{DoxyItemize}\hypertarget{md__d_1_2_projects_2_raspberrypi__pico_2pico__freertos__final_2freertos__pico2_2pico__freertos_2d95867e26e90c362d774b53c9e57a66f_autotoc_md14}{}\doxysubsubsection{\texorpdfstring{Rule 11.\+1}{Rule 11.\+1}}\label{md__d_1_2_projects_2_raspberrypi__pico_2pico__freertos__final_2freertos__pico2_2pico__freertos_2d95867e26e90c362d774b53c9e57a66f_autotoc_md14}
+MISRA C\+:2012 Rule 11.\+1\+: Conversions shall not be performed between a pointer to function and any other type.
+
+{\itshape Ref 11.\+1.\+1}
+\begin{DoxyItemize}
+\item The pointer to function is casted into void to avoid unused parameter compiler warning when Stream Buffer\textquotesingle{}s Tx and Rx Completed callback feature is not used.
+\end{DoxyItemize}\hypertarget{md__d_1_2_projects_2_raspberrypi__pico_2pico__freertos__final_2freertos__pico2_2pico__freertos_2d95867e26e90c362d774b53c9e57a66f_autotoc_md15}{}\doxysubsubsection{\texorpdfstring{Rule 11.\+3}{Rule 11.\+3}}\label{md__d_1_2_projects_2_raspberrypi__pico_2pico__freertos__final_2freertos__pico2_2pico__freertos_2d95867e26e90c362d774b53c9e57a66f_autotoc_md15}
+MISRA C\+:2012 Rule 11.\+3\+: A cast shall not be performed between a pointer to object type and a pointer to a different object type.
+
+{\itshape Ref 11.\+3.\+1}
+\begin{DoxyItemize}
+\item This rule prohibits casting a pointer to object into a pointer to a different object because it may result in an incorrectly aligned pointer, leading to undefined behavior. Even if the casting produces a correctly aligned pointer, the behavior may be still undefined if the pointer is used to access an object. Free\+RTOS deliberately creates external aliases for all the kernel object types (\doxylink{_free_r_t_o_s_8h_af87e218149130753afb4a7044e5569e6}{Static\+Event\+Group\+\_\+t}, \doxylink{_free_r_t_o_s_8h_a22e8979e2849d002747c0dd4c7c37908}{Static\+Queue\+\_\+t}, \doxylink{_free_r_t_o_s_8h_a3675ce07f6d3e0e7130bc6ea01162d34}{Static\+Stream\+Buffer\+\_\+t}, \doxylink{_free_r_t_o_s_8h_a85fc227d111ec21647641e0deddcccc6}{Static\+Timer\+\_\+t} and \doxylink{_free_r_t_o_s_8h_af0002e4ad72220b34b95fcdf43bcd82d}{Static\+Task\+\_\+t}) for data hiding purposes. The internal object types and the corresponding external aliases are guaranteed to have the same size and alignment which is checked using config\+ASSERT.
+\end{DoxyItemize}\hypertarget{md__d_1_2_projects_2_raspberrypi__pico_2pico__freertos__final_2freertos__pico2_2pico__freertos_2d95867e26e90c362d774b53c9e57a66f_autotoc_md16}{}\doxysubsubsection{\texorpdfstring{Rule 11.\+5}{Rule 11.\+5}}\label{md__d_1_2_projects_2_raspberrypi__pico_2pico__freertos__final_2freertos__pico2_2pico__freertos_2d95867e26e90c362d774b53c9e57a66f_autotoc_md16}
+MISRA C\+:2012 Rule 11.\+5\+: A conversion should not be performed from pointer to void into pointer to object. This rule prohibits conversion of a pointer to void into a pointer to object because it may result in an incorrectly aligned pointer leading to undefined behavior.
+
+{\itshape Ref 11.\+5.\+1}
+\begin{DoxyItemize}
+\item The memory blocks returned by \doxylink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_a4d523dc6c079459faa62130465595246}{pv\+Port\+Malloc()} are guaranteed to meet the architecture alignment requirements specified by port\+BYTE\+\_\+\+ALIGNMENT. The casting of the pointer to void returned by \doxylink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_a4d523dc6c079459faa62130465595246}{pv\+Port\+Malloc()} is, therefore, safe because it is guaranteed to be aligned.
+\end{DoxyItemize}
+
+{\itshape Ref 11.\+5.\+2}
+\begin{DoxyItemize}
+\item The conversion from a pointer to void into a pointer to Event\+Group\+\_\+t is safe because it is a pointer to Event\+Group\+\_\+t, which is returned to the application at the time of event group creation for data hiding purposes.
+\end{DoxyItemize}
+
+{\itshape Ref 11.\+5.\+3}
+\begin{DoxyItemize}
+\item The conversion from a pointer to void in list macros for list item owner is safe because the type of the pointer stored and retrieved is the same.
+\end{DoxyItemize}
+
+{\itshape Ref 11.\+5.\+4}
+\begin{DoxyItemize}
+\item The conversion from a pointer to void into a pointer to Event\+Group\+\_\+t is safe because it is a pointer to Event\+Group\+\_\+t, which is passed as a parameter to the x\+Timer\+Pend\+Function\+Call\+From\+ISR API when the callback is pended.
+\end{DoxyItemize}
+
+{\itshape Ref 11.\+5.\+5}
+\begin{DoxyItemize}
+\item The conversion from a pointer to void into a pointer to uint8\+\_\+t is safe because data storage buffers are implemented as uint8\+\_\+t arrays for the ease of sizing, alignment and access.
+\end{DoxyItemize}\hypertarget{md__d_1_2_projects_2_raspberrypi__pico_2pico__freertos__final_2freertos__pico2_2pico__freertos_2d95867e26e90c362d774b53c9e57a66f_autotoc_md17}{}\doxysubsubsection{\texorpdfstring{Rule 21.\+6}{Rule 21.\+6}}\label{md__d_1_2_projects_2_raspberrypi__pico_2pico__freertos__final_2freertos__pico2_2pico__freertos_2d95867e26e90c362d774b53c9e57a66f_autotoc_md17}
+MISRA C-\/2012 Rule 21.\+6\+: The Standard Library input/output functions shall not be used.
+
+{\itshape Ref 21.\+6.\+1}
+\begin{DoxyItemize}
+\item The Standard Library function snprintf is used in v\+Task\+List\+Tasks and v\+Task\+Get\+Run\+Time\+Statistics APIs, both of which are utility functions only and are not considered part of core kernel implementation. 
+\end{DoxyItemize}

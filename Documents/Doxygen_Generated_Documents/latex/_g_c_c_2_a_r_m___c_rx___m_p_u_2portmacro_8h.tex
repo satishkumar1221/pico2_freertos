@@ -1,0 +1,870 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+GCC/\+ARM\+\_\+\+CRx\+\_\+\+MPU/portmacro.h File Reference}
+\hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h}{}\label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/ARM\_CRx\_MPU/portmacro.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/ARM\_CRx\_MPU/portmacro.h}}
+
+
+Functions, Defines, and Structs for use in the ARM\+\_\+\+CRx\+\_\+\+MPU Free\+RTOS-\/\+Port.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include "{}portmacro\+\_\+asm.\+h"{}}\newline
+Include dependency graph for portmacro.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_m_p_u___r_e_g_i_o_n___r_e_g_i_s_t_e_r_s}{MPU\+\_\+\+REGION\+\_\+\+REGISTERS}}
+\item 
+struct \mbox{\hyperlink{struct_s_y_s_t_e_m___c_a_l_l___s_t_a_c_k___i_n_f_o}{SYSTEM\+\_\+\+CALL\+\_\+\+STACK\+\_\+\+INFO}}
+\item 
+struct \mbox{\hyperlink{struct_m_p_u___s_e_t_t_i_n_g_s}{MPU\+\_\+\+SETTINGS}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_ab7c7cbbda4fb9a253c7e5086071db162}{port\+NO\+\_\+\+CRITICAL\+\_\+\+NESTING}}~( ( uint32\+\_\+t ) 0x0 )
+\begin{DoxyCompactList}\small\item\em Critical section nesting value. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a156ba74bc35da2293a2482ab4195183b}{port\+THUMB\+\_\+\+MODE\+\_\+\+BIT}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x20 )
+\begin{DoxyCompactList}\small\item\em Bit in Current Program Status Register (CPSR) to indicate that CPU is in Thumb State. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_adbfdd867a19042b41457005b761fe7ee}{port\+THUMB\+\_\+\+MODE\+\_\+\+ADDRESS}}~( 0x01\+UL )
+\begin{DoxyCompactList}\small\item\em Bitmask to check if an address is of Thumb Code. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a21adaab1601f6a0f35ba550a43060830}{port\+STACK\+\_\+\+GROWTH}}~( -\/1 )
+\begin{DoxyCompactList}\small\item\em Marks the direction the stack grows on the targeted CPU. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_ab9091ce3940d8bd93ec850122a2c6a1c}{port\+BYTE\+\_\+\+ALIGNMENT}}~8U
+\begin{DoxyCompactList}\small\item\em Specifies stack pointer alignment requirements of the target CPU. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a2921e1c5a1f974dfa01ae44d1f665f14}{port\+TASK\+\_\+\+FUNCTION\+\_\+\+PROTO}}(v\+Function,  pv\+Parameters)
+\begin{DoxyCompactList}\small\item\em Task function prototype macro as described on Free\+RTOS.\+org. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a3a289793652f505c538abea27045ccdf}{port\+TASK\+\_\+\+FUNCTION}}(v\+Function,  pv\+Parameters)
+\begin{DoxyCompactList}\small\item\em Task function prototype macro as described on Free\+RTOS.\+org. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a23c54dff0b50ff35563ef06c6d6d1835}{port\+NOP}}()
+\begin{DoxyCompactList}\small\item\em The no-\/op ARM assembly instruction. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a73448585c9c9e96500c2f0c9ea824601}{port\+INLINE}}~\+\_\+\+\_\+inline
+\begin{DoxyCompactList}\small\item\em The inline GCC label. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a4b03d1af7eaa8e1c7788e17fc74482eb}{port\+MEMORY\+\_\+\+BARRIER}}()
+\begin{DoxyCompactList}\small\item\em The memory access synchronization barrier. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a6720aeadd2ae4379a1280e2d6ff42c0c}{port\+DONT\+\_\+\+DISCARD}}~\mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_ab35b2424ac8c0625cfdbbcf916c5e1c3}{\+\_\+\+\_\+attribute\+\_\+\+\_\+}}( ( used ) )
+\begin{DoxyCompactList}\small\item\em Ensure a symbol isn\textquotesingle{}t removed from the compilation unit. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a62e53bc6d3fa5c4bf4e65ab2752930f3}{port\+TICK\+\_\+\+TYPE\+\_\+\+IS\+\_\+\+ATOMIC}}~1
+\begin{DoxyCompactList}\small\item\em Defines if the tick count can be accessed atomically. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a554d9322ce7f698a86a22b21234bd8cd}{port\+TICK\+\_\+\+PERIOD\+\_\+\+MS}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}} ) 1000\+UL / \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_a2f0258dd1e3b877e5bc013be54c2db6a}{config\+TICK\+\_\+\+RATE\+\_\+\+HZ}} )
+\begin{DoxyCompactList}\small\item\em The number of miliseconds between system ticks. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a72723ba1e4a85ca14f25c2b9e066613d}{port\+MAX\+\_\+\+DELAY}}~( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}} ) 0x\+FFFFFFFFUL
+\begin{DoxyCompactList}\small\item\em The largest possible delay value for any Free\+RTOS API. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_ae1ff06193615f5130b5a97dc9e708fc7}{port\+YIELD}}()
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_abc47e85a6befbb47961ad5ee7aa57173}{port\+ENABLE\+\_\+\+INTERRUPTS}}()
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a6e3d10ee1a0734a647ca192523c2cfc1}{port\+DISABLE\+\_\+\+INTERRUPTS}}()
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a8a09321ad004019f3c8d0f2e4d7224c7}{port\+ENTER\+\_\+\+CRITICAL}}()
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a529358e6147881dd881c890ade21c9bd}{port\+EXIT\+\_\+\+CRITICAL}}()
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a44b71b000f54b613b9cea59e86861a1c}{port\+IS\+\_\+\+PRIVILEGED}}()
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a44a44174ba1a38fb7271b3388aab5f6d}{port\+IS\+\_\+\+TASK\+\_\+\+PRIVILEGED}}()
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a254a1ddd7499c6ec36b38e2fc3486b80}{port\+TASK\+\_\+\+RETURN\+\_\+\+ADDRESS}}~prv\+Task\+Exit\+Error
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a63d7ba028eb2432720bb5c7d626a8d7e}{port\+USING\+\_\+\+MPU\+\_\+\+WRAPPERS}}~1
+\begin{DoxyCompactList}\small\item\em Mark that this port utilizes the onboard ARM MPU. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a27b7e11718b2ec5b5217e60f3b9e8aec}{port\+PRIVILEGE\+\_\+\+BIT}}~( 0x80000000\+UL )
+\begin{DoxyCompactList}\small\item\em Used to mark if a task should be created as a privileged task. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a24ad87830055bb4410f21ec76fd32616}{port\+ACL\+\_\+\+ENTRY\+\_\+\+SIZE\+\_\+\+BITS}}~( 32UL )
+\begin{DoxyCompactList}\small\item\em Size of an Access Control List (ACL) entry in bits. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef uint32\+\_\+t \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_aa73b01e0200940d619095fb74fb3030b}{Stack\+Type\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Data type used to represent a stack word. \end{DoxyCompactList}\item 
+typedef int32\+\_\+t \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a79d032d263c449483f65e80555b97d66}{Base\+Type\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Signed data type equal to the data word operating size of the CPU. \end{DoxyCompactList}\item 
+typedef uint32\+\_\+t \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_ac2664ea79933f581cfee14e03e458bbd}{UBase\+Type\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Unsigned data type equal to the data word operating size of the CPU. \end{DoxyCompactList}\item 
+typedef struct \mbox{\hyperlink{struct_m_p_u___r_e_g_i_o_n___r_e_g_i_s_t_e_r_s}{MPU\+\_\+\+REGION\+\_\+\+REGISTERS}} \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a1cbfacfca1c21e805d515664a566cd93}{x\+MPU\+\_\+\+REGION\+\_\+\+REGISTERS}}
+\item 
+typedef struct \mbox{\hyperlink{struct_s_y_s_t_e_m___c_a_l_l___s_t_a_c_k___i_n_f_o}{SYSTEM\+\_\+\+CALL\+\_\+\+STACK\+\_\+\+INFO}} \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a917d4fc0fb856d8f718fad5c5e33f321}{x\+SYSTEM\+\_\+\+CALL\+\_\+\+STACK\+\_\+\+INFO}}
+\item 
+typedef struct \mbox{\hyperlink{struct_m_p_u___s_e_t_t_i_n_g_s}{MPU\+\_\+\+SETTINGS}} \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a0f8f90148a90e1be9815fda669fc0e28}{x\+MPU\+\_\+\+SETTINGS}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a5f54ea681c871c66dd9d5562d427f538}{Free\+RTOS\+\_\+\+SVC\+\_\+\+Handler}} (void)
+\begin{DoxyCompactList}\small\item\em Free\+RTOS Supervisor Call (SVC) Handler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_ab7ae228f5e1caa8baa622668ff8892cb}{Free\+RTOS\+\_\+\+IRQ\+\_\+\+Handler}} (void)
+\begin{DoxyCompactList}\small\item\em Free\+RTOS Interrupt Handler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_add01c927fb689f7ec170e42d47d27927}{v\+Port\+Yield}} (void)
+\begin{DoxyCompactList}\small\item\em Yield the CPU. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_af329f3280e39011c4d9efbca3d5dd329}{v\+Port\+Enable\+Interrupts}} (void)
+\begin{DoxyCompactList}\small\item\em Enable interrupts. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a6efcba81026ff6f2920ea53804bc6bdf}{v\+Port\+Disable\+Interrupts}} (void)
+\begin{DoxyCompactList}\small\item\em Disable interrupts. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a7cde6871b0335e88c76859fad8d7767c}{v\+Port\+System\+Call\+Exit}} (void)
+\begin{DoxyCompactList}\small\item\em Exit from a Free\+RTO System Call. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a5cfc38319f17c8e804020ec247b6325d}{v\+Port\+Start\+First\+Task}} (void)
+\begin{DoxyCompactList}\small\item\em Start executing first task. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a2ca3e39c8700f3482665fff66c9cd46f}{v\+MPUEnable}} (void)
+\begin{DoxyCompactList}\small\item\em Enable the onboard MPU. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_ab4c800f9c44c6dcb9fc216ef56fe1199}{v\+MPUDisable}} (void)
+\begin{DoxyCompactList}\small\item\em Disable the onboard MPU. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a0fb06f01392a2c2d709eff692af8cd86}{v\+MPUEnable\+Background\+Region}} (void)
+\begin{DoxyCompactList}\small\item\em Enable the MPU Background Region. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a1459df01a7aa69b79bb1d9306ceba1aa}{v\+MPUDisable\+Background\+Region}} (void)
+\begin{DoxyCompactList}\small\item\em Disable the MPU Background Region. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a337c2e2fe0a7f3cc1bb3f1249b0d0c58}{v\+MPUSet\+Region}} (uint32\+\_\+t ul\+Region\+Number, uint32\+\_\+t ul\+Base\+Address, uint32\+\_\+t ul\+Region\+Size, uint32\+\_\+t ul\+Region\+Permissions)
+\begin{DoxyCompactList}\small\item\em Set permissions for an MPU Region. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a2ed3554a3de09a3bd09d396ee081ab69}{v\+Port\+Enter\+Critical}} (void)
+\begin{DoxyCompactList}\small\item\em Enter critical section. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_aed20ada05b957181a0de042802a82a5b}{v\+Port\+Exit\+Critical}} (void)
+\begin{DoxyCompactList}\small\item\em Exit critical section. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_aa56482d0f579f9741f851d6cbd17f942}{x\+Port\+Is\+Privileged}} (void)
+\begin{DoxyCompactList}\small\item\em Checks whether or not the processor is privileged. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a21335221c26ff106b4f5e87edf6567aa}{x\+Port\+Is\+Task\+Privileged}} (void)
+\begin{DoxyCompactList}\small\item\em Checks whether or not a task is privileged. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a1f156a1435c0f5a18647e0d12230d9df}{prv\+Task\+Exit\+Error}} (void)
+\begin{DoxyCompactList}\small\item\em Default return address for tasks. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a87b021a0ecc68be430e34ae9257a7420}{ul\+Port\+Count\+Leading\+Zeros}} (\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} ul\+Bitmap)
+\begin{DoxyCompactList}\small\item\em Returns the number of leading zeros in a 32 bit variable. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_af76f3c0b44c5b5c06fc046a4ee1a6423}{v\+Port\+End\+Scheduler}} (void)
+\begin{DoxyCompactList}\small\item\em End the Free\+RTOS scheduler. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions, Defines, and Structs for use in the ARM\+\_\+\+CRx\+\_\+\+MPU Free\+RTOS-\/\+Port. 
+
+\begin{DoxyNote}{Note}
+The settings in this file configure Free\+RTOS correctly for the given hardware and compiler. These settings should not be altered. 
+\end{DoxyNote}
+
+
+Definition in file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+
+
+\label{doc-define-members}
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a24ad87830055bb4410f21ec76fd32616}\index{portmacro.h@{portmacro.h}!portACL\_ENTRY\_SIZE\_BITS@{portACL\_ENTRY\_SIZE\_BITS}}
+\index{portACL\_ENTRY\_SIZE\_BITS@{portACL\_ENTRY\_SIZE\_BITS}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{portACL\_ENTRY\_SIZE\_BITS}{portACL\_ENTRY\_SIZE\_BITS}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a24ad87830055bb4410f21ec76fd32616} 
+\#define port\+ACL\+\_\+\+ENTRY\+\_\+\+SIZE\+\_\+\+BITS~( 32UL )}
+
+
+
+Size of an Access Control List (ACL) entry in bits. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00462}{462}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_ab9091ce3940d8bd93ec850122a2c6a1c}\index{portmacro.h@{portmacro.h}!portBYTE\_ALIGNMENT@{portBYTE\_ALIGNMENT}}
+\index{portBYTE\_ALIGNMENT@{portBYTE\_ALIGNMENT}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{portBYTE\_ALIGNMENT}{portBYTE\_ALIGNMENT}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_ab9091ce3940d8bd93ec850122a2c6a1c} 
+\#define port\+BYTE\+\_\+\+ALIGNMENT~8U}
+
+
+
+Specifies stack pointer alignment requirements of the target CPU. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00179}{179}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a6e3d10ee1a0734a647ca192523c2cfc1}\index{portmacro.h@{portmacro.h}!portDISABLE\_INTERRUPTS@{portDISABLE\_INTERRUPTS}}
+\index{portDISABLE\_INTERRUPTS@{portDISABLE\_INTERRUPTS}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{portDISABLE\_INTERRUPTS}{portDISABLE\_INTERRUPTS}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a6e3d10ee1a0734a647ca192523c2cfc1} 
+\#define port\+DISABLE\+\_\+\+INTERRUPTS(\begin{DoxyParamCaption}\item[{}]{void}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a6efcba81026ff6f2920ea53804bc6bdf}{vPortDisableInterrupts}}()}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00293}{293}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a6720aeadd2ae4379a1280e2d6ff42c0c}\index{portmacro.h@{portmacro.h}!portDONT\_DISCARD@{portDONT\_DISCARD}}
+\index{portDONT\_DISCARD@{portDONT\_DISCARD}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{portDONT\_DISCARD}{portDONT\_DISCARD}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a6720aeadd2ae4379a1280e2d6ff42c0c} 
+\#define port\+DONT\+\_\+\+DISCARD~\mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_ab35b2424ac8c0625cfdbbcf916c5e1c3}{\+\_\+\+\_\+attribute\+\_\+\+\_\+}}( ( used ) )}
+
+
+
+Ensure a symbol isn\textquotesingle{}t removed from the compilation unit. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00229}{229}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_abc47e85a6befbb47961ad5ee7aa57173}\index{portmacro.h@{portmacro.h}!portENABLE\_INTERRUPTS@{portENABLE\_INTERRUPTS}}
+\index{portENABLE\_INTERRUPTS@{portENABLE\_INTERRUPTS}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{portENABLE\_INTERRUPTS}{portENABLE\_INTERRUPTS}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_abc47e85a6befbb47961ad5ee7aa57173} 
+\#define port\+ENABLE\+\_\+\+INTERRUPTS(\begin{DoxyParamCaption}\item[{}]{void}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_af329f3280e39011c4d9efbca3d5dd329}{vPortEnableInterrupts}}()}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00284}{284}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a8a09321ad004019f3c8d0f2e4d7224c7}\index{portmacro.h@{portmacro.h}!portENTER\_CRITICAL@{portENTER\_CRITICAL}}
+\index{portENTER\_CRITICAL@{portENTER\_CRITICAL}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{portENTER\_CRITICAL}{portENTER\_CRITICAL}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a8a09321ad004019f3c8d0f2e4d7224c7} 
+\#define port\+ENTER\+\_\+\+CRITICAL(\begin{DoxyParamCaption}\item[{}]{void}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_a2ed3554a3de09a3bd09d396ee081ab69}{vPortEnterCritical}}()}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00364}{364}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a529358e6147881dd881c890ade21c9bd}\index{portmacro.h@{portmacro.h}!portEXIT\_CRITICAL@{portEXIT\_CRITICAL}}
+\index{portEXIT\_CRITICAL@{portEXIT\_CRITICAL}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{portEXIT\_CRITICAL}{portEXIT\_CRITICAL}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a529358e6147881dd881c890ade21c9bd} 
+\#define port\+EXIT\+\_\+\+CRITICAL(\begin{DoxyParamCaption}\item[{}]{void}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_aed20ada05b957181a0de042802a82a5b}{vPortExitCritical}}()}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00373}{373}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a73448585c9c9e96500c2f0c9ea824601}\index{portmacro.h@{portmacro.h}!portINLINE@{portINLINE}}
+\index{portINLINE@{portINLINE}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{portINLINE}{portINLINE}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a73448585c9c9e96500c2f0c9ea824601} 
+\#define port\+INLINE~\+\_\+\+\_\+inline}
+
+
+
+The inline GCC label. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00215}{215}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a44b71b000f54b613b9cea59e86861a1c}\index{portmacro.h@{portmacro.h}!portIS\_PRIVILEGED@{portIS\_PRIVILEGED}}
+\index{portIS\_PRIVILEGED@{portIS\_PRIVILEGED}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{portIS\_PRIVILEGED}{portIS\_PRIVILEGED}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a44b71b000f54b613b9cea59e86861a1c} 
+\#define port\+IS\+\_\+\+PRIVILEGED(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_aa56482d0f579f9741f851d6cbd17f942}{xPortIsPrivileged}}()}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00387}{387}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a44a44174ba1a38fb7271b3388aab5f6d}\index{portmacro.h@{portmacro.h}!portIS\_TASK\_PRIVILEGED@{portIS\_TASK\_PRIVILEGED}}
+\index{portIS\_TASK\_PRIVILEGED@{portIS\_TASK\_PRIVILEGED}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{portIS\_TASK\_PRIVILEGED}{portIS\_TASK\_PRIVILEGED}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a44a44174ba1a38fb7271b3388aab5f6d} 
+\#define port\+IS\+\_\+\+TASK\+\_\+\+PRIVILEGED(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_g_c_c_2_a_r_m___c_m3___m_p_u_2port_8c_a21335221c26ff106b4f5e87edf6567aa}{xPortIsTaskPrivileged}}()}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00402}{402}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a72723ba1e4a85ca14f25c2b9e066613d}\index{portmacro.h@{portmacro.h}!portMAX\_DELAY@{portMAX\_DELAY}}
+\index{portMAX\_DELAY@{portMAX\_DELAY}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{portMAX\_DELAY}{portMAX\_DELAY}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a72723ba1e4a85ca14f25c2b9e066613d} 
+\#define port\+MAX\+\_\+\+DELAY~( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}} ) 0x\+FFFFFFFFUL}
+
+
+
+The largest possible delay value for any Free\+RTOS API. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00250}{250}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a4b03d1af7eaa8e1c7788e17fc74482eb}\index{portmacro.h@{portmacro.h}!portMEMORY\_BARRIER@{portMEMORY\_BARRIER}}
+\index{portMEMORY\_BARRIER@{portMEMORY\_BARRIER}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{portMEMORY\_BARRIER}{portMEMORY\_BARRIER}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a4b03d1af7eaa8e1c7788e17fc74482eb} 
+\#define port\+MEMORY\+\_\+\+BARRIER(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\_\_asm\ \textcolor{keyword}{volatile}(\ \textcolor{stringliteral}{"{}"{}}\ :::\ \textcolor{stringliteral}{"{}memory"{}}\ )}
+
+\end{DoxyCode}
+
+
+The memory access synchronization barrier. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00222}{222}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_ab7c7cbbda4fb9a253c7e5086071db162}\index{portmacro.h@{portmacro.h}!portNO\_CRITICAL\_NESTING@{portNO\_CRITICAL\_NESTING}}
+\index{portNO\_CRITICAL\_NESTING@{portNO\_CRITICAL\_NESTING}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{portNO\_CRITICAL\_NESTING}{portNO\_CRITICAL\_NESTING}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_ab7c7cbbda4fb9a253c7e5086071db162} 
+\#define port\+NO\+\_\+\+CRITICAL\+\_\+\+NESTING~( ( uint32\+\_\+t ) 0x0 )}
+
+
+
+Critical section nesting value. 
+
+\begin{DoxyNote}{Note}
+A task exits critical section and enables IRQs when its nesting count reaches this value. 
+\end{DoxyNote}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00121}{121}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a23c54dff0b50ff35563ef06c6d6d1835}\index{portmacro.h@{portmacro.h}!portNOP@{portNOP}}
+\index{portNOP@{portNOP}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{portNOP}{portNOP}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a23c54dff0b50ff35563ef06c6d6d1835} 
+\#define port\+NOP(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\_\_asm\ \textcolor{keyword}{volatile}(\ \textcolor{stringliteral}{"{}NOP"{}}\ )}
+
+\end{DoxyCode}
+
+
+The no-\/op ARM assembly instruction. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00208}{208}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a27b7e11718b2ec5b5217e60f3b9e8aec}\index{portmacro.h@{portmacro.h}!portPRIVILEGE\_BIT@{portPRIVILEGE\_BIT}}
+\index{portPRIVILEGE\_BIT@{portPRIVILEGE\_BIT}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{portPRIVILEGE\_BIT}{portPRIVILEGE\_BIT}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a27b7e11718b2ec5b5217e60f3b9e8aec} 
+\#define port\+PRIVILEGE\+\_\+\+BIT~( 0x80000000\+UL )}
+
+
+
+Used to mark if a task should be created as a privileged task. 
+
+\begin{DoxyNote}{Note}
+A privileged task is created by performing a bitwise OR of this value and the task priority. For example, to create a privileged task at priority 2, the ux\+Priority parameter should be set to ( 2 \texorpdfstring{$\vert$}{|} port\+PRIVILEGE\+\_\+\+BIT ). 
+\end{DoxyNote}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00457}{457}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a21adaab1601f6a0f35ba550a43060830}\index{portmacro.h@{portmacro.h}!portSTACK\_GROWTH@{portSTACK\_GROWTH}}
+\index{portSTACK\_GROWTH@{portSTACK\_GROWTH}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{portSTACK\_GROWTH}{portSTACK\_GROWTH}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a21adaab1601f6a0f35ba550a43060830} 
+\#define port\+STACK\+\_\+\+GROWTH~( -\/1 )}
+
+
+
+Marks the direction the stack grows on the targeted CPU. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00172}{172}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a3a289793652f505c538abea27045ccdf}\index{portmacro.h@{portmacro.h}!portTASK\_FUNCTION@{portTASK\_FUNCTION}}
+\index{portTASK\_FUNCTION@{portTASK\_FUNCTION}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{portTASK\_FUNCTION}{portTASK\_FUNCTION}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a3a289793652f505c538abea27045ccdf} 
+\#define port\+TASK\+\_\+\+FUNCTION(\begin{DoxyParamCaption}\item[{}]{v\+Function}{, }\item[{}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ vFunction(\ \textcolor{keywordtype}{void}\ *\ pvParameters\ )}
+
+\end{DoxyCode}
+
+
+Task function prototype macro as described on Free\+RTOS.\+org. 
+
+\begin{DoxyNote}{Note}
+This is not required for this port but included in case common demo code uses it. 
+\end{DoxyNote}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00200}{200}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a2921e1c5a1f974dfa01ae44d1f665f14}\index{portmacro.h@{portmacro.h}!portTASK\_FUNCTION\_PROTO@{portTASK\_FUNCTION\_PROTO}}
+\index{portTASK\_FUNCTION\_PROTO@{portTASK\_FUNCTION\_PROTO}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{portTASK\_FUNCTION\_PROTO}{portTASK\_FUNCTION\_PROTO}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a2921e1c5a1f974dfa01ae44d1f665f14} 
+\#define port\+TASK\+\_\+\+FUNCTION\+\_\+\+PROTO(\begin{DoxyParamCaption}\item[{}]{v\+Function}{, }\item[{}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ vFunction(\ \textcolor{keywordtype}{void}\ *\ pvParameters\ )}
+
+\end{DoxyCode}
+
+
+Task function prototype macro as described on Free\+RTOS.\+org. 
+
+\begin{DoxyNote}{Note}
+This is not required for this port but included in case common demo code uses it. 
+\end{DoxyNote}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00189}{189}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a254a1ddd7499c6ec36b38e2fc3486b80}\index{portmacro.h@{portmacro.h}!portTASK\_RETURN\_ADDRESS@{portTASK\_RETURN\_ADDRESS}}
+\index{portTASK\_RETURN\_ADDRESS@{portTASK\_RETURN\_ADDRESS}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{portTASK\_RETURN\_ADDRESS}{portTASK\_RETURN\_ADDRESS}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a254a1ddd7499c6ec36b38e2fc3486b80} 
+\#define port\+TASK\+\_\+\+RETURN\+\_\+\+ADDRESS~prv\+Task\+Exit\+Error}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00417}{417}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_adbfdd867a19042b41457005b761fe7ee}\index{portmacro.h@{portmacro.h}!portTHUMB\_MODE\_ADDRESS@{portTHUMB\_MODE\_ADDRESS}}
+\index{portTHUMB\_MODE\_ADDRESS@{portTHUMB\_MODE\_ADDRESS}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{portTHUMB\_MODE\_ADDRESS}{portTHUMB\_MODE\_ADDRESS}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_adbfdd867a19042b41457005b761fe7ee} 
+\#define port\+THUMB\+\_\+\+MODE\+\_\+\+ADDRESS~( 0x01\+UL )}
+
+
+
+Bitmask to check if an address is of Thumb Code. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00136}{136}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a156ba74bc35da2293a2482ab4195183b}\index{portmacro.h@{portmacro.h}!portTHUMB\_MODE\_BIT@{portTHUMB\_MODE\_BIT}}
+\index{portTHUMB\_MODE\_BIT@{portTHUMB\_MODE\_BIT}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{portTHUMB\_MODE\_BIT}{portTHUMB\_MODE\_BIT}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a156ba74bc35da2293a2482ab4195183b} 
+\#define port\+THUMB\+\_\+\+MODE\+\_\+\+BIT~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x20 )}
+
+
+
+Bit in Current Program Status Register (CPSR) to indicate that CPU is in Thumb State. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00129}{129}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a554d9322ce7f698a86a22b21234bd8cd}\index{portmacro.h@{portmacro.h}!portTICK\_PERIOD\_MS@{portTICK\_PERIOD\_MS}}
+\index{portTICK\_PERIOD\_MS@{portTICK\_PERIOD\_MS}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{portTICK\_PERIOD\_MS}{portTICK\_PERIOD\_MS}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a554d9322ce7f698a86a22b21234bd8cd} 
+\#define port\+TICK\+\_\+\+PERIOD\+\_\+\+MS~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}} ) 1000\+UL / \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_a2f0258dd1e3b877e5bc013be54c2db6a}{config\+TICK\+\_\+\+RATE\+\_\+\+HZ}} )}
+
+
+
+The number of miliseconds between system ticks. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00243}{243}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a62e53bc6d3fa5c4bf4e65ab2752930f3}\index{portmacro.h@{portmacro.h}!portTICK\_TYPE\_IS\_ATOMIC@{portTICK\_TYPE\_IS\_ATOMIC}}
+\index{portTICK\_TYPE\_IS\_ATOMIC@{portTICK\_TYPE\_IS\_ATOMIC}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{portTICK\_TYPE\_IS\_ATOMIC}{portTICK\_TYPE\_IS\_ATOMIC}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a62e53bc6d3fa5c4bf4e65ab2752930f3} 
+\#define port\+TICK\+\_\+\+TYPE\+\_\+\+IS\+\_\+\+ATOMIC~1}
+
+
+
+Defines if the tick count can be accessed atomically. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00236}{236}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a63d7ba028eb2432720bb5c7d626a8d7e}\index{portmacro.h@{portmacro.h}!portUSING\_MPU\_WRAPPERS@{portUSING\_MPU\_WRAPPERS}}
+\index{portUSING\_MPU\_WRAPPERS@{portUSING\_MPU\_WRAPPERS}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{portUSING\_MPU\_WRAPPERS}{portUSING\_MPU\_WRAPPERS}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a63d7ba028eb2432720bb5c7d626a8d7e} 
+\#define port\+USING\+\_\+\+MPU\+\_\+\+WRAPPERS~1}
+
+
+
+Mark that this port utilizes the onboard ARM MPU. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00445}{445}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_ae1ff06193615f5130b5a97dc9e708fc7}\index{portmacro.h@{portmacro.h}!portYIELD@{portYIELD}}
+\index{portYIELD@{portYIELD}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{portYIELD}{portYIELD}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_ae1ff06193615f5130b5a97dc9e708fc7} 
+\#define port\+YIELD(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_add01c927fb689f7ec170e42d47d27927}{vPortYield}}()}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00275}{275}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a79d032d263c449483f65e80555b97d66}\index{portmacro.h@{portmacro.h}!BaseType\_t@{BaseType\_t}}
+\index{BaseType\_t@{BaseType\_t}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{BaseType\_t}{BaseType\_t}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a79d032d263c449483f65e80555b97d66} 
+typedef int32\+\_\+t \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}}}
+
+
+
+Signed data type equal to the data word operating size of the CPU. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00150}{150}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_aa73b01e0200940d619095fb74fb3030b}\index{portmacro.h@{portmacro.h}!StackType\_t@{StackType\_t}}
+\index{StackType\_t@{StackType\_t}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{StackType\_t}{StackType\_t}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_aa73b01e0200940d619095fb74fb3030b} 
+typedef uint32\+\_\+t \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}}}
+
+
+
+Data type used to represent a stack word. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00143}{143}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_ac2664ea79933f581cfee14e03e458bbd}\index{portmacro.h@{portmacro.h}!UBaseType\_t@{UBaseType\_t}}
+\index{UBaseType\_t@{UBaseType\_t}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{UBaseType\_t}{UBaseType\_t}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_ac2664ea79933f581cfee14e03e458bbd} 
+typedef uint32\+\_\+t \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}}}
+
+
+
+Unsigned data type equal to the data word operating size of the CPU. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source_l00157}{157}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_source}{portmacro.\+h}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a1cbfacfca1c21e805d515664a566cd93}\index{portmacro.h@{portmacro.h}!xMPU\_REGION\_REGISTERS@{xMPU\_REGION\_REGISTERS}}
+\index{xMPU\_REGION\_REGISTERS@{xMPU\_REGION\_REGISTERS}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{xMPU\_REGION\_REGISTERS}{xMPU\_REGION\_REGISTERS}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a1cbfacfca1c21e805d515664a566cd93} 
+typedef struct \mbox{\hyperlink{struct_m_p_u___r_e_g_i_o_n___r_e_g_i_s_t_e_r_s}{MPU\+\_\+\+REGION\+\_\+\+REGISTERS}} x\+MPU\+\_\+\+REGION\+\_\+\+REGISTERS}
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a0f8f90148a90e1be9815fda669fc0e28}\index{portmacro.h@{portmacro.h}!xMPU\_SETTINGS@{xMPU\_SETTINGS}}
+\index{xMPU\_SETTINGS@{xMPU\_SETTINGS}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{xMPU\_SETTINGS}{xMPU\_SETTINGS}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a0f8f90148a90e1be9815fda669fc0e28} 
+typedef struct \mbox{\hyperlink{struct_m_p_u___s_e_t_t_i_n_g_s}{MPU\+\_\+\+SETTINGS}} x\+MPU\+\_\+\+SETTINGS}
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a917d4fc0fb856d8f718fad5c5e33f321}\index{portmacro.h@{portmacro.h}!xSYSTEM\_CALL\_STACK\_INFO@{xSYSTEM\_CALL\_STACK\_INFO}}
+\index{xSYSTEM\_CALL\_STACK\_INFO@{xSYSTEM\_CALL\_STACK\_INFO}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{xSYSTEM\_CALL\_STACK\_INFO}{xSYSTEM\_CALL\_STACK\_INFO}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a917d4fc0fb856d8f718fad5c5e33f321} 
+typedef struct \mbox{\hyperlink{struct_s_y_s_t_e_m___c_a_l_l___s_t_a_c_k___i_n_f_o}{SYSTEM\+\_\+\+CALL\+\_\+\+STACK\+\_\+\+INFO}} x\+SYSTEM\+\_\+\+CALL\+\_\+\+STACK\+\_\+\+INFO}
+
+
+
+\label{doc-func-members}
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_ab7ae228f5e1caa8baa622668ff8892cb}\index{portmacro.h@{portmacro.h}!FreeRTOS\_IRQ\_Handler@{FreeRTOS\_IRQ\_Handler}}
+\index{FreeRTOS\_IRQ\_Handler@{FreeRTOS\_IRQ\_Handler}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{FreeRTOS\_IRQ\_Handler()}{FreeRTOS\_IRQ\_Handler()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_ab7ae228f5e1caa8baa622668ff8892cb} 
+void Free\+RTOS\+\_\+\+IRQ\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Free\+RTOS Interrupt Handler. 
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a5f54ea681c871c66dd9d5562d427f538}\index{portmacro.h@{portmacro.h}!FreeRTOS\_SVC\_Handler@{FreeRTOS\_SVC\_Handler}}
+\index{FreeRTOS\_SVC\_Handler@{FreeRTOS\_SVC\_Handler}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{FreeRTOS\_SVC\_Handler()}{FreeRTOS\_SVC\_Handler()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a5f54ea681c871c66dd9d5562d427f538} 
+void Free\+RTOS\+\_\+\+SVC\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Free\+RTOS Supervisor Call (SVC) Handler. 
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a1f156a1435c0f5a18647e0d12230d9df}\index{portmacro.h@{portmacro.h}!prvTaskExitError@{prvTaskExitError}}
+\index{prvTaskExitError@{prvTaskExitError}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{prvTaskExitError()}{prvTaskExitError()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a1f156a1435c0f5a18647e0d12230d9df} 
+void prv\+Task\+Exit\+Error (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Default return address for tasks. 
+
+\begin{DoxyNote}{Note}
+This function is used as the default return address for tasks if config\+TASK\+\_\+\+RETURN\+\_\+\+ADDRESS is not defined in Free\+RTOSConfig.\+h. 
+\end{DoxyNote}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source_l00777}{777}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_rx___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a87b021a0ecc68be430e34ae9257a7420}\index{portmacro.h@{portmacro.h}!ulPortCountLeadingZeros@{ulPortCountLeadingZeros}}
+\index{ulPortCountLeadingZeros@{ulPortCountLeadingZeros}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{ulPortCountLeadingZeros()}{ulPortCountLeadingZeros()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a87b021a0ecc68be430e34ae9257a7420} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} ul\+Port\+Count\+Leading\+Zeros (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}}}]{ul\+Bitmap}{}\end{DoxyParamCaption})}
+
+
+
+Returns the number of leading zeros in a 32 bit variable. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em ul\+Bitmap} & 32-\/Bit number to count leading zeros in.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of leading zeros in ul\+Bitmap. 
+\end{DoxyReturn}
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_ab4c800f9c44c6dcb9fc216ef56fe1199}\index{portmacro.h@{portmacro.h}!vMPUDisable@{vMPUDisable}}
+\index{vMPUDisable@{vMPUDisable}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{vMPUDisable()}{vMPUDisable()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_ab4c800f9c44c6dcb9fc216ef56fe1199} 
+void v\+MPUDisable (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Disable the onboard MPU. 
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a1459df01a7aa69b79bb1d9306ceba1aa}\index{portmacro.h@{portmacro.h}!vMPUDisableBackgroundRegion@{vMPUDisableBackgroundRegion}}
+\index{vMPUDisableBackgroundRegion@{vMPUDisableBackgroundRegion}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{vMPUDisableBackgroundRegion()}{vMPUDisableBackgroundRegion()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a1459df01a7aa69b79bb1d9306ceba1aa} 
+void v\+MPUDisable\+Background\+Region (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Disable the MPU Background Region. 
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a2ca3e39c8700f3482665fff66c9cd46f}\index{portmacro.h@{portmacro.h}!vMPUEnable@{vMPUEnable}}
+\index{vMPUEnable@{vMPUEnable}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{vMPUEnable()}{vMPUEnable()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a2ca3e39c8700f3482665fff66c9cd46f} 
+void v\+MPUEnable (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Enable the onboard MPU. 
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a0fb06f01392a2c2d709eff692af8cd86}\index{portmacro.h@{portmacro.h}!vMPUEnableBackgroundRegion@{vMPUEnableBackgroundRegion}}
+\index{vMPUEnableBackgroundRegion@{vMPUEnableBackgroundRegion}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{vMPUEnableBackgroundRegion()}{vMPUEnableBackgroundRegion()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a0fb06f01392a2c2d709eff692af8cd86} 
+void v\+MPUEnable\+Background\+Region (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Enable the MPU Background Region. 
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a337c2e2fe0a7f3cc1bb3f1249b0d0c58}\index{portmacro.h@{portmacro.h}!vMPUSetRegion@{vMPUSetRegion}}
+\index{vMPUSetRegion@{vMPUSetRegion}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{vMPUSetRegion()}{vMPUSetRegion()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a337c2e2fe0a7f3cc1bb3f1249b0d0c58} 
+void v\+MPUSet\+Region (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{ul\+Region\+Number}{, }\item[{uint32\+\_\+t}]{ul\+Base\+Address}{, }\item[{uint32\+\_\+t}]{ul\+Region\+Size}{, }\item[{uint32\+\_\+t}]{ul\+Region\+Permissions}{}\end{DoxyParamCaption})}
+
+
+
+Set permissions for an MPU Region. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em ul\+Region\+Number} & The MPU Region Number to set permissions for. \\
+\hline
+\mbox{\texttt{in}}  & {\em ul\+Base\+Address} & The base address of the MPU Region. \\
+\hline
+\mbox{\texttt{in}}  & {\em ul\+Region\+Size} & The size of the MPU Region in bytes. \\
+\hline
+\mbox{\texttt{in}}  & {\em ul\+Region\+Permissions} & The permissions associated with the MPU Region.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This is an internal function and assumes that the inputs to this function are checked before calling this function. 
+\end{DoxyNote}
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a6efcba81026ff6f2920ea53804bc6bdf}\index{portmacro.h@{portmacro.h}!vPortDisableInterrupts@{vPortDisableInterrupts}}
+\index{vPortDisableInterrupts@{vPortDisableInterrupts}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{vPortDisableInterrupts()}{vPortDisableInterrupts()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a6efcba81026ff6f2920ea53804bc6bdf} 
+void v\+Port\+Disable\+Interrupts (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Disable interrupts. 
+
+
+
+Definition at line \mbox{\hyperlink{_third_party_2_g_c_c_2_posix_2port_8c_source_l00342}{342}} of file \mbox{\hyperlink{_third_party_2_g_c_c_2_posix_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_af329f3280e39011c4d9efbca3d5dd329}\index{portmacro.h@{portmacro.h}!vPortEnableInterrupts@{vPortEnableInterrupts}}
+\index{vPortEnableInterrupts@{vPortEnableInterrupts}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{vPortEnableInterrupts()}{vPortEnableInterrupts()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_af329f3280e39011c4d9efbca3d5dd329} 
+void v\+Port\+Enable\+Interrupts (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Enable interrupts. 
+
+
+
+Definition at line \mbox{\hyperlink{_third_party_2_g_c_c_2_posix_2port_8c_source_l00348}{348}} of file \mbox{\hyperlink{_third_party_2_g_c_c_2_posix_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_af76f3c0b44c5b5c06fc046a4ee1a6423}\index{portmacro.h@{portmacro.h}!vPortEndScheduler@{vPortEndScheduler}}
+\index{vPortEndScheduler@{vPortEndScheduler}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{vPortEndScheduler()}{vPortEndScheduler()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_af76f3c0b44c5b5c06fc046a4ee1a6423} 
+void v\+Port\+End\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+End the Free\+RTOS scheduler. 
+
+Not implemented on this port. 
+
+Definition at line \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_source_l01780}{1780}} of file \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a2ed3554a3de09a3bd09d396ee081ab69}\index{portmacro.h@{portmacro.h}!vPortEnterCritical@{vPortEnterCritical}}
+\index{vPortEnterCritical@{vPortEnterCritical}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{vPortEnterCritical()}{vPortEnterCritical()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a2ed3554a3de09a3bd09d396ee081ab69} 
+void v\+Port\+Enter\+Critical (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Enter critical section. 
+
+
+
+Definition at line \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_source_l00992}{992}} of file \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_aed20ada05b957181a0de042802a82a5b}\index{portmacro.h@{portmacro.h}!vPortExitCritical@{vPortExitCritical}}
+\index{vPortExitCritical@{vPortExitCritical}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{vPortExitCritical()}{vPortExitCritical()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_aed20ada05b957181a0de042802a82a5b} 
+void v\+Port\+Exit\+Critical (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Exit critical section. 
+
+
+
+Definition at line \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_source_l01004}{1004}} of file \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a5cfc38319f17c8e804020ec247b6325d}\index{portmacro.h@{portmacro.h}!vPortStartFirstTask@{vPortStartFirstTask}}
+\index{vPortStartFirstTask@{vPortStartFirstTask}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{vPortStartFirstTask()}{vPortStartFirstTask()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a5cfc38319f17c8e804020ec247b6325d} 
+void v\+Port\+Start\+First\+Task (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Start executing first task. 
+
+
+
+Definition at line \mbox{\hyperlink{_third_party_2_g_c_c_2_r_p2040_2port_8c_source_l00215}{215}} of file \mbox{\hyperlink{_third_party_2_g_c_c_2_r_p2040_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a7cde6871b0335e88c76859fad8d7767c}\index{portmacro.h@{portmacro.h}!vPortSystemCallExit@{vPortSystemCallExit}}
+\index{vPortSystemCallExit@{vPortSystemCallExit}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{vPortSystemCallExit()}{vPortSystemCallExit()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a7cde6871b0335e88c76859fad8d7767c} 
+void v\+Port\+System\+Call\+Exit (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Exit from a Free\+RTO System Call. 
+
+Here is the caller graph for this function\+:
+% FIG 3
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_add01c927fb689f7ec170e42d47d27927}\index{portmacro.h@{portmacro.h}!vPortYield@{vPortYield}}
+\index{vPortYield@{vPortYield}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{vPortYield()}{vPortYield()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_add01c927fb689f7ec170e42d47d27927} 
+void v\+Port\+Yield (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Yield the CPU. 
+
+
+
+Definition at line \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_source_l00980}{980}} of file \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_aa56482d0f579f9741f851d6cbd17f942}\index{portmacro.h@{portmacro.h}!xPortIsPrivileged@{xPortIsPrivileged}}
+\index{xPortIsPrivileged@{xPortIsPrivileged}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{xPortIsPrivileged()}{xPortIsPrivileged()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_aa56482d0f579f9741f851d6cbd17f942} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Is\+Privileged (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Checks whether or not the processor is privileged. 
+
+\begin{DoxyNote}{Note}
+The processor privilege level is determined by checking the mode bits \mbox{[}4\+:0\mbox{]} of the Current Program Status Register (CPSR).
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+pd\+TRUE, if the processer is privileged, pd\+FALSE otherwise. 
+\end{DoxyReturn}
+\Hypertarget{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a21335221c26ff106b4f5e87edf6567aa}\index{portmacro.h@{portmacro.h}!xPortIsTaskPrivileged@{xPortIsTaskPrivileged}}
+\index{xPortIsTaskPrivileged@{xPortIsTaskPrivileged}!portmacro.h@{portmacro.h}}
+\doxysubsubsection{\texorpdfstring{xPortIsTaskPrivileged()}{xPortIsTaskPrivileged()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_rx___m_p_u_2portmacro_8h_a21335221c26ff106b4f5e87edf6567aa} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Is\+Task\+Privileged (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Checks whether or not a task is privileged. 
+
+\begin{DoxyNote}{Note}
+A task\textquotesingle{}s privilege level is associated with the task and is different from the processor\textquotesingle{}s privilege level returned by x\+Port\+Is\+Privileged. For example, the processor is privileged when an unprivileged task executes a system call.
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+pd\+TRUE if the task is privileged, pd\+FALSE otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m3___m_p_u_2port_8c_source_l00674}{674}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m3___m_p_u_2port_8c_source}{port.\+c}}.
+

@@ -1,0 +1,129 @@
+\doxysection{semphr.\+h}
+\hypertarget{semphr_8h_source}{}\label{semphr_8h_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/semphr.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/semphr.h}}
+\mbox{\hyperlink{semphr_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00029}00029\ \textcolor{preprocessor}{\#ifndef\ SEMAPHORE\_H}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00030}00030\ \textcolor{preprocessor}{\#define\ SEMAPHORE\_H}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00032}00032\ \textcolor{preprocessor}{\#ifndef\ INC\_FREERTOS\_H}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00033}00033\ \textcolor{preprocessor}{\ \ \ \ \#error\ "{}include\ FreeRTOS.h"{}\ must\ appear\ in\ source\ files\ before\ "{}include\ semphr.h"{}}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00034}00034\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00036}00036\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{queue_8h}{queue.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00038}\mbox{\hyperlink{semphr_8h_ad88c6df4a04beedeac782918c8a332f5}{00038}}\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{semphr_8h_ad88c6df4a04beedeac782918c8a332f5}{SemaphoreHandle\_t}};}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00040}\mbox{\hyperlink{semphr_8h_a73cfd14cf25a13f8dd4dc1d74b7fc04a}{00040}}\ \textcolor{preprocessor}{\#define\ semBINARY\_SEMAPHORE\_QUEUE\_LENGTH\ \ \ \ (\ (\ uint8\_t\ )\ 1U\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00041}\mbox{\hyperlink{semphr_8h_a93bd07e28aed3084bdafa1f4e99700b2}{00041}}\ \textcolor{preprocessor}{\#define\ semSEMAPHORE\_QUEUE\_ITEM\_LENGTH\ \ \ \ \ \ (\ (\ uint8\_t\ )\ 0U\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00042}\mbox{\hyperlink{semphr_8h_a124bb5bd7805baa06fbd3239840d6803}{00042}}\ \textcolor{preprocessor}{\#define\ semGIVE\_BLOCK\_TIME\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ (\ TickType\_t\ )\ 0U\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00096}00096\ \textcolor{preprocessor}{\#if\ (\ configSUPPORT\_DYNAMIC\_ALLOCATION\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00097}00097\ \textcolor{preprocessor}{\ \ \ \ \#define\ vSemaphoreCreateBinary(\ xSemaphore\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00098}00098\ \textcolor{preprocessor}{\ \ \ \ do\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00099}00099\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (\ xSemaphore\ )\ =\ xQueueGenericCreate(\ (\ UBaseType\_t\ )\ 1,\ semSEMAPHORE\_QUEUE\_ITEM\_LENGTH,\ queueQUEUE\_TYPE\_BINARY\_SEMAPHORE\ );\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00100}00100\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if(\ (\ xSemaphore\ )\ !=\ NULL\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00101}00101\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00102}00102\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ (\ void\ )\ xSemaphoreGive(\ (\ xSemaphore\ )\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00103}00103\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00104}00104\ \textcolor{preprocessor}{\ \ \ \ \}\ while(\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00105}00105\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00166}00166\ \textcolor{preprocessor}{\#if\ (\ configSUPPORT\_DYNAMIC\_ALLOCATION\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00167}00167\ \textcolor{preprocessor}{\ \ \ \ \#define\ xSemaphoreCreateBinary()\ \ \ \ xQueueGenericCreate(\ (\ UBaseType\_t\ )\ 1,\ semSEMAPHORE\_QUEUE\_ITEM\_LENGTH,\ queueQUEUE\_TYPE\_BINARY\_SEMAPHORE\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00168}00168\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00227}00227\ \textcolor{preprocessor}{\#if\ (\ configSUPPORT\_STATIC\_ALLOCATION\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00228}00228\ \textcolor{preprocessor}{\ \ \ \ \#define\ xSemaphoreCreateBinaryStatic(\ pxStaticSemaphore\ )\ \ \ \ xQueueGenericCreateStatic(\ (\ UBaseType\_t\ )\ 1,\ semSEMAPHORE\_QUEUE\_ITEM\_LENGTH,\ NULL,\ (\ pxStaticSemaphore\ ),\ queueQUEUE\_TYPE\_BINARY\_SEMAPHORE\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00229}00229\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ configSUPPORT\_STATIC\_ALLOCATION\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00230}00230\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00298}\mbox{\hyperlink{semphr_8h_af116e436d2a5ae5bd72dbade2b5ea930}{00298}}\ \textcolor{preprocessor}{\#define\ xSemaphoreTake(\ xSemaphore,\ xBlockTime\ )\ \ \ \ xQueueSemaphoreTake(\ (\ xSemaphore\ ),\ (\ xBlockTime\ )\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00299}00299\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00393}00393\ \textcolor{preprocessor}{\#if\ (\ configUSE\_RECURSIVE\_MUTEXES\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00394}00394\ \textcolor{preprocessor}{\ \ \ \ \#define\ xSemaphoreTakeRecursive(\ xMutex,\ xBlockTime\ )\ \ \ \ xQueueTakeMutexRecursive(\ (\ xMutex\ ),\ (\ xBlockTime\ )\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00395}00395\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00396}00396\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00460}\mbox{\hyperlink{semphr_8h_aae55761cabfa9bf85c8f4430f78c0953}{00460}}\ \textcolor{preprocessor}{\#define\ xSemaphoreGive(\ xSemaphore\ )\ \ \ \ xQueueGenericSend(\ (\ QueueHandle\_t\ )\ (\ xSemaphore\ ),\ NULL,\ semGIVE\_BLOCK\_TIME,\ queueSEND\_TO\_BACK\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00461}00461\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00546}00546\ \textcolor{preprocessor}{\#if\ (\ configUSE\_RECURSIVE\_MUTEXES\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00547}00547\ \textcolor{preprocessor}{\ \ \ \ \#define\ xSemaphoreGiveRecursive(\ xMutex\ )\ \ \ \ xQueueGiveMutexRecursive(\ (\ xMutex\ )\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00548}00548\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00549}00549\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00640}\mbox{\hyperlink{semphr_8h_a68aa43df8b2a0dbe17d05fad74670ef0}{00640}}\ \textcolor{preprocessor}{\#define\ xSemaphoreGiveFromISR(\ xSemaphore,\ pxHigherPriorityTaskWoken\ )\ \ \ \ xQueueGiveFromISR(\ (\ QueueHandle\_t\ )\ (\ xSemaphore\ ),\ (\ pxHigherPriorityTaskWoken\ )\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00641}00641\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00675}\mbox{\hyperlink{semphr_8h_a076419b58e072655686939016e7ca3c5}{00675}}\ \textcolor{preprocessor}{\#define\ xSemaphoreTakeFromISR(\ xSemaphore,\ pxHigherPriorityTaskWoken\ )\ \ \ \ xQueueReceiveFromISR(\ (\ QueueHandle\_t\ )\ (\ xSemaphore\ ),\ NULL,\ (\ pxHigherPriorityTaskWoken\ )\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00676}00676\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00734}00734\ \textcolor{preprocessor}{\#if\ (\ (\ configSUPPORT\_DYNAMIC\_ALLOCATION\ ==\ 1\ )\ \&\&\ (\ configUSE\_MUTEXES\ ==\ 1\ )\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00735}00735\ \textcolor{preprocessor}{\ \ \ \ \#define\ xSemaphoreCreateMutex()\ \ \ \ xQueueCreateMutex(\ queueQUEUE\_TYPE\_MUTEX\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00736}00736\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00737}00737\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00797}00797\ \textcolor{preprocessor}{\#if\ (\ (\ configSUPPORT\_STATIC\_ALLOCATION\ ==\ 1\ )\ \&\&\ (\ configUSE\_MUTEXES\ ==\ 1\ )\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00798}00798\ \textcolor{preprocessor}{\ \ \ \ \#define\ xSemaphoreCreateMutexStatic(\ pxMutexBuffer\ )\ \ \ \ xQueueCreateMutexStatic(\ queueQUEUE\_TYPE\_MUTEX,\ (\ pxMutexBuffer\ )\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00799}00799\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00800}00800\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00801}00801\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00867}00867\ \textcolor{preprocessor}{\#if\ (\ (\ configSUPPORT\_DYNAMIC\_ALLOCATION\ ==\ 1\ )\ \&\&\ (\ configUSE\_RECURSIVE\_MUTEXES\ ==\ 1\ )\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00868}00868\ \textcolor{preprocessor}{\ \ \ \ \#define\ xSemaphoreCreateRecursiveMutex()\ \ \ \ xQueueCreateMutex(\ queueQUEUE\_TYPE\_RECURSIVE\_MUTEX\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00869}00869\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00870}00870\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00942}00942\ \textcolor{preprocessor}{\#if\ (\ (\ configSUPPORT\_STATIC\_ALLOCATION\ ==\ 1\ )\ \&\&\ (\ configUSE\_RECURSIVE\_MUTEXES\ ==\ 1\ )\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00943}00943\ \textcolor{preprocessor}{\ \ \ \ \#define\ xSemaphoreCreateRecursiveMutexStatic(\ pxStaticSemaphore\ )\ \ \ \ xQueueCreateMutexStatic(\ queueQUEUE\_TYPE\_RECURSIVE\_MUTEX,\ (\ pxStaticSemaphore\ )\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00944}00944\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ configSUPPORT\_STATIC\_ALLOCATION\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l00945}00945\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01024}01024\ \textcolor{preprocessor}{\#if\ (\ configSUPPORT\_DYNAMIC\_ALLOCATION\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01025}01025\ \textcolor{preprocessor}{\ \ \ \ \#define\ xSemaphoreCreateCounting(\ uxMaxCount,\ uxInitialCount\ )\ \ \ \ xQueueCreateCountingSemaphore(\ (\ uxMaxCount\ ),\ (\ uxInitialCount\ )\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01026}01026\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01027}01027\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01111}01111\ \textcolor{preprocessor}{\#if\ (\ configSUPPORT\_STATIC\_ALLOCATION\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01112}01112\ \textcolor{preprocessor}{\ \ \ \ \#define\ xSemaphoreCreateCountingStatic(\ uxMaxCount,\ uxInitialCount,\ pxSemaphoreBuffer\ )\ \ \ \ xQueueCreateCountingSemaphoreStatic(\ (\ uxMaxCount\ ),\ (\ uxInitialCount\ ),\ (\ pxSemaphoreBuffer\ )\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01113}01113\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ configSUPPORT\_STATIC\_ALLOCATION\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01114}01114\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01129}\mbox{\hyperlink{semphr_8h_acd7d0eda0923d7caeeaaee9202c43eab}{01129}}\ \textcolor{preprocessor}{\#define\ vSemaphoreDelete(\ xSemaphore\ )\ \ \ \ vQueueDelete(\ (\ QueueHandle\_t\ )\ (\ xSemaphore\ )\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01130}01130\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01146}01146\ \textcolor{preprocessor}{\#if\ (\ (\ configUSE\_MUTEXES\ ==\ 1\ )\ \&\&\ (\ INCLUDE\_xSemaphoreGetMutexHolder\ ==\ 1\ )\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01147}01147\ \textcolor{preprocessor}{\ \ \ \ \#define\ xSemaphoreGetMutexHolder(\ xSemaphore\ )\ \ \ \ xQueueGetMutexHolder(\ (\ xSemaphore\ )\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01148}01148\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01149}01149\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01161}01161\ \textcolor{preprocessor}{\#if\ (\ (\ configUSE\_MUTEXES\ ==\ 1\ )\ \&\&\ (\ INCLUDE\_xSemaphoreGetMutexHolder\ ==\ 1\ )\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01162}01162\ \textcolor{preprocessor}{\ \ \ \ \#define\ xSemaphoreGetMutexHolderFromISR(\ xSemaphore\ )\ \ \ \ xQueueGetMutexHolderFromISR(\ (\ xSemaphore\ )\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01163}01163\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01164}01164\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01177}\mbox{\hyperlink{semphr_8h_aa26a3d7cf9b5595a652daeb7f81229f3}{01177}}\ \textcolor{preprocessor}{\#define\ uxSemaphoreGetCount(\ xSemaphore\ )\ \ \ \ \ \ \ \ \ \ \ uxQueueMessagesWaiting(\ (\ QueueHandle\_t\ )\ (\ xSemaphore\ )\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01178}01178\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01191}\mbox{\hyperlink{semphr_8h_a03b7cb6ac11b161ce9e11f18a111d24c}{01191}}\ \textcolor{preprocessor}{\#define\ uxSemaphoreGetCountFromISR(\ xSemaphore\ )\ \ \ \ uxQueueMessagesWaitingFromISR(\ (\ QueueHandle\_t\ )\ (\ xSemaphore\ )\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01192}01192\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01211}01211\ \textcolor{preprocessor}{\#if\ (\ configSUPPORT\_STATIC\_ALLOCATION\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01212}01212\ \textcolor{preprocessor}{\ \ \ \ \#define\ xSemaphoreGetStaticBuffer(\ xSemaphore,\ ppxSemaphoreBuffer\ )\ \ \ \ xQueueGenericGetStaticBuffers(\ (\ QueueHandle\_t\ )\ (\ xSemaphore\ ),\ NULL,\ (\ ppxSemaphoreBuffer\ )\ )}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01213}01213\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ configSUPPORT\_STATIC\_ALLOCATION\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01214}01214\ }
+\DoxyCodeLine{\Hypertarget{semphr_8h_source_l01215}01215\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ SEMAPHORE\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

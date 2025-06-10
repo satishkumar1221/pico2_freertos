@@ -1,0 +1,68 @@
+\doxysection{newlib-\/freertos.h}
+\hypertarget{newlib-freertos_8h_source}{}\label{newlib-freertos_8h_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/newlib-\/freertos.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/newlib-\/freertos.h}}
+\mbox{\hyperlink{newlib-freertos_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00029}00029\ \textcolor{preprocessor}{\#ifndef\ INC\_NEWLIB\_FREERTOS\_H}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00030}00030\ \textcolor{preprocessor}{\#define\ INC\_NEWLIB\_FREERTOS\_H}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00032}00032\ \textcolor{comment}{/*\ Note\ Newlib\ support\ has\ been\ included\ by\ popular\ demand,\ but\ is\ not}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00033}00033\ \textcolor{comment}{\ *\ used\ by\ the\ FreeRTOS\ maintainers\ themselves.\ \ FreeRTOS\ is\ not}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00034}00034\ \textcolor{comment}{\ *\ responsible\ for\ resulting\ newlib\ operation.\ \ User\ must\ be\ familiar\ with}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00035}00035\ \textcolor{comment}{\ *\ newlib\ and\ must\ provide\ system-\/wide\ implementations\ of\ the\ necessary}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00036}00036\ \textcolor{comment}{\ *\ stubs.\ Be\ warned\ that\ (at\ the\ time\ of\ writing)\ the\ current\ newlib\ design}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00037}00037\ \textcolor{comment}{\ *\ implements\ a\ system-\/wide\ malloc()\ that\ must\ be\ provided\ with\ locks.}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00038}00038\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00039}00039\ \textcolor{comment}{\ *\ See\ the\ third\ party\ link\ http://www.nadler.com/embedded/newlibAndFreeRTOS.html}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00040}00040\ \textcolor{comment}{\ *\ for\ additional\ information.\ */}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00042}00042\ \textcolor{preprocessor}{\#include\ <reent.h>}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00044}\mbox{\hyperlink{newlib-freertos_8h_a4807cda51a20b460daeedb131f6654dc}{00044}}\ \textcolor{preprocessor}{\#define\ configUSE\_C\_RUNTIME\_TLS\_SUPPORT\ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00046}00046\ \textcolor{preprocessor}{\#ifndef\ configTLS\_BLOCK\_TYPE}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00047}\mbox{\hyperlink{newlib-freertos_8h_aafd9f168d1e58611a5d4517abda2c12b}{00047}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ configTLS\_BLOCK\_TYPE\ \ \ \ \ \ \ \ \ \ \ struct\ \_reent}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00048}00048\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00050}00050\ \textcolor{preprocessor}{\#ifndef\ configINIT\_TLS\_BLOCK}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00051}\mbox{\hyperlink{newlib-freertos_8h_a0ec3ff910e465b074abe0d34584b433e}{00051}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ configINIT\_TLS\_BLOCK(\ xTLSBlock,\ pxTopOfStack\ )\ \ \ \ \_REENT\_INIT\_PTR(\ \&(\ xTLSBlock\ )\ )}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00052}00052\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00054}00054\ \textcolor{preprocessor}{\#ifndef\ configSET\_TLS\_BLOCK}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00055}\mbox{\hyperlink{newlib-freertos_8h_a570a14f4311409e74c87f22d977ee7af}{00055}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ configSET\_TLS\_BLOCK(\ xTLSBlock\ )\ \ \ \ (\ \_impure\_ptr\ =\ \&(\ xTLSBlock\ )\ )}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00056}00056\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00058}00058\ \textcolor{preprocessor}{\#ifndef\ configDEINIT\_TLS\_BLOCK}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00059}\mbox{\hyperlink{newlib-freertos_8h_a78b23cee14ba1d8058e093a6a4920e85}{00059}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ configDEINIT\_TLS\_BLOCK(\ xTLSBlock\ )\ \ \ \ \_reclaim\_reent(\ \&(\ xTLSBlock\ )\ )}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00060}00060\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{newlib-freertos_8h_source_l00062}00062\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_NEWLIB\_FREERTOS\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

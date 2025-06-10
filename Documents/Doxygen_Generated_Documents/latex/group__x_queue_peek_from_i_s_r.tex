@@ -1,0 +1,28 @@
+\doxysection{x\+Queue\+Peek\+From\+ISR }
+\hypertarget{group__x_queue_peek_from_i_s_r}{}\label{group__x_queue_peek_from_i_s_r}\index{xQueuePeekFromISR@{xQueuePeekFromISR}}
+queue. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{queue_8h_ac402adf98be1fb8ca0345f30dc11a9dc}{xQueuePeekFromISR}}(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ xQueue,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *pvBuffer,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
+
+\end{DoxyCode}
+
+
+A version of \doxylink{queue_8h_a3f9e430276fe5244417fd82644ec8a75}{x\+Queue\+Peek()} that can be called from an interrupt service routine (ISR).
+
+Receive an item from a queue without removing the item from the queue. The item is received by copy so a buffer of adequate size must be provided. The number of bytes copied into the buffer was defined when the queue was created.
+
+Successfully received items remain on the queue so will be returned again by the next call, or a call to \doxylink{queue_8h_ae8364d988c6f9b63c771cc2b3dfe5df9}{x\+Queue\+Receive()}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Queue} & The handle to the queue from which the item is to be received.\\
+\hline
+{\em pv\+Buffer} & Pointer to the buffer into which the received item will be copied.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pd\+TRUE if an item was successfully received from the queue, otherwise pd\+FALSE. 
+\end{DoxyReturn}

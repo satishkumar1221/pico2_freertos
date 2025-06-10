@@ -1,0 +1,102 @@
+\doxysection{cr\+QUEUE\+\_\+\+RECEIVE\+\_\+\+FROM\+\_\+\+ISR }
+\hypertarget{group__cr_q_u_e_u_e___r_e_c_e_i_v_e___f_r_o_m___i_s_r}{}\label{group__cr_q_u_e_u_e___r_e_c_e_i_v_e___f_r_o_m___i_s_r}\index{crQUEUE\_RECEIVE\_FROM\_ISR@{crQUEUE\_RECEIVE\_FROM\_ISR}}
+croutine. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{croutine_8h_ac8eb0a81c5cf69de7e4edd73ce44a3be}{crQUEUE\_SEND\_FROM\_ISR}}(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ pxQueue,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *pvBuffer,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ *\ pxCoRoutineWoken}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )}
+
+\end{DoxyCode}
+
+
+The macro\textquotesingle{}s \doxylink{croutine_8h_ac8eb0a81c5cf69de7e4edd73ce44a3be}{cr\+QUEUE\+\_\+\+SEND\+\_\+\+FROM\+\_\+\+ISR()} and \doxylink{croutine_8h_a9c0fa977ca69adbddb4811affa2a71f7}{cr\+QUEUE\+\_\+\+RECEIVE\+\_\+\+FROM\+\_\+\+ISR()} are the co-\/routine equivalent to the \doxylink{queue_8h_a21d5919ed26c21d121df4a4debeb643c}{x\+Queue\+Send\+From\+ISR()} and \doxylink{queue_8h_acdf528f5c91131ae2f31c669cfd65758}{x\+Queue\+Receive\+From\+ISR()} functions used by tasks.
+
+\doxylink{croutine_8h_ac8eb0a81c5cf69de7e4edd73ce44a3be}{cr\+QUEUE\+\_\+\+SEND\+\_\+\+FROM\+\_\+\+ISR()} and \doxylink{croutine_8h_a9c0fa977ca69adbddb4811affa2a71f7}{cr\+QUEUE\+\_\+\+RECEIVE\+\_\+\+FROM\+\_\+\+ISR()} can only be used to pass data between a co-\/routine and and ISR, whereas \doxylink{queue_8h_a21d5919ed26c21d121df4a4debeb643c}{x\+Queue\+Send\+From\+ISR()} and \doxylink{queue_8h_acdf528f5c91131ae2f31c669cfd65758}{x\+Queue\+Receive\+From\+ISR()} can only be used to pass data between a task and and ISR.
+
+cr\+QUEUE\+\_\+\+RECEIVE\+\_\+\+FROM\+\_\+\+ISR can only be called from an ISR to receive data from a queue that is being used from within a co-\/routine (a co-\/routine posted to the queue).
+
+See the co-\/routine section of the WEB documentation for information on passing data between tasks and co-\/routines and between ISR\textquotesingle{}s and co-\/routines.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Queue} & The handle to the queue on which the item is to be posted.\\
+\hline
+{\em pv\+Buffer} & A pointer to a buffer into which the received item will be placed. The size of the items the queue will hold was defined when the queue was created, so this many bytes will be copied from the queue into pv\+Buffer.\\
+\hline
+{\em px\+Co\+Routine\+Woken} & A co-\/routine may be blocked waiting for space to become available on the queue. If cr\+QUEUE\+\_\+\+RECEIVE\+\_\+\+FROM\+\_\+\+ISR causes such a co-\/routine to unblock \texorpdfstring{$\ast$}{*}px\+Co\+Routine\+Woken will get set to pd\+TRUE, otherwise \texorpdfstring{$\ast$}{*}px\+Co\+Routine\+Woken will remain unchanged.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pd\+TRUE an item was successfully received from the queue, otherwise pd\+FALSE.
+\end{DoxyReturn}
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ A\ co-\/routine\ that\ posts\ a\ character\ to\ a\ queue\ then\ blocks\ for\ a\ fixed}}
+\DoxyCodeLine{\textcolor{comment}{//\ period.\ \ The\ character\ is\ incremented\ each\ time.}}
+\DoxyCodeLine{\textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ vSendingCoRoutine(\ \mbox{\hyperlink{croutine_8h_a33b9d058688c92258155b5756d9936dd}{CoRoutineHandle\_t}}\ xHandle,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxIndex\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{comment}{//\ cChar\ holds\ its\ value\ while\ this\ co-\/routine\ is\ blocked\ and\ must\ therefore}}
+\DoxyCodeLine{\textcolor{comment}{//\ be\ declared\ static.}}
+\DoxyCodeLine{\textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ cCharToTx\ =\ \textcolor{charliteral}{'a'};}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xResult;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ All\ co-\/routines\ must\ start\ with\ a\ call\ to\ crSTART().}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{croutine_8h_a19a57a201a325e8af1207ed68c4aedde}{crSTART}}(\ xHandle\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{for}(\ ;;\ )}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Send\ the\ next\ character\ to\ the\ queue.}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{croutine_8h_a26af3d36f22a04168eebdf5b08465d6e}{crQUEUE\_SEND}}(\ xHandle,\ xCoRoutineQueue,\ \&cCharToTx,\ NO\_DELAY,\ \&xResult\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{if}(\ xResult\ ==\ \mbox{\hyperlink{projdefs_8h_a07848d3078849bd32353c69d30a479b3}{pdPASS}}\ )}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ character\ was\ successfully\ posted\ to\ the\ queue.}}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Could\ not\ post\ the\ character\ to\ the\ queue.}}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Enable\ the\ UART\ Tx\ interrupt\ to\ cause\ an\ interrupt\ in\ this}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ hypothetical\ UART.\ \ The\ interrupt\ will\ obtain\ the\ character}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ from\ the\ queue\ and\ send\ it.}}
+\DoxyCodeLine{\ \ \ \ \ \ ENABLE\_RX\_INTERRUPT();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Increment\ to\ the\ next\ character\ then\ block\ for\ a\ fixed\ period.}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ cCharToTx\ will\ maintain\ its\ value\ across\ the\ delay\ as\ it\ is}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ declared\ static.}}
+\DoxyCodeLine{\ \ \ \ \ \ cCharToTx++;}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{if}(\ cCharToTx\ >\ \textcolor{charliteral}{'x'}\ )}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ cCharToTx\ =\ \textcolor{charliteral}{'a'};}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{croutine_8h_a05a06feb11028f2d1d440ea335f562ba}{crDELAY}}(\ 100\ );}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ All\ co-\/routines\ must\ end\ with\ a\ call\ to\ crEND().}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{croutine_8h_ae6038cc976689b50000475ebfc4e2f23}{crEND}}();}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ An\ ISR\ that\ uses\ a\ queue\ to\ receive\ characters\ to\ send\ on\ a\ UART.}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vUART\_ISR(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keywordtype}{char}\ cCharToTx;}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xCRWokenByPost\ =\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{while}(\ UART\_TX\_REG\_EMPTY()\ )}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ Are\ there\ any\ characters\ in\ the\ queue\ waiting\ to\ be\ sent?}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ xCRWokenByPost\ will\ automatically\ be\ set\ to\ pdTRUE\ if\ a\ co-\/routine}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ is\ woken\ by\ the\ post\ -\/\ ensuring\ that\ only\ a\ single\ co-\/routine\ is}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{comment}{//\ woken\ no\ matter\ how\ many\ times\ we\ go\ around\ this\ loop.}}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{croutine_8h_a9c0fa977ca69adbddb4811affa2a71f7}{crQUEUE\_RECEIVE\_FROM\_ISR}}(\ pxQueue,\ \&cCharToTx,\ \&xCRWokenByPost\ )\ )}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ SEND\_CHARACTER(\ cCharToTx\ );}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

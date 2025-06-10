@@ -1,0 +1,215 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+Third\+Party/\+GCC/\+Xtensa\+\_\+\+ESP32/portmux\+\_\+impl.inc.\+h File Reference}
+\hypertarget{portmux__impl_8inc_8h}{}\label{portmux__impl_8inc_8h}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/Xtensa\_ESP32/portmux\_impl.inc.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/Xtensa\_ESP32/portmux\_impl.inc.h}}
+This graph shows which files directly or indirectly include this file\+:
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{portmux__impl_8inc_8h_a6a71db7a53957c030bb05d588ffc97cc}{if}} (\mbox{\hyperlink{portmux__impl_8inc_8h_ade7967c9539e6b3f4a4d0d560c39ccbc}{set\+\_\+timeout}})
+\item 
+\mbox{\hyperlink{portmux__impl_8inc_8h_a1fae68e70dbed78e74bcf6b87c758a38}{RSR}} (PRID, \mbox{\hyperlink{portmux__impl_8inc_8h_aac0fffbb9fa3b7bb2abca5f6c5682089}{core\+ID}})
+\item 
+\mbox{\hyperlink{portmux__impl_8inc_8h_a40737b3310ba0530b484d9a77e5c2746}{if}} (res !=\mbox{\hyperlink{portmux__impl_8inc_8h_ad9d4c53c46e4a9626f802132743a3d3d}{other\+Core\+ID}})
+\item 
+\mbox{\hyperlink{portmux__impl_8inc_8h_a8fdafe3be7e00ce3d4f0cb50a9a5eb39}{while}} (1)
+\item 
+\mbox{\hyperlink{portmux__impl_8inc_8h_a87993902dd156c3d38f452c1608c1d03}{assert}} (res==\mbox{\hyperlink{portmux__impl_8inc_8h_aac0fffbb9fa3b7bb2abca5f6c5682089}{core\+ID}}\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}res==\mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_aeb0b75a0e2a4b2e6108d504112498b65}{port\+MUX\+\_\+\+FREE\+\_\+\+VAL}})
+\item 
+\mbox{\hyperlink{portmux__impl_8inc_8h_abe99fa908b45d7aa91a9bd3e8e0cae12}{assert}} ((res==\mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_aeb0b75a0e2a4b2e6108d504112498b65}{port\+MUX\+\_\+\+FREE\+\_\+\+VAL}})==(\mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/$>$\mbox{\hyperlink{portmux__impl_8inc_8h_a8a4394c1a6850583aa442709d0d22d4e}{count}}==0))
+\item 
+\mbox{\hyperlink{portmux__impl_8inc_8h_a05668f96f8bae85b380c20e72a2b006a}{assert}} (\mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/$>$\mbox{\hyperlink{portmux__impl_8inc_8h_a8a4394c1a6850583aa442709d0d22d4e}{count}}$<$ 0x\+FF)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static bool int \mbox{\hyperlink{portmux__impl_8inc_8h_afc3883f40d43226571e900129d15fae2}{timeout\+\_\+cycles}}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a1ebe82d24d764ae4e352f7c3a9f92c01}{port\+BASE\+\_\+\+TYPE}} \mbox{\hyperlink{portmux__impl_8inc_8h_aac0fffbb9fa3b7bb2abca5f6c5682089}{core\+ID}}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a1ebe82d24d764ae4e352f7c3a9f92c01}{port\+BASE\+\_\+\+TYPE}} \mbox{\hyperlink{portmux__impl_8inc_8h_ad9d4c53c46e4a9626f802132743a3d3d}{other\+Core\+ID}} = \mbox{\hyperlink{portmux__impl_8h_a8ffe864813f4c55413a63d9a08597814}{CORE\+\_\+\+ID\+\_\+\+REGVAL\+\_\+\+XOR\+\_\+\+SWAP}} \texorpdfstring{$^\wedge$}{\string^} \mbox{\hyperlink{portmux__impl_8inc_8h_aac0fffbb9fa3b7bb2abca5f6c5682089}{core\+ID}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{portmux__impl_8inc_8h_ad26af34a7f0c0e2281ebe47054816e50}{ccount\+\_\+start}}
+\item 
+bool \mbox{\hyperlink{portmux__impl_8inc_8h_ade7967c9539e6b3f4a4d0d560c39ccbc}{set\+\_\+timeout}} = \mbox{\hyperlink{portmux__impl_8inc_8h_afc3883f40d43226571e900129d15fae2}{timeout\+\_\+cycles}} $>$ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_a4dacf258989e70ecdba52e145b38b526}{port\+MUX\+\_\+\+NO\+\_\+\+TIMEOUT}}
+\item 
+\mbox{\hyperlink{portmux__impl_8inc_8h_a721c6ff80a6d3e4ad4ffa52a04c60085}{do}}
+\item 
+\mbox{\hyperlink{portmux__impl_8h_ae5af280d24f56b0f817b2322e4c1a6de}{PORTMUX\+\_\+\+COMPARE\+\_\+\+SET\+\_\+\+FN\+\_\+\+NAME}} \& \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}
+\item 
+\mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}} \mbox{\hyperlink{portmux__impl_8inc_8h_a8a4394c1a6850583aa442709d0d22d4e}{count}}
+\item 
+return \mbox{\hyperlink{portmux__impl_8inc_8h_a930920b2bc42824a5c03be681830f4b2}{true}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{portmux__impl_8inc_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{portmux__impl_8inc_8h_abe99fa908b45d7aa91a9bd3e8e0cae12}\index{portmux\_impl.inc.h@{portmux\_impl.inc.h}!assert@{assert}}
+\index{assert@{assert}!portmux\_impl.inc.h@{portmux\_impl.inc.h}}
+\doxysubsubsection{\texorpdfstring{assert()}{assert()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{portmux__impl_8inc_8h_abe99fa908b45d7aa91a9bd3e8e0cae12} 
+assert (\begin{DoxyParamCaption}\item[{(res==\mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_aeb0b75a0e2a4b2e6108d504112498b65}{port\+MUX\+\_\+\+FREE\+\_\+\+VAL}})}]{}{ = {\ttfamily =(\mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/$>$\mbox{\hyperlink{portmux__impl_8inc_8h_a8a4394c1a6850583aa442709d0d22d4e}{count}}==0)}}\end{DoxyParamCaption})}
+
+\Hypertarget{portmux__impl_8inc_8h_a05668f96f8bae85b380c20e72a2b006a}\index{portmux\_impl.inc.h@{portmux\_impl.inc.h}!assert@{assert}}
+\index{assert@{assert}!portmux\_impl.inc.h@{portmux\_impl.inc.h}}
+\doxysubsubsection{\texorpdfstring{assert()}{assert()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{portmux__impl_8inc_8h_a05668f96f8bae85b380c20e72a2b006a} 
+assert (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+% FIG 1
+\Hypertarget{portmux__impl_8inc_8h_a87993902dd156c3d38f452c1608c1d03}\index{portmux\_impl.inc.h@{portmux\_impl.inc.h}!assert@{assert}}
+\index{assert@{assert}!portmux\_impl.inc.h@{portmux\_impl.inc.h}}
+\doxysubsubsection{\texorpdfstring{assert()}{assert()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{portmux__impl_8inc_8h_a87993902dd156c3d38f452c1608c1d03} 
+assert (\begin{DoxyParamCaption}\item[{res}]{}{ = {\ttfamily =\mbox{\hyperlink{portmux__impl_8inc_8h_aac0fffbb9fa3b7bb2abca5f6c5682089}{core\+ID}}\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}res==\mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_aeb0b75a0e2a4b2e6108d504112498b65}{port\+MUX\+\_\+\+FREE\+\_\+\+VAL}}}}\end{DoxyParamCaption})}
+
+\Hypertarget{portmux__impl_8inc_8h_a40737b3310ba0530b484d9a77e5c2746}\index{portmux\_impl.inc.h@{portmux\_impl.inc.h}!if@{if}}
+\index{if@{if}!portmux\_impl.inc.h@{portmux\_impl.inc.h}}
+\doxysubsubsection{\texorpdfstring{if()}{if()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{portmux__impl_8inc_8h_a40737b3310ba0530b484d9a77e5c2746} 
+if (\begin{DoxyParamCaption}\item[{res !}]{}{ = {\ttfamily \mbox{\hyperlink{portmux__impl_8inc_8h_ad9d4c53c46e4a9626f802132743a3d3d}{other\+Core\+ID}}}}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{portmux__impl_8inc_8h_source_l00092}{92}} of file \mbox{\hyperlink{portmux__impl_8inc_8h_source}{portmux\+\_\+impl.\+inc.\+h}}.
+
+\Hypertarget{portmux__impl_8inc_8h_a6a71db7a53957c030bb05d588ffc97cc}\index{portmux\_impl.inc.h@{portmux\_impl.inc.h}!if@{if}}
+\index{if@{if}!portmux\_impl.inc.h@{portmux\_impl.inc.h}}
+\doxysubsubsection{\texorpdfstring{if()}{if()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{portmux__impl_8inc_8h_a6a71db7a53957c030bb05d588ffc97cc} 
+if (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{portmux__impl_8inc_8h_ade7967c9539e6b3f4a4d0d560c39ccbc}{set\+\_\+timeout}}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{portmux__impl_8inc_8h_source_l00048}{48}} of file \mbox{\hyperlink{portmux__impl_8inc_8h_source}{portmux\+\_\+impl.\+inc.\+h}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{portmux__impl_8inc_8h_a1fae68e70dbed78e74bcf6b87c758a38}\index{portmux\_impl.inc.h@{portmux\_impl.inc.h}!RSR@{RSR}}
+\index{RSR@{RSR}!portmux\_impl.inc.h@{portmux\_impl.inc.h}}
+\doxysubsubsection{\texorpdfstring{RSR()}{RSR()}}
+{\footnotesize\ttfamily \label{portmux__impl_8inc_8h_a1fae68e70dbed78e74bcf6b87c758a38} 
+RSR (\begin{DoxyParamCaption}\item[{PRID}]{}{, }\item[{\mbox{\hyperlink{portmux__impl_8inc_8h_aac0fffbb9fa3b7bb2abca5f6c5682089}{core\+ID}}}]{}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+% FIG 3
+\Hypertarget{portmux__impl_8inc_8h_a8fdafe3be7e00ce3d4f0cb50a9a5eb39}\index{portmux\_impl.inc.h@{portmux\_impl.inc.h}!while@{while}}
+\index{while@{while}!portmux\_impl.inc.h@{portmux\_impl.inc.h}}
+\doxysubsubsection{\texorpdfstring{while()}{while()}}
+{\footnotesize\ttfamily \label{portmux__impl_8inc_8h_a8fdafe3be7e00ce3d4f0cb50a9a5eb39} 
+while (\begin{DoxyParamCaption}\item[{1}]{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-var-members}
+\Hypertarget{portmux__impl_8inc_8h_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{portmux__impl_8inc_8h_ad26af34a7f0c0e2281ebe47054816e50}\index{portmux\_impl.inc.h@{portmux\_impl.inc.h}!ccount\_start@{ccount\_start}}
+\index{ccount\_start@{ccount\_start}!portmux\_impl.inc.h@{portmux\_impl.inc.h}}
+\doxysubsubsection{\texorpdfstring{ccount\_start}{ccount\_start}}
+{\footnotesize\ttfamily \label{portmux__impl_8inc_8h_ad26af34a7f0c0e2281ebe47054816e50} 
+uint32\+\_\+t ccount\+\_\+start}
+
+
+
+Definition at line \mbox{\hyperlink{portmux__impl_8inc_8h_source_l00038}{38}} of file \mbox{\hyperlink{portmux__impl_8inc_8h_source}{portmux\+\_\+impl.\+inc.\+h}}.
+
+\Hypertarget{portmux__impl_8inc_8h_aac0fffbb9fa3b7bb2abca5f6c5682089}\index{portmux\_impl.inc.h@{portmux\_impl.inc.h}!coreID@{coreID}}
+\index{coreID@{coreID}!portmux\_impl.inc.h@{portmux\_impl.inc.h}}
+\doxysubsubsection{\texorpdfstring{coreID}{coreID}}
+{\footnotesize\ttfamily \label{portmux__impl_8inc_8h_aac0fffbb9fa3b7bb2abca5f6c5682089} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a1ebe82d24d764ae4e352f7c3a9f92c01}{port\+BASE\+\_\+\+TYPE}} core\+ID}
+
+
+
+Definition at line \mbox{\hyperlink{portmux__impl_8inc_8h_source_l00037}{37}} of file \mbox{\hyperlink{portmux__impl_8inc_8h_source}{portmux\+\_\+impl.\+inc.\+h}}.
+
+\Hypertarget{portmux__impl_8inc_8h_a8a4394c1a6850583aa442709d0d22d4e}\index{portmux\_impl.inc.h@{portmux\_impl.inc.h}!count@{count}}
+\index{count@{count}!portmux\_impl.inc.h@{portmux\_impl.inc.h}}
+\doxysubsubsection{\texorpdfstring{count}{count}}
+{\footnotesize\ttfamily \label{portmux__impl_8inc_8h_a8a4394c1a6850583aa442709d0d22d4e} 
+\mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}} count}
+
+
+
+Definition at line \mbox{\hyperlink{portmux__impl_8inc_8h_source_l00118}{118}} of file \mbox{\hyperlink{portmux__impl_8inc_8h_source}{portmux\+\_\+impl.\+inc.\+h}}.
+
+\Hypertarget{portmux__impl_8inc_8h_a721c6ff80a6d3e4ad4ffa52a04c60085}\index{portmux\_impl.inc.h@{portmux\_impl.inc.h}!do@{do}}
+\index{do@{do}!portmux\_impl.inc.h@{portmux\_impl.inc.h}}
+\doxysubsubsection{\texorpdfstring{do}{do}}
+{\footnotesize\ttfamily \label{portmux__impl_8inc_8h_a721c6ff80a6d3e4ad4ffa52a04c60085} 
+do}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ res\ =\ \mbox{\hyperlink{portmux__impl_8inc_8h_aac0fffbb9fa3b7bb2abca5f6c5682089}{coreID}}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{portmux__impl_8inc_8h_source_l00080}{80}} of file \mbox{\hyperlink{portmux__impl_8inc_8h_source}{portmux\+\_\+impl.\+inc.\+h}}.
+
+\Hypertarget{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}\index{portmux\_impl.inc.h@{portmux\_impl.inc.h}!mux@{mux}}
+\index{mux@{mux}!portmux\_impl.inc.h@{portmux\_impl.inc.h}}
+\doxysubsubsection{\texorpdfstring{mux}{mux}}
+{\footnotesize\ttfamily \label{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a} 
+\mbox{\hyperlink{portmux__impl_8h_ae5af280d24f56b0f817b2322e4c1a6de}{PORTMUX\+\_\+\+COMPARE\+\_\+\+SET\+\_\+\+FN\+\_\+\+NAME}} \& mux}
+
+
+
+Definition at line \mbox{\hyperlink{portmux__impl_8inc_8h_source_l00090}{90}} of file \mbox{\hyperlink{portmux__impl_8inc_8h_source}{portmux\+\_\+impl.\+inc.\+h}}.
+
+\Hypertarget{portmux__impl_8inc_8h_ad9d4c53c46e4a9626f802132743a3d3d}\index{portmux\_impl.inc.h@{portmux\_impl.inc.h}!otherCoreID@{otherCoreID}}
+\index{otherCoreID@{otherCoreID}!portmux\_impl.inc.h@{portmux\_impl.inc.h}}
+\doxysubsubsection{\texorpdfstring{otherCoreID}{otherCoreID}}
+{\footnotesize\ttfamily \label{portmux__impl_8inc_8h_ad9d4c53c46e4a9626f802132743a3d3d} 
+other\+Core\+ID = \mbox{\hyperlink{portmux__impl_8h_a8ffe864813f4c55413a63d9a08597814}{CORE\+\_\+\+ID\+\_\+\+REGVAL\+\_\+\+XOR\+\_\+\+SWAP}} \texorpdfstring{$^\wedge$}{\string^} \mbox{\hyperlink{portmux__impl_8inc_8h_aac0fffbb9fa3b7bb2abca5f6c5682089}{core\+ID}}}
+
+
+
+Definition at line \mbox{\hyperlink{portmux__impl_8inc_8h_source_l00037}{37}} of file \mbox{\hyperlink{portmux__impl_8inc_8h_source}{portmux\+\_\+impl.\+inc.\+h}}.
+
+\Hypertarget{portmux__impl_8inc_8h_ade7967c9539e6b3f4a4d0d560c39ccbc}\index{portmux\_impl.inc.h@{portmux\_impl.inc.h}!set\_timeout@{set\_timeout}}
+\index{set\_timeout@{set\_timeout}!portmux\_impl.inc.h@{portmux\_impl.inc.h}}
+\doxysubsubsection{\texorpdfstring{set\_timeout}{set\_timeout}}
+{\footnotesize\ttfamily \label{portmux__impl_8inc_8h_ade7967c9539e6b3f4a4d0d560c39ccbc} 
+bool set\+\_\+timeout = \mbox{\hyperlink{portmux__impl_8inc_8h_afc3883f40d43226571e900129d15fae2}{timeout\+\_\+cycles}} $>$ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_a4dacf258989e70ecdba52e145b38b526}{port\+MUX\+\_\+\+NO\+\_\+\+TIMEOUT}}}
+
+
+
+Definition at line \mbox{\hyperlink{portmux__impl_8inc_8h_source_l00039}{39}} of file \mbox{\hyperlink{portmux__impl_8inc_8h_source}{portmux\+\_\+impl.\+inc.\+h}}.
+
+\Hypertarget{portmux__impl_8inc_8h_afc3883f40d43226571e900129d15fae2}\index{portmux\_impl.inc.h@{portmux\_impl.inc.h}!timeout\_cycles@{timeout\_cycles}}
+\index{timeout\_cycles@{timeout\_cycles}!portmux\_impl.inc.h@{portmux\_impl.inc.h}}
+\doxysubsubsection{\texorpdfstring{timeout\_cycles}{timeout\_cycles}}
+{\footnotesize\ttfamily \label{portmux__impl_8inc_8h_afc3883f40d43226571e900129d15fae2} 
+bool int timeout\+\_\+cycles}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ res}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{portmux__impl_8inc_8h_source_l00030}{30}} of file \mbox{\hyperlink{portmux__impl_8inc_8h_source}{portmux\+\_\+impl.\+inc.\+h}}.
+
+\Hypertarget{portmux__impl_8inc_8h_a930920b2bc42824a5c03be681830f4b2}\index{portmux\_impl.inc.h@{portmux\_impl.inc.h}!true@{true}}
+\index{true@{true}!portmux\_impl.inc.h@{portmux\_impl.inc.h}}
+\doxysubsubsection{\texorpdfstring{true}{true}}
+{\footnotesize\ttfamily \label{portmux__impl_8inc_8h_a930920b2bc42824a5c03be681830f4b2} 
+return true}
+
+
+
+Definition at line \mbox{\hyperlink{portmux__impl_8inc_8h_source_l00134}{134}} of file \mbox{\hyperlink{portmux__impl_8inc_8h_source}{portmux\+\_\+impl.\+inc.\+h}}.
+

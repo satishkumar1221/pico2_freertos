@@ -1,0 +1,37 @@
+\doxysection{v\+Task\+Delete }
+\hypertarget{group__v_task_delete}{}\label{group__v_task_delete}\index{vTaskDelete@{vTaskDelete}}
+task. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{task_8h_a27ff4ebce26565bef136bda84201ff80}{vTaskDelete}}(\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xTaskToDelete\ );}
+
+\end{DoxyCode}
+
+
+INCLUDE\+\_\+v\+Task\+Delete must be defined as 1 for this function to be available. See the configuration section for more information.
+
+Remove a task from the RTOS real time kernel\textquotesingle{}s management. The task being deleted will be removed from all ready, blocked, suspended and event lists.
+
+NOTE\+: The idle task is responsible for freeing the kernel allocated memory from tasks that have been deleted. It is therefore important that the idle task is not starved of microcontroller processing time if your application makes any calls to v\+Task\+Delete (). Memory allocated by the task code is not automatically freed, and should be freed before the task is deleted.
+
+See the demo application file death.\+c for sample code that utilises v\+Task\+Delete ().
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Task\+To\+Delete} & The handle of the task to be deleted. Passing NULL will cause the calling task to be deleted.\\
+\hline
+\end{DoxyParams}
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vOtherFunction(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xHandle;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Create\ the\ task,\ storing\ the\ handle.}}
+\DoxyCodeLine{\ \ xTaskCreate(\ vTaskCode,\ \textcolor{stringliteral}{"{}NAME"{}},\ STACK\_SIZE,\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}},\ \mbox{\hyperlink{task_8h_a94ed0b9b3b4e8ccc859c322f18583e67}{tskIDLE\_PRIORITY}},\ \&xHandle\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Use\ the\ handle\ to\ delete\ the\ task.}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{task_8h_a27ff4ebce26565bef136bda84201ff80}{vTaskDelete}}(\ xHandle\ );}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

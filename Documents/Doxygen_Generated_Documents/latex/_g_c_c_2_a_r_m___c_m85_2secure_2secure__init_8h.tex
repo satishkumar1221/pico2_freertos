@@ -1,0 +1,54 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+GCC/\+ARM\+\_\+\+CM85/secure/secure\+\_\+init.h File Reference}
+\hypertarget{_g_c_c_2_a_r_m___c_m85_2secure_2secure__init_8h}{}\label{_g_c_c_2_a_r_m___c_m85_2secure_2secure__init_8h}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/ARM\_CM85/secure/secure\_init.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/ARM\_CM85/secure/secure\_init.h}}
+This graph shows which files directly or indirectly include this file\+:
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__init_8h_a91e1f99a427892aabe8c694ef5d40951}{Secure\+Init\+\_\+\+De\+Prioritize\+NSExceptions}} (void)
+\begin{DoxyCompactList}\small\item\em De-\/prioritizes the non-\/secure exceptions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__init_8h_a5d71a97b2eb51ccc36961dfc3242a1e6}{Secure\+Init\+\_\+\+Enable\+NSFPUAccess}} (void)
+\begin{DoxyCompactList}\small\item\em Sets up the Floating Point Unit (FPU) for Non-\/\+Secure access. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{_g_c_c_2_a_r_m___c_m85_2secure_2secure__init_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_g_c_c_2_a_r_m___c_m85_2secure_2secure__init_8h_a91e1f99a427892aabe8c694ef5d40951}\index{secure\_init.h@{secure\_init.h}!SecureInit\_DePrioritizeNSExceptions@{SecureInit\_DePrioritizeNSExceptions}}
+\index{SecureInit\_DePrioritizeNSExceptions@{SecureInit\_DePrioritizeNSExceptions}!secure\_init.h@{secure\_init.h}}
+\doxysubsubsection{\texorpdfstring{SecureInit\_DePrioritizeNSExceptions()}{SecureInit\_DePrioritizeNSExceptions()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m85_2secure_2secure__init_8h_a91e1f99a427892aabe8c694ef5d40951} 
+void Secure\+Init\+\_\+\+De\+Prioritize\+NSExceptions (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+De-\/prioritizes the non-\/secure exceptions. 
+
+This is needed to ensure that the non-\/secure Pend\+SV runs at the lowest priority. Context switch is done in the non-\/secure Pend\+SV handler.
+
+\begin{DoxyNote}{Note}
+This function must be called in the handler mode. It is no-\/op if called in the thread mode. 
+\end{DoxyNote}
+
+
+Definition at line \mbox{\hyperlink{_a_r_mv8_m_2secure_2init_2secure__init_8c_source_l00063}{63}} of file \mbox{\hyperlink{_a_r_mv8_m_2secure_2init_2secure__init_8c_source}{secure\+\_\+init.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m85_2secure_2secure__init_8h_a5d71a97b2eb51ccc36961dfc3242a1e6}\index{secure\_init.h@{secure\_init.h}!SecureInit\_EnableNSFPUAccess@{SecureInit\_EnableNSFPUAccess}}
+\index{SecureInit\_EnableNSFPUAccess@{SecureInit\_EnableNSFPUAccess}!secure\_init.h@{secure\_init.h}}
+\doxysubsubsection{\texorpdfstring{SecureInit\_EnableNSFPUAccess()}{SecureInit\_EnableNSFPUAccess()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m85_2secure_2secure__init_8h_a5d71a97b2eb51ccc36961dfc3242a1e6} 
+void Secure\+Init\+\_\+\+Enable\+NSFPUAccess (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Sets up the Floating Point Unit (FPU) for Non-\/\+Secure access. 
+
+Also sets FPCCR.\+TS=1 to ensure that the content of the Floating Point Registers are not leaked to the non-\/secure side.
+
+\begin{DoxyNote}{Note}
+This function must be called in the handler mode. It is no-\/op if called in the thread mode. 
+\end{DoxyNote}
+
+
+Definition at line \mbox{\hyperlink{_a_r_mv8_m_2secure_2init_2secure__init_8c_source_l00081}{81}} of file \mbox{\hyperlink{_a_r_mv8_m_2secure_2init_2secure__init_8c_source}{secure\+\_\+init.\+c}}.
+

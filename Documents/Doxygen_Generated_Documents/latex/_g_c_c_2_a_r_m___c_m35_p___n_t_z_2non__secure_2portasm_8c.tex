@@ -1,0 +1,181 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+GCC/\+ARM\+\_\+\+CM35\+P\+\_\+\+NTZ/non\+\_\+secure/portasm.c File Reference}
+\hypertarget{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c}{}\label{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/ARM\_CM35P\_NTZ/non\_secure/portasm.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/ARM\_CM35P\_NTZ/non\_secure/portasm.c}}
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include "{}portasm.\+h"{}}\newline
+{\ttfamily \#include "{}mpu\+\_\+syscall\+\_\+numbers.\+h"{}}\newline
+Include dependency graph for portasm.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_ab622d8c674f2a417a666a7ed89109e79}{MPU\+\_\+\+WRAPPERS\+\_\+\+INCLUDED\+\_\+\+FROM\+\_\+\+API\+\_\+\+FILE}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_abd917e2b6cb37a9fdbecf2e0b22250a0}{v\+Restore\+Context\+Of\+First\+Task}} (void)
+\begin{DoxyCompactList}\small\item\em Restore the context of the first task so that the first task starts executing. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_aeb898982ec8e7db29c57dcaedfd824d6}{x\+Is\+Privileged}} (void)
+\begin{DoxyCompactList}\small\item\em Checks whether or not the processor is privileged. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_ac163c14f36944b1a01c8b2fe0dd4bbc8}{v\+Raise\+Privilege}} (void)
+\begin{DoxyCompactList}\small\item\em Raises the privilege level by clearing the bit 0 of the CONTROL register. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_a627331d65921f4d7559b0ff24167fd7c}{v\+Reset\+Privilege}} (void)
+\begin{DoxyCompactList}\small\item\em Lowers the privilege level by setting the bit 0 of the CONTROL register. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_a37c7e8404c17b21d348fe26086257684}{v\+Start\+First\+Task}} (void)
+\begin{DoxyCompactList}\small\item\em Starts the first task. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_ad1b80c64c27d21459e030fcaa47868b3}{ul\+Set\+Interrupt\+Mask}} (void)
+\begin{DoxyCompactList}\small\item\em Disables interrupts. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_af682655eb88d6b5999fc845031b56423}{v\+Clear\+Interrupt\+Mask}} (\mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_ab35b2424ac8c0625cfdbbcf916c5e1c3}{\+\_\+\+\_\+attribute\+\_\+\+\_\+}}((unused)) uint32\+\_\+t ul\+Mask)
+\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_a6303e1f258cbdc1f970ce579cc015623}{Pend\+SV\+\_\+\+Handler}} (void)
+\begin{DoxyCompactList}\small\item\em Pend\+SV Exception handler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_a3e5ddb3df0d62f2dc357e64a3f04a6ce}{SVC\+\_\+\+Handler}} (void)
+\begin{DoxyCompactList}\small\item\em SVC Handler. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_ab622d8c674f2a417a666a7ed89109e79}\index{portasm.c@{portasm.c}!MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE@{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}}
+\index{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE@{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}!portasm.c@{portasm.c}}
+\doxysubsubsection{\texorpdfstring{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_ab622d8c674f2a417a666a7ed89109e79} 
+\#define MPU\+\_\+\+WRAPPERS\+\_\+\+INCLUDED\+\_\+\+FROM\+\_\+\+API\+\_\+\+FILE}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_source_l00034}{34}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_source}{portasm.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_a6303e1f258cbdc1f970ce579cc015623}\index{portasm.c@{portasm.c}!PendSV\_Handler@{PendSV\_Handler}}
+\index{PendSV\_Handler@{PendSV\_Handler}!portasm.c@{portasm.c}}
+\doxysubsubsection{\texorpdfstring{PendSV\_Handler()}{PendSV\_Handler()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_a6303e1f258cbdc1f970ce579cc015623} 
+void Pend\+SV\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Pend\+SV Exception handler. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_source_l00363}{363}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_source}{portasm.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_a3e5ddb3df0d62f2dc357e64a3f04a6ce}\index{portasm.c@{portasm.c}!SVC\_Handler@{SVC\_Handler}}
+\index{SVC\_Handler@{SVC\_Handler}!portasm.c@{portasm.c}}
+\doxysubsubsection{\texorpdfstring{SVC\_Handler()}{SVC\_Handler()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_a3e5ddb3df0d62f2dc357e64a3f04a6ce} 
+void SVC\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+SVC Handler. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_source_l00455}{455}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_source}{portasm.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_ad1b80c64c27d21459e030fcaa47868b3}\index{portasm.c@{portasm.c}!ulSetInterruptMask@{ulSetInterruptMask}}
+\index{ulSetInterruptMask@{ulSetInterruptMask}!portasm.c@{portasm.c}}
+\doxysubsubsection{\texorpdfstring{ulSetInterruptMask()}{ulSetInterruptMask()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_ad1b80c64c27d21459e030fcaa47868b3} 
+uint32\+\_\+t ul\+Set\+Interrupt\+Mask (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Disables interrupts. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_source_l00215}{215}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_source}{portasm.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_af682655eb88d6b5999fc845031b56423}\index{portasm.c@{portasm.c}!vClearInterruptMask@{vClearInterruptMask}}
+\index{vClearInterruptMask@{vClearInterruptMask}!portasm.c@{portasm.c}}
+\doxysubsubsection{\texorpdfstring{vClearInterruptMask()}{vClearInterruptMask()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_af682655eb88d6b5999fc845031b56423} 
+void v\+Clear\+Interrupt\+Mask (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_ab35b2424ac8c0625cfdbbcf916c5e1c3}{\+\_\+\+\_\+attribute\+\_\+\+\_\+}}((unused)) uint32\+\_\+t}]{ul\+Mask}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_source_l00232}{232}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_source}{portasm.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_ac163c14f36944b1a01c8b2fe0dd4bbc8}\index{portasm.c@{portasm.c}!vRaisePrivilege@{vRaisePrivilege}}
+\index{vRaisePrivilege@{vRaisePrivilege}!portasm.c@{portasm.c}}
+\doxysubsubsection{\texorpdfstring{vRaisePrivilege()}{vRaisePrivilege()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_ac163c14f36944b1a01c8b2fe0dd4bbc8} 
+void v\+Raise\+Privilege (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Raises the privilege level by clearing the bit 0 of the CONTROL register. 
+
+\begin{DoxyNote}{Note}
+This is a privileged function and should only be called from the kenrel code.
+\end{DoxyNote}
+Bit 0 of the CONTROL register defines the privilege level of Thread Mode. Bit\mbox{[}0\mbox{]} = 0 -\/-\/\texorpdfstring{$>$}{>} The processor is running privileged Bit\mbox{[}0\mbox{]} = 1 -\/-\/\texorpdfstring{$>$}{>} The processor is running unprivileged. 
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_source_l00164}{164}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_source}{portasm.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_a627331d65921f4d7559b0ff24167fd7c}\index{portasm.c@{portasm.c}!vResetPrivilege@{vResetPrivilege}}
+\index{vResetPrivilege@{vResetPrivilege}!portasm.c@{portasm.c}}
+\doxysubsubsection{\texorpdfstring{vResetPrivilege()}{vResetPrivilege()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_a627331d65921f4d7559b0ff24167fd7c} 
+void v\+Reset\+Privilege (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Lowers the privilege level by setting the bit 0 of the CONTROL register. 
+
+Bit 0 of the CONTROL register defines the privilege level of Thread Mode. Bit\mbox{[}0\mbox{]} = 0 -\/-\/\texorpdfstring{$>$}{>} The processor is running privileged Bit\mbox{[}0\mbox{]} = 1 -\/-\/\texorpdfstring{$>$}{>} The processor is running unprivileged. 
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_source_l00179}{179}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_source}{portasm.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_abd917e2b6cb37a9fdbecf2e0b22250a0}\index{portasm.c@{portasm.c}!vRestoreContextOfFirstTask@{vRestoreContextOfFirstTask}}
+\index{vRestoreContextOfFirstTask@{vRestoreContextOfFirstTask}!portasm.c@{portasm.c}}
+\doxysubsubsection{\texorpdfstring{vRestoreContextOfFirstTask()}{vRestoreContextOfFirstTask()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_abd917e2b6cb37a9fdbecf2e0b22250a0} 
+void v\+Restore\+Context\+Of\+First\+Task (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Restore the context of the first task so that the first task starts executing. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_source_l00121}{121}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_source}{portasm.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_a37c7e8404c17b21d348fe26086257684}\index{portasm.c@{portasm.c}!vStartFirstTask@{vStartFirstTask}}
+\index{vStartFirstTask@{vStartFirstTask}!portasm.c@{portasm.c}}
+\doxysubsubsection{\texorpdfstring{vStartFirstTask()}{vStartFirstTask()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_a37c7e8404c17b21d348fe26086257684} 
+void v\+Start\+First\+Task (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Starts the first task. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_source_l00194}{194}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_source}{portasm.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_aeb898982ec8e7db29c57dcaedfd824d6}\index{portasm.c@{portasm.c}!xIsPrivileged@{xIsPrivileged}}
+\index{xIsPrivileged@{xIsPrivileged}!portasm.c@{portasm.c}}
+\doxysubsubsection{\texorpdfstring{xIsPrivileged()}{xIsPrivileged()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_aeb898982ec8e7db29c57dcaedfd824d6} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Is\+Privileged (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Checks whether or not the processor is privileged. 
+
+\begin{DoxyReturn}{Returns}
+1 if the processor is already privileged, 0 otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_source_l00147}{147}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m35_p___n_t_z_2non__secure_2portasm_8c_source}{portasm.\+c}}.
+

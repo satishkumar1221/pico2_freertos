@@ -1,0 +1,201 @@
+\doxysection{portmux\+\_\+impl.\+inc.\+h}
+\hypertarget{portmux__impl_8inc_8h_source}{}\label{portmux__impl_8inc_8h_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/Xtensa\_ESP32/portmux\_impl.inc.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/Xtensa\_ESP32/portmux\_impl.inc.h}}
+\mbox{\hyperlink{portmux__impl_8inc_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00002}00002\ \textcolor{comment}{\ *\ SPDX-\/FileCopyrightText:\ 2017-\/2021\ Espressif\ Systems\ (Shanghai)\ CO\ LTD}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00003}00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00004}00004\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00005}00005\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00008}00008\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00009}00009\ \textcolor{comment}{\ *\ Warning:\ funky\ preprocessor\ hackery\ ahead.\ Including\ these\ headers\ will\ generate\ two}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00010}00010\ \textcolor{comment}{\ *\ functions,\ which\ names\ are\ defined\ by\ the\ preprocessor\ macros}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00011}00011\ \textcolor{comment}{\ *\ PORTMUX\_AQUIRE\_MUX\_FN\_NAME\ and\ PORTMUX\_RELEASE\_MUX\_FN\_NAME.\ In\ order\ to\ do\ the\ compare}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00012}00012\ \textcolor{comment}{\ *\ and\ exchange\ function,\ they\ will\ use\ whatever\ PORTMUX\_COMPARE\_SET\_FN\_NAME\ resolves\ to.}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00014}00014\ \textcolor{comment}{\ *\ In\ some\ scenarios,\ this\ header\ is\ included\ *twice*\ in\ portmux\_impl.h:\ one\ time}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00015}00015\ \textcolor{comment}{\ *\ for\ the\ 'normal'\ mux\ code\ which\ uses\ a\ compare\&exchange\ routine,\ another\ time}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00016}00016\ \textcolor{comment}{\ *\ to\ generate\ code\ for\ a\ second\ set\ of\ these\ routines\ that\ use\ a\ second\ mux}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00017}00017\ \textcolor{comment}{\ *\ (in\ internal\ ram)\ to\ fake\ a\ compare\&exchange\ on\ a\ variable\ in\ external\ memory.}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00018}00018\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00022}00022\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_ab35b2424ac8c0625cfdbbcf916c5e1c3}{\_\_attribute\_\_}}(\ (\ always\_inline\ )\ )}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00023}00023\ \textcolor{preprocessor}{\#ifdef\ CONFIG\_FREERTOS\_PORTMUX\_DEBUG}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00024}00024\ \ \ \ \ \mbox{\hyperlink{portmux__impl_8h_aaec7aa479d5f7e87f8dc0bc132d7091c}{PORTMUX\_AQUIRE\_MUX\_FN\_NAME}}(\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_ac9f8cff2c1e657fd97da40661a59013d}{portMUX\_TYPE}}\ *\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}},}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{portmux__impl_8inc_8h_afc3883f40d43226571e900129d15fae2}{timeout\_cycles}},}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ fnName,}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ line\ )}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00028}00028\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00029}00029\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00030}\mbox{\hyperlink{portmux__impl_8inc_8h_afc3883f40d43226571e900129d15fae2}{00030}}\ \ \ \ \ \mbox{\hyperlink{portmux__impl_8h_aaec7aa479d5f7e87f8dc0bc132d7091c}{PORTMUX\_AQUIRE\_MUX\_FN\_NAME}}(\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_ac9f8cff2c1e657fd97da40661a59013d}{portMUX\_TYPE}}\ *\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{portmux__impl_8inc_8h_afc3883f40d43226571e900129d15fae2}{timeout\_cycles}}\ )}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00031}00031\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00032}00032\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00035}00035\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ !CONFIG\_FREERTOS\_UNICORE}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ res;}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00037}\mbox{\hyperlink{portmux__impl_8inc_8h_aac0fffbb9fa3b7bb2abca5f6c5682089}{00037}}\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a1ebe82d24d764ae4e352f7c3a9f92c01}{portBASE\_TYPE}}\ \mbox{\hyperlink{portmux__impl_8inc_8h_aac0fffbb9fa3b7bb2abca5f6c5682089}{coreID}},\ \mbox{\hyperlink{portmux__impl_8inc_8h_ad9d4c53c46e4a9626f802132743a3d3d}{otherCoreID}};}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00038}\mbox{\hyperlink{portmux__impl_8inc_8h_ad26af34a7f0c0e2281ebe47054816e50}{00038}}\ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{portmux__impl_8inc_8h_ad26af34a7f0c0e2281ebe47054816e50}{ccount\_start}};}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00039}\mbox{\hyperlink{portmux__impl_8inc_8h_ade7967c9539e6b3f4a4d0d560c39ccbc}{00039}}\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{portmux__impl_8inc_8h_ade7967c9539e6b3f4a4d0d560c39ccbc}{set\_timeout}}\ =\ \mbox{\hyperlink{portmux__impl_8inc_8h_afc3883f40d43226571e900129d15fae2}{timeout\_cycles}}\ >\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_a4dacf258989e70ecdba52e145b38b526}{portMUX\_NO\_TIMEOUT}};}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00040}00040\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#ifdef\ CONFIG\_FREERTOS\_PORTMUX\_DEBUG}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ !\mbox{\hyperlink{portmux__impl_8inc_8h_ade7967c9539e6b3f4a4d0d560c39ccbc}{set\_timeout}}\ )}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmux__impl_8inc_8h_afc3883f40d43226571e900129d15fae2}{timeout\_cycles}}\ =\ 10000;\ \textcolor{comment}{/*\ Always\ set\ a\ timeout\ in\ debug\ mode\ */}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmux__impl_8inc_8h_ade7967c9539e6b3f4a4d0d560c39ccbc}{set\_timeout}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00046}00046\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00048}\mbox{\hyperlink{portmux__impl_8inc_8h_a6a71db7a53957c030bb05d588ffc97cc}{00048}}\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{portmux__impl_8inc_8h_ade7967c9539e6b3f4a4d0d560c39ccbc}{set\_timeout}}\ )\ \textcolor{comment}{/*\ Timeout\ */}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmux__impl_8inc_8h_a1fae68e70dbed78e74bcf6b87c758a38}{RSR}}(\ CCOUNT,\ \mbox{\hyperlink{portmux__impl_8inc_8h_ad26af34a7f0c0e2281ebe47054816e50}{ccount\_start}}\ );}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00053}00053\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#ifdef\ CONFIG\_FREERTOS\_PORTMUX\_DEBUG}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ owner\ =\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>owner;}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00056}00056\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#if\ (\ ESP\_IDF\_VERSION\ <\ ESP\_IDF\_VERSION\_VAL(\ 4,\ 2,\ 0\ )\ )}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ (\ owner\ !=\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_aeb0b75a0e2a4b2e6108d504112498b65}{portMUX\_FREE\_VAL}}\ )\ \&\&\ (\ owner\ !=\ CORE\_ID\_PRO\ )\ \&\&\ (\ owner\ !=\ CORE\_ID\_APP\ )\ )}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00058}00058\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#else}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ (\ owner\ !=\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_aeb0b75a0e2a4b2e6108d504112498b65}{portMUX\_FREE\_VAL}}\ )\ \&\&\ (\ owner\ !=\ CORE\_ID\_REGVAL\_PRO\ )\ \&\&\ (\ owner\ !=\ CORE\_ID\_REGVAL\_APP\ )\ )}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00060}00060\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ets\_printf(\ \textcolor{stringliteral}{"{}ERROR:\ vPortCPUAcquireMutex:\ mux\ \%p\ is\ uninitialized\ (0x\%X)!\ Called\ from\ \%s\ line\ \%d.\(\backslash\)n"{}},\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}},\ owner,\ fnName,\ line\ );}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>owner\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_aeb0b75a0e2a4b2e6108d504112498b65}{portMUX\_FREE\_VAL}};}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00065}00065\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#endif\ }\textcolor{comment}{/*\ ifdef\ CONFIG\_FREERTOS\_PORTMUX\_DEBUG\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Spin\ until\ we\ own\ the\ core\ */}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00069}\mbox{\hyperlink{portmux__impl_8inc_8h_a1fae68e70dbed78e74bcf6b87c758a38}{00069}}\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmux__impl_8inc_8h_a1fae68e70dbed78e74bcf6b87c758a38}{RSR}}(\ PRID,\ \mbox{\hyperlink{portmux__impl_8inc_8h_aac0fffbb9fa3b7bb2abca5f6c5682089}{coreID}}\ );}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Note:\ coreID\ is\ the\ full\ 32\ bit\ core\ ID\ (CORE\_ID\_PRO/CORE\_ID\_APP),}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00072}00072\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ not\ the\ 0/1\ value\ returned\ by\ xPortGetCoreID()}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00073}00073\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00074}00074\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#if\ (\ ESP\_IDF\_VERSION\ <\ ESP\_IDF\_VERSION\_VAL(\ 4,\ 2,\ 0\ )\ )}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmux__impl_8inc_8h_ad9d4c53c46e4a9626f802132743a3d3d}{otherCoreID}}\ =\ CORE\_ID\_XOR\_SWAP\ \string^\ \mbox{\hyperlink{portmux__impl_8inc_8h_aac0fffbb9fa3b7bb2abca5f6c5682089}{coreID}};}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00076}00076\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#else}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmux__impl_8inc_8h_ad9d4c53c46e4a9626f802132743a3d3d}{otherCoreID}}\ =\ \mbox{\hyperlink{portmux__impl_8h_a8ffe864813f4c55413a63d9a08597814}{CORE\_ID\_REGVAL\_XOR\_SWAP}}\ \string^\ \mbox{\hyperlink{portmux__impl_8inc_8h_aac0fffbb9fa3b7bb2abca5f6c5682089}{coreID}};}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00078}00078\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00080}\mbox{\hyperlink{portmux__impl_8inc_8h_a721c6ff80a6d3e4ad4ffa52a04c60085}{00080}}\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ mux-\/>owner\ should\ be\ one\ of\ portMUX\_FREE\_VAL,\ CORE\_ID\_PRO,}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00083}00083\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ CORE\_ID\_APP:}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00084}00084\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00085}00085\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ -\/\ If\ portMUX\_FREE\_VAL,\ we\ want\ to\ atomically\ set\ to\ 'coreID'.}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00086}00086\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ -\/\ If\ "{}our"{}\ coreID,\ we\ can\ drop\ through\ immediately.}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00087}00087\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ -\/\ If\ "{}otherCoreID"{},\ we\ spin\ here.}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00088}00088\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ res\ =\ \mbox{\hyperlink{portmux__impl_8inc_8h_aac0fffbb9fa3b7bb2abca5f6c5682089}{coreID}};}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00090}\mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{00090}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmux__impl_8h_ae5af280d24f56b0f817b2322e4c1a6de}{PORTMUX\_COMPARE\_SET\_FN\_NAME}}(\ \&\mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>owner,\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_aeb0b75a0e2a4b2e6108d504112498b65}{portMUX\_FREE\_VAL}},\ \&res\ );}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00092}\mbox{\hyperlink{portmux__impl_8inc_8h_a40737b3310ba0530b484d9a77e5c2746}{00092}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ res\ !=\ \mbox{\hyperlink{portmux__impl_8inc_8h_ad9d4c53c46e4a9626f802132743a3d3d}{otherCoreID}}\ )}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};\ \textcolor{comment}{/*\ mux-\/>owner\ is\ "{}our"{}\ coreID\ */}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{portmux__impl_8inc_8h_ade7967c9539e6b3f4a4d0d560c39ccbc}{set\_timeout}}\ )}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ ccount\_now;}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmux__impl_8inc_8h_a1fae68e70dbed78e74bcf6b87c758a38}{RSR}}(\ CCOUNT,\ ccount\_now\ );}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ ccount\_now\ -\/\ \mbox{\hyperlink{portmux__impl_8inc_8h_ad26af34a7f0c0e2281ebe47054816e50}{ccount\_start}}\ >\ (\ \textcolor{keywordtype}{unsigned}\ )\ \mbox{\hyperlink{portmux__impl_8inc_8h_afc3883f40d43226571e900129d15fae2}{timeout\_cycles}}\ )}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00104}00104\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#ifdef\ CONFIG\_FREERTOS\_PORTMUX\_DEBUG}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ets\_printf(\ \textcolor{stringliteral}{"{}Timeout\ on\ mux!\ last\ non-\/recursive\ lock\ \%s\ line\ \%d,\ curr\ \%s\ line\ \%d\(\backslash\)n"{}},\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>lastLockedFn,\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>lastLockedLine,\ fnName,\ line\ );}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ets\_printf(\ \textcolor{stringliteral}{"{}Owner\ 0x\%x\ count\ \%d\(\backslash\)n"{}},\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>owner,\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>count\ );}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00107}00107\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00111}\mbox{\hyperlink{portmux__impl_8inc_8h_a8fdafe3be7e00ce3d4f0cb50a9a5eb39}{00111}}\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}(\ 1\ );}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00113}\mbox{\hyperlink{portmux__impl_8inc_8h_a87993902dd156c3d38f452c1608c1d03}{00113}}\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmux__impl_8inc_8h_a05668f96f8bae85b380c20e72a2b006a}{assert}}(\ res\ ==\ \mbox{\hyperlink{portmux__impl_8inc_8h_aac0fffbb9fa3b7bb2abca5f6c5682089}{coreID}}\ ||\ res\ ==\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_aeb0b75a0e2a4b2e6108d504112498b65}{portMUX\_FREE\_VAL}}\ );\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ any\ other\ value\ implies\ memory\ corruption\ or\ uninitialized\ mux\ */}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00114}\mbox{\hyperlink{portmux__impl_8inc_8h_abe99fa908b45d7aa91a9bd3e8e0cae12}{00114}}\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmux__impl_8inc_8h_a05668f96f8bae85b380c20e72a2b006a}{assert}}(\ (\ res\ ==\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_aeb0b75a0e2a4b2e6108d504112498b65}{portMUX\_FREE\_VAL}}\ )\ ==\ (\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>count\ ==\ 0\ )\ );\ \textcolor{comment}{/*\ we're\ first\ to\ lock\ iff\ count\ is\ zero\ */}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00115}\mbox{\hyperlink{portmux__impl_8inc_8h_a05668f96f8bae85b380c20e72a2b006a}{00115}}\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmux__impl_8inc_8h_a05668f96f8bae85b380c20e72a2b006a}{assert}}(\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>count\ <\ 0xFF\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Bad\ count\ value\ implies\ memory\ corruption\ */}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ now\ we\ own\ it,\ we\ can\ increment\ the\ refcount\ */}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00118}\mbox{\hyperlink{portmux__impl_8inc_8h_a8a4394c1a6850583aa442709d0d22d4e}{00118}}\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>count++;}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00121}00121\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#ifdef\ CONFIG\_FREERTOS\_PORTMUX\_DEBUG}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ res\ ==\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_aeb0b75a0e2a4b2e6108d504112498b65}{portMUX\_FREE\_VAL}}\ )\ \textcolor{comment}{/*initial\ lock\ */}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>lastLockedFn\ =\ fnName;}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>lastLockedLine\ =\ line;}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ets\_printf(\ \textcolor{stringliteral}{"{}Recursive\ lock:\ count=\%d\ last\ non-\/recursive\ lock\ \%s\ line\ \%d,\ curr\ \%s\ line\ \%d\(\backslash\)n"{}},\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>count\ -\/\ 1,}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>lastLockedFn,\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>lastLockedLine,\ fnName,\ line\ );}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00132}00132\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#endif\ }\textcolor{comment}{/*\ CONFIG\_FREERTOS\_PORTMUX\_DEBUG\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00133}00133\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif\ }\textcolor{comment}{/*\ CONFIG\_FREERTOS\_UNICORE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00134}\mbox{\hyperlink{portmux__impl_8inc_8h_a930920b2bc42824a5c03be681830f4b2}{00134}}\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00135}00135\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00137}00137\ \textcolor{preprocessor}{\#ifdef\ CONFIG\_FREERTOS\_PORTMUX\_DEBUG}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00138}00138\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{portmux__impl_8h_ad6f171a6adcd673b60cec1aa220ae3ce}{PORTMUX\_RELEASE\_MUX\_FN\_NAME}}(\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_ac9f8cff2c1e657fd97da40661a59013d}{portMUX\_TYPE}}\ *\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}},}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ fnName,}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ line\ )}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00141}00141\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00142}00142\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00143}00143\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{portmux__impl_8h_ad6f171a6adcd673b60cec1aa220ae3ce}{PORTMUX\_RELEASE\_MUX\_FN\_NAME}}(\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_ac9f8cff2c1e657fd97da40661a59013d}{portMUX\_TYPE}}\ *\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}\ )}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00144}00144\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00145}00145\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00148}00148\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#if\ !CONFIG\_FREERTOS\_UNICORE}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a1ebe82d24d764ae4e352f7c3a9f92c01}{portBASE\_TYPE}}\ \mbox{\hyperlink{portmux__impl_8inc_8h_aac0fffbb9fa3b7bb2abca5f6c5682089}{coreID}};}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00150}00150\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#ifdef\ CONFIG\_FREERTOS\_PORTMUX\_DEBUG}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ lastLockedFn\ =\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>lastLockedFn;}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ lastLockedLine\ =\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>lastLockedLine;}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>lastLockedFn\ =\ fnName;}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>lastLockedLine\ =\ line;}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ owner\ =\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>owner;}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00157}00157\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#if\ (\ ESP\_IDF\_VERSION\ <\ ESP\_IDF\_VERSION\_VAL(\ 4,\ 2,\ 0\ )\ )}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ (\ owner\ !=\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_aeb0b75a0e2a4b2e6108d504112498b65}{portMUX\_FREE\_VAL}}\ )\ \&\&\ (\ owner\ !=\ CORE\_ID\_PRO\ )\ \&\&\ (\ owner\ !=\ CORE\_ID\_APP\ )\ )}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00159}00159\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#else}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ (\ owner\ !=\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_aeb0b75a0e2a4b2e6108d504112498b65}{portMUX\_FREE\_VAL}}\ )\ \&\&\ (\ owner\ !=\ CORE\_ID\_REGVAL\_PRO\ )\ \&\&\ (\ owner\ !=\ CORE\_ID\_REGVAL\_APP\ )\ )}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00161}00161\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ets\_printf(\ \textcolor{stringliteral}{"{}ERROR:\ vPortCPUReleaseMutex:\ mux\ \%p\ is\ invalid\ (0x\%x)!\(\backslash\)n"{}},\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}},\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>owner\ );}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00165}00165\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#endif\ }\textcolor{comment}{/*\ ifdef\ CONFIG\_FREERTOS\_PORTMUX\_DEBUG\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00166}00166\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00167}00167\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#if\ CONFIG\_FREERTOS\_PORTMUX\_DEBUG\ ||\ !defined(\ NDEBUG\ )}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmux__impl_8inc_8h_a1fae68e70dbed78e74bcf6b87c758a38}{RSR}}(\ PRID,\ \mbox{\hyperlink{portmux__impl_8inc_8h_aac0fffbb9fa3b7bb2abca5f6c5682089}{coreID}}\ );}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00169}00169\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00171}00171\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#ifdef\ CONFIG\_FREERTOS\_PORTMUX\_DEBUG}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{portmux__impl_8inc_8h_aac0fffbb9fa3b7bb2abca5f6c5682089}{coreID}}\ !=\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>owner\ )}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ets\_printf(\ \textcolor{stringliteral}{"{}ERROR:\ vPortCPUReleaseMutex:\ mux\ \%p\ was\ already\ unlocked!\(\backslash\)n"{}},\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}\ );}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ets\_printf(\ \textcolor{stringliteral}{"{}Last\ non-\/recursive\ unlock\ \%s\ line\ \%d,\ curr\ unlock\ \%s\ line\ \%d\(\backslash\)n"{}},\ lastLockedFn,\ lastLockedLine,\ fnName,\ line\ );}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00177}00177\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00178}00178\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmux__impl_8inc_8h_a05668f96f8bae85b380c20e72a2b006a}{assert}}(\ \mbox{\hyperlink{portmux__impl_8inc_8h_aac0fffbb9fa3b7bb2abca5f6c5682089}{coreID}}\ ==\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>owner\ );\ \textcolor{comment}{/*\ This\ is\ a\ mutex\ we\ didn't\ lock,\ or\ it's\ corrupt\ */}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00180}00180\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>count-\/-\/;}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>count\ ==\ 0\ )}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>owner\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_aeb0b75a0e2a4b2e6108d504112498b65}{portMUX\_FREE\_VAL}};}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{portmux__impl_8inc_8h_a05668f96f8bae85b380c20e72a2b006a}{assert}}(\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>count\ <\ 0x100\ );\ \textcolor{comment}{/*\ Indicates\ memory\ corruption\ */}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00190}00190\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#ifdef\ CONFIG\_FREERTOS\_PORTMUX\_DEBUG\_RECURSIVE}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ets\_printf(\ \textcolor{stringliteral}{"{}Recursive\ unlock:\ count=\%d\ last\ locked\ \%s\ line\ \%d,\ curr\ \%s\ line\ \%d\(\backslash\)n"{}},\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}-\/>count,\ lastLockedFn,\ lastLockedLine,\ fnName,\ line\ );}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00192}00192\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00194}00194\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#endif\ }}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8inc_8h_source_l00195}00195\ \ \ \ \ \ \ \ \ \}}
+
+\end{DoxyCode}

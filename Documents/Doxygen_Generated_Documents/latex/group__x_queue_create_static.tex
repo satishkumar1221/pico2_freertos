@@ -1,0 +1,70 @@
+\doxysection{x\+Queue\+Create\+Static }
+\hypertarget{group__x_queue_create_static}{}\label{group__x_queue_create_static}\index{xQueueCreateStatic@{xQueueCreateStatic}}
+queue. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ xQueueCreateStatic(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxQueueLength,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxItemSize,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ *pucQueueStorage,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_a22e8979e2849d002747c0dd4c7c37908}{StaticQueue\_t}}\ *pxQueueBuffer}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
+
+\end{DoxyCode}
+
+
+Creates a new queue instance, and returns a handle by which the new queue can be referenced.
+
+Internally, within the Free\+RTOS implementation, queues use two blocks of memory. The first block is used to hold the queue\textquotesingle{}s data structures. The second block is used to hold items placed into the queue. If a queue is created using x\+Queue\+Create() then both blocks of memory are automatically dynamically allocated inside the x\+Queue\+Create() function. (see \href{https://www.FreeRTOS.org/a00111.html}{\texttt{https\+://www.\+Free\+RTOS.\+org/a00111.\+html}}). If a queue is created using x\+Queue\+Create\+Static() then the application writer must provide the memory that will get used by the queue. x\+Queue\+Create\+Static() therefore allows a queue to be created without using any dynamic memory allocation.
+
+\href{https://www.FreeRTOS.org/Embedded-RTOS-Queues.html}{\texttt{https\+://www.\+Free\+RTOS.\+org/\+Embedded-\/\+RTOS-\/\+Queues.\+html}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em ux\+Queue\+Length} & The maximum number of items that the queue can contain.\\
+\hline
+{\em ux\+Item\+Size} & The number of bytes each item in the queue will require. Items are queued by copy, not by reference, so this is the number of bytes that will be copied for each posted item. Each item on the queue must be the same size.\\
+\hline
+{\em puc\+Queue\+Storage} & If ux\+Item\+Size is not zero then puc\+Queue\+Storage must point to a uint8\+\_\+t array that is at least large enough to hold the maximum number of items that can be in the queue at any one time -\/ which is ( ux\+Queue\+Length \texorpdfstring{$\ast$}{*} ux\+Items\+Size ) bytes. If ux\+Item\+Size is zero then puc\+Queue\+Storage can be NULL.\\
+\hline
+{\em px\+Queue\+Buffer} & Must point to a variable of type \doxylink{_free_r_t_o_s_8h_a22e8979e2849d002747c0dd4c7c37908}{Static\+Queue\+\_\+t}, which will be used to hold the queue\textquotesingle{}s data structure.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If the queue is created then a handle to the created queue is returned. If px\+Queue\+Buffer is NULL then NULL is returned.
+\end{DoxyReturn}
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{struct\ }AMessage}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{char}\ ucMessageID;}
+\DoxyCodeLine{\ \ \ \textcolor{keywordtype}{char}\ ucData[\ 20\ ];}
+\DoxyCodeLine{\ \ \};}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ QUEUE\_LENGTH\ 10}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ ITEM\_SIZE\ sizeof(\ uint32\_t\ )}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ xQueueBuffer\ will\ hold\ the\ queue\ structure.}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{_free_r_t_o_s_8h_a22e8979e2849d002747c0dd4c7c37908}{StaticQueue\_t}}\ xQueueBuffer;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ ucQueueStorage\ will\ hold\ the\ items\ posted\ to\ the\ queue.\ \ Must\ be\ at\ least}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ [(queue\ length)\ *\ (\ queue\ item\ size)]\ bytes\ long.}}
+\DoxyCodeLine{\ \ uint8\_t\ ucQueueStorage[\ QUEUE\_LENGTH\ *\ ITEM\_SIZE\ ];}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \textcolor{keywordtype}{void}\ vATask(\ \textcolor{keywordtype}{void}\ *pvParameters\ )}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ xQueue1;}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ Create\ a\ queue\ capable\ of\ containing\ 10\ uint32\_t\ values.}}
+\DoxyCodeLine{\ \ \ xQueue1\ =\ xQueueCreate(\ QUEUE\_LENGTH,\ \textcolor{comment}{//\ The\ number\ of\ items\ the\ queue\ can\ hold.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ITEM\_SIZE\ \ \ \ \ \textcolor{comment}{//\ The\ size\ of\ each\ item\ in\ the\ queue}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&(\ ucQueueStorage[\ 0\ ]\ ),\ \textcolor{comment}{//\ The\ buffer\ that\ will\ hold\ the\ items\ in\ the\ queue.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&xQueueBuffer\ );\ \textcolor{comment}{//\ The\ buffer\ that\ will\ hold\ the\ queue\ structure.}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ The\ queue\ is\ guaranteed\ to\ be\ created\ successfully\ as\ no\ dynamic\ memory}}
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ allocation\ is\ used.\ \ Therefore\ xQueue1\ is\ now\ a\ handle\ to\ a\ valid\ queue.}}
+\DoxyCodeLine{\ }
+\DoxyCodeLine{\ \ \ \textcolor{comment}{//\ ...\ Rest\ of\ task\ code.}}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+ 

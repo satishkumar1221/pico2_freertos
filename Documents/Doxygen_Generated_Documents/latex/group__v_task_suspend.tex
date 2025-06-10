@@ -1,0 +1,51 @@
+\doxysection{v\+Task\+Suspend }
+\hypertarget{group__v_task_suspend}{}\label{group__v_task_suspend}\index{vTaskSuspend@{vTaskSuspend}}
+task. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{task_8h_a84d4e660b04630be2939d91b3c2412f8}{vTaskSuspend}}(\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xTaskToSuspend\ );}
+
+\end{DoxyCode}
+
+
+INCLUDE\+\_\+v\+Task\+Suspend must be defined as 1 for this function to be available. See the configuration section for more information.
+
+Suspend any task. When suspended a task will never get any microcontroller processing time, no matter what its priority.
+
+Calls to v\+Task\+Suspend are not accumulative -\/ i.\+e. calling v\+Task\+Suspend () twice on the same task still only requires one call to v\+Task\+Resume () to ready the suspended task.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Task\+To\+Suspend} & Handle to the task being suspended. Passing a NULL handle will cause the calling task to be suspended.\\
+\hline
+\end{DoxyParams}
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vAFunction(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xHandle;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Create\ a\ task,\ storing\ the\ handle.}}
+\DoxyCodeLine{\ \ xTaskCreate(\ vTaskCode,\ \textcolor{stringliteral}{"{}NAME"{}},\ STACK\_SIZE,\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}},\ \mbox{\hyperlink{task_8h_a94ed0b9b3b4e8ccc859c322f18583e67}{tskIDLE\_PRIORITY}},\ \&xHandle\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ ...}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Use\ the\ handle\ to\ suspend\ the\ created\ task.}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{task_8h_a84d4e660b04630be2939d91b3c2412f8}{vTaskSuspend}}(\ xHandle\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ ...}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ The\ created\ task\ will\ not\ run\ during\ this\ period,\ unless}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ another\ task\ calls\ vTaskResume(\ xHandle\ ).}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//...}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ Suspend\ ourselves.}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{task_8h_a84d4e660b04630be2939d91b3c2412f8}{vTaskSuspend}}(\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ We\ cannot\ get\ here\ unless\ another\ task\ calls\ vTaskResume}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ with\ our\ handle\ as\ the\ parameter.}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

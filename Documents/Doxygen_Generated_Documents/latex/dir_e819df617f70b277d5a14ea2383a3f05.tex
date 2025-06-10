@@ -1,0 +1,51 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+Third\+Party/\+GCC/\+RP2350\+\_\+\+ARM\+\_\+\+NTZ Directory Reference}
+\hypertarget{dir_e819df617f70b277d5a14ea2383a3f05}{}\label{dir_e819df617f70b277d5a14ea2383a3f05}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/RP2350\_ARM\_NTZ Directory Reference@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/RP2350\_ARM\_NTZ Directory Reference}}
+Directory dependency graph for RP2350\+\_\+\+ARM\+\_\+\+NTZ\+:
+% FIG 0
+\doxysubsubsection*{Directories}
+\begin{DoxyCompactItemize}
+\item 
+directory \mbox{\hyperlink{dir_2083a4c550f343d638fd957a56a8dc1e}{non\+\_\+secure}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{README.md_autotoc_md37}{}\doxysubsection{\texorpdfstring{Overview}{Overview}}\label{README.md_autotoc_md37}
+This directory provides an SMP Free\+RTOS-\/\+Kernel port that can be used with the Raspberry Pi Pico SDK on RP2350. It supports\+:
+
+
+\begin{DoxyItemize}
+\item Simple CMake INTERFACE libraries, to provide the Free\+RTOS-\/\+Kernel and also the individual allocator types, without copying code into the user\textquotesingle{}s project.
+\item Running the Free\+RTOS-\/\+Kernel and tasks on either core 0 or core 1, or both.
+\item Use of SDK synchronization primitives (such as mutexes, semaphores, queues from pico\+\_\+sync) between Free\+RTOS tasks and code executing on a non Free\+RTOS core, or in IRQ handlers.
+\end{DoxyItemize}
+
+Note that whilst this SMP version can be run on just a single (either) core, it is probably more efficient to use the non SMP version in the main Free\+RTOS-\/\+Kernel branch in that case.\hypertarget{README.md_autotoc_md38}{}\doxysubsection{\texorpdfstring{Using this port}{Using this port}}\label{README.md_autotoc_md38}
+You can copy \href{FreeRTOS_Kernel_import.cmake}{\texttt{Free\+RTOS\+\_\+\+Kernel\+\_\+import.\+cmake}} into your project, and add the following in your {\ttfamily CMake\+Lists.\+txt}\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{include(FreeRTOS\_Kernel\_import.cmake)}
+
+\end{DoxyCode}
+
+
+This will locate the Free\+RTOS kernel if it is a direct sub-\/module of your project, or if you provide the {\ttfamily FREERTOS\+\_\+\+KERNEL\+\_\+\+PATH} variable in your environment or via {\ttfamily -\/DFREERTOS\+\_\+\+KERNEL\+\_\+\+PATH=/path/to/\+Free\+RTOS-\/\+Kernel} on the CMake command line.
+
+{\bfseries{NOTE\+:}} If you are using version 1.\+3.\+1 or older of the Raspberry Pi Pico SDK then this line must appear before the {\ttfamily pico\+\_\+sdk\+\_\+init()} and will cause Free\+RTOS to be included/required in all RP2040 targets in your project. After this SDK version, you can include the Free\+RTOS-\/\+Kernel support later in your CMake build (possibly in a subdirectory) and the Free\+RTOS-\/\+Kernel support will only apply to those targets which explicitly include Free\+RTOS support.
+
+As an alternative to the {\ttfamily import} statement above, you can just add this directory directly via thw following (with the same placement restrictions related to the Raspberry Pi Pico SDK version above)\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{add\_subdirectory(path/to/this/directory\ FreeRTOS-\/Kernel)}
+
+\end{DoxyCode}
+ \hypertarget{README.md_autotoc_md39}{}\doxysubsection{\texorpdfstring{Free\+RTOS configuration for Armv8-\/M}{Free\+RTOS configuration for Armv8-\/M}}\label{README.md_autotoc_md39}
+The following standard Free\+RTOS ARM options are required for RP2350"{}  \+These three options must be specified as follows, as only RP2040-\/like Free\+RTOS implementation only is supported currently; running in at a single privilege level in the secure statea.  @icode\{c\}  \#define config\+ENABLE\+\_\+\+MPU                        0 \#define config\+ENABLE\+\_\+\+TRUSTZONE                  0 \#define config\+RUN\+\_\+\+FREERTOS\+\_\+\+SECURE\+\_\+\+ONLY          1 @endicode   \+You can set the following to enable save/restore of FPU state (you should set this is you are using floating point operations)  @icode\{c\}  \#define config\+ENABLE\+\_\+\+FPU                        1 @endicode   \+As of right now this is the only value of config\+MAX\+\_\+\+SYSCALL\+\_\+\+INTERRUPT\+\_\+\+PRIORITY that has been tested  @icode\{c\}  \#define config\+MAX\+\_\+\+SYSCALL\+\_\+\+INTERRUPT\+\_\+\+PRIORITY    16 @endicode   @section autotoc\+\_\+md40 Advanced Configuration  \+Some additional $<$tt$>$config$<$/tt$>$ options are defined $<$a href="{}include/rp2040\+\_\+config.\+h"{} \texorpdfstring{$>$}{>}here which control some low level implementation details.\hypertarget{README.md_autotoc_md41}{}\doxysubsection{\texorpdfstring{Known Limitations}{Known Limitations}}\label{README.md_autotoc_md41}
+
+\begin{DoxyItemize}
+\item Tickless idle has not currently been tested, and is likely non-\/functiona
+\item There is no Trust\+Zone version
+\item There is no support for enabling MPU for user/handler mode within Free\+RTOS 
+\end{DoxyItemize}

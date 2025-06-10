@@ -1,0 +1,375 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+SDCC/\+Cygnal/port.c File Reference}
+\hypertarget{_s_d_c_c_2_cygnal_2port_8c}{}\label{_s_d_c_c_2_cygnal_2port_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/SDCC/Cygnal/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/SDCC/Cygnal/port.c}}
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}task.\+h"{}}\newline
+Include dependency graph for port.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_a2ded1dd76ecf66f68443e7135f8807fc}{port\+CLOCK\+\_\+\+DIVISOR}}~( ( uint32\+\_\+t ) 12 )
+\item 
+\#define \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_a60c2a5e51d2dcbefaeb7201dc327d2c1}{port\+MAX\+\_\+\+TIMER\+\_\+\+VALUE}}~( ( uint32\+\_\+t ) 0xffff )
+\item 
+\#define \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_a3b69ebb0c1475f1bb8ed771e6c589e2a}{port\+ENABLE\+\_\+\+TIMER}}~( ( uint8\+\_\+t ) 0x04 )
+\item 
+\#define \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_aba58c81908613d65d0215a70cc1a521d}{port\+TIMER\+\_\+2\+\_\+\+INTERRUPT\+\_\+\+ENABLE}}~( ( uint8\+\_\+t ) 0x20 )
+\item 
+\#define \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_a21f6ad49a2286a8c53bd5da602351487}{port\+GLOBAL\+\_\+\+INTERRUPT\+\_\+\+BIT}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x80 )
+\item 
+\#define \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_a3b89bf729488db5c18a40f8a016e3838}{port\+INITIAL\+\_\+\+PSW}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x00 )
+\item 
+\#define \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_a097bd32546c0c342a43bb0c66977f600}{port\+CLEAR\+\_\+\+INTERRUPT\+\_\+\+FLAG}}()
+\item 
+\#define \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_a0003aec0622b1914fead6587479431a4}{port\+COPY\+\_\+\+STACK\+\_\+\+TO\+\_\+\+XRAM}}()
+\item 
+\#define \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_ac4ff2bfcb6b4f48de9c31f323b245058}{port\+COPY\+\_\+\+XRAM\+\_\+\+TO\+\_\+\+STACK}}()
+\item 
+\#define \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_a798f37b250502b49763c54a56b3aa4b0}{port\+SAVE\+\_\+\+CONTEXT}}()
+\item 
+\#define \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_a8d3a167375b5b57944a57df23d45b39e}{port\+RESTORE\+\_\+\+CONTEXT}}()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}{px\+Port\+Initialise\+Stack}} (\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}px\+Top\+Of\+Stack, \mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}} px\+Code, void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{x\+Port\+Start\+Scheduler}} (void)
+\item 
+void \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{v\+Port\+End\+Scheduler}} (void)
+\begin{DoxyCompactList}\small\item\em End the Free\+RTOS scheduler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_add01c927fb689f7ec170e42d47d27927}{v\+Port\+Yield}} (void)
+\begin{DoxyCompactList}\small\item\em Yield the CPU. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_ae1064ff55886ef9cf64f424672819a27}{v\+Timer2\+ISR}} (void)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+volatile \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_af5b0f7452857787ed70ce2856ca74c4b}{TCB\+\_\+t}} \texorpdfstring{$\ast$}{*}volatile \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_af7b1fc0a36e224b885fb22b9936a03a2}{px\+Current\+TCB}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_s_d_c_c_2_cygnal_2port_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_s_d_c_c_2_cygnal_2port_8c_a097bd32546c0c342a43bb0c66977f600}\index{port.c@{port.c}!portCLEAR\_INTERRUPT\_FLAG@{portCLEAR\_INTERRUPT\_FLAG}}
+\index{portCLEAR\_INTERRUPT\_FLAG@{portCLEAR\_INTERRUPT\_FLAG}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portCLEAR\_INTERRUPT\_FLAG}{portCLEAR\_INTERRUPT\_FLAG}}
+{\footnotesize\ttfamily \label{_s_d_c_c_2_cygnal_2port_8c_a097bd32546c0c342a43bb0c66977f600} 
+\#define port\+CLEAR\+\_\+\+INTERRUPT\+\_\+\+FLAG(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{TMR2CN\ \&=\ \string~0x80;}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source_l00053}{53}} of file \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_s_d_c_c_2_cygnal_2port_8c_a2ded1dd76ecf66f68443e7135f8807fc}\index{port.c@{port.c}!portCLOCK\_DIVISOR@{portCLOCK\_DIVISOR}}
+\index{portCLOCK\_DIVISOR@{portCLOCK\_DIVISOR}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portCLOCK\_DIVISOR}{portCLOCK\_DIVISOR}}
+{\footnotesize\ttfamily \label{_s_d_c_c_2_cygnal_2port_8c_a2ded1dd76ecf66f68443e7135f8807fc} 
+\#define port\+CLOCK\+\_\+\+DIVISOR~( ( uint32\+\_\+t ) 12 )}
+
+
+
+Definition at line \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source_l00041}{41}} of file \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_s_d_c_c_2_cygnal_2port_8c_a0003aec0622b1914fead6587479431a4}\index{port.c@{port.c}!portCOPY\_STACK\_TO\_XRAM@{portCOPY\_STACK\_TO\_XRAM}}
+\index{portCOPY\_STACK\_TO\_XRAM@{portCOPY\_STACK\_TO\_XRAM}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portCOPY\_STACK\_TO\_XRAM}{portCOPY\_STACK\_TO\_XRAM}}
+{\footnotesize\ttfamily \label{_s_d_c_c_2_cygnal_2port_8c_a0003aec0622b1914fead6587479431a4} 
+\#define port\+COPY\+\_\+\+STACK\+\_\+\+TO\+\_\+\+XRAM(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{/*\ pxCurrentTCB\ points\ to\ a\ TCB\ which\ itself\ points\ to\ the\ location\ into\ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \ which\ the\ first\ stack\ byte\ should\ be\ copied.\ Set\ pxXRAMStack\ to\ point\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \ to\ the\ location\ into\ which\ the\ first\ stack\ byte\ is\ to\ be\ copied.\ */}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ pxXRAMStack\ =\ (\ xdata\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *\ )\ *(\ (\ xdata\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ **\ )\ \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}}\ );\ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Set\ pxRAMStack\ to\ point\ to\ the\ first\ byte\ to\ be\ coped\ from\ the\ stack.\ */}\ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ pxRAMStack\ =\ (\ data\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *\ data\ )\ configSTACK\_START;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Calculate\ the\ size\ of\ the\ stack\ we\ are\ about\ to\ copy\ from\ the\ current\ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \ stack\ pointer\ value.\ */}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ucStackBytes\ =\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a85224ff891d5fa22f8aa26c3eaca34f1}{SP}}\ -\/\ (\ configSTACK\_START\ -\/\ 1\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Before\ starting\ to\ copy\ the\ stack,\ store\ the\ calculated\ stack\ size\ so\ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \ the\ stack\ can\ be\ restored\ when\ the\ task\ is\ resumed.\ */}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ *pxXRAMStack\ =\ ucStackBytes;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Copy\ each\ stack\ byte\ in\ turn.\ \ pxXRAMStack\ is\ incremented\ first\ as\ we\ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \ have\ already\ stored\ the\ stack\ size\ into\ XRAM.\ */}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ while(\ ucStackBytes\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pxXRAMStack++;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *pxXRAMStack\ =\ *pxRAMStack;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pxRAMStack++;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ucStackBytes-\/-\/;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source_l00084}{84}} of file \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_s_d_c_c_2_cygnal_2port_8c_ac4ff2bfcb6b4f48de9c31f323b245058}\index{port.c@{port.c}!portCOPY\_XRAM\_TO\_STACK@{portCOPY\_XRAM\_TO\_STACK}}
+\index{portCOPY\_XRAM\_TO\_STACK@{portCOPY\_XRAM\_TO\_STACK}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portCOPY\_XRAM\_TO\_STACK}{portCOPY\_XRAM\_TO\_STACK}}
+{\footnotesize\ttfamily \label{_s_d_c_c_2_cygnal_2port_8c_ac4ff2bfcb6b4f48de9c31f323b245058} 
+\#define port\+COPY\+\_\+\+XRAM\+\_\+\+TO\+\_\+\+STACK(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Setup\ the\ pointers\ as\ per\ portCOPY\_STACK\_TO\_XRAM(),\ but\ this\ time\ to\ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \ copy\ the\ data\ back\ out\ of\ XRAM\ and\ into\ the\ stack.\ */}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ pxXRAMStack\ =\ (\ xdata\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *\ )\ *(\ (\ xdata\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ **\ )\ \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}}\ );\ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ pxRAMStack\ =\ (\ data\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *\ data\ )\ (\ configSTACK\_START\ -\/\ 1\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{/*\ The\ first\ value\ stored\ in\ XRAM\ was\ the\ size\ of\ the\ stack\ -\/\ i.e.\ the\ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \ number\ of\ bytes\ we\ need\ to\ copy\ back.\ */}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ucStackBytes\ =\ pxXRAMStack[\ 0\ ];\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Copy\ the\ required\ number\ of\ bytes\ back\ into\ the\ stack.\ */}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pxXRAMStack++;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pxRAMStack++;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *pxRAMStack\ =\ *pxXRAMStack;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ucStackBytes-\/-\/;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}(\ ucStackBytes\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Restore\ the\ stack\ pointer\ ready\ to\ use\ the\ restored\ stack.\ */}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_a85224ff891d5fa22f8aa26c3eaca34f1}{SP}}\ =\ (\ uint8\_t\ )\ pxRAMStack;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source_l00113}{113}} of file \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_s_d_c_c_2_cygnal_2port_8c_a3b69ebb0c1475f1bb8ed771e6c589e2a}\index{port.c@{port.c}!portENABLE\_TIMER@{portENABLE\_TIMER}}
+\index{portENABLE\_TIMER@{portENABLE\_TIMER}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portENABLE\_TIMER}{portENABLE\_TIMER}}
+{\footnotesize\ttfamily \label{_s_d_c_c_2_cygnal_2port_8c_a3b69ebb0c1475f1bb8ed771e6c589e2a} 
+\#define port\+ENABLE\+\_\+\+TIMER~( ( uint8\+\_\+t ) 0x04 )}
+
+
+
+Definition at line \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source_l00043}{43}} of file \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_s_d_c_c_2_cygnal_2port_8c_a21f6ad49a2286a8c53bd5da602351487}\index{port.c@{port.c}!portGLOBAL\_INTERRUPT\_BIT@{portGLOBAL\_INTERRUPT\_BIT}}
+\index{portGLOBAL\_INTERRUPT\_BIT@{portGLOBAL\_INTERRUPT\_BIT}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portGLOBAL\_INTERRUPT\_BIT}{portGLOBAL\_INTERRUPT\_BIT}}
+{\footnotesize\ttfamily \label{_s_d_c_c_2_cygnal_2port_8c_a21f6ad49a2286a8c53bd5da602351487} 
+\#define port\+GLOBAL\+\_\+\+INTERRUPT\+\_\+\+BIT~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x80 )}
+
+
+
+Definition at line \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source_l00047}{47}} of file \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_s_d_c_c_2_cygnal_2port_8c_a3b89bf729488db5c18a40f8a016e3838}\index{port.c@{port.c}!portINITIAL\_PSW@{portINITIAL\_PSW}}
+\index{portINITIAL\_PSW@{portINITIAL\_PSW}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portINITIAL\_PSW}{portINITIAL\_PSW}}
+{\footnotesize\ttfamily \label{_s_d_c_c_2_cygnal_2port_8c_a3b89bf729488db5c18a40f8a016e3838} 
+\#define port\+INITIAL\+\_\+\+PSW~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x00 )}
+
+
+
+Definition at line \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source_l00050}{50}} of file \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_s_d_c_c_2_cygnal_2port_8c_a60c2a5e51d2dcbefaeb7201dc327d2c1}\index{port.c@{port.c}!portMAX\_TIMER\_VALUE@{portMAX\_TIMER\_VALUE}}
+\index{portMAX\_TIMER\_VALUE@{portMAX\_TIMER\_VALUE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portMAX\_TIMER\_VALUE}{portMAX\_TIMER\_VALUE}}
+{\footnotesize\ttfamily \label{_s_d_c_c_2_cygnal_2port_8c_a60c2a5e51d2dcbefaeb7201dc327d2c1} 
+\#define port\+MAX\+\_\+\+TIMER\+\_\+\+VALUE~( ( uint32\+\_\+t ) 0xffff )}
+
+
+
+Definition at line \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source_l00042}{42}} of file \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_s_d_c_c_2_cygnal_2port_8c_a8d3a167375b5b57944a57df23d45b39e}\index{port.c@{port.c}!portRESTORE\_CONTEXT@{portRESTORE\_CONTEXT}}
+\index{portRESTORE\_CONTEXT@{portRESTORE\_CONTEXT}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portRESTORE\_CONTEXT}{portRESTORE\_CONTEXT}}
+{\footnotesize\ttfamily \label{_s_d_c_c_2_cygnal_2port_8c_a8d3a167375b5b57944a57df23d45b39e} 
+\#define port\+RESTORE\+\_\+\+CONTEXT(\begin{DoxyParamCaption}\item[{}]{void}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \_asm\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pop\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_bp\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pop\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PSW\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pop\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ar1\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pop\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ar0\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pop\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ar7\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pop\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ar6\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pop\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ar5\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pop\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ar4\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pop\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ar3\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pop\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ar2\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pop\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ b\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pop\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DPH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pop\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ DPL\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ The\ next\ byte\ of\ the\ stack\ is\ the\ IE\ register.\ \ Only\ the\ global\ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ enable\ bit\ forms\ part\ of\ the\ task\ context.\ \ Pop\ off\ the\ IE\ then\ set\ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ the\ global\ enable\ bit\ to\ match\ that\ of\ the\ stored\ IE\ register.\ */}\ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pop\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ACC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ JB\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ACC.7,0098\$\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CLR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ IE.7\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ LJMP\ \ \ \ \ \ \ \ 0099\$\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ 0098\$:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SETB\ \ \ \ \ \ \ \ IE.7\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ 0099\$:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Finally\ pop\ off\ the\ ACC,\ which\ was\ the\ first\ register\ saved.\ */}\ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pop\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ACC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ reti\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \_endasm;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source_l00172}{172}} of file \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_s_d_c_c_2_cygnal_2port_8c_a798f37b250502b49763c54a56b3aa4b0}\index{port.c@{port.c}!portSAVE\_CONTEXT@{portSAVE\_CONTEXT}}
+\index{portSAVE\_CONTEXT@{portSAVE\_CONTEXT}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portSAVE\_CONTEXT}{portSAVE\_CONTEXT}}
+{\footnotesize\ttfamily \label{_s_d_c_c_2_cygnal_2port_8c_a798f37b250502b49763c54a56b3aa4b0} 
+\#define port\+SAVE\+\_\+\+CONTEXT(\begin{DoxyParamCaption}\item[{}]{void}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \_asm\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Push\ ACC\ first,\ as\ when\ restoring\ the\ context\ it\ must\ be\ restored\ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ last\ (it\ is\ used\ to\ set\ the\ IE\ register).\ */}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ push\ \ \ \ \ \ \ \ ACC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Store\ the\ IE\ register\ then\ disable\ interrupts.\ */}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ push\ \ \ \ \ \ \ \ IE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ clr\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_EA\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ push\ \ \ \ \ \ \ \ DPL\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ push\ \ \ \ \ \ \ \ DPH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ push\ \ \ \ \ \ \ \ b\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ push\ \ \ \ \ \ \ \ ar2\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ push\ \ \ \ \ \ \ \ ar3\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ push\ \ \ \ \ \ \ \ ar4\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ push\ \ \ \ \ \ \ \ ar5\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ push\ \ \ \ \ \ \ \ ar6\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ push\ \ \ \ \ \ \ \ ar7\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ push\ \ \ \ \ \ \ \ ar0\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ push\ \ \ \ \ \ \ \ ar1\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ push\ \ \ \ \ \ \ \ PSW\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \_endasm;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PSW\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \_asm\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ push\ \ \ \ \ \ \ \ \_bp\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \_endasm;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source_l00140}{140}} of file \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_s_d_c_c_2_cygnal_2port_8c_aba58c81908613d65d0215a70cc1a521d}\index{port.c@{port.c}!portTIMER\_2\_INTERRUPT\_ENABLE@{portTIMER\_2\_INTERRUPT\_ENABLE}}
+\index{portTIMER\_2\_INTERRUPT\_ENABLE@{portTIMER\_2\_INTERRUPT\_ENABLE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portTIMER\_2\_INTERRUPT\_ENABLE}{portTIMER\_2\_INTERRUPT\_ENABLE}}
+{\footnotesize\ttfamily \label{_s_d_c_c_2_cygnal_2port_8c_aba58c81908613d65d0215a70cc1a521d} 
+\#define port\+TIMER\+\_\+2\+\_\+\+INTERRUPT\+\_\+\+ENABLE~( ( uint8\+\_\+t ) 0x20 )}
+
+
+
+Definition at line \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source_l00044}{44}} of file \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source}{port.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_s_d_c_c_2_cygnal_2port_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_s_d_c_c_2_cygnal_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}\index{port.c@{port.c}!pxPortInitialiseStack@{pxPortInitialiseStack}}
+\index{pxPortInitialiseStack@{pxPortInitialiseStack}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{pxPortInitialiseStack()}{pxPortInitialiseStack()}}
+{\footnotesize\ttfamily \label{_s_d_c_c_2_cygnal_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} px\+Port\+Initialise\+Stack (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{px\+Top\+Of\+Stack}{, }\item[{\mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}}}]{px\+Code}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+px\+Top\+Of\+Stack = 0x11;
+
+px\+Top\+Of\+Stack = 0x22;
+
+px\+Top\+Of\+Stack = 0x33;
+
+Definition at line \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source_l00206}{206}} of file \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_s_d_c_c_2_cygnal_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}\index{port.c@{port.c}!vPortEndScheduler@{vPortEndScheduler}}
+\index{vPortEndScheduler@{vPortEndScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEndScheduler()}{vPortEndScheduler()}}
+{\footnotesize\ttfamily \label{_s_d_c_c_2_cygnal_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423} 
+void v\+Port\+End\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+End the Free\+RTOS scheduler. 
+
+Not implemented on this port. 
+
+Definition at line \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source_l00311}{311}} of file \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_s_d_c_c_2_cygnal_2port_8c_add01c927fb689f7ec170e42d47d27927}\index{port.c@{port.c}!vPortYield@{vPortYield}}
+\index{vPortYield@{vPortYield}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortYield()}{vPortYield()}}
+{\footnotesize\ttfamily \label{_s_d_c_c_2_cygnal_2port_8c_add01c927fb689f7ec170e42d47d27927} 
+void v\+Port\+Yield (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Yield the CPU. 
+
+
+
+Definition at line \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source_l00321}{321}} of file \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_s_d_c_c_2_cygnal_2port_8c_ae1064ff55886ef9cf64f424672819a27}\index{port.c@{port.c}!vTimer2ISR@{vTimer2ISR}}
+\index{vTimer2ISR@{vTimer2ISR}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vTimer2ISR()}{vTimer2ISR()}}
+{\footnotesize\ttfamily \label{_s_d_c_c_2_cygnal_2port_8c_ae1064ff55886ef9cf64f424672819a27} 
+void v\+Timer2\+ISR (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source_l00362}{362}} of file \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{_s_d_c_c_2_cygnal_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}\index{port.c@{port.c}!xPortStartScheduler@{xPortStartScheduler}}
+\index{xPortStartScheduler@{xPortStartScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortStartScheduler()}{xPortStartScheduler()}}
+{\footnotesize\ttfamily \label{_s_d_c_c_2_cygnal_2port_8c_ade5a8c6666e7413a0355cc252029c5c6} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Start\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source_l00292}{292}} of file \mbox{\hyperlink{_s_d_c_c_2_cygnal_2port_8c_source}{port.\+c}}.
+
+
+
+\label{doc-var-members}
+\Hypertarget{_s_d_c_c_2_cygnal_2port_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_s_d_c_c_2_cygnal_2port_8c_af7b1fc0a36e224b885fb22b9936a03a2}\index{port.c@{port.c}!pxCurrentTCB@{pxCurrentTCB}}
+\index{pxCurrentTCB@{pxCurrentTCB}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{pxCurrentTCB}{pxCurrentTCB}}
+{\footnotesize\ttfamily \label{_s_d_c_c_2_cygnal_2port_8c_af7b1fc0a36e224b885fb22b9936a03a2} 
+volatile \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_af5b0f7452857787ed70ce2856ca74c4b}{TCB\+\_\+t}}\texorpdfstring{$\ast$}{*} volatile px\+Current\+TCB\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_source_l00067}{67}} of file \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_source}{ISR\+\_\+\+Support.\+h}}.
+

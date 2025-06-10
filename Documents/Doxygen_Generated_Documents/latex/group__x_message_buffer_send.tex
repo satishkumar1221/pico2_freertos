@@ -1,0 +1,68 @@
+\doxysection{x\+Message\+Buffer\+Send }
+\hypertarget{group__x_message_buffer_send}{}\label{group__x_message_buffer_send}\index{xMessageBufferSend@{xMessageBufferSend}}
+\doxylink{message__buffer_8h}{message\+\_\+buffer.\+h}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{message__buffer_8h_a858f6da6fe24a226c45caf1634ea1605}{xMessageBufferSend}}(\ \mbox{\hyperlink{message__buffer_8h_a6c510e0a4aeb3a08df4af49c1d651057}{MessageBufferHandle\_t}}\ xMessageBuffer,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *pvTxData,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ xDataLengthBytes,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xTicksToWait\ );}
+
+\end{DoxyCode}
+
+
+Sends a discrete message to the message buffer. The message can be any length that fits within the buffer\textquotesingle{}s free space, and is copied into the buffer.
+
+{\itshape {\bfseries{NOTE}}}\+: Uniquely among Free\+RTOS objects, the stream buffer implementation (so also the message buffer implementation, as message buffers are built on top of stream buffers) assumes there is only one task or interrupt that will write to the buffer (the writer), and only one task or interrupt that will read from the buffer (the reader). It is safe for the writer and reader to be different tasks or interrupts, but, unlike other Free\+RTOS objects, it is not safe to have multiple different writers or multiple different readers. If there are to be multiple different writers then the application writer must place each call to a writing API function (such as \doxylink{message__buffer_8h_a858f6da6fe24a226c45caf1634ea1605}{x\+Message\+Buffer\+Send()}) inside a critical section and set the send block time to 0. Likewise, if there are to be multiple different readers then the application writer must place each call to a reading API function (such as x\+Message\+Buffer\+Read()) inside a critical section and set the receive block time to 0.
+
+Use \doxylink{message__buffer_8h_a858f6da6fe24a226c45caf1634ea1605}{x\+Message\+Buffer\+Send()} to write to a message buffer from a task. Use \doxylink{message__buffer_8h_aeef5b0c4f8c2db6ca2230a8874813e79}{x\+Message\+Buffer\+Send\+From\+ISR()} to write to a message buffer from an interrupt service routine (ISR).
+
+config\+USE\+\_\+\+STREAM\+\_\+\+BUFFERS must be set to 1 in for Free\+RTOSConfig.\+h for \doxylink{message__buffer_8h_a858f6da6fe24a226c45caf1634ea1605}{x\+Message\+Buffer\+Send()} to be available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Message\+Buffer} & The handle of the message buffer to which a message is being sent.\\
+\hline
+{\em pv\+Tx\+Data} & A pointer to the message that is to be copied into the message buffer.\\
+\hline
+{\em x\+Data\+Length\+Bytes} & The length of the message. That is, the number of bytes to copy from pv\+Tx\+Data into the message buffer. When a message is written to the message buffer an additional sizeof( size\+\_\+t ) bytes are also written to store the message\textquotesingle{}s length. sizeof( size\+\_\+t ) is typically 4 bytes on a 32-\/bit architecture, so on most 32-\/bit architecture setting x\+Data\+Length\+Bytes to 20 will reduce the free space in the message buffer by 24 bytes (20 bytes of message data and 4 bytes to hold the message length).\\
+\hline
+{\em x\+Ticks\+To\+Wait} & The maximum amount of time the calling task should remain in the Blocked state to wait for enough space to become available in the message buffer, should the message buffer have insufficient space when \doxylink{message__buffer_8h_a858f6da6fe24a226c45caf1634ea1605}{x\+Message\+Buffer\+Send()} is called. The calling task will never block if x\+Ticks\+To\+Wait is zero. The block time is specified in tick periods, so the absolute time it represents is dependent on the tick frequency. The macro \doxylink{projdefs_8h_a353d0f62b82a402cb3db63706c81ec3f}{pd\+MS\+\_\+\+TO\+\_\+\+TICKS()} can be used to convert a time specified in milliseconds into a time specified in ticks. Setting x\+Ticks\+To\+Wait to port\+MAX\+\_\+\+DELAY will cause the task to wait indefinitely (without timing out), provided INCLUDE\+\_\+v\+Task\+Suspend is set to 1 in Free\+RTOSConfig.\+h. Tasks do not use any CPU time when they are in the Blocked state.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of bytes written to the message buffer. If the call to \doxylink{message__buffer_8h_a858f6da6fe24a226c45caf1634ea1605}{x\+Message\+Buffer\+Send()} times out before there was enough space to write the message into the message buffer then zero is returned. If the call did not time out then x\+Data\+Length\+Bytes is returned.
+\end{DoxyReturn}
+Example use\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vAFunction(\ \mbox{\hyperlink{message__buffer_8h_a6c510e0a4aeb3a08df4af49c1d651057}{MessageBufferHandle\_t}}\ xMessageBuffer\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keywordtype}{size\_t}\ xBytesSent;}
+\DoxyCodeLine{uint8\_t\ ucArrayToSend[]\ =\ \{\ 0,\ 1,\ 2,\ 3\ \};}
+\DoxyCodeLine{\textcolor{keywordtype}{char}\ *pcStringToSend\ =\ \textcolor{stringliteral}{"{}String\ to\ send"{}};}
+\DoxyCodeLine{\textcolor{keyword}{const}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ x100ms\ =\ \mbox{\hyperlink{projdefs_8h_a353d0f62b82a402cb3db63706c81ec3f}{pdMS\_TO\_TICKS}}(\ 100\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Send\ an\ array\ to\ the\ message\ buffer,\ blocking\ for\ a\ maximum\ of\ 100ms\ to}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ wait\ for\ enough\ space\ to\ be\ available\ in\ the\ message\ buffer.}}
+\DoxyCodeLine{\ xBytesSent\ =\ \mbox{\hyperlink{message__buffer_8h_a858f6da6fe24a226c45caf1634ea1605}{xMessageBufferSend}}(\ xMessageBuffer,\ (\ \textcolor{keywordtype}{void}\ *\ )\ ucArrayToSend,\ \textcolor{keyword}{sizeof}(\ ucArrayToSend\ ),\ x100ms\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(\ xBytesSent\ !=\ \textcolor{keyword}{sizeof}(\ ucArrayToSend\ )\ )}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ The\ call\ to\ xMessageBufferSend()\ times\ out\ before\ there\ was\ enough}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ space\ in\ the\ buffer\ for\ the\ data\ to\ be\ written.}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Send\ the\ string\ to\ the\ message\ buffer.\ \ Return\ immediately\ if\ there\ is}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ not\ enough\ space\ in\ the\ buffer.}}
+\DoxyCodeLine{\ xBytesSent\ =\ \mbox{\hyperlink{message__buffer_8h_a858f6da6fe24a226c45caf1634ea1605}{xMessageBufferSend}}(\ xMessageBuffer,\ (\ \textcolor{keywordtype}{void}\ *\ )\ pcStringToSend,\ strlen(\ pcStringToSend\ ),\ 0\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(\ xBytesSent\ !=\ strlen(\ pcStringToSend\ )\ )}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ The\ string\ could\ not\ be\ added\ to\ the\ message\ buffer\ because\ there\ was}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ not\ enough\ free\ space\ in\ the\ buffer.}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

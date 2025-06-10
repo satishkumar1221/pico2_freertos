@@ -1,0 +1,70 @@
+\doxysection{x\+Stream\+Buffer\+Send }
+\hypertarget{group__x_stream_buffer_send}{}\label{group__x_stream_buffer_send}\index{xStreamBufferSend@{xStreamBufferSend}}
+\doxylink{stream__buffer_8h}{stream\+\_\+buffer.\+h}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{stream__buffer_8h_a35cdf3b6bf677086b9128782f762499d}{xStreamBufferSend}}(\ \mbox{\hyperlink{stream__buffer_8h_a8b80974e2278f073412293e6580ce56f}{StreamBufferHandle\_t}}\ xStreamBuffer,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *pvTxData,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ xDataLengthBytes,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xTicksToWait\ );}
+
+\end{DoxyCode}
+
+
+Sends bytes to a stream buffer. The bytes are copied into the stream buffer.
+
+{\itshape {\bfseries{NOTE}}}\+: Uniquely among Free\+RTOS objects, the stream buffer implementation (so also the message buffer implementation, as message buffers are built on top of stream buffers) assumes there is only one task or interrupt that will write to the buffer (the writer), and only one task or interrupt that will read from the buffer (the reader). It is safe for the writer and reader to be different tasks or interrupts, but, unlike other Free\+RTOS objects, it is not safe to have multiple different writers or multiple different readers. If there are to be multiple different writers then the application writer must place each call to a writing API function (such as \doxylink{stream__buffer_8h_a35cdf3b6bf677086b9128782f762499d}{x\+Stream\+Buffer\+Send()}) inside a critical section and set the send block time to 0. Likewise, if there are to be multiple different readers then the application writer must place each call to a reading API function (such as \doxylink{stream__buffer_8h_a55efc144b988598d84a6087d3e20b507}{x\+Stream\+Buffer\+Receive()}) inside a critical section and set the receive block time to 0.
+
+Use \doxylink{stream__buffer_8h_a35cdf3b6bf677086b9128782f762499d}{x\+Stream\+Buffer\+Send()} to write to a stream buffer from a task. Use \doxylink{stream__buffer_8h_a1dab226e99230e01e79bc2b5c0605e44}{x\+Stream\+Buffer\+Send\+From\+ISR()} to write to a stream buffer from an interrupt service routine (ISR).
+
+config\+USE\+\_\+\+STREAM\+\_\+\+BUFFERS must be set to 1 in for Free\+RTOSConfig.\+h for \doxylink{stream__buffer_8h_a35cdf3b6bf677086b9128782f762499d}{x\+Stream\+Buffer\+Send()} to be available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Stream\+Buffer} & The handle of the stream buffer to which a stream is being sent.\\
+\hline
+{\em pv\+Tx\+Data} & A pointer to the buffer that holds the bytes to be copied into the stream buffer.\\
+\hline
+{\em x\+Data\+Length\+Bytes} & The maximum number of bytes to copy from pv\+Tx\+Data into the stream buffer.\\
+\hline
+{\em x\+Ticks\+To\+Wait} & The maximum amount of time the task should remain in the Blocked state to wait for enough space to become available in the stream buffer, should the stream buffer contain too little space to hold the another x\+Data\+Length\+Bytes bytes. The block time is specified in tick periods, so the absolute time it represents is dependent on the tick frequency. The macro \doxylink{projdefs_8h_a353d0f62b82a402cb3db63706c81ec3f}{pd\+MS\+\_\+\+TO\+\_\+\+TICKS()} can be used to convert a time specified in milliseconds into a time specified in ticks. Setting x\+Ticks\+To\+Wait to port\+MAX\+\_\+\+DELAY will cause the task to wait indefinitely (without timing out), provided INCLUDE\+\_\+v\+Task\+Suspend is set to 1 in Free\+RTOSConfig.\+h. If a task times out before it can write all x\+Data\+Length\+Bytes into the buffer it will still write as many bytes as possible. A task does not use any CPU time when it is in the blocked state.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of bytes written to the stream buffer. If a task times out before it can write all x\+Data\+Length\+Bytes into the buffer it will still write as many bytes as possible.
+\end{DoxyReturn}
+Example use\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vAFunction(\ \mbox{\hyperlink{stream__buffer_8h_a8b80974e2278f073412293e6580ce56f}{StreamBufferHandle\_t}}\ xStreamBuffer\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keywordtype}{size\_t}\ xBytesSent;}
+\DoxyCodeLine{uint8\_t\ ucArrayToSend[]\ =\ \{\ 0,\ 1,\ 2,\ 3\ \};}
+\DoxyCodeLine{\textcolor{keywordtype}{char}\ *pcStringToSend\ =\ \textcolor{stringliteral}{"{}String\ to\ send"{}};}
+\DoxyCodeLine{\textcolor{keyword}{const}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ x100ms\ =\ \mbox{\hyperlink{projdefs_8h_a353d0f62b82a402cb3db63706c81ec3f}{pdMS\_TO\_TICKS}}(\ 100\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Send\ an\ array\ to\ the\ stream\ buffer,\ blocking\ for\ a\ maximum\ of\ 100ms\ to}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ wait\ for\ enough\ space\ to\ be\ available\ in\ the\ stream\ buffer.}}
+\DoxyCodeLine{\ xBytesSent\ =\ \mbox{\hyperlink{stream__buffer_8h_a35cdf3b6bf677086b9128782f762499d}{xStreamBufferSend}}(\ xStreamBuffer,\ (\ \textcolor{keywordtype}{void}\ *\ )\ ucArrayToSend,\ \textcolor{keyword}{sizeof}(\ ucArrayToSend\ ),\ x100ms\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(\ xBytesSent\ !=\ \textcolor{keyword}{sizeof}(\ ucArrayToSend\ )\ )}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ The\ call\ to\ xStreamBufferSend()\ times\ out\ before\ there\ was\ enough}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ space\ in\ the\ buffer\ for\ the\ data\ to\ be\ written,\ but\ it\ did}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ successfully\ write\ xBytesSent\ bytes.}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Send\ the\ string\ to\ the\ stream\ buffer.\ \ Return\ immediately\ if\ there\ is\ not}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ enough\ space\ in\ the\ buffer.}}
+\DoxyCodeLine{\ xBytesSent\ =\ \mbox{\hyperlink{stream__buffer_8h_a35cdf3b6bf677086b9128782f762499d}{xStreamBufferSend}}(\ xStreamBuffer,\ (\ \textcolor{keywordtype}{void}\ *\ )\ pcStringToSend,\ strlen(\ pcStringToSend\ ),\ 0\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(\ xBytesSent\ !=\ strlen(\ pcStringToSend\ )\ )}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ The\ entire\ string\ could\ not\ be\ added\ to\ the\ stream\ buffer\ because}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ there\ was\ not\ enough\ free\ space\ in\ the\ buffer,\ but\ xBytesSent\ bytes}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ were\ sent.\ \ Could\ try\ again\ to\ send\ the\ remaining\ bytes.}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

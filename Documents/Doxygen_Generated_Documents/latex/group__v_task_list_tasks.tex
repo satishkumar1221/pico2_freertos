@@ -1,0 +1,170 @@
+\doxysection{v\+Task\+List\+Tasks }
+\hypertarget{group__v_task_list_tasks}{}\label{group__v_task_list_tasks}\index{vTaskListTasks@{vTaskListTasks}}
+\doxylink{task_8h}{task.\+h} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxTaskGetStackHighWaterMark(\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xTask\ );}
+
+\end{DoxyCode}
+
+
+INCLUDE\+\_\+ux\+Task\+Get\+Stack\+High\+Water\+Mark must be set to 1 in Free\+RTOSConfig.\+h for this function to be available.
+
+Returns the high water mark of the stack associated with x\+Task. That is, the minimum free stack space there has been (in words, so on a 32 bit machine a value of 1 means 4 bytes) since the task started. The smaller the returned number the closer the task has come to overflowing its stack.
+
+ux\+Task\+Get\+Stack\+High\+Water\+Mark() and ux\+Task\+Get\+Stack\+High\+Water\+Mark2() are the same except for their return type. Using config\+STACK\+\_\+\+DEPTH\+\_\+\+TYPE allows the user to determine the return type. It gets around the problem of the value overflowing on 8-\/bit types without breaking backward compatibility for applications that expect an 8-\/bit return type.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Task} & Handle of the task associated with the stack to be checked. Set x\+Task to NULL to check the stack of the calling task.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The smallest amount of free stack space there has been (in words, so actual spaces on the stack rather than bytes) since the task referenced by x\+Task was created. \doxylink{task_8h}{task.\+h} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_ae4e85bffd36d76cf2796092f0ccd784a}{configSTACK\_DEPTH\_TYPE}}\ uxTaskGetStackHighWaterMark2(\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xTask\ );}
+
+\end{DoxyCode}
+
+\end{DoxyReturn}
+INCLUDE\+\_\+ux\+Task\+Get\+Stack\+High\+Water\+Mark2 must be set to 1 in Free\+RTOSConfig.\+h for this function to be available.
+
+Returns the high water mark of the stack associated with x\+Task. That is, the minimum free stack space there has been (in words, so on a 32 bit machine a value of 1 means 4 bytes) since the task started. The smaller the returned number the closer the task has come to overflowing its stack.
+
+ux\+Task\+Get\+Stack\+High\+Water\+Mark() and ux\+Task\+Get\+Stack\+High\+Water\+Mark2() are the same except for their return type. Using config\+STACK\+\_\+\+DEPTH\+\_\+\+TYPE allows the user to determine the return type. It gets around the problem of the value overflowing on 8-\/bit types without breaking backward compatibility for applications that expect an 8-\/bit return type.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Task} & Handle of the task associated with the stack to be checked. Set x\+Task to NULL to check the stack of the calling task.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The smallest amount of free stack space there has been (in words, so actual spaces on the stack rather than bytes) since the task referenced by x\+Task was created. \doxylink{task_8h}{task.\+h} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xTaskCallApplicationTaskHook(\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xTask,\ \textcolor{keywordtype}{void}\ *pvParameter\ );}
+
+\end{DoxyCode}
+
+\end{DoxyReturn}
+Calls the hook function associated with x\+Task. Passing x\+Task as NULL has the effect of calling the Running tasks (the calling task) hook function.
+
+pv\+Parameter is passed to the hook function for the task to interpret as it wants. The return value is the value returned by the task hook function registered by the user. x\+Task\+Get\+Idle\+Task\+Handle() is only available if INCLUDE\+\_\+x\+Task\+Get\+Idle\+Task\+Handle is set to 1 in Free\+RTOSConfig.\+h.
+
+In single-\/core Free\+RTOS, this function simply returns the handle of the idle task. It is not valid to call x\+Task\+Get\+Idle\+Task\+Handle() before the scheduler has been started.
+
+In the Free\+RTOS SMP, there are a total of config\+NUMBER\+\_\+\+OF\+\_\+\+CORES idle tasks\+:
+\begin{DoxyEnumerate}
+\item 1 Active idle task which does all the housekeeping.
+\item ( config\+NUMBER\+\_\+\+OF\+\_\+\+CORES -\/ 1 ) Passive idle tasks which do nothing. These idle tasks are created to ensure that each core has an idle task to run when no other task is available to run. Call x\+Task\+Get\+Idle\+Task\+Handle() or x\+Task\+Get\+Idle\+Task\+Handle\+For\+Core() with x\+Core\+ID set to 0 to get the Active idle task handle. Call x\+Task\+Get\+Idle\+Task\+Handle\+For\+Core() with x\+Core\+ID set to 1,2 ... ( config\+NUMBER\+\_\+\+OF\+\_\+\+CORES -\/ 1 ) to get the Passive idle task handles. config\+USE\+\_\+\+TRACE\+\_\+\+FACILITY must be defined as 1 in Free\+RTOSConfig.\+h for ux\+Task\+Get\+System\+State() to be available.
+\end{DoxyEnumerate}
+
+ux\+Task\+Get\+System\+State() populates an \doxylink{task_8h_ae5c0c4b9b2c8af5836583b2984ef5b6e}{Task\+Status\+\_\+t} structure for each task in the system. \doxylink{task_8h_ae5c0c4b9b2c8af5836583b2984ef5b6e}{Task\+Status\+\_\+t} structures contain, among other things, members for the task handle, task name, task priority, task state, and total amount of run time consumed by the task. See the \doxylink{task_8h_ae5c0c4b9b2c8af5836583b2984ef5b6e}{Task\+Status\+\_\+t} structure definition in this file for the full member list.
+
+NOTE\+: This function is intended for debugging use only as its use results in the scheduler remaining suspended for an extended period.
+
+
+\begin{DoxyParams}{Parameters}
+{\em px\+Task\+Status\+Array} & A pointer to an array of \doxylink{task_8h_ae5c0c4b9b2c8af5836583b2984ef5b6e}{Task\+Status\+\_\+t} structures. The array must contain at least one \doxylink{task_8h_ae5c0c4b9b2c8af5836583b2984ef5b6e}{Task\+Status\+\_\+t} structure for each task that is under the control of the RTOS. The number of tasks under the control of the RTOS can be determined using the \doxylink{task_8h_a70a89a0f07c7db5d695707d1f6f44a4a}{ux\+Task\+Get\+Number\+Of\+Tasks()} API function.\\
+\hline
+{\em ux\+Array\+Size} & The size of the array pointed to by the px\+Task\+Status\+Array parameter. The size is specified as the number of indexes in the array, or the number of \doxylink{task_8h_ae5c0c4b9b2c8af5836583b2984ef5b6e}{Task\+Status\+\_\+t} structures contained in the array, not by the number of bytes in the array.\\
+\hline
+{\em pul\+Total\+Run\+Time} & If config\+GENERATE\+\_\+\+RUN\+\_\+\+TIME\+\_\+\+STATS is set to 1 in Free\+RTOSConfig.\+h then \texorpdfstring{$\ast$}{*}pul\+Total\+Run\+Time is set by ux\+Task\+Get\+System\+State() to the total run time (as defined by the run time stats clock, see \href{https://www.FreeRTOS.org/rtos-run-time-stats.html}{\texttt{https\+://www.\+Free\+RTOS.\+org/rtos-\/run-\/time-\/stats.\+html}}) since the target booted. pul\+Total\+Run\+Time can be set to NULL to omit the total run time information.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of \doxylink{task_8h_ae5c0c4b9b2c8af5836583b2984ef5b6e}{Task\+Status\+\_\+t} structures that were populated by ux\+Task\+Get\+System\+State(). This should equal the number returned by the \doxylink{task_8h_a70a89a0f07c7db5d695707d1f6f44a4a}{ux\+Task\+Get\+Number\+Of\+Tasks()} API function, but will be zero if the value passed in the ux\+Array\+Size parameter was too small.
+\end{DoxyReturn}
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \textcolor{comment}{//\ This\ example\ demonstrates\ how\ a\ human\ readable\ table\ of\ run\ time\ stats}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ information\ is\ generated\ from\ raw\ data\ provided\ by\ uxTaskGetSystemState().}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ The\ human\ readable\ table\ is\ written\ to\ pcWriteBuffer}}
+\DoxyCodeLine{\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{task_8h_a9d9cbeb55e8b255293690ceed544b047}{vTaskGetRunTimeStats}}(\ \textcolor{keywordtype}{char}\ *pcWriteBuffer\ )}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \mbox{\hyperlink{task_8h_ae5c0c4b9b2c8af5836583b2984ef5b6e}{TaskStatus\_t}}\ *pxTaskStatusArray;}
+\DoxyCodeLine{\ \textcolor{keyword}{volatile}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxArraySize,\ x;}
+\DoxyCodeLine{\ \mbox{\hyperlink{_free_r_t_o_s_8h_ac9ea108cc5201dd5b2877a7dfe7e07a3}{configRUN\_TIME\_COUNTER\_TYPE}}\ ulTotalRunTime,\ ulStatsAsPercentage;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Make\ sure\ the\ write\ buffer\ does\ not\ contain\ a\ string.}}
+\DoxyCodeLine{pcWriteBuffer\ =\ 0x00;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Take\ a\ snapshot\ of\ the\ number\ of\ tasks\ in\ case\ it\ changes\ while\ this}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ function\ is\ executing.}}
+\DoxyCodeLine{\ \ \ \ \ uxArraySize\ =\ \mbox{\hyperlink{task_8h_a70a89a0f07c7db5d695707d1f6f44a4a}{uxTaskGetNumberOfTasks}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Allocate\ a\ TaskStatus\_t\ structure\ for\ each\ task.\ \ An\ array\ could\ be}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ allocated\ statically\ at\ compile\ time.}}
+\DoxyCodeLine{\ \ \ \ \ pxTaskStatusArray\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_a4d523dc6c079459faa62130465595246}{pvPortMalloc}}(\ uxArraySize\ *\ \textcolor{keyword}{sizeof}(\ \mbox{\hyperlink{task_8h_ae5c0c4b9b2c8af5836583b2984ef5b6e}{TaskStatus\_t}}\ )\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(\ pxTaskStatusArray\ !=\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Generate\ raw\ status\ information\ about\ each\ task.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ uxArraySize\ =\ uxTaskGetSystemState(\ pxTaskStatusArray,\ uxArraySize,\ \&ulTotalRunTime\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ For\ percentage\ calculations.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ ulTotalRunTime\ /=\ 100U;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Avoid\ divide\ by\ zero\ errors.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ ulTotalRunTime\ >\ 0\ )}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ For\ each\ populated\ position\ in\ the\ pxTaskStatusArray\ array,}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ format\ the\ raw\ data\ as\ human\ readable\ ASCII\ data}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\ x\ =\ 0;\ x\ <\ uxArraySize;\ x++\ )}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ What\ percentage\ of\ the\ total\ run\ time\ has\ the\ task\ used?}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ will\ always\ be\ rounded\ down\ to\ the\ nearest\ integer.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ulTotalRunTimeDiv100\ has\ already\ been\ divided\ by\ 100.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ulStatsAsPercentage\ =\ pxTaskStatusArray[\ x\ ].\mbox{\hyperlink{structx_t_a_s_k___s_t_a_t_u_s_a94915091d92efd017afb3dbdb5595da9}{ulRunTimeCounter}}\ /\ ulTotalRunTime;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ ulStatsAsPercentage\ >\ 0U\ )}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sprintf(\ pcWriteBuffer,\ \textcolor{stringliteral}{"{}\%s\(\backslash\)t\(\backslash\)t\%lu\(\backslash\)t\(\backslash\)t\%lu\%\%\(\backslash\)r\(\backslash\)n"{}},\ pxTaskStatusArray[\ x\ ].pcTaskName,\ pxTaskStatusArray[\ x\ ].ulRunTimeCounter,\ ulStatsAsPercentage\ );}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ the\ percentage\ is\ zero\ here\ then\ the\ task\ has}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ consumed\ less\ than\ 1\%\ of\ the\ total\ run\ time.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sprintf(\ pcWriteBuffer,\ \textcolor{stringliteral}{"{}\%s\(\backslash\)t\(\backslash\)t\%lu\(\backslash\)t\(\backslash\)t<1\%\%\(\backslash\)r\(\backslash\)n"{}},\ pxTaskStatusArray[\ x\ ].pcTaskName,\ pxTaskStatusArray[\ x\ ].ulRunTimeCounter\ );}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pcWriteBuffer\ +=\ strlen(\ (\ \textcolor{keywordtype}{char}\ *\ )\ pcWriteBuffer\ );}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ array\ is\ no\ longer\ needed,\ free\ the\ memory\ it\ consumes.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_a5e70e878c0ed79ab346b5eab7e93ddff}{vPortFree}}(\ pxTaskStatusArray\ );}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \}}
+
+\end{DoxyCode}
+ task. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vTaskListTasks(\ \textcolor{keywordtype}{char}\ *pcWriteBuffer,\ \textcolor{keywordtype}{size\_t}\ uxBufferLength\ );}
+
+\end{DoxyCode}
+
+
+config\+USE\+\_\+\+TRACE\+\_\+\+FACILITY and config\+USE\+\_\+\+STATS\+\_\+\+FORMATTING\+\_\+\+FUNCTIONS must both be defined as 1 for this function to be available. See the configuration section of the Free\+RTOS.\+org website for more information.
+
+NOTE 1\+: This function will disable interrupts for its duration. It is not intended for normal application runtime use but as a debug aid.
+
+Lists all the current tasks, along with their current state and stack usage high water mark.
+
+Tasks are reported as blocked (\textquotesingle{}B\textquotesingle{}), ready (\textquotesingle{}R\textquotesingle{}), deleted (\textquotesingle{}D\textquotesingle{}) or suspended (\textquotesingle{}S\textquotesingle{}).
+
+PLEASE NOTE\+:
+
+This function is provided for convenience only, and is used by many of the demo applications. Do not consider it to be part of the scheduler.
+
+v\+Task\+List\+Tasks() calls ux\+Task\+Get\+System\+State(), then formats part of the ux\+Task\+Get\+System\+State() output into a human readable table that displays task\+: names, states, priority, stack usage and task number. Stack usage specified as the number of unused \doxylink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t} words stack can hold on top of stack -\/ not the number of bytes.
+
+v\+Task\+List\+Tasks() has a dependency on the snprintf() C library function that might bloat the code size, use a lot of stack, and provide different results on different platforms. An alternative, tiny, third party, and limited functionality implementation of snprintf() is provided in many of the Free\+RTOS/\+Demo sub-\/directories in a file called printf-\/stdarg.\+c (note printf-\/stdarg.\+c does not provide a full snprintf() implementation!).
+
+It is recommended that production systems call ux\+Task\+Get\+System\+State() directly to get access to raw stats data, rather than indirectly through a call to v\+Task\+List\+Tasks().
+
+
+\begin{DoxyParams}{Parameters}
+{\em pc\+Write\+Buffer} & A buffer into which the above mentioned details will be written, in ASCII form. This buffer is assumed to be large enough to contain the generated report. Approximately 40 bytes per task should be sufficient.\\
+\hline
+{\em ux\+Buffer\+Length} & Length of the pc\+Write\+Buffer. \\
+\hline
+\end{DoxyParams}

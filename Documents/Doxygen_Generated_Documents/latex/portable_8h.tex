@@ -1,0 +1,317 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/include/portable.h File Reference}
+\hypertarget{portable_8h}{}\label{portable_8h}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/portable.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/portable.h}}
+{\ttfamily \#include "{}deprecated\+\_\+definitions.\+h"{}}\newline
+{\ttfamily \#include "{}portmacro.\+h"{}}\newline
+{\ttfamily \#include "{}mpu\+\_\+wrappers.\+h"{}}\newline
+Include dependency graph for portable.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_heap_region}{Heap\+Region}}
+\item 
+struct \mbox{\hyperlink{structx_heap_stats}{x\+Heap\+Stats}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{portable_8h_a63d7ba028eb2432720bb5c7d626a8d7e}{port\+USING\+\_\+\+MPU\+\_\+\+WRAPPERS}}~0
+\item 
+\#define \mbox{\hyperlink{portable_8h_aca7e1a8a568a38b74cc9db10c8efebda}{port\+NUM\+\_\+\+CONFIGURABLE\+\_\+\+REGIONS}}~1
+\item 
+\#define \mbox{\hyperlink{portable_8h_a19b8150e9a84001333b8728be1882da0}{port\+HAS\+\_\+\+STACK\+\_\+\+OVERFLOW\+\_\+\+CHECKING}}~0
+\item 
+\#define \mbox{\hyperlink{portable_8h_a2d5be0d247f2bf84b3d699be1378e8c4}{port\+ARCH\+\_\+\+NAME}}~\mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}
+\item 
+\#define \mbox{\hyperlink{portable_8h_ae4e85bffd36d76cf2796092f0ccd784a}{config\+STACK\+\_\+\+DEPTH\+\_\+\+TYPE}}~\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}}
+\item 
+\#define \mbox{\hyperlink{portable_8h_a03b048d3b1b965b4e6b0e0e03b1038ff}{config\+STACK\+\_\+\+ALLOCATION\+\_\+\+FROM\+\_\+\+SEPARATE\+\_\+\+HEAP}}~0
+\item 
+\#define \mbox{\hyperlink{portable_8h_aa189f196e41e18e7b86a7764d67691f6}{pv\+Port\+Malloc\+Stack}}~\mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_a4d523dc6c079459faa62130465595246}{pv\+Port\+Malloc}}
+\item 
+\#define \mbox{\hyperlink{portable_8h_aea845f6533dc5815a516b16ce7bda9e6}{v\+Port\+Free\+Stack}}~\mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_a5e70e878c0ed79ab346b5eab7e93ddff}{v\+Port\+Free}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{struct_heap_region}{Heap\+Region}} \mbox{\hyperlink{portable_8h_acce46e1bf21496c11f2b1e49ded2882b}{Heap\+Region\+\_\+t}}
+\item 
+typedef struct \mbox{\hyperlink{structx_heap_stats}{x\+Heap\+Stats}} \mbox{\hyperlink{portable_8h_aebfa6771f45f6a5ac026e91ee2fd57f4}{Heap\+Stats\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{portable_8h_ac176989ae73455502063fd6cbe01a1ca}{px\+Port\+Initialise\+Stack}} (\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}px\+Top\+Of\+Stack, \mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}} px\+Code, void \texorpdfstring{$\ast$}{*}pv\+Parameters) \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}}
+\item 
+void \mbox{\hyperlink{portable_8h_a4f3a75726f448c4170d9d6565bdef636}{v\+Port\+Define\+Heap\+Regions}} (const \mbox{\hyperlink{portable_8h_acce46e1bf21496c11f2b1e49ded2882b}{Heap\+Region\+\_\+t}} \texorpdfstring{$\ast$}{*}const px\+Heap\+Regions) \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}}
+\item 
+void \mbox{\hyperlink{portable_8h_abbecc6cff952357f60cce5014ecbe470}{v\+Port\+Get\+Heap\+Stats}} (\mbox{\hyperlink{portable_8h_aebfa6771f45f6a5ac026e91ee2fd57f4}{Heap\+Stats\+\_\+t}} \texorpdfstring{$\ast$}{*}px\+Heap\+Stats)
+\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{portable_8h_a60af819b89a8df65e00660ed77015aba}{pv\+Port\+Malloc}} (size\+\_\+t x\+Wanted\+Size) \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}}
+\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{portable_8h_a8596fd5fd0a3bccf22fa1fa97999b8d7}{pv\+Port\+Calloc}} (size\+\_\+t x\+Num, size\+\_\+t x\+Size) \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}}
+\item 
+void \mbox{\hyperlink{portable_8h_a735cd3085bb7ba06ff8e47565bfd7016}{v\+Port\+Free}} (void \texorpdfstring{$\ast$}{*}pv) \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}}
+\item 
+void \mbox{\hyperlink{portable_8h_a846b5ebdaf2b51fe707efb4a0974f676}{v\+Port\+Initialise\+Blocks}} (void) \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}}
+\item 
+size\+\_\+t \mbox{\hyperlink{portable_8h_a8f72fbee5c25c956bda528299ce6dd02}{x\+Port\+Get\+Free\+Heap\+Size}} (void) \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}}
+\item 
+size\+\_\+t \mbox{\hyperlink{portable_8h_a6195704430323f2e97ea4deab7a4eece}{x\+Port\+Get\+Minimum\+Ever\+Free\+Heap\+Size}} (void) \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}}
+\item 
+void \mbox{\hyperlink{portable_8h_ab1d82c64224912f762fbf4bf1f4d59de}{v\+Port\+Heap\+Reset\+State}} (void) \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{portable_8h_a4f3b1bb7590996f2fa1e0456dda961ff}{x\+Port\+Start\+Scheduler}} (void) \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}}
+\begin{DoxyCompactList}\small\item\em start the freertos scheduler, go to the first task \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{portable_8h_aa356b7baaa9089490321aa919542dd6c}{v\+Port\+End\+Scheduler}} (void) \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{portable_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{portable_8h_a03b048d3b1b965b4e6b0e0e03b1038ff}\index{portable.h@{portable.h}!configSTACK\_ALLOCATION\_FROM\_SEPARATE\_HEAP@{configSTACK\_ALLOCATION\_FROM\_SEPARATE\_HEAP}}
+\index{configSTACK\_ALLOCATION\_FROM\_SEPARATE\_HEAP@{configSTACK\_ALLOCATION\_FROM\_SEPARATE\_HEAP}!portable.h@{portable.h}}
+\doxysubsubsection{\texorpdfstring{configSTACK\_ALLOCATION\_FROM\_SEPARATE\_HEAP}{configSTACK\_ALLOCATION\_FROM\_SEPARATE\_HEAP}}
+{\footnotesize\ttfamily \label{portable_8h_a03b048d3b1b965b4e6b0e0e03b1038ff} 
+\#define config\+STACK\+\_\+\+ALLOCATION\+\_\+\+FROM\+\_\+\+SEPARATE\+\_\+\+HEAP~0}
+
+
+
+Definition at line \mbox{\hyperlink{portable_8h_source_l00094}{94}} of file \mbox{\hyperlink{portable_8h_source}{portable.\+h}}.
+
+\Hypertarget{portable_8h_ae4e85bffd36d76cf2796092f0ccd784a}\index{portable.h@{portable.h}!configSTACK\_DEPTH\_TYPE@{configSTACK\_DEPTH\_TYPE}}
+\index{configSTACK\_DEPTH\_TYPE@{configSTACK\_DEPTH\_TYPE}!portable.h@{portable.h}}
+\doxysubsubsection{\texorpdfstring{configSTACK\_DEPTH\_TYPE}{configSTACK\_DEPTH\_TYPE}}
+{\footnotesize\ttfamily \label{portable_8h_ae4e85bffd36d76cf2796092f0ccd784a} 
+\#define config\+STACK\+\_\+\+DEPTH\+\_\+\+TYPE~\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}}}
+
+
+
+Definition at line \mbox{\hyperlink{portable_8h_source_l00089}{89}} of file \mbox{\hyperlink{portable_8h_source}{portable.\+h}}.
+
+\Hypertarget{portable_8h_a2d5be0d247f2bf84b3d699be1378e8c4}\index{portable.h@{portable.h}!portARCH\_NAME@{portARCH\_NAME}}
+\index{portARCH\_NAME@{portARCH\_NAME}!portable.h@{portable.h}}
+\doxysubsubsection{\texorpdfstring{portARCH\_NAME}{portARCH\_NAME}}
+{\footnotesize\ttfamily \label{portable_8h_a2d5be0d247f2bf84b3d699be1378e8c4} 
+\#define port\+ARCH\+\_\+\+NAME~\mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}}
+
+
+
+Definition at line \mbox{\hyperlink{portable_8h_source_l00085}{85}} of file \mbox{\hyperlink{portable_8h_source}{portable.\+h}}.
+
+\Hypertarget{portable_8h_a19b8150e9a84001333b8728be1882da0}\index{portable.h@{portable.h}!portHAS\_STACK\_OVERFLOW\_CHECKING@{portHAS\_STACK\_OVERFLOW\_CHECKING}}
+\index{portHAS\_STACK\_OVERFLOW\_CHECKING@{portHAS\_STACK\_OVERFLOW\_CHECKING}!portable.h@{portable.h}}
+\doxysubsubsection{\texorpdfstring{portHAS\_STACK\_OVERFLOW\_CHECKING}{portHAS\_STACK\_OVERFLOW\_CHECKING}}
+{\footnotesize\ttfamily \label{portable_8h_a19b8150e9a84001333b8728be1882da0} 
+\#define port\+HAS\+\_\+\+STACK\+\_\+\+OVERFLOW\+\_\+\+CHECKING~0}
+
+
+
+Definition at line \mbox{\hyperlink{portable_8h_source_l00081}{81}} of file \mbox{\hyperlink{portable_8h_source}{portable.\+h}}.
+
+\Hypertarget{portable_8h_aca7e1a8a568a38b74cc9db10c8efebda}\index{portable.h@{portable.h}!portNUM\_CONFIGURABLE\_REGIONS@{portNUM\_CONFIGURABLE\_REGIONS}}
+\index{portNUM\_CONFIGURABLE\_REGIONS@{portNUM\_CONFIGURABLE\_REGIONS}!portable.h@{portable.h}}
+\doxysubsubsection{\texorpdfstring{portNUM\_CONFIGURABLE\_REGIONS}{portNUM\_CONFIGURABLE\_REGIONS}}
+{\footnotesize\ttfamily \label{portable_8h_aca7e1a8a568a38b74cc9db10c8efebda} 
+\#define port\+NUM\+\_\+\+CONFIGURABLE\+\_\+\+REGIONS~1}
+
+
+
+Definition at line \mbox{\hyperlink{portable_8h_source_l00077}{77}} of file \mbox{\hyperlink{portable_8h_source}{portable.\+h}}.
+
+\Hypertarget{portable_8h_a63d7ba028eb2432720bb5c7d626a8d7e}\index{portable.h@{portable.h}!portUSING\_MPU\_WRAPPERS@{portUSING\_MPU\_WRAPPERS}}
+\index{portUSING\_MPU\_WRAPPERS@{portUSING\_MPU\_WRAPPERS}!portable.h@{portable.h}}
+\doxysubsubsection{\texorpdfstring{portUSING\_MPU\_WRAPPERS}{portUSING\_MPU\_WRAPPERS}}
+{\footnotesize\ttfamily \label{portable_8h_a63d7ba028eb2432720bb5c7d626a8d7e} 
+\#define port\+USING\+\_\+\+MPU\+\_\+\+WRAPPERS~0}
+
+
+
+Definition at line \mbox{\hyperlink{portable_8h_source_l00073}{73}} of file \mbox{\hyperlink{portable_8h_source}{portable.\+h}}.
+
+\Hypertarget{portable_8h_aa189f196e41e18e7b86a7764d67691f6}\index{portable.h@{portable.h}!pvPortMallocStack@{pvPortMallocStack}}
+\index{pvPortMallocStack@{pvPortMallocStack}!portable.h@{portable.h}}
+\doxysubsubsection{\texorpdfstring{pvPortMallocStack}{pvPortMallocStack}}
+{\footnotesize\ttfamily \label{portable_8h_aa189f196e41e18e7b86a7764d67691f6} 
+\#define pv\+Port\+Malloc\+Stack~\mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_a4d523dc6c079459faa62130465595246}{pv\+Port\+Malloc}}}
+
+
+
+Definition at line \mbox{\hyperlink{portable_8h_source_l00193}{193}} of file \mbox{\hyperlink{portable_8h_source}{portable.\+h}}.
+
+\Hypertarget{portable_8h_aea845f6533dc5815a516b16ce7bda9e6}\index{portable.h@{portable.h}!vPortFreeStack@{vPortFreeStack}}
+\index{vPortFreeStack@{vPortFreeStack}!portable.h@{portable.h}}
+\doxysubsubsection{\texorpdfstring{vPortFreeStack}{vPortFreeStack}}
+{\footnotesize\ttfamily \label{portable_8h_aea845f6533dc5815a516b16ce7bda9e6} 
+\#define v\+Port\+Free\+Stack~\mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_a5e70e878c0ed79ab346b5eab7e93ddff}{v\+Port\+Free}}}
+
+
+
+Definition at line \mbox{\hyperlink{portable_8h_source_l00194}{194}} of file \mbox{\hyperlink{portable_8h_source}{portable.\+h}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{portable_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{portable_8h_acce46e1bf21496c11f2b1e49ded2882b}\index{portable.h@{portable.h}!HeapRegion\_t@{HeapRegion\_t}}
+\index{HeapRegion\_t@{HeapRegion\_t}!portable.h@{portable.h}}
+\doxysubsubsection{\texorpdfstring{HeapRegion\_t}{HeapRegion\_t}}
+{\footnotesize\ttfamily \label{portable_8h_acce46e1bf21496c11f2b1e49ded2882b} 
+typedef struct \mbox{\hyperlink{struct_heap_region}{Heap\+Region}} \mbox{\hyperlink{portable_8h_acce46e1bf21496c11f2b1e49ded2882b}{Heap\+Region\+\_\+t}}}
+
+\Hypertarget{portable_8h_aebfa6771f45f6a5ac026e91ee2fd57f4}\index{portable.h@{portable.h}!HeapStats\_t@{HeapStats\_t}}
+\index{HeapStats\_t@{HeapStats\_t}!portable.h@{portable.h}}
+\doxysubsubsection{\texorpdfstring{HeapStats\_t}{HeapStats\_t}}
+{\footnotesize\ttfamily \label{portable_8h_aebfa6771f45f6a5ac026e91ee2fd57f4} 
+typedef struct \mbox{\hyperlink{structx_heap_stats}{x\+Heap\+Stats}} \mbox{\hyperlink{portable_8h_aebfa6771f45f6a5ac026e91ee2fd57f4}{Heap\+Stats\+\_\+t}}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{portable_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{portable_8h_a8596fd5fd0a3bccf22fa1fa97999b8d7}\index{portable.h@{portable.h}!pvPortCalloc@{pvPortCalloc}}
+\index{pvPortCalloc@{pvPortCalloc}!portable.h@{portable.h}}
+\doxysubsubsection{\texorpdfstring{pvPortCalloc()}{pvPortCalloc()}}
+{\footnotesize\ttfamily \label{portable_8h_a8596fd5fd0a3bccf22fa1fa97999b8d7} 
+void \texorpdfstring{$\ast$}{*} pv\+Port\+Calloc (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{x\+Num}{, }\item[{size\+\_\+t}]{x\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{heap__2_8c_source_l00352}{352}} of file \mbox{\hyperlink{heap__2_8c_source}{heap\+\_\+2.\+c}}.
+
+\Hypertarget{portable_8h_a60af819b89a8df65e00660ed77015aba}\index{portable.h@{portable.h}!pvPortMalloc@{pvPortMalloc}}
+\index{pvPortMalloc@{pvPortMalloc}!portable.h@{portable.h}}
+\doxysubsubsection{\texorpdfstring{pvPortMalloc()}{pvPortMalloc()}}
+{\footnotesize\ttfamily \label{portable_8h_a60af819b89a8df65e00660ed77015aba} 
+void \texorpdfstring{$\ast$}{*} pv\+Port\+Malloc (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{x\+Wanted\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_source_l00252}{252}} of file \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_source}{secure\+\_\+heap.\+c}}.
+
+\Hypertarget{portable_8h_ac176989ae73455502063fd6cbe01a1ca}\index{portable.h@{portable.h}!pxPortInitialiseStack@{pxPortInitialiseStack}}
+\index{pxPortInitialiseStack@{pxPortInitialiseStack}!portable.h@{portable.h}}
+\doxysubsubsection{\texorpdfstring{pxPortInitialiseStack()}{pxPortInitialiseStack()}}
+{\footnotesize\ttfamily \label{portable_8h_ac176989ae73455502063fd6cbe01a1ca} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} px\+Port\+Initialise\+Stack (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{px\+Top\+Of\+Stack}{, }\item[{\mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}}}]{px\+Code}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+px\+Top\+Of\+Stack = 0x11;
+
+px\+Top\+Of\+Stack = 0x22;
+
+px\+Top\+Of\+Stack = 0x33;
+
+Definition at line \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portcomn_8c_source_l00049}{49}} of file \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portcomn_8c_source}{portcomn.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{portable_8h_a4f3a75726f448c4170d9d6565bdef636}\index{portable.h@{portable.h}!vPortDefineHeapRegions@{vPortDefineHeapRegions}}
+\index{vPortDefineHeapRegions@{vPortDefineHeapRegions}!portable.h@{portable.h}}
+\doxysubsubsection{\texorpdfstring{vPortDefineHeapRegions()}{vPortDefineHeapRegions()}}
+{\footnotesize\ttfamily \label{portable_8h_a4f3a75726f448c4170d9d6565bdef636} 
+void v\+Port\+Define\+Heap\+Regions (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{portable_8h_acce46e1bf21496c11f2b1e49ded2882b}{Heap\+Region\+\_\+t}} \texorpdfstring{$\ast$}{*}const}]{px\+Heap\+Regions}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{heap__5_8c_source_l00540}{540}} of file \mbox{\hyperlink{heap__5_8c_source}{heap\+\_\+5.\+c}}.
+
+\Hypertarget{portable_8h_aa356b7baaa9089490321aa919542dd6c}\index{portable.h@{portable.h}!vPortEndScheduler@{vPortEndScheduler}}
+\index{vPortEndScheduler@{vPortEndScheduler}!portable.h@{portable.h}}
+\doxysubsubsection{\texorpdfstring{vPortEndScheduler()}{vPortEndScheduler()}}
+{\footnotesize\ttfamily \label{portable_8h_aa356b7baaa9089490321aa919542dd6c} 
+void v\+Port\+End\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_source_l01780}{1780}} of file \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_source}{port.\+c}}.
+
+Here is the caller graph for this function\+:
+% FIG 3
+\Hypertarget{portable_8h_a735cd3085bb7ba06ff8e47565bfd7016}\index{portable.h@{portable.h}!vPortFree@{vPortFree}}
+\index{vPortFree@{vPortFree}!portable.h@{portable.h}}
+\doxysubsubsection{\texorpdfstring{vPortFree()}{vPortFree()}}
+{\footnotesize\ttfamily \label{portable_8h_a735cd3085bb7ba06ff8e47565bfd7016} 
+void v\+Port\+Free (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{pv}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_source_l00424}{424}} of file \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_source}{secure\+\_\+heap.\+c}}.
+
+\Hypertarget{portable_8h_abbecc6cff952357f60cce5014ecbe470}\index{portable.h@{portable.h}!vPortGetHeapStats@{vPortGetHeapStats}}
+\index{vPortGetHeapStats@{vPortGetHeapStats}!portable.h@{portable.h}}
+\doxysubsubsection{\texorpdfstring{vPortGetHeapStats()}{vPortGetHeapStats()}}
+{\footnotesize\ttfamily \label{portable_8h_abbecc6cff952357f60cce5014ecbe470} 
+void v\+Port\+Get\+Heap\+Stats (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{portable_8h_aebfa6771f45f6a5ac026e91ee2fd57f4}{Heap\+Stats\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{px\+Heap\+Stats}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{heap__4_8c_source_l00566}{566}} of file \mbox{\hyperlink{heap__4_8c_source}{heap\+\_\+4.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{portable_8h_ab1d82c64224912f762fbf4bf1f4d59de}\index{portable.h@{portable.h}!vPortHeapResetState@{vPortHeapResetState}}
+\index{vPortHeapResetState@{vPortHeapResetState}!portable.h@{portable.h}}
+\doxysubsubsection{\texorpdfstring{vPortHeapResetState()}{vPortHeapResetState()}}
+{\footnotesize\ttfamily \label{portable_8h_ab1d82c64224912f762fbf4bf1f4d59de} 
+void v\+Port\+Heap\+Reset\+State (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{heap__1_8c_source_l00174}{174}} of file \mbox{\hyperlink{heap__1_8c_source}{heap\+\_\+1.\+c}}.
+
+\Hypertarget{portable_8h_a846b5ebdaf2b51fe707efb4a0974f676}\index{portable.h@{portable.h}!vPortInitialiseBlocks@{vPortInitialiseBlocks}}
+\index{vPortInitialiseBlocks@{vPortInitialiseBlocks}!portable.h@{portable.h}}
+\doxysubsubsection{\texorpdfstring{vPortInitialiseBlocks()}{vPortInitialiseBlocks()}}
+{\footnotesize\ttfamily \label{portable_8h_a846b5ebdaf2b51fe707efb4a0974f676} 
+void v\+Port\+Initialise\+Blocks (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{heap__1_8c_source_l00155}{155}} of file \mbox{\hyperlink{heap__1_8c_source}{heap\+\_\+1.\+c}}.
+
+\Hypertarget{portable_8h_a8f72fbee5c25c956bda528299ce6dd02}\index{portable.h@{portable.h}!xPortGetFreeHeapSize@{xPortGetFreeHeapSize}}
+\index{xPortGetFreeHeapSize@{xPortGetFreeHeapSize}!portable.h@{portable.h}}
+\doxysubsubsection{\texorpdfstring{xPortGetFreeHeapSize()}{xPortGetFreeHeapSize()}}
+{\footnotesize\ttfamily \label{portable_8h_a8f72fbee5c25c956bda528299ce6dd02} 
+size\+\_\+t x\+Port\+Get\+Free\+Heap\+Size (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_source_l00472}{472}} of file \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_source}{secure\+\_\+heap.\+c}}.
+
+\Hypertarget{portable_8h_a6195704430323f2e97ea4deab7a4eece}\index{portable.h@{portable.h}!xPortGetMinimumEverFreeHeapSize@{xPortGetMinimumEverFreeHeapSize}}
+\index{xPortGetMinimumEverFreeHeapSize@{xPortGetMinimumEverFreeHeapSize}!portable.h@{portable.h}}
+\doxysubsubsection{\texorpdfstring{xPortGetMinimumEverFreeHeapSize()}{xPortGetMinimumEverFreeHeapSize()}}
+{\footnotesize\ttfamily \label{portable_8h_a6195704430323f2e97ea4deab7a4eece} 
+size\+\_\+t x\+Port\+Get\+Minimum\+Ever\+Free\+Heap\+Size (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_source_l00478}{478}} of file \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_source}{secure\+\_\+heap.\+c}}.
+
+\Hypertarget{portable_8h_a4f3b1bb7590996f2fa1e0456dda961ff}\index{portable.h@{portable.h}!xPortStartScheduler@{xPortStartScheduler}}
+\index{xPortStartScheduler@{xPortStartScheduler}!portable.h@{portable.h}}
+\doxysubsubsection{\texorpdfstring{xPortStartScheduler()}{xPortStartScheduler()}}
+{\footnotesize\ttfamily \label{portable_8h_a4f3b1bb7590996f2fa1e0456dda961ff} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Start\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+start the freertos scheduler, go to the first task 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_source_l01627}{1627}} of file \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 5
+Here is the caller graph for this function\+:
+% FIG 6

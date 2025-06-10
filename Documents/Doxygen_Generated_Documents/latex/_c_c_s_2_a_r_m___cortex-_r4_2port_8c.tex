@@ -1,0 +1,346 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+CCS/\+ARM\+\_\+\+Cortex-\/\+R4/port.c File Reference}
+\hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c}{}\label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/CCS/ARM\_Cortex-\/R4/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/CCS/ARM\_Cortex-\/R4/port.c}}
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}task.\+h"{}}\newline
+Include dependency graph for port.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_aff46363042cc866d0ba6df9110568cf4}{port\+RTI\+\_\+\+GCTRL\+\_\+\+REG}}~( \texorpdfstring{$\ast$}{*} ( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+FFFFFC00 ) )
+\item 
+\#define \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a4f9bc95664ed4983bb94af37e153c5f2}{port\+RTI\+\_\+\+TBCTRL\+\_\+\+REG}}~( \texorpdfstring{$\ast$}{*} ( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+FFFFFC04 ) )
+\item 
+\#define \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_ab0142058832463ac15ae49adf0fafecd}{port\+RTI\+\_\+\+COMPCTRL\+\_\+\+REG}}~( \texorpdfstring{$\ast$}{*} ( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+FFFFFC0C ) )
+\item 
+\#define \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a557a48537ec211483665269e918dc94d}{port\+RTI\+\_\+\+CNT0\+\_\+\+FRC0\+\_\+\+REG}}~( \texorpdfstring{$\ast$}{*} ( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+FFFFFC10 ) )
+\item 
+\#define \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_ad0e07d8351bedea2f80c1c8d70881053}{port\+RTI\+\_\+\+CNT0\+\_\+\+UC0\+\_\+\+REG}}~( \texorpdfstring{$\ast$}{*} ( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+FFFFFC14 ) )
+\item 
+\#define \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_aa479a6d0eb4c00f8b920df6f5eaee215}{port\+RTI\+\_\+\+CNT0\+\_\+\+CPUC0\+\_\+\+REG}}~( \texorpdfstring{$\ast$}{*} ( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+FFFFFC18 ) )
+\item 
+\#define \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_af90f6e7888f2ce9acf89e265ab89a50e}{port\+RTI\+\_\+\+CNT0\+\_\+\+COMP0\+\_\+\+REG}}~( \texorpdfstring{$\ast$}{*} ( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+FFFFFC50 ) )
+\item 
+\#define \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a1ebaedc5c82c885e866a008360c7e637}{port\+RTI\+\_\+\+CNT0\+\_\+\+UDCP0\+\_\+\+REG}}~( \texorpdfstring{$\ast$}{*} ( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+FFFFFC54 ) )
+\item 
+\#define \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a82bc8ad423f54018e6c6395a464a5676}{port\+RTI\+\_\+\+SETINTENA\+\_\+\+REG}}~( \texorpdfstring{$\ast$}{*} ( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+FFFFFC80 ) )
+\item 
+\#define \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a7d7712951ba0e2fa947b5fa4aa8bc1b4}{port\+RTI\+\_\+\+CLEARINTENA\+\_\+\+REG}}~( \texorpdfstring{$\ast$}{*} ( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+FFFFFC84 ) )
+\item 
+\#define \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a849f31cea7f826d98176a4e075ddd3cc}{port\+RTI\+\_\+\+INTFLAG\+\_\+\+REG}}~( \texorpdfstring{$\ast$}{*} ( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+FFFFFC88 ) )
+\item 
+\#define \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a153b1b0b2476d5fea865a32e6d27027d}{port\+INITIAL\+\_\+\+SPSR}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x1F )
+\item 
+\#define \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_ac0d88abb68188f5d7da45c60a5f78c02}{port\+INITIAL\+\_\+\+FPSCR}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x00 )
+\item 
+\#define \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a4a09bb6297fbc0a50ed78a132ff9f0fe}{port\+INSTRUCTION\+\_\+\+SIZE}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x04 )
+\item 
+\#define \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a156ba74bc35da2293a2482ab4195183b}{port\+THUMB\+\_\+\+MODE\+\_\+\+BIT}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x20 )
+\item 
+\#define \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_ad668c6ef52816676d05bb8f41266b8a7}{port\+SPACE\+\_\+\+BETWEEN\+\_\+\+TOS\+\_\+\+AND\+\_\+\+PARAMETERS}}~( 12 )
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a5cfc38319f17c8e804020ec247b6325d}{v\+Port\+Start\+First\+Task}} (void)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}{px\+Port\+Initialise\+Stack}} (\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}px\+Top\+Of\+Stack, \mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}} px\+Code, void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{x\+Port\+Start\+Scheduler}} (void)
+\item 
+void \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{v\+Port\+End\+Scheduler}} (void)
+\begin{DoxyCompactList}\small\item\em End the Free\+RTOS scheduler. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+interrupt void \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_aa3d36248da898dd1d2ae1784c76bdb9c}{v\+Port\+Non\+Preemptive\+Tick}} (void)
+\item 
+void \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a2ed3554a3de09a3bd09d396ee081ab69}{v\+Port\+Enter\+Critical}} (void)
+\begin{DoxyCompactList}\small\item\em Enter critical section. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_aed20ada05b957181a0de042802a82a5b}{v\+Port\+Exit\+Critical}} (void)
+\begin{DoxyCompactList}\small\item\em Exit critical section. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_abd5c4f2fdb773b389a89cf1bb14f22c8}{ul\+Critical\+Nesting}} = 9999
+\item 
+uint32\+\_\+t \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_adb618e609f6505a99aa1d2bf85f70e51}{ul\+Task\+Has\+FPUContext}} = 0
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_ac0d88abb68188f5d7da45c60a5f78c02}\index{port.c@{port.c}!portINITIAL\_FPSCR@{portINITIAL\_FPSCR}}
+\index{portINITIAL\_FPSCR@{portINITIAL\_FPSCR}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portINITIAL\_FPSCR}{portINITIAL\_FPSCR}}
+{\footnotesize\ttfamily \label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_ac0d88abb68188f5d7da45c60a5f78c02} 
+\#define port\+INITIAL\+\_\+\+FPSCR~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x00 )}
+
+
+
+Definition at line \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source_l00056}{56}} of file \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a153b1b0b2476d5fea865a32e6d27027d}\index{port.c@{port.c}!portINITIAL\_SPSR@{portINITIAL\_SPSR}}
+\index{portINITIAL\_SPSR@{portINITIAL\_SPSR}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portINITIAL\_SPSR}{portINITIAL\_SPSR}}
+{\footnotesize\ttfamily \label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a153b1b0b2476d5fea865a32e6d27027d} 
+\#define port\+INITIAL\+\_\+\+SPSR~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x1F )}
+
+
+
+Definition at line \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source_l00055}{55}} of file \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a4a09bb6297fbc0a50ed78a132ff9f0fe}\index{port.c@{port.c}!portINSTRUCTION\_SIZE@{portINSTRUCTION\_SIZE}}
+\index{portINSTRUCTION\_SIZE@{portINSTRUCTION\_SIZE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portINSTRUCTION\_SIZE}{portINSTRUCTION\_SIZE}}
+{\footnotesize\ttfamily \label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a4a09bb6297fbc0a50ed78a132ff9f0fe} 
+\#define port\+INSTRUCTION\+\_\+\+SIZE~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x04 )}
+
+
+
+Definition at line \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source_l00057}{57}} of file \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a7d7712951ba0e2fa947b5fa4aa8bc1b4}\index{port.c@{port.c}!portRTI\_CLEARINTENA\_REG@{portRTI\_CLEARINTENA\_REG}}
+\index{portRTI\_CLEARINTENA\_REG@{portRTI\_CLEARINTENA\_REG}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portRTI\_CLEARINTENA\_REG}{portRTI\_CLEARINTENA\_REG}}
+{\footnotesize\ttfamily \label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a7d7712951ba0e2fa947b5fa4aa8bc1b4} 
+\#define port\+RTI\+\_\+\+CLEARINTENA\+\_\+\+REG~( \texorpdfstring{$\ast$}{*} ( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+FFFFFC84 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source_l00050}{50}} of file \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_af90f6e7888f2ce9acf89e265ab89a50e}\index{port.c@{port.c}!portRTI\_CNT0\_COMP0\_REG@{portRTI\_CNT0\_COMP0\_REG}}
+\index{portRTI\_CNT0\_COMP0\_REG@{portRTI\_CNT0\_COMP0\_REG}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portRTI\_CNT0\_COMP0\_REG}{portRTI\_CNT0\_COMP0\_REG}}
+{\footnotesize\ttfamily \label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_af90f6e7888f2ce9acf89e265ab89a50e} 
+\#define port\+RTI\+\_\+\+CNT0\+\_\+\+COMP0\+\_\+\+REG~( \texorpdfstring{$\ast$}{*} ( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+FFFFFC50 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source_l00047}{47}} of file \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_aa479a6d0eb4c00f8b920df6f5eaee215}\index{port.c@{port.c}!portRTI\_CNT0\_CPUC0\_REG@{portRTI\_CNT0\_CPUC0\_REG}}
+\index{portRTI\_CNT0\_CPUC0\_REG@{portRTI\_CNT0\_CPUC0\_REG}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portRTI\_CNT0\_CPUC0\_REG}{portRTI\_CNT0\_CPUC0\_REG}}
+{\footnotesize\ttfamily \label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_aa479a6d0eb4c00f8b920df6f5eaee215} 
+\#define port\+RTI\+\_\+\+CNT0\+\_\+\+CPUC0\+\_\+\+REG~( \texorpdfstring{$\ast$}{*} ( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+FFFFFC18 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source_l00046}{46}} of file \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a557a48537ec211483665269e918dc94d}\index{port.c@{port.c}!portRTI\_CNT0\_FRC0\_REG@{portRTI\_CNT0\_FRC0\_REG}}
+\index{portRTI\_CNT0\_FRC0\_REG@{portRTI\_CNT0\_FRC0\_REG}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portRTI\_CNT0\_FRC0\_REG}{portRTI\_CNT0\_FRC0\_REG}}
+{\footnotesize\ttfamily \label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a557a48537ec211483665269e918dc94d} 
+\#define port\+RTI\+\_\+\+CNT0\+\_\+\+FRC0\+\_\+\+REG~( \texorpdfstring{$\ast$}{*} ( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+FFFFFC10 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source_l00044}{44}} of file \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_ad0e07d8351bedea2f80c1c8d70881053}\index{port.c@{port.c}!portRTI\_CNT0\_UC0\_REG@{portRTI\_CNT0\_UC0\_REG}}
+\index{portRTI\_CNT0\_UC0\_REG@{portRTI\_CNT0\_UC0\_REG}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portRTI\_CNT0\_UC0\_REG}{portRTI\_CNT0\_UC0\_REG}}
+{\footnotesize\ttfamily \label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_ad0e07d8351bedea2f80c1c8d70881053} 
+\#define port\+RTI\+\_\+\+CNT0\+\_\+\+UC0\+\_\+\+REG~( \texorpdfstring{$\ast$}{*} ( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+FFFFFC14 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source_l00045}{45}} of file \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a1ebaedc5c82c885e866a008360c7e637}\index{port.c@{port.c}!portRTI\_CNT0\_UDCP0\_REG@{portRTI\_CNT0\_UDCP0\_REG}}
+\index{portRTI\_CNT0\_UDCP0\_REG@{portRTI\_CNT0\_UDCP0\_REG}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portRTI\_CNT0\_UDCP0\_REG}{portRTI\_CNT0\_UDCP0\_REG}}
+{\footnotesize\ttfamily \label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a1ebaedc5c82c885e866a008360c7e637} 
+\#define port\+RTI\+\_\+\+CNT0\+\_\+\+UDCP0\+\_\+\+REG~( \texorpdfstring{$\ast$}{*} ( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+FFFFFC54 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source_l00048}{48}} of file \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_ab0142058832463ac15ae49adf0fafecd}\index{port.c@{port.c}!portRTI\_COMPCTRL\_REG@{portRTI\_COMPCTRL\_REG}}
+\index{portRTI\_COMPCTRL\_REG@{portRTI\_COMPCTRL\_REG}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portRTI\_COMPCTRL\_REG}{portRTI\_COMPCTRL\_REG}}
+{\footnotesize\ttfamily \label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_ab0142058832463ac15ae49adf0fafecd} 
+\#define port\+RTI\+\_\+\+COMPCTRL\+\_\+\+REG~( \texorpdfstring{$\ast$}{*} ( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+FFFFFC0C ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source_l00043}{43}} of file \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_aff46363042cc866d0ba6df9110568cf4}\index{port.c@{port.c}!portRTI\_GCTRL\_REG@{portRTI\_GCTRL\_REG}}
+\index{portRTI\_GCTRL\_REG@{portRTI\_GCTRL\_REG}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portRTI\_GCTRL\_REG}{portRTI\_GCTRL\_REG}}
+{\footnotesize\ttfamily \label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_aff46363042cc866d0ba6df9110568cf4} 
+\#define port\+RTI\+\_\+\+GCTRL\+\_\+\+REG~( \texorpdfstring{$\ast$}{*} ( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+FFFFFC00 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source_l00041}{41}} of file \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a849f31cea7f826d98176a4e075ddd3cc}\index{port.c@{port.c}!portRTI\_INTFLAG\_REG@{portRTI\_INTFLAG\_REG}}
+\index{portRTI\_INTFLAG\_REG@{portRTI\_INTFLAG\_REG}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portRTI\_INTFLAG\_REG}{portRTI\_INTFLAG\_REG}}
+{\footnotesize\ttfamily \label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a849f31cea7f826d98176a4e075ddd3cc} 
+\#define port\+RTI\+\_\+\+INTFLAG\+\_\+\+REG~( \texorpdfstring{$\ast$}{*} ( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+FFFFFC88 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source_l00051}{51}} of file \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a82bc8ad423f54018e6c6395a464a5676}\index{port.c@{port.c}!portRTI\_SETINTENA\_REG@{portRTI\_SETINTENA\_REG}}
+\index{portRTI\_SETINTENA\_REG@{portRTI\_SETINTENA\_REG}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portRTI\_SETINTENA\_REG}{portRTI\_SETINTENA\_REG}}
+{\footnotesize\ttfamily \label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a82bc8ad423f54018e6c6395a464a5676} 
+\#define port\+RTI\+\_\+\+SETINTENA\+\_\+\+REG~( \texorpdfstring{$\ast$}{*} ( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+FFFFFC80 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source_l00049}{49}} of file \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a4f9bc95664ed4983bb94af37e153c5f2}\index{port.c@{port.c}!portRTI\_TBCTRL\_REG@{portRTI\_TBCTRL\_REG}}
+\index{portRTI\_TBCTRL\_REG@{portRTI\_TBCTRL\_REG}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portRTI\_TBCTRL\_REG}{portRTI\_TBCTRL\_REG}}
+{\footnotesize\ttfamily \label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a4f9bc95664ed4983bb94af37e153c5f2} 
+\#define port\+RTI\+\_\+\+TBCTRL\+\_\+\+REG~( \texorpdfstring{$\ast$}{*} ( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+FFFFFC04 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source_l00042}{42}} of file \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_ad668c6ef52816676d05bb8f41266b8a7}\index{port.c@{port.c}!portSPACE\_BETWEEN\_TOS\_AND\_PARAMETERS@{portSPACE\_BETWEEN\_TOS\_AND\_PARAMETERS}}
+\index{portSPACE\_BETWEEN\_TOS\_AND\_PARAMETERS@{portSPACE\_BETWEEN\_TOS\_AND\_PARAMETERS}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portSPACE\_BETWEEN\_TOS\_AND\_PARAMETERS}{portSPACE\_BETWEEN\_TOS\_AND\_PARAMETERS}}
+{\footnotesize\ttfamily \label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_ad668c6ef52816676d05bb8f41266b8a7} 
+\#define port\+SPACE\+\_\+\+BETWEEN\+\_\+\+TOS\+\_\+\+AND\+\_\+\+PARAMETERS~( 12 )}
+
+
+
+Definition at line \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source_l00062}{62}} of file \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a156ba74bc35da2293a2482ab4195183b}\index{port.c@{port.c}!portTHUMB\_MODE\_BIT@{portTHUMB\_MODE\_BIT}}
+\index{portTHUMB\_MODE\_BIT@{portTHUMB\_MODE\_BIT}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portTHUMB\_MODE\_BIT}{portTHUMB\_MODE\_BIT}}
+{\footnotesize\ttfamily \label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a156ba74bc35da2293a2482ab4195183b} 
+\#define port\+THUMB\+\_\+\+MODE\+\_\+\+BIT~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0x20 )}
+
+
+
+Definition at line \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source_l00058}{58}} of file \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source}{port.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f}\index{port.c@{port.c}!pxPortInitialiseStack@{pxPortInitialiseStack}}
+\index{pxPortInitialiseStack@{pxPortInitialiseStack}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{pxPortInitialiseStack()}{pxPortInitialiseStack()}}
+{\footnotesize\ttfamily \label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_aec89de59377079f7dc6a71dfbefd9a6f} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*} px\+Port\+Initialise\+Stack (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{px\+Top\+Of\+Stack}{, }\item[{\mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{Task\+Function\+\_\+t}}}]{px\+Code}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source_l00081}{81}} of file \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}\index{port.c@{port.c}!vPortEndScheduler@{vPortEndScheduler}}
+\index{vPortEndScheduler@{vPortEndScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEndScheduler()}{vPortEndScheduler()}}
+{\footnotesize\ttfamily \label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423} 
+void v\+Port\+End\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+End the Free\+RTOS scheduler. 
+
+Not implemented on this port. 
+
+Definition at line \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source_l00222}{222}} of file \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a2ed3554a3de09a3bd09d396ee081ab69}\index{port.c@{port.c}!vPortEnterCritical@{vPortEnterCritical}}
+\index{vPortEnterCritical@{vPortEnterCritical}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEnterCritical()}{vPortEnterCritical()}}
+{\footnotesize\ttfamily \label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a2ed3554a3de09a3bd09d396ee081ab69} 
+void v\+Port\+Enter\+Critical (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Enter critical section. 
+
+
+
+Definition at line \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source_l00262}{262}} of file \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_aed20ada05b957181a0de042802a82a5b}\index{port.c@{port.c}!vPortExitCritical@{vPortExitCritical}}
+\index{vPortExitCritical@{vPortExitCritical}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortExitCritical()}{vPortExitCritical()}}
+{\footnotesize\ttfamily \label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_aed20ada05b957181a0de042802a82a5b} 
+void v\+Port\+Exit\+Critical (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Exit critical section. 
+
+
+
+Definition at line \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source_l00278}{278}} of file \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_aa3d36248da898dd1d2ae1784c76bdb9c}\index{port.c@{port.c}!vPortNonPreemptiveTick@{vPortNonPreemptiveTick}}
+\index{vPortNonPreemptiveTick@{vPortNonPreemptiveTick}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortNonPreemptiveTick()}{vPortNonPreemptiveTick()}}
+{\footnotesize\ttfamily \label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_aa3d36248da898dd1d2ae1784c76bdb9c} 
+\+\_\+\+\_\+arm \+\_\+\+\_\+irq void v\+Port\+Non\+Preemptive\+Tick (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source_l00234}{234}} of file \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a5cfc38319f17c8e804020ec247b6325d}\index{port.c@{port.c}!vPortStartFirstTask@{vPortStartFirstTask}}
+\index{vPortStartFirstTask@{vPortStartFirstTask}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortStartFirstTask()}{vPortStartFirstTask()}}
+{\footnotesize\ttfamily \label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_a5cfc38319f17c8e804020ec247b6325d} 
+void v\+Port\+Start\+First\+Task (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{_third_party_2_g_c_c_2_r_p2040_2port_8c_source_l00215}{215}} of file \mbox{\hyperlink{_third_party_2_g_c_c_2_r_p2040_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}\index{port.c@{port.c}!xPortStartScheduler@{xPortStartScheduler}}
+\index{xPortStartScheduler@{xPortStartScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortStartScheduler()}{xPortStartScheduler()}}
+{\footnotesize\ttfamily \label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_ade5a8c6666e7413a0355cc252029c5c6} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Start\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source_l00202}{202}} of file \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-var-members}
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_abd5c4f2fdb773b389a89cf1bb14f22c8}\index{port.c@{port.c}!ulCriticalNesting@{ulCriticalNesting}}
+\index{ulCriticalNesting@{ulCriticalNesting}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{ulCriticalNesting}{ulCriticalNesting}}
+{\footnotesize\ttfamily \label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_abd5c4f2fdb773b389a89cf1bb14f22c8} 
+uint32\+\_\+t ul\+Critical\+Nesting = 9999}
+
+
+
+Definition at line \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source_l00036}{36}} of file \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_adb618e609f6505a99aa1d2bf85f70e51}\index{port.c@{port.c}!ulTaskHasFPUContext@{ulTaskHasFPUContext}}
+\index{ulTaskHasFPUContext@{ulTaskHasFPUContext}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{ulTaskHasFPUContext}{ulTaskHasFPUContext}}
+{\footnotesize\ttfamily \label{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_adb618e609f6505a99aa1d2bf85f70e51} 
+uint32\+\_\+t ul\+Task\+Has\+FPUContext = 0}
+
+
+
+Definition at line \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source_l00073}{73}} of file \mbox{\hyperlink{_c_c_s_2_a_r_m___cortex-_r4_2port_8c_source}{port.\+c}}.
+

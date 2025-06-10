@@ -1,0 +1,456 @@
+\doxysection{secure\+\_\+heap.\+c}
+\hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source}{}\label{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/IAR/ARM\_CM23/secure/secure\_heap.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/IAR/ARM\_CM23/secure/secure\_heap.c}}
+\mbox{\hyperlink{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00029}00029\ \textcolor{comment}{/*\ Standard\ includes.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00030}00030\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00032}00032\ \textcolor{comment}{/*\ Secure\ context\ heap\ includes.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00033}00033\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8h}{secure\_heap.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00035}00035\ \textcolor{comment}{/*\ Secure\ port\ macros.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00036}00036\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_m23_2secure_2secure__port__macros_8h}{secure\_port\_macros.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00041}00041\ \textcolor{preprocessor}{\#ifndef\ secureconfigTOTAL\_HEAP\_SIZE}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00042}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_ac7459238c8114b55d18f88d1f731ea9a}{00042}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ secureconfigTOTAL\_HEAP\_SIZE\ \ \ \ (\ (\ (\ size\_t\ )\ (\ 10\ *\ 1024\ )\ )\ )}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00043}00043\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00045}00045\ \textcolor{comment}{/*\ No\ test\ marker\ by\ default.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00046}00046\ \textcolor{preprocessor}{\#ifndef\ mtCOVERAGE\_TEST\_MARKER}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00047}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{00047}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ mtCOVERAGE\_TEST\_MARKER()}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00048}00048\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00050}00050\ \textcolor{comment}{/*\ No\ tracing\ by\ default.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00051}00051\ \textcolor{preprocessor}{\#ifndef\ traceMALLOC}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00052}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_a7b7adb972133ffecbaddb8a8a4303e28}{00052}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ traceMALLOC(\ pvReturn,\ xWantedSize\ )}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00053}00053\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00055}00055\ \textcolor{comment}{/*\ No\ tracing\ by\ default.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00056}00056\ \textcolor{preprocessor}{\#ifndef\ traceFREE}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00057}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_a47dffc63f23004f444db7058604e4626}{00057}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ traceFREE(\ pv,\ xBlockSize\ )}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00058}00058\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00060}00060\ \textcolor{comment}{/*\ Block\ sizes\ must\ not\ get\ too\ small.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00061}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_a254cc5ef30ce05c8182a6a66aa8bee24}{00061}}\ \textcolor{preprocessor}{\#define\ secureheapMINIMUM\_BLOCK\_SIZE\ \ \ \ (\ (\ size\_t\ )\ (\ xHeapStructSize\ <<\ 1\ )\ )}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00063}00063\ \textcolor{comment}{/*\ Assumes\ 8bit\ bytes!\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00064}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_a56fc9978bbe112b45db6176aef25a403}{00064}}\ \textcolor{preprocessor}{\#define\ secureheapBITS\_PER\_BYTE\ \ \ \ \ \ \ \ \ (\ (\ size\_t\ )\ 8\ )}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00066}00066\ \textcolor{comment}{/*\ Max\ value\ that\ fits\ in\ a\ size\_t\ type.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00067}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_aa1f970a075e01ab1c7861e1ac730b026}{00067}}\ \textcolor{preprocessor}{\#define\ secureheapSIZE\_MAX\ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ \string~(\ (\ size\_t\ )\ 0\ )\ )}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00069}00069\ \textcolor{comment}{/*\ Check\ if\ adding\ a\ and\ b\ will\ result\ in\ overflow.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00070}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_ae5c7388baf75bb8bc7d989440601d0f3}{00070}}\ \textcolor{preprocessor}{\#define\ secureheapADD\_WILL\_OVERFLOW(\ a,\ b\ )\ \ \ \ (\ (\ a\ )\ >\ (\ secureheapSIZE\_MAX\ -\/\ (\ b\ )\ )\ )}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00072}00072\ \textcolor{comment}{/*\ MSB\ of\ the\ xBlockSize\ member\ of\ an\ BlockLink\_t\ structure\ is\ used\ to\ track}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00073}00073\ \textcolor{comment}{\ *\ the\ allocation\ status\ of\ a\ block.\ \ When\ MSB\ of\ the\ xBlockSize\ member\ of}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00074}00074\ \textcolor{comment}{\ *\ an\ BlockLink\_t\ structure\ is\ set\ then\ the\ block\ belongs\ to\ the\ application.}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00075}00075\ \textcolor{comment}{\ *\ When\ the\ bit\ is\ free\ the\ block\ is\ still\ part\ of\ the\ free\ heap\ space.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00076}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_a06c25db8ac03202ed1a0b1bcb66286b4}{00076}}\ \textcolor{preprocessor}{\#define\ secureheapBLOCK\_ALLOCATED\_BITMASK\ \ \ \ (\ (\ (\ size\_t\ )\ 1\ )\ <<\ (\ (\ sizeof(\ size\_t\ )\ *\ secureheapBITS\_PER\_BYTE\ )\ -\/\ 1\ )\ )}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00077}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_ab46eb5ffc4904212c0d4a02afa78dc69}{00077}}\ \textcolor{preprocessor}{\#define\ secureheapBLOCK\_SIZE\_IS\_VALID(\ xBlockSize\ )\ \ \ \ (\ (\ (\ xBlockSize\ )\ \&\ secureheapBLOCK\_ALLOCATED\_BITMASK\ )\ ==\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00078}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_a9154f9d356f99eb4ca4c085cc4dd2094}{00078}}\ \textcolor{preprocessor}{\#define\ secureheapBLOCK\_IS\_ALLOCATED(\ pxBlock\ )\ \ \ \ \ \ \ \ (\ (\ (\ pxBlock-\/>xBlockSize\ )\ \&\ secureheapBLOCK\_ALLOCATED\_BITMASK\ )\ !=\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00079}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_ad1d672bdaa4cd684a6b2c999605cf3a7}{00079}}\ \textcolor{preprocessor}{\#define\ secureheapALLOCATE\_BLOCK(\ pxBlock\ )\ \ \ \ \ \ \ \ \ \ \ \ (\ (\ pxBlock-\/>xBlockSize\ )\ |=\ secureheapBLOCK\_ALLOCATED\_BITMASK\ )}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00080}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_a799f87ee3b68fa03086bd681fc9de8c8}{00080}}\ \textcolor{preprocessor}{\#define\ secureheapFREE\_BLOCK(\ pxBlock\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ (\ pxBlock-\/>xBlockSize\ )\ \&=\ \string~secureheapBLOCK\_ALLOCATED\_BITMASK\ )}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00081}00081\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00083}00083\ \textcolor{comment}{/*\ Allocate\ the\ memory\ for\ the\ heap.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00084}00084\ \textcolor{preprocessor}{\#if\ (\ configAPPLICATION\_ALLOCATED\_HEAP\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00086}00086\ \textcolor{comment}{/*\ The\ application\ writer\ has\ already\ defined\ the\ array\ used\ for\ the\ RTOS}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00087}00087\ \textcolor{comment}{*\ heap\ -\/\ probably\ so\ it\ can\ be\ placed\ in\ a\ special\ segment\ or\ address.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00088}00088\ \ \ \ \ \textcolor{keyword}{extern}\ uint8\_t\ ucHeap[\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_ac7459238c8114b55d18f88d1f731ea9a}{secureconfigTOTAL\_HEAP\_SIZE}}\ ];}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00089}00089\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{/*\ configAPPLICATION\_ALLOCATED\_HEAP\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00090}00090\ \ \ \ \ \textcolor{keyword}{static}\ uint8\_t\ ucHeap[\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_ac7459238c8114b55d18f88d1f731ea9a}{secureconfigTOTAL\_HEAP\_SIZE}}\ ];}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00091}00091\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ configAPPLICATION\_ALLOCATED\_HEAP\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00098}00098\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k}{A\_BLOCK\_LINK}}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00099}00099\ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00100}00100\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k}{A\_BLOCK\_LINK}}\ *\ \mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock}};\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00101}00101\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00102}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_a5867d4b64d89c6ab51e4783687f8960a}{00102}}\ \}\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a5867d4b64d89c6ab51e4783687f8960a}{BlockLink\_t}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00103}00103\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00109}00109\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ prvHeapInit(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00120}00120\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{heap__2_8c_a55396870242c952746147671bf78a149}{prvInsertBlockIntoFreeList}}(\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a5867d4b64d89c6ab51e4783687f8960a}{BlockLink\_t}}\ *\ pxBlockToInsert\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00121}00121\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00127}00127\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ xHeapStructSize\ =\ (\ \textcolor{keyword}{sizeof}(\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a5867d4b64d89c6ab51e4783687f8960a}{BlockLink\_t}}\ )\ +\ (\ (\ size\_t\ )\ (\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_ab06abdc9b4f433ae02205aa3dc3f0876}{secureportBYTE\_ALIGNMENT}}\ -\/\ 1\ )\ )\ )\ \&\ \string~(\ (\ \textcolor{keywordtype}{size\_t}\ )\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_adfce344f987e53ff15404238cb85bbf6}{secureportBYTE\_ALIGNMENT\_MASK}}\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00132}00132\ \textcolor{keyword}{static}\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a5867d4b64d89c6ab51e4783687f8960a}{BlockLink\_t}}\ xStart;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00133}00133\ \textcolor{keyword}{static}\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a5867d4b64d89c6ab51e4783687f8960a}{BlockLink\_t}}\ *\ pxEnd\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00139}00139\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{size\_t}\ xFreeBytesRemaining\ =\ 0U;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00140}00140\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{size\_t}\ xMinimumEverFreeBytesRemaining\ =\ 0U;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00142}00142\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00144}00144\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ prvHeapInit(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00145}00145\ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00146}00146\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a5867d4b64d89c6ab51e4783687f8960a}{BlockLink\_t}}\ *\ pxFirstFreeBlock;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00147}00147\ \ \ \ \ uint8\_t\ *\ pucAlignedHeap;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00148}00148\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ uxAddress;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00149}00149\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ xTotalHeapSize\ =\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_ac7459238c8114b55d18f88d1f731ea9a}{secureconfigTOTAL\_HEAP\_SIZE}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00151}00151\ \ \ \ \ \textcolor{comment}{/*\ Ensure\ the\ heap\ starts\ on\ a\ correctly\ aligned\ boundary.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00152}00152\ \ \ \ \ uxAddress\ =\ (\ size\_t\ )\ ucHeap;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00154}00154\ \ \ \ \ \textcolor{keywordflow}{if}(\ (\ uxAddress\ \&\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_adfce344f987e53ff15404238cb85bbf6}{secureportBYTE\_ALIGNMENT\_MASK}}\ )\ !=\ 0\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00155}00155\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00156}00156\ \ \ \ \ \ \ \ \ uxAddress\ +=\ (\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_ab06abdc9b4f433ae02205aa3dc3f0876}{secureportBYTE\_ALIGNMENT}}\ -\/\ 1\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00157}00157\ \ \ \ \ \ \ \ \ uxAddress\ \&=\ \string~(\ (\ size\_t\ )\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_adfce344f987e53ff15404238cb85bbf6}{secureportBYTE\_ALIGNMENT\_MASK}}\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00158}00158\ \ \ \ \ \ \ \ \ xTotalHeapSize\ -\/=\ uxAddress\ -\/\ (\ size\_t\ )\ ucHeap;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00159}00159\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00160}00160\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00161}00161\ \ \ \ \ pucAlignedHeap\ =\ (\ uint8\_t\ *\ )\ uxAddress;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00163}00163\ \ \ \ \ \textcolor{comment}{/*\ xStart\ is\ used\ to\ hold\ a\ pointer\ to\ the\ first\ item\ in\ the\ list\ of\ free}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00164}00164\ \textcolor{comment}{\ \ \ \ \ *\ blocks.\ \ The\ void\ cast\ is\ used\ to\ prevent\ compiler\ warnings.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00165}00165\ \ \ \ \ xStart.pxNextFreeBlock\ =\ (\ \textcolor{keywordtype}{void}\ *\ )\ pucAlignedHeap;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00166}00166\ \ \ \ \ xStart.xBlockSize\ =\ (\ size\_t\ )\ 0;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00167}00167\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00168}00168\ \ \ \ \ \textcolor{comment}{/*\ pxEnd\ is\ used\ to\ mark\ the\ end\ of\ the\ list\ of\ free\ blocks\ and\ is\ inserted}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00169}00169\ \textcolor{comment}{\ \ \ \ \ *\ at\ the\ end\ of\ the\ heap\ space.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00170}00170\ \ \ \ \ uxAddress\ =\ (\ (\ size\_t\ )\ pucAlignedHeap\ )\ +\ xTotalHeapSize;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00171}00171\ \ \ \ \ uxAddress\ -\/=\ xHeapStructSize;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00172}00172\ \ \ \ \ uxAddress\ \&=\ \string~(\ (\ size\_t\ )\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_adfce344f987e53ff15404238cb85bbf6}{secureportBYTE\_ALIGNMENT\_MASK}}\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00173}00173\ \ \ \ \ pxEnd\ =\ (\ \textcolor{keywordtype}{void}\ *\ )\ uxAddress;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00174}00174\ \ \ \ \ pxEnd-\/>xBlockSize\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00175}00175\ \ \ \ \ pxEnd-\/>pxNextFreeBlock\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00177}00177\ \ \ \ \ \textcolor{comment}{/*\ To\ start\ with\ there\ is\ a\ single\ free\ block\ that\ is\ sized\ to\ take\ up\ the}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00178}00178\ \textcolor{comment}{\ \ \ \ \ *\ entire\ heap\ space,\ minus\ the\ space\ taken\ by\ pxEnd.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00179}00179\ \ \ \ \ pxFirstFreeBlock\ =\ (\ \textcolor{keywordtype}{void}\ *\ )\ pucAlignedHeap;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00180}00180\ \ \ \ \ pxFirstFreeBlock-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize}}\ =\ uxAddress\ -\/\ (\ size\_t\ )\ pxFirstFreeBlock;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00181}00181\ \ \ \ \ pxFirstFreeBlock-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock}}\ =\ pxEnd;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00183}00183\ \ \ \ \ \textcolor{comment}{/*\ Only\ one\ block\ exists\ -\/\ and\ it\ covers\ the\ entire\ usable\ heap\ space.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00184}00184\ \ \ \ \ xMinimumEverFreeBytesRemaining\ =\ pxFirstFreeBlock-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00185}00185\ \ \ \ \ xFreeBytesRemaining\ =\ pxFirstFreeBlock-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00186}00186\ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00187}00187\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00188}00188\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00189}00189\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{heap__2_8c_a55396870242c952746147671bf78a149}{prvInsertBlockIntoFreeList}}(\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a5867d4b64d89c6ab51e4783687f8960a}{BlockLink\_t}}\ *\ pxBlockToInsert\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00190}00190\ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00191}00191\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a5867d4b64d89c6ab51e4783687f8960a}{BlockLink\_t}}\ *\ pxIterator;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00192}00192\ \ \ \ \ uint8\_t\ *\ puc;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00194}00194\ \ \ \ \ \textcolor{comment}{/*\ Iterate\ through\ the\ list\ until\ a\ block\ is\ found\ that\ has\ a\ higher\ address}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00195}00195\ \textcolor{comment}{\ \ \ \ \ *\ than\ the\ block\ being\ inserted.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00196}00196\ \ \ \ \ \textcolor{keywordflow}{for}(\ pxIterator\ =\ \&xStart;\ pxIterator-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock}}\ <\ pxBlockToInsert;\ pxIterator\ =\ pxIterator-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock}}\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00197}00197\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00198}00198\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Nothing\ to\ do\ here,\ just\ iterate\ to\ the\ right\ position.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00199}00199\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00200}00200\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00201}00201\ \ \ \ \ \textcolor{comment}{/*\ Do\ the\ block\ being\ inserted,\ and\ the\ block\ it\ is\ being\ inserted\ after}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00202}00202\ \textcolor{comment}{\ \ \ \ \ *\ make\ a\ contiguous\ block\ of\ memory?\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00203}00203\ \ \ \ \ puc\ =\ (\ uint8\_t\ *\ )\ pxIterator;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00204}00204\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00205}00205\ \ \ \ \ \textcolor{keywordflow}{if}(\ (\ puc\ +\ pxIterator-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize}}\ )\ ==\ (\ uint8\_t\ *\ )\ pxBlockToInsert\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00206}00206\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00207}00207\ \ \ \ \ \ \ \ \ pxIterator-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize}}\ +=\ pxBlockToInsert-\/>xBlockSize;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00208}00208\ \ \ \ \ \ \ \ \ pxBlockToInsert\ =\ pxIterator;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00209}00209\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00210}00210\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00211}00211\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00212}00212\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}}();}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00213}00213\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00215}00215\ \ \ \ \ \textcolor{comment}{/*\ Do\ the\ block\ being\ inserted,\ and\ the\ block\ it\ is\ being\ inserted\ before}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00216}00216\ \textcolor{comment}{\ \ \ \ \ *\ make\ a\ contiguous\ block\ of\ memory?\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00217}00217\ \ \ \ \ puc\ =\ (\ uint8\_t\ *\ )\ pxBlockToInsert;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00219}00219\ \ \ \ \ \textcolor{keywordflow}{if}(\ (\ puc\ +\ pxBlockToInsert-\/>xBlockSize\ )\ ==\ (\ uint8\_t\ *\ )\ pxIterator-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock}}\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00220}00220\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00221}00221\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ pxIterator-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock}}\ !=\ pxEnd\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00222}00222\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Form\ one\ big\ block\ from\ the\ two\ blocks.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ pxBlockToInsert-\/>xBlockSize\ +=\ pxIterator-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock}}-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ pxBlockToInsert-\/>pxNextFreeBlock\ =\ pxIterator-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock}}-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00226}00226\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00227}00227\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00228}00228\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ pxBlockToInsert-\/>pxNextFreeBlock\ =\ pxEnd;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00230}00230\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00231}00231\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00232}00232\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00233}00233\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00234}00234\ \ \ \ \ \ \ \ \ pxBlockToInsert-\/>pxNextFreeBlock\ =\ pxIterator-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00235}00235\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00236}00236\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00237}00237\ \ \ \ \ \textcolor{comment}{/*\ If\ the\ block\ being\ inserted\ plugged\ a\ gab,\ so\ was\ merged\ with\ the\ block}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00238}00238\ \textcolor{comment}{\ \ \ \ \ *\ before\ and\ the\ block\ after,\ then\ it's\ pxNextFreeBlock\ pointer\ will\ have}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00239}00239\ \textcolor{comment}{\ \ \ \ \ *\ already\ been\ set,\ and\ should\ not\ be\ set\ here\ as\ that\ would\ make\ it\ point}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00240}00240\ \textcolor{comment}{\ \ \ \ \ *\ to\ itself.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00241}00241\ \ \ \ \ \textcolor{keywordflow}{if}(\ pxIterator\ !=\ pxBlockToInsert\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00242}00242\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00243}00243\ \ \ \ \ \ \ \ \ pxIterator-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock}}\ =\ pxBlockToInsert;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00244}00244\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00245}00245\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00246}00246\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00247}00247\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}}();}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00248}00248\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00249}00249\ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00250}00250\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00251}00251\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00252}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_ac56bcb7515f081a5b3df83935499fa4a}{00252}}\ \textcolor{keywordtype}{void}\ *\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_a4d523dc6c079459faa62130465595246}{pvPortMalloc}}(\ \textcolor{keywordtype}{size\_t}\ xWantedSize\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00253}00253\ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00254}00254\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a5867d4b64d89c6ab51e4783687f8960a}{BlockLink\_t}}\ *\ pxBlock;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00255}00255\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a5867d4b64d89c6ab51e4783687f8960a}{BlockLink\_t}}\ *\ pxPreviousBlock;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00256}00256\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a5867d4b64d89c6ab51e4783687f8960a}{BlockLink\_t}}\ *\ pxNewBlockLink;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00257}00257\ \ \ \ \ \textcolor{keywordtype}{void}\ *\ pvReturn\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00258}00258\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ xAdditionalRequiredSize;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00259}00259\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ xAllocatedBlockSize\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00260}00260\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00261}00261\ \ \ \ \ \textcolor{comment}{/*\ If\ this\ is\ the\ first\ call\ to\ malloc\ then\ the\ heap\ will\ require}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00262}00262\ \textcolor{comment}{\ \ \ \ \ *\ initialisation\ to\ setup\ the\ list\ of\ free\ blocks.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00263}00263\ \ \ \ \ \textcolor{keywordflow}{if}(\ pxEnd\ ==\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00264}00264\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00265}00265\ \ \ \ \ \ \ \ \ prvHeapInit();}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00266}00266\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00267}00267\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00268}00268\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00269}00269\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}}();}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00270}00270\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00271}00271\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00272}00272\ \ \ \ \ \textcolor{keywordflow}{if}(\ xWantedSize\ >\ 0\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00273}00273\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00274}00274\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ The\ wanted\ size\ must\ be\ increased\ so\ it\ can\ contain\ a\ BlockLink\_t}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00275}00275\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ structure\ in\ addition\ to\ the\ requested\ amount\ of\ bytes.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00276}00276\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_ae5c7388baf75bb8bc7d989440601d0f3}{secureheapADD\_WILL\_OVERFLOW}}(\ xWantedSize,\ xHeapStructSize\ )\ ==\ 0\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00277}00277\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00278}00278\ \ \ \ \ \ \ \ \ \ \ \ \ xWantedSize\ +=\ xHeapStructSize;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00279}00279\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00280}00280\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Ensure\ that\ blocks\ are\ always\ aligned\ to\ the\ required\ number}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00281}00281\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ of\ bytes.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00282}00282\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ (\ xWantedSize\ \&\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_adfce344f987e53ff15404238cb85bbf6}{secureportBYTE\_ALIGNMENT\_MASK}}\ )\ !=\ 0x00\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00283}00283\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00284}00284\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Byte\ alignment\ required.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00285}00285\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ xAdditionalRequiredSize\ =\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_ab06abdc9b4f433ae02205aa3dc3f0876}{secureportBYTE\_ALIGNMENT}}\ -\/\ (\ xWantedSize\ \&\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_adfce344f987e53ff15404238cb85bbf6}{secureportBYTE\_ALIGNMENT\_MASK}}\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00286}00286\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00287}00287\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_ae5c7388baf75bb8bc7d989440601d0f3}{secureheapADD\_WILL\_OVERFLOW}}(\ xWantedSize,\ xAdditionalRequiredSize\ )\ ==\ 0\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00288}00288\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00289}00289\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ xWantedSize\ +=\ xAdditionalRequiredSize;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00290}00290\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00292}00292\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ xWantedSize\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00296}00296\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00297}00297\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}}();}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00300}00300\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00301}00301\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00302}00302\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ xWantedSize\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00304}00304\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00305}00305\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00306}00306\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00307}00307\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00308}00308\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}}();}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00309}00309\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00310}00310\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00311}00311\ \ \ \ \ \textcolor{comment}{/*\ Check\ the\ requested\ block\ size\ is\ not\ so\ large\ that\ the\ top\ bit\ is\ set.}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00312}00312\ \textcolor{comment}{\ \ \ \ \ *\ The\ top\ bit\ of\ the\ block\ size\ member\ of\ the\ BlockLink\_t\ structure\ is\ used}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00313}00313\ \textcolor{comment}{\ \ \ \ \ *\ to\ determine\ who\ owns\ the\ block\ -\/\ the\ application\ or\ the\ kernel,\ so\ it}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00314}00314\ \textcolor{comment}{\ \ \ \ \ *\ must\ be\ free.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00315}00315\ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_ab46eb5ffc4904212c0d4a02afa78dc69}{secureheapBLOCK\_SIZE\_IS\_VALID}}(\ xWantedSize\ )\ !=\ 0\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00316}00316\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00317}00317\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ (\ xWantedSize\ >\ 0\ )\ \&\&\ (\ xWantedSize\ <=\ xFreeBytesRemaining\ )\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00318}00318\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00319}00319\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Traverse\ the\ list\ from\ the\ start\ (lowest\ address)\ block\ until}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00320}00320\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ one\ of\ adequate\ size\ is\ found.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00321}00321\ \ \ \ \ \ \ \ \ \ \ \ \ pxPreviousBlock\ =\ \&xStart;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00322}00322\ \ \ \ \ \ \ \ \ \ \ \ \ pxBlock\ =\ xStart.\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00323}00323\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00324}00324\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}(\ (\ pxBlock-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize}}\ <\ xWantedSize\ )\ \&\&\ (\ pxBlock-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock}}\ !=\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00325}00325\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00326}00326\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pxPreviousBlock\ =\ pxBlock;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00327}00327\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pxBlock\ =\ pxBlock-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00328}00328\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00329}00329\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00330}00330\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ If\ the\ end\ marker\ was\ reached\ then\ a\ block\ of\ adequate\ size\ was}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00331}00331\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ not\ found.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00332}00332\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ pxBlock\ !=\ pxEnd\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00333}00333\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00334}00334\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Return\ the\ memory\ space\ pointed\ to\ -\/\ jumping\ over\ the}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00335}00335\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ BlockLink\_t\ structure\ at\ its\ start.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00336}00336\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pvReturn\ =\ (\ \textcolor{keywordtype}{void}\ *\ )\ (\ (\ (\ uint8\_t\ *\ )\ pxPreviousBlock-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock}}\ )\ +\ xHeapStructSize\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00337}00337\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00338}00338\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ This\ block\ is\ being\ returned\ for\ use\ so\ must\ be\ taken\ out}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00339}00339\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ of\ the\ list\ of\ free\ blocks.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00340}00340\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pxPreviousBlock-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock}}\ =\ pxBlock-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00341}00341\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00342}00342\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ If\ the\ block\ is\ larger\ than\ required\ it\ can\ be\ split\ into}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00343}00343\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ two.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00344}00344\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ (\ pxBlock-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize}}\ -\/\ xWantedSize\ )\ >\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a254cc5ef30ce05c8182a6a66aa8bee24}{secureheapMINIMUM\_BLOCK\_SIZE}}\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00345}00345\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00346}00346\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ This\ block\ is\ to\ be\ split\ into\ two.\ \ Create\ a\ new}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00347}00347\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ block\ following\ the\ number\ of\ bytes\ requested.\ The\ void}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00348}00348\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ cast\ is\ used\ to\ prevent\ byte\ alignment\ warnings\ from\ the}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00349}00349\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ compiler.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00350}00350\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pxNewBlockLink\ =\ (\ \textcolor{keywordtype}{void}\ *\ )\ (\ (\ (\ uint8\_t\ *\ )\ pxBlock\ )\ +\ xWantedSize\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00351}00351\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_a2e7dbc2d6fde4222617bab6ac84f8c36}{secureportASSERT}}(\ (\ (\ (\ \textcolor{keywordtype}{size\_t}\ )\ pxNewBlockLink\ )\ \&\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_adfce344f987e53ff15404238cb85bbf6}{secureportBYTE\_ALIGNMENT\_MASK}}\ )\ ==\ 0\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00352}00352\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00353}00353\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Calculate\ the\ sizes\ of\ two\ blocks\ split\ from\ the\ single}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00354}00354\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ block.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00355}00355\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pxNewBlockLink-\/>xBlockSize\ =\ pxBlock-\/>xBlockSize\ -\/\ xWantedSize;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00356}00356\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pxBlock-\/>xBlockSize\ =\ xWantedSize;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00357}00357\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00358}00358\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Insert\ the\ new\ block\ into\ the\ list\ of\ free\ blocks.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00359}00359\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pxNewBlockLink-\/>pxNextFreeBlock\ =\ pxPreviousBlock-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00360}00360\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pxPreviousBlock-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock}}\ =\ pxNewBlockLink;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00361}00361\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00362}00362\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00363}00363\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00364}00364\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}}();}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00365}00365\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00366}00366\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00367}00367\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ xFreeBytesRemaining\ -\/=\ pxBlock-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00368}00368\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00369}00369\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ xFreeBytesRemaining\ <\ xMinimumEverFreeBytesRemaining\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00370}00370\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00371}00371\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ xMinimumEverFreeBytesRemaining\ =\ xFreeBytesRemaining;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00372}00372\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00373}00373\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00374}00374\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00375}00375\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}}();}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00376}00376\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00377}00377\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00378}00378\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ xAllocatedBlockSize\ =\ pxBlock-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00379}00379\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00380}00380\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ The\ block\ is\ being\ returned\ -\/\ it\ is\ allocated\ and\ owned\ by}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00381}00381\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ the\ application\ and\ has\ no\ "{}next"{}\ block.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00382}00382\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_ad1d672bdaa4cd684a6b2c999605cf3a7}{secureheapALLOCATE\_BLOCK}}(\ pxBlock\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00383}00383\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pxBlock-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock}}\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00384}00384\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00385}00385\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00386}00386\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00387}00387\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}}();}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00388}00388\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00389}00389\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00390}00390\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00391}00391\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00392}00392\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}}();}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00393}00393\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00394}00394\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00395}00395\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00396}00396\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00397}00397\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}}();}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00398}00398\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00399}00399\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00400}00400\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a7b7adb972133ffecbaddb8a8a4303e28}{traceMALLOC}}(\ pvReturn,\ xAllocatedBlockSize\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00401}00401\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00402}00402\ \ \ \ \ \textcolor{comment}{/*\ Prevent\ compiler\ warnings\ when\ trace\ macros\ are\ not\ used.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00403}00403\ \ \ \ \ (\ void\ )\ xAllocatedBlockSize;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00404}00404\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00405}00405\ \textcolor{preprocessor}{\ \ \ \ \#if\ (\ secureconfigUSE\_MALLOC\_FAILED\_HOOK\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00406}00406\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00407}00407\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ pvReturn\ ==\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00408}00408\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00409}00409\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ vApplicationMallocFailedHook(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00410}00410\ \ \ \ \ \ \ \ \ \ \ \ \ vApplicationMallocFailedHook();}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00411}00411\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00412}00412\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00413}00413\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00414}00414\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}}();}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00415}00415\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00416}00416\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00417}00417\ \textcolor{preprocessor}{\ \ \ \ \#endif\ }\textcolor{comment}{/*\ if\ (\ secureconfigUSE\_MALLOC\_FAILED\_HOOK\ ==\ 1\ )\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00418}00418\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00419}00419\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_a2e7dbc2d6fde4222617bab6ac84f8c36}{secureportASSERT}}(\ (\ (\ (\ \textcolor{keywordtype}{size\_t}\ )\ pvReturn\ )\ \&\ (\ \textcolor{keywordtype}{size\_t}\ )\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_adfce344f987e53ff15404238cb85bbf6}{secureportBYTE\_ALIGNMENT\_MASK}}\ )\ ==\ 0\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00420}00420\ \ \ \ \ \textcolor{keywordflow}{return}\ pvReturn;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00421}00421\ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00422}00422\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00423}00423\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00424}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_a1e7cea2fd1bc894ea3b5f5e8179d259b}{00424}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_third_party_2_g_c_c_2_xtensa___e_s_p32_2include_2portmacro_8h_a5e70e878c0ed79ab346b5eab7e93ddff}{vPortFree}}(\ \textcolor{keywordtype}{void}\ *\ pv\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00425}00425\ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00426}00426\ \ \ \ \ uint8\_t\ *\ puc\ =\ (\ uint8\_t\ *\ )\ pv;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00427}00427\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a5867d4b64d89c6ab51e4783687f8960a}{BlockLink\_t}}\ *\ pxLink;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00428}00428\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00429}00429\ \ \ \ \ \textcolor{keywordflow}{if}(\ pv\ !=\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00430}00430\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00431}00431\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ The\ memory\ being\ freed\ will\ have\ an\ BlockLink\_t\ structure\ immediately}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00432}00432\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ before\ it.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00433}00433\ \ \ \ \ \ \ \ \ puc\ -\/=\ xHeapStructSize;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00434}00434\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00435}00435\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ This\ casting\ is\ to\ keep\ the\ compiler\ from\ issuing\ warnings.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00436}00436\ \ \ \ \ \ \ \ \ pxLink\ =\ (\ \textcolor{keywordtype}{void}\ *\ )\ puc;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00437}00437\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00438}00438\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Check\ the\ block\ is\ actually\ allocated.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00439}00439\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_a2e7dbc2d6fde4222617bab6ac84f8c36}{secureportASSERT}}(\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a9154f9d356f99eb4ca4c085cc4dd2094}{secureheapBLOCK\_IS\_ALLOCATED}}(\ pxLink\ )\ !=\ 0\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00440}00440\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_a2e7dbc2d6fde4222617bab6ac84f8c36}{secureportASSERT}}(\ pxLink-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock}}\ ==\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00441}00441\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00442}00442\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a9154f9d356f99eb4ca4c085cc4dd2094}{secureheapBLOCK\_IS\_ALLOCATED}}(\ pxLink\ )\ !=\ 0\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00443}00443\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00444}00444\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ pxLink-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_aaef1b26e95b0b7b7ebffc91fa6ce874f}{pxNextFreeBlock}}\ ==\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00445}00445\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00446}00446\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ The\ block\ is\ being\ returned\ to\ the\ heap\ -\/\ it\ is\ no\ longer}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00447}00447\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ allocated.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00448}00448\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a799f87ee3b68fa03086bd681fc9de8c8}{secureheapFREE\_BLOCK}}(\ pxLink\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00449}00449\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00450}00450\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_abc6e8c9ccaac36e9daa045a1aabf4745}{secureportDISABLE\_NON\_SECURE\_INTERRUPTS}}();}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00451}00451\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00452}00452\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Add\ this\ block\ to\ the\ list\ of\ free\ blocks.\ */}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00453}00453\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ xFreeBytesRemaining\ +=\ pxLink-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize}};}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00454}00454\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a47dffc63f23004f444db7058604e4626}{traceFREE}}(\ pv,\ pxLink-\/>\mbox{\hyperlink{struct_a___b_l_o_c_k___l_i_n_k_ad5dcf5df03d8be6186c567be9e2c657b}{xBlockSize}}\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00455}00455\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{heap__2_8c_a55396870242c952746147671bf78a149}{prvInsertBlockIntoFreeList}}(\ (\ (\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a5867d4b64d89c6ab51e4783687f8960a}{BlockLink\_t}}\ *\ )\ pxLink\ )\ );}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00456}00456\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00457}00457\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_aa62975df4f2217efc4c0c88e4783d080}{secureportENABLE\_NON\_SECURE\_INTERRUPTS}}();}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00458}00458\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00459}00459\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00460}00460\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00461}00461\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}}();}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00462}00462\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00463}00463\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00464}00464\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00465}00465\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00466}00466\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}}();}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00467}00467\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00468}00468\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00469}00469\ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00470}00470\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00471}00471\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00472}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_a0c28a12b313bc248be0cb7a37ed81bb7}{00472}}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_a0c28a12b313bc248be0cb7a37ed81bb7}{xPortGetFreeHeapSize}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00473}00473\ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00474}00474\ \ \ \ \ \textcolor{keywordflow}{return}\ xFreeBytesRemaining;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00475}00475\ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00476}00476\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00477}00477\ }
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00478}\mbox{\hyperlink{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_ab222e4545b8ff12b62fd000fea6b34eb}{00478}}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{_a_r_mv8_m_2secure_2heap_2secure__heap_8c_ab222e4545b8ff12b62fd000fea6b34eb}{xPortGetMinimumEverFreeHeapSize}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00479}00479\ \{}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00480}00480\ \ \ \ \ \textcolor{keywordflow}{return}\ xMinimumEverFreeBytesRemaining;}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00481}00481\ \}}
+\DoxyCodeLine{\Hypertarget{_i_a_r_2_a_r_m___c_m23_2secure_2secure__heap_8c_source_l00482}00482\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+
+\end{DoxyCode}

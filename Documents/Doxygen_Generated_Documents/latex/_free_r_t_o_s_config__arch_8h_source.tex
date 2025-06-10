@@ -1,0 +1,139 @@
+\doxysection{Free\+RTOSConfig\+\_\+arch.\+h}
+\hypertarget{_free_r_t_o_s_config__arch_8h_source}{}\label{_free_r_t_o_s_config__arch_8h_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/Xtensa\_ESP32/include/FreeRTOSConfig\_arch.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/Xtensa\_ESP32/include/FreeRTOSConfig\_arch.h}}
+\mbox{\hyperlink{_free_r_t_o_s_config__arch_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00002}00002\ \textcolor{comment}{\ *\ SPDX-\/FileCopyrightText:\ 2022\ Amazon.com,\ Inc.\ or\ its\ affiliates}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00003}00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00004}00004\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00005}00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00006}00006\ \textcolor{comment}{\ *\ SPDX-\/FileContributor:\ 2016-\/2022\ Espressif\ Systems\ (Shanghai)\ CO\ LTD}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00007}00007\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00009}00009\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00010}00010\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00011}00011\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2017\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00012}00012\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00013}00013\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00014}00014\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00015}00015\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00016}00016\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00017}00017\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00018}00018\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00019}00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00020}00020\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00021}00021\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.\ If\ you\ wish\ to\ use\ our\ Amazon}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00022}00022\ \textcolor{comment}{\ *\ FreeRTOS\ name,\ please\ do\ so\ in\ a\ fair\ use\ way\ that\ does\ not\ cause\ confusion.}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00024}00024\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00025}00025\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00026}00026\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00027}00027\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00028}00028\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00029}00029\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00030}00030\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00031}00031\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00032}00032\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00033}00033\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00034}00034\ \textcolor{comment}{\ *\ 1\ tab\ ==\ 4\ spaces!}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00035}00035\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00037}00037\ \textcolor{preprocessor}{\#ifndef\ FREERTOS\_CONFIG\_XTENSA\_H}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00038}00038\ \textcolor{preprocessor}{\#define\ FREERTOS\_CONFIG\_XTENSA\_H}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00040}00040\ \textcolor{preprocessor}{\#include\ "{}sdkconfig.h"{}}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00042}00042\ \textcolor{comment}{/*\ enable\ use\ of\ optimized\ task\ selection\ by\ the\ scheduler\ */}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00043}00043\ \textcolor{preprocessor}{\#if\ defined(\ CONFIG\_FREERTOS\_OPTIMIZED\_SCHEDULER\ )\ \&\&\ !defined(\ configUSE\_PORT\_OPTIMISED\_TASK\_SELECTION\ )}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00044}00044\ \textcolor{preprocessor}{\ \ \ \ \#define\ configUSE\_PORT\_OPTIMISED\_TASK\_SELECTION\ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00045}00045\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00047}\mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_aeeb11d652f7f8685a1d7e84643f3b148}{00047}}\ \textcolor{preprocessor}{\#define\ XT\_USE\_THREAD\_SAFE\_CLIB\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00048}00048\ \textcolor{preprocessor}{\#undef\ XT\_USE\_SWPRI}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00050}00050\ \textcolor{preprocessor}{\#if\ CONFIG\_FREERTOS\_CORETIMER\_0}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00051}00051\ \textcolor{preprocessor}{\ \ \ \ \#define\ XT\_TIMER\_INDEX\ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00052}00052\ \textcolor{preprocessor}{\#elif\ CONFIG\_FREERTOS\_CORETIMER\_1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00053}00053\ \textcolor{preprocessor}{\ \ \ \ \#define\ XT\_TIMER\_INDEX\ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00054}00054\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00056}00056\ \textcolor{preprocessor}{\#ifndef\ \_\_ASSEMBLER\_\_}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00064}\mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_ab4440ca844e09af984e871862ac3a603}{00064}}\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_ab4440ca844e09af984e871862ac3a603}{xt\_clock\_freq}}(\ \textcolor{keywordtype}{void}\ )\ \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_ab35b2424ac8c0625cfdbbcf916c5e1c3}{\_\_attribute\_\_}}(\ (\ deprecated\ )\ );}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00066}\mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_adafcf91309f31387a8e6c3dc96f0726b}{00066}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ XT\_CLOCK\_FREQ\ \ \ \ (\ xt\_clock\_freq()\ )}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00068}00068\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ \_\_ASSEMBLER\_\_}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00070}00070\ \textcolor{comment}{/*\ Required\ for\ configuration-\/dependent\ settings\ */}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00071}00071\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{_g_c_c_2_xtensa___e_s_p32_2include_2xtensa__config_8h}{xtensa\_config.h}}>}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00073}00073\ \textcolor{comment}{/*\ configASSERT\ behaviour\ */}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00074}00074\ \textcolor{preprocessor}{\#ifndef\ \_\_ASSEMBLER\_\_}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00075}00075\ \textcolor{preprocessor}{\ \ \ \ \#include\ <assert.h>}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00076}00076\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}esp\_rom\_sys.h"{}}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00077}00077\ \textcolor{preprocessor}{\ \ \ \ \#if\ CONFIG\_IDF\_TARGET\_ESP32}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00078}00078\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#include\ "{}esp32/rom/ets\_sys.h"{}}\ \textcolor{comment}{/*\ will\ be\ removed\ in\ idf\ v5.0\ */}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00079}00079\ \textcolor{preprocessor}{\ \ \ \ \#elif\ CONFIG\_IDF\_TARGET\_ESP32S2}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00080}00080\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#include\ "{}esp32s2/rom/ets\_sys.h"{}}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00081}00081\ \textcolor{preprocessor}{\ \ \ \ \#elif\ CONFIG\_IDF\_TARGET\_ESP32S3}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00082}00082\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#include\ "{}esp32s3/rom/ets\_sys.h"{}}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00083}00083\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00084}00084\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ \_\_ASSEMBLER\_\_}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00086}00086\ \textcolor{comment}{/*\ If\ CONFIG\_FREERTOS\_ASSERT\_DISABLE\ is\ set\ then\ configASSERT\ is\ defined\ empty\ later\ in\ FreeRTOS.h\ and\ the\ macro\ */}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00087}00087\ \textcolor{comment}{/*\ configASSERT\_DEFINED\ remains\ unset\ (meaning\ some\ warnings\ are\ avoided)\ */}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00088}00088\ \textcolor{preprocessor}{\#ifdef\ configASSERT}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00089}00089\ \textcolor{preprocessor}{\ \ \ \ \#undef\ configASSERT}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00090}00090\ \textcolor{preprocessor}{\ \ \ \ \#if\ defined(\ CONFIG\_FREERTOS\_ASSERT\_FAIL\_PRINT\_CONTINUE\ )}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00091}00091\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ configASSERT(\ a\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00092}00092\ \textcolor{preprocessor}{\ \ \ \ if(\ unlikely(\ !(\ a\ )\ )\ )\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00093}00093\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ esp\_rom\_printf(\ "{}\%s:\%d\ (\%s)-\/\ assert\ failed!\(\backslash\)n"{},\ \_\_FILE\_\_,\ \_\_LINE\_\_,\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00094}00094\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_FUNCTION\_\_\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00095}00095\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00096}00096\ \textcolor{preprocessor}{\ \ \ \ \#elif\ defined(\ CONFIG\_FREERTOS\_ASSERT\_FAIL\_ABORT\ )}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00097}00097\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ configASSERT(\ a\ )\ \ \ \ assert(\ a\ )}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00098}00098\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00099}00099\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ ifdef\ configASSERT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00101}00101\ \textcolor{preprocessor}{\#if\ CONFIG\_FREERTOS\_ASSERT\_ON\_UNTESTED\_FUNCTION}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00102}00102\ \textcolor{preprocessor}{\ \ \ \ \#define\ UNTESTED\_FUNCTION()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00103}00103\ \textcolor{preprocessor}{\ \ \ \ \{\ esp\_rom\_printf(\ "{}Untested\ FreeRTOS\ function\ \%s\(\backslash\)r\(\backslash\)n"{},\ \_\_FUNCTION\_\_\ );\ configASSERT(\ false\ );\ \}\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00104}00104\ \textcolor{preprocessor}{\ \ \ \ while(\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00105}00105\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00106}\mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_a7f5de729bb3993a5fc84484ed8717be6}{00106}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ UNTESTED\_FUNCTION()}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00107}00107\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00109}\mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_a61c84d118699861ab25dd95293b1f6a3}{00109}}\ \textcolor{preprocessor}{\#define\ configXT\_BOARD\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1\ \ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{/*\ Board\ mode\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00110}\mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_af38f4fd15326ef6e0b3281675c6eff7e}{00110}}\ \textcolor{preprocessor}{\#define\ configXT\_SIMULATOR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00112}00112\ \textcolor{comment}{/*\ The\ maximum\ interrupt\ priority\ from\ which\ FreeRTOS.org\ API\ functions\ can}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00113}00113\ \textcolor{comment}{\ *\ be\ called.\ \ Only\ API\ functions\ that\ end\ in\ ...FromISR()\ can\ be\ used\ within}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00114}00114\ \textcolor{comment}{\ *\ interrupts.\ */}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00115}\mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_a54bfc31c410ee452577a25a4552c3704}{00115}}\ \textcolor{preprocessor}{\#define\ configMAX\_SYSCALL\_INTERRUPT\_PRIORITY\ \ \ \ XCHAL\_EXCM\_LEVEL}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00117}00117\ \textcolor{comment}{/*\ Stack\ alignment,\ architecture\ specifc.\ Must\ be\ a\ power\ of\ two.\ */}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00118}\mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_a20ee483300de7a4f8a6805819c1b3600}{00118}}\ \textcolor{preprocessor}{\#define\ configSTACK\_ALIGNMENT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 16}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00121}00121\ \textcolor{comment}{/*\ The\ Xtensa\ port\ uses\ a\ separate\ interrupt\ stack.\ Adjust\ the\ stack\ size}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00122}00122\ \textcolor{comment}{\ *\ to\ suit\ the\ needs\ of\ your\ specific\ application.}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00123}00123\ \textcolor{comment}{\ *\ Size\ needs\ to\ be\ aligned\ to\ the\ stack\ increment,\ since\ the\ location\ of}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00124}00124\ \textcolor{comment}{\ *\ the\ stack\ for\ the\ 2nd\ CPU\ will\ be\ calculated\ using\ configISR\_STACK\_SIZE.}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00125}00125\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00126}00126\ \textcolor{preprocessor}{\#ifndef\ configISR\_STACK\_SIZE}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00127}\mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_a09130ab92a2b53d1952301ded0244a4d}{00127}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ configISR\_STACK\_SIZE\ \ \ \ (\ (\ CONFIG\_FREERTOS\_ISR\_STACKSIZE\ +\ configSTACK\_ALIGNMENT\ -\/\ 1\ )\ \&\ (\ \string~(\ configSTACK\_ALIGNMENT\ -\/\ 1\ )\ )\ )}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00128}00128\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00130}00130\ \textcolor{preprocessor}{\#ifndef\ \_\_ASSEMBLER\_\_}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00131}00131\ \textcolor{preprocessor}{\ \ \ \ \#if\ CONFIG\_APPTRACE\_SV\_ENABLE}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00132}00132\ \ \ \ \ \ \ \ \ \textcolor{keyword}{extern}\ uint32\_t\ port\_switch\_flag[];}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00133}00133\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ os\_task\_switch\_is\_pended(\ \_cpu\_\ )\ \ \ \ (\ port\_switch\_flag[\ \_cpu\_\ ]\ )}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00134}00134\ \textcolor{preprocessor}{\ \ \ \ \#else}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00135}\mbox{\hyperlink{_free_r_t_o_s_config__arch_8h_a66d4555d5de9eb3542d2463c331bfd45}{00135}}\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ os\_task\_switch\_is\_pended(\ \_cpu\_\ )\ \ \ \ (\ false\ )}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00136}00136\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00137}00137\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{_free_r_t_o_s_config__arch_8h_source_l00139}00139\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ FREERTOS\_CONFIG\_XTENSA\_H}}
+
+\end{DoxyCode}

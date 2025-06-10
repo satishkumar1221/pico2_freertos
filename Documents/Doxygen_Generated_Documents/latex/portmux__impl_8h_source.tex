@@ -1,0 +1,106 @@
+\doxysection{portmux\+\_\+impl.\+h}
+\hypertarget{portmux__impl_8h_source}{}\label{portmux__impl_8h_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/Xtensa\_ESP32/portmux\_impl.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/GCC/Xtensa\_ESP32/portmux\_impl.h}}
+\mbox{\hyperlink{portmux__impl_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00002}00002\ \textcolor{comment}{\ *\ SPDX-\/FileCopyrightText:\ 2017-\/2021\ Espressif\ Systems\ (Shanghai)\ CO\ LTD}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00003}00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00004}00004\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00005}00005\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00007}00007\ \textcolor{comment}{/*\ This\ header\ exists\ for\ performance\ reasons,\ in\ order\ to\ inline\ the}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00008}00008\ \textcolor{comment}{\ *\ implementation\ of\ vPortCPUAcquireMutexIntsDisabled\ and}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00009}00009\ \textcolor{comment}{\ *\ vPortCPUReleaseMutexIntsDisabled\ into\ the}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00010}00010\ \textcolor{comment}{\ *\ vTaskEnterCritical/vTaskExitCritical\ functions\ in\ task.c\ as\ well\ as\ the}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00011}00011\ \textcolor{comment}{\ *\ vPortCPUAcquireMutex/vPortCPUReleaseMutex\ implementations.}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00012}00012\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00013}00013\ \textcolor{comment}{\ *\ Normally\ this\ kind\ of\ performance\ hack\ is\ over\ the\ top,\ but}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00014}00014\ \textcolor{comment}{\ *\ vTaskEnterCritical/vTaskExitCritical\ is\ called\ a\ great}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00015}00015\ \textcolor{comment}{\ *\ deal\ by\ FreeRTOS\ internals.}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00017}00017\ \textcolor{comment}{\ *\ It\ should\ be\ \#included\ by\ freertos\ port.c\ or\ tasks.c,\ in\ esp-\/idf.}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00018}00018\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00019}00019\ \textcolor{comment}{\ *\ The\ way\ it\ works\ is\ that\ it\ essentially\ uses\ portmux\_impl.inc.h\ as\ a}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00020}00020\ \textcolor{comment}{\ *\ generator\ template\ of\ sorts.\ When\ no\ external\ memory\ is\ used,\ this}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00021}00021\ \textcolor{comment}{\ *\ template\ is\ only\ used\ to\ generate\ the\ vPortCPUAcquireMutexIntsDisabledInternal}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00022}00022\ \textcolor{comment}{\ *\ and\ vPortCPUReleaseMutexIntsDisabledInternal\ functions,\ which\ use\ S32C1\ to}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00023}00023\ \textcolor{comment}{\ *\ do\ an\ atomic\ compare\ \&\ swap.\ When\ external\ memory\ is\ used\ the\ functions}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00024}00024\ \textcolor{comment}{\ *\ vPortCPUAcquireMutexIntsDisabledExtram\ and\ vPortCPUReleaseMutexIntsDisabledExtram}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00025}00025\ \textcolor{comment}{\ *\ are\ also\ generated,\ which\ use\ uxPortCompareSetExtram\ to\ fake\ the\ S32C1\ instruction.}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00026}00026\ \textcolor{comment}{\ *\ The\ wrapper\ functions\ vPortCPUAcquireMutexIntsDisabled\ and}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00027}00027\ \textcolor{comment}{\ *\ vPortCPUReleaseMutexIntsDisabled\ will\ then\ use\ the\ appropriate\ function\ to\ do\ the}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00028}00028\ \textcolor{comment}{\ *\ actual\ lock/unlock.}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00029}00029\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00030}00030\ \textcolor{preprocessor}{\#include\ "{}soc/cpu.h"{}}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00031}00031\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{portable_8h}{portable.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00033}00033\ \textcolor{comment}{/*\ XOR\ one\ core\ ID\ with\ this\ value\ to\ get\ the\ other\ core\ ID\ */}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00034}00034\ \textcolor{preprocessor}{\#if\ (\ ESP\_IDF\_VERSION\ <\ ESP\_IDF\_VERSION\_VAL(\ 4,\ 2,\ 0\ )\ )}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00035}00035\ \textcolor{preprocessor}{\ \ \ \ \#define\ CORE\_ID\_XOR\_SWAP\ \ \ \ \ \ \ \ \ \ \ (\ CORE\_ID\_PRO\ \string^\ CORE\_ID\_APP\ )}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00036}00036\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00037}\mbox{\hyperlink{portmux__impl_8h_a8ffe864813f4c55413a63d9a08597814}{00037}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ CORE\_ID\_REGVAL\_XOR\_SWAP\ \ \ \ (\ CORE\_ID\_REGVAL\_PRO\ \string^\ CORE\_ID\_REGVAL\_APP\ )}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00038}00038\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00042}00042\ \textcolor{comment}{/*Define\ the\ mux\ routines\ for\ use\ with\ muxes\ in\ internal\ RAM\ */}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00043}\mbox{\hyperlink{portmux__impl_8h_aaec7aa479d5f7e87f8dc0bc132d7091c}{00043}}\ \textcolor{preprocessor}{\#define\ PORTMUX\_AQUIRE\_MUX\_FN\_NAME\ \ \ \ \ vPortCPUAcquireMutexIntsDisabledInternal}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00044}\mbox{\hyperlink{portmux__impl_8h_ad6f171a6adcd673b60cec1aa220ae3ce}{00044}}\ \textcolor{preprocessor}{\#define\ PORTMUX\_RELEASE\_MUX\_FN\_NAME\ \ \ \ vPortCPUReleaseMutexIntsDisabledInternal}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00045}\mbox{\hyperlink{portmux__impl_8h_ae5af280d24f56b0f817b2322e4c1a6de}{00045}}\ \textcolor{preprocessor}{\#define\ PORTMUX\_COMPARE\_SET\_FN\_NAME\ \ \ \ uxPortCompareSet}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00046}00046\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{portmux__impl_8inc_8h}{portmux\_impl.inc.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00047}00047\ \textcolor{preprocessor}{\#undef\ PORTMUX\_AQUIRE\_MUX\_FN\_NAME}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00048}00048\ \textcolor{preprocessor}{\#undef\ PORTMUX\_RELEASE\_MUX\_FN\_NAME}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00049}00049\ \textcolor{preprocessor}{\#undef\ PORTMUX\_COMPARE\_SET\_FN\_NAME}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00052}00052\ \textcolor{preprocessor}{\#if\ defined(\ CONFIG\_SPIRAM\_SUPPORT\ )}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00054}00054\ \textcolor{preprocessor}{\ \ \ \ \#define\ PORTMUX\_AQUIRE\_MUX\_FN\_NAME\ \ \ \ \ vPortCPUAcquireMutexIntsDisabledExtram}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00055}00055\ \textcolor{preprocessor}{\ \ \ \ \#define\ PORTMUX\_RELEASE\_MUX\_FN\_NAME\ \ \ \ vPortCPUReleaseMutexIntsDisabledExtram}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00056}00056\ \textcolor{preprocessor}{\ \ \ \ \#define\ PORTMUX\_COMPARE\_SET\_FN\_NAME\ \ \ \ uxPortCompareSetExtram}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00057}00057\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}\mbox{\hyperlink{portmux__impl_8inc_8h}{portmux\_impl.inc.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00058}00058\ \textcolor{preprocessor}{\ \ \ \ \#undef\ PORTMUX\_AQUIRE\_MUX\_FN\_NAME}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00059}00059\ \textcolor{preprocessor}{\ \ \ \ \#undef\ PORTMUX\_RELEASE\_MUX\_FN\_NAME}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00060}00060\ \textcolor{preprocessor}{\ \ \ \ \#undef\ PORTMUX\_COMPARE\_SET\_FN\_NAME}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00062}00062\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00065}00065\ \textcolor{preprocessor}{\#ifdef\ CONFIG\_FREERTOS\_PORTMUX\_DEBUG}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00066}00066\ \textcolor{preprocessor}{\ \ \ \ \#define\ PORTMUX\_AQUIRE\_MUX\_FN\_ARGS\ \ \ \ \ portMUX\_TYPE\ *\ mux,\ int\ timeout\_cycles,\ const\ char\ *\ fnName,\ int\ line}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00067}00067\ \textcolor{preprocessor}{\ \ \ \ \#define\ PORTMUX\_RELEASE\_MUX\_FN\_ARGS\ \ \ \ portMUX\_TYPE\ *\ mux,\ const\ char\ *\ fnName,\ int\ line}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00068}00068\ \textcolor{preprocessor}{\ \ \ \ \#define\ PORTMUX\_AQUIRE\_MUX\_FN\_CALL\_ARGS(\ x\ )\ \ \ \ \ x,\ timeout\_cycles,\ fnName,\ line}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00069}00069\ \textcolor{preprocessor}{\ \ \ \ \#define\ PORTMUX\_RELEASE\_MUX\_FN\_CALL\_ARGS(\ x\ )\ \ \ \ x,\ fnName,\ line}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00070}00070\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00071}\mbox{\hyperlink{portmux__impl_8h_a72981756cb9a07cddad7db7ef57e117c}{00071}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ PORTMUX\_AQUIRE\_MUX\_FN\_ARGS\ \ \ \ \ portMUX\_TYPE\ *\ mux,\ int\ timeout\_cycles}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00072}\mbox{\hyperlink{portmux__impl_8h_ad5bf0c56276852d5323372d737995ae1}{00072}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ PORTMUX\_RELEASE\_MUX\_FN\_ARGS\ \ \ \ portMUX\_TYPE\ *\ mux}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00073}\mbox{\hyperlink{portmux__impl_8h_a465ad51ef3a026d8c7e78539970fc628}{00073}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ PORTMUX\_AQUIRE\_MUX\_FN\_CALL\_ARGS(\ x\ )\ \ \ \ \ x,\ timeout\_cycles}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00074}\mbox{\hyperlink{portmux__impl_8h_a4c5e5295d66e0c679688c5c961619745}{00074}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ PORTMUX\_RELEASE\_MUX\_FN\_CALL\_ARGS(\ x\ )\ \ \ \ x}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00075}00075\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00078}00078\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_ab35b2424ac8c0625cfdbbcf916c5e1c3}{\_\_attribute\_\_}}(\ (\ always\_inline\ )\ )\ vPortCPUAcquireMutexIntsDisabled(\ \mbox{\hyperlink{portmux__impl_8h_a72981756cb9a07cddad7db7ef57e117c}{PORTMUX\_AQUIRE\_MUX\_FN\_ARGS}}\ )}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00079}00079\ \{}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00080}00080\ \textcolor{preprocessor}{\ \ \ \ \#if\ defined(\ CONFIG\_SPIRAM\_SUPPORT\ )}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00081}00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ esp\_ptr\_external\_ram(\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}\ )\ )}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00082}00082\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ vPortCPUAcquireMutexIntsDisabledExtram(\ \mbox{\hyperlink{portmux__impl_8h_a465ad51ef3a026d8c7e78539970fc628}{PORTMUX\_AQUIRE\_MUX\_FN\_CALL\_ARGS}}(\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}\ )\ );}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00084}00084\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00085}00085\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00086}00086\ \ \ \ \ \textcolor{keywordflow}{return}\ vPortCPUAcquireMutexIntsDisabledInternal(\ \mbox{\hyperlink{portmux__impl_8h_a465ad51ef3a026d8c7e78539970fc628}{PORTMUX\_AQUIRE\_MUX\_FN\_CALL\_ARGS}}(\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}\ )\ );}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00087}00087\ \}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00090}00090\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ vPortCPUReleaseMutexIntsDisabled(\ \mbox{\hyperlink{portmux__impl_8h_ad5bf0c56276852d5323372d737995ae1}{PORTMUX\_RELEASE\_MUX\_FN\_ARGS}}\ )}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00091}00091\ \{}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00092}00092\ \textcolor{preprocessor}{\ \ \ \ \#if\ defined(\ CONFIG\_SPIRAM\_SUPPORT\ )}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00093}00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ esp\_ptr\_external\_ram(\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}\ )\ )}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00094}00094\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ vPortCPUReleaseMutexIntsDisabledExtram(\ \mbox{\hyperlink{portmux__impl_8h_a4c5e5295d66e0c679688c5c961619745}{PORTMUX\_RELEASE\_MUX\_FN\_CALL\_ARGS}}(\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}\ )\ );}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00097}00097\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00098}00098\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00099}00099\ \ \ \ \ vPortCPUReleaseMutexIntsDisabledInternal(\ \mbox{\hyperlink{portmux__impl_8h_a4c5e5295d66e0c679688c5c961619745}{PORTMUX\_RELEASE\_MUX\_FN\_CALL\_ARGS}}(\ \mbox{\hyperlink{portmux__impl_8inc_8h_a80a4ee366c9507996d346432d43d4f9a}{mux}}\ )\ );}
+\DoxyCodeLine{\Hypertarget{portmux__impl_8h_source_l00100}00100\ \}}
+
+\end{DoxyCode}

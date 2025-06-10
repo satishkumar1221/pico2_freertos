@@ -1,0 +1,85 @@
+\doxysection{x\+Queue\+Receive\+From\+ISR }
+\hypertarget{group__x_queue_receive_from_i_s_r}{}\label{group__x_queue_receive_from_i_s_r}\index{xQueueReceiveFromISR@{xQueueReceiveFromISR}}
+queue. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{queue_8h_acdf528f5c91131ae2f31c669cfd65758}{xQueueReceiveFromISR}}(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \ \ \ xQueue,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ *pvBuffer,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \ \ \ \ \ \ *pxTaskWoken}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
+
+\end{DoxyCode}
+
+
+Receive an item from a queue. It is safe to use this function from within an interrupt service routine.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Queue} & The handle to the queue from which the item is to be received.\\
+\hline
+{\em pv\+Buffer} & Pointer to the buffer into which the received item will be copied.\\
+\hline
+{\em px\+Higher\+Priority\+Task\+Woken} & A task may be blocked waiting for space to become available on the queue. If x\+Queue\+Receive\+From\+ISR causes such a task to unblock \texorpdfstring{$\ast$}{*}px\+Task\+Woken will get set to pd\+TRUE, otherwise \texorpdfstring{$\ast$}{*}px\+Task\+Woken will remain unchanged.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pd\+TRUE if an item was successfully received from the queue, otherwise pd\+FALSE.
+\end{DoxyReturn}
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ xQueue;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Function\ to\ create\ a\ queue\ and\ post\ some\ values.}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vAFunction(\ \textcolor{keywordtype}{void}\ *pvParameters\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keywordtype}{char}\ cValueToPost;}
+\DoxyCodeLine{\textcolor{keyword}{const}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xTicksToWait\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ )0xff;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ a\ queue\ capable\ of\ containing\ 10\ characters.}}
+\DoxyCodeLine{\ xQueue\ =\ xQueueCreate(\ 10,\ \textcolor{keyword}{sizeof}(\ \textcolor{keywordtype}{char}\ )\ );}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(\ xQueue\ ==\ 0\ )}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Failed\ to\ create\ the\ queue.}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ ...}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Post\ some\ characters\ that\ will\ be\ used\ within\ an\ ISR.\ \ If\ the\ queue}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ is\ full\ then\ this\ task\ will\ block\ for\ xTicksToWait\ ticks.}}
+\DoxyCodeLine{\ cValueToPost\ =\ \textcolor{charliteral}{'a'};}
+\DoxyCodeLine{\ \mbox{\hyperlink{queue_8h_af7eb49d3249351176992950d9185abe9}{xQueueSend}}(\ xQueue,\ (\ \textcolor{keywordtype}{void}\ *\ )\ \&cValueToPost,\ xTicksToWait\ );}
+\DoxyCodeLine{\ cValueToPost\ =\ \textcolor{charliteral}{'b'};}
+\DoxyCodeLine{\ \mbox{\hyperlink{queue_8h_af7eb49d3249351176992950d9185abe9}{xQueueSend}}(\ xQueue,\ (\ \textcolor{keywordtype}{void}\ *\ )\ \&cValueToPost,\ xTicksToWait\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ ...\ keep\ posting\ characters\ ...\ this\ task\ may\ block\ when\ the\ queue}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ becomes\ full.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ cValueToPost\ =\ \textcolor{charliteral}{'c'};}
+\DoxyCodeLine{\ \mbox{\hyperlink{queue_8h_af7eb49d3249351176992950d9185abe9}{xQueueSend}}(\ xQueue,\ (\ \textcolor{keywordtype}{void}\ *\ )\ \&cValueToPost,\ xTicksToWait\ );}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ ISR\ that\ outputs\ all\ the\ characters\ received\ on\ the\ queue.}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vISR\_Routine(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xTaskWokenByReceive\ =\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}};}
+\DoxyCodeLine{\textcolor{keywordtype}{char}\ cRxedChar;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{while}(\ \mbox{\hyperlink{queue_8h_acdf528f5c91131ae2f31c669cfd65758}{xQueueReceiveFromISR}}(\ xQueue,\ (\ \textcolor{keywordtype}{void}\ *\ )\ \&cRxedChar,\ \&xTaskWokenByReceive)\ )}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ A\ character\ was\ received.\ \ Output\ the\ character\ now.}}
+\DoxyCodeLine{\ \ \ \ \ vOutputCharacter(\ cRxedChar\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ If\ removing\ the\ character\ from\ the\ queue\ woke\ the\ task\ that\ was}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ posting\ onto\ the\ queue\ xTaskWokenByReceive\ will\ have\ been\ set\ to}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ pdTRUE.\ \ No\ matter\ how\ many\ times\ this\ loop\ iterates\ only\ one}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ task\ will\ be\ woken.}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(\ xTaskWokenByReceive\ !=\ (\ \textcolor{keywordtype}{char}\ )\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}};}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{task_8h_a767e474430db1e60056e9678763f9202}{taskYIELD}}\ ();}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

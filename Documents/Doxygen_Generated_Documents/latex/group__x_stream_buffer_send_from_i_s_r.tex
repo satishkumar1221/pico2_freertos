@@ -1,0 +1,72 @@
+\doxysection{x\+Stream\+Buffer\+Send\+From\+ISR }
+\hypertarget{group__x_stream_buffer_send_from_i_s_r}{}\label{group__x_stream_buffer_send_from_i_s_r}\index{xStreamBufferSendFromISR@{xStreamBufferSendFromISR}}
+\doxylink{stream__buffer_8h}{stream\+\_\+buffer.\+h}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{stream__buffer_8h_a1dab226e99230e01e79bc2b5c0605e44}{xStreamBufferSendFromISR}}(\ \mbox{\hyperlink{stream__buffer_8h_a8b80974e2278f073412293e6580ce56f}{StreamBufferHandle\_t}}\ xStreamBuffer,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *pvTxData,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ xDataLengthBytes,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ *pxHigherPriorityTaskWoken\ );}
+
+\end{DoxyCode}
+
+
+Interrupt safe version of the API function that sends a stream of bytes to the stream buffer.
+
+{\itshape {\bfseries{NOTE}}}\+: Uniquely among Free\+RTOS objects, the stream buffer implementation (so also the message buffer implementation, as message buffers are built on top of stream buffers) assumes there is only one task or interrupt that will write to the buffer (the writer), and only one task or interrupt that will read from the buffer (the reader). It is safe for the writer and reader to be different tasks or interrupts, but, unlike other Free\+RTOS objects, it is not safe to have multiple different writers or multiple different readers. If there are to be multiple different writers then the application writer must place each call to a writing API function (such as \doxylink{stream__buffer_8h_a35cdf3b6bf677086b9128782f762499d}{x\+Stream\+Buffer\+Send()}) inside a critical section and set the send block time to 0. Likewise, if there are to be multiple different readers then the application writer must place each call to a reading API function (such as \doxylink{stream__buffer_8h_a55efc144b988598d84a6087d3e20b507}{x\+Stream\+Buffer\+Receive()}) inside a critical section and set the receive block time to 0.
+
+Use \doxylink{stream__buffer_8h_a35cdf3b6bf677086b9128782f762499d}{x\+Stream\+Buffer\+Send()} to write to a stream buffer from a task. Use \doxylink{stream__buffer_8h_a1dab226e99230e01e79bc2b5c0605e44}{x\+Stream\+Buffer\+Send\+From\+ISR()} to write to a stream buffer from an interrupt service routine (ISR).
+
+config\+USE\+\_\+\+STREAM\+\_\+\+BUFFERS must be set to 1 in for Free\+RTOSConfig.\+h for \doxylink{stream__buffer_8h_a1dab226e99230e01e79bc2b5c0605e44}{x\+Stream\+Buffer\+Send\+From\+ISR()} to be available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Stream\+Buffer} & The handle of the stream buffer to which a stream is being sent.\\
+\hline
+{\em pv\+Tx\+Data} & A pointer to the data that is to be copied into the stream buffer.\\
+\hline
+{\em x\+Data\+Length\+Bytes} & The maximum number of bytes to copy from pv\+Tx\+Data into the stream buffer.\\
+\hline
+{\em px\+Higher\+Priority\+Task\+Woken} & It is possible that a stream buffer will have a task blocked on it waiting for data. Calling \doxylink{stream__buffer_8h_a1dab226e99230e01e79bc2b5c0605e44}{x\+Stream\+Buffer\+Send\+From\+ISR()} can make data available, and so cause a task that was waiting for data to leave the Blocked state. If calling \doxylink{stream__buffer_8h_a1dab226e99230e01e79bc2b5c0605e44}{x\+Stream\+Buffer\+Send\+From\+ISR()} causes a task to leave the Blocked state, and the unblocked task has a priority higher than the currently executing task (the task that was interrupted), then, internally, \doxylink{stream__buffer_8h_a1dab226e99230e01e79bc2b5c0605e44}{x\+Stream\+Buffer\+Send\+From\+ISR()} will set \texorpdfstring{$\ast$}{*}px\+Higher\+Priority\+Task\+Woken to pd\+TRUE. If \doxylink{stream__buffer_8h_a1dab226e99230e01e79bc2b5c0605e44}{x\+Stream\+Buffer\+Send\+From\+ISR()} sets this value to pd\+TRUE, then normally a context switch should be performed before the interrupt is exited. This will ensure that the interrupt returns directly to the highest priority Ready state task. \texorpdfstring{$\ast$}{*}px\+Higher\+Priority\+Task\+Woken should be set to pd\+FALSE before it is passed into the function. See the example code below for an example.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of bytes actually written to the stream buffer, which will be less than x\+Data\+Length\+Bytes if the stream buffer didn\textquotesingle{}t have enough free space for all the bytes to be written.
+\end{DoxyReturn}
+Example use\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ A\ stream\ buffer\ that\ has\ already\ been\ created.}}
+\DoxyCodeLine{\mbox{\hyperlink{stream__buffer_8h_a8b80974e2278f073412293e6580ce56f}{StreamBufferHandle\_t}}\ xStreamBuffer;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vAnInterruptServiceRoutine(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keywordtype}{size\_t}\ xBytesSent;}
+\DoxyCodeLine{\textcolor{keywordtype}{char}\ *pcStringToSend\ =\ \textcolor{stringliteral}{"{}String\ to\ send"{}};}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xHigherPriorityTaskWoken\ =\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}};\ \textcolor{comment}{//\ Initialised\ to\ pdFALSE.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Attempt\ to\ send\ the\ string\ to\ the\ stream\ buffer.}}
+\DoxyCodeLine{\ xBytesSent\ =\ \mbox{\hyperlink{stream__buffer_8h_a1dab226e99230e01e79bc2b5c0605e44}{xStreamBufferSendFromISR}}(\ xStreamBuffer,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ \textcolor{keywordtype}{void}\ *\ )\ pcStringToSend,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strlen(\ pcStringToSend\ ),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&xHigherPriorityTaskWoken\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(\ xBytesSent\ !=\ strlen(\ pcStringToSend\ )\ )}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ There\ was\ not\ enough\ free\ space\ in\ the\ stream\ buffer\ for\ the\ entire}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ string\ to\ be\ written,\ ut\ xBytesSent\ bytes\ were\ written.}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ If\ xHigherPriorityTaskWoken\ was\ set\ to\ pdTRUE\ inside}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ xStreamBufferSendFromISR()\ then\ a\ task\ that\ has\ a\ priority\ above\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ priority\ of\ the\ currently\ executing\ task\ was\ unblocked\ and\ a\ context}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ switch\ should\ be\ performed\ to\ ensure\ the\ ISR\ returns\ to\ the\ unblocked}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ task.\ \ In\ most\ FreeRTOS\ ports\ this\ is\ done\ by\ simply\ passing}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ xHigherPriorityTaskWoken\ into\ portYIELD\_FROM\_ISR(),\ which\ will\ test\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ variables\ value,\ and\ perform\ the\ context\ switch\ if\ necessary.\ \ Check\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ documentation\ for\ the\ port\ in\ use\ for\ port\ specific\ instructions.}}
+\DoxyCodeLine{\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_aac6850c66595efdc02a8bbb95fb4648e}{portYIELD\_FROM\_ISR}}(\ xHigherPriorityTaskWoken\ );}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

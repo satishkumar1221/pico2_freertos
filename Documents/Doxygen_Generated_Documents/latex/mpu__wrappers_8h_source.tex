@@ -1,0 +1,282 @@
+\doxysection{mpu\+\_\+wrappers.\+h}
+\hypertarget{mpu__wrappers_8h_source}{}\label{mpu__wrappers_8h_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/mpu\_wrappers.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/mpu\_wrappers.h}}
+\mbox{\hyperlink{mpu__wrappers_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00029}00029\ \textcolor{preprocessor}{\#ifndef\ MPU\_WRAPPERS\_H}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00030}00030\ \textcolor{preprocessor}{\#define\ MPU\_WRAPPERS\_H}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00032}00032\ \textcolor{comment}{/*\ This\ file\ redefines\ API\ functions\ to\ be\ called\ through\ a\ wrapper\ macro,\ but}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00033}00033\ \textcolor{comment}{\ *\ only\ for\ ports\ that\ are\ using\ the\ MPU.\ */}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00034}00034\ \textcolor{preprocessor}{\#if\ (\ portUSING\_MPU\_WRAPPERS\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00036}00036\ \textcolor{comment}{/*\ MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE\ will\ be\ defined\ when\ this\ file\ is}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00037}00037\ \textcolor{comment}{\ *\ included\ from\ queue.c\ or\ task.c\ to\ prevent\ it\ from\ having\ an\ effect\ within}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00038}00038\ \textcolor{comment}{\ *\ those\ files.\ */}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00039}00039\ \textcolor{preprocessor}{\ \ \ \ \#ifndef\ MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00041}00041\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00042}00042\ \textcolor{comment}{\ *\ Map\ standard\ (non\ MPU)\ API\ functions\ to\ equivalents\ that\ start}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00043}00043\ \textcolor{comment}{\ *\ "{}MPU\_"{}.\ \ This\ will\ cause\ the\ application\ code\ to\ call\ the\ MPU\_}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00044}00044\ \textcolor{comment}{\ *\ version,\ which\ wraps\ the\ non-\/MPU\ version\ with\ privilege\ promoting}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00045}00045\ \textcolor{comment}{\ *\ then\ demoting\ code,\ so\ the\ kernel\ code\ always\ runs\ will\ full}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00046}00046\ \textcolor{comment}{\ *\ privileges.}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00047}00047\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00049}00049\ \textcolor{comment}{/*\ Map\ standard\ task.h\ API\ functions\ to\ the\ MPU\ equivalents.\ */}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00050}00050\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ vTaskDelay\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_vTaskDelay}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00051}00051\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xTaskDelayUntil\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xTaskDelayUntil}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00052}00052\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xTaskAbortDelay\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xTaskAbortDelay}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00053}00053\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ uxTaskPriorityGet\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_uxTaskPriorityGet}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00054}00054\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ eTaskGetState\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_eTaskGetState}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00055}00055\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ vTaskGetInfo\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_vTaskGetInfo}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00056}00056\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ vTaskSuspend\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_vTaskSuspend}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00057}00057\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ vTaskResume\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_vTaskResume}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00058}00058\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xTaskGetTickCount\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xTaskGetTickCount}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00059}00059\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ uxTaskGetNumberOfTasks\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_uxTaskGetNumberOfTasks}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00060}00060\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ uxTaskGetStackHighWaterMark\ \ \ \ \ \ \ \ \ \ \ MPU\_uxTaskGetStackHighWaterMark}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00061}00061\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ uxTaskGetStackHighWaterMark2\ \ \ \ \ \ \ \ \ \ MPU\_uxTaskGetStackHighWaterMark2}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00062}00062\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ vTaskSetApplicationTaskTag\ \ \ \ \ \ \ \ \ \ \ \ MPU\_vTaskSetApplicationTaskTag}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00063}00063\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xTaskGetApplicationTaskTag\ \ \ \ \ \ \ \ \ \ \ \ MPU\_xTaskGetApplicationTaskTag}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00064}00064\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ vTaskSetThreadLocalStoragePointer\ \ \ \ \ MPU\_vTaskSetThreadLocalStoragePointer}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00065}00065\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ pvTaskGetThreadLocalStoragePointer\ \ \ \ MPU\_pvTaskGetThreadLocalStoragePointer}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00066}00066\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xTaskGetIdleTaskHandle\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xTaskGetIdleTaskHandle}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00067}00067\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ uxTaskGetSystemState\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_uxTaskGetSystemState}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00068}00068\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ ulTaskGetIdleRunTimeCounter\ \ \ \ \ \ \ \ \ \ \ MPU\_ulTaskGetIdleRunTimeCounter}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00069}00069\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ ulTaskGetIdleRunTimePercent\ \ \ \ \ \ \ \ \ \ \ MPU\_ulTaskGetIdleRunTimePercent}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00070}00070\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xTaskGenericNotify\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xTaskGenericNotify}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00071}00071\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xTaskGenericNotifyWait\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xTaskGenericNotifyWait}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00072}00072\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ ulTaskGenericNotifyTake\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_ulTaskGenericNotifyTake}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00073}00073\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xTaskGenericNotifyStateClear\ \ \ \ \ \ \ \ \ \ MPU\_xTaskGenericNotifyStateClear}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00074}00074\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ ulTaskGenericNotifyValueClear\ \ \ \ \ \ \ \ \ MPU\_ulTaskGenericNotifyValueClear}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00075}00075\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ vTaskSetTimeOutState\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_vTaskSetTimeOutState}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00076}00076\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xTaskCheckForTimeOut\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xTaskCheckForTimeOut}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00077}00077\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xTaskGetCurrentTaskHandle\ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xTaskGetCurrentTaskHandle}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00078}00078\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xTaskGetSchedulerState\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xTaskGetSchedulerState}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00080}00080\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ (\ configUSE\_MPU\_WRAPPERS\_V1\ ==\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00081}00081\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ ulTaskGetRunTimeCounter\ \ \ \ \ \ \ \ \ \ \ MPU\_ulTaskGetRunTimeCounter}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00082}00082\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ ulTaskGetRunTimePercent\ \ \ \ \ \ \ \ \ \ \ MPU\_ulTaskGetRunTimePercent}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00083}00083\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif\ }\textcolor{comment}{/*\ \#if\ (\ configUSE\_MPU\_WRAPPERS\_V1\ ==\ 0\ )\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00085}00085\ \textcolor{comment}{/*\ Privileged\ only\ wrappers\ for\ Task\ APIs.\ These\ are\ needed\ so\ that}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00086}00086\ \textcolor{comment}{\ *\ the\ application\ can\ use\ opaque\ handles\ maintained\ in\ mpu\_wrappers.c}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00087}00087\ \textcolor{comment}{\ *\ with\ all\ the\ APIs.\ */}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00088}00088\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xTaskCreate\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xTaskCreate}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00089}00089\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xTaskCreateStatic\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xTaskCreateStatic}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00090}00090\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ vTaskDelete\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_vTaskDelete}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00091}00091\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ vTaskPrioritySet\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_vTaskPrioritySet}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00092}00092\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xTaskGetHandle\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xTaskGetHandle}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00093}00093\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xTaskCallApplicationTaskHook\ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xTaskCallApplicationTaskHook}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00095}00095\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ (\ configUSE\_MPU\_WRAPPERS\_V1\ ==\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00096}00096\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ pcTaskGetName\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_pcTaskGetName}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00097}00097\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xTaskCreateRestricted\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xTaskCreateRestricted}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00098}00098\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xTaskCreateRestrictedStatic\ \ \ \ \ \ \ \ \ \ MPU\_xTaskCreateRestrictedStatic}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00099}00099\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ vTaskAllocateMPURegions\ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_vTaskAllocateMPURegions}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00100}00100\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xTaskGetStaticBuffers\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xTaskGetStaticBuffers}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00101}00101\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ uxTaskPriorityGetFromISR\ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_uxTaskPriorityGetFromISR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00102}00102\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ uxTaskBasePriorityGet\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_uxTaskBasePriorityGet}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00103}00103\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ uxTaskBasePriorityGetFromISR\ \ \ \ \ \ \ \ \ MPU\_uxTaskBasePriorityGetFromISR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00104}00104\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xTaskResumeFromISR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xTaskResumeFromISR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00105}00105\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xTaskGetApplicationTaskTagFromISR\ \ \ \ MPU\_xTaskGetApplicationTaskTagFromISR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00106}00106\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xTaskGenericNotifyFromISR\ \ \ \ \ \ \ \ \ \ \ \ MPU\_xTaskGenericNotifyFromISR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00107}00107\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ vTaskGenericNotifyGiveFromISR\ \ \ \ \ \ \ \ MPU\_vTaskGenericNotifyGiveFromISR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00108}00108\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif\ }\textcolor{comment}{/*\ \#if\ (\ configUSE\_MPU\_WRAPPERS\_V1\ ==\ 0\ )\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00110}00110\ \textcolor{comment}{/*\ Map\ standard\ queue.h\ API\ functions\ to\ the\ MPU\ equivalents.\ */}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00111}00111\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xQueueGenericSend\ \ \ \ \ \ \ \ \ \ \ \ MPU\_xQueueGenericSend}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00112}00112\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xQueueReceive\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xQueueReceive}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00113}00113\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xQueuePeek\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xQueuePeek}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00114}00114\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xQueueSemaphoreTake\ \ \ \ \ \ \ \ \ \ MPU\_xQueueSemaphoreTake}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00115}00115\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ uxQueueMessagesWaiting\ \ \ \ \ \ \ MPU\_uxQueueMessagesWaiting}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00116}00116\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ uxQueueSpacesAvailable\ \ \ \ \ \ \ MPU\_uxQueueSpacesAvailable}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00117}00117\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xQueueGetMutexHolder\ \ \ \ \ \ \ \ \ MPU\_xQueueGetMutexHolder}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00118}00118\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xQueueTakeMutexRecursive\ \ \ \ \ MPU\_xQueueTakeMutexRecursive}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00119}00119\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xQueueGiveMutexRecursive\ \ \ \ \ MPU\_xQueueGiveMutexRecursive}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00120}00120\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xQueueAddToSet\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xQueueAddToSet}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00121}00121\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xQueueSelectFromSet\ \ \ \ \ \ \ \ \ \ MPU\_xQueueSelectFromSet}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00123}00123\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ (\ configQUEUE\_REGISTRY\_SIZE\ >\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00124}00124\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ vQueueAddToRegistry\ \ \ \ \ \ MPU\_vQueueAddToRegistry}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00125}00125\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ vQueueUnregisterQueue\ \ \ \ MPU\_vQueueUnregisterQueue}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00126}00126\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ pcQueueGetName\ \ \ \ \ \ \ \ \ \ \ MPU\_pcQueueGetName}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00127}00127\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif\ }\textcolor{comment}{/*\ \#if\ (\ configQUEUE\_REGISTRY\_SIZE\ >\ 0\ )\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00129}00129\ \textcolor{comment}{/*\ Privileged\ only\ wrappers\ for\ Queue\ APIs.\ These\ are\ needed\ so\ that}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00130}00130\ \textcolor{comment}{\ *\ the\ application\ can\ use\ opaque\ handles\ maintained\ in\ mpu\_wrappers.c}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00131}00131\ \textcolor{comment}{\ *\ with\ all\ the\ APIs.\ */}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00132}00132\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ vQueueDelete\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_vQueueDelete}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00133}00133\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xQueueCreateMutex\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xQueueCreateMutex}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00134}00134\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xQueueCreateMutexStatic\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xQueueCreateMutexStatic}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00135}00135\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xQueueCreateCountingSemaphore\ \ \ \ \ \ \ \ \ \ MPU\_xQueueCreateCountingSemaphore}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00136}00136\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xQueueCreateCountingSemaphoreStatic\ \ \ \ MPU\_xQueueCreateCountingSemaphoreStatic}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00137}00137\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xQueueGenericCreate\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xQueueGenericCreate}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00138}00138\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xQueueGenericCreateStatic\ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xQueueGenericCreateStatic}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00139}00139\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xQueueGenericReset\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xQueueGenericReset}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00140}00140\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xQueueCreateSet\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xQueueCreateSet}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00141}00141\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xQueueRemoveFromSet\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xQueueRemoveFromSet}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00143}00143\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ (\ configUSE\_MPU\_WRAPPERS\_V1\ ==\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00144}00144\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xQueueGenericGetStaticBuffers\ \ \ \ \ \ MPU\_xQueueGenericGetStaticBuffers}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00145}00145\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xQueueGenericSendFromISR\ \ \ \ \ \ \ \ \ \ \ MPU\_xQueueGenericSendFromISR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00146}00146\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xQueueGiveFromISR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xQueueGiveFromISR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00147}00147\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xQueuePeekFromISR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xQueuePeekFromISR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00148}00148\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xQueueReceiveFromISR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xQueueReceiveFromISR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00149}00149\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xQueueIsQueueEmptyFromISR\ \ \ \ \ \ \ \ \ \ MPU\_xQueueIsQueueEmptyFromISR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00150}00150\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xQueueIsQueueFullFromISR\ \ \ \ \ \ \ \ \ \ \ MPU\_xQueueIsQueueFullFromISR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00151}00151\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ uxQueueMessagesWaitingFromISR\ \ \ \ \ \ MPU\_uxQueueMessagesWaitingFromISR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00152}00152\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xQueueGetMutexHolderFromISR\ \ \ \ \ \ \ \ MPU\_xQueueGetMutexHolderFromISR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00153}00153\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xQueueSelectFromSetFromISR\ \ \ \ \ \ \ \ \ MPU\_xQueueSelectFromSetFromISR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00154}00154\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif\ }\textcolor{comment}{/*\ if\ (\ configUSE\_MPU\_WRAPPERS\_V1\ ==\ 0\ )\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00155}00155\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00156}00156\ \textcolor{comment}{/*\ Map\ standard\ timer.h\ API\ functions\ to\ the\ MPU\ equivalents.\ */}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00157}00157\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ pvTimerGetTimerID\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_pvTimerGetTimerID}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00158}00158\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ vTimerSetTimerID\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_vTimerSetTimerID}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00159}00159\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xTimerIsTimerActive\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xTimerIsTimerActive}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00160}00160\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xTimerGetTimerDaemonTaskHandle\ \ \ \ MPU\_xTimerGetTimerDaemonTaskHandle}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00161}00161\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xTimerGenericCommandFromTask\ \ \ \ \ \ MPU\_xTimerGenericCommandFromTask}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00162}00162\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ pcTimerGetName\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_pcTimerGetName}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00163}00163\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ vTimerSetReloadMode\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_vTimerSetReloadMode}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00164}00164\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ uxTimerGetReloadMode\ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_uxTimerGetReloadMode}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00165}00165\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xTimerGetPeriod\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xTimerGetPeriod}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00166}00166\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xTimerGetExpiryTime\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xTimerGetExpiryTime}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00167}00167\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00168}00168\ \textcolor{comment}{/*\ Privileged\ only\ wrappers\ for\ Timer\ APIs.\ These\ are\ needed\ so\ that}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00169}00169\ \textcolor{comment}{\ *\ the\ application\ can\ use\ opaque\ handles\ maintained\ in\ mpu\_wrappers.c}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00170}00170\ \textcolor{comment}{\ *\ with\ all\ the\ APIs.\ */}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00171}00171\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ (\ configUSE\_MPU\_WRAPPERS\_V1\ ==\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00172}00172\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xTimerGetReloadMode\ \ \ \ \ \ \ \ \ \ \ \ MPU\_xTimerGetReloadMode}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00173}00173\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xTimerCreate\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xTimerCreate}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00174}00174\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xTimerCreateStatic\ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xTimerCreateStatic}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00175}00175\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xTimerGetStaticBuffer\ \ \ \ \ \ \ \ \ \ MPU\_xTimerGetStaticBuffer}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00176}00176\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xTimerGenericCommandFromISR\ \ \ \ MPU\_xTimerGenericCommandFromISR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00177}00177\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif\ }\textcolor{comment}{/*\ \#if\ (\ configUSE\_MPU\_WRAPPERS\_V1\ ==\ 0\ )\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00178}00178\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00179}00179\ \textcolor{comment}{/*\ Map\ standard\ event\_group.h\ API\ functions\ to\ the\ MPU\ equivalents.\ */}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00180}00180\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xEventGroupWaitBits\ \ \ \ \ \ \ \ \ \ MPU\_xEventGroupWaitBits}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00181}00181\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xEventGroupClearBits\ \ \ \ \ \ \ \ \ MPU\_xEventGroupClearBits}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00182}00182\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xEventGroupSetBits\ \ \ \ \ \ \ \ \ \ \ MPU\_xEventGroupSetBits}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00183}00183\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xEventGroupSync\ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xEventGroupSync}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00184}00184\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00185}00185\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ (\ (\ configUSE\_TRACE\_FACILITY\ ==\ 1\ )\ \&\&\ (\ configUSE\_MPU\_WRAPPERS\_V1\ ==\ 0\ )\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00186}00186\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ uxEventGroupGetNumber\ \ \ \ MPU\_uxEventGroupGetNumber}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00187}00187\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ vEventGroupSetNumber\ \ \ \ \ MPU\_vEventGroupSetNumber}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00188}00188\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif\ }\textcolor{comment}{/*\ \#if\ (\ (\ configUSE\_TRACE\_FACILITY\ ==\ 1\ )\ \&\&\ (\ configUSE\_MPU\_WRAPPERS\_V1\ ==\ 0\ )\ )\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00190}00190\ \textcolor{comment}{/*\ Privileged\ only\ wrappers\ for\ Event\ Group\ APIs.\ These\ are\ needed\ so\ that}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00191}00191\ \textcolor{comment}{\ *\ the\ application\ can\ use\ opaque\ handles\ maintained\ in\ mpu\_wrappers.c}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00192}00192\ \textcolor{comment}{\ *\ with\ all\ the\ APIs.\ */}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00193}00193\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xEventGroupCreate\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xEventGroupCreate}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00194}00194\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xEventGroupCreateStatic\ \ \ \ \ \ \ \ \ \ \ \ MPU\_xEventGroupCreateStatic}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00195}00195\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ vEventGroupDelete\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_vEventGroupDelete}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00197}00197\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ (\ configUSE\_MPU\_WRAPPERS\_V1\ ==\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00198}00198\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xEventGroupGetStaticBuffer\ \ \ \ \ MPU\_xEventGroupGetStaticBuffer}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00199}00199\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xEventGroupClearBitsFromISR\ \ \ \ MPU\_xEventGroupClearBitsFromISR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00200}00200\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xEventGroupSetBitsFromISR\ \ \ \ \ \ MPU\_xEventGroupSetBitsFromISR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00201}00201\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xEventGroupGetBitsFromISR\ \ \ \ \ \ MPU\_xEventGroupGetBitsFromISR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00202}00202\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif\ }\textcolor{comment}{/*\ \#if\ (\ configUSE\_MPU\_WRAPPERS\_V1\ ==\ 0\ )\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00204}00204\ \textcolor{comment}{/*\ Map\ standard\ message/stream\_buffer.h\ API\ functions\ to\ the\ MPU}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00205}00205\ \textcolor{comment}{\ *\ equivalents.\ */}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00206}00206\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xStreamBufferSend\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xStreamBufferSend}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00207}00207\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xStreamBufferReceive\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xStreamBufferReceive}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00208}00208\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xStreamBufferIsFull\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xStreamBufferIsFull}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00209}00209\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xStreamBufferIsEmpty\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xStreamBufferIsEmpty}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00210}00210\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xStreamBufferSpacesAvailable\ \ \ \ \ \ \ \ \ \ \ MPU\_xStreamBufferSpacesAvailable}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00211}00211\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xStreamBufferBytesAvailable\ \ \ \ \ \ \ \ \ \ \ \ MPU\_xStreamBufferBytesAvailable}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00212}00212\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xStreamBufferSetTriggerLevel\ \ \ \ \ \ \ \ \ \ \ MPU\_xStreamBufferSetTriggerLevel}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00213}00213\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xStreamBufferNextMessageLengthBytes\ \ \ \ MPU\_xStreamBufferNextMessageLengthBytes}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00215}00215\ \textcolor{comment}{/*\ Privileged\ only\ wrappers\ for\ Stream\ Buffer\ APIs.\ These\ are\ needed\ so\ that}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00216}00216\ \textcolor{comment}{\ *\ the\ application\ can\ use\ opaque\ handles\ maintained\ in\ mpu\_wrappers.c}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00217}00217\ \textcolor{comment}{\ *\ with\ all\ the\ APIs.\ */}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00219}00219\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xStreamBufferGenericCreate\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xStreamBufferGenericCreate}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00220}00220\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xStreamBufferGenericCreateStatic\ \ \ \ \ \ \ \ \ \ \ \ MPU\_xStreamBufferGenericCreateStatic}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00221}00221\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ vStreamBufferDelete\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_vStreamBufferDelete}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00222}00222\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ xStreamBufferReset\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xStreamBufferReset}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00223}00223\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00224}00224\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ (\ configUSE\_MPU\_WRAPPERS\_V1\ ==\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00225}00225\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xStreamBufferGetStaticBuffers\ \ \ \ \ \ \ \ \ \ \ MPU\_xStreamBufferGetStaticBuffers}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00226}00226\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xStreamBufferSendFromISR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xStreamBufferSendFromISR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00227}00227\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xStreamBufferReceiveFromISR\ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xStreamBufferReceiveFromISR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00228}00228\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xStreamBufferSendCompletedFromISR\ \ \ \ \ \ \ MPU\_xStreamBufferSendCompletedFromISR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00229}00229\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xStreamBufferReceiveCompletedFromISR\ \ \ \ MPU\_xStreamBufferReceiveCompletedFromISR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00230}00230\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ xStreamBufferResetFromISR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MPU\_xStreamBufferResetFromISR}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00231}00231\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif\ }\textcolor{comment}{/*\ \#if\ (\ configUSE\_MPU\_WRAPPERS\_V1\ ==\ 0\ )\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00233}00233\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ (\ (\ configUSE\_MPU\_WRAPPERS\_V1\ ==\ 0\ )\ \&\&\ (\ configENABLE\_ACCESS\_CONTROL\_LIST\ ==\ 1\ )\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00234}00234\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00235}00235\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ vGrantAccessToTask(\ xTask,\ xTaskToGrantAccess\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vGrantAccessToKernelObject(\ (\ xTask\ ),\ (\ int32\_t\ )\ (\ xTaskToGrantAccess\ )\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00236}00236\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ vRevokeAccessToTask(\ xTask,\ xTaskToRevokeAccess\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vRevokeAccessToKernelObject(\ (\ xTask\ ),\ (\ int32\_t\ )\ (\ xTaskToRevokeAccess\ )\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00237}00237\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00238}00238\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ vGrantAccessToSemaphore(\ xTask,\ xSemaphoreToGrantAccess\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ vGrantAccessToKernelObject(\ (\ xTask\ ),\ (\ int32\_t\ )\ (\ xSemaphoreToGrantAccess\ )\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00239}00239\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ vRevokeAccessToSemaphore(\ xTask,\ xSemaphoreToRevokeAccess\ )\ \ \ \ \ \ \ \ \ \ \ \ vRevokeAccessToKernelObject(\ (\ xTask\ ),\ (\ int32\_t\ )\ (\ xSemaphoreToRevokeAccess\ )\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00240}00240\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00241}00241\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ vGrantAccessToQueue(\ xTask,\ xQueueToGrantAccess\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vGrantAccessToKernelObject(\ (\ xTask\ ),\ (\ int32\_t\ )\ (\ xQueueToGrantAccess\ )\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00242}00242\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ vRevokeAccessToQueue(\ xTask,\ xQueueToRevokeAccess\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vRevokeAccessToKernelObject(\ (\ xTask\ ),\ (\ int32\_t\ )\ (\ xQueueToRevokeAccess\ )\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00243}00243\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00244}00244\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ vGrantAccessToQueueSet(\ xTask,\ xQueueSetToGrantAccess\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vGrantAccessToKernelObject(\ (\ xTask\ ),\ (\ int32\_t\ )\ (\ xQueueSetToGrantAccess\ )\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00245}00245\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ vRevokeAccessToQueueSet(\ xTask,\ xQueueSetToRevokeAccess\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ vRevokeAccessToKernelObject(\ (\ xTask\ ),\ (\ int32\_t\ )\ (\ xQueueSetToRevokeAccess\ )\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00246}00246\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00247}00247\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ vGrantAccessToEventGroup(\ xTask,\ xEventGroupToGrantAccess\ )\ \ \ \ \ \ \ \ \ \ \ \ vGrantAccessToKernelObject(\ (\ xTask\ ),\ (\ int32\_t\ )\ (\ xEventGroupToGrantAccess\ )\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00248}00248\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ vRevokeAccessToEventGroup(\ xTask,\ xEventGroupToRevokeAccess\ )\ \ \ \ \ \ \ \ \ \ vRevokeAccessToKernelObject(\ (\ xTask\ ),\ (\ int32\_t\ )\ (\ xEventGroupToRevokeAccess\ )\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00249}00249\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00250}00250\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ vGrantAccessToStreamBuffer(\ xTask,\ xStreamBufferToGrantAccess\ )\ \ \ \ \ \ \ \ vGrantAccessToKernelObject(\ (\ xTask\ ),\ (\ int32\_t\ )\ (\ xStreamBufferToGrantAccess\ )\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00251}00251\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ vRevokeAccessToStreamBuffer(\ xTask,\ xStreamBufferToRevokeAccess\ )\ \ \ \ \ \ vRevokeAccessToKernelObject(\ (\ xTask\ ),\ (\ int32\_t\ )\ (\ xStreamBufferToRevokeAccess\ )\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00252}00252\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00253}00253\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ vGrantAccessToMessageBuffer(\ xTask,\ xMessageBufferToGrantAccess\ )\ \ \ \ \ \ vGrantAccessToKernelObject(\ (\ xTask\ ),\ (\ int32\_t\ )\ (\ xMessageBufferToGrantAccess\ )\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00254}00254\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ vRevokeAccessToMessageBuffer(\ xTask,\ xMessageBufferToRevokeAccess\ )\ \ \ \ vRevokeAccessToKernelObject(\ (\ xTask\ ),\ (\ int32\_t\ )\ (\ xMessageBufferToRevokeAccess\ )\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00255}00255\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00256}00256\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ vGrantAccessToTimer(\ xTask,\ xTimerToGrantAccess\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vGrantAccessToKernelObject(\ (\ xTask\ ),\ (\ int32\_t\ )\ (\ xTimerToGrantAccess\ )\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00257}00257\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ vRevokeAccessToTimer(\ xTask,\ xTimerToRevokeAccess\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vRevokeAccessToKernelObject(\ (\ xTask\ ),\ (\ int32\_t\ )\ (\ xTimerToRevokeAccess\ )\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00258}00258\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00259}00259\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif\ }\textcolor{comment}{/*\ \#if\ (\ (\ configUSE\_MPU\_WRAPPERS\_V1\ ==\ 0\ )\ \&\&\ (\ configENABLE\_ACCESS\_CONTROL\_LIST\ ==\ 1\ )\ )\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00260}00260\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00261}00261\ \textcolor{preprocessor}{\ \ \ \ \#endif\ }\textcolor{comment}{/*\ MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00262}00262\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00263}00263\ \textcolor{preprocessor}{\ \ \ \ \#define\ PRIVILEGED\_FUNCTION\ \ \ \ \ \_\_attribute\_\_(\ (\ section(\ "{}privileged\_functions"{}\ )\ )\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00264}00264\ \textcolor{preprocessor}{\ \ \ \ \#define\ PRIVILEGED\_DATA\ \ \ \ \ \ \ \ \ \_\_attribute\_\_(\ (\ section(\ "{}privileged\_data"{}\ )\ )\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00265}00265\ \textcolor{preprocessor}{\ \ \ \ \#define\ FREERTOS\_SYSTEM\_CALL\ \ \ \ \_\_attribute\_\_(\ (\ section(\ "{}freertos\_system\_calls"{}\ )\ )\ )}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00266}00266\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00267}00267\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{/*\ portUSING\_MPU\_WRAPPERS\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00268}00268\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00269}\mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{00269}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ PRIVILEGED\_FUNCTION}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00270}\mbox{\hyperlink{mpu__wrappers_8h_a56a0b54ca924c56d192d4389ba585ed5}{00270}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ PRIVILEGED\_DATA}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00271}\mbox{\hyperlink{mpu__wrappers_8h_a89028881b88837beb0733993c8ce5f2b}{00271}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ FREERTOS\_SYSTEM\_CALL}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00272}00272\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00273}00273\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ portUSING\_MPU\_WRAPPERS\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00274}00274\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00275}00275\ }
+\DoxyCodeLine{\Hypertarget{mpu__wrappers_8h_source_l00276}00276\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MPU\_WRAPPERS\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

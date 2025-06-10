@@ -1,0 +1,29 @@
+\doxysection{x\+Stream\+Buffer\+Get\+Static\+Buffers }
+\hypertarget{group__x_stream_buffer_get_static_buffers}{}\label{group__x_stream_buffer_get_static_buffers}\index{xStreamBufferGetStaticBuffers@{xStreamBufferGetStaticBuffers}}
+\doxylink{stream__buffer_8h}{stream\+\_\+buffer.\+h}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xStreamBufferGetStaticBuffers(\ \mbox{\hyperlink{stream__buffer_8h_a8b80974e2278f073412293e6580ce56f}{StreamBufferHandle\_t}}\ xStreamBuffer,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ **\ ppucStreamBufferStorageArea,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_a3675ce07f6d3e0e7130bc6ea01162d34}{StaticStreamBuffer\_t}}\ **\ ppxStaticStreamBuffer\ );}
+
+\end{DoxyCode}
+
+
+Retrieve pointers to a statically created stream buffer\textquotesingle{}s data structure buffer and storage area buffer. These are the same buffers that are supplied at the time of creation.
+
+config\+USE\+\_\+\+STREAM\+\_\+\+BUFFERS must be set to 1 in for Free\+RTOSConfig.\+h for x\+Stream\+Buffer\+Get\+Static\+Buffers() to be available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Stream\+Buffer} & The stream buffer for which to retrieve the buffers.\\
+\hline
+{\em ppuc\+Stream\+Buffer\+Storage\+Area} & Used to return a pointer to the stream buffer\textquotesingle{}s storage area buffer.\\
+\hline
+{\em ppx\+Static\+Stream\+Buffer} & Used to return a pointer to the stream buffer\textquotesingle{}s data structure buffer.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pd\+TRUE if buffers were retrieved, pd\+FALSE otherwise. 
+\end{DoxyReturn}

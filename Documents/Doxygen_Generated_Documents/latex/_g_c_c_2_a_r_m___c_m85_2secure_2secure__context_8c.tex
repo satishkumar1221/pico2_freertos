@@ -1,0 +1,277 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+GCC/\+ARM\+\_\+\+CM85/secure/secure\+\_\+context.c File Reference}
+\hypertarget{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c}{}\label{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/ARM\_CM85/secure/secure\_context.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/ARM\_CM85/secure/secure\_context.c}}
+{\ttfamily \#include "{}secure\+\_\+context.\+h"{}}\newline
+{\ttfamily \#include "{}secure\+\_\+heap.\+h"{}}\newline
+{\ttfamily \#include "{}secure\+\_\+port\+\_\+macros.\+h"{}}\newline
+Include dependency graph for secure\+\_\+context.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_ac70988ca66339421ba1266146d01bcdc}{securecontext\+CONTROL\+\_\+\+VALUE\+\_\+\+PRIVILEGED}}~0x02
+\begin{DoxyCompactList}\small\item\em CONTROL value for privileged tasks. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_aa163e287843e3f29906ffb0e58200de6}{securecontext\+CONTROL\+\_\+\+VALUE\+\_\+\+UNPRIVILEGED}}~0x03
+\begin{DoxyCompactList}\small\item\em CONTROL value for un-\/privileged tasks. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_af19960fdc1ab8e30714ba070f5c91754}{securecontext\+STACK\+\_\+\+SEAL\+\_\+\+SIZE}}~8
+\begin{DoxyCompactList}\small\item\em Size of stack seal values in bytes. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_ab781c7ef498c4661534c59f881595d10}{securecontext\+STACK\+\_\+\+SEAL\+\_\+\+VALUE}}~0x\+FEF5\+EDA5
+\begin{DoxyCompactList}\small\item\em Stack seal value as recommended by ARM. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_a60238b4080952307c914bfe377874322}{secureconfig\+MAX\+\_\+\+SECURE\+\_\+\+CONTEXTS}}~8UL
+\begin{DoxyCompactList}\small\item\em Maximum number of secure contexts. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_af684db9a3a05f73484fa4f1728a17f9c}{Secure\+Context\+\_\+\+Load\+Context\+Asm}} (\mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8h_aaf290b187b04214d847b38025741aadf}{Secure\+Context\+\_\+t}} \texorpdfstring{$\ast$}{*}px\+Secure\+Context)
+\item 
+void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_ae41524a5abe7778311348f7a8d17535a}{Secure\+Context\+\_\+\+Save\+Context\+Asm}} (\mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8h_aaf290b187b04214d847b38025741aadf}{Secure\+Context\+\_\+t}} \texorpdfstring{$\ast$}{*}px\+Secure\+Context)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_a13646350e58b5033103457103f2db55c}{secureport\+NON\+\_\+\+SECURE\+\_\+\+CALLABLE}} void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_ac55b431926ff079d997c10215472dee8}{Secure\+Context\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Initializes the secure context management system. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_a13646350e58b5033103457103f2db55c}{secureport\+NON\+\_\+\+SECURE\+\_\+\+CALLABLE}} \mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8h_a83fe8bdca5c412852d8ec8614215449b}{Secure\+Context\+Handle\+\_\+t}} \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_a1b8ed4f4b989b4d6bb4b5653da39cf37}{Secure\+Context\+\_\+\+Allocate\+Context}} (uint32\+\_\+t ul\+Secure\+Stack\+Size, void \texorpdfstring{$\ast$}{*}pv\+Task\+Handle)
+\begin{DoxyCompactList}\small\item\em Allocates a context on the secure side. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_a13646350e58b5033103457103f2db55c}{secureport\+NON\+\_\+\+SECURE\+\_\+\+CALLABLE}} void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_ab684e3b6f1c2c2df87e2d42fc97da700}{Secure\+Context\+\_\+\+Free\+Context}} (\mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8h_a83fe8bdca5c412852d8ec8614215449b}{Secure\+Context\+Handle\+\_\+t}} x\+Secure\+Context\+Handle, void \texorpdfstring{$\ast$}{*}pv\+Task\+Handle)
+\begin{DoxyCompactList}\small\item\em Frees the given context. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_a13646350e58b5033103457103f2db55c}{secureport\+NON\+\_\+\+SECURE\+\_\+\+CALLABLE}} void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_a886132d5bc22fe26a2c8210a0ad67255}{Secure\+Context\+\_\+\+Load\+Context}} (\mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8h_a83fe8bdca5c412852d8ec8614215449b}{Secure\+Context\+Handle\+\_\+t}} x\+Secure\+Context\+Handle, void \texorpdfstring{$\ast$}{*}pv\+Task\+Handle)
+\begin{DoxyCompactList}\small\item\em Loads the given context. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_a13646350e58b5033103457103f2db55c}{secureport\+NON\+\_\+\+SECURE\+\_\+\+CALLABLE}} void \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_aa4bb9a11bb87fca5589d44fe1caea414}{Secure\+Context\+\_\+\+Save\+Context}} (\mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8h_a83fe8bdca5c412852d8ec8614215449b}{Secure\+Context\+Handle\+\_\+t}} x\+Secure\+Context\+Handle, void \texorpdfstring{$\ast$}{*}pv\+Task\+Handle)
+\begin{DoxyCompactList}\small\item\em Saves the given context. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8h_aaf290b187b04214d847b38025741aadf}{Secure\+Context\+\_\+t}} \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_aea495f4ae131e702f172f167bccec6fd}{x\+Secure\+Contexts}} \mbox{[}\mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a60238b4080952307c914bfe377874322}{secureconfig\+MAX\+\_\+\+SECURE\+\_\+\+CONTEXTS}}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Pre-\/allocated array of secure contexts. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_a60238b4080952307c914bfe377874322}\index{secure\_context.c@{secure\_context.c}!secureconfigMAX\_SECURE\_CONTEXTS@{secureconfigMAX\_SECURE\_CONTEXTS}}
+\index{secureconfigMAX\_SECURE\_CONTEXTS@{secureconfigMAX\_SECURE\_CONTEXTS}!secure\_context.c@{secure\_context.c}}
+\doxysubsubsection{\texorpdfstring{secureconfigMAX\_SECURE\_CONTEXTS}{secureconfigMAX\_SECURE\_CONTEXTS}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_a60238b4080952307c914bfe377874322} 
+\#define secureconfig\+MAX\+\_\+\+SECURE\+\_\+\+CONTEXTS~8UL}
+
+
+
+Maximum number of secure contexts. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_source_l00068}{68}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_source}{secure\+\_\+context.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_ac70988ca66339421ba1266146d01bcdc}\index{secure\_context.c@{secure\_context.c}!securecontextCONTROL\_VALUE\_PRIVILEGED@{securecontextCONTROL\_VALUE\_PRIVILEGED}}
+\index{securecontextCONTROL\_VALUE\_PRIVILEGED@{securecontextCONTROL\_VALUE\_PRIVILEGED}!secure\_context.c@{secure\_context.c}}
+\doxysubsubsection{\texorpdfstring{securecontextCONTROL\_VALUE\_PRIVILEGED}{securecontextCONTROL\_VALUE\_PRIVILEGED}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_ac70988ca66339421ba1266146d01bcdc} 
+\#define securecontext\+CONTROL\+\_\+\+VALUE\+\_\+\+PRIVILEGED~0x02}
+
+
+
+CONTROL value for privileged tasks. 
+
+Bit\mbox{[}0\mbox{]} -\/ 0 -\/-\/\texorpdfstring{$>$}{>} Thread mode is privileged. Bit\mbox{[}1\mbox{]} -\/ 1 -\/-\/\texorpdfstring{$>$}{>} Thread mode uses PSP. 
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_source_l00044}{44}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_source}{secure\+\_\+context.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_aa163e287843e3f29906ffb0e58200de6}\index{secure\_context.c@{secure\_context.c}!securecontextCONTROL\_VALUE\_UNPRIVILEGED@{securecontextCONTROL\_VALUE\_UNPRIVILEGED}}
+\index{securecontextCONTROL\_VALUE\_UNPRIVILEGED@{securecontextCONTROL\_VALUE\_UNPRIVILEGED}!secure\_context.c@{secure\_context.c}}
+\doxysubsubsection{\texorpdfstring{securecontextCONTROL\_VALUE\_UNPRIVILEGED}{securecontextCONTROL\_VALUE\_UNPRIVILEGED}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_aa163e287843e3f29906ffb0e58200de6} 
+\#define securecontext\+CONTROL\+\_\+\+VALUE\+\_\+\+UNPRIVILEGED~0x03}
+
+
+
+CONTROL value for un-\/privileged tasks. 
+
+Bit\mbox{[}0\mbox{]} -\/ 1 -\/-\/\texorpdfstring{$>$}{>} Thread mode is un-\/privileged. Bit\mbox{[}1\mbox{]} -\/ 1 -\/-\/\texorpdfstring{$>$}{>} Thread mode uses PSP. 
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_source_l00052}{52}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_source}{secure\+\_\+context.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_af19960fdc1ab8e30714ba070f5c91754}\index{secure\_context.c@{secure\_context.c}!securecontextSTACK\_SEAL\_SIZE@{securecontextSTACK\_SEAL\_SIZE}}
+\index{securecontextSTACK\_SEAL\_SIZE@{securecontextSTACK\_SEAL\_SIZE}!secure\_context.c@{secure\_context.c}}
+\doxysubsubsection{\texorpdfstring{securecontextSTACK\_SEAL\_SIZE}{securecontextSTACK\_SEAL\_SIZE}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_af19960fdc1ab8e30714ba070f5c91754} 
+\#define securecontext\+STACK\+\_\+\+SEAL\+\_\+\+SIZE~8}
+
+
+
+Size of stack seal values in bytes. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_source_l00057}{57}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_source}{secure\+\_\+context.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_ab781c7ef498c4661534c59f881595d10}\index{secure\_context.c@{secure\_context.c}!securecontextSTACK\_SEAL\_VALUE@{securecontextSTACK\_SEAL\_VALUE}}
+\index{securecontextSTACK\_SEAL\_VALUE@{securecontextSTACK\_SEAL\_VALUE}!secure\_context.c@{secure\_context.c}}
+\doxysubsubsection{\texorpdfstring{securecontextSTACK\_SEAL\_VALUE}{securecontextSTACK\_SEAL\_VALUE}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_ab781c7ef498c4661534c59f881595d10} 
+\#define securecontext\+STACK\+\_\+\+SEAL\+\_\+\+VALUE~0x\+FEF5\+EDA5}
+
+
+
+Stack seal value as recommended by ARM. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_source_l00062}{62}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_source}{secure\+\_\+context.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_a1b8ed4f4b989b4d6bb4b5653da39cf37}\index{secure\_context.c@{secure\_context.c}!SecureContext\_AllocateContext@{SecureContext\_AllocateContext}}
+\index{SecureContext\_AllocateContext@{SecureContext\_AllocateContext}!secure\_context.c@{secure\_context.c}}
+\doxysubsubsection{\texorpdfstring{SecureContext\_AllocateContext()}{SecureContext\_AllocateContext()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_a1b8ed4f4b989b4d6bb4b5653da39cf37} 
+\mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_a13646350e58b5033103457103f2db55c}{secureport\+NON\+\_\+\+SECURE\+\_\+\+CALLABLE}} \mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8h_a83fe8bdca5c412852d8ec8614215449b}{Secure\+Context\+Handle\+\_\+t}} Secure\+Context\+\_\+\+Allocate\+Context (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{ul\+Secure\+Stack\+Size}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Task\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Allocates a context on the secure side. 
+
+\begin{DoxyNote}{Note}
+This function must be called in the handler mode. It is no-\/op if called in the thread mode.
+\end{DoxyNote}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em ul\+Secure\+Stack\+Size} & Size of the stack to allocate on secure side. \\
+\hline
+\mbox{\texttt{in}}  & {\em ul\+Is\+Task\+Privileged} & 1 if the calling task is privileged, 0 otherwise.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Opaque context handle if context is successfully allocated, NULL otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_source_l00186}{186}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_source}{secure\+\_\+context.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_ab684e3b6f1c2c2df87e2d42fc97da700}\index{secure\_context.c@{secure\_context.c}!SecureContext\_FreeContext@{SecureContext\_FreeContext}}
+\index{SecureContext\_FreeContext@{SecureContext\_FreeContext}!secure\_context.c@{secure\_context.c}}
+\doxysubsubsection{\texorpdfstring{SecureContext\_FreeContext()}{SecureContext\_FreeContext()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_ab684e3b6f1c2c2df87e2d42fc97da700} 
+\mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_a13646350e58b5033103457103f2db55c}{secureport\+NON\+\_\+\+SECURE\+\_\+\+CALLABLE}} void Secure\+Context\+\_\+\+Free\+Context (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8h_a83fe8bdca5c412852d8ec8614215449b}{Secure\+Context\+Handle\+\_\+t}}}]{x\+Secure\+Context\+Handle}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Task\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Frees the given context. 
+
+\begin{DoxyNote}{Note}
+This function must be called in the handler mode. It is no-\/op if called in the thread mode.
+\end{DoxyNote}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em x\+Secure\+Context\+Handle} & Context handle corresponding to the context to be freed. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_source_l00278}{278}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_source}{secure\+\_\+context.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_ac55b431926ff079d997c10215472dee8}\index{secure\_context.c@{secure\_context.c}!SecureContext\_Init@{SecureContext\_Init}}
+\index{SecureContext\_Init@{SecureContext\_Init}!secure\_context.c@{secure\_context.c}}
+\doxysubsubsection{\texorpdfstring{SecureContext\_Init()}{SecureContext\_Init()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_ac55b431926ff079d997c10215472dee8} 
+\mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_a13646350e58b5033103457103f2db55c}{secureport\+NON\+\_\+\+SECURE\+\_\+\+CALLABLE}} void Secure\+Context\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the secure context management system. 
+
+PSP is set to NULL and therefore a task must allocate and load a context before calling any secure side function in the thread mode.
+
+\begin{DoxyNote}{Note}
+This function must be called in the handler mode. It is no-\/op if called in the thread mode. 
+\end{DoxyNote}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_source_l00138}{138}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_source}{secure\+\_\+context.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_a886132d5bc22fe26a2c8210a0ad67255}\index{secure\_context.c@{secure\_context.c}!SecureContext\_LoadContext@{SecureContext\_LoadContext}}
+\index{SecureContext\_LoadContext@{SecureContext\_LoadContext}!secure\_context.c@{secure\_context.c}}
+\doxysubsubsection{\texorpdfstring{SecureContext\_LoadContext()}{SecureContext\_LoadContext()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_a886132d5bc22fe26a2c8210a0ad67255} 
+\mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_a13646350e58b5033103457103f2db55c}{secureport\+NON\+\_\+\+SECURE\+\_\+\+CALLABLE}} void Secure\+Context\+\_\+\+Load\+Context (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8h_a83fe8bdca5c412852d8ec8614215449b}{Secure\+Context\+Handle\+\_\+t}}}]{x\+Secure\+Context\+Handle}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Task\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Loads the given context. 
+
+\begin{DoxyNote}{Note}
+This function must be called in the handler mode. It is no-\/op if called in the thread mode.
+\end{DoxyNote}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em x\+Secure\+Context\+Handle} & Context handle corresponding to the context to be loaded. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_source_l00310}{310}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_source}{secure\+\_\+context.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_af684db9a3a05f73484fa4f1728a17f9c}\index{secure\_context.c@{secure\_context.c}!SecureContext\_LoadContextAsm@{SecureContext\_LoadContextAsm}}
+\index{SecureContext\_LoadContextAsm@{SecureContext\_LoadContextAsm}!secure\_context.c@{secure\_context.c}}
+\doxysubsubsection{\texorpdfstring{SecureContext\_LoadContextAsm()}{SecureContext\_LoadContextAsm()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_af684db9a3a05f73484fa4f1728a17f9c} 
+void Secure\+Context\+\_\+\+Load\+Context\+Asm (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8h_aaf290b187b04214d847b38025741aadf}{Secure\+Context\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{px\+Secure\+Context}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2portable_2_g_c_c_2_a_r_m___c_m23_2secure__context__port_8c_source_l00042}{42}} of file \mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2portable_2_g_c_c_2_a_r_m___c_m23_2secure__context__port_8c_source}{secure\+\_\+context\+\_\+port.\+c}}.
+
+\Hypertarget{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_aa4bb9a11bb87fca5589d44fe1caea414}\index{secure\_context.c@{secure\_context.c}!SecureContext\_SaveContext@{SecureContext\_SaveContext}}
+\index{SecureContext\_SaveContext@{SecureContext\_SaveContext}!secure\_context.c@{secure\_context.c}}
+\doxysubsubsection{\texorpdfstring{SecureContext\_SaveContext()}{SecureContext\_SaveContext()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_aa4bb9a11bb87fca5589d44fe1caea414} 
+\mbox{\hyperlink{_a_r_mv8_m_2secure_2macros_2secure__port__macros_8h_a13646350e58b5033103457103f2db55c}{secureport\+NON\+\_\+\+SECURE\+\_\+\+CALLABLE}} void Secure\+Context\+\_\+\+Save\+Context (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8h_a83fe8bdca5c412852d8ec8614215449b}{Secure\+Context\+Handle\+\_\+t}}}]{x\+Secure\+Context\+Handle}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Task\+Handle}{}\end{DoxyParamCaption})}
+
+
+
+Saves the given context. 
+
+\begin{DoxyNote}{Note}
+This function must be called in the handler mode. It is no-\/op if called in the thread mode.
+\end{DoxyNote}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em x\+Secure\+Context\+Handle} & Context handle corresponding to the context to be saved. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_source_l00333}{333}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_source}{secure\+\_\+context.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_ae41524a5abe7778311348f7a8d17535a}\index{secure\_context.c@{secure\_context.c}!SecureContext\_SaveContextAsm@{SecureContext\_SaveContextAsm}}
+\index{SecureContext\_SaveContextAsm@{SecureContext\_SaveContextAsm}!secure\_context.c@{secure\_context.c}}
+\doxysubsubsection{\texorpdfstring{SecureContext\_SaveContextAsm()}{SecureContext\_SaveContextAsm()}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_ae41524a5abe7778311348f7a8d17535a} 
+void Secure\+Context\+\_\+\+Save\+Context\+Asm (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8h_aaf290b187b04214d847b38025741aadf}{Secure\+Context\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{px\+Secure\+Context}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2portable_2_g_c_c_2_a_r_m___c_m23_2secure__context__port_8c_source_l00069}{69}} of file \mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2portable_2_g_c_c_2_a_r_m___c_m23_2secure__context__port_8c_source}{secure\+\_\+context\+\_\+port.\+c}}.
+
+
+
+\label{doc-var-members}
+\Hypertarget{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_aea495f4ae131e702f172f167bccec6fd}\index{secure\_context.c@{secure\_context.c}!xSecureContexts@{xSecureContexts}}
+\index{xSecureContexts@{xSecureContexts}!secure\_context.c@{secure\_context.c}}
+\doxysubsubsection{\texorpdfstring{xSecureContexts}{xSecureContexts}}
+{\footnotesize\ttfamily \label{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_aea495f4ae131e702f172f167bccec6fd} 
+\mbox{\hyperlink{_a_r_mv8_m_2secure_2context_2secure__context_8h_aaf290b187b04214d847b38025741aadf}{Secure\+Context\+\_\+t}} x\+Secure\+Contexts\mbox{[}\mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_a60238b4080952307c914bfe377874322}{secureconfig\+MAX\+\_\+\+SECURE\+\_\+\+CONTEXTS}}\mbox{]}}
+
+
+
+Pre-\/allocated array of secure contexts. 
+
+
+
+Definition at line \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_source_l00075}{75}} of file \mbox{\hyperlink{_g_c_c_2_a_r_m___c_m85_2secure_2secure__context_8c_source}{secure\+\_\+context.\+c}}.
+

@@ -1,0 +1,493 @@
+\doxysection{queue.\+h}
+\hypertarget{queue_8h_source}{}\label{queue_8h_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/queue.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/queue.h}}
+\mbox{\hyperlink{queue_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00030}00030\ \textcolor{preprocessor}{\#ifndef\ QUEUE\_H}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00031}00031\ \textcolor{preprocessor}{\#define\ QUEUE\_H}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00033}00033\ \textcolor{preprocessor}{\#ifndef\ INC\_FREERTOS\_H}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00034}00034\ \textcolor{preprocessor}{\ \ \ \ \#error\ "{}include\ FreeRTOS.h"{}\ must\ appear\ in\ source\ files\ before\ "{}include\ queue.h"{}}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00035}00035\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00037}00037\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{task_8h}{task.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00039}00039\ \textcolor{comment}{/*\ *INDENT-\/OFF*\ */}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00040}00040\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00041}00041\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00042}00042\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00043}00043\ \textcolor{comment}{/*\ *INDENT-\/ON*\ */}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00050}00050\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_queue_definition}{QueueDefinition}};\ \textcolor{comment}{/*\ Using\ old\ naming\ convention\ so\ as\ not\ to\ break\ kernel\ aware\ debuggers.\ */}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00051}\mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{00051}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_queue_definition}{QueueDefinition}}\ \ \ *\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00058}\mbox{\hyperlink{queue_8h_a1ae056fb02b2467993003b85111dde16}{00058}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_queue_definition}{QueueDefinition}}\ \ \ *\ \mbox{\hyperlink{queue_8h_a1ae056fb02b2467993003b85111dde16}{QueueSetHandle\_t}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00065}\mbox{\hyperlink{queue_8h_afac7ec7649e5c57381315eb011c36ef5}{00065}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_queue_definition}{QueueDefinition}}\ \ \ *\ \mbox{\hyperlink{queue_8h_afac7ec7649e5c57381315eb011c36ef5}{QueueSetMemberHandle\_t}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00067}00067\ \textcolor{comment}{/*\ For\ internal\ use\ only.\ */}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00068}\mbox{\hyperlink{queue_8h_a4d78fa863fbeb90425a2dda08fae8b12}{00068}}\ \textcolor{preprocessor}{\#define\ queueSEND\_TO\_BACK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ (\ BaseType\_t\ )\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00069}\mbox{\hyperlink{queue_8h_a6bae395a00f1a4455f0e7fe3c9e76c14}{00069}}\ \textcolor{preprocessor}{\#define\ queueSEND\_TO\_FRONT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ (\ BaseType\_t\ )\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00070}\mbox{\hyperlink{queue_8h_a5bb1c4a46d4b08b6d35cf586983476ef}{00070}}\ \textcolor{preprocessor}{\#define\ queueOVERWRITE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ (\ BaseType\_t\ )\ 2\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00072}00072\ \textcolor{comment}{/*\ For\ internal\ use\ only.\ \ These\ definitions\ *must*\ match\ those\ in\ queue.c.\ */}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00073}\mbox{\hyperlink{queue_8h_a3f926bea6ffa4e2f1af900431d0d90a5}{00073}}\ \textcolor{preprocessor}{\#define\ queueQUEUE\_TYPE\_BASE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ (\ uint8\_t\ )\ 0U\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00074}\mbox{\hyperlink{queue_8h_ae9c10f504e758fb69271024dc8d8a8c9}{00074}}\ \textcolor{preprocessor}{\#define\ queueQUEUE\_TYPE\_MUTEX\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ (\ uint8\_t\ )\ 1U\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00075}\mbox{\hyperlink{queue_8h_abccf1c95aa0942f8df163d414010542b}{00075}}\ \textcolor{preprocessor}{\#define\ queueQUEUE\_TYPE\_COUNTING\_SEMAPHORE\ \ \ \ (\ (\ uint8\_t\ )\ 2U\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00076}\mbox{\hyperlink{queue_8h_a8af9c6a83fce59c386da4f22248b56ae}{00076}}\ \textcolor{preprocessor}{\#define\ queueQUEUE\_TYPE\_BINARY\_SEMAPHORE\ \ \ \ \ \ (\ (\ uint8\_t\ )\ 3U\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00077}\mbox{\hyperlink{queue_8h_a6f68aa65394f83b57e34061d9ff44b47}{00077}}\ \textcolor{preprocessor}{\#define\ queueQUEUE\_TYPE\_RECURSIVE\_MUTEX\ \ \ \ \ \ \ (\ (\ uint8\_t\ )\ 4U\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00078}\mbox{\hyperlink{queue_8h_a9b8e1b1d5d9952bd0121ae71cf3aba8d}{00078}}\ \textcolor{preprocessor}{\#define\ queueQUEUE\_TYPE\_SET\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ (\ uint8\_t\ )\ 5U\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00148}00148\ \textcolor{preprocessor}{\#if\ (\ configSUPPORT\_DYNAMIC\_ALLOCATION\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00149}00149\ \textcolor{preprocessor}{\ \ \ \ \#define\ xQueueCreate(\ uxQueueLength,\ uxItemSize\ )\ \ \ \ xQueueGenericCreate(\ (\ uxQueueLength\ ),\ (\ uxItemSize\ ),\ (\ queueQUEUE\_TYPE\_BASE\ )\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00150}00150\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00234}00234\ \textcolor{preprocessor}{\#if\ (\ configSUPPORT\_STATIC\_ALLOCATION\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00235}00235\ \textcolor{preprocessor}{\ \ \ \ \#define\ xQueueCreateStatic(\ uxQueueLength,\ uxItemSize,\ pucQueueStorage,\ pxQueueBuffer\ )\ \ \ \ xQueueGenericCreateStatic(\ (\ uxQueueLength\ ),\ (\ uxItemSize\ ),\ (\ pucQueueStorage\ ),\ (\ pxQueueBuffer\ ),\ (\ queueQUEUE\_TYPE\_BASE\ )\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00236}00236\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ configSUPPORT\_STATIC\_ALLOCATION\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00237}00237\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00263}00263\ \textcolor{preprocessor}{\#if\ (\ configSUPPORT\_STATIC\_ALLOCATION\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00264}00264\ \textcolor{preprocessor}{\ \ \ \ \#define\ xQueueGetStaticBuffers(\ xQueue,\ ppucQueueStorage,\ ppxStaticQueue\ )\ \ \ \ xQueueGenericGetStaticBuffers(\ (\ xQueue\ ),\ (\ ppucQueueStorage\ ),\ (\ ppxStaticQueue\ )\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00265}00265\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ configSUPPORT\_STATIC\_ALLOCATION\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00266}00266\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00345}\mbox{\hyperlink{queue_8h_aa612fcc2b1ceee0200f34b942e300b41}{00345}}\ \textcolor{preprocessor}{\#define\ xQueueSendToFront(\ xQueue,\ pvItemToQueue,\ xTicksToWait\ )\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00346}00346\ \textcolor{preprocessor}{\ \ \ \ xQueueGenericSend(\ (\ xQueue\ ),\ (\ pvItemToQueue\ ),\ (\ xTicksToWait\ ),\ queueSEND\_TO\_FRONT\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00347}00347\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00428}\mbox{\hyperlink{queue_8h_a81d24a2c1199d58efb76fbee15853112}{00428}}\ \textcolor{preprocessor}{\#define\ xQueueSendToBack(\ xQueue,\ pvItemToQueue,\ xTicksToWait\ )\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00429}00429\ \textcolor{preprocessor}{\ \ \ \ xQueueGenericSend(\ (\ xQueue\ ),\ (\ pvItemToQueue\ ),\ (\ xTicksToWait\ ),\ queueSEND\_TO\_BACK\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00430}00430\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00513}\mbox{\hyperlink{queue_8h_af7eb49d3249351176992950d9185abe9}{00513}}\ \textcolor{preprocessor}{\#define\ xQueueSend(\ xQueue,\ pvItemToQueue,\ xTicksToWait\ )\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00514}00514\ \textcolor{preprocessor}{\ \ \ \ xQueueGenericSend(\ (\ xQueue\ ),\ (\ pvItemToQueue\ ),\ (\ xTicksToWait\ ),\ queueSEND\_TO\_BACK\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00515}00515\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00597}\mbox{\hyperlink{queue_8h_a8e9ced123b5a0e37a36d3bbdb2e56b4e}{00597}}\ \textcolor{preprocessor}{\#define\ xQueueOverwrite(\ xQueue,\ pvItemToQueue\ )\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00598}00598\ \textcolor{preprocessor}{\ \ \ \ xQueueGenericSend(\ (\ xQueue\ ),\ (\ pvItemToQueue\ ),\ 0,\ queueOVERWRITE\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00599}00599\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00600}00600\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00686}00686\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{queue_8h_a7ce86d1026e0c3055a523935bf53c0b3}{xQueueGenericSend}}(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}},}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00687}00687\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *\ \textcolor{keyword}{const}\ pvItemToQueue,}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00688}00688\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xTicksToWait,}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00689}00689\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xCopyPosition\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00690}00690\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00784}00784\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{queue_8h_a3f9e430276fe5244417fd82644ec8a75}{xQueuePeek}}(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}},}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00785}00785\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *\ \textcolor{keyword}{const}\ pvBuffer,}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00786}00786\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xTicksToWait\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00787}00787\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00820}00820\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{queue_8h_ac402adf98be1fb8ca0345f30dc11a9dc}{xQueuePeekFromISR}}(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}},}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00821}00821\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *\ \textcolor{keyword}{const}\ pvBuffer\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00822}00822\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00913}00913\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{queue_8h_ae8364d988c6f9b63c771cc2b3dfe5df9}{xQueueReceive}}(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}},}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00914}00914\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *\ \textcolor{keyword}{const}\ pvBuffer,}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00915}00915\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xTicksToWait\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00916}00916\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00932}00932\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ \mbox{\hyperlink{queue_8h_add7ee0701ba35904d190811b9e5a4eda}{uxQueueMessagesWaiting}}(\ \textcolor{keyword}{const}\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}}\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00933}00933\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00951}00951\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ \mbox{\hyperlink{queue_8h_aae75791e91707c1e0bb31d761921531c}{uxQueueSpacesAvailable}}(\ \textcolor{keyword}{const}\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}}\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00952}00952\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00967}00967\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{queue_8h_a707cbcfe3aed6b877b6aa6d9d75a3f22}{vQueueDelete}}(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}}\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l00968}00968\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01037}\mbox{\hyperlink{queue_8h_af03b83396462affe9e28302660e7b9c6}{01037}}\ \textcolor{preprocessor}{\#define\ xQueueSendToFrontFromISR(\ xQueue,\ pvItemToQueue,\ pxHigherPriorityTaskWoken\ )\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01038}01038\ \textcolor{preprocessor}{\ \ \ \ xQueueGenericSendFromISR(\ (\ xQueue\ ),\ (\ pvItemToQueue\ ),\ (\ pxHigherPriorityTaskWoken\ ),\ queueSEND\_TO\_FRONT\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01039}01039\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01040}01040\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01109}\mbox{\hyperlink{queue_8h_a51e9f73417b11441a181cdc4f33a68e9}{01109}}\ \textcolor{preprocessor}{\#define\ xQueueSendToBackFromISR(\ xQueue,\ pvItemToQueue,\ pxHigherPriorityTaskWoken\ )\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01110}01110\ \textcolor{preprocessor}{\ \ \ \ xQueueGenericSendFromISR(\ (\ xQueue\ ),\ (\ pvItemToQueue\ ),\ (\ pxHigherPriorityTaskWoken\ ),\ queueSEND\_TO\_BACK\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01111}01111\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01200}\mbox{\hyperlink{queue_8h_abdcd6a86ef82034d002193e79cfd3ce8}{01200}}\ \textcolor{preprocessor}{\#define\ xQueueOverwriteFromISR(\ xQueue,\ pvItemToQueue,\ pxHigherPriorityTaskWoken\ )\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01201}01201\ \textcolor{preprocessor}{\ \ \ \ xQueueGenericSendFromISR(\ (\ xQueue\ ),\ (\ pvItemToQueue\ ),\ (\ pxHigherPriorityTaskWoken\ ),\ queueOVERWRITE\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01202}01202\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01278}\mbox{\hyperlink{queue_8h_a21d5919ed26c21d121df4a4debeb643c}{01278}}\ \textcolor{preprocessor}{\#define\ xQueueSendFromISR(\ xQueue,\ pvItemToQueue,\ pxHigherPriorityTaskWoken\ )\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01279}01279\ \textcolor{preprocessor}{\ \ \ \ xQueueGenericSendFromISR(\ (\ xQueue\ ),\ (\ pvItemToQueue\ ),\ (\ pxHigherPriorityTaskWoken\ ),\ queueSEND\_TO\_BACK\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01280}01280\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01361}01361\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{queue_8h_a263711eb0124112e828a18fd4b8ab29d}{xQueueGenericSendFromISR}}(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}},}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01362}01362\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *\ \textcolor{keyword}{const}\ pvItemToQueue,}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01363}01363\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ *\ \textcolor{keyword}{const}\ pxHigherPriorityTaskWoken,}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01364}01364\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xCopyPosition\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01365}01365\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{queue_8h_ad14ae1174c2772cffc9e0c2c45dc55a6}{xQueueGiveFromISR}}(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}},}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01366}01366\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ *\ \textcolor{keyword}{const}\ pxHigherPriorityTaskWoken\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01367}01367\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01455}01455\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{queue_8h_acdf528f5c91131ae2f31c669cfd65758}{xQueueReceiveFromISR}}(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}},}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01456}01456\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *\ \textcolor{keyword}{const}\ pvBuffer,}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01457}01457\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ *\ \textcolor{keyword}{const}\ pxHigherPriorityTaskWoken\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01458}01458\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01459}01459\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01460}01460\ \textcolor{comment}{\ *\ Utilities\ to\ query\ queues\ that\ are\ safe\ to\ use\ from\ an\ ISR.\ \ These\ utilities}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01461}01461\ \textcolor{comment}{\ *\ should\ be\ used\ only\ from\ within\ an\ ISR,\ or\ within\ a\ critical\ section.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01462}01462\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01463}01463\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{queue_8h_aa11139c58f4eecaa0c50078f2976d010}{xQueueIsQueueEmptyFromISR}}(\ \textcolor{keyword}{const}\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}}\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01464}01464\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{queue_8h_a81319b3aa562733957c5a12a088516d3}{xQueueIsQueueFullFromISR}}(\ \textcolor{keyword}{const}\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}}\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01465}01465\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ \mbox{\hyperlink{queue_8h_a3e89b6189166f9544f283435e2732f9a}{uxQueueMessagesWaitingFromISR}}(\ \textcolor{keyword}{const}\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}}\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01466}01466\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01467}01467\ \textcolor{preprocessor}{\#if\ (\ configUSE\_CO\_ROUTINES\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01468}01468\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01469}01469\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01470}01470\ \textcolor{comment}{\ *\ The\ functions\ defined\ above\ are\ for\ passing\ data\ to\ and\ from\ tasks.\ \ The}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01471}01471\ \textcolor{comment}{\ *\ functions\ below\ are\ the\ equivalents\ for\ passing\ data\ to\ and\ from}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01472}01472\ \textcolor{comment}{\ *\ co-\/routines.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01473}01473\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01474}01474\ \textcolor{comment}{\ *\ These\ functions\ are\ called\ from\ the\ co-\/routine\ macro\ implementation\ and}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01475}01475\ \textcolor{comment}{\ *\ should\ not\ be\ called\ directly\ from\ application\ code.\ \ Instead\ use\ the\ macro}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01476}01476\ \textcolor{comment}{\ *\ wrappers\ defined\ within\ croutine.h.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01477}01477\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01478}01478\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xQueueCRSendFromISR(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}},}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01479}01479\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *\ pvItemToQueue,}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01480}01480\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xCoRoutinePreviouslyWoken\ );}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01481}01481\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xQueueCRReceiveFromISR(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}},}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01482}01482\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *\ pvBuffer,}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01483}01483\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ *\ pxTaskWoken\ );}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01484}01484\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xQueueCRSend(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}},}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01485}01485\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *\ pvItemToQueue,}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01486}01486\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xTicksToWait\ );}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01487}01487\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xQueueCRReceive(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}},}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01488}01488\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *\ pvBuffer,}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01489}01489\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xTicksToWait\ );}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01490}01490\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01491}01491\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ if\ (\ configUSE\_CO\_ROUTINES\ ==\ 1\ )\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01492}01492\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01493}01493\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01494}01494\ \textcolor{comment}{\ *\ For\ internal\ use\ only.\ \ Use\ xSemaphoreCreateMutex(),}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01495}01495\ \textcolor{comment}{\ *\ xSemaphoreCreateCounting()\ or\ xSemaphoreGetMutexHolder()\ instead\ of\ calling}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01496}01496\ \textcolor{comment}{\ *\ these\ functions\ directly.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01497}01497\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01498}\mbox{\hyperlink{queue_8h_acac7df114346b4219bc2aab79cac35b5}{01498}}\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{queue_8h_acac7df114346b4219bc2aab79cac35b5}{xQueueCreateMutex}}(\ \textcolor{keyword}{const}\ uint8\_t\ ucQueueType\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01499}01499\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01500}01500\ \textcolor{preprocessor}{\#if\ (\ configSUPPORT\_STATIC\_ALLOCATION\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01501}01501\ \ \ \ \ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ xQueueCreateMutexStatic(\ \textcolor{keyword}{const}\ uint8\_t\ ucQueueType,}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01502}01502\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_a22e8979e2849d002747c0dd4c7c37908}{StaticQueue\_t}}\ *\ pxStaticQueue\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01503}01503\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01504}01504\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01505}01505\ \textcolor{preprocessor}{\#if\ (\ configUSE\_COUNTING\_SEMAPHORES\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01506}01506\ \ \ \ \ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ xQueueCreateCountingSemaphore(\ \textcolor{keyword}{const}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxMaxCount,}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01507}01507\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxInitialCount\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01508}01508\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01509}01509\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01510}01510\ \textcolor{preprocessor}{\#if\ (\ (\ configUSE\_COUNTING\_SEMAPHORES\ ==\ 1\ )\ \&\&\ (\ configSUPPORT\_STATIC\_ALLOCATION\ ==\ 1\ )\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01511}01511\ \ \ \ \ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ xQueueCreateCountingSemaphoreStatic(\ \textcolor{keyword}{const}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxMaxCount,}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01512}01512\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxInitialCount,}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01513}01513\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_a22e8979e2849d002747c0dd4c7c37908}{StaticQueue\_t}}\ *\ pxStaticQueue\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01514}01514\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01515}01515\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01516}01516\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{queue_8h_a124567e9fc3a37b99f7e184ae98de9f8}{xQueueSemaphoreTake}}(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}},}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01517}01517\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xTicksToWait\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01518}01518\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01519}01519\ \textcolor{preprocessor}{\#if\ (\ (\ configUSE\_MUTEXES\ ==\ 1\ )\ \&\&\ (\ INCLUDE\_xSemaphoreGetMutexHolder\ ==\ 1\ )\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01520}01520\ \ \ \ \ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xQueueGetMutexHolder(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_adb2c0818274974553c619ff953b6f477}{xSemaphore}}\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01521}01521\ \ \ \ \ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xQueueGetMutexHolderFromISR(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_adb2c0818274974553c619ff953b6f477}{xSemaphore}}\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01522}01522\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01523}01523\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01524}01524\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01525}01525\ \textcolor{comment}{\ *\ For\ internal\ use\ only.\ \ Use\ xSemaphoreTakeRecursive()\ or}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01526}01526\ \textcolor{comment}{\ *\ xSemaphoreGiveRecursive()\ instead\ of\ calling\ these\ functions\ directly.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01527}01527\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01528}\mbox{\hyperlink{queue_8h_a74e27d539a884589ebbbdfcc371a48cd}{01528}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{queue_8h_a74e27d539a884589ebbbdfcc371a48cd}{xQueueTakeMutexRecursive}}(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ xMutex,}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01529}01529\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xTicksToWait\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01530}\mbox{\hyperlink{queue_8h_a51adeb17e9d3bb1077969e6e53f61c3b}{01530}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{queue_8h_a51adeb17e9d3bb1077969e6e53f61c3b}{xQueueGiveMutexRecursive}}(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ xMutex\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01531}01531\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01532}01532\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01533}01533\ \textcolor{comment}{\ *\ Reset\ a\ queue\ back\ to\ its\ original\ empty\ state.\ \ The\ return\ value\ is\ now}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01534}01534\ \textcolor{comment}{\ *\ obsolete\ and\ is\ always\ set\ to\ pdPASS.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01535}01535\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01536}\mbox{\hyperlink{queue_8h_a94df8d8bc938424151f8196db2f1177b}{01536}}\ \textcolor{preprocessor}{\#define\ xQueueReset(\ xQueue\ )\ \ \ \ xQueueGenericReset(\ (\ xQueue\ ),\ pdFALSE\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01537}01537\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01538}01538\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01539}01539\ \textcolor{comment}{\ *\ The\ registry\ is\ provided\ as\ a\ means\ for\ kernel\ aware\ debuggers\ to}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01540}01540\ \textcolor{comment}{\ *\ locate\ queues,\ semaphores\ and\ mutexes.\ \ Call\ vQueueAddToRegistry()\ add}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01541}01541\ \textcolor{comment}{\ *\ a\ queue,\ semaphore\ or\ mutex\ handle\ to\ the\ registry\ if\ you\ want\ the\ handle}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01542}01542\ \textcolor{comment}{\ *\ to\ be\ available\ to\ a\ kernel\ aware\ debugger.\ \ If\ you\ are\ not\ using\ a\ kernel}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01543}01543\ \textcolor{comment}{\ *\ aware\ debugger\ then\ this\ function\ can\ be\ ignored.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01544}01544\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01545}01545\ \textcolor{comment}{\ *\ configQUEUE\_REGISTRY\_SIZE\ defines\ the\ maximum\ number\ of\ handles\ the}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01546}01546\ \textcolor{comment}{\ *\ registry\ can\ hold.\ \ configQUEUE\_REGISTRY\_SIZE\ must\ be\ greater\ than\ 0}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01547}01547\ \textcolor{comment}{\ *\ within\ FreeRTOSConfig.h\ for\ the\ registry\ to\ be\ available.\ \ Its\ value}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01548}01548\ \textcolor{comment}{\ *\ does\ not\ affect\ the\ number\ of\ queues,\ semaphores\ and\ mutexes\ that\ can\ be}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01549}01549\ \textcolor{comment}{\ *\ created\ -\/\ just\ the\ number\ that\ the\ registry\ can\ hold.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01550}01550\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01551}01551\ \textcolor{comment}{\ *\ If\ vQueueAddToRegistry\ is\ called\ more\ than\ once\ with\ the\ same\ xQueue}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01552}01552\ \textcolor{comment}{\ *\ parameter,\ the\ registry\ will\ store\ the\ pcQueueName\ parameter\ from\ the}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01553}01553\ \textcolor{comment}{\ *\ most\ recent\ call\ to\ vQueueAddToRegistry.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01554}01554\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01555}01555\ \textcolor{comment}{\ *\ @param\ xQueue\ The\ handle\ of\ the\ queue\ being\ added\ to\ the\ registry.\ \ This}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01556}01556\ \textcolor{comment}{\ *\ is\ the\ handle\ returned\ by\ a\ call\ to\ xQueueCreate().\ \ Semaphore\ and\ mutex}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01557}01557\ \textcolor{comment}{\ *\ handles\ can\ also\ be\ passed\ in\ here.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01558}01558\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01559}01559\ \textcolor{comment}{\ *\ @param\ pcQueueName\ The\ name\ to\ be\ associated\ with\ the\ handle.\ \ This\ is\ the}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01560}01560\ \textcolor{comment}{\ *\ name\ that\ the\ kernel\ aware\ debugger\ will\ display.\ \ The\ queue\ registry\ only}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01561}01561\ \textcolor{comment}{\ *\ stores\ a\ pointer\ to\ the\ string\ -\/\ so\ the\ string\ must\ be\ persistent\ (global\ or}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01562}01562\ \textcolor{comment}{\ *\ preferably\ in\ ROM/Flash),\ not\ on\ the\ stack.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01563}01563\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01564}01564\ \textcolor{preprocessor}{\#if\ (\ configQUEUE\_REGISTRY\_SIZE\ >\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01565}01565\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_free_r_t_o_s_8h_a3e103eedd5088f5f30bc55e55820a9e3}{vQueueAddToRegistry}}(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}},}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01566}01566\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ pcQueueName\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01567}01567\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01568}01568\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01569}01569\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01570}01570\ \textcolor{comment}{\ *\ The\ registry\ is\ provided\ as\ a\ means\ for\ kernel\ aware\ debuggers\ to}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01571}01571\ \textcolor{comment}{\ *\ locate\ queues,\ semaphores\ and\ mutexes.\ \ Call\ vQueueAddToRegistry()\ add}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01572}01572\ \textcolor{comment}{\ *\ a\ queue,\ semaphore\ or\ mutex\ handle\ to\ the\ registry\ if\ you\ want\ the\ handle}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01573}01573\ \textcolor{comment}{\ *\ to\ be\ available\ to\ a\ kernel\ aware\ debugger,\ and\ vQueueUnregisterQueue()\ to}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01574}01574\ \textcolor{comment}{\ *\ remove\ the\ queue,\ semaphore\ or\ mutex\ from\ the\ register.\ \ If\ you\ are\ not\ using}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01575}01575\ \textcolor{comment}{\ *\ a\ kernel\ aware\ debugger\ then\ this\ function\ can\ be\ ignored.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01576}01576\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01577}01577\ \textcolor{comment}{\ *\ @param\ xQueue\ The\ handle\ of\ the\ queue\ being\ removed\ from\ the\ registry.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01578}01578\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01579}01579\ \textcolor{preprocessor}{\#if\ (\ configQUEUE\_REGISTRY\_SIZE\ >\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01580}01580\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_free_r_t_o_s_8h_af007b655ee91c919bad9cd2798195899}{vQueueUnregisterQueue}}(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}}\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01581}01581\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01582}01582\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01583}01583\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01584}01584\ \textcolor{comment}{\ *\ The\ queue\ registry\ is\ provided\ as\ a\ means\ for\ kernel\ aware\ debuggers\ to}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01585}01585\ \textcolor{comment}{\ *\ locate\ queues,\ semaphores\ and\ mutexes.\ \ Call\ pcQueueGetName()\ to\ look}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01586}01586\ \textcolor{comment}{\ *\ up\ and\ return\ the\ name\ of\ a\ queue\ in\ the\ queue\ registry\ from\ the\ queue's}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01587}01587\ \textcolor{comment}{\ *\ handle.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01588}01588\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01589}01589\ \textcolor{comment}{\ *\ @param\ xQueue\ The\ handle\ of\ the\ queue\ the\ name\ of\ which\ will\ be\ returned.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01590}01590\ \textcolor{comment}{\ *\ @return\ If\ the\ queue\ is\ in\ the\ registry\ then\ a\ pointer\ to\ the\ name\ of\ the}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01591}01591\ \textcolor{comment}{\ *\ queue\ is\ returned.\ \ If\ the\ queue\ is\ not\ in\ the\ registry\ then\ NULL\ is}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01592}01592\ \textcolor{comment}{\ *\ returned.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01593}01593\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01594}01594\ \textcolor{preprocessor}{\#if\ (\ configQUEUE\_REGISTRY\_SIZE\ >\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01595}01595\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \mbox{\hyperlink{_free_r_t_o_s_8h_ae9c520a136753cfb579e5caac11077a6}{pcQueueGetName}}(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}}\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01596}01596\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01597}01597\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01598}01598\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01599}01599\ \textcolor{comment}{\ *\ Generic\ version\ of\ the\ function\ used\ to\ create\ a\ queue\ using\ dynamic\ memory}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01600}01600\ \textcolor{comment}{\ *\ allocation.\ \ This\ is\ called\ by\ other\ functions\ and\ macros\ that\ create\ other}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01601}01601\ \textcolor{comment}{\ *\ RTOS\ objects\ that\ use\ the\ queue\ structure\ as\ their\ base.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01602}01602\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01603}01603\ \textcolor{preprocessor}{\#if\ (\ configSUPPORT\_DYNAMIC\_ALLOCATION\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01604}01604\ \ \ \ \ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ xQueueGenericCreate(\ \textcolor{keyword}{const}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxQueueLength,}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01605}01605\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ \mbox{\hyperlink{struct_queue_definition_a81bb7d3826909244baa9debf5a55abb0}{uxItemSize}},}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01606}01606\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ ucQueueType\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01607}01607\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01608}01608\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01609}01609\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01610}01610\ \textcolor{comment}{\ *\ Generic\ version\ of\ the\ function\ used\ to\ create\ a\ queue\ using\ dynamic\ memory}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01611}01611\ \textcolor{comment}{\ *\ allocation.\ \ This\ is\ called\ by\ other\ functions\ and\ macros\ that\ create\ other}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01612}01612\ \textcolor{comment}{\ *\ RTOS\ objects\ that\ use\ the\ queue\ structure\ as\ their\ base.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01613}01613\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01614}01614\ \textcolor{preprocessor}{\#if\ (\ configSUPPORT\_STATIC\_ALLOCATION\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01615}01615\ \ \ \ \ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ xQueueGenericCreateStatic(\ \textcolor{keyword}{const}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxQueueLength,}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01616}01616\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ \mbox{\hyperlink{struct_queue_definition_a81bb7d3826909244baa9debf5a55abb0}{uxItemSize}},}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01617}01617\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ *\ pucQueueStorage,}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01618}01618\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_a22e8979e2849d002747c0dd4c7c37908}{StaticQueue\_t}}\ *\ pxStaticQueue,}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01619}01619\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ ucQueueType\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01620}01620\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01621}01621\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01622}01622\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01623}01623\ \textcolor{comment}{\ *\ Generic\ version\ of\ the\ function\ used\ to\ retrieve\ the\ buffers\ of\ statically}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01624}01624\ \textcolor{comment}{\ *\ created\ queues.\ This\ is\ called\ by\ other\ functions\ and\ macros\ that\ retrieve}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01625}01625\ \textcolor{comment}{\ *\ the\ buffers\ of\ other\ statically\ created\ RTOS\ objects\ that\ use\ the\ queue}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01626}01626\ \textcolor{comment}{\ *\ structure\ as\ their\ base.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01627}01627\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01628}01628\ \textcolor{preprocessor}{\#if\ (\ configSUPPORT\_STATIC\_ALLOCATION\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01629}01629\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xQueueGenericGetStaticBuffers(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}},}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01630}01630\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ **\ ppucQueueStorage,}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01631}01631\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_a22e8979e2849d002747c0dd4c7c37908}{StaticQueue\_t}}\ **\ ppxStaticQueue\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01632}01632\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01633}01633\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01634}01634\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01635}01635\ \textcolor{comment}{\ *\ Queue\ sets\ provide\ a\ mechanism\ to\ allow\ a\ task\ to\ block\ (pend)\ on\ a\ read}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01636}01636\ \textcolor{comment}{\ *\ operation\ from\ multiple\ queues\ or\ semaphores\ simultaneously.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01637}01637\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01638}01638\ \textcolor{comment}{\ *\ See\ FreeRTOS/Source/Demo/Common/Minimal/QueueSet.c\ for\ an\ example\ using\ this}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01639}01639\ \textcolor{comment}{\ *\ function.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01640}01640\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01641}01641\ \textcolor{comment}{\ *\ A\ queue\ set\ must\ be\ explicitly\ created\ using\ a\ call\ to\ xQueueCreateSet()}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01642}01642\ \textcolor{comment}{\ *\ before\ it\ can\ be\ used.\ \ Once\ created,\ standard\ FreeRTOS\ queues\ and\ semaphores}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01643}01643\ \textcolor{comment}{\ *\ can\ be\ added\ to\ the\ set\ using\ calls\ to\ xQueueAddToSet().}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01644}01644\ \textcolor{comment}{\ *\ xQueueSelectFromSet()\ is\ then\ used\ to\ determine\ which,\ if\ any,\ of\ the\ queues}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01645}01645\ \textcolor{comment}{\ *\ or\ semaphores\ contained\ in\ the\ set\ is\ in\ a\ state\ where\ a\ queue\ read\ or}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01646}01646\ \textcolor{comment}{\ *\ semaphore\ take\ operation\ would\ be\ successful.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01647}01647\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01648}01648\ \textcolor{comment}{\ *\ Note\ 1:\ \ See\ the\ documentation\ on\ https://www.FreeRTOS.org/RTOS-\/queue-\/sets.html}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01649}01649\ \textcolor{comment}{\ *\ for\ reasons\ why\ queue\ sets\ are\ very\ rarely\ needed\ in\ practice\ as\ there\ are}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01650}01650\ \textcolor{comment}{\ *\ simpler\ methods\ of\ blocking\ on\ multiple\ objects.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01651}01651\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01652}01652\ \textcolor{comment}{\ *\ Note\ 2:\ \ Blocking\ on\ a\ queue\ set\ that\ contains\ a\ mutex\ will\ not\ cause\ the}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01653}01653\ \textcolor{comment}{\ *\ mutex\ holder\ to\ inherit\ the\ priority\ of\ the\ blocked\ task.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01654}01654\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01655}01655\ \textcolor{comment}{\ *\ Note\ 3:\ \ An\ additional\ 4\ bytes\ of\ RAM\ is\ required\ for\ each\ space\ in\ a\ every}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01656}01656\ \textcolor{comment}{\ *\ queue\ added\ to\ a\ queue\ set.\ \ Therefore\ counting\ semaphores\ that\ have\ a\ high}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01657}01657\ \textcolor{comment}{\ *\ maximum\ count\ value\ should\ not\ be\ added\ to\ a\ queue\ set.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01658}01658\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01659}01659\ \textcolor{comment}{\ *\ Note\ 4:\ \ A\ receive\ (in\ the\ case\ of\ a\ queue)\ or\ take\ (in\ the\ case\ of\ a}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01660}01660\ \textcolor{comment}{\ *\ semaphore)\ operation\ must\ not\ be\ performed\ on\ a\ member\ of\ a\ queue\ set\ unless}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01661}01661\ \textcolor{comment}{\ *\ a\ call\ to\ xQueueSelectFromSet()\ has\ first\ returned\ a\ handle\ to\ that\ set\ member.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01662}01662\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01663}01663\ \textcolor{comment}{\ *\ @param\ uxEventQueueLength\ Queue\ sets\ store\ events\ that\ occur\ on}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01664}01664\ \textcolor{comment}{\ *\ the\ queues\ and\ semaphores\ contained\ in\ the\ set.\ \ uxEventQueueLength\ specifies}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01665}01665\ \textcolor{comment}{\ *\ the\ maximum\ number\ of\ events\ that\ can\ be\ queued\ at\ once.\ \ To\ be\ absolutely}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01666}01666\ \textcolor{comment}{\ *\ certain\ that\ events\ are\ not\ lost\ uxEventQueueLength\ should\ be\ set\ to\ the}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01667}01667\ \textcolor{comment}{\ *\ total\ sum\ of\ the\ length\ of\ the\ queues\ added\ to\ the\ set,\ where\ binary}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01668}01668\ \textcolor{comment}{\ *\ semaphores\ and\ mutexes\ have\ a\ length\ of\ 1,\ and\ counting\ semaphores\ have\ a}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01669}01669\ \textcolor{comment}{\ *\ length\ set\ by\ their\ maximum\ count\ value.\ \ Examples:}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01670}01670\ \textcolor{comment}{\ *\ \ +\ If\ a\ queue\ set\ is\ to\ hold\ a\ queue\ of\ length\ 5,\ another\ queue\ of\ length\ 12,}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01671}01671\ \textcolor{comment}{\ *\ \ \ \ and\ a\ binary\ semaphore,\ then\ uxEventQueueLength\ should\ be\ set\ to}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01672}01672\ \textcolor{comment}{\ *\ \ \ \ (5\ +\ 12\ +\ 1),\ or\ 18.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01673}01673\ \textcolor{comment}{\ *\ \ +\ If\ a\ queue\ set\ is\ to\ hold\ three\ binary\ semaphores\ then\ uxEventQueueLength}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01674}01674\ \textcolor{comment}{\ *\ \ \ \ should\ be\ set\ to\ (1\ +\ 1\ +\ 1\ ),\ or\ 3.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01675}01675\ \textcolor{comment}{\ *\ \ +\ If\ a\ queue\ set\ is\ to\ hold\ a\ counting\ semaphore\ that\ has\ a\ maximum\ count\ of}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01676}01676\ \textcolor{comment}{\ *\ \ \ \ 5,\ and\ a\ counting\ semaphore\ that\ has\ a\ maximum\ count\ of\ 3,\ then}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01677}01677\ \textcolor{comment}{\ *\ \ \ \ uxEventQueueLength\ should\ be\ set\ to\ (5\ +\ 3),\ or\ 8.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01678}01678\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01679}01679\ \textcolor{comment}{\ *\ @return\ If\ the\ queue\ set\ is\ created\ successfully\ then\ a\ handle\ to\ the\ created}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01680}01680\ \textcolor{comment}{\ *\ queue\ set\ is\ returned.\ \ Otherwise\ NULL\ is\ returned.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01681}01681\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01682}01682\ \textcolor{preprocessor}{\#if\ (\ (\ configUSE\_QUEUE\_SETS\ ==\ 1\ )\ \&\&\ (\ configSUPPORT\_DYNAMIC\_ALLOCATION\ ==\ 1\ )\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01683}01683\ \ \ \ \ \mbox{\hyperlink{queue_8h_a1ae056fb02b2467993003b85111dde16}{QueueSetHandle\_t}}\ xQueueCreateSet(\ \textcolor{keyword}{const}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxEventQueueLength\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01684}01684\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01685}01685\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01686}01686\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01687}01687\ \textcolor{comment}{\ *\ Adds\ a\ queue\ or\ semaphore\ to\ a\ queue\ set\ that\ was\ previously\ created\ by\ a}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01688}01688\ \textcolor{comment}{\ *\ call\ to\ xQueueCreateSet().}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01689}01689\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01690}01690\ \textcolor{comment}{\ *\ See\ FreeRTOS/Source/Demo/Common/Minimal/QueueSet.c\ for\ an\ example\ using\ this}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01691}01691\ \textcolor{comment}{\ *\ function.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01692}01692\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01693}01693\ \textcolor{comment}{\ *\ Note\ 1:\ \ A\ receive\ (in\ the\ case\ of\ a\ queue)\ or\ take\ (in\ the\ case\ of\ a}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01694}01694\ \textcolor{comment}{\ *\ semaphore)\ operation\ must\ not\ be\ performed\ on\ a\ member\ of\ a\ queue\ set\ unless}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01695}01695\ \textcolor{comment}{\ *\ a\ call\ to\ xQueueSelectFromSet()\ has\ first\ returned\ a\ handle\ to\ that\ set\ member.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01696}01696\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01697}01697\ \textcolor{comment}{\ *\ @param\ xQueueOrSemaphore\ The\ handle\ of\ the\ queue\ or\ semaphore\ being\ added\ to}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01698}01698\ \textcolor{comment}{\ *\ the\ queue\ set\ (cast\ to\ an\ QueueSetMemberHandle\_t\ type).}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01699}01699\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01700}01700\ \textcolor{comment}{\ *\ @param\ xQueueSet\ The\ handle\ of\ the\ queue\ set\ to\ which\ the\ queue\ or\ semaphore}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01701}01701\ \textcolor{comment}{\ *\ is\ being\ added.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01702}01702\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01703}01703\ \textcolor{comment}{\ *\ @return\ If\ the\ queue\ or\ semaphore\ was\ successfully\ added\ to\ the\ queue\ set}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01704}01704\ \textcolor{comment}{\ *\ then\ pdPASS\ is\ returned.\ \ If\ the\ queue\ could\ not\ be\ successfully\ added\ to\ the}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01705}01705\ \textcolor{comment}{\ *\ queue\ set\ because\ it\ is\ already\ a\ member\ of\ a\ different\ queue\ set\ then\ pdFAIL}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01706}01706\ \textcolor{comment}{\ *\ is\ returned.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01707}01707\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01708}01708\ \textcolor{preprocessor}{\#if\ (\ configUSE\_QUEUE\_SETS\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01709}01709\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xQueueAddToSet(\ \mbox{\hyperlink{queue_8h_afac7ec7649e5c57381315eb011c36ef5}{QueueSetMemberHandle\_t}}\ xQueueOrSemaphore,}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01710}01710\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{queue_8h_a1ae056fb02b2467993003b85111dde16}{QueueSetHandle\_t}}\ xQueueSet\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01711}01711\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01712}01712\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01713}01713\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01714}01714\ \textcolor{comment}{\ *\ Removes\ a\ queue\ or\ semaphore\ from\ a\ queue\ set.\ \ A\ queue\ or\ semaphore\ can\ only}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01715}01715\ \textcolor{comment}{\ *\ be\ removed\ from\ a\ set\ if\ the\ queue\ or\ semaphore\ is\ empty.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01716}01716\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01717}01717\ \textcolor{comment}{\ *\ See\ FreeRTOS/Source/Demo/Common/Minimal/QueueSet.c\ for\ an\ example\ using\ this}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01718}01718\ \textcolor{comment}{\ *\ function.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01719}01719\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01720}01720\ \textcolor{comment}{\ *\ @param\ xQueueOrSemaphore\ The\ handle\ of\ the\ queue\ or\ semaphore\ being\ removed}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01721}01721\ \textcolor{comment}{\ *\ from\ the\ queue\ set\ (cast\ to\ an\ QueueSetMemberHandle\_t\ type).}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01722}01722\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01723}01723\ \textcolor{comment}{\ *\ @param\ xQueueSet\ The\ handle\ of\ the\ queue\ set\ in\ which\ the\ queue\ or\ semaphore}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01724}01724\ \textcolor{comment}{\ *\ is\ included.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01725}01725\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01726}01726\ \textcolor{comment}{\ *\ @return\ If\ the\ queue\ or\ semaphore\ was\ successfully\ removed\ from\ the\ queue\ set}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01727}01727\ \textcolor{comment}{\ *\ then\ pdPASS\ is\ returned.\ \ If\ the\ queue\ was\ not\ in\ the\ queue\ set,\ or\ the}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01728}01728\ \textcolor{comment}{\ *\ queue\ (or\ semaphore)\ was\ not\ empty,\ then\ pdFAIL\ is\ returned.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01729}01729\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01730}01730\ \textcolor{preprocessor}{\#if\ (\ configUSE\_QUEUE\_SETS\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01731}01731\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xQueueRemoveFromSet(\ \mbox{\hyperlink{queue_8h_afac7ec7649e5c57381315eb011c36ef5}{QueueSetMemberHandle\_t}}\ xQueueOrSemaphore,}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01732}01732\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{queue_8h_a1ae056fb02b2467993003b85111dde16}{QueueSetHandle\_t}}\ xQueueSet\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01733}01733\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01734}01734\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01735}01735\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01736}01736\ \textcolor{comment}{\ *\ xQueueSelectFromSet()\ selects\ from\ the\ members\ of\ a\ queue\ set\ a\ queue\ or}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01737}01737\ \textcolor{comment}{\ *\ semaphore\ that\ either\ contains\ data\ (in\ the\ case\ of\ a\ queue)\ or\ is\ available}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01738}01738\ \textcolor{comment}{\ *\ to\ take\ (in\ the\ case\ of\ a\ semaphore).\ \ xQueueSelectFromSet()\ effectively}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01739}01739\ \textcolor{comment}{\ *\ allows\ a\ task\ to\ block\ (pend)\ on\ a\ read\ operation\ on\ all\ the\ queues\ and}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01740}01740\ \textcolor{comment}{\ *\ semaphores\ in\ a\ queue\ set\ simultaneously.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01741}01741\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01742}01742\ \textcolor{comment}{\ *\ See\ FreeRTOS/Source/Demo/Common/Minimal/QueueSet.c\ for\ an\ example\ using\ this}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01743}01743\ \textcolor{comment}{\ *\ function.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01744}01744\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01745}01745\ \textcolor{comment}{\ *\ Note\ 1:\ \ See\ the\ documentation\ on\ https://www.FreeRTOS.org/RTOS-\/queue-\/sets.html}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01746}01746\ \textcolor{comment}{\ *\ for\ reasons\ why\ queue\ sets\ are\ very\ rarely\ needed\ in\ practice\ as\ there\ are}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01747}01747\ \textcolor{comment}{\ *\ simpler\ methods\ of\ blocking\ on\ multiple\ objects.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01748}01748\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01749}01749\ \textcolor{comment}{\ *\ Note\ 2:\ \ Blocking\ on\ a\ queue\ set\ that\ contains\ a\ mutex\ will\ not\ cause\ the}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01750}01750\ \textcolor{comment}{\ *\ mutex\ holder\ to\ inherit\ the\ priority\ of\ the\ blocked\ task.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01751}01751\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01752}01752\ \textcolor{comment}{\ *\ Note\ 3:\ \ A\ receive\ (in\ the\ case\ of\ a\ queue)\ or\ take\ (in\ the\ case\ of\ a}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01753}01753\ \textcolor{comment}{\ *\ semaphore)\ operation\ must\ not\ be\ performed\ on\ a\ member\ of\ a\ queue\ set\ unless}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01754}01754\ \textcolor{comment}{\ *\ a\ call\ to\ xQueueSelectFromSet()\ has\ first\ returned\ a\ handle\ to\ that\ set\ member.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01755}01755\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01756}01756\ \textcolor{comment}{\ *\ @param\ xQueueSet\ The\ queue\ set\ on\ which\ the\ task\ will\ (potentially)\ block.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01757}01757\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01758}01758\ \textcolor{comment}{\ *\ @param\ xTicksToWait\ The\ maximum\ time,\ in\ ticks,\ that\ the\ calling\ task\ will}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01759}01759\ \textcolor{comment}{\ *\ remain\ in\ the\ Blocked\ state\ (with\ other\ tasks\ executing)\ to\ wait\ for\ a\ member}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01760}01760\ \textcolor{comment}{\ *\ of\ the\ queue\ set\ to\ be\ ready\ for\ a\ successful\ queue\ read\ or\ semaphore\ take}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01761}01761\ \textcolor{comment}{\ *\ operation.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01762}01762\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01763}01763\ \textcolor{comment}{\ *\ @return\ xQueueSelectFromSet()\ will\ return\ the\ handle\ of\ a\ queue\ (cast\ to}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01764}01764\ \textcolor{comment}{\ *\ a\ QueueSetMemberHandle\_t\ type)\ contained\ in\ the\ queue\ set\ that\ contains\ data,}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01765}01765\ \textcolor{comment}{\ *\ or\ the\ handle\ of\ a\ semaphore\ (cast\ to\ a\ QueueSetMemberHandle\_t\ type)\ contained}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01766}01766\ \textcolor{comment}{\ *\ in\ the\ queue\ set\ that\ is\ available,\ or\ NULL\ if\ no\ such\ queue\ or\ semaphore}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01767}01767\ \textcolor{comment}{\ *\ exists\ before\ before\ the\ specified\ block\ time\ expires.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01768}01768\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01769}01769\ \textcolor{preprocessor}{\#if\ (\ configUSE\_QUEUE\_SETS\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01770}01770\ \ \ \ \ \mbox{\hyperlink{queue_8h_afac7ec7649e5c57381315eb011c36ef5}{QueueSetMemberHandle\_t}}\ xQueueSelectFromSet(\ \mbox{\hyperlink{queue_8h_a1ae056fb02b2467993003b85111dde16}{QueueSetHandle\_t}}\ xQueueSet,}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01771}01771\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xTicksToWait\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01772}01772\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01773}01773\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01774}01774\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01775}01775\ \textcolor{comment}{\ *\ A\ version\ of\ xQueueSelectFromSet()\ that\ can\ be\ used\ from\ an\ ISR.}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01776}01776\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01777}01777\ \textcolor{preprocessor}{\#if\ (\ configUSE\_QUEUE\_SETS\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01778}01778\ \ \ \ \ \mbox{\hyperlink{queue_8h_afac7ec7649e5c57381315eb011c36ef5}{QueueSetMemberHandle\_t}}\ xQueueSelectFromSetFromISR(\ \mbox{\hyperlink{queue_8h_a1ae056fb02b2467993003b85111dde16}{QueueSetHandle\_t}}\ xQueueSet\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01779}01779\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01780}01780\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01781}01781\ \textcolor{comment}{/*\ Not\ public\ API\ functions.\ */}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01782}\mbox{\hyperlink{queue_8h_abaa0f8224837d82e60cf799127185546}{01782}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{queue_8h_abaa0f8224837d82e60cf799127185546}{vQueueWaitForMessageRestricted}}(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}},}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01783}01783\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xTicksToWait,}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01784}01784\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xWaitIndefinitely\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01785}01785\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{queue_8h_a3c13a9fe455ec2d35b5f8386a1040599}{xQueueGenericReset}}(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}},}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01786}01786\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xNewQueue\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01787}01787\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01788}01788\ \textcolor{preprocessor}{\#if\ (\ configUSE\_TRACE\_FACILITY\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01789}01789\ \ \ \ \ \textcolor{keywordtype}{void}\ vQueueSetQueueNumber(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}},}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01790}01790\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxQueueNumber\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01791}01791\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01792}01792\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01793}01793\ \textcolor{preprocessor}{\#if\ (\ configUSE\_TRACE\_FACILITY\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01794}01794\ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxQueueGetQueueNumber(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}}\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01795}01795\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01796}01796\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01797}01797\ \textcolor{preprocessor}{\#if\ (\ configUSE\_TRACE\_FACILITY\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01798}01798\ \ \ \ \ uint8\_t\ ucQueueGetQueueType(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}}\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01799}01799\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01800}01800\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01801}01801\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ \mbox{\hyperlink{queue_8h_af569b515027c6d61095c9a28d2f501e8}{uxQueueGetQueueItemSize}}(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}}\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01802}01802\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ \mbox{\hyperlink{queue_8h_ab915702bd4d2d22224b1a17be59b6b08}{uxQueueGetQueueLength}}(\ \mbox{\hyperlink{queue_8h_a57349603001f8ddf51c888c49e2804d7}{QueueHandle\_t}}\ \mbox{\hyperlink{struct_queue_definition_aea4a2daf33054ff6b535f158bd4007f0}{xQueue}}\ )\ \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\_FUNCTION}};}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01803}01803\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01804}01804\ \textcolor{comment}{/*\ *INDENT-\/OFF*\ */}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01805}01805\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01806}01806\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01807}01807\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01808}01808\ \textcolor{comment}{/*\ *INDENT-\/ON*\ */}}
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01809}01809\ }
+\DoxyCodeLine{\Hypertarget{queue_8h_source_l01810}01810\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ QUEUE\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

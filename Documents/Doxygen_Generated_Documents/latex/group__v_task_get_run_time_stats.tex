@@ -1,0 +1,32 @@
+\doxysection{v\+Task\+Get\+Run\+Time\+Stats }
+\hypertarget{group__v_task_get_run_time_stats}{}\label{group__v_task_get_run_time_stats}\index{vTaskGetRunTimeStats@{vTaskGetRunTimeStats}}
+task. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{task_8h_a9d9cbeb55e8b255293690ceed544b047}{vTaskGetRunTimeStats}}(\ \textcolor{keywordtype}{char}\ *pcWriteBuffer\ );}
+
+\end{DoxyCode}
+
+
+config\+GENERATE\+\_\+\+RUN\+\_\+\+TIME\+\_\+\+STATS and config\+USE\+\_\+\+STATS\+\_\+\+FORMATTING\+\_\+\+FUNCTIONS must both be defined as 1 for this function to be available. The application must also then provide definitions for \doxylink{_free_r_t_o_s_8h_a727939bcdb98501e0eba0ec8a1841e1b}{port\+CONFIGURE\+\_\+\+TIMER\+\_\+\+FOR\+\_\+\+RUN\+\_\+\+TIME\+\_\+\+STATS()} and \doxylink{_third_party_2_g_c_c_2_posix_2portmacro_8h_aa7cb8c79fb40bf2d4caccf5ba9ae6737}{port\+GET\+\_\+\+RUN\+\_\+\+TIME\+\_\+\+COUNTER\+\_\+\+VALUE()} to configure a peripheral timer/counter and return the timers current count value respectively. The counter should be at least 10 times the frequency of the tick count.
+
+WARN\+: This function assumes that the pc\+Write\+Buffer is of length config\+STATS\+\_\+\+BUFFER\+\_\+\+MAX\+\_\+\+LENGTH. This function is there only for backward compatiblity. New applications are recommended to use v\+Task\+Get\+Run\+Time\+Statistics and supply the length of the pc\+Write\+Buffer explicitly.
+
+NOTE 1\+: This function will disable interrupts for its duration. It is not intended for normal application runtime use but as a debug aid.
+
+Setting config\+GENERATE\+\_\+\+RUN\+\_\+\+TIME\+\_\+\+STATS to 1 will result in a total accumulated execution time being stored for each task. The resolution of the accumulated time value depends on the frequency of the timer configured by the \doxylink{_free_r_t_o_s_8h_a727939bcdb98501e0eba0ec8a1841e1b}{port\+CONFIGURE\+\_\+\+TIMER\+\_\+\+FOR\+\_\+\+RUN\+\_\+\+TIME\+\_\+\+STATS()} macro. Calling \doxylink{task_8h_a9d9cbeb55e8b255293690ceed544b047}{v\+Task\+Get\+Run\+Time\+Stats()} writes the total execution time of each task into a buffer, both as an absolute count value and as a percentage of the total system execution time.
+
+NOTE 2\+:
+
+This function is provided for convenience only, and is used by many of the demo applications. Do not consider it to be part of the scheduler.
+
+\doxylink{task_8h_a9d9cbeb55e8b255293690ceed544b047}{v\+Task\+Get\+Run\+Time\+Stats()} calls ux\+Task\+Get\+System\+State(), then formats part of the ux\+Task\+Get\+System\+State() output into a human readable table that displays the amount of time each task has spent in the Running state in both absolute and percentage terms.
+
+\doxylink{task_8h_a9d9cbeb55e8b255293690ceed544b047}{v\+Task\+Get\+Run\+Time\+Stats()} has a dependency on the snprintf() C library function that might bloat the code size, use a lot of stack, and provide different results on different platforms. An alternative, tiny, third party, and limited functionality implementation of snprintf() is provided in many of the Free\+RTOS/\+Demo sub-\/directories in a file called printf-\/stdarg.\+c (note printf-\/stdarg.\+c does not provide a full snprintf() implementation!).
+
+It is recommended that production systems call ux\+Task\+Get\+System\+State() directly to get access to raw stats data, rather than indirectly through a call to \doxylink{task_8h_a9d9cbeb55e8b255293690ceed544b047}{v\+Task\+Get\+Run\+Time\+Stats()}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pc\+Write\+Buffer} & A buffer into which the execution times will be written, in ASCII form. This buffer is assumed to be large enough to contain the generated report. Approximately 40 bytes per task should be sufficient. \\
+\hline
+\end{DoxyParams}

@@ -1,0 +1,52 @@
+\doxysection{x\+Message\+Buffer\+Create }
+\hypertarget{group__x_message_buffer_create}{}\label{group__x_message_buffer_create}\index{xMessageBufferCreate@{xMessageBufferCreate}}
+\doxylink{message__buffer_8h}{message\+\_\+buffer.\+h}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{message__buffer_8h_a6c510e0a4aeb3a08df4af49c1d651057}{MessageBufferHandle\_t}}\ \mbox{\hyperlink{message__buffer_8h_a2959cd0e3d2bd20d46908e5c9872be36}{xMessageBufferCreate}}(\ \textcolor{keywordtype}{size\_t}\ xBufferSizeBytes\ );}
+
+\end{DoxyCode}
+
+
+Creates a new message buffer using dynamically allocated memory. See \doxylink{message__buffer_8h_acc84f4a15dbd39ecbad35f7337e78b2c}{x\+Message\+Buffer\+Create\+Static()} for a version that uses statically allocated memory (memory that is allocated at compile time).
+
+config\+SUPPORT\+\_\+\+DYNAMIC\+\_\+\+ALLOCATION must be set to 1 or left undefined in Free\+RTOSConfig.\+h for \doxylink{message__buffer_8h_a2959cd0e3d2bd20d46908e5c9872be36}{x\+Message\+Buffer\+Create()} to be available. config\+USE\+\_\+\+STREAM\+\_\+\+BUFFERS must be set to 1 in for Free\+RTOSConfig.\+h for \doxylink{message__buffer_8h_a2959cd0e3d2bd20d46908e5c9872be36}{x\+Message\+Buffer\+Create()} to be available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Buffer\+Size\+Bytes} & The total number of bytes (not messages) the message buffer will be able to hold at any one time. When a message is written to the message buffer an additional sizeof( size\+\_\+t ) bytes are also written to store the message\textquotesingle{}s length. sizeof( size\+\_\+t ) is typically 4 bytes on a 32-\/bit architecture, so on most 32-\/bit architectures a 10 byte message will take up 14 bytes of message buffer space.\\
+\hline
+{\em px\+Send\+Completed\+Callback} & Callback invoked when a send operation to the message buffer is complete. If the parameter is NULL or \doxylink{message__buffer_8h_a2959cd0e3d2bd20d46908e5c9872be36}{x\+Message\+Buffer\+Create()} is called without the parameter, then it will use the default implementation provided by sb\+SEND\+\_\+\+COMPLETED macro. To enable the callback, config\+USE\+\_\+\+SB\+\_\+\+COMPLETED\+\_\+\+CALLBACK must be set to 1 in Free\+RTOSConfig.\+h.\\
+\hline
+{\em px\+Receive\+Completed\+Callback} & Callback invoked when a receive operation from the message buffer is complete. If the parameter is NULL or \doxylink{message__buffer_8h_a2959cd0e3d2bd20d46908e5c9872be36}{x\+Message\+Buffer\+Create()} is called without the parameter, it will use the default implementation provided by sb\+RECEIVE\+\_\+\+COMPLETED macro. To enable the callback, config\+USE\+\_\+\+SB\+\_\+\+COMPLETED\+\_\+\+CALLBACK must be set to 1 in Free\+RTOSConfig.\+h.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If NULL is returned, then the message buffer cannot be created because there is insufficient heap memory available for Free\+RTOS to allocate the message buffer data structures and storage area. A non-\/\+NULL value being returned indicates that the message buffer has been created successfully -\/ the returned value should be stored as the handle to the created message buffer.
+\end{DoxyReturn}
+Example use\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vAFunction(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\mbox{\hyperlink{message__buffer_8h_a6c510e0a4aeb3a08df4af49c1d651057}{MessageBufferHandle\_t}}\ xMessageBuffer;}
+\DoxyCodeLine{\textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ xMessageBufferSizeBytes\ =\ 100;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ a\ message\ buffer\ that\ can\ hold\ 100\ bytes.\ \ The\ memory\ used\ to\ hold}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ both\ the\ message\ buffer\ structure\ and\ the\ messages\ themselves\ is\ allocated}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ dynamically.\ \ Each\ message\ added\ to\ the\ buffer\ consumes\ an\ additional\ 4}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ bytes\ which\ are\ used\ to\ hold\ the\ length\ of\ the\ message.}}
+\DoxyCodeLine{\ xMessageBuffer\ =\ \mbox{\hyperlink{message__buffer_8h_a2959cd0e3d2bd20d46908e5c9872be36}{xMessageBufferCreate}}(\ xMessageBufferSizeBytes\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(\ xMessageBuffer\ ==\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ There\ was\ not\ enough\ heap\ memory\ space\ available\ to\ create\ the}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ message\ buffer.}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ The\ message\ buffer\ was\ created\ successfully\ and\ can\ now\ be\ used.}}
+\DoxyCodeLine{\ \}}
+
+\end{DoxyCode}
+ 

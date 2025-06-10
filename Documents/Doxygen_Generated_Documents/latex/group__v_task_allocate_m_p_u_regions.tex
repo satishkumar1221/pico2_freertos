@@ -1,0 +1,49 @@
+\doxysection{v\+Task\+Allocate\+MPURegions }
+\hypertarget{group__v_task_allocate_m_p_u_regions}{}\label{group__v_task_allocate_m_p_u_regions}\index{vTaskAllocateMPURegions@{vTaskAllocateMPURegions}}
+task. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vTaskAllocateMPURegions(\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xTask,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{task_8h_abc1e4d1b3f52e2a9101487e1831b992a}{MemoryRegion\_t}}\ *\ \textcolor{keyword}{const}\ pxRegions\ );}
+
+\end{DoxyCode}
+
+
+Memory regions are assigned to a restricted task when the task is created by a call to x\+Task\+Create\+Restricted(). These regions can be redefined using v\+Task\+Allocate\+MPURegions().
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em x\+Task\+To\+Modify} & The handle of the task being updated.\\
+\hline
+\mbox{\texttt{in}}  & {\em px\+Regions} & A pointer to a \doxylink{task_8h_abc1e4d1b3f52e2a9101487e1831b992a}{Memory\+Region\+\_\+t} structure that contains the new memory region definitions.\\
+\hline
+\end{DoxyParams}
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Define\ an\ array\ of\ MemoryRegion\_t\ structures\ that\ configures\ an\ MPU\ region}}
+\DoxyCodeLine{\textcolor{comment}{//\ allowing\ read/write\ access\ for\ 1024\ bytes\ starting\ at\ the\ beginning\ of\ the}}
+\DoxyCodeLine{\textcolor{comment}{//\ ucOneKByte\ array.\ \ The\ other\ two\ of\ the\ maximum\ 3\ definable\ regions\ are}}
+\DoxyCodeLine{\textcolor{comment}{//\ unused\ so\ set\ to\ zero.}}
+\DoxyCodeLine{\textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{task_8h_abc1e4d1b3f52e2a9101487e1831b992a}{MemoryRegion\_t}}\ xAltRegions[\ \mbox{\hyperlink{portable_8h_aca7e1a8a568a38b74cc9db10c8efebda}{portNUM\_CONFIGURABLE\_REGIONS}}\ ]\ =}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Base\ address\ \ \ \ \ Length\ \ \ \ \ \ Parameters}}
+\DoxyCodeLine{\ \{\ ucOneKByte,\ \ \ \ \ \ \ 1024,\ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a5734e533fa14ffe54fcc68374f85b7f6}{portMPU\_REGION\_READ\_WRITE}}\ \},}
+\DoxyCodeLine{\ \{\ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ 0\ \},}
+\DoxyCodeLine{\ \{\ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ 0\ \}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vATask(\ \textcolor{keywordtype}{void}\ *pvParameters\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ This\ task\ was\ created\ such\ that\ it\ has\ access\ to\ certain\ regions\ of}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ memory\ as\ defined\ by\ the\ MPU\ configuration.\ \ At\ some\ point\ it\ is}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ desired\ that\ these\ MPU\ regions\ are\ replaced\ with\ that\ defined\ in\ the}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ xAltRegions\ const\ struct\ above.\ \ Use\ a\ call\ to\ vTaskAllocateMPURegions()}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ for\ this\ purpose.\ \ NULL\ is\ used\ as\ the\ task\ handle\ to\ indicate\ that\ this}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ function\ should\ modify\ the\ MPU\ regions\ of\ the\ calling\ task.}}
+\DoxyCodeLine{\ vTaskAllocateMPURegions(\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}},\ xAltRegions\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Now\ the\ task\ can\ continue\ its\ function,\ but\ from\ this\ point\ on\ can\ only}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ access\ its\ stack\ and\ the\ ucOneKByte\ array\ (unless\ any\ other\ statically}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ defined\ or\ shared\ regions\ have\ been\ declared\ elsewhere).}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

@@ -1,0 +1,85 @@
+\doxysection{isr\+Tick.\+c}
+\hypertarget{isr_tick_8c_source}{}\label{isr_tick_8c_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/WizC/PIC18/Drivers/Tick/isrTick.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/WizC/PIC18/Drivers/Tick/isrTick.c}}
+\mbox{\hyperlink{isr_tick_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00029}00029\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00030}00030\ \textcolor{comment}{Changes\ from\ V3.0.0}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00031}00031\ \textcolor{comment}{\ \ \ \ +\ ISRcode\ pulled\ inline\ to\ reduce\ stack-\/usage.}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00032}00032\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00033}00033\ \textcolor{comment}{\ \ \ \ +\ Added\ functionality\ to\ only\ call\ vTaskSwitchContext()\ once}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00034}00034\ \textcolor{comment}{\ \ \ \ \ \ when\ handling\ multiple\ interruptsources\ in\ a\ single\ interruptcall.}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00035}00035\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00036}00036\ \textcolor{comment}{\ \ \ \ +\ Filename\ changed\ to\ a\ .c\ extension\ to\ allow\ stepping\ through\ code}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00037}00037\ \textcolor{comment}{\ \ \ \ \ \ using\ F7.}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00038}00038\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00039}00039\ \textcolor{comment}{Changes\ from\ V3.0.1}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00040}00040\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00042}00042\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00043}00043\ \textcolor{comment}{\ *\ ISR\ for\ the\ tick.}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00044}00044\ \textcolor{comment}{\ *\ This\ increments\ the\ tick\ count\ and,\ if\ using\ the\ preemptive\ scheduler,}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00045}00045\ \textcolor{comment}{\ *\ performs\ a\ context\ switch.\ \ This\ must\ be\ identical\ to\ the\ manual}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00046}00046\ \textcolor{comment}{\ *\ context\ switch\ in\ how\ it\ stores\ the\ context\ of\ a\ task.}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00047}00047\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00049}00049\ \textcolor{preprocessor}{\#ifndef\ \_FREERTOS\_DRIVERS\_TICK\_ISRTICK\_C}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00050}\mbox{\hyperlink{isr_tick_8c_ab5ffc7d231e933f6524df71db11a8bb2}{00050}}\ \textcolor{preprocessor}{\#define\ \_FREERTOS\_DRIVERS\_TICK\_ISRTICK\_C}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00052}00052\ \{}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00053}00053\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00054}00054\ \textcolor{comment}{\ \ \ \ \ *\ Was\ the\ interrupt\ the\ SystemClock?}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00055}00055\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00056}00056\ \ \ \ \ \textcolor{keywordflow}{if}(\ bCCP1IF\ \&\&\ bCCP1IE\ )}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00057}00057\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00059}00059\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Reset\ the\ interrupt\ flag}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00060}00060\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00061}00061\ \ \ \ \ \ \ \ \ bCCP1IF\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00064}00064\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Maintain\ the\ tick\ count.}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00065}00065\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{task_8h_a978e25460ac35706f9ad30b46d9403d8}{xTaskIncrementTick}}()\ !=\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}}\ )}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00067}00067\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00069}00069\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ Ask\ for\ a\ switch\ to\ the\ highest\ priority\ task}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00070}00070\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ that\ is\ ready\ to\ run.}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00071}00071\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ uxSwitchRequested\ =\ \mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}};}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00073}00073\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00074}00074\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00075}00075\ \}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00077}00077\ \textcolor{preprocessor}{\#pragma\ wizcpp\ uselib\ \ \ \ \ "{}\$\_\_PATHNAME\_\_/Tick.c"{}}}
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{isr_tick_8c_source_l00079}00079\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{/*\ \_FREERTOS\_DRIVERS\_TICK\_ISRTICK\_C\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

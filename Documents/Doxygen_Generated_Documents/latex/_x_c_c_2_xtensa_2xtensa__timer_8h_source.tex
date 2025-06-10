@@ -1,0 +1,170 @@
+\doxysection{xtensa\+\_\+timer.\+h}
+\hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source}{}\label{_x_c_c_2_xtensa_2xtensa__timer_8h_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/XCC/Xtensa/xtensa\_timer.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/XCC/Xtensa/xtensa\_timer.h}}
+\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__timer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00001}00001\ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2015-\/2019\ Cadence\ Design\ Systems,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00004}00004\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00005}00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00006}00006\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00007}00007\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00008}00008\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00009}00009\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00010}00010\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00011}00011\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00012}00012\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00013}00013\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00014}00014\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00015}00015\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00016}00016\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00017}00017\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00018}00018\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00019}00019\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00020}00020\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00021}00021\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00022}00022\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00023}00023\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00024}00024\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00025}00025\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00026}00026\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00027}00027\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00028}00028\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00030}00030\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00031}00031\ \textcolor{comment}{\ *\ XTENSA\ INFORMATION\ FOR\ RTOS\ TICK\ TIMER\ AND\ CLOCK\ FREQUENCY}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00032}00032\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00033}00033\ \textcolor{comment}{\ *\ This\ header\ contains\ definitions\ and\ macros\ for\ use\ primarily\ by\ Xtensa}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00034}00034\ \textcolor{comment}{\ *\ RTOS\ assembly\ coded\ source\ files.\ It\ includes\ and\ uses\ the\ Xtensa\ hardware}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00035}00035\ \textcolor{comment}{\ *\ abstraction\ layer\ (HAL)\ to\ deal\ with\ config\ specifics.\ It\ may\ also\ be}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00036}00036\ \textcolor{comment}{\ *\ included\ in\ C\ source\ files.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00037}00037\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00038}00038\ \textcolor{comment}{\ *\ Edit\ this\ file\ to\ modify\ timer\ selection\ and\ to\ specify\ clock\ frequency\ and}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00039}00039\ \textcolor{comment}{\ *\ tick\ duration\ to\ match\ timer\ interrupt\ to\ the\ real-\/time\ tick\ duration.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00040}00040\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00041}00041\ \textcolor{comment}{\ *\ If\ the\ RTOS\ has\ no\ timer\ interrupt,\ then\ there\ is\ no\ tick\ timer\ and\ the}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00042}00042\ \textcolor{comment}{\ *\ clock\ frequency\ is\ irrelevant,\ so\ all\ of\ these\ macros\ are\ left\ undefined}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00043}00043\ \textcolor{comment}{\ *\ and\ the\ Xtensa\ core\ configuration\ need\ not\ have\ a\ timer.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00044}00044\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00046}00046\ \textcolor{preprocessor}{\#ifndef\ XTENSA\_TIMER\_H}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00047}00047\ \textcolor{preprocessor}{\#define\ XTENSA\_TIMER\_H}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00049}00049\ \textcolor{preprocessor}{\#ifdef\ \_\_ASSEMBLER\_\_}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00050}00050\ \textcolor{preprocessor}{\#include\ \ \ \ <xtensa/coreasm.h>}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00051}00051\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00053}00053\ \textcolor{preprocessor}{\#include\ \ \ \ <xtensa/corebits.h>}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00054}00054\ \textcolor{preprocessor}{\#include\ \ \ \ <xtensa/config/system.h>}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00056}00056\ \textcolor{preprocessor}{\#include\ \ \ \ "{}\mbox{\hyperlink{_x_c_c_2_xtensa_2xtensa__rtos_8h}{xtensa\_rtos.h}}"{}}\ \ \ \ \ \textcolor{comment}{/*\ in\ case\ this\ wasn't\ included\ directly\ */}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00058}00058\ \textcolor{preprocessor}{\#include\ \ \ \ <FreeRTOSConfig.h>}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00060}00060\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00061}00061\ \textcolor{comment}{Select\ timer\ to\ use\ for\ periodic\ tick,\ and\ determine\ its\ interrupt\ number}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00062}00062\ \textcolor{comment}{and\ priority.\ User\ may\ specify\ a\ timer\ by\ defining\ XT\_TIMER\_INDEX\ with\ -\/D,}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00063}00063\ \textcolor{comment}{in\ which\ case\ its\ validity\ is\ checked\ (it\ must\ exist\ in\ this\ core\ and\ must}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00064}00064\ \textcolor{comment}{not\ be\ on\ a\ high\ priority\ interrupt\ -\/\ an\ error\ will\ be\ reported\ in\ invalid).}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00065}00065\ \textcolor{comment}{Otherwise\ select\ the\ first\ low\ or\ medium\ priority\ interrupt\ timer\ available.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00066}00066\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00067}00067\ \textcolor{preprocessor}{\#if\ XCHAL\_NUM\_TIMERS\ ==\ 0}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00069}00069\ \textcolor{preprocessor}{\ \ \#error\ "{}This\ Xtensa\ configuration\ is\ unsupported,\ it\ has\ no\ timers."{}}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00071}00071\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00073}00073\ \textcolor{preprocessor}{\#ifndef\ XT\_TIMER\_INDEX}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00074}00074\ \textcolor{preprocessor}{\ \ \#if\ XCHAL\_TIMER3\_INTERRUPT\ !=\ XTHAL\_TIMER\_UNCONFIGURED}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00075}00075\ \textcolor{preprocessor}{\ \ \ \ \#if\ XCHAL\_INT\_LEVEL(XCHAL\_TIMER3\_INTERRUPT)\ <=\ XCHAL\_EXCM\_LEVEL}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00076}00076\ \textcolor{preprocessor}{\ \ \ \ \ \ \#undef\ \ XT\_TIMER\_INDEX}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00077}00077\ \textcolor{preprocessor}{\ \ \ \ \ \ \#define\ XT\_TIMER\_INDEX\ \ \ \ 3}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00078}00078\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00079}00079\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00080}00080\ \textcolor{preprocessor}{\ \ \#if\ XCHAL\_TIMER2\_INTERRUPT\ !=\ XTHAL\_TIMER\_UNCONFIGURED}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00081}00081\ \textcolor{preprocessor}{\ \ \ \ \#if\ XCHAL\_INT\_LEVEL(XCHAL\_TIMER2\_INTERRUPT)\ <=\ XCHAL\_EXCM\_LEVEL}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00082}00082\ \textcolor{preprocessor}{\ \ \ \ \ \ \#undef\ \ XT\_TIMER\_INDEX}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00083}00083\ \textcolor{preprocessor}{\ \ \ \ \ \ \#define\ XT\_TIMER\_INDEX\ \ \ \ 2}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00084}00084\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00085}00085\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00086}00086\ \textcolor{preprocessor}{\ \ \#if\ XCHAL\_TIMER1\_INTERRUPT\ !=\ XTHAL\_TIMER\_UNCONFIGURED}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00087}00087\ \textcolor{preprocessor}{\ \ \ \ \#if\ XCHAL\_INT\_LEVEL(XCHAL\_TIMER1\_INTERRUPT)\ <=\ XCHAL\_EXCM\_LEVEL}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00088}00088\ \textcolor{preprocessor}{\ \ \ \ \ \ \#undef\ \ XT\_TIMER\_INDEX}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00089}00089\ \textcolor{preprocessor}{\ \ \ \ \ \ \#define\ XT\_TIMER\_INDEX\ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00090}00090\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00091}00091\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00092}00092\ \textcolor{preprocessor}{\ \ \#if\ XCHAL\_TIMER0\_INTERRUPT\ !=\ XTHAL\_TIMER\_UNCONFIGURED}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00093}00093\ \textcolor{preprocessor}{\ \ \ \ \#if\ XCHAL\_INT\_LEVEL(XCHAL\_TIMER0\_INTERRUPT)\ <=\ XCHAL\_EXCM\_LEVEL}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00094}00094\ \textcolor{preprocessor}{\ \ \ \ \ \ \#undef\ \ XT\_TIMER\_INDEX}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00095}00095\ \textcolor{preprocessor}{\ \ \ \ \ \ \#define\ XT\_TIMER\_INDEX\ \ \ \ 0}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00096}00096\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00097}00097\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00098}00098\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00099}00099\ \textcolor{preprocessor}{\#ifndef\ XT\_TIMER\_INDEX}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00100}00100\ \textcolor{preprocessor}{\ \ \#error\ "{}There\ is\ no\ suitable\ timer\ in\ this\ Xtensa\ configuration."{}}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00101}00101\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00103}00103\ \textcolor{preprocessor}{\#define\ XT\_CCOMPARE\ \ \ \ \ \ \ \ \ \ \ \ \ (CCOMPARE\ +\ XT\_TIMER\_INDEX)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00104}00104\ \textcolor{preprocessor}{\#define\ XT\_TIMER\_INTNUM\ \ \ \ \ \ \ \ \ XCHAL\_TIMER\_INTERRUPT(XT\_TIMER\_INDEX)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00105}00105\ \textcolor{preprocessor}{\#define\ XT\_TIMER\_INTPRI\ \ \ \ \ \ \ \ \ XCHAL\_INT\_LEVEL(XT\_TIMER\_INTNUM)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00106}00106\ \textcolor{preprocessor}{\#define\ XT\_TIMER\_INTEN\ \ \ \ \ \ \ \ \ \ (1\ <<\ XT\_TIMER\_INTNUM)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00108}00108\ \textcolor{preprocessor}{\#if\ XT\_TIMER\_INTNUM\ ==\ XTHAL\_TIMER\_UNCONFIGURED}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00109}00109\ \textcolor{preprocessor}{\ \ \#error\ "{}The\ timer\ selected\ by\ XT\_TIMER\_INDEX\ does\ not\ exist\ in\ this\ core."{}}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00110}00110\ \textcolor{preprocessor}{\#elif\ XT\_TIMER\_INTPRI\ >\ XCHAL\_EXCM\_LEVEL}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00111}00111\ \textcolor{preprocessor}{\ \ \#error\ "{}The\ timer\ interrupt\ cannot\ be\ high\ priority\ (use\ medium\ or\ low)."{}}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00112}00112\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00114}00114\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ XCHAL\_NUM\_TIMERS\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00116}00116\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00117}00117\ \textcolor{comment}{Set\ processor\ clock\ frequency,\ used\ to\ determine\ clock\ divisor\ for\ timer\ tick.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00118}00118\ \textcolor{comment}{User\ should\ BE\ SURE\ TO\ ADJUST\ THIS\ for\ the\ Xtensa\ platform\ being\ used.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00119}00119\ \textcolor{comment}{If\ using\ a\ supported\ board\ via\ the\ board-\/independent\ API\ defined\ in\ xtbsp.h,}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00120}00120\ \textcolor{comment}{this\ may\ be\ left\ undefined\ and\ frequency\ and\ tick\ divisor\ will\ be\ computed}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00121}00121\ \textcolor{comment}{and\ cached\ during\ run-\/time\ initialization.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00122}00122\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00123}00123\ \textcolor{comment}{NOTE\ ON\ SIMULATOR:}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00124}00124\ \textcolor{comment}{Under\ the\ Xtensa\ instruction\ set\ simulator,\ the\ frequency\ can\ only\ be\ estimated}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00125}00125\ \textcolor{comment}{because\ it\ depends\ on\ the\ speed\ of\ the\ host\ and\ the\ version\ of\ the\ simulator.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00126}00126\ \textcolor{comment}{Also\ because\ it\ runs\ much\ slower\ than\ hardware,\ it\ is\ not\ possible\ to\ achieve}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00127}00127\ \textcolor{comment}{real-\/time\ performance\ for\ most\ applications\ under\ the\ simulator.\ A\ frequency}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00128}00128\ \textcolor{comment}{too\ low\ does\ not\ allow\ enough\ time\ between\ timer\ interrupts,\ starving\ threads.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00129}00129\ \textcolor{comment}{To\ obtain\ a\ more\ convenient\ but\ non-\/real-\/time\ tick\ duration\ on\ the\ simulator,}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00130}00130\ \textcolor{comment}{compile\ with\ xt-\/xcc\ option\ "{}-\/DXT\_SIMULATOR"{}.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00131}00131\ \textcolor{comment}{Adjust\ this\ frequency\ to\ taste\ (it's\ not\ real-\/time\ anyway!).}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00132}00132\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00133}00133\ \textcolor{preprocessor}{\#if\ defined(XT\_SIMULATOR)\ \&\&\ !defined(XT\_CLOCK\_FREQ)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00134}00134\ \textcolor{preprocessor}{\#define\ XT\_CLOCK\_FREQ\ \ \ \ \ \ \ configCPU\_CLOCK\_HZ}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00135}00135\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00137}00137\ \textcolor{preprocessor}{\#if\ !defined(XT\_CLOCK\_FREQ)\ \&\&\ !defined(XT\_BOARD)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00138}00138\ \textcolor{preprocessor}{\ \ \#error\ "{}XT\_CLOCK\_FREQ\ must\ be\ defined\ for\ the\ target\ platform."{}}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00139}00139\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00141}00141\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00142}00142\ \textcolor{comment}{Default\ number\ of\ timer\ "{}ticks"{}\ per\ second\ (default\ 100\ for\ 10ms\ tick).}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00143}00143\ \textcolor{comment}{RTOS\ may\ define\ this\ in\ its\ own\ way\ (if\ applicable)\ in\ xtensa\_rtos.h.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00144}00144\ \textcolor{comment}{User\ may\ redefine\ this\ to\ an\ optimal\ value\ for\ the\ application,\ either\ by}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00145}00145\ \textcolor{comment}{editing\ this\ here\ or\ in\ xtensa\_rtos.h,\ or\ compiling\ with\ xt-\/xcc\ option}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00146}00146\ \textcolor{comment}{"{}-\/DXT\_TICK\_PER\_SEC=<value>"{}\ where\ <value>\ is\ a\ suitable\ number.}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00147}00147\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00148}00148\ \textcolor{preprocessor}{\#ifndef\ XT\_TICK\_PER\_SEC}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00149}00149\ \textcolor{preprocessor}{\#define\ XT\_TICK\_PER\_SEC\ \ \ \ configTICK\_RATE\_HZ\ \ \ \ \ \ \ \ }\textcolor{comment}{/*\ 10\ ms\ tick\ =\ 100\ ticks\ per\ second\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00150}00150\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00152}00152\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00153}00153\ \textcolor{comment}{Derivation\ of\ clock\ divisor\ for\ timer\ tick\ and\ interrupt\ (one\ per\ tick).}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00154}00154\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00155}00155\ \textcolor{preprocessor}{\#ifdef\ XT\_CLOCK\_FREQ}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00156}00156\ \textcolor{preprocessor}{\#define\ XT\_TICK\_DIVISOR\ \ \ \ \ (XT\_CLOCK\_FREQ\ /\ XT\_TICK\_PER\_SEC)}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00157}00157\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00159}00159\ \textcolor{preprocessor}{\#ifndef\ \_\_ASSEMBLER\_\_}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00160}00160\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{_g_c_c_2_xtensa___e_s_p32_2include_2xtensa__timer_8h_a29b2b6d585d1c417918c1aac884c30c5}{\_xt\_tick\_divisor}};}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00161}00161\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \ \ \ \ \mbox{\hyperlink{_g_c_c_2_xtensa___e_s_p32_2include_2xtensa__timer_8h_a698fa42e858f9941700aafc5bb68a6c9}{\_xt\_tick\_divisor\_init}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00162}00162\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{_x_c_c_2_xtensa_2xtensa__timer_8h_source_l00164}00164\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{/*\ XTENSA\_TIMER\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

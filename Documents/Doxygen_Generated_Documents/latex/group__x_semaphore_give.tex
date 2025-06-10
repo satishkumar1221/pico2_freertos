@@ -1,0 +1,61 @@
+\doxysection{x\+Semaphore\+Give }
+\hypertarget{group__x_semaphore_give}{}\label{group__x_semaphore_give}\index{xSemaphoreGive@{xSemaphoreGive}}
+semphr. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{semphr_8h_aae55761cabfa9bf85c8f4430f78c0953}{xSemaphoreGive}}(\ \mbox{\hyperlink{semphr_8h_ad88c6df4a04beedeac782918c8a332f5}{SemaphoreHandle\_t}}\ xSemaphore\ );}
+
+\end{DoxyCode}
+
+
+{\itshape Macro} to release a semaphore. The semaphore must have previously been created with a call to x\+Semaphore\+Create\+Binary(), x\+Semaphore\+Create\+Mutex() or x\+Semaphore\+Create\+Counting(). and obtained using s\+Semaphore\+Take().
+
+This macro must not be used from an ISR. See x\+Semaphore\+Give\+From\+ISR () for an alternative which can be used from an ISR.
+
+This macro must also not be used on semaphores created using x\+Semaphore\+Create\+Recursive\+Mutex().
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Semaphore} & A handle to the semaphore being released. This is the handle returned when the semaphore was created.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pd\+TRUE if the semaphore was released. pd\+FALSE if an error occurred. Semaphores are implemented using queues. An error can occur if there is no space on the queue to post a message -\/ indicating that the semaphore was not first obtained correctly.
+\end{DoxyReturn}
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{semphr_8h_ad88c6df4a04beedeac782918c8a332f5}{SemaphoreHandle\_t}}\ xSemaphore\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vATask(\ \textcolor{keywordtype}{void}\ *\ pvParameters\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Create\ the\ semaphore\ to\ guard\ a\ shared\ resource.}}
+\DoxyCodeLine{\ xSemaphore\ =\ vSemaphoreCreateBinary();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{keywordflow}{if}(\ xSemaphore\ !=\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{semphr_8h_aae55761cabfa9bf85c8f4430f78c0953}{xSemaphoreGive}}(\ xSemaphore\ )\ !=\ \mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}}\ )}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ We\ would\ expect\ this\ call\ to\ fail\ because\ we\ cannot\ give}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ a\ semaphore\ without\ first\ "{}taking"{}\ it!}}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Obtain\ the\ semaphore\ -\/\ don't\ block\ if\ the\ semaphore\ is\ not}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ immediately\ available.}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{semphr_8h_af116e436d2a5ae5bd72dbade2b5ea930}{xSemaphoreTake}}(\ xSemaphore,\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ )\ 0\ )\ )}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ We\ now\ have\ the\ semaphore\ and\ can\ access\ the\ shared\ resource.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ...}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ We\ have\ finished\ accessing\ the\ shared\ resource\ so\ can\ free\ the}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ semaphore.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{semphr_8h_aae55761cabfa9bf85c8f4430f78c0953}{xSemaphoreGive}}(\ xSemaphore\ )\ !=\ \mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}}\ )}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ We\ would\ not\ expect\ this\ call\ to\ fail\ because\ we\ must\ have}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ obtained\ the\ semaphore\ to\ get\ here.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

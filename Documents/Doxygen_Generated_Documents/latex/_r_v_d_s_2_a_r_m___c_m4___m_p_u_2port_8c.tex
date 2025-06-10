@@ -1,0 +1,1101 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+RVDS/\+ARM\+\_\+\+CM4\+\_\+\+MPU/port.c File Reference}
+\hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c}{}\label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/RVDS/ARM\_CM4\_MPU/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/RVDS/ARM\_CM4\_MPU/port.c}}
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}task.\+h"{}}\newline
+{\ttfamily \#include "{}mpu\+\_\+syscall\+\_\+numbers.\+h"{}}\newline
+Include dependency graph for port.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ab622d8c674f2a417a666a7ed89109e79}{MPU\+\_\+\+WRAPPERS\+\_\+\+INCLUDED\+\_\+\+FROM\+\_\+\+API\+\_\+\+FILE}}
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ad2c996ff8a48233b2ce55993686049e8}{config\+ALLOW\+\_\+\+UNPRIVILEGED\+\_\+\+CRITICAL\+\_\+\+SECTIONS}}~1
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_adad03b75dbce86018cd8f77724f5f89a}{port\+NVIC\+\_\+\+SYSTICK\+\_\+\+CTRL\+\_\+\+REG}}~( \texorpdfstring{$\ast$}{*}( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000e010 ) )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a6fb185b6f87a37fcb11be7f5f7f74c3c}{port\+NVIC\+\_\+\+SYSTICK\+\_\+\+LOAD\+\_\+\+REG}}~( \texorpdfstring{$\ast$}{*}( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000e014 ) )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a840264c4ada33651c41921488329f127}{port\+NVIC\+\_\+\+SYSTICK\+\_\+\+CURRENT\+\_\+\+VALUE\+\_\+\+REG}}~( \texorpdfstring{$\ast$}{*}( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000e018 ) )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a6baa518b54632b8194ac2dd74f30ab6d}{port\+NVIC\+\_\+\+SHPR3\+\_\+\+REG}}~( \texorpdfstring{$\ast$}{*}( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000ed20 ) )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aea5602c11ead95885f4a8dfb0c2da1b5}{port\+NVIC\+\_\+\+SHPR2\+\_\+\+REG}}~( \texorpdfstring{$\ast$}{*}( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000ed1c ) )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a0d3d0b2d6b418d965a0fe19a1ffb83f1}{port\+NVIC\+\_\+\+SYS\+\_\+\+CTRL\+\_\+\+STATE\+\_\+\+REG}}~( \texorpdfstring{$\ast$}{*}( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000ed24 ) )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_acdef952eb903280dc93852a6533a77ac}{port\+NVIC\+\_\+\+MEM\+\_\+\+FAULT\+\_\+\+ENABLE}}~( 1UL $<$$<$ 16UL )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a6c5290885b276bfcff1a8b11fdbc7922}{port\+CPUID}}~( \texorpdfstring{$\ast$}{*}( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+E000ed00 ) )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a886265a9e68a1d7f89a6e8175ea5afbe}{port\+CORTEX\+\_\+\+M7\+\_\+r0p1\+\_\+\+ID}}~( 0x410\+FC271\+UL )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ac5ff711f46f557286695d23f48ccd8c1}{port\+CORTEX\+\_\+\+M7\+\_\+r0p0\+\_\+\+ID}}~( 0x410\+FC270\+UL )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aeb3b919525b5dbfd78bd5f470a1092f1}{port\+MPU\+\_\+\+TYPE\+\_\+\+REG}}~( \texorpdfstring{$\ast$}{*}( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000ed90 ) )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aac6cdf78e51154baa7431f253cf33bb6}{port\+MPU\+\_\+\+REGION\+\_\+\+BASE\+\_\+\+ADDRESS\+\_\+\+REG}}~( \texorpdfstring{$\ast$}{*}( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000ed9C ) )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a100489cacc1a4c0ddf3f75e285091f38}{port\+MPU\+\_\+\+REGION\+\_\+\+ATTRIBUTE\+\_\+\+REG}}~( \texorpdfstring{$\ast$}{*}( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000ed\+A0 ) )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a9479ccbf12b6a6fac418f477b0a8d8a3}{port\+MPU\+\_\+\+CTRL\+\_\+\+REG}}~( \texorpdfstring{$\ast$}{*}( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000ed94 ) )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a7b72d249500608fc2029c6de80ac5863}{port\+EXPECTED\+\_\+\+MPU\+\_\+\+TYPE\+\_\+\+VALUE}}~( \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_aae77584952457452f06f8ec75cf616d3}{config\+TOTAL\+\_\+\+MPU\+\_\+\+REGIONS}} $<$$<$ 8UL )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a3f406b36c513d575edab59ff2752ed9e}{port\+MPU\+\_\+\+ENABLE}}~( 0x01\+UL )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a40db474ecba1086d93db1b4733584da9}{port\+MPU\+\_\+\+BACKGROUND\+\_\+\+ENABLE}}~( 1UL $<$$<$ 2UL )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ac367710b7ceb5b51f1490bb7b33be31f}{port\+PRIVILEGED\+\_\+\+EXECUTION\+\_\+\+START\+\_\+\+ADDRESS}}~( 0\+UL )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a108ee0d861562b61efb679612f01638b}{port\+MPU\+\_\+\+REGION\+\_\+\+VALID}}~( 0x10\+UL )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a6323908daa39345ab5a7ed0b72619c5c}{port\+MPU\+\_\+\+REGION\+\_\+\+ENABLE}}~( 0x01\+UL )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_af10b52e6c8c44893154ca83c86687756}{port\+PERIPHERALS\+\_\+\+START\+\_\+\+ADDRESS}}~0x40000000\+UL
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a6b32ee18154a22e980f1c4251fc40088}{port\+PERIPHERALS\+\_\+\+END\+\_\+\+ADDRESS}}~0x5\+FFFFFFFUL
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a590d0fe4b2df70ef49aa19708c89e6c2}{port\+NVIC\+\_\+\+SYSTICK\+\_\+\+CLK}}~( 0x00000004\+UL )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_af8c3f4bd42d82e070baf097363a30e3f}{port\+NVIC\+\_\+\+SYSTICK\+\_\+\+INT}}~( 0x00000002\+UL )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_af78a1fa447c6312c9ea7fb8e191afc22}{port\+NVIC\+\_\+\+SYSTICK\+\_\+\+ENABLE}}~( 0x00000001\+UL )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a7695fa51586f81228c89bcf517ec44f3}{port\+MIN\+\_\+\+INTERRUPT\+\_\+\+PRIORITY}}~( 255UL )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a71a0b2492ed73217b5864c1e3ba8c9be}{port\+NVIC\+\_\+\+PENDSV\+\_\+\+PRI}}~( ( ( uint32\+\_\+t ) \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_a7695fa51586f81228c89bcf517ec44f3}{port\+MIN\+\_\+\+INTERRUPT\+\_\+\+PRIORITY}} ) $<$$<$ 16UL )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ae4ddaa528bc05260d1a5a607c8a00d9f}{port\+NVIC\+\_\+\+SYSTICK\+\_\+\+PRI}}~( ( ( uint32\+\_\+t ) \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_a7695fa51586f81228c89bcf517ec44f3}{port\+MIN\+\_\+\+INTERRUPT\+\_\+\+PRIORITY}} ) $<$$<$ 24UL )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a45273dc9a093bf983ce3797ca3a3b58e}{port\+FPCCR}}~( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000ef34\+UL ) /\texorpdfstring{$\ast$}{*} Floating point \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_afc222dc14cdd45ff7e72dec42824f2ac}{context}} \mbox{\hyperlink{_mikro_c_2_a_r_m___c_m4_f_2port_8c_aee72edb18f8d4dc62c005533b45ab473}{control}} register. \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aba967c75b3173a502d99d274da0f6757}{port\+ASPEN\+\_\+\+AND\+\_\+\+LSPEN\+\_\+\+BITS}}~( 0x3\+UL $<$$<$ 30\+UL )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a062d03aca8ae932b4552a2aa19853b44}{port\+INITIAL\+\_\+\+XPSR}}~( 0x01000000\+UL )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a372d1affad9d6424b60dac6c513e97f0}{port\+INITIAL\+\_\+\+EXC\+\_\+\+RETURN}}~( 0xfffffffd\+UL )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a841afcdc52ed68a2d5cc0884ff9a67b0}{port\+INITIAL\+\_\+\+CONTROL\+\_\+\+IF\+\_\+\+UNPRIVILEGED}}~( 0x03 )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a6cc91f3151d1a38897a23ccacefe3388}{port\+INITIAL\+\_\+\+CONTROL\+\_\+\+IF\+\_\+\+PRIVILEGED}}~( 0x02 )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_abc97c324f2bbdd443b7b006427c96294}{port\+SCB\+\_\+\+VTOR\+\_\+\+REG}}~( \texorpdfstring{$\ast$}{*}( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_a7a9bd7cb6e8210c5321973d1e7150ac9}{port\+ISR\+\_\+t}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} ) 0x\+E000\+ED08 ) )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a4822d10f02c6b044e508154ca7522c99}{port\+VECTOR\+\_\+\+INDEX\+\_\+\+SVC}}~( 11 )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a674254871b5c2bfecb77a8fa451fd1c6}{port\+VECTOR\+\_\+\+INDEX\+\_\+\+PENDSV}}~( 14 )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a9bf7ad0c574222fbbf0ad6ac5a387a11}{port\+FIRST\+\_\+\+USER\+\_\+\+INTERRUPT\+\_\+\+NUMBER}}~( 16 )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a72b5f375744da7a3ec890dd573dddc77}{port\+NVIC\+\_\+\+IP\+\_\+\+REGISTERS\+\_\+\+OFFSET\+\_\+16}}~( 0x\+E000\+E3\+F0 )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ad4e191d3886fa6ba91bb7cd11cdc665e}{port\+AIRCR\+\_\+\+REG}}~( \texorpdfstring{$\ast$}{*}( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+E000\+ED0C ) )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a6a8cc3be38f6a681ffcf3a895970853f}{port\+MAX\+\_\+8\+\_\+\+BIT\+\_\+\+VALUE}}~( ( uint8\+\_\+t ) 0xff )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a046cc13f73dad0c8a9cdd0504bc35a88}{port\+TOP\+\_\+\+BIT\+\_\+\+OF\+\_\+\+BYTE}}~( ( uint8\+\_\+t ) 0x80 )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_abbfa60faa2116dee71c1923a4ec3aa4a}{port\+MAX\+\_\+\+PRIGROUP\+\_\+\+BITS}}~( ( uint8\+\_\+t ) 7 )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a3de9530f5de675c37a0195cda9e272d0}{port\+PRIORITY\+\_\+\+GROUP\+\_\+\+MASK}}~( 0x07\+UL $<$$<$ 8UL )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a31e85c2138ccee8dc7a8397f0c5cf44c}{port\+PRIGROUP\+\_\+\+SHIFT}}~( 8UL )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aaf7e4f4d5a665e0930068fecd1cb6779}{port\+PSR\+\_\+\+STACK\+\_\+\+PADDING\+\_\+\+MASK}}~( 1UL $<$$<$ 9UL )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a97d3e0c30816dba4da099b1d41696108}{port\+EXC\+\_\+\+RETURN\+\_\+\+STACK\+\_\+\+FRAME\+\_\+\+TYPE\+\_\+\+MASK}}~( 1UL $<$$<$ 4UL )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a73dfb430c7463c1edd9ad21a962946d7}{port\+OFFSET\+\_\+\+TO\+\_\+\+LR}}~( 5 )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a999f8ac4db72ceef6f6922f385fadbcd}{port\+OFFSET\+\_\+\+TO\+\_\+\+PC}}~( 6 )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ab89a8bea4f105b24e1a8d57fe11737f4}{port\+OFFSET\+\_\+\+TO\+\_\+\+PSR}}~( 7 )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ac4d0dccf5f3a96cf955bd2cf5ff987a2}{port\+START\+\_\+\+ADDRESS\+\_\+\+MASK}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0xfffffffe\+UL )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a896343620cf0f9624e9a221a5f692312}{port\+IS\+\_\+\+ADDRESS\+\_\+\+WITHIN\+\_\+\+RANGE}}(addr,  start,  end)
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ad87f67133e98b3693df63b8d16bf36e6}{port\+IS\+\_\+\+AUTHORIZED}}(access\+Request,  permissions)
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ae18dd907c689d62c6fa18011b0499f7c}{port\+UINT32\+\_\+\+MAX}}~( \texorpdfstring{$\sim$}{\string~}( ( uint32\+\_\+t ) 0 ) )
+\item 
+\#define \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a2a9b0b46310abdc43c0aaf33e70b07a7}{port\+ADD\+\_\+\+UINT32\+\_\+\+WILL\+\_\+\+OVERFLOW}}(\mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_a79f1ee1a890da6b8d5ae0087f0a941b8}{a}},  b)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a7a9bd7cb6e8210c5321973d1e7150ac9}{port\+ISR\+\_\+t}}) (void)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a7f7aa2e0c9a97b05240967849020d7fa}{v\+Setup\+Timer\+Interrupt}} (static void prv\+Setup\+MPU void)
+\item 
+void \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aa0924e56ade716700597b1faa5c9deef}{v\+SVCHandler\+\_\+C}} (uint32\+\_\+t \texorpdfstring{$\ast$}{*}pul\+Param)
+\item 
+\+\_\+\+\_\+asm void \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aec5e737e77ef9d213012435ff56d1cf8}{prv\+Trigger\+Lazy\+Stacking}} (void)
+\item 
+void \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a07679b9235841789393f48e4e5c4740c}{v\+System\+Call\+Enter}} (uint32\+\_\+t \texorpdfstring{$\ast$}{*}pul\+Task\+Stack, uint32\+\_\+t ul\+LR, uint8\+\_\+t uc\+System\+Call\+Number)
+\item 
+\+\_\+\+\_\+asm void \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ae79bc426631661b9b7511b3f9fc17143}{v\+Request\+System\+Call\+Exit}} (void)
+\item 
+void \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aee0f0a83b90bc2b4e5aad7ff6eba0c26}{v\+System\+Call\+Exit}} (uint32\+\_\+t \texorpdfstring{$\ast$}{*}pul\+System\+Call\+Stack, uint32\+\_\+t ul\+LR)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a21335221c26ff106b4f5e87edf6567aa}{x\+Port\+Is\+Task\+Privileged}} (void)
+\begin{DoxyCompactList}\small\item\em Checks whether or not a task is privileged. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+asm void \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ad27c319499e569356fcb13efefd0449e}{v\+Port\+SVCHandler}} (void)
+\item 
+\+\_\+\+\_\+asm void \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ab4dc071b3f9f043b18b40270a8709688}{prv\+Restore\+Context\+Of\+First\+Task}} (void)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{x\+Port\+Start\+Scheduler}} (void)
+\item 
+\+\_\+\+\_\+asm void \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aa62e48aea4d4d2ad3426bd1243dbc72a}{prv\+Start\+First\+Task}} (void)
+\item 
+void \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{v\+Port\+End\+Scheduler}} (void)
+\begin{DoxyCompactList}\small\item\em End the Free\+RTOS scheduler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a2ed3554a3de09a3bd09d396ee081ab69}{v\+Port\+Enter\+Critical}} (void)
+\begin{DoxyCompactList}\small\item\em Enter critical section. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aed20ada05b957181a0de042802a82a5b}{v\+Port\+Exit\+Critical}} (void)
+\begin{DoxyCompactList}\small\item\em Exit critical section. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+asm void \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a42dc4a2098d21136cc9bc98287f683d4}{x\+Port\+Pend\+SVHandler}} (void)
+\item 
+void \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a78100b2d36913d0b45565be8975e5de8}{x\+Port\+Sys\+Tick\+Handler}} (void)
+\item 
+\+\_\+\+\_\+weak void \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a17e747b8558bebde348fdde7267dfd58}{v\+Setup\+Timer\+Interrupt}} (void)
+\item 
+\+\_\+\+\_\+asm void \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a9ff246b1dcf8d5478bfb6f0b88258513}{v\+Port\+Enable\+VFP}} (void)
+\item 
+\+\_\+\+\_\+asm \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a31181458e8d35b3b5d3764eb0b406735}{x\+Is\+Privileged}} (void)
+\begin{DoxyCompactList}\small\item\em Checks whether or not the processor is privileged. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+asm void \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a1100acdf63e88bb9e0ca5e283d278d19}{v\+Reset\+Privilege}} (void)
+\begin{DoxyCompactList}\small\item\em Lowers the privilege level by setting the bit 0 of the CONTROL register. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a1559396bf151310d1c825c5239317a3b}{v\+Port\+Switch\+To\+User\+Mode}} (void)
+\item 
+void \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a911aa5915537b19a087674a0c6d792a2}{v\+Port\+Store\+Task\+MPUSettings}} (\mbox{\hyperlink{structx_m_p_u___s_e_t_t_i_n_g_s}{x\+MPU\+\_\+\+SETTINGS}} \texorpdfstring{$\ast$}{*}x\+MPUSettings, const struct \mbox{\hyperlink{structx_m_e_m_o_r_y___r_e_g_i_o_n}{x\+MEMORY\+\_\+\+REGION}} \texorpdfstring{$\ast$}{*}const x\+Regions, \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}px\+Bottom\+Of\+Stack, \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_ae4e85bffd36d76cf2796092f0ccd784a}{config\+STACK\+\_\+\+DEPTH\+\_\+\+TYPE}} ux\+Stack\+Depth)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ac0ef06e97192d35ffbb89e04a8cef668}{x\+Port\+Is\+Authorized\+To\+Access\+Buffer}} (const void \texorpdfstring{$\ast$}{*}pv\+Buffer, uint32\+\_\+t ul\+Buffer\+Length, uint32\+\_\+t ul\+Access\+Requested)
+\item 
+\+\_\+\+\_\+asm uint32\+\_\+t \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a995b793d848ecc0413a79a36ee879a0d}{prv\+Port\+Get\+IPSR}} (void)
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a687076084d0a903ebb72f9694e118b4e}{x\+Port\+Is\+Authorized\+To\+Access\+Kernel\+Object}} (int32\+\_\+t l\+Internal\+Index\+Of\+Kernel\+Object)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ad2c996ff8a48233b2ce55993686049e8}\index{port.c@{port.c}!configALLOW\_UNPRIVILEGED\_CRITICAL\_SECTIONS@{configALLOW\_UNPRIVILEGED\_CRITICAL\_SECTIONS}}
+\index{configALLOW\_UNPRIVILEGED\_CRITICAL\_SECTIONS@{configALLOW\_UNPRIVILEGED\_CRITICAL\_SECTIONS}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{configALLOW\_UNPRIVILEGED\_CRITICAL\_SECTIONS}{configALLOW\_UNPRIVILEGED\_CRITICAL\_SECTIONS}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ad2c996ff8a48233b2ce55993686049e8} 
+\#define config\+ALLOW\+\_\+\+UNPRIVILEGED\+\_\+\+CRITICAL\+\_\+\+SECTIONS~1}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00051}{51}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ab622d8c674f2a417a666a7ed89109e79}\index{port.c@{port.c}!MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE@{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}}
+\index{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE@{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ab622d8c674f2a417a666a7ed89109e79} 
+\#define MPU\+\_\+\+WRAPPERS\+\_\+\+INCLUDED\+\_\+\+FROM\+\_\+\+API\+\_\+\+FILE}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00036}{36}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a2a9b0b46310abdc43c0aaf33e70b07a7}\index{port.c@{port.c}!portADD\_UINT32\_WILL\_OVERFLOW@{portADD\_UINT32\_WILL\_OVERFLOW}}
+\index{portADD\_UINT32\_WILL\_OVERFLOW@{portADD\_UINT32\_WILL\_OVERFLOW}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portADD\_UINT32\_WILL\_OVERFLOW}{portADD\_UINT32\_WILL\_OVERFLOW}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a2a9b0b46310abdc43c0aaf33e70b07a7} 
+\#define port\+ADD\+\_\+\+UINT32\+\_\+\+WILL\+\_\+\+OVERFLOW(\begin{DoxyParamCaption}\item[{}]{\mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_a79f1ee1a890da6b8d5ae0087f0a941b8}{a}}}{, }\item[{}]{b}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\ (\ \mbox{\hyperlink{_c_c_s_2_m_s_p430_x_2data__model_8h_a79f1ee1a890da6b8d5ae0087f0a941b8}{a}}\ )\ >\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_ae18dd907c689d62c6fa18011b0499f7c}{portUINT32\_MAX}}\ -\/\ (\ b\ )\ )\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00144}{144}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ad4e191d3886fa6ba91bb7cd11cdc665e}\index{port.c@{port.c}!portAIRCR\_REG@{portAIRCR\_REG}}
+\index{portAIRCR\_REG@{portAIRCR\_REG}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portAIRCR\_REG}{portAIRCR\_REG}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ad4e191d3886fa6ba91bb7cd11cdc665e} 
+\#define port\+AIRCR\+\_\+\+REG~( \texorpdfstring{$\ast$}{*}( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+E000\+ED0C ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00112}{112}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aba967c75b3173a502d99d274da0f6757}\index{port.c@{port.c}!portASPEN\_AND\_LSPEN\_BITS@{portASPEN\_AND\_LSPEN\_BITS}}
+\index{portASPEN\_AND\_LSPEN\_BITS@{portASPEN\_AND\_LSPEN\_BITS}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portASPEN\_AND\_LSPEN\_BITS}{portASPEN\_AND\_LSPEN\_BITS}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aba967c75b3173a502d99d274da0f6757} 
+\#define port\+ASPEN\+\_\+\+AND\+\_\+\+LSPEN\+\_\+\+BITS~( 0x3\+UL $<$$<$ 30\+UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00096}{96}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ac5ff711f46f557286695d23f48ccd8c1}\index{port.c@{port.c}!portCORTEX\_M7\_r0p0\_ID@{portCORTEX\_M7\_r0p0\_ID}}
+\index{portCORTEX\_M7\_r0p0\_ID@{portCORTEX\_M7\_r0p0\_ID}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portCORTEX\_M7\_r0p0\_ID}{portCORTEX\_M7\_r0p0\_ID}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ac5ff711f46f557286695d23f48ccd8c1} 
+\#define port\+CORTEX\+\_\+\+M7\+\_\+r0p0\+\_\+\+ID~( 0x410\+FC270\+UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00070}{70}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a886265a9e68a1d7f89a6e8175ea5afbe}\index{port.c@{port.c}!portCORTEX\_M7\_r0p1\_ID@{portCORTEX\_M7\_r0p1\_ID}}
+\index{portCORTEX\_M7\_r0p1\_ID@{portCORTEX\_M7\_r0p1\_ID}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portCORTEX\_M7\_r0p1\_ID}{portCORTEX\_M7\_r0p1\_ID}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a886265a9e68a1d7f89a6e8175ea5afbe} 
+\#define port\+CORTEX\+\_\+\+M7\+\_\+r0p1\+\_\+\+ID~( 0x410\+FC271\+UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00069}{69}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a6c5290885b276bfcff1a8b11fdbc7922}\index{port.c@{port.c}!portCPUID@{portCPUID}}
+\index{portCPUID@{portCPUID}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portCPUID}{portCPUID}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a6c5290885b276bfcff1a8b11fdbc7922} 
+\#define port\+CPUID~( \texorpdfstring{$\ast$}{*}( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0x\+E000ed00 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00068}{68}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a97d3e0c30816dba4da099b1d41696108}\index{port.c@{port.c}!portEXC\_RETURN\_STACK\_FRAME\_TYPE\_MASK@{portEXC\_RETURN\_STACK\_FRAME\_TYPE\_MASK}}
+\index{portEXC\_RETURN\_STACK\_FRAME\_TYPE\_MASK@{portEXC\_RETURN\_STACK\_FRAME\_TYPE\_MASK}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portEXC\_RETURN\_STACK\_FRAME\_TYPE\_MASK}{portEXC\_RETURN\_STACK\_FRAME\_TYPE\_MASK}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a97d3e0c30816dba4da099b1d41696108} 
+\#define port\+EXC\+\_\+\+RETURN\+\_\+\+STACK\+\_\+\+FRAME\+\_\+\+TYPE\+\_\+\+MASK~( 1UL $<$$<$ 4UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00121}{121}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a7b72d249500608fc2029c6de80ac5863}\index{port.c@{port.c}!portEXPECTED\_MPU\_TYPE\_VALUE@{portEXPECTED\_MPU\_TYPE\_VALUE}}
+\index{portEXPECTED\_MPU\_TYPE\_VALUE@{portEXPECTED\_MPU\_TYPE\_VALUE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portEXPECTED\_MPU\_TYPE\_VALUE}{portEXPECTED\_MPU\_TYPE\_VALUE}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a7b72d249500608fc2029c6de80ac5863} 
+\#define port\+EXPECTED\+\_\+\+MPU\+\_\+\+TYPE\+\_\+\+VALUE~( \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2template__configuration_2_free_r_t_o_s_config_8h_aae77584952457452f06f8ec75cf616d3}{config\+TOTAL\+\_\+\+MPU\+\_\+\+REGIONS}} $<$$<$ 8UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00077}{77}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a9bf7ad0c574222fbbf0ad6ac5a387a11}\index{port.c@{port.c}!portFIRST\_USER\_INTERRUPT\_NUMBER@{portFIRST\_USER\_INTERRUPT\_NUMBER}}
+\index{portFIRST\_USER\_INTERRUPT\_NUMBER@{portFIRST\_USER\_INTERRUPT\_NUMBER}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portFIRST\_USER\_INTERRUPT\_NUMBER}{portFIRST\_USER\_INTERRUPT\_NUMBER}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a9bf7ad0c574222fbbf0ad6ac5a387a11} 
+\#define port\+FIRST\+\_\+\+USER\+\_\+\+INTERRUPT\+\_\+\+NUMBER~( 16 )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00110}{110}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a45273dc9a093bf983ce3797ca3a3b58e}\index{port.c@{port.c}!portFPCCR@{portFPCCR}}
+\index{portFPCCR@{portFPCCR}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portFPCCR}{portFPCCR}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a45273dc9a093bf983ce3797ca3a3b58e} 
+\#define port\+FPCCR~( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000ef34\+UL ) /\texorpdfstring{$\ast$}{*} Floating point \mbox{\hyperlink{_i_a_r_2_a_r_m___c_a5___no___g_i_c_2portasm_8h_afc222dc14cdd45ff7e72dec42824f2ac}{context}} \mbox{\hyperlink{_mikro_c_2_a_r_m___c_m4_f_2port_8c_aee72edb18f8d4dc62c005533b45ab473}{control}} register. \texorpdfstring{$\ast$}{*}/}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00095}{95}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a6cc91f3151d1a38897a23ccacefe3388}\index{port.c@{port.c}!portINITIAL\_CONTROL\_IF\_PRIVILEGED@{portINITIAL\_CONTROL\_IF\_PRIVILEGED}}
+\index{portINITIAL\_CONTROL\_IF\_PRIVILEGED@{portINITIAL\_CONTROL\_IF\_PRIVILEGED}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portINITIAL\_CONTROL\_IF\_PRIVILEGED}{portINITIAL\_CONTROL\_IF\_PRIVILEGED}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a6cc91f3151d1a38897a23ccacefe3388} 
+\#define port\+INITIAL\+\_\+\+CONTROL\+\_\+\+IF\+\_\+\+PRIVILEGED~( 0x02 )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00102}{102}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a841afcdc52ed68a2d5cc0884ff9a67b0}\index{port.c@{port.c}!portINITIAL\_CONTROL\_IF\_UNPRIVILEGED@{portINITIAL\_CONTROL\_IF\_UNPRIVILEGED}}
+\index{portINITIAL\_CONTROL\_IF\_UNPRIVILEGED@{portINITIAL\_CONTROL\_IF\_UNPRIVILEGED}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portINITIAL\_CONTROL\_IF\_UNPRIVILEGED}{portINITIAL\_CONTROL\_IF\_UNPRIVILEGED}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a841afcdc52ed68a2d5cc0884ff9a67b0} 
+\#define port\+INITIAL\+\_\+\+CONTROL\+\_\+\+IF\+\_\+\+UNPRIVILEGED~( 0x03 )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00101}{101}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a372d1affad9d6424b60dac6c513e97f0}\index{port.c@{port.c}!portINITIAL\_EXC\_RETURN@{portINITIAL\_EXC\_RETURN}}
+\index{portINITIAL\_EXC\_RETURN@{portINITIAL\_EXC\_RETURN}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portINITIAL\_EXC\_RETURN}{portINITIAL\_EXC\_RETURN}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a372d1affad9d6424b60dac6c513e97f0} 
+\#define port\+INITIAL\+\_\+\+EXC\+\_\+\+RETURN~( 0xfffffffd\+UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00100}{100}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a062d03aca8ae932b4552a2aa19853b44}\index{port.c@{port.c}!portINITIAL\_XPSR@{portINITIAL\_XPSR}}
+\index{portINITIAL\_XPSR@{portINITIAL\_XPSR}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portINITIAL\_XPSR}{portINITIAL\_XPSR}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a062d03aca8ae932b4552a2aa19853b44} 
+\#define port\+INITIAL\+\_\+\+XPSR~( 0x01000000\+UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00099}{99}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a896343620cf0f9624e9a221a5f692312}\index{port.c@{port.c}!portIS\_ADDRESS\_WITHIN\_RANGE@{portIS\_ADDRESS\_WITHIN\_RANGE}}
+\index{portIS\_ADDRESS\_WITHIN\_RANGE@{portIS\_ADDRESS\_WITHIN\_RANGE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portIS\_ADDRESS\_WITHIN\_RANGE}{portIS\_ADDRESS\_WITHIN\_RANGE}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a896343620cf0f9624e9a221a5f692312} 
+\#define port\+IS\+\_\+\+ADDRESS\+\_\+\+WITHIN\+\_\+\+RANGE(\begin{DoxyParamCaption}\item[{}]{addr}{, }\item[{}]{start}{, }\item[{}]{end}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ (\ (\ (\ addr\ )\ >=\ (\ start\ )\ )\ \&\&\ (\ (\ addr\ )\ <=\ (\ end\ )\ )\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00133}{133}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ad87f67133e98b3693df63b8d16bf36e6}\index{port.c@{port.c}!portIS\_AUTHORIZED@{portIS\_AUTHORIZED}}
+\index{portIS\_AUTHORIZED@{portIS\_AUTHORIZED}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portIS\_AUTHORIZED}{portIS\_AUTHORIZED}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ad87f67133e98b3693df63b8d16bf36e6} 
+\#define port\+IS\+\_\+\+AUTHORIZED(\begin{DoxyParamCaption}\item[{}]{access\+Request}{, }\item[{}]{permissions}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ (\ (\ (\ permissions\ )\ \&\ (\ accessRequest\ )\ )\ ==\ accessRequest\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00137}{137}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a6a8cc3be38f6a681ffcf3a895970853f}\index{port.c@{port.c}!portMAX\_8\_BIT\_VALUE@{portMAX\_8\_BIT\_VALUE}}
+\index{portMAX\_8\_BIT\_VALUE@{portMAX\_8\_BIT\_VALUE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portMAX\_8\_BIT\_VALUE}{portMAX\_8\_BIT\_VALUE}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a6a8cc3be38f6a681ffcf3a895970853f} 
+\#define port\+MAX\+\_\+8\+\_\+\+BIT\+\_\+\+VALUE~( ( uint8\+\_\+t ) 0xff )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00113}{113}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_abbfa60faa2116dee71c1923a4ec3aa4a}\index{port.c@{port.c}!portMAX\_PRIGROUP\_BITS@{portMAX\_PRIGROUP\_BITS}}
+\index{portMAX\_PRIGROUP\_BITS@{portMAX\_PRIGROUP\_BITS}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portMAX\_PRIGROUP\_BITS}{portMAX\_PRIGROUP\_BITS}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_abbfa60faa2116dee71c1923a4ec3aa4a} 
+\#define port\+MAX\+\_\+\+PRIGROUP\+\_\+\+BITS~( ( uint8\+\_\+t ) 7 )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00115}{115}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a7695fa51586f81228c89bcf517ec44f3}\index{port.c@{port.c}!portMIN\_INTERRUPT\_PRIORITY@{portMIN\_INTERRUPT\_PRIORITY}}
+\index{portMIN\_INTERRUPT\_PRIORITY@{portMIN\_INTERRUPT\_PRIORITY}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portMIN\_INTERRUPT\_PRIORITY}{portMIN\_INTERRUPT\_PRIORITY}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a7695fa51586f81228c89bcf517ec44f3} 
+\#define port\+MIN\+\_\+\+INTERRUPT\+\_\+\+PRIORITY~( 255UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00090}{90}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a40db474ecba1086d93db1b4733584da9}\index{port.c@{port.c}!portMPU\_BACKGROUND\_ENABLE@{portMPU\_BACKGROUND\_ENABLE}}
+\index{portMPU\_BACKGROUND\_ENABLE@{portMPU\_BACKGROUND\_ENABLE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portMPU\_BACKGROUND\_ENABLE}{portMPU\_BACKGROUND\_ENABLE}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a40db474ecba1086d93db1b4733584da9} 
+\#define port\+MPU\+\_\+\+BACKGROUND\+\_\+\+ENABLE~( 1UL $<$$<$ 2UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00079}{79}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a9479ccbf12b6a6fac418f477b0a8d8a3}\index{port.c@{port.c}!portMPU\_CTRL\_REG@{portMPU\_CTRL\_REG}}
+\index{portMPU\_CTRL\_REG@{portMPU\_CTRL\_REG}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portMPU\_CTRL\_REG}{portMPU\_CTRL\_REG}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a9479ccbf12b6a6fac418f477b0a8d8a3} 
+\#define port\+MPU\+\_\+\+CTRL\+\_\+\+REG~( \texorpdfstring{$\ast$}{*}( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000ed94 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00076}{76}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a3f406b36c513d575edab59ff2752ed9e}\index{port.c@{port.c}!portMPU\_ENABLE@{portMPU\_ENABLE}}
+\index{portMPU\_ENABLE@{portMPU\_ENABLE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portMPU\_ENABLE}{portMPU\_ENABLE}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a3f406b36c513d575edab59ff2752ed9e} 
+\#define port\+MPU\+\_\+\+ENABLE~( 0x01\+UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00078}{78}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a100489cacc1a4c0ddf3f75e285091f38}\index{port.c@{port.c}!portMPU\_REGION\_ATTRIBUTE\_REG@{portMPU\_REGION\_ATTRIBUTE\_REG}}
+\index{portMPU\_REGION\_ATTRIBUTE\_REG@{portMPU\_REGION\_ATTRIBUTE\_REG}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_ATTRIBUTE\_REG}{portMPU\_REGION\_ATTRIBUTE\_REG}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a100489cacc1a4c0ddf3f75e285091f38} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+ATTRIBUTE\+\_\+\+REG~( \texorpdfstring{$\ast$}{*}( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000ed\+A0 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00075}{75}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aac6cdf78e51154baa7431f253cf33bb6}\index{port.c@{port.c}!portMPU\_REGION\_BASE\_ADDRESS\_REG@{portMPU\_REGION\_BASE\_ADDRESS\_REG}}
+\index{portMPU\_REGION\_BASE\_ADDRESS\_REG@{portMPU\_REGION\_BASE\_ADDRESS\_REG}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_BASE\_ADDRESS\_REG}{portMPU\_REGION\_BASE\_ADDRESS\_REG}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aac6cdf78e51154baa7431f253cf33bb6} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+BASE\+\_\+\+ADDRESS\+\_\+\+REG~( \texorpdfstring{$\ast$}{*}( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000ed9C ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00074}{74}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a6323908daa39345ab5a7ed0b72619c5c}\index{port.c@{port.c}!portMPU\_REGION\_ENABLE@{portMPU\_REGION\_ENABLE}}
+\index{portMPU\_REGION\_ENABLE@{portMPU\_REGION\_ENABLE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_ENABLE}{portMPU\_REGION\_ENABLE}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a6323908daa39345ab5a7ed0b72619c5c} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+ENABLE~( 0x01\+UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00082}{82}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a108ee0d861562b61efb679612f01638b}\index{port.c@{port.c}!portMPU\_REGION\_VALID@{portMPU\_REGION\_VALID}}
+\index{portMPU\_REGION\_VALID@{portMPU\_REGION\_VALID}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portMPU\_REGION\_VALID}{portMPU\_REGION\_VALID}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a108ee0d861562b61efb679612f01638b} 
+\#define port\+MPU\+\_\+\+REGION\+\_\+\+VALID~( 0x10\+UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00081}{81}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aeb3b919525b5dbfd78bd5f470a1092f1}\index{port.c@{port.c}!portMPU\_TYPE\_REG@{portMPU\_TYPE\_REG}}
+\index{portMPU\_TYPE\_REG@{portMPU\_TYPE\_REG}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portMPU\_TYPE\_REG}{portMPU\_TYPE\_REG}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aeb3b919525b5dbfd78bd5f470a1092f1} 
+\#define port\+MPU\+\_\+\+TYPE\+\_\+\+REG~( \texorpdfstring{$\ast$}{*}( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000ed90 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00073}{73}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a72b5f375744da7a3ec890dd573dddc77}\index{port.c@{port.c}!portNVIC\_IP\_REGISTERS\_OFFSET\_16@{portNVIC\_IP\_REGISTERS\_OFFSET\_16}}
+\index{portNVIC\_IP\_REGISTERS\_OFFSET\_16@{portNVIC\_IP\_REGISTERS\_OFFSET\_16}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portNVIC\_IP\_REGISTERS\_OFFSET\_16}{portNVIC\_IP\_REGISTERS\_OFFSET\_16}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a72b5f375744da7a3ec890dd573dddc77} 
+\#define port\+NVIC\+\_\+\+IP\+\_\+\+REGISTERS\+\_\+\+OFFSET\+\_\+16~( 0x\+E000\+E3\+F0 )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00111}{111}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_acdef952eb903280dc93852a6533a77ac}\index{port.c@{port.c}!portNVIC\_MEM\_FAULT\_ENABLE@{portNVIC\_MEM\_FAULT\_ENABLE}}
+\index{portNVIC\_MEM\_FAULT\_ENABLE@{portNVIC\_MEM\_FAULT\_ENABLE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portNVIC\_MEM\_FAULT\_ENABLE}{portNVIC\_MEM\_FAULT\_ENABLE}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_acdef952eb903280dc93852a6533a77ac} 
+\#define port\+NVIC\+\_\+\+MEM\+\_\+\+FAULT\+\_\+\+ENABLE~( 1UL $<$$<$ 16UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00064}{64}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a71a0b2492ed73217b5864c1e3ba8c9be}\index{port.c@{port.c}!portNVIC\_PENDSV\_PRI@{portNVIC\_PENDSV\_PRI}}
+\index{portNVIC\_PENDSV\_PRI@{portNVIC\_PENDSV\_PRI}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portNVIC\_PENDSV\_PRI}{portNVIC\_PENDSV\_PRI}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a71a0b2492ed73217b5864c1e3ba8c9be} 
+\#define port\+NVIC\+\_\+\+PENDSV\+\_\+\+PRI~( ( ( uint32\+\_\+t ) \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_a7695fa51586f81228c89bcf517ec44f3}{port\+MIN\+\_\+\+INTERRUPT\+\_\+\+PRIORITY}} ) $<$$<$ 16UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00091}{91}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aea5602c11ead95885f4a8dfb0c2da1b5}\index{port.c@{port.c}!portNVIC\_SHPR2\_REG@{portNVIC\_SHPR2\_REG}}
+\index{portNVIC\_SHPR2\_REG@{portNVIC\_SHPR2\_REG}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portNVIC\_SHPR2\_REG}{portNVIC\_SHPR2\_REG}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aea5602c11ead95885f4a8dfb0c2da1b5} 
+\#define port\+NVIC\+\_\+\+SHPR2\+\_\+\+REG~( \texorpdfstring{$\ast$}{*}( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000ed1c ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00062}{62}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a6baa518b54632b8194ac2dd74f30ab6d}\index{port.c@{port.c}!portNVIC\_SHPR3\_REG@{portNVIC\_SHPR3\_REG}}
+\index{portNVIC\_SHPR3\_REG@{portNVIC\_SHPR3\_REG}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portNVIC\_SHPR3\_REG}{portNVIC\_SHPR3\_REG}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a6baa518b54632b8194ac2dd74f30ab6d} 
+\#define port\+NVIC\+\_\+\+SHPR3\+\_\+\+REG~( \texorpdfstring{$\ast$}{*}( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000ed20 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00061}{61}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a0d3d0b2d6b418d965a0fe19a1ffb83f1}\index{port.c@{port.c}!portNVIC\_SYS\_CTRL\_STATE\_REG@{portNVIC\_SYS\_CTRL\_STATE\_REG}}
+\index{portNVIC\_SYS\_CTRL\_STATE\_REG@{portNVIC\_SYS\_CTRL\_STATE\_REG}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portNVIC\_SYS\_CTRL\_STATE\_REG}{portNVIC\_SYS\_CTRL\_STATE\_REG}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a0d3d0b2d6b418d965a0fe19a1ffb83f1} 
+\#define port\+NVIC\+\_\+\+SYS\+\_\+\+CTRL\+\_\+\+STATE\+\_\+\+REG~( \texorpdfstring{$\ast$}{*}( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000ed24 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00063}{63}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a590d0fe4b2df70ef49aa19708c89e6c2}\index{port.c@{port.c}!portNVIC\_SYSTICK\_CLK@{portNVIC\_SYSTICK\_CLK}}
+\index{portNVIC\_SYSTICK\_CLK@{portNVIC\_SYSTICK\_CLK}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portNVIC\_SYSTICK\_CLK}{portNVIC\_SYSTICK\_CLK}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a590d0fe4b2df70ef49aa19708c89e6c2} 
+\#define port\+NVIC\+\_\+\+SYSTICK\+\_\+\+CLK~( 0x00000004\+UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00087}{87}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_adad03b75dbce86018cd8f77724f5f89a}\index{port.c@{port.c}!portNVIC\_SYSTICK\_CTRL\_REG@{portNVIC\_SYSTICK\_CTRL\_REG}}
+\index{portNVIC\_SYSTICK\_CTRL\_REG@{portNVIC\_SYSTICK\_CTRL\_REG}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portNVIC\_SYSTICK\_CTRL\_REG}{portNVIC\_SYSTICK\_CTRL\_REG}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_adad03b75dbce86018cd8f77724f5f89a} 
+\#define port\+NVIC\+\_\+\+SYSTICK\+\_\+\+CTRL\+\_\+\+REG~( \texorpdfstring{$\ast$}{*}( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000e010 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00058}{58}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a840264c4ada33651c41921488329f127}\index{port.c@{port.c}!portNVIC\_SYSTICK\_CURRENT\_VALUE\_REG@{portNVIC\_SYSTICK\_CURRENT\_VALUE\_REG}}
+\index{portNVIC\_SYSTICK\_CURRENT\_VALUE\_REG@{portNVIC\_SYSTICK\_CURRENT\_VALUE\_REG}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portNVIC\_SYSTICK\_CURRENT\_VALUE\_REG}{portNVIC\_SYSTICK\_CURRENT\_VALUE\_REG}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a840264c4ada33651c41921488329f127} 
+\#define port\+NVIC\+\_\+\+SYSTICK\+\_\+\+CURRENT\+\_\+\+VALUE\+\_\+\+REG~( \texorpdfstring{$\ast$}{*}( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000e018 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00060}{60}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_af78a1fa447c6312c9ea7fb8e191afc22}\index{port.c@{port.c}!portNVIC\_SYSTICK\_ENABLE@{portNVIC\_SYSTICK\_ENABLE}}
+\index{portNVIC\_SYSTICK\_ENABLE@{portNVIC\_SYSTICK\_ENABLE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portNVIC\_SYSTICK\_ENABLE}{portNVIC\_SYSTICK\_ENABLE}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_af78a1fa447c6312c9ea7fb8e191afc22} 
+\#define port\+NVIC\+\_\+\+SYSTICK\+\_\+\+ENABLE~( 0x00000001\+UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00089}{89}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_af8c3f4bd42d82e070baf097363a30e3f}\index{port.c@{port.c}!portNVIC\_SYSTICK\_INT@{portNVIC\_SYSTICK\_INT}}
+\index{portNVIC\_SYSTICK\_INT@{portNVIC\_SYSTICK\_INT}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portNVIC\_SYSTICK\_INT}{portNVIC\_SYSTICK\_INT}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_af8c3f4bd42d82e070baf097363a30e3f} 
+\#define port\+NVIC\+\_\+\+SYSTICK\+\_\+\+INT~( 0x00000002\+UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00088}{88}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a6fb185b6f87a37fcb11be7f5f7f74c3c}\index{port.c@{port.c}!portNVIC\_SYSTICK\_LOAD\_REG@{portNVIC\_SYSTICK\_LOAD\_REG}}
+\index{portNVIC\_SYSTICK\_LOAD\_REG@{portNVIC\_SYSTICK\_LOAD\_REG}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portNVIC\_SYSTICK\_LOAD\_REG}{portNVIC\_SYSTICK\_LOAD\_REG}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a6fb185b6f87a37fcb11be7f5f7f74c3c} 
+\#define port\+NVIC\+\_\+\+SYSTICK\+\_\+\+LOAD\+\_\+\+REG~( \texorpdfstring{$\ast$}{*}( ( volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} ) 0xe000e014 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00059}{59}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ae4ddaa528bc05260d1a5a607c8a00d9f}\index{port.c@{port.c}!portNVIC\_SYSTICK\_PRI@{portNVIC\_SYSTICK\_PRI}}
+\index{portNVIC\_SYSTICK\_PRI@{portNVIC\_SYSTICK\_PRI}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portNVIC\_SYSTICK\_PRI}{portNVIC\_SYSTICK\_PRI}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ae4ddaa528bc05260d1a5a607c8a00d9f} 
+\#define port\+NVIC\+\_\+\+SYSTICK\+\_\+\+PRI~( ( ( uint32\+\_\+t ) \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_a7695fa51586f81228c89bcf517ec44f3}{port\+MIN\+\_\+\+INTERRUPT\+\_\+\+PRIORITY}} ) $<$$<$ 24UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00092}{92}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a73dfb430c7463c1edd9ad21a962946d7}\index{port.c@{port.c}!portOFFSET\_TO\_LR@{portOFFSET\_TO\_LR}}
+\index{portOFFSET\_TO\_LR@{portOFFSET\_TO\_LR}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portOFFSET\_TO\_LR}{portOFFSET\_TO\_LR}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a73dfb430c7463c1edd9ad21a962946d7} 
+\#define port\+OFFSET\+\_\+\+TO\+\_\+\+LR~( 5 )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00124}{124}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a999f8ac4db72ceef6f6922f385fadbcd}\index{port.c@{port.c}!portOFFSET\_TO\_PC@{portOFFSET\_TO\_PC}}
+\index{portOFFSET\_TO\_PC@{portOFFSET\_TO\_PC}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portOFFSET\_TO\_PC}{portOFFSET\_TO\_PC}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a999f8ac4db72ceef6f6922f385fadbcd} 
+\#define port\+OFFSET\+\_\+\+TO\+\_\+\+PC~( 6 )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00125}{125}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ab89a8bea4f105b24e1a8d57fe11737f4}\index{port.c@{port.c}!portOFFSET\_TO\_PSR@{portOFFSET\_TO\_PSR}}
+\index{portOFFSET\_TO\_PSR@{portOFFSET\_TO\_PSR}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portOFFSET\_TO\_PSR}{portOFFSET\_TO\_PSR}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ab89a8bea4f105b24e1a8d57fe11737f4} 
+\#define port\+OFFSET\+\_\+\+TO\+\_\+\+PSR~( 7 )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00126}{126}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a6b32ee18154a22e980f1c4251fc40088}\index{port.c@{port.c}!portPERIPHERALS\_END\_ADDRESS@{portPERIPHERALS\_END\_ADDRESS}}
+\index{portPERIPHERALS\_END\_ADDRESS@{portPERIPHERALS\_END\_ADDRESS}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portPERIPHERALS\_END\_ADDRESS}{portPERIPHERALS\_END\_ADDRESS}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a6b32ee18154a22e980f1c4251fc40088} 
+\#define port\+PERIPHERALS\+\_\+\+END\+\_\+\+ADDRESS~0x5\+FFFFFFFUL}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00084}{84}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_af10b52e6c8c44893154ca83c86687756}\index{port.c@{port.c}!portPERIPHERALS\_START\_ADDRESS@{portPERIPHERALS\_START\_ADDRESS}}
+\index{portPERIPHERALS\_START\_ADDRESS@{portPERIPHERALS\_START\_ADDRESS}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portPERIPHERALS\_START\_ADDRESS}{portPERIPHERALS\_START\_ADDRESS}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_af10b52e6c8c44893154ca83c86687756} 
+\#define port\+PERIPHERALS\+\_\+\+START\+\_\+\+ADDRESS~0x40000000\+UL}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00083}{83}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a31e85c2138ccee8dc7a8397f0c5cf44c}\index{port.c@{port.c}!portPRIGROUP\_SHIFT@{portPRIGROUP\_SHIFT}}
+\index{portPRIGROUP\_SHIFT@{portPRIGROUP\_SHIFT}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portPRIGROUP\_SHIFT}{portPRIGROUP\_SHIFT}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a31e85c2138ccee8dc7a8397f0c5cf44c} 
+\#define port\+PRIGROUP\+\_\+\+SHIFT~( 8UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00117}{117}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a3de9530f5de675c37a0195cda9e272d0}\index{port.c@{port.c}!portPRIORITY\_GROUP\_MASK@{portPRIORITY\_GROUP\_MASK}}
+\index{portPRIORITY\_GROUP\_MASK@{portPRIORITY\_GROUP\_MASK}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portPRIORITY\_GROUP\_MASK}{portPRIORITY\_GROUP\_MASK}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a3de9530f5de675c37a0195cda9e272d0} 
+\#define port\+PRIORITY\+\_\+\+GROUP\+\_\+\+MASK~( 0x07\+UL $<$$<$ 8UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00116}{116}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ac367710b7ceb5b51f1490bb7b33be31f}\index{port.c@{port.c}!portPRIVILEGED\_EXECUTION\_START\_ADDRESS@{portPRIVILEGED\_EXECUTION\_START\_ADDRESS}}
+\index{portPRIVILEGED\_EXECUTION\_START\_ADDRESS@{portPRIVILEGED\_EXECUTION\_START\_ADDRESS}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portPRIVILEGED\_EXECUTION\_START\_ADDRESS}{portPRIVILEGED\_EXECUTION\_START\_ADDRESS}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ac367710b7ceb5b51f1490bb7b33be31f} 
+\#define port\+PRIVILEGED\+\_\+\+EXECUTION\+\_\+\+START\+\_\+\+ADDRESS~( 0\+UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00080}{80}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aaf7e4f4d5a665e0930068fecd1cb6779}\index{port.c@{port.c}!portPSR\_STACK\_PADDING\_MASK@{portPSR\_STACK\_PADDING\_MASK}}
+\index{portPSR\_STACK\_PADDING\_MASK@{portPSR\_STACK\_PADDING\_MASK}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portPSR\_STACK\_PADDING\_MASK}{portPSR\_STACK\_PADDING\_MASK}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aaf7e4f4d5a665e0930068fecd1cb6779} 
+\#define port\+PSR\+\_\+\+STACK\+\_\+\+PADDING\+\_\+\+MASK~( 1UL $<$$<$ 9UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00120}{120}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_abc97c324f2bbdd443b7b006427c96294}\index{port.c@{port.c}!portSCB\_VTOR\_REG@{portSCB\_VTOR\_REG}}
+\index{portSCB\_VTOR\_REG@{portSCB\_VTOR\_REG}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portSCB\_VTOR\_REG}{portSCB\_VTOR\_REG}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_abc97c324f2bbdd443b7b006427c96294} 
+\#define port\+SCB\+\_\+\+VTOR\+\_\+\+REG~( \texorpdfstring{$\ast$}{*}( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_a7a9bd7cb6e8210c5321973d1e7150ac9}{port\+ISR\+\_\+t}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} ) 0x\+E000\+ED08 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00105}{105}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ac4d0dccf5f3a96cf955bd2cf5ff987a2}\index{port.c@{port.c}!portSTART\_ADDRESS\_MASK@{portSTART\_ADDRESS\_MASK}}
+\index{portSTART\_ADDRESS\_MASK@{portSTART\_ADDRESS\_MASK}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portSTART\_ADDRESS\_MASK}{portSTART\_ADDRESS\_MASK}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ac4d0dccf5f3a96cf955bd2cf5ff987a2} 
+\#define port\+START\+\_\+\+ADDRESS\+\_\+\+MASK~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} ) 0xfffffffe\+UL )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00130}{130}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a046cc13f73dad0c8a9cdd0504bc35a88}\index{port.c@{port.c}!portTOP\_BIT\_OF\_BYTE@{portTOP\_BIT\_OF\_BYTE}}
+\index{portTOP\_BIT\_OF\_BYTE@{portTOP\_BIT\_OF\_BYTE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portTOP\_BIT\_OF\_BYTE}{portTOP\_BIT\_OF\_BYTE}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a046cc13f73dad0c8a9cdd0504bc35a88} 
+\#define port\+TOP\+\_\+\+BIT\+\_\+\+OF\+\_\+\+BYTE~( ( uint8\+\_\+t ) 0x80 )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00114}{114}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ae18dd907c689d62c6fa18011b0499f7c}\index{port.c@{port.c}!portUINT32\_MAX@{portUINT32\_MAX}}
+\index{portUINT32\_MAX@{portUINT32\_MAX}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portUINT32\_MAX}{portUINT32\_MAX}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ae18dd907c689d62c6fa18011b0499f7c} 
+\#define port\+UINT32\+\_\+\+MAX~( \texorpdfstring{$\sim$}{\string~}( ( uint32\+\_\+t ) 0 ) )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00141}{141}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a674254871b5c2bfecb77a8fa451fd1c6}\index{port.c@{port.c}!portVECTOR\_INDEX\_PENDSV@{portVECTOR\_INDEX\_PENDSV}}
+\index{portVECTOR\_INDEX\_PENDSV@{portVECTOR\_INDEX\_PENDSV}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portVECTOR\_INDEX\_PENDSV}{portVECTOR\_INDEX\_PENDSV}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a674254871b5c2bfecb77a8fa451fd1c6} 
+\#define port\+VECTOR\+\_\+\+INDEX\+\_\+\+PENDSV~( 14 )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00107}{107}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a4822d10f02c6b044e508154ca7522c99}\index{port.c@{port.c}!portVECTOR\_INDEX\_SVC@{portVECTOR\_INDEX\_SVC}}
+\index{portVECTOR\_INDEX\_SVC@{portVECTOR\_INDEX\_SVC}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portVECTOR\_INDEX\_SVC}{portVECTOR\_INDEX\_SVC}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a4822d10f02c6b044e508154ca7522c99} 
+\#define port\+VECTOR\+\_\+\+INDEX\+\_\+\+SVC~( 11 )}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00106}{106}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a7a9bd7cb6e8210c5321973d1e7150ac9}\index{port.c@{port.c}!portISR\_t@{portISR\_t}}
+\index{portISR\_t@{portISR\_t}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portISR\_t}{portISR\_t}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a7a9bd7cb6e8210c5321973d1e7150ac9} 
+typedef void(\texorpdfstring{$\ast$}{*} port\+ISR\+\_\+t) (void)}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00055}{55}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a995b793d848ecc0413a79a36ee879a0d}\index{port.c@{port.c}!prvPortGetIPSR@{prvPortGetIPSR}}
+\index{prvPortGetIPSR@{prvPortGetIPSR}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{prvPortGetIPSR()}{prvPortGetIPSR()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a995b793d848ecc0413a79a36ee879a0d} 
+\+\_\+\+\_\+asm uint32\+\_\+t prv\+Port\+Get\+IPSR (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l01556}{1556}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ab4dc071b3f9f043b18b40270a8709688}\index{port.c@{port.c}!prvRestoreContextOfFirstTask@{prvRestoreContextOfFirstTask}}
+\index{prvRestoreContextOfFirstTask@{prvRestoreContextOfFirstTask}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{prvRestoreContextOfFirstTask()}{prvRestoreContextOfFirstTask()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ab4dc071b3f9f043b18b40270a8709688} 
+\+\_\+\+\_\+asm void prv\+Restore\+Context\+Of\+First\+Task (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00752}{752}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+Here is the caller graph for this function\+:
+% FIG 1
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aa62e48aea4d4d2ad3426bd1243dbc72a}\index{port.c@{port.c}!prvStartFirstTask@{prvStartFirstTask}}
+\index{prvStartFirstTask@{prvStartFirstTask}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{prvStartFirstTask()}{prvStartFirstTask()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aa62e48aea4d4d2ad3426bd1243dbc72a} 
+\+\_\+\+\_\+asm void prv\+Start\+First\+Task (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00986}{986}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+Here is the caller graph for this function\+:
+% FIG 2
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aec5e737e77ef9d213012435ff56d1cf8}\index{port.c@{port.c}!prvTriggerLazyStacking@{prvTriggerLazyStacking}}
+\index{prvTriggerLazyStacking@{prvTriggerLazyStacking}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{prvTriggerLazyStacking()}{prvTriggerLazyStacking()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aec5e737e77ef9d213012435ff56d1cf8} 
+\+\_\+\+\_\+asm void prv\+Trigger\+Lazy\+Stacking (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00453}{453}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+Here is the caller graph for this function\+:
+% FIG 3
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a9ff246b1dcf8d5478bfb6f0b88258513}\index{port.c@{port.c}!vPortEnableVFP@{vPortEnableVFP}}
+\index{vPortEnableVFP@{vPortEnableVFP}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEnableVFP()}{vPortEnableVFP()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a9ff246b1dcf8d5478bfb6f0b88258513} 
+\+\_\+\+\_\+asm void v\+Port\+Enable\+VFP (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l01229}{1229}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+Here is the caller graph for this function\+:
+% FIG 4
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}\index{port.c@{port.c}!vPortEndScheduler@{vPortEndScheduler}}
+\index{vPortEndScheduler@{vPortEndScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEndScheduler()}{vPortEndScheduler()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423} 
+void v\+Port\+End\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+End the Free\+RTOS scheduler. 
+
+Not implemented on this port. 
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l01015}{1015}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a2ed3554a3de09a3bd09d396ee081ab69}\index{port.c@{port.c}!vPortEnterCritical@{vPortEnterCritical}}
+\index{vPortEnterCritical@{vPortEnterCritical}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEnterCritical()}{vPortEnterCritical()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a2ed3554a3de09a3bd09d396ee081ab69} 
+void v\+Port\+Enter\+Critical (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Enter critical section. 
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l01023}{1023}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aed20ada05b957181a0de042802a82a5b}\index{port.c@{port.c}!vPortExitCritical@{vPortExitCritical}}
+\index{vPortExitCritical@{vPortExitCritical}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortExitCritical()}{vPortExitCritical()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aed20ada05b957181a0de042802a82a5b} 
+void v\+Port\+Exit\+Critical (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Exit critical section. 
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l01050}{1050}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a911aa5915537b19a087674a0c6d792a2}\index{port.c@{port.c}!vPortStoreTaskMPUSettings@{vPortStoreTaskMPUSettings}}
+\index{vPortStoreTaskMPUSettings@{vPortStoreTaskMPUSettings}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortStoreTaskMPUSettings()}{vPortStoreTaskMPUSettings()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a911aa5915537b19a087674a0c6d792a2} 
+void v\+Port\+Store\+Task\+MPUSettings (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structx_m_p_u___s_e_t_t_i_n_g_s}{x\+MPU\+\_\+\+SETTINGS}} \texorpdfstring{$\ast$}{*}}]{x\+MPUSettings}{, }\item[{const struct \mbox{\hyperlink{structx_m_e_m_o_r_y___r_e_g_i_o_n}{x\+MEMORY\+\_\+\+REGION}} \texorpdfstring{$\ast$}{*}const}]{x\+Regions}{, }\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{Stack\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{px\+Bottom\+Of\+Stack}{, }\item[{\mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_ae4e85bffd36d76cf2796092f0ccd784a}{config\+STACK\+\_\+\+DEPTH\+\_\+\+TYPE}}}]{ux\+Stack\+Depth}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l01380}{1380}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ad27c319499e569356fcb13efefd0449e}\index{port.c@{port.c}!vPortSVCHandler@{vPortSVCHandler}}
+\index{vPortSVCHandler@{vPortSVCHandler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortSVCHandler()}{vPortSVCHandler()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ad27c319499e569356fcb13efefd0449e} 
+\+\_\+\+\_\+asm void v\+Port\+SVCHandler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00694}{694}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a1559396bf151310d1c825c5239317a3b}\index{port.c@{port.c}!vPortSwitchToUserMode@{vPortSwitchToUserMode}}
+\index{vPortSwitchToUserMode@{vPortSwitchToUserMode}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortSwitchToUserMode()}{vPortSwitchToUserMode()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a1559396bf151310d1c825c5239317a3b} 
+void v\+Port\+Switch\+To\+User\+Mode (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l01367}{1367}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ae79bc426631661b9b7511b3f9fc17143}\index{port.c@{port.c}!vRequestSystemCallExit@{vRequestSystemCallExit}}
+\index{vRequestSystemCallExit@{vRequestSystemCallExit}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vRequestSystemCallExit()}{vRequestSystemCallExit()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ae79bc426631661b9b7511b3f9fc17143} 
+\+\_\+\+\_\+asm void v\+Request\+System\+Call\+Exit (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00577}{577}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a1100acdf63e88bb9e0ca5e283d278d19}\index{port.c@{port.c}!vResetPrivilege@{vResetPrivilege}}
+\index{vResetPrivilege@{vResetPrivilege}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vResetPrivilege()}{vResetPrivilege()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a1100acdf63e88bb9e0ca5e283d278d19} 
+\+\_\+\+\_\+asm void v\+Reset\+Privilege (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Lowers the privilege level by setting the bit 0 of the CONTROL register. 
+
+Bit 0 of the CONTROL register defines the privilege level of Thread Mode. Bit\mbox{[}0\mbox{]} = 0 -\/-\/\texorpdfstring{$>$}{>} The processor is running privileged Bit\mbox{[}0\mbox{]} = 1 -\/-\/\texorpdfstring{$>$}{>} The processor is running unprivileged. 
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l01354}{1354}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a7f7aa2e0c9a97b05240967849020d7fa}\index{port.c@{port.c}!vSetupTimerInterrupt@{vSetupTimerInterrupt}}
+\index{vSetupTimerInterrupt@{vSetupTimerInterrupt}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vSetupTimerInterrupt()}{vSetupTimerInterrupt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a7f7aa2e0c9a97b05240967849020d7fa} 
+void v\+Setup\+Timer\+Interrupt (\begin{DoxyParamCaption}\item[{static void prv\+Setup\+MPU}]{void}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00164}{164}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a17e747b8558bebde348fdde7267dfd58}\index{port.c@{port.c}!vSetupTimerInterrupt@{vSetupTimerInterrupt}}
+\index{vSetupTimerInterrupt@{vSetupTimerInterrupt}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vSetupTimerInterrupt()}{vSetupTimerInterrupt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a17e747b8558bebde348fdde7267dfd58} 
+\+\_\+\+\_\+weak void v\+Setup\+Timer\+Interrupt (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l01217}{1217}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+Here is the caller graph for this function\+:
+% FIG 7
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aa0924e56ade716700597b1faa5c9deef}\index{port.c@{port.c}!vSVCHandler\_C@{vSVCHandler\_C}}
+\index{vSVCHandler\_C@{vSVCHandler\_C}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vSVCHandler\_C()}{vSVCHandler\_C()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aa0924e56ade716700597b1faa5c9deef} 
+void v\+SVCHandler\+\_\+C (\begin{DoxyParamCaption}\item[{uint32\+\_\+t \texorpdfstring{$\ast$}{*}}]{pul\+Param}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00374}{374}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a07679b9235841789393f48e4e5c4740c}\index{port.c@{port.c}!vSystemCallEnter@{vSystemCallEnter}}
+\index{vSystemCallEnter@{vSystemCallEnter}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vSystemCallEnter()}{vSystemCallEnter()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a07679b9235841789393f48e4e5c4740c} 
+void v\+System\+Call\+Enter (\begin{DoxyParamCaption}\item[{uint32\+\_\+t \texorpdfstring{$\ast$}{*}}]{pul\+Task\+Stack}{, }\item[{uint32\+\_\+t}]{ul\+LR}{, }\item[{uint8\+\_\+t}]{uc\+System\+Call\+Number}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00469}{469}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aee0f0a83b90bc2b4e5aad7ff6eba0c26}\index{port.c@{port.c}!vSystemCallExit@{vSystemCallExit}}
+\index{vSystemCallExit@{vSystemCallExit}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vSystemCallExit()}{vSystemCallExit()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_aee0f0a83b90bc2b4e5aad7ff6eba0c26} 
+void v\+System\+Call\+Exit (\begin{DoxyParamCaption}\item[{uint32\+\_\+t \texorpdfstring{$\ast$}{*}}]{pul\+System\+Call\+Stack}{, }\item[{uint32\+\_\+t}]{ul\+LR}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00589}{589}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a31181458e8d35b3b5d3764eb0b406735}\index{port.c@{port.c}!xIsPrivileged@{xIsPrivileged}}
+\index{xIsPrivileged@{xIsPrivileged}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xIsPrivileged()}{xIsPrivileged()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a31181458e8d35b3b5d3764eb0b406735} 
+\+\_\+\+\_\+asm \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Is\+Privileged (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Checks whether or not the processor is privileged. 
+
+\begin{DoxyReturn}{Returns}
+1 if the processor is already privileged, 0 otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l01339}{1339}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ac0ef06e97192d35ffbb89e04a8cef668}\index{port.c@{port.c}!xPortIsAuthorizedToAccessBuffer@{xPortIsAuthorizedToAccessBuffer}}
+\index{xPortIsAuthorizedToAccessBuffer@{xPortIsAuthorizedToAccessBuffer}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortIsAuthorizedToAccessBuffer()}{xPortIsAuthorizedToAccessBuffer()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ac0ef06e97192d35ffbb89e04a8cef668} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Is\+Authorized\+To\+Access\+Buffer (\begin{DoxyParamCaption}\item[{const void \texorpdfstring{$\ast$}{*}}]{pv\+Buffer}{, }\item[{uint32\+\_\+t}]{ul\+Buffer\+Length}{, }\item[{uint32\+\_\+t}]{ul\+Access\+Requested}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l01504}{1504}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a687076084d0a903ebb72f9694e118b4e}\index{port.c@{port.c}!xPortIsAuthorizedToAccessKernelObject@{xPortIsAuthorizedToAccessKernelObject}}
+\index{xPortIsAuthorizedToAccessKernelObject@{xPortIsAuthorizedToAccessKernelObject}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortIsAuthorizedToAccessKernelObject()}{xPortIsAuthorizedToAccessKernelObject()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a687076084d0a903ebb72f9694e118b4e} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Is\+Authorized\+To\+Access\+Kernel\+Object (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{l\+Internal\+Index\+Of\+Kernel\+Object}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l01709}{1709}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a21335221c26ff106b4f5e87edf6567aa}\index{port.c@{port.c}!xPortIsTaskPrivileged@{xPortIsTaskPrivileged}}
+\index{xPortIsTaskPrivileged@{xPortIsTaskPrivileged}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortIsTaskPrivileged()}{xPortIsTaskPrivileged()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a21335221c26ff106b4f5e87edf6567aa} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Is\+Task\+Privileged (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Checks whether or not a task is privileged. 
+
+\begin{DoxyNote}{Note}
+A task\textquotesingle{}s privilege level is associated with the task and is different from the processor\textquotesingle{}s privilege level returned by x\+Port\+Is\+Privileged. For example, the processor is privileged when an unprivileged task executes a system call.
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+pd\+TRUE if the task is privileged, pd\+FALSE otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00678}{678}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a42dc4a2098d21136cc9bc98287f683d4}\index{port.c@{port.c}!xPortPendSVHandler@{xPortPendSVHandler}}
+\index{xPortPendSVHandler@{xPortPendSVHandler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortPendSVHandler()}{xPortPendSVHandler()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a42dc4a2098d21136cc9bc98287f683d4} 
+\+\_\+\+\_\+asm void x\+Port\+Pend\+SVHandler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l01093}{1093}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}\index{port.c@{port.c}!xPortStartScheduler@{xPortStartScheduler}}
+\index{xPortStartScheduler@{xPortStartScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortStartScheduler()}{xPortStartScheduler()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_ade5a8c6666e7413a0355cc252029c5c6} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Start\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l00812}{812}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a78100b2d36913d0b45565be8975e5de8}\index{port.c@{port.c}!xPortSysTickHandler@{xPortSysTickHandler}}
+\index{xPortSysTickHandler@{xPortSysTickHandler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortSysTickHandler()}{xPortSysTickHandler()}}
+{\footnotesize\ttfamily \label{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_a78100b2d36913d0b45565be8975e5de8} 
+void x\+Port\+Sys\+Tick\+Handler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source_l01190}{1190}} of file \mbox{\hyperlink{_r_v_d_s_2_a_r_m___c_m4___m_p_u_2port_8c_source}{port.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 13

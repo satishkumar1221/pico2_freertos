@@ -1,0 +1,4 @@
+var dir_5127a2b107f5c563b56266a7d7765b0e =
+[
+    [ "freertos_risc_v_chip_specific_extensions.h", "_g_c_c_2_r_i_s_c-_v_2chip__specific__extensions_2_pulpino___vega___r_v32_m1_r_m_2freertos__risc_42330ed41578e3246f3d21d6cb759dc2.html", "_g_c_c_2_r_i_s_c-_v_2chip__specific__extensions_2_pulpino___vega___r_v32_m1_r_m_2freertos__risc_42330ed41578e3246f3d21d6cb759dc2" ]
+];

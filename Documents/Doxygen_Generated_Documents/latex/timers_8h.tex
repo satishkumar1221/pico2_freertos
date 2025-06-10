@@ -1,0 +1,1361 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/include/timers.h File Reference}
+\hypertarget{timers_8h}{}\label{timers_8h}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/timers.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/timers.h}}
+{\ttfamily \#include "{}task.\+h"{}}\newline
+Include dependency graph for timers.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{timers_8h_aff0b8d2d5d743afef9d52861618139bf}{tmr\+COMMAND\+\_\+\+EXECUTE\+\_\+\+CALLBACK\+\_\+\+FROM\+\_\+\+ISR}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) -\/2 )
+\item 
+\#define \mbox{\hyperlink{timers_8h_aca42f545424488ce7dfd43c0d70ca610}{tmr\+COMMAND\+\_\+\+EXECUTE\+\_\+\+CALLBACK}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) -\/1 )
+\item 
+\#define \mbox{\hyperlink{timers_8h_adcc4f4391b0850b18596974d7618bdfc}{tmr\+COMMAND\+\_\+\+START\+\_\+\+DONT\+\_\+\+TRACE}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) 0 )
+\item 
+\#define \mbox{\hyperlink{timers_8h_afc38af63403775cc4ced3995f920343a}{tmr\+COMMAND\+\_\+\+START}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) 1 )
+\item 
+\#define \mbox{\hyperlink{timers_8h_a0a63f701c021371d186adca7c590e923}{tmr\+COMMAND\+\_\+\+RESET}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) 2 )
+\item 
+\#define \mbox{\hyperlink{timers_8h_a0cd6f6a41dcd52d2fc06c350f43516c0}{tmr\+COMMAND\+\_\+\+STOP}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) 3 )
+\item 
+\#define \mbox{\hyperlink{timers_8h_adb27881a1a1118b9cc4d711391c89414}{tmr\+COMMAND\+\_\+\+CHANGE\+\_\+\+PERIOD}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) 4 )
+\item 
+\#define \mbox{\hyperlink{timers_8h_a5a5586339a9dbc1320153fd96a1c2f33}{tmr\+COMMAND\+\_\+\+DELETE}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) 5 )
+\item 
+\#define \mbox{\hyperlink{timers_8h_afab5e13e40f49f678d62925ab8bc44a1}{tmr\+FIRST\+\_\+\+FROM\+\_\+\+ISR\+\_\+\+COMMAND}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) 6 )
+\item 
+\#define \mbox{\hyperlink{timers_8h_add053fdcf41607ba790004590c11844f}{tmr\+COMMAND\+\_\+\+START\+\_\+\+FROM\+\_\+\+ISR}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) 6 )
+\item 
+\#define \mbox{\hyperlink{timers_8h_a1d69bd5e47301570a4aa149bd868534a}{tmr\+COMMAND\+\_\+\+RESET\+\_\+\+FROM\+\_\+\+ISR}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) 7 )
+\item 
+\#define \mbox{\hyperlink{timers_8h_acbf988b64a5897a1c030da417cc654de}{tmr\+COMMAND\+\_\+\+STOP\+\_\+\+FROM\+\_\+\+ISR}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) 8 )
+\item 
+\#define \mbox{\hyperlink{timers_8h_ab520106084753fbb137ac275ab3ff20b}{tmr\+COMMAND\+\_\+\+CHANGE\+\_\+\+PERIOD\+\_\+\+FROM\+\_\+\+ISR}}~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) 9 )
+\item 
+\#define \mbox{\hyperlink{timers_8h_a3a9b838f48991e852ce05c986b0eeb8c}{x\+Timer\+Start}}(x\+Timer,  x\+Ticks\+To\+Wait)
+\item 
+\#define \mbox{\hyperlink{timers_8h_a8327c7fc10aee414cb163b445c5269a4}{x\+Timer\+Stop}}(x\+Timer,  x\+Ticks\+To\+Wait)
+\item 
+\#define \mbox{\hyperlink{timers_8h_ab12eac1c69a3437b8161ce81ff34b2f4}{x\+Timer\+Change\+Period}}(x\+Timer,  x\+New\+Period,  x\+Ticks\+To\+Wait)
+\item 
+\#define \mbox{\hyperlink{timers_8h_a8c8e21f05ebe92e15449addc5d269d10}{x\+Timer\+Delete}}(x\+Timer,  x\+Ticks\+To\+Wait)
+\item 
+\#define \mbox{\hyperlink{timers_8h_a8081b4541b752908dc55df2693e53287}{x\+Timer\+Reset}}(x\+Timer,  x\+Ticks\+To\+Wait)
+\item 
+\#define \mbox{\hyperlink{timers_8h_adab5809f9679e44a343b8dbb8fb7c67f}{x\+Timer\+Start\+From\+ISR}}(x\+Timer,  px\+Higher\+Priority\+Task\+Woken)
+\item 
+\#define \mbox{\hyperlink{timers_8h_aef0f53e7ecfaa881621da83d61072db7}{x\+Timer\+Stop\+From\+ISR}}(x\+Timer,  px\+Higher\+Priority\+Task\+Woken)
+\item 
+\#define \mbox{\hyperlink{timers_8h_a6d89ca6afb6e692e98932b5038c9e14a}{x\+Timer\+Change\+Period\+From\+ISR}}(x\+Timer,  x\+New\+Period,  px\+Higher\+Priority\+Task\+Woken)
+\item 
+\#define \mbox{\hyperlink{timers_8h_a448138d0cebf76044f107ca56c842230}{x\+Timer\+Reset\+From\+ISR}}(x\+Timer,  px\+Higher\+Priority\+Task\+Woken)
+\item 
+\#define \mbox{\hyperlink{timers_8h_a4a129682fc4bb988a364058ed6f71013}{x\+Timer\+Generic\+Command}}(x\+Timer,  x\+Command\+ID,  x\+Optional\+Value,  px\+Higher\+Priority\+Task\+Woken,  x\+Ticks\+To\+Wait)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct tmr\+Timer\+Control \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}}
+\item 
+typedef void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{timers_8h_a5cf6d1f61ccd4871022ed8ad454c6027}{Timer\+Callback\+Function\+\_\+t}}) (\mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}} x\+Timer)
+\item 
+typedef void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{timers_8h_ac659ed1ec27ec62e10d2f0849e738b60}{Pended\+Function\+\_\+t}}) (void \texorpdfstring{$\ast$}{*}arg1, uint32\+\_\+t arg2)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{timers_8h_a116df5c5464393c6aeda6ecec6c9e916}{pv\+Timer\+Get\+Timer\+ID}} (const \mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}} x\+Timer) \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}}
+\item 
+void \mbox{\hyperlink{timers_8h_a1f06045a953481dd7012d4c7762990cb}{v\+Timer\+Set\+Timer\+ID}} (\mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}} x\+Timer, void \texorpdfstring{$\ast$}{*}pv\+New\+ID) \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{timers_8h_a2cd9b1399fb25203be698f123846dc33}{x\+Timer\+Is\+Timer\+Active}} (\mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}} x\+Timer) \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}}
+\item 
+\mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{Task\+Handle\+\_\+t}} \mbox{\hyperlink{timers_8h_ad2a0d15a1e213493bd898e748d9f7555}{x\+Timer\+Get\+Timer\+Daemon\+Task\+Handle}} (void) \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}}
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{timers_8h_a5007aef53e4cc6aea1aadcdcc72aa9da}{pc\+Timer\+Get\+Name}} (\mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}} x\+Timer) \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}}
+\item 
+void \mbox{\hyperlink{timers_8h_a5585a414eeac64f5713ce0168c733dcd}{v\+Timer\+Set\+Reload\+Mode}} (\mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}} x\+Timer, const \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Auto\+Reload) \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{timers_8h_a1d118cb514a0933042157f064cccdb09}{x\+Timer\+Get\+Reload\+Mode}} (\mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}} x\+Timer) \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} \mbox{\hyperlink{timers_8h_a0e66306f2e9c482a28e750e90eec3d65}{ux\+Timer\+Get\+Reload\+Mode}} (\mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}} x\+Timer) \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}} \mbox{\hyperlink{timers_8h_a2735e79e155b2ca2a3809958ebb7431e}{x\+Timer\+Get\+Period}} (\mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}} x\+Timer) \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}} \mbox{\hyperlink{timers_8h_a06cdc26759c622eeb575070064e26025}{x\+Timer\+Get\+Expiry\+Time}} (\mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}} x\+Timer) \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{timers_8h_af777ab3e9ac04abd5dd21be739fa1321}{x\+Timer\+Create\+Timer\+Task}} (void) \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{timers_8h_a930f274da918a2d32afef162123a097f}{x\+Timer\+Generic\+Command\+From\+Task}} (\mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}} x\+Timer, const \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Command\+ID, const \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}} x\+Optional\+Value, \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}const px\+Higher\+Priority\+Task\+Woken, const \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}} x\+Ticks\+To\+Wait) \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{timers_8h_a5a58ac97f6aaf4d912be1e4390a4b5c7}{x\+Timer\+Generic\+Command\+From\+ISR}} (\mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}} x\+Timer, const \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Command\+ID, const \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}} x\+Optional\+Value, \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}const px\+Higher\+Priority\+Task\+Woken, const \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}} x\+Ticks\+To\+Wait) \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}}
+\item 
+void \mbox{\hyperlink{timers_8h_a9b8b0e689aa057d3dcb04e4cc7a6ce5d}{v\+Timer\+Reset\+State}} (void) \mbox{\hyperlink{mpu__wrappers_8h_a4785c4f4a8c04b835139dcc2a6682078}{PRIVILEGED\+\_\+\+FUNCTION}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{timers_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{timers_8h_adb27881a1a1118b9cc4d711391c89414}\index{timers.h@{timers.h}!tmrCOMMAND\_CHANGE\_PERIOD@{tmrCOMMAND\_CHANGE\_PERIOD}}
+\index{tmrCOMMAND\_CHANGE\_PERIOD@{tmrCOMMAND\_CHANGE\_PERIOD}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{tmrCOMMAND\_CHANGE\_PERIOD}{tmrCOMMAND\_CHANGE\_PERIOD}}
+{\footnotesize\ttfamily \label{timers_8h_adb27881a1a1118b9cc4d711391c89414} 
+\#define tmr\+COMMAND\+\_\+\+CHANGE\+\_\+\+PERIOD~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) 4 )}
+
+
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l00061}{61}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+\Hypertarget{timers_8h_ab520106084753fbb137ac275ab3ff20b}\index{timers.h@{timers.h}!tmrCOMMAND\_CHANGE\_PERIOD\_FROM\_ISR@{tmrCOMMAND\_CHANGE\_PERIOD\_FROM\_ISR}}
+\index{tmrCOMMAND\_CHANGE\_PERIOD\_FROM\_ISR@{tmrCOMMAND\_CHANGE\_PERIOD\_FROM\_ISR}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{tmrCOMMAND\_CHANGE\_PERIOD\_FROM\_ISR}{tmrCOMMAND\_CHANGE\_PERIOD\_FROM\_ISR}}
+{\footnotesize\ttfamily \label{timers_8h_ab520106084753fbb137ac275ab3ff20b} 
+\#define tmr\+COMMAND\+\_\+\+CHANGE\+\_\+\+PERIOD\+\_\+\+FROM\+\_\+\+ISR~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) 9 )}
+
+
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l00068}{68}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+\Hypertarget{timers_8h_a5a5586339a9dbc1320153fd96a1c2f33}\index{timers.h@{timers.h}!tmrCOMMAND\_DELETE@{tmrCOMMAND\_DELETE}}
+\index{tmrCOMMAND\_DELETE@{tmrCOMMAND\_DELETE}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{tmrCOMMAND\_DELETE}{tmrCOMMAND\_DELETE}}
+{\footnotesize\ttfamily \label{timers_8h_a5a5586339a9dbc1320153fd96a1c2f33} 
+\#define tmr\+COMMAND\+\_\+\+DELETE~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) 5 )}
+
+
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l00062}{62}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+\Hypertarget{timers_8h_aca42f545424488ce7dfd43c0d70ca610}\index{timers.h@{timers.h}!tmrCOMMAND\_EXECUTE\_CALLBACK@{tmrCOMMAND\_EXECUTE\_CALLBACK}}
+\index{tmrCOMMAND\_EXECUTE\_CALLBACK@{tmrCOMMAND\_EXECUTE\_CALLBACK}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{tmrCOMMAND\_EXECUTE\_CALLBACK}{tmrCOMMAND\_EXECUTE\_CALLBACK}}
+{\footnotesize\ttfamily \label{timers_8h_aca42f545424488ce7dfd43c0d70ca610} 
+\#define tmr\+COMMAND\+\_\+\+EXECUTE\+\_\+\+CALLBACK~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) -\/1 )}
+
+
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l00056}{56}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+\Hypertarget{timers_8h_aff0b8d2d5d743afef9d52861618139bf}\index{timers.h@{timers.h}!tmrCOMMAND\_EXECUTE\_CALLBACK\_FROM\_ISR@{tmrCOMMAND\_EXECUTE\_CALLBACK\_FROM\_ISR}}
+\index{tmrCOMMAND\_EXECUTE\_CALLBACK\_FROM\_ISR@{tmrCOMMAND\_EXECUTE\_CALLBACK\_FROM\_ISR}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{tmrCOMMAND\_EXECUTE\_CALLBACK\_FROM\_ISR}{tmrCOMMAND\_EXECUTE\_CALLBACK\_FROM\_ISR}}
+{\footnotesize\ttfamily \label{timers_8h_aff0b8d2d5d743afef9d52861618139bf} 
+\#define tmr\+COMMAND\+\_\+\+EXECUTE\+\_\+\+CALLBACK\+\_\+\+FROM\+\_\+\+ISR~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) -\/2 )}
+
+
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l00055}{55}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+\Hypertarget{timers_8h_a0a63f701c021371d186adca7c590e923}\index{timers.h@{timers.h}!tmrCOMMAND\_RESET@{tmrCOMMAND\_RESET}}
+\index{tmrCOMMAND\_RESET@{tmrCOMMAND\_RESET}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{tmrCOMMAND\_RESET}{tmrCOMMAND\_RESET}}
+{\footnotesize\ttfamily \label{timers_8h_a0a63f701c021371d186adca7c590e923} 
+\#define tmr\+COMMAND\+\_\+\+RESET~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) 2 )}
+
+
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l00059}{59}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+\Hypertarget{timers_8h_a1d69bd5e47301570a4aa149bd868534a}\index{timers.h@{timers.h}!tmrCOMMAND\_RESET\_FROM\_ISR@{tmrCOMMAND\_RESET\_FROM\_ISR}}
+\index{tmrCOMMAND\_RESET\_FROM\_ISR@{tmrCOMMAND\_RESET\_FROM\_ISR}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{tmrCOMMAND\_RESET\_FROM\_ISR}{tmrCOMMAND\_RESET\_FROM\_ISR}}
+{\footnotesize\ttfamily \label{timers_8h_a1d69bd5e47301570a4aa149bd868534a} 
+\#define tmr\+COMMAND\+\_\+\+RESET\+\_\+\+FROM\+\_\+\+ISR~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) 7 )}
+
+
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l00066}{66}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+\Hypertarget{timers_8h_afc38af63403775cc4ced3995f920343a}\index{timers.h@{timers.h}!tmrCOMMAND\_START@{tmrCOMMAND\_START}}
+\index{tmrCOMMAND\_START@{tmrCOMMAND\_START}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{tmrCOMMAND\_START}{tmrCOMMAND\_START}}
+{\footnotesize\ttfamily \label{timers_8h_afc38af63403775cc4ced3995f920343a} 
+\#define tmr\+COMMAND\+\_\+\+START~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) 1 )}
+
+
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l00058}{58}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+\Hypertarget{timers_8h_adcc4f4391b0850b18596974d7618bdfc}\index{timers.h@{timers.h}!tmrCOMMAND\_START\_DONT\_TRACE@{tmrCOMMAND\_START\_DONT\_TRACE}}
+\index{tmrCOMMAND\_START\_DONT\_TRACE@{tmrCOMMAND\_START\_DONT\_TRACE}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{tmrCOMMAND\_START\_DONT\_TRACE}{tmrCOMMAND\_START\_DONT\_TRACE}}
+{\footnotesize\ttfamily \label{timers_8h_adcc4f4391b0850b18596974d7618bdfc} 
+\#define tmr\+COMMAND\+\_\+\+START\+\_\+\+DONT\+\_\+\+TRACE~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) 0 )}
+
+
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l00057}{57}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+\Hypertarget{timers_8h_add053fdcf41607ba790004590c11844f}\index{timers.h@{timers.h}!tmrCOMMAND\_START\_FROM\_ISR@{tmrCOMMAND\_START\_FROM\_ISR}}
+\index{tmrCOMMAND\_START\_FROM\_ISR@{tmrCOMMAND\_START\_FROM\_ISR}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{tmrCOMMAND\_START\_FROM\_ISR}{tmrCOMMAND\_START\_FROM\_ISR}}
+{\footnotesize\ttfamily \label{timers_8h_add053fdcf41607ba790004590c11844f} 
+\#define tmr\+COMMAND\+\_\+\+START\+\_\+\+FROM\+\_\+\+ISR~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) 6 )}
+
+
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l00065}{65}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+\Hypertarget{timers_8h_a0cd6f6a41dcd52d2fc06c350f43516c0}\index{timers.h@{timers.h}!tmrCOMMAND\_STOP@{tmrCOMMAND\_STOP}}
+\index{tmrCOMMAND\_STOP@{tmrCOMMAND\_STOP}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{tmrCOMMAND\_STOP}{tmrCOMMAND\_STOP}}
+{\footnotesize\ttfamily \label{timers_8h_a0cd6f6a41dcd52d2fc06c350f43516c0} 
+\#define tmr\+COMMAND\+\_\+\+STOP~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) 3 )}
+
+
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l00060}{60}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+\Hypertarget{timers_8h_acbf988b64a5897a1c030da417cc654de}\index{timers.h@{timers.h}!tmrCOMMAND\_STOP\_FROM\_ISR@{tmrCOMMAND\_STOP\_FROM\_ISR}}
+\index{tmrCOMMAND\_STOP\_FROM\_ISR@{tmrCOMMAND\_STOP\_FROM\_ISR}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{tmrCOMMAND\_STOP\_FROM\_ISR}{tmrCOMMAND\_STOP\_FROM\_ISR}}
+{\footnotesize\ttfamily \label{timers_8h_acbf988b64a5897a1c030da417cc654de} 
+\#define tmr\+COMMAND\+\_\+\+STOP\+\_\+\+FROM\+\_\+\+ISR~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) 8 )}
+
+
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l00067}{67}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+\Hypertarget{timers_8h_afab5e13e40f49f678d62925ab8bc44a1}\index{timers.h@{timers.h}!tmrFIRST\_FROM\_ISR\_COMMAND@{tmrFIRST\_FROM\_ISR\_COMMAND}}
+\index{tmrFIRST\_FROM\_ISR\_COMMAND@{tmrFIRST\_FROM\_ISR\_COMMAND}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{tmrFIRST\_FROM\_ISR\_COMMAND}{tmrFIRST\_FROM\_ISR\_COMMAND}}
+{\footnotesize\ttfamily \label{timers_8h_afab5e13e40f49f678d62925ab8bc44a1} 
+\#define tmr\+FIRST\+\_\+\+FROM\+\_\+\+ISR\+\_\+\+COMMAND~( ( \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} ) 6 )}
+
+
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l00064}{64}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+\Hypertarget{timers_8h_ab12eac1c69a3437b8161ce81ff34b2f4}\index{timers.h@{timers.h}!xTimerChangePeriod@{xTimerChangePeriod}}
+\index{xTimerChangePeriod@{xTimerChangePeriod}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{xTimerChangePeriod}{xTimerChangePeriod}}
+{\footnotesize\ttfamily \label{timers_8h_ab12eac1c69a3437b8161ce81ff34b2f4} 
+\#define x\+Timer\+Change\+Period(\begin{DoxyParamCaption}\item[{}]{x\+Timer}{, }\item[{}]{x\+New\+Period}{, }\item[{}]{x\+Ticks\+To\+Wait}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{timers_8h_a4a129682fc4bb988a364058ed6f71013}{xTimerGenericCommand}}(\ (\ xTimer\ ),\ \mbox{\hyperlink{timers_8h_adb27881a1a1118b9cc4d711391c89414}{tmrCOMMAND\_CHANGE\_PERIOD}},\ (\ xNewPeriod\ ),\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}},\ (\ xTicksToWait\ )\ )}
+
+\end{DoxyCode}
+\doxylink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t} \doxylink{timers_8h_ab12eac1c69a3437b8161ce81ff34b2f4}{x\+Timer\+Change\+Period(   Timer\+Handle\+\_\+t x\+Timer,                                    Tick\+Type\+\_\+t x\+New\+Period,                                    Tick\+Type\+\_\+t x\+Ticks\+To\+Wait )};
+
+Timer functionality is provided by a timer service/daemon task. Many of the public Free\+RTOS timer API functions send commands to the timer service task through a queue called the timer command queue. The timer command queue is private to the kernel itself and is not directly accessible to application code. The length of the timer command queue is set by the config\+TIMER\+\_\+\+QUEUE\+\_\+\+LENGTH configuration constant.
+
+\doxylink{timers_8h_ab12eac1c69a3437b8161ce81ff34b2f4}{x\+Timer\+Change\+Period()} changes the period of a timer that was previously created using the x\+Timer\+Create() API function.
+
+\doxylink{timers_8h_ab12eac1c69a3437b8161ce81ff34b2f4}{x\+Timer\+Change\+Period()} can be called to change the period of an active or dormant state timer.
+
+The config\+USE\+\_\+\+TIMERS configuration constant must be set to 1 for \doxylink{timers_8h_ab12eac1c69a3437b8161ce81ff34b2f4}{x\+Timer\+Change\+Period()} to be available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Timer} & The handle of the timer that is having its period changed.\\
+\hline
+{\em x\+New\+Period} & The new period for x\+Timer. Timer periods are specified in tick periods, so the constant port\+TICK\+\_\+\+PERIOD\+\_\+\+MS can be used to convert a time that has been specified in milliseconds. For example, if the timer must expire after 100 ticks, then x\+New\+Period should be set to 100. Alternatively, if the timer must expire after 500ms, then x\+New\+Period can be set to ( 500 / port\+TICK\+\_\+\+PERIOD\+\_\+\+MS ) provided config\+TICK\+\_\+\+RATE\+\_\+\+HZ is less than or equal to 1000.\\
+\hline
+{\em x\+Ticks\+To\+Wait} & Specifies the time, in ticks, that the calling task should be held in the Blocked state to wait for the change period command to be successfully sent to the timer command queue, should the queue already be full when \doxylink{timers_8h_ab12eac1c69a3437b8161ce81ff34b2f4}{x\+Timer\+Change\+Period()} was called. x\+Ticks\+To\+Wait is ignored if \doxylink{timers_8h_ab12eac1c69a3437b8161ce81ff34b2f4}{x\+Timer\+Change\+Period()} is called before the scheduler is started.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pd\+FAIL will be returned if the change period command could not be sent to the timer command queue even after x\+Ticks\+To\+Wait ticks had passed. pd\+PASS will be returned if the command was successfully sent to the timer command queue. When the command is actually processed will depend on the priority of the timer service/daemon task relative to other tasks in the system. The timer service/daemon task priority is set by the config\+TIMER\+\_\+\+TASK\+\_\+\+PRIORITY configuration constant.
+\end{DoxyReturn}
+Example usage\+: \begin{DoxyVerb}* // This function assumes xTimer has already been created.  If the timer
+* // referenced by xTimer is already active when it is called, then the timer
+* // is deleted.  If the timer referenced by xTimer is not active when it is
+* // called, then the period of the timer is set to 500ms and the timer is
+* // started.
+* void vAFunction( TimerHandle_t xTimer )
+* {
+*     if( xTimerIsTimerActive( xTimer ) != pdFALSE ) // or more simply and equivalently "if( xTimerIsTimerActive( xTimer ) )"
+*     {
+*         // xTimer is already active - delete it.
+*         xTimerDelete( xTimer );
+*     }
+*     else
+*     {
+*         // xTimer is not active, change its period to 500ms.  This will also
+*         // cause the timer to start.  Block for a maximum of 100 ticks if the
+*         // change period command cannot immediately be sent to the timer
+*         // command queue.
+*         if( xTimerChangePeriod( xTimer, 500 / portTICK_PERIOD_MS, 100 ) == pdPASS )
+*         {
+*             // The command was successfully sent.
+*         }
+*         else
+*         {
+*             // The command could not be sent, even after waiting for 100 ticks
+*             // to pass.  Take appropriate action here.
+*         }
+*     }
+* }
+* \end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l00631}{631}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+\Hypertarget{timers_8h_a6d89ca6afb6e692e98932b5038c9e14a}\index{timers.h@{timers.h}!xTimerChangePeriodFromISR@{xTimerChangePeriodFromISR}}
+\index{xTimerChangePeriodFromISR@{xTimerChangePeriodFromISR}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{xTimerChangePeriodFromISR}{xTimerChangePeriodFromISR}}
+{\footnotesize\ttfamily \label{timers_8h_a6d89ca6afb6e692e98932b5038c9e14a} 
+\#define x\+Timer\+Change\+Period\+From\+ISR(\begin{DoxyParamCaption}\item[{}]{x\+Timer}{, }\item[{}]{x\+New\+Period}{, }\item[{}]{px\+Higher\+Priority\+Task\+Woken}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{timers_8h_a4a129682fc4bb988a364058ed6f71013}{xTimerGenericCommand}}(\ (\ xTimer\ ),\ \mbox{\hyperlink{timers_8h_ab520106084753fbb137ac275ab3ff20b}{tmrCOMMAND\_CHANGE\_PERIOD\_FROM\_ISR}},\ (\ xNewPeriod\ ),\ (\ pxHigherPriorityTaskWoken\ ),\ 0U\ )}
+
+\end{DoxyCode}
+\doxylink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t} \doxylink{timers_8h_a6d89ca6afb6e692e98932b5038c9e14a}{x\+Timer\+Change\+Period\+From\+ISR( Timer\+Handle\+\_\+t x\+Timer,                                         Tick\+Type\+\_\+t x\+New\+Period,                                         Base\+Type\+\_\+t \texorpdfstring{$\ast$}{*}px\+Higher\+Priority\+Task\+Woken )};
+
+A version of \doxylink{timers_8h_ab12eac1c69a3437b8161ce81ff34b2f4}{x\+Timer\+Change\+Period()} that can be called from an interrupt service routine.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Timer} & The handle of the timer that is having its period changed.\\
+\hline
+{\em x\+New\+Period} & The new period for x\+Timer. Timer periods are specified in tick periods, so the constant port\+TICK\+\_\+\+PERIOD\+\_\+\+MS can be used to convert a time that has been specified in milliseconds. For example, if the timer must expire after 100 ticks, then x\+New\+Period should be set to 100. Alternatively, if the timer must expire after 500ms, then x\+New\+Period can be set to ( 500 / port\+TICK\+\_\+\+PERIOD\+\_\+\+MS ) provided config\+TICK\+\_\+\+RATE\+\_\+\+HZ is less than or equal to 1000.\\
+\hline
+{\em px\+Higher\+Priority\+Task\+Woken} & The timer service/daemon task spends most of its time in the Blocked state, waiting for messages to arrive on the timer command queue. Calling \doxylink{timers_8h_a6d89ca6afb6e692e98932b5038c9e14a}{x\+Timer\+Change\+Period\+From\+ISR()} writes a message to the timer command queue, so has the potential to transition the timer service/ daemon task out of the Blocked state. If calling \doxylink{timers_8h_a6d89ca6afb6e692e98932b5038c9e14a}{x\+Timer\+Change\+Period\+From\+ISR()} causes the timer service/daemon task to leave the Blocked state, and the timer service/daemon task has a priority equal to or greater than the currently executing task (the task that was interrupted), then \texorpdfstring{$\ast$}{*}px\+Higher\+Priority\+Task\+Woken will get set to pd\+TRUE internally within the \doxylink{timers_8h_a6d89ca6afb6e692e98932b5038c9e14a}{x\+Timer\+Change\+Period\+From\+ISR()} function. If \doxylink{timers_8h_a6d89ca6afb6e692e98932b5038c9e14a}{x\+Timer\+Change\+Period\+From\+ISR()} sets this value to pd\+TRUE then a context switch should be performed before the interrupt exits.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pd\+FAIL will be returned if the command to change the timers period could not be sent to the timer command queue. pd\+PASS will be returned if the command was successfully sent to the timer command queue. When the command is actually processed will depend on the priority of the timer service/daemon task relative to other tasks in the system. The timer service/daemon task priority is set by the config\+TIMER\+\_\+\+TASK\+\_\+\+PRIORITY configuration constant.
+\end{DoxyReturn}
+Example usage\+: \begin{DoxyVerb}* // This scenario assumes xTimer has already been created and started.  When
+* // an interrupt occurs, the period of xTimer should be changed to 500ms.
+*
+* // The interrupt service routine that changes the period of xTimer.
+* void vAnExampleInterruptServiceRoutine( void )
+* {
+* BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+*
+*     // The interrupt has occurred - change the period of xTimer to 500ms.
+*     // xHigherPriorityTaskWoken was set to pdFALSE where it was defined
+*     // (within this function).  As this is an interrupt service routine, only
+*     // FreeRTOS API functions that end in "FromISR" can be used.
+*     if( xTimerChangePeriodFromISR( xTimer, &xHigherPriorityTaskWoken ) != pdPASS )
+*     {
+*         // The command to change the timers period was not executed
+*         // successfully.  Take appropriate action here.
+*     }
+*
+*     // If xHigherPriorityTaskWoken equals pdTRUE, then a context switch
+*     // should be performed.  The syntax required to perform a context switch
+*     // from inside an ISR varies from port to port, and from compiler to
+*     // compiler.  Inspect the demos for the port you are using to find the
+*     // actual syntax required.
+*     if( xHigherPriorityTaskWoken != pdFALSE )
+*     {
+*         // Call the interrupt safe yield function here (actual function
+*         // depends on the FreeRTOS port being used).
+*     }
+* }
+* \end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l01020}{1020}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+\Hypertarget{timers_8h_a8c8e21f05ebe92e15449addc5d269d10}\index{timers.h@{timers.h}!xTimerDelete@{xTimerDelete}}
+\index{xTimerDelete@{xTimerDelete}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{xTimerDelete}{xTimerDelete}}
+{\footnotesize\ttfamily \label{timers_8h_a8c8e21f05ebe92e15449addc5d269d10} 
+\#define x\+Timer\+Delete(\begin{DoxyParamCaption}\item[{}]{x\+Timer}{, }\item[{}]{x\+Ticks\+To\+Wait}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{timers_8h_a4a129682fc4bb988a364058ed6f71013}{xTimerGenericCommand}}(\ (\ xTimer\ ),\ \mbox{\hyperlink{timers_8h_a5a5586339a9dbc1320153fd96a1c2f33}{tmrCOMMAND\_DELETE}},\ 0U,\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}},\ (\ xTicksToWait\ )\ )}
+
+\end{DoxyCode}
+\doxylink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t} \doxylink{timers_8h_a8c8e21f05ebe92e15449addc5d269d10}{x\+Timer\+Delete( Timer\+Handle\+\_\+t x\+Timer, Tick\+Type\+\_\+t x\+Ticks\+To\+Wait )};
+
+Timer functionality is provided by a timer service/daemon task. Many of the public Free\+RTOS timer API functions send commands to the timer service task through a queue called the timer command queue. The timer command queue is private to the kernel itself and is not directly accessible to application code. The length of the timer command queue is set by the config\+TIMER\+\_\+\+QUEUE\+\_\+\+LENGTH configuration constant.
+
+\doxylink{timers_8h_a8c8e21f05ebe92e15449addc5d269d10}{x\+Timer\+Delete()} deletes a timer that was previously created using the x\+Timer\+Create() API function.
+
+The config\+USE\+\_\+\+TIMERS configuration constant must be set to 1 for \doxylink{timers_8h_a8c8e21f05ebe92e15449addc5d269d10}{x\+Timer\+Delete()} to be available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Timer} & The handle of the timer being deleted.\\
+\hline
+{\em x\+Ticks\+To\+Wait} & Specifies the time, in ticks, that the calling task should be held in the Blocked state to wait for the delete command to be successfully sent to the timer command queue, should the queue already be full when \doxylink{timers_8h_a8c8e21f05ebe92e15449addc5d269d10}{x\+Timer\+Delete()} was called. x\+Ticks\+To\+Wait is ignored if \doxylink{timers_8h_a8c8e21f05ebe92e15449addc5d269d10}{x\+Timer\+Delete()} is called before the scheduler is started.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pd\+FAIL will be returned if the delete command could not be sent to the timer command queue even after x\+Ticks\+To\+Wait ticks had passed. pd\+PASS will be returned if the command was successfully sent to the timer command queue. When the command is actually processed will depend on the priority of the timer service/daemon task relative to other tasks in the system. The timer service/daemon task priority is set by the config\+TIMER\+\_\+\+TASK\+\_\+\+PRIORITY configuration constant.
+\end{DoxyReturn}
+Example usage\+:
+
+See the \doxylink{timers_8h_ab12eac1c69a3437b8161ce81ff34b2f4}{x\+Timer\+Change\+Period()} API function example usage scenario. 
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l00670}{670}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+\Hypertarget{timers_8h_a4a129682fc4bb988a364058ed6f71013}\index{timers.h@{timers.h}!xTimerGenericCommand@{xTimerGenericCommand}}
+\index{xTimerGenericCommand@{xTimerGenericCommand}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{xTimerGenericCommand}{xTimerGenericCommand}}
+{\footnotesize\ttfamily \label{timers_8h_a4a129682fc4bb988a364058ed6f71013} 
+\#define x\+Timer\+Generic\+Command(\begin{DoxyParamCaption}\item[{}]{x\+Timer}{, }\item[{}]{x\+Command\+ID}{, }\item[{}]{x\+Optional\+Value}{, }\item[{}]{px\+Higher\+Priority\+Task\+Woken}{, }\item[{}]{x\+Ticks\+To\+Wait}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ (\ (\ xCommandID\ )\ <\ \mbox{\hyperlink{timers_8h_afab5e13e40f49f678d62925ab8bc44a1}{tmrFIRST\_FROM\_ISR\_COMMAND}}\ ?\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ xTimerGenericCommandFromTask(\ xTimer,\ xCommandID,\ xOptionalValue,\ pxHigherPriorityTaskWoken,\ xTicksToWait\ )\ :\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \mbox{\hyperlink{timers_8h_a5a58ac97f6aaf4d912be1e4390a4b5c7}{xTimerGenericCommandFromISR}}(\ xTimer,\ xCommandID,\ xOptionalValue,\ pxHigherPriorityTaskWoken,\ xTicksToWait\ )\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l01372}{1372}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+\Hypertarget{timers_8h_a8081b4541b752908dc55df2693e53287}\index{timers.h@{timers.h}!xTimerReset@{xTimerReset}}
+\index{xTimerReset@{xTimerReset}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{xTimerReset}{xTimerReset}}
+{\footnotesize\ttfamily \label{timers_8h_a8081b4541b752908dc55df2693e53287} 
+\#define x\+Timer\+Reset(\begin{DoxyParamCaption}\item[{}]{x\+Timer}{, }\item[{}]{x\+Ticks\+To\+Wait}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{timers_8h_a4a129682fc4bb988a364058ed6f71013}{xTimerGenericCommand}}(\ (\ xTimer\ ),\ \mbox{\hyperlink{timers_8h_a0a63f701c021371d186adca7c590e923}{tmrCOMMAND\_RESET}},\ (\ \mbox{\hyperlink{task_8h_a753ecfe23e7386066ecccad5d16422f7}{xTaskGetTickCount}}()\ ),\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}},\ (\ xTicksToWait\ )\ )}
+
+\end{DoxyCode}
+\doxylink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t} \doxylink{timers_8h_a8081b4541b752908dc55df2693e53287}{x\+Timer\+Reset( Timer\+Handle\+\_\+t x\+Timer, Tick\+Type\+\_\+t x\+Ticks\+To\+Wait )};
+
+Timer functionality is provided by a timer service/daemon task. Many of the public Free\+RTOS timer API functions send commands to the timer service task through a queue called the timer command queue. The timer command queue is private to the kernel itself and is not directly accessible to application code. The length of the timer command queue is set by the config\+TIMER\+\_\+\+QUEUE\+\_\+\+LENGTH configuration constant.
+
+\doxylink{timers_8h_a8081b4541b752908dc55df2693e53287}{x\+Timer\+Reset()} re-\/starts a timer that was previously created using the x\+Timer\+Create() API function. If the timer had already been started and was already in the active state, then \doxylink{timers_8h_a8081b4541b752908dc55df2693e53287}{x\+Timer\+Reset()} will cause the timer to re-\/evaluate its expiry time so that it is relative to when \doxylink{timers_8h_a8081b4541b752908dc55df2693e53287}{x\+Timer\+Reset()} was called. If the timer was in the dormant state then \doxylink{timers_8h_a8081b4541b752908dc55df2693e53287}{x\+Timer\+Reset()} has equivalent functionality to the \doxylink{timers_8h_a3a9b838f48991e852ce05c986b0eeb8c}{x\+Timer\+Start()} API function.
+
+Resetting a timer ensures the timer is in the active state. If the timer is not stopped, deleted, or reset in the mean time, the callback function associated with the timer will get called \textquotesingle{}n\textquotesingle{} ticks after \doxylink{timers_8h_a8081b4541b752908dc55df2693e53287}{x\+Timer\+Reset()} was called, where \textquotesingle{}n\textquotesingle{} is the timers defined period.
+
+It is valid to call \doxylink{timers_8h_a8081b4541b752908dc55df2693e53287}{x\+Timer\+Reset()} before the scheduler has been started, but when this is done the timer will not actually start until the scheduler is started, and the timers expiry time will be relative to when the scheduler is started, not relative to when \doxylink{timers_8h_a8081b4541b752908dc55df2693e53287}{x\+Timer\+Reset()} was called.
+
+The config\+USE\+\_\+\+TIMERS configuration constant must be set to 1 for \doxylink{timers_8h_a8081b4541b752908dc55df2693e53287}{x\+Timer\+Reset()} to be available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Timer} & The handle of the timer being reset/started/restarted.\\
+\hline
+{\em x\+Ticks\+To\+Wait} & Specifies the time, in ticks, that the calling task should be held in the Blocked state to wait for the reset command to be successfully sent to the timer command queue, should the queue already be full when \doxylink{timers_8h_a8081b4541b752908dc55df2693e53287}{x\+Timer\+Reset()} was called. x\+Ticks\+To\+Wait is ignored if \doxylink{timers_8h_a8081b4541b752908dc55df2693e53287}{x\+Timer\+Reset()} is called before the scheduler is started.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pd\+FAIL will be returned if the reset command could not be sent to the timer command queue even after x\+Ticks\+To\+Wait ticks had passed. pd\+PASS will be returned if the command was successfully sent to the timer command queue. When the command is actually processed will depend on the priority of the timer service/daemon task relative to other tasks in the system, although the timers expiry time is relative to when \doxylink{timers_8h_a3a9b838f48991e852ce05c986b0eeb8c}{x\+Timer\+Start()} is actually called. The timer service/daemon task priority is set by the config\+TIMER\+\_\+\+TASK\+\_\+\+PRIORITY configuration constant.
+\end{DoxyReturn}
+Example usage\+: \begin{DoxyVerb}* // When a key is pressed, an LCD back-light is switched on.  If 5 seconds pass
+* // without a key being pressed, then the LCD back-light is switched off.  In
+* // this case, the timer is a one-shot timer.
+*
+* TimerHandle_t xBacklightTimer = NULL;
+*
+* // The callback function assigned to the one-shot timer.  In this case the
+* // parameter is not used.
+* void vBacklightTimerCallback( TimerHandle_t pxTimer )
+* {
+*     // The timer expired, therefore 5 seconds must have passed since a key
+*     // was pressed.  Switch off the LCD back-light.
+*     vSetBacklightState( BACKLIGHT_OFF );
+* }
+*
+* // The key press event handler.
+* void vKeyPressEventHandler( char cKey )
+* {
+*     // Ensure the LCD back-light is on, then reset the timer that is
+*     // responsible for turning the back-light off after 5 seconds of
+*     // key inactivity.  Wait 10 ticks for the command to be successfully sent
+*     // if it cannot be sent immediately.
+*     vSetBacklightState( BACKLIGHT_ON );
+*     if( xTimerReset( xBacklightTimer, 100 ) != pdPASS )
+*     {
+*         // The reset command was not executed successfully.  Take appropriate
+*         // action here.
+*     }
+*
+*     // Perform the rest of the key processing here.
+* }
+*
+* void main( void )
+* {
+* int32_t x;
+*
+*     // Create then start the one-shot timer that is responsible for turning
+*     // the back-light off if no keys are pressed within a 5 second period.
+*     xBacklightTimer = xTimerCreate( "BacklightTimer",           // Just a text name, not used by the kernel.
+*                                     ( 5000 / portTICK_PERIOD_MS), // The timer period in ticks.
+*                                     pdFALSE,                    // The timer is a one-shot timer.
+*                                     0,                          // The id is not used by the callback so can take any value.
+*                                     vBacklightTimerCallback     // The callback function that switches the LCD back-light off.
+*                                   );
+*
+*     if( xBacklightTimer == NULL )
+*     {
+*         // The timer was not created.
+*     }
+*     else
+*     {
+*         // Start the timer.  No block time is specified, and even if one was
+*         // it would be ignored because the scheduler has not yet been
+*         // started.
+*         if( xTimerStart( xBacklightTimer, 0 ) != pdPASS )
+*         {
+*             // The timer could not be set into the Active state.
+*         }
+*     }
+*
+*     // ...
+*     // Create tasks here.
+*     // ...
+*
+*     // Starting the scheduler will start the timer running as it has already
+*     // been set into the active state.
+*     vTaskStartScheduler();
+*
+*     // Should not reach here.
+*     for( ;; );
+* }
+* \end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l00795}{795}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+\Hypertarget{timers_8h_a448138d0cebf76044f107ca56c842230}\index{timers.h@{timers.h}!xTimerResetFromISR@{xTimerResetFromISR}}
+\index{xTimerResetFromISR@{xTimerResetFromISR}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{xTimerResetFromISR}{xTimerResetFromISR}}
+{\footnotesize\ttfamily \label{timers_8h_a448138d0cebf76044f107ca56c842230} 
+\#define x\+Timer\+Reset\+From\+ISR(\begin{DoxyParamCaption}\item[{}]{x\+Timer}{, }\item[{}]{px\+Higher\+Priority\+Task\+Woken}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{timers_8h_a4a129682fc4bb988a364058ed6f71013}{xTimerGenericCommand}}(\ (\ xTimer\ ),\ \mbox{\hyperlink{timers_8h_a1d69bd5e47301570a4aa149bd868534a}{tmrCOMMAND\_RESET\_FROM\_ISR}},\ (\ \mbox{\hyperlink{task_8h_a092be3fd5752625303c307620be523ff}{xTaskGetTickCountFromISR}}()\ ),\ (\ pxHigherPriorityTaskWoken\ ),\ 0U\ )}
+
+\end{DoxyCode}
+\doxylink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t} \doxylink{timers_8h_a448138d0cebf76044f107ca56c842230}{x\+Timer\+Reset\+From\+ISR(   Timer\+Handle\+\_\+t x\+Timer,                                    Base\+Type\+\_\+t \texorpdfstring{$\ast$}{*}px\+Higher\+Priority\+Task\+Woken )};
+
+A version of \doxylink{timers_8h_a8081b4541b752908dc55df2693e53287}{x\+Timer\+Reset()} that can be called from an interrupt service routine.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Timer} & The handle of the timer that is to be started, reset, or restarted.\\
+\hline
+{\em px\+Higher\+Priority\+Task\+Woken} & The timer service/daemon task spends most of its time in the Blocked state, waiting for messages to arrive on the timer command queue. Calling \doxylink{timers_8h_a448138d0cebf76044f107ca56c842230}{x\+Timer\+Reset\+From\+ISR()} writes a message to the timer command queue, so has the potential to transition the timer service/daemon task out of the Blocked state. If calling \doxylink{timers_8h_a448138d0cebf76044f107ca56c842230}{x\+Timer\+Reset\+From\+ISR()} causes the timer service/daemon task to leave the Blocked state, and the timer service/ daemon task has a priority equal to or greater than the currently executing task (the task that was interrupted), then \texorpdfstring{$\ast$}{*}px\+Higher\+Priority\+Task\+Woken will get set to pd\+TRUE internally within the \doxylink{timers_8h_a448138d0cebf76044f107ca56c842230}{x\+Timer\+Reset\+From\+ISR()} function. If \doxylink{timers_8h_a448138d0cebf76044f107ca56c842230}{x\+Timer\+Reset\+From\+ISR()} sets this value to pd\+TRUE then a context switch should be performed before the interrupt exits.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pd\+FAIL will be returned if the reset command could not be sent to the timer command queue. pd\+PASS will be returned if the command was successfully sent to the timer command queue. When the command is actually processed will depend on the priority of the timer service/daemon task relative to other tasks in the system, although the timers expiry time is relative to when \doxylink{timers_8h_a448138d0cebf76044f107ca56c842230}{x\+Timer\+Reset\+From\+ISR()} is actually called. The timer service/daemon task priority is set by the config\+TIMER\+\_\+\+TASK\+\_\+\+PRIORITY configuration constant.
+\end{DoxyReturn}
+Example usage\+: \begin{DoxyVerb}* // This scenario assumes xBacklightTimer has already been created.  When a
+* // key is pressed, an LCD back-light is switched on.  If 5 seconds pass
+* // without a key being pressed, then the LCD back-light is switched off.  In
+* // this case, the timer is a one-shot timer, and unlike the example given for
+* // the xTimerReset() function, the key press event handler is an interrupt
+* // service routine.
+*
+* // The callback function assigned to the one-shot timer.  In this case the
+* // parameter is not used.
+* void vBacklightTimerCallback( TimerHandle_t pxTimer )
+* {
+*     // The timer expired, therefore 5 seconds must have passed since a key
+*     // was pressed.  Switch off the LCD back-light.
+*     vSetBacklightState( BACKLIGHT_OFF );
+* }
+*
+* // The key press interrupt service routine.
+* void vKeyPressEventInterruptHandler( void )
+* {
+* BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+*
+*     // Ensure the LCD back-light is on, then reset the timer that is
+*     // responsible for turning the back-light off after 5 seconds of
+*     // key inactivity.  This is an interrupt service routine so can only
+*     // call FreeRTOS API functions that end in "FromISR".
+*     vSetBacklightState( BACKLIGHT_ON );
+*
+*     // xTimerStartFromISR() or xTimerResetFromISR() could be called here
+*     // as both cause the timer to re-calculate its expiry time.
+*     // xHigherPriorityTaskWoken was initialised to pdFALSE when it was
+*     // declared (in this function).
+*     if( xTimerResetFromISR( xBacklightTimer, &xHigherPriorityTaskWoken ) != pdPASS )
+*     {
+*         // The reset command was not executed successfully.  Take appropriate
+*         // action here.
+*     }
+*
+*     // Perform the rest of the key processing here.
+*
+*     // If xHigherPriorityTaskWoken equals pdTRUE, then a context switch
+*     // should be performed.  The syntax required to perform a context switch
+*     // from inside an ISR varies from port to port, and from compiler to
+*     // compiler.  Inspect the demos for the port you are using to find the
+*     // actual syntax required.
+*     if( xHigherPriorityTaskWoken != pdFALSE )
+*     {
+*         // Call the interrupt safe yield function here (actual function
+*         // depends on the FreeRTOS port being used).
+*     }
+* }
+* \end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l01107}{1107}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+\Hypertarget{timers_8h_a3a9b838f48991e852ce05c986b0eeb8c}\index{timers.h@{timers.h}!xTimerStart@{xTimerStart}}
+\index{xTimerStart@{xTimerStart}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{xTimerStart}{xTimerStart}}
+{\footnotesize\ttfamily \label{timers_8h_a3a9b838f48991e852ce05c986b0eeb8c} 
+\#define x\+Timer\+Start(\begin{DoxyParamCaption}\item[{}]{x\+Timer}{, }\item[{}]{x\+Ticks\+To\+Wait}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{timers_8h_a4a129682fc4bb988a364058ed6f71013}{xTimerGenericCommand}}(\ (\ xTimer\ ),\ \mbox{\hyperlink{timers_8h_afc38af63403775cc4ced3995f920343a}{tmrCOMMAND\_START}},\ (\ \mbox{\hyperlink{task_8h_a753ecfe23e7386066ecccad5d16422f7}{xTaskGetTickCount}}()\ ),\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}},\ (\ xTicksToWait\ )\ )}
+
+\end{DoxyCode}
+\doxylink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t} \doxylink{timers_8h_a3a9b838f48991e852ce05c986b0eeb8c}{x\+Timer\+Start( Timer\+Handle\+\_\+t x\+Timer, Tick\+Type\+\_\+t x\+Ticks\+To\+Wait )};
+
+Timer functionality is provided by a timer service/daemon task. Many of the public Free\+RTOS timer API functions send commands to the timer service task through a queue called the timer command queue. The timer command queue is private to the kernel itself and is not directly accessible to application code. The length of the timer command queue is set by the config\+TIMER\+\_\+\+QUEUE\+\_\+\+LENGTH configuration constant.
+
+\doxylink{timers_8h_a3a9b838f48991e852ce05c986b0eeb8c}{x\+Timer\+Start()} starts a timer that was previously created using the x\+Timer\+Create() API function. If the timer had already been started and was already in the active state, then \doxylink{timers_8h_a3a9b838f48991e852ce05c986b0eeb8c}{x\+Timer\+Start()} has equivalent functionality to the \doxylink{timers_8h_a8081b4541b752908dc55df2693e53287}{x\+Timer\+Reset()} API function.
+
+Starting a timer ensures the timer is in the active state. If the timer is not stopped, deleted, or reset in the mean time, the callback function associated with the timer will get called \textquotesingle{}n\textquotesingle{} ticks after \doxylink{timers_8h_a3a9b838f48991e852ce05c986b0eeb8c}{x\+Timer\+Start()} was called, where \textquotesingle{}n\textquotesingle{} is the timers defined period.
+
+It is valid to call \doxylink{timers_8h_a3a9b838f48991e852ce05c986b0eeb8c}{x\+Timer\+Start()} before the scheduler has been started, but when this is done the timer will not actually start until the scheduler is started, and the timers expiry time will be relative to when the scheduler is started, not relative to when \doxylink{timers_8h_a3a9b838f48991e852ce05c986b0eeb8c}{x\+Timer\+Start()} was called.
+
+The config\+USE\+\_\+\+TIMERS configuration constant must be set to 1 for \doxylink{timers_8h_a3a9b838f48991e852ce05c986b0eeb8c}{x\+Timer\+Start()} to be available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Timer} & The handle of the timer being started/restarted.\\
+\hline
+{\em x\+Ticks\+To\+Wait} & Specifies the time, in ticks, that the calling task should be held in the Blocked state to wait for the start command to be successfully sent to the timer command queue, should the queue already be full when \doxylink{timers_8h_a3a9b838f48991e852ce05c986b0eeb8c}{x\+Timer\+Start()} was called. x\+Ticks\+To\+Wait is ignored if \doxylink{timers_8h_a3a9b838f48991e852ce05c986b0eeb8c}{x\+Timer\+Start()} is called before the scheduler is started.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pd\+FAIL will be returned if the start command could not be sent to the timer command queue even after x\+Ticks\+To\+Wait ticks had passed. pd\+PASS will be returned if the command was successfully sent to the timer command queue. When the command is actually processed will depend on the priority of the timer service/daemon task relative to other tasks in the system, although the timers expiry time is relative to when \doxylink{timers_8h_a3a9b838f48991e852ce05c986b0eeb8c}{x\+Timer\+Start()} is actually called. The timer service/daemon task priority is set by the config\+TIMER\+\_\+\+TASK\+\_\+\+PRIORITY configuration constant.
+\end{DoxyReturn}
+Example usage\+:
+
+See the x\+Timer\+Create() API function example usage scenario. 
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l00507}{507}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+\Hypertarget{timers_8h_adab5809f9679e44a343b8dbb8fb7c67f}\index{timers.h@{timers.h}!xTimerStartFromISR@{xTimerStartFromISR}}
+\index{xTimerStartFromISR@{xTimerStartFromISR}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{xTimerStartFromISR}{xTimerStartFromISR}}
+{\footnotesize\ttfamily \label{timers_8h_adab5809f9679e44a343b8dbb8fb7c67f} 
+\#define x\+Timer\+Start\+From\+ISR(\begin{DoxyParamCaption}\item[{}]{x\+Timer}{, }\item[{}]{px\+Higher\+Priority\+Task\+Woken}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{timers_8h_a4a129682fc4bb988a364058ed6f71013}{xTimerGenericCommand}}(\ (\ xTimer\ ),\ \mbox{\hyperlink{timers_8h_add053fdcf41607ba790004590c11844f}{tmrCOMMAND\_START\_FROM\_ISR}},\ (\ \mbox{\hyperlink{task_8h_a092be3fd5752625303c307620be523ff}{xTaskGetTickCountFromISR}}()\ ),\ (\ pxHigherPriorityTaskWoken\ ),\ 0U\ )}
+
+\end{DoxyCode}
+\doxylink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t} \doxylink{timers_8h_adab5809f9679e44a343b8dbb8fb7c67f}{x\+Timer\+Start\+From\+ISR(   Timer\+Handle\+\_\+t x\+Timer,                                    Base\+Type\+\_\+t \texorpdfstring{$\ast$}{*}px\+Higher\+Priority\+Task\+Woken )};
+
+A version of \doxylink{timers_8h_a3a9b838f48991e852ce05c986b0eeb8c}{x\+Timer\+Start()} that can be called from an interrupt service routine.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Timer} & The handle of the timer being started/restarted.\\
+\hline
+{\em px\+Higher\+Priority\+Task\+Woken} & The timer service/daemon task spends most of its time in the Blocked state, waiting for messages to arrive on the timer command queue. Calling \doxylink{timers_8h_adab5809f9679e44a343b8dbb8fb7c67f}{x\+Timer\+Start\+From\+ISR()} writes a message to the timer command queue, so has the potential to transition the timer service/daemon task out of the Blocked state. If calling \doxylink{timers_8h_adab5809f9679e44a343b8dbb8fb7c67f}{x\+Timer\+Start\+From\+ISR()} causes the timer service/daemon task to leave the Blocked state, and the timer service/ daemon task has a priority equal to or greater than the currently executing task (the task that was interrupted), then \texorpdfstring{$\ast$}{*}px\+Higher\+Priority\+Task\+Woken will get set to pd\+TRUE internally within the \doxylink{timers_8h_adab5809f9679e44a343b8dbb8fb7c67f}{x\+Timer\+Start\+From\+ISR()} function. If \doxylink{timers_8h_adab5809f9679e44a343b8dbb8fb7c67f}{x\+Timer\+Start\+From\+ISR()} sets this value to pd\+TRUE then a context switch should be performed before the interrupt exits.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pd\+FAIL will be returned if the start command could not be sent to the timer command queue. pd\+PASS will be returned if the command was successfully sent to the timer command queue. When the command is actually processed will depend on the priority of the timer service/daemon task relative to other tasks in the system, although the timers expiry time is relative to when \doxylink{timers_8h_adab5809f9679e44a343b8dbb8fb7c67f}{x\+Timer\+Start\+From\+ISR()} is actually called. The timer service/daemon task priority is set by the config\+TIMER\+\_\+\+TASK\+\_\+\+PRIORITY configuration constant.
+\end{DoxyReturn}
+Example usage\+: \begin{DoxyVerb}* // This scenario assumes xBacklightTimer has already been created.  When a
+* // key is pressed, an LCD back-light is switched on.  If 5 seconds pass
+* // without a key being pressed, then the LCD back-light is switched off.  In
+* // this case, the timer is a one-shot timer, and unlike the example given for
+* // the xTimerReset() function, the key press event handler is an interrupt
+* // service routine.
+*
+* // The callback function assigned to the one-shot timer.  In this case the
+* // parameter is not used.
+* void vBacklightTimerCallback( TimerHandle_t pxTimer )
+* {
+*     // The timer expired, therefore 5 seconds must have passed since a key
+*     // was pressed.  Switch off the LCD back-light.
+*     vSetBacklightState( BACKLIGHT_OFF );
+* }
+*
+* // The key press interrupt service routine.
+* void vKeyPressEventInterruptHandler( void )
+* {
+* BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+*
+*     // Ensure the LCD back-light is on, then restart the timer that is
+*     // responsible for turning the back-light off after 5 seconds of
+*     // key inactivity.  This is an interrupt service routine so can only
+*     // call FreeRTOS API functions that end in "FromISR".
+*     vSetBacklightState( BACKLIGHT_ON );
+*
+*     // xTimerStartFromISR() or xTimerResetFromISR() could be called here
+*     // as both cause the timer to re-calculate its expiry time.
+*     // xHigherPriorityTaskWoken was initialised to pdFALSE when it was
+*     // declared (in this function).
+*     if( xTimerStartFromISR( xBacklightTimer, &xHigherPriorityTaskWoken ) != pdPASS )
+*     {
+*         // The start command was not executed successfully.  Take appropriate
+*         // action here.
+*     }
+*
+*     // Perform the rest of the key processing here.
+*
+*     // If xHigherPriorityTaskWoken equals pdTRUE, then a context switch
+*     // should be performed.  The syntax required to perform a context switch
+*     // from inside an ISR varies from port to port, and from compiler to
+*     // compiler.  Inspect the demos for the port you are using to find the
+*     // actual syntax required.
+*     if( xHigherPriorityTaskWoken != pdFALSE )
+*     {
+*         // Call the interrupt safe yield function here (actual function
+*         // depends on the FreeRTOS port being used).
+*     }
+* }
+* \end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l00882}{882}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+\Hypertarget{timers_8h_a8327c7fc10aee414cb163b445c5269a4}\index{timers.h@{timers.h}!xTimerStop@{xTimerStop}}
+\index{xTimerStop@{xTimerStop}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{xTimerStop}{xTimerStop}}
+{\footnotesize\ttfamily \label{timers_8h_a8327c7fc10aee414cb163b445c5269a4} 
+\#define x\+Timer\+Stop(\begin{DoxyParamCaption}\item[{}]{x\+Timer}{, }\item[{}]{x\+Ticks\+To\+Wait}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{timers_8h_a4a129682fc4bb988a364058ed6f71013}{xTimerGenericCommand}}(\ (\ xTimer\ ),\ \mbox{\hyperlink{timers_8h_a0cd6f6a41dcd52d2fc06c350f43516c0}{tmrCOMMAND\_STOP}},\ 0U,\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}},\ (\ xTicksToWait\ )\ )}
+
+\end{DoxyCode}
+\doxylink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t} \doxylink{timers_8h_a8327c7fc10aee414cb163b445c5269a4}{x\+Timer\+Stop( Timer\+Handle\+\_\+t x\+Timer, Tick\+Type\+\_\+t x\+Ticks\+To\+Wait )};
+
+Timer functionality is provided by a timer service/daemon task. Many of the public Free\+RTOS timer API functions send commands to the timer service task through a queue called the timer command queue. The timer command queue is private to the kernel itself and is not directly accessible to application code. The length of the timer command queue is set by the config\+TIMER\+\_\+\+QUEUE\+\_\+\+LENGTH configuration constant.
+
+\doxylink{timers_8h_a8327c7fc10aee414cb163b445c5269a4}{x\+Timer\+Stop()} stops a timer that was previously started using either of the The \doxylink{timers_8h_a3a9b838f48991e852ce05c986b0eeb8c}{x\+Timer\+Start()}, \doxylink{timers_8h_a8081b4541b752908dc55df2693e53287}{x\+Timer\+Reset()}, \doxylink{timers_8h_adab5809f9679e44a343b8dbb8fb7c67f}{x\+Timer\+Start\+From\+ISR()}, \doxylink{timers_8h_a448138d0cebf76044f107ca56c842230}{x\+Timer\+Reset\+From\+ISR()}, \doxylink{timers_8h_ab12eac1c69a3437b8161ce81ff34b2f4}{x\+Timer\+Change\+Period()} or \doxylink{timers_8h_a6d89ca6afb6e692e98932b5038c9e14a}{x\+Timer\+Change\+Period\+From\+ISR()} API functions.
+
+Stopping a timer ensures the timer is not in the active state.
+
+The config\+USE\+\_\+\+TIMERS configuration constant must be set to 1 for \doxylink{timers_8h_a8327c7fc10aee414cb163b445c5269a4}{x\+Timer\+Stop()} to be available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Timer} & The handle of the timer being stopped.\\
+\hline
+{\em x\+Ticks\+To\+Wait} & Specifies the time, in ticks, that the calling task should be held in the Blocked state to wait for the stop command to be successfully sent to the timer command queue, should the queue already be full when \doxylink{timers_8h_a8327c7fc10aee414cb163b445c5269a4}{x\+Timer\+Stop()} was called. x\+Ticks\+To\+Wait is ignored if \doxylink{timers_8h_a8327c7fc10aee414cb163b445c5269a4}{x\+Timer\+Stop()} is called before the scheduler is started.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pd\+FAIL will be returned if the stop command could not be sent to the timer command queue even after x\+Ticks\+To\+Wait ticks had passed. pd\+PASS will be returned if the command was successfully sent to the timer command queue. When the command is actually processed will depend on the priority of the timer service/daemon task relative to other tasks in the system. The timer service/daemon task priority is set by the config\+TIMER\+\_\+\+TASK\+\_\+\+PRIORITY configuration constant.
+\end{DoxyReturn}
+Example usage\+:
+
+See the x\+Timer\+Create() API function example usage scenario. 
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l00550}{550}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+\Hypertarget{timers_8h_aef0f53e7ecfaa881621da83d61072db7}\index{timers.h@{timers.h}!xTimerStopFromISR@{xTimerStopFromISR}}
+\index{xTimerStopFromISR@{xTimerStopFromISR}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{xTimerStopFromISR}{xTimerStopFromISR}}
+{\footnotesize\ttfamily \label{timers_8h_aef0f53e7ecfaa881621da83d61072db7} 
+\#define x\+Timer\+Stop\+From\+ISR(\begin{DoxyParamCaption}\item[{}]{x\+Timer}{, }\item[{}]{px\+Higher\+Priority\+Task\+Woken}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{timers_8h_a4a129682fc4bb988a364058ed6f71013}{xTimerGenericCommand}}(\ (\ xTimer\ ),\ \mbox{\hyperlink{timers_8h_acbf988b64a5897a1c030da417cc654de}{tmrCOMMAND\_STOP\_FROM\_ISR}},\ 0,\ (\ pxHigherPriorityTaskWoken\ ),\ 0U\ )}
+
+\end{DoxyCode}
+\doxylink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t} \doxylink{timers_8h_aef0f53e7ecfaa881621da83d61072db7}{x\+Timer\+Stop\+From\+ISR(    Timer\+Handle\+\_\+t x\+Timer,                                    Base\+Type\+\_\+t \texorpdfstring{$\ast$}{*}px\+Higher\+Priority\+Task\+Woken )};
+
+A version of \doxylink{timers_8h_a8327c7fc10aee414cb163b445c5269a4}{x\+Timer\+Stop()} that can be called from an interrupt service routine.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Timer} & The handle of the timer being stopped.\\
+\hline
+{\em px\+Higher\+Priority\+Task\+Woken} & The timer service/daemon task spends most of its time in the Blocked state, waiting for messages to arrive on the timer command queue. Calling \doxylink{timers_8h_aef0f53e7ecfaa881621da83d61072db7}{x\+Timer\+Stop\+From\+ISR()} writes a message to the timer command queue, so has the potential to transition the timer service/daemon task out of the Blocked state. If calling \doxylink{timers_8h_aef0f53e7ecfaa881621da83d61072db7}{x\+Timer\+Stop\+From\+ISR()} causes the timer service/daemon task to leave the Blocked state, and the timer service/ daemon task has a priority equal to or greater than the currently executing task (the task that was interrupted), then \texorpdfstring{$\ast$}{*}px\+Higher\+Priority\+Task\+Woken will get set to pd\+TRUE internally within the \doxylink{timers_8h_aef0f53e7ecfaa881621da83d61072db7}{x\+Timer\+Stop\+From\+ISR()} function. If \doxylink{timers_8h_aef0f53e7ecfaa881621da83d61072db7}{x\+Timer\+Stop\+From\+ISR()} sets this value to pd\+TRUE then a context switch should be performed before the interrupt exits.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pd\+FAIL will be returned if the stop command could not be sent to the timer command queue. pd\+PASS will be returned if the command was successfully sent to the timer command queue. When the command is actually processed will depend on the priority of the timer service/daemon task relative to other tasks in the system. The timer service/daemon task priority is set by the config\+TIMER\+\_\+\+TASK\+\_\+\+PRIORITY configuration constant.
+\end{DoxyReturn}
+Example usage\+: \begin{DoxyVerb}* // This scenario assumes xTimer has already been created and started.  When
+* // an interrupt occurs, the timer should be simply stopped.
+*
+* // The interrupt service routine that stops the timer.
+* void vAnExampleInterruptServiceRoutine( void )
+* {
+* BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+*
+*     // The interrupt has occurred - simply stop the timer.
+*     // xHigherPriorityTaskWoken was set to pdFALSE where it was defined
+*     // (within this function).  As this is an interrupt service routine, only
+*     // FreeRTOS API functions that end in "FromISR" can be used.
+*     if( xTimerStopFromISR( xTimer, &xHigherPriorityTaskWoken ) != pdPASS )
+*     {
+*         // The stop command was not executed successfully.  Take appropriate
+*         // action here.
+*     }
+*
+*     // If xHigherPriorityTaskWoken equals pdTRUE, then a context switch
+*     // should be performed.  The syntax required to perform a context switch
+*     // from inside an ISR varies from port to port, and from compiler to
+*     // compiler.  Inspect the demos for the port you are using to find the
+*     // actual syntax required.
+*     if( xHigherPriorityTaskWoken != pdFALSE )
+*     {
+*         // Call the interrupt safe yield function here (actual function
+*         // depends on the FreeRTOS port being used).
+*     }
+* }
+* \end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l00946}{946}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{timers_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{timers_8h_ac659ed1ec27ec62e10d2f0849e738b60}\index{timers.h@{timers.h}!PendedFunction\_t@{PendedFunction\_t}}
+\index{PendedFunction\_t@{PendedFunction\_t}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{PendedFunction\_t}{PendedFunction\_t}}
+{\footnotesize\ttfamily \label{timers_8h_ac659ed1ec27ec62e10d2f0849e738b60} 
+typedef void(\texorpdfstring{$\ast$}{*} Pended\+Function\+\_\+t) (void \texorpdfstring{$\ast$}{*}arg1, uint32\+\_\+t arg2)}
+
+
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l00089}{89}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+\Hypertarget{timers_8h_a5cf6d1f61ccd4871022ed8ad454c6027}\index{timers.h@{timers.h}!TimerCallbackFunction\_t@{TimerCallbackFunction\_t}}
+\index{TimerCallbackFunction\_t@{TimerCallbackFunction\_t}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{TimerCallbackFunction\_t}{TimerCallbackFunction\_t}}
+{\footnotesize\ttfamily \label{timers_8h_a5cf6d1f61ccd4871022ed8ad454c6027} 
+typedef void(\texorpdfstring{$\ast$}{*} Timer\+Callback\+Function\+\_\+t) (\mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}} x\+Timer)}
+
+
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l00083}{83}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+\Hypertarget{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}\index{timers.h@{timers.h}!TimerHandle\_t@{TimerHandle\_t}}
+\index{TimerHandle\_t@{TimerHandle\_t}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{TimerHandle\_t}{TimerHandle\_t}}
+{\footnotesize\ttfamily \label{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6} 
+typedef struct tmr\+Timer\+Control\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}}}
+
+
+
+Definition at line \mbox{\hyperlink{timers_8h_source_l00078}{78}} of file \mbox{\hyperlink{timers_8h_source}{timers.\+h}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{timers_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{timers_8h_a5007aef53e4cc6aea1aadcdcc72aa9da}\index{timers.h@{timers.h}!pcTimerGetName@{pcTimerGetName}}
+\index{pcTimerGetName@{pcTimerGetName}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{pcTimerGetName()}{pcTimerGetName()}}
+{\footnotesize\ttfamily \label{timers_8h_a5007aef53e4cc6aea1aadcdcc72aa9da} 
+const char \texorpdfstring{$\ast$}{*} pc\+Timer\+Get\+Name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}}}]{x\+Timer}{}\end{DoxyParamCaption})}
+
+\doxylink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t} x\+Timer\+Pend\+Function\+Call\+From\+ISR( Pended\+Function\+\_\+t x\+Function\+To\+Pend,                                            void \texorpdfstring{$\ast$}{*}pv\+Parameter1,                                            uint32\+\_\+t ul\+Parameter2,                                            Base\+Type\+\_\+t \texorpdfstring{$\ast$}{*}px\+Higher\+Priority\+Task\+Woken );
+
+Used from application interrupt service routines to defer the execution of a function to the RTOS daemon task (the timer service task, hence this function is implemented in \doxylink{timers_8c}{timers.\+c} and is prefixed with \textquotesingle{}Timer\textquotesingle{}).
+
+Ideally an interrupt service routine (ISR) is kept as short as possible, but sometimes an ISR either has a lot of processing to do, or needs to perform processing that is not deterministic. In these cases x\+Timer\+Pend\+Function\+Call\+From\+ISR() can be used to defer processing of a function to the RTOS daemon task.
+
+A mechanism is provided that allows the interrupt to return directly to the task that will subsequently execute the pended callback function. This allows the callback function to execute contiguously in time with the interrupt -\/ just as if the callback had executed in the interrupt itself.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Function\+To\+Pend} & The function to execute from the timer service/ daemon task. The function must conform to the \doxylink{timers_8h_ac659ed1ec27ec62e10d2f0849e738b60}{Pended\+Function\+\_\+t} prototype.\\
+\hline
+{\em pv\+Parameter1} & The value of the callback function\textquotesingle{}s first parameter. The parameter has a void \texorpdfstring{$\ast$}{*} type to allow it to be used to pass any type. For example, unsigned longs can be cast to a void \texorpdfstring{$\ast$}{*}, or the void \texorpdfstring{$\ast$}{*} can be used to point to a structure.\\
+\hline
+{\em ul\+Parameter2} & The value of the callback function\textquotesingle{}s second parameter.\\
+\hline
+{\em px\+Higher\+Priority\+Task\+Woken} & As mentioned above, calling this function will result in a message being sent to the timer daemon task. If the priority of the timer daemon task (which is set using config\+TIMER\+\_\+\+TASK\+\_\+\+PRIORITY in Free\+RTOSConfig.\+h) is higher than the priority of the currently running task (the task the interrupt interrupted) then \texorpdfstring{$\ast$}{*}px\+Higher\+Priority\+Task\+Woken will be set to pd\+TRUE within x\+Timer\+Pend\+Function\+Call\+From\+ISR(), indicating that a context switch should be requested before the interrupt exits. For that reason \texorpdfstring{$\ast$}{*}px\+Higher\+Priority\+Task\+Woken must be initialised to pd\+FALSE. See the example code below.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pd\+PASS is returned if the message was successfully sent to the timer daemon task, otherwise pd\+FALSE is returned.
+\end{DoxyReturn}
+Example usage\+: \begin{DoxyVerb}*
+*  // The callback function that will execute in the context of the daemon task.
+*  // Note callback functions must all use this same prototype.
+*  void vProcessInterface( void *pvParameter1, uint32_t ulParameter2 )
+*  {
+*      BaseType_t xInterfaceToService;
+*
+*      // The interface that requires servicing is passed in the second
+*      // parameter.  The first parameter is not used in this case.
+*      xInterfaceToService = ( BaseType_t ) ulParameter2;
+*
+*      // ...Perform the processing here...
+*  }
+*
+*  // An ISR that receives data packets from multiple interfaces
+*  void vAnISR( void )
+*  {
+*      BaseType_t xInterfaceToService, xHigherPriorityTaskWoken;
+*
+*      // Query the hardware to determine which interface needs processing.
+*      xInterfaceToService = prvCheckInterfaces();
+*
+*      // The actual processing is to be deferred to a task.  Request the
+*      // vProcessInterface() callback function is executed, passing in the
+*      // number of the interface that needs processing.  The interface to
+*      // service is passed in the second parameter.  The first parameter is
+*      // not used in this case.
+*      xHigherPriorityTaskWoken = pdFALSE;
+*      xTimerPendFunctionCallFromISR( vProcessInterface, NULL, ( uint32_t ) xInterfaceToService, &xHigherPriorityTaskWoken );
+*
+*      // If xHigherPriorityTaskWoken is now set to pdTRUE then a context
+*      // switch should be requested.  The macro used is port specific and will
+*      // be either portYIELD_FROM_ISR() or portEND_SWITCHING_ISR() - refer to
+*      // the documentation page for the port being used.
+*      portYIELD_FROM_ISR( xHigherPriorityTaskWoken );
+*
+*  }
+* \end{DoxyVerb}
+ \doxylink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t} x\+Timer\+Pend\+Function\+Call( Pended\+Function\+\_\+t x\+Function\+To\+Pend,                                    void \texorpdfstring{$\ast$}{*}pv\+Parameter1,                                    uint32\+\_\+t ul\+Parameter2,                                    Tick\+Type\+\_\+t x\+Ticks\+To\+Wait );
+
+Used to defer the execution of a function to the RTOS daemon task (the timer service task, hence this function is implemented in \doxylink{timers_8c}{timers.\+c} and is prefixed with \textquotesingle{}Timer\textquotesingle{}).
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Function\+To\+Pend} & The function to execute from the timer service/ daemon task. The function must conform to the \doxylink{timers_8h_ac659ed1ec27ec62e10d2f0849e738b60}{Pended\+Function\+\_\+t} prototype.\\
+\hline
+{\em pv\+Parameter1} & The value of the callback function\textquotesingle{}s first parameter. The parameter has a void \texorpdfstring{$\ast$}{*} type to allow it to be used to pass any type. For example, unsigned longs can be cast to a void \texorpdfstring{$\ast$}{*}, or the void \texorpdfstring{$\ast$}{*} can be used to point to a structure.\\
+\hline
+{\em ul\+Parameter2} & The value of the callback function\textquotesingle{}s second parameter.\\
+\hline
+{\em x\+Ticks\+To\+Wait} & Calling this function will result in a message being sent to the timer daemon task on a queue. x\+Ticks\+To\+Wait is the amount of time the calling task should remain in the Blocked state (so not using any processing time) for space to become available on the timer queue if the queue is found to be full.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pd\+PASS is returned if the message was successfully sent to the timer daemon task, otherwise pd\+FALSE is returned. const char \texorpdfstring{$\ast$}{*} const \doxylink{timers_8h_a5007aef53e4cc6aea1aadcdcc72aa9da}{pc\+Timer\+Get\+Name( Timer\+Handle\+\_\+t x\+Timer )};
+\end{DoxyReturn}
+Returns the name that was assigned to a timer when the timer was created.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Timer} & The handle of the timer being queried.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The name assigned to the timer specified by the x\+Timer parameter. 
+\end{DoxyReturn}
+\Hypertarget{timers_8h_a116df5c5464393c6aeda6ecec6c9e916}\index{timers.h@{timers.h}!pvTimerGetTimerID@{pvTimerGetTimerID}}
+\index{pvTimerGetTimerID@{pvTimerGetTimerID}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{pvTimerGetTimerID()}{pvTimerGetTimerID()}}
+{\footnotesize\ttfamily \label{timers_8h_a116df5c5464393c6aeda6ecec6c9e916} 
+void \texorpdfstring{$\ast$}{*} pv\+Timer\+Get\+Timer\+ID (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}}}]{x\+Timer}{}\end{DoxyParamCaption})}
+
+\doxylink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t} x\+Timer\+Create(  const char \texorpdfstring{$\ast$}{*} const pc\+Timer\+Name,                                Tick\+Type\+\_\+t x\+Timer\+Period\+In\+Ticks,                                Base\+Type\+\_\+t x\+Auto\+Reload,                                void \texorpdfstring{$\ast$}{*} pv\+Timer\+ID,                                Timer\+Callback\+Function\+\_\+t px\+Callback\+Function );
+
+Creates a new software timer instance, and returns a handle by which the created software timer can be referenced.
+
+Internally, within the Free\+RTOS implementation, software timers use a block of memory, in which the timer data structure is stored. If a software timer is created using x\+Timer\+Create() then the required memory is automatically dynamically allocated inside the x\+Timer\+Create() function. (see \href{https://www.FreeRTOS.org/a00111.html}{\texttt{https\+://www.\+Free\+RTOS.\+org/a00111.\+html}}). If a software timer is created using x\+Timer\+Create\+Static() then the application writer must provide the memory that will get used by the software timer. x\+Timer\+Create\+Static() therefore allows a software timer to be created without using any dynamic memory allocation.
+
+Timers are created in the dormant state. The \doxylink{timers_8h_a3a9b838f48991e852ce05c986b0eeb8c}{x\+Timer\+Start()}, \doxylink{timers_8h_a8081b4541b752908dc55df2693e53287}{x\+Timer\+Reset()}, \doxylink{timers_8h_adab5809f9679e44a343b8dbb8fb7c67f}{x\+Timer\+Start\+From\+ISR()}, \doxylink{timers_8h_a448138d0cebf76044f107ca56c842230}{x\+Timer\+Reset\+From\+ISR()}, \doxylink{timers_8h_ab12eac1c69a3437b8161ce81ff34b2f4}{x\+Timer\+Change\+Period()} and \doxylink{timers_8h_a6d89ca6afb6e692e98932b5038c9e14a}{x\+Timer\+Change\+Period\+From\+ISR()} API functions can all be used to transition a timer into the active state.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pc\+Timer\+Name} & A text name that is assigned to the timer. This is done purely to assist debugging. The kernel itself only ever references a timer by its handle, and never by its name.\\
+\hline
+{\em x\+Timer\+Period\+In\+Ticks} & The timer period. The time is defined in tick periods so the constant port\+TICK\+\_\+\+PERIOD\+\_\+\+MS can be used to convert a time that has been specified in milliseconds. For example, if the timer must expire after 100 ticks, then x\+Timer\+Period\+In\+Ticks should be set to 100. Alternatively, if the timer must expire after 500ms, then x\+Period can be set to ( 500 / port\+TICK\+\_\+\+PERIOD\+\_\+\+MS ) provided config\+TICK\+\_\+\+RATE\+\_\+\+HZ is less than or equal to 1000. Time timer period must be greater than 0.\\
+\hline
+{\em x\+Auto\+Reload} & If x\+Auto\+Reload is set to pd\+TRUE then the timer will expire repeatedly with a frequency set by the x\+Timer\+Period\+In\+Ticks parameter. If x\+Auto\+Reload is set to pd\+FALSE then the timer will be a one-\/shot timer and enter the dormant state after it expires.\\
+\hline
+{\em pv\+Timer\+ID} & An identifier that is assigned to the timer being created. Typically this would be used in the timer callback function to identify which timer expired when the same callback function is assigned to more than one timer.\\
+\hline
+{\em px\+Callback\+Function} & The function to call when the timer expires. Callback functions must have the prototype defined by \doxylink{timers_8h_a5cf6d1f61ccd4871022ed8ad454c6027}{Timer\+Callback\+Function\+\_\+t}, which is "{}void v\+Callback\+Function( Timer\+Handle\+\_\+t x\+Timer );"{}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If the timer is successfully created then a handle to the newly created timer is returned. If the timer cannot be created because there is insufficient Free\+RTOS heap remaining to allocate the timer structures then NULL is returned.
+\end{DoxyReturn}
+Example usage\+: \begin{DoxyVerb}* #define NUM_TIMERS 5
+*
+* // An array to hold handles to the created timers.
+* TimerHandle_t xTimers[ NUM_TIMERS ];
+*
+* // An array to hold a count of the number of times each timer expires.
+* int32_t lExpireCounters[ NUM_TIMERS ] = { 0 };
+*
+* // Define a callback function that will be used by multiple timer instances.
+* // The callback function does nothing but count the number of times the
+* // associated timer expires, and stop the timer once the timer has expired
+* // 10 times.
+* void vTimerCallback( TimerHandle_t pxTimer )
+* {
+* int32_t lArrayIndex;
+* const int32_t xMaxExpiryCountBeforeStopping = 10;
+*
+*     // Optionally do something if the pxTimer parameter is NULL.
+*     configASSERT( pxTimer );
+*
+*     // Which timer expired?
+*     lArrayIndex = ( int32_t ) pvTimerGetTimerID( pxTimer );
+*
+*     // Increment the number of times that pxTimer has expired.
+*     lExpireCounters[ lArrayIndex ] += 1;
+*
+*     // If the timer has expired 10 times then stop it from running.
+*     if( lExpireCounters[ lArrayIndex ] == xMaxExpiryCountBeforeStopping )
+*     {
+*         // Do not use a block time if calling a timer API function from a
+*         // timer callback function, as doing so could cause a deadlock!
+*         xTimerStop( pxTimer, 0 );
+*     }
+* }
+*
+* void main( void )
+* {
+* int32_t x;
+*
+*     // Create then start some timers.  Starting the timers before the scheduler
+*     // has been started means the timers will start running immediately that
+*     // the scheduler starts.
+*     for( x = 0; x < NUM_TIMERS; x++ )
+*     {
+*         xTimers[ x ] = xTimerCreate(    "Timer",             // Just a text name, not used by the kernel.
+*                                         ( 100 * ( x + 1 ) ), // The timer period in ticks.
+*                                         pdTRUE,              // The timers will auto-reload themselves when they expire.
+*                                         ( void * ) x,        // Assign each timer a unique id equal to its array index.
+*                                         vTimerCallback       // Each timer calls the same callback when it expires.
+*                                     );
+*
+*         if( xTimers[ x ] == NULL )
+*         {
+*             // The timer was not created.
+*         }
+*         else
+*         {
+*             // Start the timer.  No block time is specified, and even if one was
+*             // it would be ignored because the scheduler has not yet been
+*             // started.
+*             if( xTimerStart( xTimers[ x ], 0 ) != pdPASS )
+*             {
+*                 // The timer could not be set into the Active state.
+*             }
+*         }
+*     }
+*
+*     // ...
+*     // Create tasks here.
+*     // ...
+*
+*     // Starting the scheduler will start the timers running as they have already
+*     // been set into the active state.
+*     vTaskStartScheduler();
+*
+*     // Should not reach here.
+*     for( ;; );
+* }
+* \end{DoxyVerb}
+ \doxylink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t} x\+Timer\+Create\+Static(const char \texorpdfstring{$\ast$}{*} const pc\+Timer\+Name,                                    Tick\+Type\+\_\+t x\+Timer\+Period\+In\+Ticks,                                    Base\+Type\+\_\+t x\+Auto\+Reload,                                    void \texorpdfstring{$\ast$}{*} pv\+Timer\+ID,                                    Timer\+Callback\+Function\+\_\+t px\+Callback\+Function,                                    Static\+Timer\+\_\+t \texorpdfstring{$\ast$}{*}px\+Timer\+Buffer );
+
+Creates a new software timer instance, and returns a handle by which the created software timer can be referenced.
+
+Internally, within the Free\+RTOS implementation, software timers use a block of memory, in which the timer data structure is stored. If a software timer is created using x\+Timer\+Create() then the required memory is automatically dynamically allocated inside the x\+Timer\+Create() function. (see \href{https://www.FreeRTOS.org/a00111.html}{\texttt{https\+://www.\+Free\+RTOS.\+org/a00111.\+html}}). If a software timer is created using x\+Timer\+Create\+Static() then the application writer must provide the memory that will get used by the software timer. x\+Timer\+Create\+Static() therefore allows a software timer to be created without using any dynamic memory allocation.
+
+Timers are created in the dormant state. The \doxylink{timers_8h_a3a9b838f48991e852ce05c986b0eeb8c}{x\+Timer\+Start()}, \doxylink{timers_8h_a8081b4541b752908dc55df2693e53287}{x\+Timer\+Reset()}, \doxylink{timers_8h_adab5809f9679e44a343b8dbb8fb7c67f}{x\+Timer\+Start\+From\+ISR()}, \doxylink{timers_8h_a448138d0cebf76044f107ca56c842230}{x\+Timer\+Reset\+From\+ISR()}, \doxylink{timers_8h_ab12eac1c69a3437b8161ce81ff34b2f4}{x\+Timer\+Change\+Period()} and \doxylink{timers_8h_a6d89ca6afb6e692e98932b5038c9e14a}{x\+Timer\+Change\+Period\+From\+ISR()} API functions can all be used to transition a timer into the active state.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pc\+Timer\+Name} & A text name that is assigned to the timer. This is done purely to assist debugging. The kernel itself only ever references a timer by its handle, and never by its name.\\
+\hline
+{\em x\+Timer\+Period\+In\+Ticks} & The timer period. The time is defined in tick periods so the constant port\+TICK\+\_\+\+PERIOD\+\_\+\+MS can be used to convert a time that has been specified in milliseconds. For example, if the timer must expire after 100 ticks, then x\+Timer\+Period\+In\+Ticks should be set to 100. Alternatively, if the timer must expire after 500ms, then x\+Period can be set to ( 500 / port\+TICK\+\_\+\+PERIOD\+\_\+\+MS ) provided config\+TICK\+\_\+\+RATE\+\_\+\+HZ is less than or equal to 1000. The timer period must be greater than 0.\\
+\hline
+{\em x\+Auto\+Reload} & If x\+Auto\+Reload is set to pd\+TRUE then the timer will expire repeatedly with a frequency set by the x\+Timer\+Period\+In\+Ticks parameter. If x\+Auto\+Reload is set to pd\+FALSE then the timer will be a one-\/shot timer and enter the dormant state after it expires.\\
+\hline
+{\em pv\+Timer\+ID} & An identifier that is assigned to the timer being created. Typically this would be used in the timer callback function to identify which timer expired when the same callback function is assigned to more than one timer.\\
+\hline
+{\em px\+Callback\+Function} & The function to call when the timer expires. Callback functions must have the prototype defined by \doxylink{timers_8h_a5cf6d1f61ccd4871022ed8ad454c6027}{Timer\+Callback\+Function\+\_\+t}, which is "{}void v\+Callback\+Function( Timer\+Handle\+\_\+t x\+Timer );"{}.\\
+\hline
+{\em px\+Timer\+Buffer} & Must point to a variable of type \doxylink{_free_r_t_o_s_8h_a85fc227d111ec21647641e0deddcccc6}{Static\+Timer\+\_\+t}, which will be then be used to hold the software timer\textquotesingle{}s data structures, removing the need for the memory to be allocated dynamically.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If the timer is created then a handle to the created timer is returned. If px\+Timer\+Buffer was NULL then NULL is returned.
+\end{DoxyReturn}
+Example usage\+: \begin{DoxyVerb}*
+* // The buffer used to hold the software timer's data structure.
+* static StaticTimer_t xTimerBuffer;
+*
+* // A variable that will be incremented by the software timer's callback
+* // function.
+* UBaseType_t uxVariableToIncrement = 0;
+*
+* // A software timer callback function that increments a variable passed to
+* // it when the software timer was created.  After the 5th increment the
+* // callback function stops the software timer.
+* static void prvTimerCallback( TimerHandle_t xExpiredTimer )
+* {
+* UBaseType_t *puxVariableToIncrement;
+* BaseType_t xReturned;
+*
+*     // Obtain the address of the variable to increment from the timer ID.
+*     puxVariableToIncrement = ( UBaseType_t * ) pvTimerGetTimerID( xExpiredTimer );
+*
+*     // Increment the variable to show the timer callback has executed.
+*     ( *puxVariableToIncrement )++;
+*
+*     // If this callback has executed the required number of times, stop the
+*     // timer.
+*     if( *puxVariableToIncrement == 5 )
+*     {
+*         // This is called from a timer callback so must not block.
+*         xTimerStop( xExpiredTimer, staticDONT_BLOCK );
+*     }
+* }
+*
+*
+* void main( void )
+* {
+*     // Create the software time.  xTimerCreateStatic() has an extra parameter
+*     // than the normal xTimerCreate() API function.  The parameter is a pointer
+*     // to the StaticTimer_t structure that will hold the software timer
+*     // structure.  If the parameter is passed as NULL then the structure will be
+*     // allocated dynamically, just as if xTimerCreate() had been called.
+*     xTimer = xTimerCreateStatic( "T1",             // Text name for the task.  Helps debugging only.  Not used by FreeRTOS.
+*                                  xTimerPeriod,     // The period of the timer in ticks.
+*                                  pdTRUE,           // This is an auto-reload timer.
+*                                  ( void * ) &uxVariableToIncrement,    // A variable incremented by the software timer's callback function
+*                                  prvTimerCallback, // The function to execute when the timer expires.
+*                                  &xTimerBuffer );  // The buffer that will hold the software timer structure.
+*
+*     // The scheduler has not started yet so a block time is not used.
+*     xReturned = xTimerStart( xTimer, 0 );
+*
+*     // ...
+*     // Create tasks here.
+*     // ...
+*
+*     // Starting the scheduler will start the timers running as they have already
+*     // been set into the active state.
+*     vTaskStartScheduler();
+*
+*     // Should not reach here.
+*     for( ;; );
+* }
+* \end{DoxyVerb}
+ void \texorpdfstring{$\ast$}{*}pv\+Timer\+Get\+Timer\+ID( \doxylink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t} x\+Timer );
+
+Returns the ID assigned to the timer.
+
+IDs are assigned to timers using the pv\+Timer\+ID parameter of the call to x\+Timer\+Created() that was used to create the timer, and by calling the \doxylink{timers_8h_a1f06045a953481dd7012d4c7762990cb}{v\+Timer\+Set\+Timer\+ID()} API function.
+
+If the same callback function is assigned to multiple timers then the timer ID can be used as time specific (timer local) storage.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Timer} & The timer being queried.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The ID assigned to the timer being queried.
+\end{DoxyReturn}
+Example usage\+:
+
+See the x\+Timer\+Create() API function example usage scenario. \Hypertarget{timers_8h_a0e66306f2e9c482a28e750e90eec3d65}\index{timers.h@{timers.h}!uxTimerGetReloadMode@{uxTimerGetReloadMode}}
+\index{uxTimerGetReloadMode@{uxTimerGetReloadMode}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{uxTimerGetReloadMode()}{uxTimerGetReloadMode()}}
+{\footnotesize\ttfamily \label{timers_8h_a0e66306f2e9c482a28e750e90eec3d65} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t}} ux\+Timer\+Get\+Reload\+Mode (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}}}]{x\+Timer}{}\end{DoxyParamCaption})}
+
+\doxylink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBase\+Type\+\_\+t} \doxylink{timers_8h_a0e66306f2e9c482a28e750e90eec3d65}{ux\+Timer\+Get\+Reload\+Mode( Timer\+Handle\+\_\+t x\+Timer )};
+
+Queries a timer to determine if it is an auto-\/reload timer, in which case the timer automatically resets itself each time it expires, or a one-\/shot timer, in which case the timer will only expire once unless it is manually restarted.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Timer} & The handle of the timer being queried.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If the timer is an auto-\/reload timer then pd\+TRUE is returned, otherwise pd\+FALSE is returned. 
+\end{DoxyReturn}
+\Hypertarget{timers_8h_a9b8b0e689aa057d3dcb04e4cc7a6ce5d}\index{timers.h@{timers.h}!vTimerResetState@{vTimerResetState}}
+\index{vTimerResetState@{vTimerResetState}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{vTimerResetState()}{vTimerResetState()}}
+{\footnotesize\ttfamily \label{timers_8h_a9b8b0e689aa057d3dcb04e4cc7a6ce5d} 
+void v\+Timer\+Reset\+State (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{timers_8h_a5585a414eeac64f5713ce0168c733dcd}\index{timers.h@{timers.h}!vTimerSetReloadMode@{vTimerSetReloadMode}}
+\index{vTimerSetReloadMode@{vTimerSetReloadMode}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{vTimerSetReloadMode()}{vTimerSetReloadMode()}}
+{\footnotesize\ttfamily \label{timers_8h_a5585a414eeac64f5713ce0168c733dcd} 
+void v\+Timer\+Set\+Reload\+Mode (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}}}]{x\+Timer}{, }\item[{const \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}}}]{x\+Auto\+Reload}{}\end{DoxyParamCaption})}
+
+void \doxylink{timers_8h_a5585a414eeac64f5713ce0168c733dcd}{v\+Timer\+Set\+Reload\+Mode( Timer\+Handle\+\_\+t x\+Timer, const Base\+Type\+\_\+t x\+Auto\+Reload )};
+
+Updates a timer to be either an auto-\/reload timer, in which case the timer automatically resets itself each time it expires, or a one-\/shot timer, in which case the timer will only expire once unless it is manually restarted.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Timer} & The handle of the timer being updated.\\
+\hline
+{\em x\+Auto\+Reload} & If x\+Auto\+Reload is set to pd\+TRUE then the timer will expire repeatedly with a frequency set by the timer\textquotesingle{}s period (see the x\+Timer\+Period\+In\+Ticks parameter of the x\+Timer\+Create() API function). If x\+Auto\+Reload is set to pd\+FALSE then the timer will be a one-\/shot timer and enter the dormant state after it expires. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{timers_8h_a1f06045a953481dd7012d4c7762990cb}\index{timers.h@{timers.h}!vTimerSetTimerID@{vTimerSetTimerID}}
+\index{vTimerSetTimerID@{vTimerSetTimerID}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{vTimerSetTimerID()}{vTimerSetTimerID()}}
+{\footnotesize\ttfamily \label{timers_8h_a1f06045a953481dd7012d4c7762990cb} 
+void v\+Timer\+Set\+Timer\+ID (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}}}]{x\+Timer}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+New\+ID}{}\end{DoxyParamCaption})}
+
+void \doxylink{timers_8h_a1f06045a953481dd7012d4c7762990cb}{v\+Timer\+Set\+Timer\+ID( Timer\+Handle\+\_\+t x\+Timer, void \texorpdfstring{$\ast$}{*}pv\+New\+ID )};
+
+Sets the ID assigned to the timer.
+
+IDs are assigned to timers using the pv\+Timer\+ID parameter of the call to x\+Timer\+Created() that was used to create the timer.
+
+If the same callback function is assigned to multiple timers then the timer ID can be used as time specific (timer local) storage.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Timer} & The timer being updated.\\
+\hline
+{\em pv\+New\+ID} & The ID to assign to the timer.\\
+\hline
+\end{DoxyParams}
+Example usage\+:
+
+See the x\+Timer\+Create() API function example usage scenario. \Hypertarget{timers_8h_af777ab3e9ac04abd5dd21be739fa1321}\index{timers.h@{timers.h}!xTimerCreateTimerTask@{xTimerCreateTimerTask}}
+\index{xTimerCreateTimerTask@{xTimerCreateTimerTask}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{xTimerCreateTimerTask()}{xTimerCreateTimerTask()}}
+{\footnotesize\ttfamily \label{timers_8h_af777ab3e9ac04abd5dd21be739fa1321} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Timer\+Create\+Timer\+Task (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\doxylink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t} x\+Timer\+Get\+Static\+Buffer( Timer\+Handle\+\_\+t x\+Timer,                                   Static\+Timer\+\_\+t \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} ppx\+Timer\+Buffer );
+
+Retrieve pointer to a statically created timer\textquotesingle{}s data structure buffer. This is the same buffer that is supplied at the time of creation.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Timer} & The timer for which to retrieve the buffer.\\
+\hline
+{\em ppx\+Task\+Buffer} & Used to return a pointer to the timers\textquotesingle{}s data structure buffer.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pd\+TRUE if the buffer was retrieved, pd\+FALSE otherwise. 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:
+% FIG 2
+\Hypertarget{timers_8h_a5a58ac97f6aaf4d912be1e4390a4b5c7}\index{timers.h@{timers.h}!xTimerGenericCommandFromISR@{xTimerGenericCommandFromISR}}
+\index{xTimerGenericCommandFromISR@{xTimerGenericCommandFromISR}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{xTimerGenericCommandFromISR()}{xTimerGenericCommandFromISR()}}
+{\footnotesize\ttfamily \label{timers_8h_a5a58ac97f6aaf4d912be1e4390a4b5c7} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Timer\+Generic\+Command\+From\+ISR (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}}}]{x\+Timer}{, }\item[{const \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}}}]{x\+Command\+ID}{, }\item[{const \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}}}]{x\+Optional\+Value}{, }\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}const}]{px\+Higher\+Priority\+Task\+Woken}{, }\item[{const \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}}}]{x\+Ticks\+To\+Wait}{}\end{DoxyParamCaption})}
+
+\Hypertarget{timers_8h_a930f274da918a2d32afef162123a097f}\index{timers.h@{timers.h}!xTimerGenericCommandFromTask@{xTimerGenericCommandFromTask}}
+\index{xTimerGenericCommandFromTask@{xTimerGenericCommandFromTask}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{xTimerGenericCommandFromTask()}{xTimerGenericCommandFromTask()}}
+{\footnotesize\ttfamily \label{timers_8h_a930f274da918a2d32afef162123a097f} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Timer\+Generic\+Command\+From\+Task (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}}}]{x\+Timer}{, }\item[{const \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}}}]{x\+Command\+ID}{, }\item[{const \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}}}]{x\+Optional\+Value}{, }\item[{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \texorpdfstring{$\ast$}{*}const}]{px\+Higher\+Priority\+Task\+Woken}{, }\item[{const \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}}}]{x\+Ticks\+To\+Wait}{}\end{DoxyParamCaption})}
+
+\Hypertarget{timers_8h_a06cdc26759c622eeb575070064e26025}\index{timers.h@{timers.h}!xTimerGetExpiryTime@{xTimerGetExpiryTime}}
+\index{xTimerGetExpiryTime@{xTimerGetExpiryTime}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{xTimerGetExpiryTime()}{xTimerGetExpiryTime()}}
+{\footnotesize\ttfamily \label{timers_8h_a06cdc26759c622eeb575070064e26025} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}} x\+Timer\+Get\+Expiry\+Time (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}}}]{x\+Timer}{}\end{DoxyParamCaption})}
+
+\doxylink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t} \doxylink{timers_8h_a06cdc26759c622eeb575070064e26025}{x\+Timer\+Get\+Expiry\+Time( Timer\+Handle\+\_\+t x\+Timer )};
+
+Returns the time in ticks at which the timer will expire. If this is less than the current tick count then the expiry time has overflowed from the current time.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Timer} & The handle of the timer being queried.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If the timer is running then the time in ticks at which the timer will next expire is returned. If the timer is not running then the return value is undefined. 
+\end{DoxyReturn}
+\Hypertarget{timers_8h_a2735e79e155b2ca2a3809958ebb7431e}\index{timers.h@{timers.h}!xTimerGetPeriod@{xTimerGetPeriod}}
+\index{xTimerGetPeriod@{xTimerGetPeriod}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{xTimerGetPeriod()}{xTimerGetPeriod()}}
+{\footnotesize\ttfamily \label{timers_8h_a2735e79e155b2ca2a3809958ebb7431e} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t}} x\+Timer\+Get\+Period (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}}}]{x\+Timer}{}\end{DoxyParamCaption})}
+
+\doxylink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{Tick\+Type\+\_\+t} \doxylink{timers_8h_a2735e79e155b2ca2a3809958ebb7431e}{x\+Timer\+Get\+Period( Timer\+Handle\+\_\+t x\+Timer )};
+
+Returns the period of a timer.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Timer} & The handle of the timer being queried.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The period of the timer in ticks. 
+\end{DoxyReturn}
+\Hypertarget{timers_8h_a1d118cb514a0933042157f064cccdb09}\index{timers.h@{timers.h}!xTimerGetReloadMode@{xTimerGetReloadMode}}
+\index{xTimerGetReloadMode@{xTimerGetReloadMode}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{xTimerGetReloadMode()}{xTimerGetReloadMode()}}
+{\footnotesize\ttfamily \label{timers_8h_a1d118cb514a0933042157f064cccdb09} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Timer\+Get\+Reload\+Mode (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}}}]{x\+Timer}{}\end{DoxyParamCaption})}
+
+\doxylink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t} \doxylink{timers_8h_a1d118cb514a0933042157f064cccdb09}{x\+Timer\+Get\+Reload\+Mode( Timer\+Handle\+\_\+t x\+Timer )};
+
+Queries a timer to determine if it is an auto-\/reload timer, in which case the timer automatically resets itself each time it expires, or a one-\/shot timer, in which case the timer will only expire once unless it is manually restarted.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Timer} & The handle of the timer being queried.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If the timer is an auto-\/reload timer then pd\+TRUE is returned, otherwise pd\+FALSE is returned. 
+\end{DoxyReturn}
+\Hypertarget{timers_8h_ad2a0d15a1e213493bd898e748d9f7555}\index{timers.h@{timers.h}!xTimerGetTimerDaemonTaskHandle@{xTimerGetTimerDaemonTaskHandle}}
+\index{xTimerGetTimerDaemonTaskHandle@{xTimerGetTimerDaemonTaskHandle}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{xTimerGetTimerDaemonTaskHandle()}{xTimerGetTimerDaemonTaskHandle()}}
+{\footnotesize\ttfamily \label{timers_8h_ad2a0d15a1e213493bd898e748d9f7555} 
+\mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{Task\+Handle\+\_\+t}} x\+Timer\+Get\+Timer\+Daemon\+Task\+Handle (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\doxylink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{Task\+Handle\+\_\+t} \doxylink{timers_8h_ad2a0d15a1e213493bd898e748d9f7555}{x\+Timer\+Get\+Timer\+Daemon\+Task\+Handle( void )};
+
+Simply returns the handle of the timer service/daemon task. It it not valid to call \doxylink{timers_8h_ad2a0d15a1e213493bd898e748d9f7555}{x\+Timer\+Get\+Timer\+Daemon\+Task\+Handle()} before the scheduler has been started. Here is the caller graph for this function\+:
+% FIG 3
+\Hypertarget{timers_8h_a2cd9b1399fb25203be698f123846dc33}\index{timers.h@{timers.h}!xTimerIsTimerActive@{xTimerIsTimerActive}}
+\index{xTimerIsTimerActive@{xTimerIsTimerActive}!timers.h@{timers.h}}
+\doxysubsubsection{\texorpdfstring{xTimerIsTimerActive()}{xTimerIsTimerActive()}}
+{\footnotesize\ttfamily \label{timers_8h_a2cd9b1399fb25203be698f123846dc33} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Timer\+Is\+Timer\+Active (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{timers_8h_ae2aa96927b4806e5dcfd264ba7bc8bf6}{Timer\+Handle\+\_\+t}}}]{x\+Timer}{}\end{DoxyParamCaption})}
+
+\doxylink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t} \doxylink{timers_8h_a2cd9b1399fb25203be698f123846dc33}{x\+Timer\+Is\+Timer\+Active( Timer\+Handle\+\_\+t x\+Timer )};
+
+Queries a timer to see if it is active or dormant.
+
+A timer will be dormant if\+: 1) It has been created but not started, or 2) It is an expired one-\/shot timer that has not been restarted.
+
+Timers are created in the dormant state. The \doxylink{timers_8h_a3a9b838f48991e852ce05c986b0eeb8c}{x\+Timer\+Start()}, \doxylink{timers_8h_a8081b4541b752908dc55df2693e53287}{x\+Timer\+Reset()}, \doxylink{timers_8h_adab5809f9679e44a343b8dbb8fb7c67f}{x\+Timer\+Start\+From\+ISR()}, \doxylink{timers_8h_a448138d0cebf76044f107ca56c842230}{x\+Timer\+Reset\+From\+ISR()}, \doxylink{timers_8h_ab12eac1c69a3437b8161ce81ff34b2f4}{x\+Timer\+Change\+Period()} and \doxylink{timers_8h_a6d89ca6afb6e692e98932b5038c9e14a}{x\+Timer\+Change\+Period\+From\+ISR()} API functions can all be used to transition a timer into the active state.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Timer} & The timer being queried.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pd\+FALSE will be returned if the timer is dormant. A value other than pd\+FALSE will be returned if the timer is active.
+\end{DoxyReturn}
+Example usage\+: \begin{DoxyVerb}* // This function assumes xTimer has already been created.
+* void vAFunction( TimerHandle_t xTimer )
+* {
+*     if( xTimerIsTimerActive( xTimer ) != pdFALSE ) // or more simply and equivalently "if( xTimerIsTimerActive( xTimer ) )"
+*     {
+*         // xTimer is active, do something.
+*     }
+*     else
+*     {
+*         // xTimer is not active, do something else.
+*     }
+* }
+* \end{DoxyVerb}
+ 

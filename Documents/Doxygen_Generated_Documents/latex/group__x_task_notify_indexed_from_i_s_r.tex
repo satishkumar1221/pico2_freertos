@@ -1,0 +1,59 @@
+\doxysection{x\+Task\+Notify\+Indexed\+From\+ISR }
+\hypertarget{group__x_task_notify_indexed_from_i_s_r}{}\label{group__x_task_notify_indexed_from_i_s_r}\index{xTaskNotifyIndexedFromISR@{xTaskNotifyIndexedFromISR}}
+task. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{task_8h_ab86169cb5493142a9e247e2cf2e583e2}{xTaskNotifyIndexedFromISR}}(\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xTaskToNotify,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxIndexToNotify,\ uint32\_t\ ulValue,\ \mbox{\hyperlink{task_8h_ae8abc4f7da5b6880467daafbf19cd233}{eNotifyAction}}\ eAction,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ *pxHigherPriorityTaskWoken\ );}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{task_8h_a1ed9129068b96a909356bd0369c5ecb0}{xTaskNotifyFromISR}}(\ \mbox{\hyperlink{task_8h_a25b35e6e19ecf894173e7ff95edb96ef}{TaskHandle\_t}}\ xTaskToNotify,\ uint32\_t\ ulValue,\ \mbox{\hyperlink{task_8h_ae8abc4f7da5b6880467daafbf19cd233}{eNotifyAction}}\ eAction,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ *pxHigherPriorityTaskWoken\ );}
+
+\end{DoxyCode}
+
+
+See \href{https://www.FreeRTOS.org/RTOS-task-notifications.html}{\texttt{https\+://www.\+Free\+RTOS.\+org/\+RTOS-\/task-\/notifications.\+html}} for details.
+
+config\+USE\+\_\+\+TASK\+\_\+\+NOTIFICATIONS must be undefined or defined as 1 for these functions to be available.
+
+A version of \doxylink{task_8h_a0261e3cca34893bdfccbca1be2de93d5}{x\+Task\+Notify\+Indexed()} that can be used from an interrupt service routine (ISR).
+
+Each task has a private array of "{}notification values"{} (or \textquotesingle{}notifications\textquotesingle{}), each of which is a 32-\/bit unsigned integer (uint32\+\_\+t). The constant config\+TASK\+\_\+\+NOTIFICATION\+\_\+\+ARRAY\+\_\+\+ENTRIES sets the number of indexes in the array, and (for backward compatibility) defaults to 1 if left undefined. Prior to Free\+RTOS V10.\+4.\+0 there was only one notification value per task.
+
+Events can be sent to a task using an intermediary object. Examples of such objects are queues, semaphores, mutexes and event groups. Task notifications are a method of sending an event directly to a task without the need for such an intermediary object.
+
+A notification sent to a task can optionally perform an action, such as update, overwrite or increment one of the task\textquotesingle{}s notification values. In that way task notifications can be used to send data to a task, or be used as light weight and fast binary or counting semaphores.
+
+A task can use \doxylink{task_8h_a5bcd5a5b7d7c41dd782a38093be1b7c9}{x\+Task\+Notify\+Wait\+Indexed()} to \mbox{[}optionally\mbox{]} block to wait for a notification to be pending, or \doxylink{task_8h_a4f42982425f3b106e1a9f19b41ba4124}{ul\+Task\+Notify\+Take\+Indexed()} to \mbox{[}optionally\mbox{]} block to wait for a notification value to have a non-\/zero value. The task does not consume any CPU time while it is in the Blocked state.
+
+A notification sent to a task will remain pending until it is cleared by the task calling \doxylink{task_8h_a5bcd5a5b7d7c41dd782a38093be1b7c9}{x\+Task\+Notify\+Wait\+Indexed()} or \doxylink{task_8h_a4f42982425f3b106e1a9f19b41ba4124}{ul\+Task\+Notify\+Take\+Indexed()} (or their un-\/indexed equivalents). If the task was already in the Blocked state to wait for a notification when the notification arrives then the task will automatically be removed from the Blocked state (unblocked) and the notification cleared.
+
+{\bfseries{NOTE}} Each notification within the array operates independently -\/ a task can only block on one notification within the array at a time and will not be unblocked by a notification sent to any other array index.
+
+Backward compatibility information\+: Prior to Free\+RTOS V10.\+4.\+0 each task had a single "{}notification value"{}, and all task notification API functions operated on that value. Replacing the single notification value with an array of notification values necessitated a new set of API functions that could address specific notifications within the array. \doxylink{task_8h_a1ed9129068b96a909356bd0369c5ecb0}{x\+Task\+Notify\+From\+ISR()} is the original API function, and remains backward compatible by always operating on the notification value at index 0 within the array. Calling \doxylink{task_8h_a1ed9129068b96a909356bd0369c5ecb0}{x\+Task\+Notify\+From\+ISR()} is equivalent to calling \doxylink{task_8h_ab86169cb5493142a9e247e2cf2e583e2}{x\+Task\+Notify\+Indexed\+From\+ISR()} with the ux\+Index\+To\+Notify parameter set to 0.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ux\+Index\+To\+Notify} & The index within the target task\textquotesingle{}s array of notification values to which the notification is to be sent. ux\+Index\+To\+Notify must be less than config\+TASK\+\_\+\+NOTIFICATION\+\_\+\+ARRAY\+\_\+\+ENTRIES. \doxylink{task_8h_a1ed9129068b96a909356bd0369c5ecb0}{x\+Task\+Notify\+From\+ISR()} does not have this parameter and always sends notifications to index 0.\\
+\hline
+{\em x\+Task\+To\+Notify} & The handle of the task being notified. The handle to a task can be returned from the x\+Task\+Create() API function used to create the task, and the handle of the currently running task can be obtained by calling \doxylink{task_8h_a85a0f9c9f817b18686efbf8f37c72dfc}{x\+Task\+Get\+Current\+Task\+Handle()}.\\
+\hline
+{\em ul\+Value} & Data that can be sent with the notification. How the data is used depends on the value of the e\+Action parameter.\\
+\hline
+{\em e\+Action} & Specifies how the notification updates the task\textquotesingle{}s notification value, if at all. Valid values for e\+Action are as follows\+:\\
+\hline
+\end{DoxyParams}
+e\+Set\+Bits -\/ The task\textquotesingle{}s notification value is bitwise ORed with ul\+Value. \doxylink{task_8h_a0d2d54fb8a64011dfbb54983e4ed06bd}{x\+Task\+Notify()} always returns pd\+PASS in this case.
+
+e\+Increment -\/ The task\textquotesingle{}s notification value is incremented. ul\+Value is not used and \doxylink{task_8h_a0d2d54fb8a64011dfbb54983e4ed06bd}{x\+Task\+Notify()} always returns pd\+PASS in this case.
+
+e\+Set\+Value\+With\+Overwrite -\/ The task\textquotesingle{}s notification value is set to the value of ul\+Value, even if the task being notified had not yet processed the previous notification (the task already had a notification pending). \doxylink{task_8h_a0d2d54fb8a64011dfbb54983e4ed06bd}{x\+Task\+Notify()} always returns pd\+PASS in this case.
+
+e\+Set\+Value\+Without\+Overwrite -\/ If the task being notified did not already have a notification pending then the task\textquotesingle{}s notification value is set to ul\+Value and \doxylink{task_8h_a0d2d54fb8a64011dfbb54983e4ed06bd}{x\+Task\+Notify()} will return pd\+PASS. If the task being notified already had a notification pending then no action is performed and pd\+FAIL is returned.
+
+e\+No\+Action -\/ The task receives a notification without its notification value being updated. ul\+Value is not used and \doxylink{task_8h_a0d2d54fb8a64011dfbb54983e4ed06bd}{x\+Task\+Notify()} always returns pd\+PASS in this case.
+
+
+\begin{DoxyParams}{Parameters}
+{\em px\+Higher\+Priority\+Task\+Woken} & \doxylink{task_8h_a1ed9129068b96a909356bd0369c5ecb0}{x\+Task\+Notify\+From\+ISR()} will set \texorpdfstring{$\ast$}{*}px\+Higher\+Priority\+Task\+Woken to pd\+TRUE if sending the notification caused the task to which the notification was sent to leave the Blocked state, and the unblocked task has a priority higher than the currently running task. If \doxylink{task_8h_a1ed9129068b96a909356bd0369c5ecb0}{x\+Task\+Notify\+From\+ISR()} sets this value to pd\+TRUE then a context switch should be requested before the interrupt is exited. How a context switch is requested from an ISR is dependent on the port -\/ see the documentation page for the port in use.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Dependent on the value of e\+Action. See the description of the e\+Action parameter. 
+\end{DoxyReturn}

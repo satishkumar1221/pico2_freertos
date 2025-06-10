@@ -1,0 +1,28 @@
+var o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h =
+[
+    [ "portBASE_TYPE", "o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h.html#a1ebe82d24d764ae4e352f7c3a9f92c01", null ],
+    [ "portBYTE_ALIGNMENT", "o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h.html#ab9091ce3940d8bd93ec850122a2c6a1c", null ],
+    [ "portCHAR", "o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h.html#add0bdbfef5abf241c7774f68bde42f1d", null ],
+    [ "portDOUBLE", "o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h.html#a4711ce186a903a14bc8ea7c8650b4f61", null ],
+    [ "portFLOAT", "o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h.html#a1bbe1ef117ec274ef919e0a930c888ac", null ],
+    [ "portINITIAL_SW", "o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h.html#a2c82b122b285ffacb4a8a621e192e496", null ],
+    [ "portINPUT_BYTE", "o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h.html#a59a2f5fb8ded86c79cd56e2a3357340b", null ],
+    [ "portINPUT_WORD", "o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h.html#aa2c258d8be67c853499f20d2a33ab0f0", null ],
+    [ "portLONG", "o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h.html#a6bbebff6020ac333ab6ec2ffd7f77001", null ],
+    [ "portMAX_DELAY", "o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h.html#a72723ba1e4a85ca14f25c2b9e066613d", null ],
+    [ "portNOP", "o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h.html#a23c54dff0b50ff35563ef06c6d6d1835", null ],
+    [ "portOUTPUT_BYTE", "o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h.html#aa34e149add9b695186a6dfbb6d992253", null ],
+    [ "portOUTPUT_WORD", "o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h.html#a379b8e03bcb6e21e8d78f7b042cde6ac", null ],
+    [ "portSHORT", "o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h.html#a42e62d5881b12ff2a5c659576c64d003", null ],
+    [ "portSTACK_GROWTH", "o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h.html#a21adaab1601f6a0f35ba550a43060830", null ],
+    [ "portSTACK_TYPE", "o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h.html#ab0a294066ac7369b8f59a52d9491a92c", null ],
+    [ "portSWITCH_INT_NUMBER", "o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h.html#a74f345489b3279d2d32a1f21ad6d4cd6", null ],
+    [ "portTASK_FUNCTION", "o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h.html#a3a289793652f505c538abea27045ccdf", null ],
+    [ "portTASK_FUNCTION_PROTO", "o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h.html#a2921e1c5a1f974dfa01ae44d1f665f14", null ],
+    [ "portTICK_PERIOD_MS", "o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h.html#a554d9322ce7f698a86a22b21234bd8cd", null ],
+    [ "portYIELD", "o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h.html#ae1ff06193615f5130b5a97dc9e708fc7", null ],
+    [ "portDISABLE_INTERRUPTS", "o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h.html#a1147ceeb33d46371c60ab9dc699f96a3", null ],
+    [ "portENABLE_INTERRUPTS", "o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h.html#a1dbf84473cfc91c1fcf326ddd2e88775", null ],
+    [ "portENTER_CRITICAL", "o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h.html#adff63afc268c80ed13a4db7eb576c989", null ],
+    [ "portEXIT_CRITICAL", "o_watcom_216_bit_d_o_s_2_flsh186_2portmacro_8h.html#a71ba2a5ff29ae3cc7a1ad9e3ae6a7ddf", null ]
+];

@@ -1,0 +1,132 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/o\+Watcom/16\+Bit\+DOS/\+Flsh186/port.c File Reference}
+\hypertarget{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c}{}\label{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/oWatcom/16BitDOS/Flsh186/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/oWatcom/16BitDOS/Flsh186/port.c}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$i86.\+h$>$}\newline
+{\ttfamily \#include $<$dos.\+h$>$}\newline
+{\ttfamily \#include $<$setjmp.\+h$>$}\newline
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}task.\+h"{}}\newline
+{\ttfamily \#include "{}portasm.\+h"{}}\newline
+Include dependency graph for port.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_a3a3790b17df2b9caadc73f994a12a5e6}{port\+TIMER\+\_\+\+EOI\+\_\+\+TYPE}}~( 8 )
+\item 
+\#define \mbox{\hyperlink{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_a3c772ef1e2592552c78f8d9dcd24cb15}{port\+RESET\+\_\+\+PIC}}()
+\item 
+\#define \mbox{\hyperlink{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_a7aa65bf5567c7a0cadf05fa4f8b40412}{port\+TIMER\+\_\+\+INT\+\_\+\+NUMBER}}~0x12
+\item 
+\#define \mbox{\hyperlink{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_a8b32d6d1ae543356a995fb6551dd3a53}{port\+TIMER\+\_\+1\+\_\+\+CONTROL\+\_\+\+REGISTER}}~( ( uint16\+\_\+t ) 0xff5e )
+\item 
+\#define \mbox{\hyperlink{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_a54aabc595291ced640095509415d0dbc}{port\+TIMER\+\_\+0\+\_\+\+CONTROL\+\_\+\+REGISTER}}~( ( uint16\+\_\+t ) 0xff56 )
+\item 
+\#define \mbox{\hyperlink{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_a9303f7f8ba7c49f34cfac61ce9013b32}{port\+TIMER\+\_\+\+INTERRUPT\+\_\+\+ENABLE}}~( ( uint16\+\_\+t ) 0x2000 )
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} \mbox{\hyperlink{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{x\+Port\+Start\+Scheduler}} (void)
+\item 
+void \mbox{\hyperlink{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{v\+Port\+End\+Scheduler}} (void)
+\begin{DoxyCompactList}\small\item\em End the Free\+RTOS scheduler. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_a3c772ef1e2592552c78f8d9dcd24cb15}\index{port.c@{port.c}!portRESET\_PIC@{portRESET\_PIC}}
+\index{portRESET\_PIC@{portRESET\_PIC}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portRESET\_PIC}{portRESET\_PIC}}
+{\footnotesize\ttfamily \label{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_a3c772ef1e2592552c78f8d9dcd24cb15} 
+\#define port\+RESET\+\_\+\+PIC(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_flsh186_2prtmacro_8h_a379b8e03bcb6e21e8d78f7b042cde6ac}{portOUTPUT\_WORD}}(\ (\ uint16\_t\ )\ 0xff22,\ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2_flsh186_2port_8c_a3a3790b17df2b9caadc73f994a12a5e6}{portTIMER\_EOI\_TYPE}}\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_source_l00064}{64}} of file \mbox{\hyperlink{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_a54aabc595291ced640095509415d0dbc}\index{port.c@{port.c}!portTIMER\_0\_CONTROL\_REGISTER@{portTIMER\_0\_CONTROL\_REGISTER}}
+\index{portTIMER\_0\_CONTROL\_REGISTER@{portTIMER\_0\_CONTROL\_REGISTER}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portTIMER\_0\_CONTROL\_REGISTER}{portTIMER\_0\_CONTROL\_REGISTER}}
+{\footnotesize\ttfamily \label{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_a54aabc595291ced640095509415d0dbc} 
+\#define port\+TIMER\+\_\+0\+\_\+\+CONTROL\+\_\+\+REGISTER~( ( uint16\+\_\+t ) 0xff56 )}
+
+
+
+Definition at line \mbox{\hyperlink{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_source_l00068}{68}} of file \mbox{\hyperlink{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_a8b32d6d1ae543356a995fb6551dd3a53}\index{port.c@{port.c}!portTIMER\_1\_CONTROL\_REGISTER@{portTIMER\_1\_CONTROL\_REGISTER}}
+\index{portTIMER\_1\_CONTROL\_REGISTER@{portTIMER\_1\_CONTROL\_REGISTER}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portTIMER\_1\_CONTROL\_REGISTER}{portTIMER\_1\_CONTROL\_REGISTER}}
+{\footnotesize\ttfamily \label{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_a8b32d6d1ae543356a995fb6551dd3a53} 
+\#define port\+TIMER\+\_\+1\+\_\+\+CONTROL\+\_\+\+REGISTER~( ( uint16\+\_\+t ) 0xff5e )}
+
+
+
+Definition at line \mbox{\hyperlink{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_source_l00067}{67}} of file \mbox{\hyperlink{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_a3a3790b17df2b9caadc73f994a12a5e6}\index{port.c@{port.c}!portTIMER\_EOI\_TYPE@{portTIMER\_EOI\_TYPE}}
+\index{portTIMER\_EOI\_TYPE@{portTIMER\_EOI\_TYPE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portTIMER\_EOI\_TYPE}{portTIMER\_EOI\_TYPE}}
+{\footnotesize\ttfamily \label{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_a3a3790b17df2b9caadc73f994a12a5e6} 
+\#define port\+TIMER\+\_\+\+EOI\+\_\+\+TYPE~( 8 )}
+
+
+
+Definition at line \mbox{\hyperlink{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_source_l00063}{63}} of file \mbox{\hyperlink{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_a7aa65bf5567c7a0cadf05fa4f8b40412}\index{port.c@{port.c}!portTIMER\_INT\_NUMBER@{portTIMER\_INT\_NUMBER}}
+\index{portTIMER\_INT\_NUMBER@{portTIMER\_INT\_NUMBER}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portTIMER\_INT\_NUMBER}{portTIMER\_INT\_NUMBER}}
+{\footnotesize\ttfamily \label{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_a7aa65bf5567c7a0cadf05fa4f8b40412} 
+\#define port\+TIMER\+\_\+\+INT\+\_\+\+NUMBER~0x12}
+
+
+
+Definition at line \mbox{\hyperlink{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_source_l00065}{65}} of file \mbox{\hyperlink{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_a9303f7f8ba7c49f34cfac61ce9013b32}\index{port.c@{port.c}!portTIMER\_INTERRUPT\_ENABLE@{portTIMER\_INTERRUPT\_ENABLE}}
+\index{portTIMER\_INTERRUPT\_ENABLE@{portTIMER\_INTERRUPT\_ENABLE}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{portTIMER\_INTERRUPT\_ENABLE}{portTIMER\_INTERRUPT\_ENABLE}}
+{\footnotesize\ttfamily \label{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_a9303f7f8ba7c49f34cfac61ce9013b32} 
+\#define port\+TIMER\+\_\+\+INTERRUPT\+\_\+\+ENABLE~( ( uint16\+\_\+t ) 0x2000 )}
+
+
+
+Definition at line \mbox{\hyperlink{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_source_l00069}{69}} of file \mbox{\hyperlink{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_source}{port.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}\index{port.c@{port.c}!vPortEndScheduler@{vPortEndScheduler}}
+\index{vPortEndScheduler@{vPortEndScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{vPortEndScheduler()}{vPortEndScheduler()}}
+{\footnotesize\ttfamily \label{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423} 
+void v\+Port\+End\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+End the Free\+RTOS scheduler. 
+
+Not implemented on this port. 
+
+Definition at line \mbox{\hyperlink{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_source_l00181}{181}} of file \mbox{\hyperlink{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_source}{port.\+c}}.
+
+\Hypertarget{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}\index{port.c@{port.c}!xPortStartScheduler@{xPortStartScheduler}}
+\index{xPortStartScheduler@{xPortStartScheduler}!port.c@{port.c}}
+\doxysubsubsection{\texorpdfstring{xPortStartScheduler()}{xPortStartScheduler()}}
+{\footnotesize\ttfamily \label{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_ade5a8c6666e7413a0355cc252029c5c6} 
+\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{Base\+Type\+\_\+t}} x\+Port\+Start\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_source_l00104}{104}} of file \mbox{\hyperlink{o_watcom_216_bit_d_o_s_2_flsh186_2port_8c_source}{port.\+c}}.
+

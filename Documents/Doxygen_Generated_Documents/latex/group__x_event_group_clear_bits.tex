@@ -1,0 +1,60 @@
+\doxysection{x\+Event\+Group\+Clear\+Bits }
+\hypertarget{group__x_event_group_clear_bits}{}\label{group__x_event_group_clear_bits}\index{xEventGroupClearBits@{xEventGroupClearBits}}
+\doxylink{event__groups_8h}{event\+\_\+groups.\+h} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{event__groups_8h_ab2f21b93db0b2a0ab64d7a81ff32ac2e}{EventBits\_t}}\ \mbox{\hyperlink{event__groups_8h_a0fb72cfdd4f0d5f86d955fc3af448f2a}{xEventGroupClearBits}}(\ \mbox{\hyperlink{event__groups_8h_acab96e0b6a5cab7f7b29822b79cc78ed}{EventGroupHandle\_t}}\ xEventGroup,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{event__groups_8h_ab2f21b93db0b2a0ab64d7a81ff32ac2e}{EventBits\_t}}\ uxBitsToClear\ );}
+
+\end{DoxyCode}
+
+
+Clear bits within an event group. This function cannot be called from an interrupt.
+
+The config\+USE\+\_\+\+EVENT\+\_\+\+GROUPS configuration constant must be set to 1 for \doxylink{event__groups_8h_a0fb72cfdd4f0d5f86d955fc3af448f2a}{x\+Event\+Group\+Clear\+Bits()} to be available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Event\+Group} & The event group in which the bits are to be cleared.\\
+\hline
+{\em ux\+Bits\+To\+Clear} & A bitwise value that indicates the bit or bits to clear in the event group. For example, to clear bit 3 only, set ux\+Bits\+To\+Clear to 0x08. To clear bit 3 and bit 0 set ux\+Bits\+To\+Clear to 0x09.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value of the event group before the specified bits were cleared.
+\end{DoxyReturn}
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BIT\_0\ (\ 1\ <<\ 0\ )}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BIT\_4\ (\ 1\ <<\ 4\ )}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ aFunction(\ \mbox{\hyperlink{event__groups_8h_acab96e0b6a5cab7f7b29822b79cc78ed}{EventGroupHandle\_t}}\ xEventGroup\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\mbox{\hyperlink{event__groups_8h_ab2f21b93db0b2a0ab64d7a81ff32ac2e}{EventBits\_t}}\ uxBits;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Clear\ bit\ 0\ and\ bit\ 4\ in\ xEventGroup.}}
+\DoxyCodeLine{\ \ \ \ \ uxBits\ =\ \mbox{\hyperlink{event__groups_8h_a0fb72cfdd4f0d5f86d955fc3af448f2a}{xEventGroupClearBits}}(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ xEventGroup,\ \ \ \ \textcolor{comment}{//\ The\ event\ group\ being\ updated.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ BIT\_0\ |\ BIT\_4\ );\textcolor{comment}{//\ The\ bits\ being\ cleared.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(\ (\ uxBits\ \&\ (\ BIT\_0\ |\ BIT\_4\ )\ )\ ==\ (\ BIT\_0\ |\ BIT\_4\ )\ )}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Both\ bit\ 0\ and\ bit\ 4\ were\ set\ before\ xEventGroupClearBits()\ was}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ called.\ \ Both\ will\ now\ be\ clear\ (not\ set).}}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}(\ (\ uxBits\ \&\ BIT\_0\ )\ !=\ 0\ )}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Bit\ 0\ was\ set\ before\ xEventGroupClearBits()\ was\ called.\ \ It\ will}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ now\ be\ clear.}}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}(\ (\ uxBits\ \&\ BIT\_4\ )\ !=\ 0\ )}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Bit\ 4\ was\ set\ before\ xEventGroupClearBits()\ was\ called.\ \ It\ will}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ now\ be\ clear.}}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Neither\ bit\ 0\ nor\ bit\ 4\ were\ set\ in\ the\ first\ place.}}
+\DoxyCodeLine{\ \ \ \ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

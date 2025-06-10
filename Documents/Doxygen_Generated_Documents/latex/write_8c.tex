@@ -1,0 +1,90 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+IAR/\+AVR32\+\_\+\+UC3/write.c File Reference}
+\hypertarget{write_8c}{}\label{write_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/IAR/AVR32\_UC3/write.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/IAR/AVR32\_UC3/write.c}}
+
+
+System-\/specific implementation of the \doxylink{write_8c_ad0145c89238a86c1b59c1d4a62bf29d8}{\+\_\+\+\_\+write} function used by the standard library.  
+
+
+{\ttfamily \#include $<$yfuns.\+h$>$}\newline
+{\ttfamily \#include $<$avr32/io.\+h$>$}\newline
+{\ttfamily \#include "{}usart.\+h"{}}\newline
+Include dependency graph for write.\+c\+:
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+size\+\_\+t \mbox{\hyperlink{write_8c_ad0145c89238a86c1b59c1d4a62bf29d8}{\+\_\+\+\_\+write}} (int handle, const uint8\+\_\+t \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Writes a number of bytes, at most {\itshape size}, from the memory area pointed to by {\itshape buffer}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\+\_\+\+STD\+\_\+\+BEGIN \+\_\+\+\_\+no\+\_\+init volatile avr32\+\_\+usart\+\_\+t \texorpdfstring{$\ast$}{*}volatile \mbox{\hyperlink{write_8c_a4fdf7dcac6a18592418fa4dd3ccd3b32}{stdio\+\_\+usart\+\_\+base}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+System-\/specific implementation of the \doxylink{write_8c_ad0145c89238a86c1b59c1d4a62bf29d8}{\+\_\+\+\_\+write} function used by the standard library. 
+
+
+\begin{DoxyItemize}
+\item Compiler\+: IAR EWAVR32
+\item Supported devices\+: All AVR32 devices with a USART module can be used.
+\item App\+Note\+:
+\end{DoxyItemize}
+
+\begin{DoxyAuthor}{Author}
+Atmel Corporation (Now Microchip)\+: \href{https://www.microchip.com}{\texttt{https\+://www.\+microchip.\+com}} ~\newline
+ Support and FAQ\+: \href{https://www.microchip.com/support}{\texttt{https\+://www.\+microchip.\+com/support}} 
+\end{DoxyAuthor}
+
+
+Definition in file \mbox{\hyperlink{write_8c_source}{write.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{write_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{write_8c_ad0145c89238a86c1b59c1d4a62bf29d8}\index{write.c@{write.c}!\_\_write@{\_\_write}}
+\index{\_\_write@{\_\_write}!write.c@{write.c}}
+\doxysubsubsection{\texorpdfstring{\_\_write()}{\_\_write()}}
+{\footnotesize\ttfamily \label{write_8c_ad0145c89238a86c1b59c1d4a62bf29d8} 
+size\+\_\+t \+\_\+\+\_\+write (\begin{DoxyParamCaption}\item[{int}]{handle}{, }\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})}
+
+
+
+Writes a number of bytes, at most {\itshape size}, from the memory area pointed to by {\itshape buffer}. 
+
+If {\itshape buffer} is zero then \doxylink{write_8c_ad0145c89238a86c1b59c1d4a62bf29d8}{\+\_\+\+\_\+write} performs flushing of internal buffers, if any. In this case, {\itshape handle} can be {\ttfamily -\/1} to indicate that all handles should be flushed.
+
+
+\begin{DoxyParams}{Parameters}
+{\em handle} & File handle to write to. \\
+\hline
+{\em buffer} & Pointer to buffer to read bytes to write from. \\
+\hline
+{\em size} & Number of bytes to write.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of bytes written, or {\ttfamily \+\_\+\+LLIO\+\_\+\+ERROR} on failure. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{write_8c_source_l00103}{103}} of file \mbox{\hyperlink{write_8c_source}{write.\+c}}.
+
+
+
+\label{doc-var-members}
+\Hypertarget{write_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{write_8c_a4fdf7dcac6a18592418fa4dd3ccd3b32}\index{write.c@{write.c}!stdio\_usart\_base@{stdio\_usart\_base}}
+\index{stdio\_usart\_base@{stdio\_usart\_base}!write.c@{write.c}}
+\doxysubsubsection{\texorpdfstring{stdio\_usart\_base}{stdio\_usart\_base}}
+{\footnotesize\ttfamily \label{write_8c_a4fdf7dcac6a18592418fa4dd3ccd3b32} 
+\+\_\+\+STD\+\_\+\+BEGIN \+\_\+\+\_\+no\+\_\+init volatile avr32\+\_\+usart\+\_\+t\texorpdfstring{$\ast$}{*} volatile stdio\+\_\+usart\+\_\+base}
+
+Pointer to the base of the USART module instance to use for stdio. 
+
+Definition at line \mbox{\hyperlink{write_8c_source_l00087}{87}} of file \mbox{\hyperlink{write_8c_source}{write.\+c}}.
+

@@ -1,0 +1,236 @@
+\doxysection{portmacro\+\_\+asm.\+h}
+\hypertarget{portmacro__asm_8h_source}{}\label{portmacro__asm_8h_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/ARM\_CRx\_MPU/portmacro\_asm.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/ARM\_CRx\_MPU/portmacro\_asm.h}}
+\mbox{\hyperlink{portmacro__asm_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2024\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00029}00029\ \textcolor{preprocessor}{\#ifndef\ PORTMACRO\_ASM\_H}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00030}00030\ \textcolor{preprocessor}{\#define\ PORTMACRO\_ASM\_H}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00032}00032\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00033}00033\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00034}00034\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00036}00036\ \textcolor{preprocessor}{\#include\ "{}FreeRTOSConfig.h"{}}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00038}00038\ \textcolor{preprocessor}{\#ifndef\ configTOTAL\_MPU\_REGIONS}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00039}00039\ \textcolor{preprocessor}{\ \ \ \ \#error\ "{}Set\ configTOTAL\_MPU\_REGIONS\ to\ the\ humber\ of\ MPU\ regions\ in\ FreeRTOSConfig.h"{}}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00040}00040\ \textcolor{preprocessor}{\#elif(\ configTOTAL\_MPU\_REGIONS\ ==\ 12\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00041}00041\ \textcolor{preprocessor}{\ \ \ \ \#define\ portMPU\_TOTAL\_REGIONS\ (\ 12UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00042}00042\ \textcolor{preprocessor}{\#elif(\ configTOTAL\_MPU\_REGIONS\ ==\ 16\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00043}00043\ \textcolor{preprocessor}{\ \ \ \ \#define\ portMPU\_TOTAL\_REGIONS\ (\ 16UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00044}00044\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00045}00045\ \textcolor{preprocessor}{\ \ \ \ \#error\ "{}Set\ configTOTAL\_MPU\_REGIONS\ to\ the\ number\ of\ MPU\ regions\ in\ FreeRTOSConfig.h"{}}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00046}00046\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ configTOTAL\_MPU\_REGIONS\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00048}00048\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00049}00049\ \textcolor{comment}{\ *\ The\ application\ write\ can\ disable\ Floating\ Point\ Unit\ (FPU)\ support\ by}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00050}00050\ \textcolor{comment}{\ *\ setting\ configENABLE\_FPU\ to\ 0.\ Floating\ point\ context\ stored\ in\ TCB}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00051}00051\ \textcolor{comment}{\ *\ comprises\ of\ 32\ floating\ point\ registers\ (D0-\/D31)\ and\ FPSCR\ register.}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00052}00052\ \textcolor{comment}{\ *\ Disabling\ FPU,\ therefore,\ reduces\ the\ per-\/task\ RAM\ usage\ by}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00053}00053\ \textcolor{comment}{\ *\ (\ 32\ +\ 1\ )\ *\ 4\ =\ 132\ bytes\ per\ task.}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00054}00054\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00055}00055\ \textcolor{comment}{\ *\ BE\ CAREFUL\ DISABLING\ THIS:\ Certain\ standard\ library\ APIs\ try\ to\ optimize}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00056}00056\ \textcolor{comment}{\ *\ themselves\ by\ using\ the\ floating\ point\ registers.\ If\ the\ FPU\ support\ is}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00057}00057\ \textcolor{comment}{\ *\ disabled,\ the\ use\ of\ such\ APIs\ may\ result\ in\ memory\ corruption.}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00058}00058\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00059}00059\ \textcolor{preprocessor}{\#ifndef\ configENABLE\_FPU}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00060}\mbox{\hyperlink{portmacro__asm_8h_a8c0327c63db06fda2294df6965508791}{00060}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ configENABLE\_FPU\ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00061}00061\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ configENABLE\_FPU\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00063}\mbox{\hyperlink{portmacro__asm_8h_ac702041d75d0430e48d9ba9269ae1e9b}{00063}}\ \textcolor{preprocessor}{\#define\ portENABLE\_FPU\ configENABLE\_FPU}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00065}00065\ \textcolor{comment}{/*\ On\ the\ ArmV7-\/R\ Architecture\ the\ Operating\ mode\ of\ the\ Processor\ is\ set}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00066}00066\ \textcolor{comment}{\ *\ using\ the\ Current\ Program\ Status\ Register\ (CPSR)\ Mode\ bits,\ [4:0].\ The\ only}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00067}00067\ \textcolor{comment}{\ *\ unprivileged\ mode\ is\ User\ Mode.}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00068}00068\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00069}00069\ \textcolor{comment}{\ *\ Additional\ information\ about\ the\ Processor\ Modes\ can\ be\ found\ here:}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00070}00070\ \textcolor{comment}{\ *\ https://developer.arm.com/documentation/ddi0406/cb/System-\/Level-\/Architecture/The-\/System-\/Level-\/Programmers-\/-\/Model/ARM-\/processor-\/modes-\/and-\/ARM-\/core-\/registers/ARM-\/processor-\/modes?lang=en}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00071}00071\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00072}00072\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00079}\mbox{\hyperlink{portmacro__asm_8h_a4590bc240c9d6d928eecc7484553c2e7}{00079}}\ \textcolor{preprocessor}{\#define\ USER\_MODE\ \ \ 0x10U}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00080}\mbox{\hyperlink{portmacro__asm_8h_ad53b2deac028f5b71d1cdddda17c4ea0}{00080}}\ \textcolor{preprocessor}{\#define\ FIQ\_MODE\ \ \ \ 0x11U}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00081}\mbox{\hyperlink{portmacro__asm_8h_a015e07338bc15a48ad76695362eea25f}{00081}}\ \textcolor{preprocessor}{\#define\ IRQ\_MODE\ \ \ \ 0x12U}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00082}\mbox{\hyperlink{portmacro__asm_8h_a312ff1d5550cc17c9907a153b04e0efa}{00082}}\ \textcolor{preprocessor}{\#define\ SVC\_MODE\ \ \ \ 0x13U}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00083}\mbox{\hyperlink{portmacro__asm_8h_a738e69e29b8e5165a11dd6a337370390}{00083}}\ \textcolor{preprocessor}{\#define\ MON\_MODE\ \ \ \ 0x16U}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00084}\mbox{\hyperlink{portmacro__asm_8h_a71f290cd91ad5ba6e3e183306fd9a0cb}{00084}}\ \textcolor{preprocessor}{\#define\ ABT\_MODE\ \ \ \ 0x17U}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00085}\mbox{\hyperlink{portmacro__asm_8h_a551e7752c79eb8cdf721efa7b680ad99}{00085}}\ \textcolor{preprocessor}{\#define\ HYP\_MODE\ \ \ \ 0x1AU}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00086}\mbox{\hyperlink{portmacro__asm_8h_a050eda1514ebd401d55cd61d2f7f78d7}{00086}}\ \textcolor{preprocessor}{\#define\ UND\_MODE\ \ \ \ 0x1BU}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00087}\mbox{\hyperlink{portmacro__asm_8h_ae62d91253c85a3dff6a838244f460f70}{00087}}\ \textcolor{preprocessor}{\#define\ SYS\_MODE\ \ \ \ 0x1FU}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00094}\mbox{\hyperlink{portmacro__asm_8h_a868b2006b5ce8f6a2642ad13ab5332ad}{00094}}\ \textcolor{preprocessor}{\#define\ portTASK\_IS\_PRIVILEGED\_FLAG\ \ \ (\ 1UL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00103}\mbox{\hyperlink{portmacro__asm_8h_a176834b4b22e63f73e0220d6fb65f7a5}{00103}}\ \textcolor{preprocessor}{\#define\ portSVC\_YIELD\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0100U}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00104}\mbox{\hyperlink{portmacro__asm_8h_aceca58fbf3e70153879a43200a523344}{00104}}\ \textcolor{preprocessor}{\#define\ portSVC\_SYSTEM\_CALL\_EXIT\ \ \ \ \ \ 0x0104U}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00114}00114\ \textcolor{comment}{/*\ MPU\ sub-\/region\ disable\ settings.\ This\ information\ is\ encoded\ in\ the\ MPU}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00115}00115\ \textcolor{comment}{\ *\ Region\ Size\ and\ Enable\ Register.\ */}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00116}\mbox{\hyperlink{portmacro__asm_8h_a504d28f3716fcbb1b0c65a9871afeb67}{00116}}\ \textcolor{preprocessor}{\#define\ portMPU\_SUBREGION\_0\_DISABLE\ \ \ (\ 0x1UL\ <<\ 8UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00117}\mbox{\hyperlink{portmacro__asm_8h_a2c3984be95a7dc28de873e8a53319b44}{00117}}\ \textcolor{preprocessor}{\#define\ portMPU\_SUBREGION\_1\_DISABLE\ \ \ (\ 0x1UL\ <<\ 9UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00118}\mbox{\hyperlink{portmacro__asm_8h_a18c08846f905a6b00cb8a616e111353a}{00118}}\ \textcolor{preprocessor}{\#define\ portMPU\_SUBREGION\_2\_DISABLE\ \ \ (\ 0x1UL\ <<\ 10UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00119}\mbox{\hyperlink{portmacro__asm_8h_a11ccda0a3982b95f9c328f8cb33f22f8}{00119}}\ \textcolor{preprocessor}{\#define\ portMPU\_SUBREGION\_3\_DISABLE\ \ \ (\ 0x1UL\ <<\ 11UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00120}\mbox{\hyperlink{portmacro__asm_8h_a4d79fd15bb7c478da380558ccf348425}{00120}}\ \textcolor{preprocessor}{\#define\ portMPU\_SUBREGION\_4\_DISABLE\ \ \ (\ 0x1UL\ <<\ 12UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00121}\mbox{\hyperlink{portmacro__asm_8h_a2afe5c62e0047c0a19310a91b6d0086c}{00121}}\ \textcolor{preprocessor}{\#define\ portMPU\_SUBREGION\_5\_DISABLE\ \ \ (\ 0x1UL\ <<\ 13UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00122}\mbox{\hyperlink{portmacro__asm_8h_ae835a1bf15407ed6e3b66376904c9903}{00122}}\ \textcolor{preprocessor}{\#define\ portMPU\_SUBREGION\_6\_DISABLE\ \ \ (\ 0x1UL\ <<\ 14UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00123}\mbox{\hyperlink{portmacro__asm_8h_a6db5e9863bb7065cdd15f4f22eff98d3}{00123}}\ \textcolor{preprocessor}{\#define\ portMPU\_SUBREGION\_7\_DISABLE\ \ \ (\ 0x1UL\ <<\ 15UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00125}00125\ \textcolor{comment}{/*\ Default\ MPU\ regions.\ */}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00126}\mbox{\hyperlink{portmacro__asm_8h_a7c87d488b9742426ef09ae95c75e1f43}{00126}}\ \textcolor{preprocessor}{\#define\ portFIRST\_CONFIGURABLE\_REGION\ (\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00127}\mbox{\hyperlink{portmacro__asm_8h_aef7f2f8670e4dcc37d13e55236cc8c12}{00127}}\ \textcolor{preprocessor}{\#define\ portLAST\_CONFIGURABLE\_REGION\ \ (\ portMPU\_TOTAL\_REGIONS\ -\/\ 5UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00128}\mbox{\hyperlink{portmacro__asm_8h_a1b0959d7e83d42f6c1dccbfe2535e3d5}{00128}}\ \textcolor{preprocessor}{\#define\ portSTACK\_REGION\ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ portMPU\_TOTAL\_REGIONS\ -\/\ 4UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00129}\mbox{\hyperlink{portmacro__asm_8h_a98374efce189d3a6a0ec99d80ba1619e}{00129}}\ \textcolor{preprocessor}{\#define\ portUNPRIVILEGED\_FLASH\_REGION\ (\ portMPU\_TOTAL\_REGIONS\ -\/\ 3UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00130}\mbox{\hyperlink{portmacro__asm_8h_a05e35f210f0e58fe583100a87cb16719}{00130}}\ \textcolor{preprocessor}{\#define\ portPRIVILEGED\_FLASH\_REGION\ \ \ (\ portMPU\_TOTAL\_REGIONS\ -\/\ 2UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00131}\mbox{\hyperlink{portmacro__asm_8h_a32c2c550dd5989c7edc9a951c2e19fe1}{00131}}\ \textcolor{preprocessor}{\#define\ portPRIVILEGED\_RAM\_REGION\ \ \ \ \ (\ portMPU\_TOTAL\_REGIONS\ -\/\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00132}\mbox{\hyperlink{portmacro__asm_8h_aca7e1a8a568a38b74cc9db10c8efebda}{00132}}\ \textcolor{preprocessor}{\#define\ portNUM\_CONFIGURABLE\_REGIONS\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00133}00133\ \textcolor{preprocessor}{\ \ \ \ (\ (\ portLAST\_CONFIGURABLE\_REGION\ -\/\ portFIRST\_CONFIGURABLE\_REGION\ )\ +\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00134}00134\ \textcolor{comment}{/*\ Plus\ one\ to\ make\ space\ for\ the\ stack\ region.\ */}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00135}\mbox{\hyperlink{portmacro__asm_8h_aee11e56d6fbdceb943ca29b686c4c322}{00135}}\ \textcolor{preprocessor}{\#define\ portTOTAL\_NUM\_REGIONS\_IN\_TCB\ \ \ \ \ \ \ \ (\ portNUM\_CONFIGURABLE\_REGIONS\ +\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00137}00137\ \textcolor{comment}{/*\ MPU\ region\ sizes.\ This\ information\ is\ encoded\ in\ the\ MPU\ Region\ Size\ and}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00138}00138\ \textcolor{comment}{\ *\ Enable\ Register.\ */}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00139}\mbox{\hyperlink{portmacro__asm_8h_aaab5d1ee2ecb41dde317fb72879aee65}{00139}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_32B\ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x04UL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00140}\mbox{\hyperlink{portmacro__asm_8h_afff023e4493279a56fe951751a31557d}{00140}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_64B\ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x05UL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00141}\mbox{\hyperlink{portmacro__asm_8h_adf1cf0546e27921ace057d93cbf0687f}{00141}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_128B\ \ \ \ \ \ \ \ \ \ \ \ (\ 0x06UL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00142}\mbox{\hyperlink{portmacro__asm_8h_a657afa0f1ec4022bbe8ac09c22e3993c}{00142}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_256B\ \ \ \ \ \ \ \ \ \ \ \ (\ 0x07UL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00143}\mbox{\hyperlink{portmacro__asm_8h_a6550d5d9272028532d3b090dfee42379}{00143}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_512B\ \ \ \ \ \ \ \ \ \ \ \ (\ 0x08UL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00144}\mbox{\hyperlink{portmacro__asm_8h_a36fb99a1b33bde929fdb75b7d5d4157c}{00144}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_1KB\ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x09UL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00145}\mbox{\hyperlink{portmacro__asm_8h_a67ed97b7b3aaaa1b3fd78766eeb80752}{00145}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_2KB\ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x0AUL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00146}\mbox{\hyperlink{portmacro__asm_8h_a7518dd89dfe63ad6527a71cc78bf1a67}{00146}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_4KB\ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x0BUL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00147}\mbox{\hyperlink{portmacro__asm_8h_a8e0abfa5fbf4c6ed7a0530d6fe4559fc}{00147}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_8KB\ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x0CUL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00148}\mbox{\hyperlink{portmacro__asm_8h_a76cd97cca65ae8e26530f87e8cea2fa4}{00148}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_16KB\ \ \ \ \ \ \ \ \ \ \ \ (\ 0x0DUL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00149}\mbox{\hyperlink{portmacro__asm_8h_a52582af09fe3197356a0929c6fd6b297}{00149}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_32KB\ \ \ \ \ \ \ \ \ \ \ \ (\ 0x0EUL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00150}\mbox{\hyperlink{portmacro__asm_8h_af4e90e240b0165263a94eaaa80359fc4}{00150}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_64KB\ \ \ \ \ \ \ \ \ \ \ \ (\ 0x0FUL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00151}\mbox{\hyperlink{portmacro__asm_8h_ac6905353be6234217a5683d5a74ccba5}{00151}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_128KB\ \ \ \ \ \ \ \ \ \ \ (\ 0x10UL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00152}\mbox{\hyperlink{portmacro__asm_8h_a3d4f0909556a7ed918192ab7bf8f71cc}{00152}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_256KB\ \ \ \ \ \ \ \ \ \ \ (\ 0x11UL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00153}\mbox{\hyperlink{portmacro__asm_8h_a319485fb54d521a901790c7cd3a642d8}{00153}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_512KB\ \ \ \ \ \ \ \ \ \ \ (\ 0x12UL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00154}\mbox{\hyperlink{portmacro__asm_8h_ac1202723ce0ae734becf0e768ef6b7ed}{00154}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_1MB\ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x13UL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00155}\mbox{\hyperlink{portmacro__asm_8h_a680b3b51d7ef3babbb758110d9958286}{00155}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_2MB\ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x14UL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00156}\mbox{\hyperlink{portmacro__asm_8h_a4ccef4b1a686298fe506178a5efa43ba}{00156}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_4MB\ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x15UL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00157}\mbox{\hyperlink{portmacro__asm_8h_a593db55ac857c53cbac68964157bcf84}{00157}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_8MB\ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x16UL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00158}\mbox{\hyperlink{portmacro__asm_8h_a5a9a8ed55c3a5d1b609f643c7b39821c}{00158}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_16MB\ \ \ \ \ \ \ \ \ \ \ \ (\ 0x17UL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00159}\mbox{\hyperlink{portmacro__asm_8h_a0e1fc23e5a2bb133ee4d918bb4a038f3}{00159}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_32MB\ \ \ \ \ \ \ \ \ \ \ \ (\ 0x18UL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00160}\mbox{\hyperlink{portmacro__asm_8h_a5e7c51b2a04ab366ef504dd25d2cea71}{00160}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_64MB\ \ \ \ \ \ \ \ \ \ \ \ (\ 0x19UL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00161}\mbox{\hyperlink{portmacro__asm_8h_a9e825ad529e6e4a72e316cb30cc318f1}{00161}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_128MB\ \ \ \ \ \ \ \ \ \ \ (\ 0x1AUL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00162}\mbox{\hyperlink{portmacro__asm_8h_a76af9f653e2edffe81049d287787bed1}{00162}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_256MB\ \ \ \ \ \ \ \ \ \ \ (\ 0x1BUL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00163}\mbox{\hyperlink{portmacro__asm_8h_a66d1e622e1199806948950044325ef69}{00163}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_512MB\ \ \ \ \ \ \ \ \ \ \ (\ 0x1CUL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00164}\mbox{\hyperlink{portmacro__asm_8h_ad1c4eeb095651dd96b1539597ecb1aa2}{00164}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_1GB\ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x1DUL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00165}\mbox{\hyperlink{portmacro__asm_8h_ab7a9acc786926eea770d9217191e63af}{00165}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_2GB\ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x1EUL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00166}\mbox{\hyperlink{portmacro__asm_8h_af6febbcd5c50694b24f820ff38d84fb1}{00166}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_SIZE\_4GB\ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x1FUL\ <<\ 1UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00167}00167\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00168}00168\ \textcolor{comment}{/*\ MPU\ memory\ types.\ This\ information\ is\ encoded\ in\ the\ TEX,\ S,\ C\ and\ B\ bits}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00169}00169\ \textcolor{comment}{\ *\ of\ the\ MPU\ Region\ Access\ Control\ Register.\ */}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00170}\mbox{\hyperlink{portmacro__asm_8h_af87b4039d350b8478ad3ca6c1b8c519e}{00170}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_STRONGLY\_ORDERED\_SHAREABLE\ \ (\ 0x00UL\ )\ }\textcolor{comment}{/*\ TEX=000,\ S=NA,\ C=0,\ B=0.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00171}\mbox{\hyperlink{portmacro__asm_8h_a4d866f8ddda62e4c331f95268c0d95b1}{00171}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_DEVICE\_SHAREABLE\ \ \ \ \ \ \ \ \ \ \ \ (\ 0x01UL\ )\ }\textcolor{comment}{/*\ TEX=000,\ S=NA,\ C=0,\ B=1.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00172}\mbox{\hyperlink{portmacro__asm_8h_af2b39e4ea31a4adc0564e96773981374}{00172}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_NORMAL\_OIWTNOWA\_NONSHARED\ \ \ (\ 0x02UL\ )\ }\textcolor{comment}{/*\ TEX=000,\ S=0,\ C=1,\ B=0.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00173}\mbox{\hyperlink{portmacro__asm_8h_aa7f6a5e72795497e7608d0dbb59302a9}{00173}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_NORMAL\_OIWTNOWA\_SHARED\ \ \ \ \ \ (\ 0x06UL\ )\ }\textcolor{comment}{/*\ TEX=000,\ S=1,\ C=1,\ B=0.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00174}\mbox{\hyperlink{portmacro__asm_8h_a952c1d24e2cc7762cc1120dd5e41ed91}{00174}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_NORMAL\_OIWBNOWA\_NONSHARED\ \ \ (\ 0x03UL\ )\ }\textcolor{comment}{/*\ TEX=000,\ S=0,\ C=1,\ B=1.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00175}\mbox{\hyperlink{portmacro__asm_8h_adc641debc8412c1d7c02dd8ff9485b5e}{00175}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_NORMAL\_OIWBNOWA\_SHARED\ \ \ \ \ \ (\ 0x07UL\ )\ }\textcolor{comment}{/*\ TEX=000,\ S=1,\ C=1,\ B=1.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00176}\mbox{\hyperlink{portmacro__asm_8h_aeeb38e03b64830a01fc7a996609c9e92}{00176}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_NORMAL\_OINC\_NONSHARED\ \ \ \ \ \ \ (\ 0x08UL\ )\ }\textcolor{comment}{/*\ TEX=001,\ S=0,\ C=0,\ B=0.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00177}\mbox{\hyperlink{portmacro__asm_8h_af904bd9e631a4439f7bcc252a1f7a111}{00177}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_NORMAL\_OINC\_SHARED\ \ \ \ \ \ \ \ \ \ (\ 0x0CUL\ )\ }\textcolor{comment}{/*\ TEX=001,\ S=1,\ C=0,\ B=0.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00178}\mbox{\hyperlink{portmacro__asm_8h_a9eeb366decf164e616f933699420b300}{00178}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_NORMAL\_OIWBWA\_NONSHARED\ \ \ \ \ (\ 0x0BUL\ )\ }\textcolor{comment}{/*\ TEX=001,\ S=0,\ C=1,\ B=1.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00179}\mbox{\hyperlink{portmacro__asm_8h_a0aea7a47bcce14aa7bc50ee6bff4ec01}{00179}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_NORMAL\_OIWBWA\_SHARED\ \ \ \ \ \ \ \ (\ 0x0FUL\ )\ }\textcolor{comment}{/*\ TEX=001,\ S=1,\ C=1,\ B=1.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00180}\mbox{\hyperlink{portmacro__asm_8h_a415829ff9b052b869b3d311273b9c0da}{00180}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_DEVICE\_NONSHAREABLE\ \ \ \ \ \ \ \ \ (\ 0x10UL\ )\ }\textcolor{comment}{/*\ TEX=010,\ S=NA,\ C=0,\ B=0.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00181}00181\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00182}00182\ \textcolor{comment}{/*\ MPU\ access\ permissions.\ This\ information\ is\ encoded\ in\ the\ XN\ and\ AP\ bits\ of}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00183}00183\ \textcolor{comment}{\ *\ the\ MPU\ Region\ Access\ Control\ Register.\ */}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00184}\mbox{\hyperlink{portmacro__asm_8h_aa28f38c7a1a921b8e56b84fa3d7c134b}{00184}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_AP\_BITMASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x07UL\ <<\ 8UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00185}\mbox{\hyperlink{portmacro__asm_8h_afcca2a6fcf80c4d60271230d6133a12c}{00185}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_XN\_BITMASK\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x01UL\ <<\ 12UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00187}\mbox{\hyperlink{portmacro__asm_8h_a248e0728a48b67f51e2e3b9a6dc6493b}{00187}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_PRIV\_NA\_USER\_NA\ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x00UL\ <<\ 8UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00188}\mbox{\hyperlink{portmacro__asm_8h_a480fd4b912b4fad4a59c3559b79c4d82}{00188}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_PRIV\_NA\_USER\_NA\_EXEC\ \ \ \ \ \ \ \ (\ portMPU\_REGION\_PRIV\_NA\_USER\_NA\ )\ }\textcolor{comment}{/*\ Priv:\ X,\ Unpriv:\ X.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00189}\mbox{\hyperlink{portmacro__asm_8h_a94f252e0b504247f70545b918e7172e9}{00189}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_PRIV\_NA\_USER\_NA\_NOEXEC\ \ \ \ \ \ (\ portMPU\_REGION\_PRIV\_NA\_USER\_NA\ |\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00190}00190\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ portMPU\_REGION\_XN\_BITMASK\ )\ }\textcolor{comment}{/*\ Priv:\ No\ Access,\ Unpriv:\ No\ Access.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00192}\mbox{\hyperlink{portmacro__asm_8h_a06d1c4ba2b6c2e92fe4c93320e05cc10}{00192}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_PRIV\_RW\_USER\_NA\ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x01UL\ <<\ 8UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00193}\mbox{\hyperlink{portmacro__asm_8h_add646a87abc38f9dd969d59cfd44c0f9}{00193}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_PRIV\_RW\_USER\_NA\_EXEC\ \ \ \ \ \ \ \ (\ portMPU\_REGION\_PRIV\_RW\_USER\_NA\ )\ }\textcolor{comment}{/*\ Priv:\ RWX,\ Unpriv:\ X.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00194}\mbox{\hyperlink{portmacro__asm_8h_a7c69af3767a52360e3cba4009b0c576b}{00194}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_PRIV\_RW\_USER\_NA\_NOEXEC\ \ \ \ \ \ (\ portMPU\_REGION\_PRIV\_RW\_USER\_NA\ |\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00195}00195\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ portMPU\_REGION\_XN\_BITMASK\ )\ }\textcolor{comment}{/*\ Priv:\ RW,\ Unpriv:\ No\ access.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00197}\mbox{\hyperlink{portmacro__asm_8h_a85c95a89455585d1359283980528617a}{00197}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_PRIV\_RW\_USER\_RO\ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x02UL\ <<\ 8UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00198}\mbox{\hyperlink{portmacro__asm_8h_a19cedc6e6e790d453b658057e86d88b7}{00198}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_PRIV\_RW\_USER\_RO\_EXEC\ \ \ \ \ \ \ \ (\ portMPU\_REGION\_PRIV\_RW\_USER\_RO\ )\ }\textcolor{comment}{/*\ Priv:\ RWX,\ Unpriv:\ RX.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00199}\mbox{\hyperlink{portmacro__asm_8h_ad89ba304ac92d35013b0fa35609e247a}{00199}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_PRIV\_RW\_USER\_RO\_NOEXEC\ \ \ \ \ \ (\ portMPU\_REGION\_PRIV\_RW\_USER\_RO\ |\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00200}00200\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ portMPU\_REGION\_XN\_BITMASK\ )\ }\textcolor{comment}{/*\ Priv:\ RW,\ Unpriv:\ R.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00201}00201\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00202}\mbox{\hyperlink{portmacro__asm_8h_a5a93d92ec6758f1b2a5906934fd9ae59}{00202}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_PRIV\_RW\_USER\_RW\ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x03UL\ <<\ 8UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00203}\mbox{\hyperlink{portmacro__asm_8h_aed11e6b1f02ed2bd91b038aec6582da8}{00203}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_PRIV\_RW\_USER\_RW\_EXEC\ \ \ \ \ \ \ \ (\ portMPU\_REGION\_PRIV\_RW\_USER\_RW\ )\ }\textcolor{comment}{/*\ Priv:\ RWX,\ Unpriv:\ RWX.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00204}\mbox{\hyperlink{portmacro__asm_8h_af1baf35099afd1eb770ef4aa15585cb0}{00204}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_PRIV\_RW\_USER\_RW\_NOEXEC\ \ \ \ \ \ (\ portMPU\_REGION\_PRIV\_RW\_USER\_RW\ |\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00205}00205\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ portMPU\_REGION\_XN\_BITMASK\ )\ }\textcolor{comment}{/*\ Priv:\ RW,\ Unpriv:\ RW.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00206}00206\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00207}\mbox{\hyperlink{portmacro__asm_8h_a5876074a59bc14b4a208d2e8182cda1c}{00207}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_PRIV\_RO\_USER\_NA\ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x05UL\ <<\ 8UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00208}\mbox{\hyperlink{portmacro__asm_8h_a1cd7fc2425bdba6fec731695175c6412}{00208}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_PRIV\_RO\_USER\_NA\_EXEC\ \ \ \ \ \ \ \ (\ portMPU\_REGION\_PRIV\_RO\_USER\_NA\ )\ }\textcolor{comment}{/*\ Priv:\ RX,\ Unpriv:\ X.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00209}\mbox{\hyperlink{portmacro__asm_8h_ad131b0ef93f11d93b4867706774d42b2}{00209}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_PRIV\_RO\_USER\_NA\_NOEXEC\ \ \ \ \ \ (\ portMPU\_REGION\_PRIV\_RO\_USER\_NA\ |\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00210}00210\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ portMPU\_REGION\_XN\_BITMASK\ )\ }\textcolor{comment}{/*\ Priv:\ R,\ Unpriv:\ No\ access.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00212}\mbox{\hyperlink{portmacro__asm_8h_a5d028119417601b597ea67b30d9b4256}{00212}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_PRIV\_RO\_USER\_RO\ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x06UL\ <<\ 8UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00213}\mbox{\hyperlink{portmacro__asm_8h_a725cdb61215e91cf0322183895d29ead}{00213}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_PRIV\_RO\_USER\_RO\_EXEC\ \ \ \ \ \ \ \ (\ portMPU\_REGION\_PRIV\_RO\_USER\_RO\ )\ }\textcolor{comment}{/*\ Priv:\ RX,\ Unpriv:\ RX.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00214}\mbox{\hyperlink{portmacro__asm_8h_a3e102be6d390b4b675a4e2e43aad3a35}{00214}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_PRIV\_RO\_USER\_RO\_NOEXEC\ \ \ \ \ \ (\ portMPU\_REGION\_PRIV\_RO\_USER\_RO\ |\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00215}00215\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ portMPU\_REGION\_XN\_BITMASK\ )\ }\textcolor{comment}{/*\ Priv:\ R,\ Unpriv:\ R.\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00216}00216\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00217}00217\ \textcolor{comment}{/*\ MPU\ region\ management.\ */}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00218}\mbox{\hyperlink{portmacro__asm_8h_a60a2ba380940d5cdf6ee27f2dce08c6a}{00218}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_EXECUTE\_NEVER\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x01UL\ <<\ 12UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00219}\mbox{\hyperlink{portmacro__asm_8h_a6323908daa39345ab5a7ed0b72619c5c}{00219}}\ \textcolor{preprocessor}{\#define\ portMPU\_REGION\_ENABLE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ 0x01UL\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00220}00220\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00243}00243\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00244}00244\ \textcolor{preprocessor}{\#if(\ portENABLE\_FPU\ ==\ 1\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00245}00245\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00246}00246\ \textcolor{comment}{\ \ \ \ \ *\ +-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00247}00247\ \textcolor{comment}{\ \ \ \ \ *\ |\ ulCriticalNesting\ |\ FPSCR\ |\ \ S0-\/S31\ \ |\ R0-\/R12\ |\ SP\ (R13)\ |\ LR\ (R14)\ |\ PC\ (R15)\ |\ CPSR\ |}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00248}00248\ \textcolor{comment}{\ \ \ \ \ *\ +-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00249}00249\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00250}00250\ \textcolor{comment}{\ \ \ \ \ *\ <-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/><-\/-\/-\/-\/-\/-\/><-\/-\/-\/-\/-\/-\/-\/-\/-\/><-\/-\/-\/-\/-\/-\/-\/-\/><-\/-\/-\/-\/-\/-\/-\/-\/-\/><-\/-\/-\/-\/-\/-\/-\/-\/><-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/><-\/-\/-\/-\/-\/>}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00251}00251\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ \ 1\ \ \ \ \ \ \ \ \ \ \ \ 1\ \ \ \ \ \ \ \ 32\ \ \ \ \ \ \ \ \ 13\ \ \ \ \ \ \ \ \ 1\ \ \ \ \ \ \ \ \ 1\ \ \ \ \ \ \ \ \ \ 1\ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00252}00252\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00253}\mbox{\hyperlink{portmacro__asm_8h_a1c5c9d4bb3418209e1fa76041b9d2189}{00253}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ CONTEXT\_SIZE\ 51U}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00254}00254\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00255}00255\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00256}00256\ \textcolor{comment}{\ \ \ \ \ *\ +-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00257}00257\ \textcolor{comment}{\ \ \ \ \ *\ |\ ulCriticalNesting\ |\ R0-\/R12\ |\ SP\ (R13)\ |\ LR\ (R14)\ |\ PC\ (R15)\ |\ CPSR\ |}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00258}00258\ \textcolor{comment}{\ \ \ \ \ *\ +-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00259}00259\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00260}00260\ \textcolor{comment}{\ \ \ \ \ *\ <-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/><-\/-\/-\/-\/-\/-\/-\/-\/><-\/-\/-\/-\/-\/-\/-\/-\/-\/><-\/-\/-\/-\/-\/-\/-\/-\/><-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/><-\/-\/-\/-\/-\/>}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00261}00261\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ \ 1\ \ \ \ \ \ \ \ \ \ \ \ \ 13\ \ \ \ \ \ \ \ \ 1\ \ \ \ \ \ \ \ \ 1\ \ \ \ \ \ \ \ \ \ 1\ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00262}00262\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00263}00263\ \textcolor{preprocessor}{\ \ \ \ \#define\ CONTEXT\_SIZE\ 18U}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00264}00264\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ CONTEXT\_SIZE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00265}00265\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00269}\mbox{\hyperlink{portmacro__asm_8h_a6871bad2d35a54d438084505d31bd22b}{00269}}\ \textcolor{preprocessor}{\#define\ portSYSTEM\_CALL\_INFO\_OFFSET\ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00270}00270\ \textcolor{preprocessor}{\ \ \ \ (\ (\ 1U\ }\textcolor{comment}{/*\ pxTopOfStack.\ */}\textcolor{preprocessor}{\ +\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00271}00271\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ (\ portTOTAL\_NUM\_REGIONS\_IN\_TCB\ *\ 3U\ )\ +\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00272}00272\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ 1U\ }\textcolor{comment}{/*\ ulTaskFlags.\ */}\textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00273}00273\ \textcolor{preprocessor}{\ \ \ \ \ \ )\ *\ 4U\ )}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00274}00274\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00275}00275\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00276}00276\ \}\ \textcolor{comment}{/*\ extern\ C\ */}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00277}00277\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00278}00278\ }
+\DoxyCodeLine{\Hypertarget{portmacro__asm_8h_source_l00279}00279\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ PORTMACRO\_ASM\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

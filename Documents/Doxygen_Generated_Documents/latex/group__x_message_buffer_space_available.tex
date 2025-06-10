@@ -1,0 +1,19 @@
+\doxysection{x\+Message\+Buffer\+Space\+Available }
+\hypertarget{group__x_message_buffer_space_available}{}\label{group__x_message_buffer_space_available}\index{xMessageBufferSpaceAvailable@{xMessageBufferSpaceAvailable}}
+\doxylink{message__buffer_8h}{message\+\_\+buffer.\+h} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{message__buffer_8h_a9f1e75a283ef603e914e10ae354e5ab8}{xMessageBufferSpaceAvailable}}(\ \mbox{\hyperlink{message__buffer_8h_a6c510e0a4aeb3a08df4af49c1d651057}{MessageBufferHandle\_t}}\ xMessageBuffer\ );}
+
+\end{DoxyCode}
+ Returns the number of bytes of free space in the message buffer.
+
+config\+USE\+\_\+\+STREAM\+\_\+\+BUFFERS must be set to 1 in for Free\+RTOSConfig.\+h for \doxylink{message__buffer_8h_a9f1e75a283ef603e914e10ae354e5ab8}{x\+Message\+Buffer\+Space\+Available()} to be available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Message\+Buffer} & The handle of the message buffer being queried.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of bytes that can be written to the message buffer before the message buffer would be full. When a message is written to the message buffer an additional sizeof( size\+\_\+t ) bytes are also written to store the message\textquotesingle{}s length. sizeof( size\+\_\+t ) is typically 4 bytes on a 32-\/bit architecture, so if \doxylink{message__buffer_8h_a572622608a32242b1d7a922b71f96658}{x\+Message\+Buffer\+Spaces\+Available()} returns 10, then the size of the largest message that can be written to the message buffer is 6 bytes. 
+\end{DoxyReturn}

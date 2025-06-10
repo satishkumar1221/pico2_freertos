@@ -1,0 +1,515 @@
+\doxysection{port.\+c}
+\hypertarget{_softune_2_m_b96340_2port_8c_source}{}\label{_softune_2_m_b96340_2port_8c_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/Softune/MB96340/port.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/Softune/MB96340/port.c}}
+\mbox{\hyperlink{_softune_2_m_b96340_2port_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00029}00029\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_free_r_t_o_s_8h}{FreeRTOS.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00030}00030\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{task_8h}{task.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00032}00032\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00033}00033\ \textcolor{comment}{\ *\ Implementation\ of\ functions\ defined\ in\ portable.h\ for\ the\ 16FX\ port.}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00034}00034\ \textcolor{comment}{\ *-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00036}00036\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00037}00037\ \textcolor{comment}{\ *\ Get\ current\ value\ of\ DPR\ and\ ADB\ registers}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00038}00038\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00039}\mbox{\hyperlink{_softune_2_m_b96340_2port_8c_a13e5fe7547f79ab37fa3a6908f4a298e}{00039}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_a13e5fe7547f79ab37fa3a6908f4a298e}{xGet\_DPR\_ADB\_bank}}(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00041}00041\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00042}00042\ \textcolor{comment}{\ *\ Get\ current\ value\ of\ DTB\ and\ PCB\ registers}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00043}00043\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00044}\mbox{\hyperlink{_softune_2_m_b96340_2port_8c_ac1749073ebb72afb94fe7392ae8ba435}{00044}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_ac1749073ebb72afb94fe7392ae8ba435}{xGet\_DTB\_PCB\_bank}}(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00046}00046\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00047}00047\ \textcolor{comment}{\ *\ Sets\ up\ the\ periodic\ ISR\ used\ for\ the\ RTOS\ tick.\ \ This\ uses\ RLT0,\ but}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00048}00048\ \textcolor{comment}{\ *\ can\ be\ done\ using\ any\ given\ RLT.}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00049}00049\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00050}00050\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ prvSetupRLT0Interrupt(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00052}00052\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00054}00054\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00055}00055\ \textcolor{comment}{\ *\ We\ require\ the\ address\ of\ the\ pxCurrentTCB\ variable,\ but\ don't\ want\ to\ know}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00056}00056\ \textcolor{comment}{\ *\ any\ details\ of\ its\ type.}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00057}00057\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00058}00058\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_af5b0f7452857787ed70ce2856ca74c4b}{TCB\_t}};}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00059}00059\ \textcolor{keyword}{extern}\ \textcolor{keyword}{volatile}\ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_af5b0f7452857787ed70ce2856ca74c4b}{TCB\_t}}\ *\ \textcolor{keyword}{volatile}\ \mbox{\hyperlink{tasks_8c_aeceb1ce641f0a4c4a5a298b1f3cbae9e}{pxCurrentTCB}};}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00061}00061\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00063}00063\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00064}00064\ \textcolor{comment}{\ *\ Macro\ to\ save\ a\ task\ context\ to\ the\ task\ stack.\ This\ macro\ \ copies\ the}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00065}00065\ \textcolor{comment}{\ *\ saved\ context\ (AH:AL,\ DPR:ADB,\ DTB:PCB\ ,\ PC\ and\ PS)\ from\ \ the\ \ \ system}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00066}00066\ \textcolor{comment}{\ *\ stack\ to\ task\ stack\ pointed\ by\ user\ stack\ pointer\ (\ USP\ \ for\ SMALL\ and}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00067}00067\ \textcolor{comment}{\ *\ MEDIUM\ memory\ model\ amd\ USB:USP\ for\ COMPACT\ \ and\ LARGE\ memory\ model\ ),}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00068}00068\ \textcolor{comment}{\ *\ then\ \ it\ pushes\ the\ general\ purpose\ registers\ RW0-\/RW7\ \ on\ \ to\ the\ task}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00069}00069\ \textcolor{comment}{\ *\ stack.\ Finally\ the\ \ resultant\ \ stack\ \ pointer\ \ value\ is\ saved\ into\ the}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00070}00070\ \textcolor{comment}{\ *\ task\ \ control\ \ block\ \ so\ \ it\ \ can\ \ be\ retrieved\ the\ next\ time\ the\ task}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00071}00071\ \textcolor{comment}{\ *\ executes.}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00072}00072\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00073}00073\ \textcolor{preprocessor}{\#if(\ (\ configMEMMODEL\ ==\ portSMALL\ )\ ||\ (\ configMEMMODEL\ ==\ portMEDIUM\ )\ )}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00075}\mbox{\hyperlink{_softune_2_m_b96340_2port_8c_a798f37b250502b49763c54a56b3aa4b0}{00075}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ portSAVE\_CONTEXT()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00076}00076\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \{\ \ \ \_\_asm("{}\ POPW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00077}00077\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ AND\ \ CCR,\#H'DF\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00078}00078\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00079}00079\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ OR\ \ \ CCR,\#H'20\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00080}00080\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ POPW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00081}00081\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ AND\ \ CCR,\#H'DF\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00082}00082\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00083}00083\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ OR\ \ \ CCR,\#H'20\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00084}00084\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ POPW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00085}00085\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ AND\ \ CCR,\#H'DF\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00086}00086\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00087}00087\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ OR\ \ \ CCR,\#H'20\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00088}00088\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ POPW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00089}00089\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ AND\ \ CCR,\#H'DF\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00090}00090\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00091}00091\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ OR\ \ \ CCR,\#H'20\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00092}00092\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ POPW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00093}00093\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ AND\ \ CCR,\#H'DF\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00094}00094\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00095}00095\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ OR\ \ \ CCR,\#H'20\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00096}00096\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ POPW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00097}00097\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ AND\ \ CCR,\#H'DF\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00098}00098\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00099}00099\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ (RW0,RW1,RW2,RW3,RW4,RW5,RW6,RW7)\ "{});\ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00100}00100\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ MOVW\ A,\ \_pxCurrentTCB\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00101}00101\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ MOVW\ A,\ SP\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00102}00102\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ SWAPW\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00103}00103\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ MOVW\ @AL,\ AH\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00104}00104\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ OR\ \ \ CCR,\#H'20\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00105}00105\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00107}00107\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00108}00108\ \textcolor{comment}{\ *\ Macro\ to\ restore\ a\ task\ context\ from\ the\ task\ stack.\ This\ is}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00109}00109\ \textcolor{comment}{\ *\ effectively\ the\ reverse\ of\ SAVE\_CONTEXT().\ First\ the\ stack\ pointer}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00110}00110\ \textcolor{comment}{\ *\ value\ (USP\ for\ SMALL\ and\ MEDIUM\ memory\ model\ amd\ USB:USP\ for\ COMPACT}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00111}00111\ \textcolor{comment}{\ *\ and\ LARGE\ memory\ model\ )\ is\ loaded\ from\ the\ task\ \ control\ block.\ Next}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00112}00112\ \textcolor{comment}{\ *\ the\ value\ of\ all\ the\ general\ purpose\ registers\ RW0-\/RW7\ is\ retrieved.}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00113}00113\ \textcolor{comment}{\ *\ Finally\ it\ copies\ of\ the\ context\ (\ AH:AL,\ DPR:ADB,\ DTB:PCB,\ PC\ and\ PS)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00114}00114\ \textcolor{comment}{\ *\ of\ the\ task\ to\ be\ executed\ upon\ RETI\ from\ user\ stack\ to\ system\ stack.}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00115}00115\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00117}\mbox{\hyperlink{_softune_2_m_b96340_2port_8c_a8d3a167375b5b57944a57df23d45b39e}{00117}}\ \textcolor{preprocessor}{\ \ \ \ \#define\ portRESTORE\_CONTEXT()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00118}00118\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \{\ \ \ \_\_asm("{}\ MOVW\ A,\ \_pxCurrentTCB\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00119}00119\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ MOVW\ A,\ @A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00120}00120\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ AND\ \ CCR,\#H'DF\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00121}00121\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ MOVW\ SP,\ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00122}00122\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ POPW\ (RW0,RW1,RW2,RW3,RW4,RW5,RW6,RW7)\ "{});\ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00123}00123\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ POPW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00124}00124\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ OR\ \ \ CCR,\#H'20\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00125}00125\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00126}00126\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ AND\ \ CCR,\#H'DF\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00127}00127\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ POPW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00128}00128\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ OR\ \ \ CCR,\#H'20\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00129}00129\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00130}00130\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ AND\ \ CCR,\#H'DF\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00131}00131\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ POPW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00132}00132\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ OR\ \ \ CCR,\#H'20\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00133}00133\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00134}00134\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ AND\ \ CCR,\#H'DF\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00135}00135\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ POPW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00136}00136\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ OR\ \ \ CCR,\#H'20\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00137}00137\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00138}00138\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ AND\ \ CCR,\#H'DF\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00139}00139\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ POPW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00140}00140\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ OR\ \ \ CCR,\#H'20\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00141}00141\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00142}00142\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ AND\ \ CCR,\#H'DF\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00143}00143\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ POPW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00144}00144\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ OR\ \ \ CCR,\#H'20\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00145}00145\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00146}00146\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00148}00148\ \textcolor{preprocessor}{\#elif(\ (\ configMEMMODEL\ ==\ portCOMPACT\ )\ ||\ (\ configMEMMODEL\ ==\ portLARGE\ )\ )}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00150}00150\ \textcolor{preprocessor}{\ \ \ \ \#define\ portSAVE\_CONTEXT()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00151}00151\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \{\ \ \ \_\_asm("{}\ POPW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00152}00152\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ AND\ \ CCR,\#H'DF\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00153}00153\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00154}00154\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ OR\ \ \ CCR,\#H'20\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00155}00155\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ POPW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00156}00156\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ AND\ \ CCR,\#H'DF\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00157}00157\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00158}00158\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ OR\ \ \ CCR,\#H'20\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00159}00159\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ POPW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00160}00160\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ AND\ \ CCR,\#H'DF\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00161}00161\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00162}00162\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ OR\ \ \ CCR,\#H'20\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00163}00163\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ POPW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00164}00164\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ AND\ \ CCR,\#H'DF\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00165}00165\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00166}00166\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ OR\ \ \ CCR,\#H'20\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00167}00167\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ POPW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00168}00168\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ AND\ \ CCR,\#H'DF\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00169}00169\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00170}00170\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ OR\ \ \ CCR,\#H'20\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00171}00171\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ POPW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00172}00172\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ AND\ \ CCR,\#H'DF\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00173}00173\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00174}00174\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ (RW0,RW1,RW2,RW3,RW4,RW5,RW6,RW7)\ "{});\ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00175}00175\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ MOVL\ A,\ \_pxCurrentTCB\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00176}00176\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ MOVL\ RL2,\ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00177}00177\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ MOVW\ A,\ SP\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00178}00178\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ MOVW\ @RL2+0,\ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00179}00179\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ MOV\ A,\ USB\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00180}00180\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ MOV\ @RL2+2,\ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00181}00181\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00183}00183\ \textcolor{preprocessor}{\ \ \ \ \#define\ portRESTORE\_CONTEXT()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00184}00184\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \{\ \ \ \_\_asm("{}\ MOVL\ A,\ \_pxCurrentTCB\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00185}00185\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ MOVL\ RL2,\ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00186}00186\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ MOVW\ A,\ @RL2+0\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00187}00187\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ AND\ \ CCR,\#H'DF\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00188}00188\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ MOVW\ SP,\ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00189}00189\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ MOV\ A,\ @RL2+2\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00190}00190\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ MOV\ USB,\ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00191}00191\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ POPW\ (RW0,RW1,RW2,RW3,RW4,RW5,RW6,RW7)\ "{});\ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00192}00192\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ POPW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00193}00193\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ OR\ \ \ CCR,\#H'20\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00194}00194\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00195}00195\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ AND\ \ CCR,\#H'DF\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00196}00196\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ POPW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00197}00197\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ OR\ \ \ CCR,\#H'20\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00198}00198\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00199}00199\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ AND\ \ CCR,\#H'DF\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00200}00200\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ POPW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00201}00201\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ OR\ \ \ CCR,\#H'20\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00202}00202\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00203}00203\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ AND\ \ CCR,\#H'DF\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00204}00204\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ POPW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00205}00205\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ OR\ \ \ CCR,\#H'20\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00206}00206\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00207}00207\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ AND\ \ CCR,\#H'DF\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00208}00208\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ POPW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00209}00209\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ OR\ \ \ CCR,\#H'20\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00210}00210\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00211}00211\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ AND\ \ CCR,\#H'DF\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00212}00212\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ POPW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00213}00213\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ OR\ \ \ CCR,\#H'20\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00214}00214\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_asm("{}\ PUSHW\ \ A\ "{});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00215}00215\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00216}00216\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00218}00218\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00219}00219\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00220}00220\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00221}00221\ \textcolor{comment}{\ *\ Functions\ for\ obtaining\ the\ current\ value\ \ of\ \ DPR:ADB,\ DTB:PCB\ bank\ registers}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00222}00222\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00223}00223\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00224}00224\ \textcolor{preprocessor}{\#pragma\ asm}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00225}00225\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00226}00226\ \ \ \ \ \ \ \ \ .GLOBAL\ \ \ \ \_xGet\_DPR\_ADB\_bank}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00227}00227\ \ \ \ \ \ \ \ \ .GLOBAL\ \ \ \ \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_ad707757f4336268c389905abf826b948}{\_xGet\_DTB\_PCB\_bank}}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00228}\mbox{\hyperlink{_softune_2_m_b96340_2port_8c_a8de422401fee7edc1a14cf099a10ec3c}{00228}}\ \ \ \ \ \ \ \ \ .SECTION\ \ \ \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_a7d51db29a9359d977e16da4b501a4274}{CODE}},\ \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_a7d51db29a9359d977e16da4b501a4274}{CODE}},\ \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_a8de422401fee7edc1a14cf099a10ec3c}{ALIGN}}=1}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00229}00229\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00230}00230\ \_xGet\_DPR\_ADB\_bank:}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00231}00231\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00232}00232\ \ \ \ \ MOV\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ae2572b8ee3e438f22571e0214222bd1b}{A}},\ DPR}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00233}00233\ \ \ \ \ SWAP}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00234}\mbox{\hyperlink{_softune_2_m_b96340_2port_8c_ae2572b8ee3e438f22571e0214222bd1b}{00234}}\ \ \ \ \ MOV\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ae2572b8ee3e438f22571e0214222bd1b}{A}},\ ADB}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00235}00235\ \ \ \ \ ORW\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ae2572b8ee3e438f22571e0214222bd1b}{A}}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00236}00236\ \textcolor{preprocessor}{\ \ \ \ \#if\ configMEMMODEL\ ==\ portMEDIUM\ ||\ configMEMMODEL\ ==\ portLARGE}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00237}00237\ \ \ \ \ \ \ \ \ RETP}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00238}00238\ \textcolor{preprocessor}{\ \ \ \ \#elif\ configMEMMODEL\ ==\ portSMALL\ ||\ configMEMMODEL\ ==\ portCOMPACT}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00239}00239\ \ \ \ \ \ \ \ \ RET}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00240}00240\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00241}00241\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00242}00242\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00243}\mbox{\hyperlink{_softune_2_m_b96340_2port_8c_ad707757f4336268c389905abf826b948}{00243}}\ \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_ad707757f4336268c389905abf826b948}{\_xGet\_DTB\_PCB\_bank}}:}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00245}00245\ \ \ \ \ MOV\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ae2572b8ee3e438f22571e0214222bd1b}{A}},\ DTB}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00246}00246\ \ \ \ \ SWAP}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00247}00247\ \ \ \ \ MOV\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ae2572b8ee3e438f22571e0214222bd1b}{A}},\ PCB}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00248}00248\ \ \ \ \ ORW\ \mbox{\hyperlink{_g_c_c_2_r_l78_2_i_s_r___support_8h_ae2572b8ee3e438f22571e0214222bd1b}{A}}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00249}00249\ \textcolor{preprocessor}{\ \ \ \ \#if\ configMEMMODEL\ ==\ portMEDIUM\ ||\ configMEMMODEL\ ==\ portLARGE}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00250}00250\ \ \ \ \ \ \ \ \ RETP}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00251}00251\ \textcolor{preprocessor}{\ \ \ \ \#elif\ configMEMMODEL\ ==\ portSMALL\ ||\ configMEMMODEL\ ==\ portCOMPACT}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00252}00252\ \ \ \ \ \ \ \ \ RET}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00253}00253\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00254}00254\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00255}00255\ \textcolor{preprocessor}{\#pragma\ endasm}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00256}00256\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00257}00257\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00258}00258\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00259}00259\ \textcolor{comment}{\ *\ Initialise\ the\ stack\ of\ a\ task\ to\ look\ exactly\ as\ if\ a\ call\ to}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00260}00260\ \textcolor{comment}{\ *\ portSAVE\_CONTEXT\ had\ been\ called.}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00261}00261\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00262}00262\ \textcolor{comment}{\ *\ See\ the\ header\ file\ portable.h.}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00263}00263\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00264}\mbox{\hyperlink{_softune_2_m_b96340_2port_8c_a97682e6bdcf335803f8ed01ae0d11b58}{00264}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_aaa2085423d917cf1707f4770de3354e2}{pxPortInitialiseStack}}(\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ *pxTopOfStack,\ \mbox{\hyperlink{projdefs_8h_a0ab243e55144f5278d263729530dac14}{TaskFunction\_t}}\ pxCode,\ \textcolor{keywordtype}{void}\ *pvParameters\ )}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00265}00265\ \{}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00266}00266\ \ \ \ \ \textcolor{comment}{/*\ Place\ a\ few\ bytes\ of\ known\ values\ on\ the\ bottom\ of\ the\ stack.}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00267}00267\ \textcolor{comment}{\ \ \ \ This\ is\ just\ useful\ for\ debugging.\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00268}00268\ \ \ \ \ *pxTopOfStack\ =\ 0x1111;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00269}00269\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00270}00270\ \ \ \ \ *pxTopOfStack\ =\ 0x2222;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00271}00271\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00272}00272\ \ \ \ \ *pxTopOfStack\ =\ 0x3333;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00273}00273\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00274}00274\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00275}00275\ \ \ \ \ \textcolor{comment}{/*\ Once\ the\ task\ is\ called\ the\ task\ \ would\ \ push\ \ the\ \ pointer\ to\ the}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00276}00276\ \textcolor{comment}{\ \ \ \ parameter\ onto\ the\ stack.\ Hence\ here\ the\ pointer\ would\ be\ copied\ to\ the\ stack}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00277}00277\ \textcolor{comment}{\ \ \ \ first.\ \ When\ using\ the\ COMPACT\ or\ LARGE\ memory\ model\ the\ pointer\ would\ be\ 24}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00278}00278\ \textcolor{comment}{\ \ \ \ bits,\ and\ when\ using\ the\ SMALL\ or\ MEDIUM\ memory\ model\ the\ pointer\ would\ be\ 16}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00279}00279\ \textcolor{comment}{\ \ \ \ bits.\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00280}00280\ \textcolor{preprocessor}{\ \ \ \ \#if(\ (\ configMEMMODEL\ ==\ portCOMPACT\ )\ ||\ (\ configMEMMODEL\ ==\ portLARGE\ )\ )}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00281}00281\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00282}00282\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ (\ (\ uint32\_t\ )\ (\ pvParameters\ )\ >>\ 16\ );}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00283}00283\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00284}00284\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00285}00285\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00286}00286\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00287}00287\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ (\ pvParameters\ );}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00288}00288\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00289}00289\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00290}00290\ \ \ \ \ \textcolor{comment}{/*\ This\ is\ redundant\ push\ to\ the\ stack.\ This\ is\ required\ in\ order\ to\ introduce}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00291}00291\ \textcolor{comment}{\ \ \ \ an\ offset\ so\ that\ the\ task\ accesses\ a\ parameter\ correctly\ that\ is\ passed\ on\ to}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00292}00292\ \textcolor{comment}{\ \ \ \ the\ task\ stack.\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00293}00293\ \textcolor{preprocessor}{\ \ \ \ \#if(\ (\ configMEMMODEL\ ==\ portMEDIUM\ )\ ||\ (\ configMEMMODEL\ ==\ portLARGE\ )\ )}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00294}00294\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00295}00295\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_ac1749073ebb72afb94fe7392ae8ba435}{xGet\_DTB\_PCB\_bank}}()\ \&\ 0xff00\ )\ |\ (\ (\ (\ int32\_t\ )\ (\ pxCode\ )\ >>\ 16\ )\ \&\ 0xff\ );}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00296}00296\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00297}00297\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00298}00298\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00299}00299\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00300}00300\ \ \ \ \ \textcolor{comment}{/*\ This\ is\ redundant\ push\ to\ the\ stack.\ This\ is\ required\ in\ order\ to\ introduce}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00301}00301\ \textcolor{comment}{\ \ \ \ an\ offset\ so\ the\ task\ correctly\ accesses\ the\ parameter\ passed\ on\ the\ task\ stack.\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00302}00302\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ (\ pxCode\ );}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00303}00303\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00304}00304\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00305}00305\ \ \ \ \ \textcolor{comment}{/*\ PS\ -\/\ User\ Mode,\ ILM=7,\ RB=0,\ Interrupts\ enabled,USP\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00306}00306\ \ \ \ \ *pxTopOfStack\ =\ 0xE0C0;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00307}00307\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00308}00308\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00309}00309\ \ \ \ \ \textcolor{comment}{/*\ PC\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00310}00310\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ (\ pxCode\ );}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00311}00311\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00312}00312\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00313}00313\ \ \ \ \ \textcolor{comment}{/*\ DTB\ |\ PCB\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00314}00314\ \textcolor{preprocessor}{\ \ \ \ \#if\ configMEMMODEL\ ==\ portSMALL\ ||\ configMEMMODEL\ ==\ portCOMPACT}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00315}00315\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00316}00316\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_ac1749073ebb72afb94fe7392ae8ba435}{xGet\_DTB\_PCB\_bank}}();}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00317}00317\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00318}00318\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00319}00319\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00320}00320\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00321}00321\ \ \ \ \ \textcolor{comment}{/*\ DTB\ |\ PCB,\ in\ case\ of\ MEDIUM\ and\ LARGE\ memory\ models,\ PCB\ would\ be\ used}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00322}00322\ \textcolor{comment}{\ \ \ \ along\ with\ PC\ to\ indicate\ the\ start\ address\ of\ the\ function.\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00323}00323\ \textcolor{preprocessor}{\ \ \ \ \#if(\ (\ configMEMMODEL\ ==\ portMEDIUM\ )\ ||\ (\ configMEMMODEL\ ==\ portLARGE\ )\ )}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00324}00324\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00325}00325\ \ \ \ \ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_ac1749073ebb72afb94fe7392ae8ba435}{xGet\_DTB\_PCB\_bank}}()\ \&\ 0xff00\ )\ |\ (\ (\ (\ int32\_t\ )\ (\ pxCode\ )\ >>\ 16\ )\ \&\ 0xff\ );}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00326}00326\ \ \ \ \ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00327}00327\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00328}00328\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00329}00329\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00330}00330\ \ \ \ \ \textcolor{comment}{/*\ DPR\ |\ ADB\ \ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00331}00331\ \ \ \ \ *pxTopOfStack\ =\ \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_a13e5fe7547f79ab37fa3a6908f4a298e}{xGet\_DPR\_ADB\_bank}}();}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00332}00332\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00333}00333\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00334}00334\ \ \ \ \ \textcolor{comment}{/*\ AL\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00335}00335\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x9999;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00336}00336\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00337}00337\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00338}00338\ \ \ \ \ \textcolor{comment}{/*\ AH\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00339}00339\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0xAAAA;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00340}00340\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00341}00341\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00342}00342\ \ \ \ \ \textcolor{comment}{/*\ Next\ the\ general\ purpose\ registers.\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00343}00343\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x7777;\ \textcolor{comment}{/*\ RW7\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00344}00344\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00345}00345\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x6666;\ \textcolor{comment}{/*\ RW6\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00346}00346\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00347}00347\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x5555;\ \textcolor{comment}{/*\ RW5\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00348}00348\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00349}00349\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x4444;\ \textcolor{comment}{/*\ RW4\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00350}00350\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00351}00351\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x3333;\ \textcolor{comment}{/*\ RW3\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00352}00352\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00353}00353\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x2222;\ \textcolor{comment}{/*\ RW2\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00354}00354\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00355}00355\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x1111;\ \textcolor{comment}{/*\ RW1\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00356}00356\ \ \ \ \ pxTopOfStack-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00357}00357\ \ \ \ \ *pxTopOfStack\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a84e9a8ba132feed0b2401c1f4e2ac63c}{StackType\_t}}\ )\ 0x8888;\ \textcolor{comment}{/*\ RW0\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00358}00358\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00359}00359\ \ \ \ \ \textcolor{keywordflow}{return}\ pxTopOfStack;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00360}00360\ \}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00361}00361\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00362}00362\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00363}00363\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ prvSetupRLT0Interrupt(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00364}00364\ \{}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00365}00365\ \textcolor{comment}{/*\ The\ peripheral\ clock\ divided\ by\ 16\ is\ used\ by\ the\ timer.\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00366}00366\ \textcolor{keyword}{const}\ uint16\_t\ usReloadValue\ =\ (\ uint16\_t\ )\ (\ (\ (\ configCLKP1\_CLOCK\_HZ\ /\ \mbox{\hyperlink{_free_r_t_o_s-_kernel_2examples_2coverity_2_free_r_t_o_s_config_8h_a2f0258dd1e3b877e5bc013be54c2db6a}{configTICK\_RATE\_HZ}}\ )\ /\ 16UL\ )\ -\/\ 1UL\ );}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00367}00367\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00368}00368\ \ \ \ \ \textcolor{comment}{/*\ set\ reload\ value\ =\ 34999+1,\ TICK\ Interrupt\ after\ 10\ ms\ @\ 56MHz\ of\ CLKP1\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00369}00369\ \ \ \ \ TMRLR0\ =\ usReloadValue;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00370}00370\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00371}00371\ \ \ \ \ \textcolor{comment}{/*\ prescaler\ 1:16,\ reload,\ interrupt\ enable,\ count\ enable,\ trigger\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00372}00372\ \ \ \ \ TMCSR0\ =\ 0x041B;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00373}00373\ \}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00374}00374\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00375}00375\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00376}\mbox{\hyperlink{_softune_2_m_b96340_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{00376}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_ade5a8c6666e7413a0355cc252029c5c6}{xPortStartScheduler}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00377}00377\ \{}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00378}00378\ \ \ \ \ \textcolor{comment}{/*\ Setup\ the\ hardware\ to\ generate\ the\ tick.\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00379}00379\ \ \ \ \ prvSetupRLT0Interrupt();}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00380}00380\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00381}00381\ \ \ \ \ \textcolor{comment}{/*\ Restore\ the\ context\ of\ the\ first\ task\ that\ is\ going\ to\ run.\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00382}00382\ \ \ \ \ \mbox{\hyperlink{_code_warrior_2_cold_fire___v2_2port_8c_a8d3a167375b5b57944a57df23d45b39e}{portRESTORE\_CONTEXT}}();}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00383}00383\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00384}00384\ \ \ \ \ \textcolor{comment}{/*\ Simulate\ a\ function\ call\ end\ as\ generated\ by\ the\ compiler.\ \ We\ will\ now}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00385}00385\ \textcolor{comment}{\ \ \ \ jump\ to\ the\ start\ of\ the\ task\ the\ context\ of\ which\ we\ have\ just\ restored.\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00386}00386\ \ \ \ \ \_\_asm(\textcolor{stringliteral}{"{}\ reti\ "{}});}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00387}00387\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00388}00388\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00389}00389\ \ \ \ \ \textcolor{comment}{/*\ Should\ not\ get\ here.\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00390}00390\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{projdefs_8h_af268cf937960eb029256bd9c4d949fbe}{pdTRUE}};}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00391}00391\ \}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00392}00392\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00393}00393\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00394}\mbox{\hyperlink{_softune_2_m_b96340_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{00394}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_af76f3c0b44c5b5c06fc046a4ee1a6423}{vPortEndScheduler}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00395}00395\ \{}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00396}00396\ \ \ \ \ \textcolor{comment}{/*\ Not\ implemented\ -\/\ unlikely\ to\ ever\ be\ required\ as\ there\ is\ nothing\ to}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00397}00397\ \textcolor{comment}{\ \ \ \ return\ to.\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00398}00398\ \}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00399}00399\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00400}00400\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00401}00401\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00402}00402\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00403}00403\ \textcolor{comment}{\ *\ The\ interrupt\ service\ routine\ used\ depends\ on\ whether\ the\ pre-\/emptive}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00404}00404\ \textcolor{comment}{\ *\ scheduler\ is\ being\ used\ or\ not.}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00405}00405\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00406}00406\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00407}00407\ \textcolor{preprocessor}{\#if\ configUSE\_PREEMPTION\ ==\ 1}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00408}00408\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00409}00409\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00410}00410\ \textcolor{comment}{\ \ \ \ \ *\ Tick\ ISR\ for\ preemptive\ scheduler.\ \ We\ can\ use\ a\ \_\_nosavereg\ attribute}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00411}00411\ \textcolor{comment}{\ \ \ \ \ *\ as\ the\ context\ is\ to\ be\ saved\ by\ the\ portSAVE\_CONTEXT()\ macro,\ not\ the}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00412}00412\ \textcolor{comment}{\ \ \ \ \ *\ compiler\ generated\ code.\ \ The\ tick\ count\ is\ incremented\ after\ the\ context}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00413}00413\ \textcolor{comment}{\ \ \ \ \ *\ is\ saved.}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00414}00414\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00415}00415\ \ \ \ \ \_\_nosavereg\ \_\_interrupt\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_aa4da5ab5570e9f7f2177febfa143843a}{prvRLT0\_TICKISR}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00416}00416\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00417}00417\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Disable\ interrupts\ so\ that\ portSAVE\_CONTEXT()\ is\ not\ interrupted\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00418}00418\ \ \ \ \ \ \ \ \ \_\_DI();}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00419}00419\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00420}00420\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Save\ the\ context\ of\ the\ interrupted\ task.\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00421}00421\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_code_warrior_2_cold_fire___v2_2port_8c_a798f37b250502b49763c54a56b3aa4b0}{portSAVE\_CONTEXT}}();}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00422}00422\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00423}00423\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Enable\ interrupts\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00424}00424\ \ \ \ \ \ \ \ \ \_\_EI();}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00425}00425\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00426}00426\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Clear\ RLT0\ interrupt\ flag\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00427}00427\ \ \ \ \ \ \ \ \ TMCSR0\_UF\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00428}00428\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00429}00429\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Increment\ the\ tick\ count\ then\ switch\ to\ the\ highest\ priority\ task}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00430}00430\ \textcolor{comment}{\ \ \ \ \ \ \ \ that\ is\ ready\ to\ run.\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00431}00431\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{task_8h_a978e25460ac35706f9ad30b46d9403d8}{xTaskIncrementTick}}()\ !=\ \mbox{\hyperlink{projdefs_8h_aa56260e937e7e203026707e5ba944273}{pdFALSE}}\ )}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00432}00432\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00433}00433\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_a9c86137bc3c1cbffc39fff22627cb885}{vTaskSwitchContext}}();}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00434}00434\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00435}00435\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00436}00436\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Disable\ interrupts\ so\ that\ portRESTORE\_CONTEXT()\ is\ not\ interrupted\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00437}00437\ \ \ \ \ \ \ \ \ \_\_DI();}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00438}00438\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00439}00439\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Restore\ the\ context\ of\ the\ new\ task.\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00440}00440\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_code_warrior_2_cold_fire___v2_2port_8c_a8d3a167375b5b57944a57df23d45b39e}{portRESTORE\_CONTEXT}}();}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00441}00441\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00442}00442\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Enable\ interrupts\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00443}00443\ \ \ \ \ \ \ \ \ \_\_EI();}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00444}00444\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00445}00445\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00446}00446\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00447}00447\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00448}00448\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00449}00449\ \textcolor{comment}{\ \ \ \ \ *\ Tick\ ISR\ for\ the\ cooperative\ scheduler.\ \ All\ this\ does\ is\ increment\ the}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00450}00450\ \textcolor{comment}{\ \ \ \ \ *\ tick\ count.\ \ We\ don't\ need\ to\ switch\ context,\ this\ can\ only\ be\ done\ by}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00451}00451\ \textcolor{comment}{\ \ \ \ \ *\ manual\ calls\ to\ taskYIELD();}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00452}00452\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00453}\mbox{\hyperlink{_softune_2_m_b96340_2port_8c_aa4da5ab5570e9f7f2177febfa143843a}{00453}}\ \ \ \ \ \_\_interrupt\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_aa4da5ab5570e9f7f2177febfa143843a}{prvRLT0\_TICKISR}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00454}00454\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00455}00455\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Clear\ RLT0\ interrupt\ flag\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00456}00456\ \ \ \ \ \ \ \ \ TMCSR0\_UF\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00457}00457\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00458}00458\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{task_8h_a978e25460ac35706f9ad30b46d9403d8}{xTaskIncrementTick}}();}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00459}00459\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00460}00460\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00461}00461\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00462}00462\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00463}00463\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00464}00464\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00465}00465\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00466}00466\ \textcolor{comment}{\ *\ Manual\ context\ switch.\ We\ can\ use\ a\ \_\_nosavereg\ attribute\ \ as\ the\ context}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00467}00467\ \textcolor{comment}{\ *\ is\ to\ be\ saved\ by\ the\ portSAVE\_CONTEXT()\ macro,\ not\ the\ compiler\ generated}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00468}00468\ \textcolor{comment}{\ *\ code.}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00469}00469\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00470}\mbox{\hyperlink{_softune_2_m_b96340_2port_8c_a37d8576541c056d8278f58b796d4e017}{00470}}\ \_\_nosavereg\ \_\_interrupt\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2port_8c_add01c927fb689f7ec170e42d47d27927}{vPortYield}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00471}00471\ \{}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00472}00472\ \ \ \ \ \textcolor{comment}{/*\ Save\ the\ context\ of\ the\ interrupted\ task.\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00473}00473\ \ \ \ \ \mbox{\hyperlink{_code_warrior_2_cold_fire___v2_2port_8c_a798f37b250502b49763c54a56b3aa4b0}{portSAVE\_CONTEXT}}();}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00474}00474\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00475}00475\ \ \ \ \ \textcolor{comment}{/*\ Switch\ to\ the\ highest\ priority\ task\ that\ is\ ready\ to\ run.\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00476}00476\ \ \ \ \ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_a9c86137bc3c1cbffc39fff22627cb885}{vTaskSwitchContext}}();}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00477}00477\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00478}00478\ \ \ \ \ \textcolor{comment}{/*\ Restore\ the\ context\ of\ the\ new\ task.\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00479}00479\ \ \ \ \ \mbox{\hyperlink{_code_warrior_2_cold_fire___v2_2port_8c_a8d3a167375b5b57944a57df23d45b39e}{portRESTORE\_CONTEXT}}();}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00480}00480\ \}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00481}00481\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00482}00482\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00483}\mbox{\hyperlink{_softune_2_m_b96340_2port_8c_a04375590036a5cbfb25df405922ab067}{00483}}\ \_\_nosavereg\ \_\_interrupt\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_softune_2_m_b96340_2port_8c_a04375590036a5cbfb25df405922ab067}{vPortYieldDelayed}}(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00484}00484\ \{}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00485}00485\ \ \ \ \ \textcolor{comment}{/*\ Disable\ interrupts\ so\ that\ portSAVE\_CONTEXT()\ is\ not\ interrupted\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00486}00486\ \ \ \ \ \_\_DI();}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00487}00487\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00488}00488\ \ \ \ \ \textcolor{comment}{/*\ Save\ the\ context\ of\ the\ interrupted\ task.\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00489}00489\ \ \ \ \ \mbox{\hyperlink{_code_warrior_2_cold_fire___v2_2port_8c_a798f37b250502b49763c54a56b3aa4b0}{portSAVE\_CONTEXT}}();}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00490}00490\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00491}00491\ \ \ \ \ \textcolor{comment}{/*\ Enable\ interrupts\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00492}00492\ \ \ \ \ \_\_EI();}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00493}00493\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00494}00494\ \ \ \ \ \textcolor{comment}{/*\ Clear\ delayed\ interrupt\ flag\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00495}00495\ \ \ \ \ \_\_asm\ (\textcolor{stringliteral}{"{}\ CLRB\ \ 03A4H:0\ "{}});}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00496}00496\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00497}00497\ \ \ \ \ \textcolor{comment}{/*\ Switch\ to\ the\ highest\ priority\ task\ that\ is\ ready\ to\ run.\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00498}00498\ \ \ \ \ \mbox{\hyperlink{_b_c_c_216_bit_d_o_s_2common_2portasm_8h_a9c86137bc3c1cbffc39fff22627cb885}{vTaskSwitchContext}}();}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00499}00499\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00500}00500\ \ \ \ \ \textcolor{comment}{/*\ Disable\ interrupts\ so\ that\ portSAVE\_CONTEXT()\ is\ not\ interrupted\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00501}00501\ \ \ \ \ \_\_DI();}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00502}00502\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00503}00503\ \ \ \ \ \textcolor{comment}{/*\ Restore\ the\ context\ of\ the\ new\ task.\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00504}00504\ \ \ \ \ \mbox{\hyperlink{_code_warrior_2_cold_fire___v2_2port_8c_a8d3a167375b5b57944a57df23d45b39e}{portRESTORE\_CONTEXT}}();}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00505}00505\ }
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00506}00506\ \ \ \ \ \textcolor{comment}{/*\ Enable\ interrupts\ */}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00507}00507\ \ \ \ \ \_\_EI();}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00508}00508\ \}}
+\DoxyCodeLine{\Hypertarget{_softune_2_m_b96340_2port_8c_source_l00509}00509\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+
+\end{DoxyCode}

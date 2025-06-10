@@ -1,0 +1,614 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/portable/\+GCC/\+Tri\+Core\+\_\+1782/porttrap.c File Reference}
+\hypertarget{porttrap_8c}{}\label{porttrap_8c}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/TriCore\_1782/porttrap.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/GCC/TriCore\_1782/porttrap.c}}
+{\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include $<$tc1782.\+h$>$}\newline
+{\ttfamily \#include $<$machine/intrinsics.\+h$>$}\newline
+{\ttfamily \#include $<$machine/cint.\+h$>$}\newline
+Include dependency graph for porttrap.\+c\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_a19574159690cc73d5516f9631513d4a4}{port\+MMU\+\_\+\+TRAP}}~0
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_ad0e47b88bb18949b0510947bad3e1190}{port\+IPT\+\_\+\+TRAP}}~1
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_a81801d9644ad1d4521a3eaf4137d8571}{port\+IE\+\_\+\+TRAP}}~2
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_ab3f86fd445d3b2c5cf8bcb08ec93235e}{port\+CM\+\_\+\+TRAP}}~3
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_a87db88c9e1fb17c8c046effd3bf7bfc2}{port\+SBP\+\_\+\+TRAP}}~4
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_a6690536b9d305a9282546f5a536c8328}{port\+ASSERT\+\_\+\+TRAP}}~5
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_aab331e9d6d1e8dac44c97388276cca85}{port\+NMI\+\_\+\+TRAP}}~7
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_ad9b9239a473b11f706afb8b0d6586f1a}{port\+TIN\+\_\+\+MMU\+\_\+\+VIRTUAL\+\_\+\+ADDRESS\+\_\+\+FILL}}~0
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_a7c003a9a21dc8823e318b576bc82ed7b}{port\+TIN\+\_\+\+MMU\+\_\+\+VIRTUAL\+\_\+\+ADDRESS\+\_\+\+PROTECTION}}~1
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_a74b7095c6659a6b412bbf4654c2f7ff4}{port\+TIN\+\_\+\+IPT\+\_\+\+PRIVILEGED\+\_\+\+INSTRUCTION}}~1
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_a6520569fea7230dc66ee1b5a19065deb}{port\+TIN\+\_\+\+IPT\+\_\+\+MEMORY\+\_\+\+PROTECTION\+\_\+\+READ}}~2
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_ad4654eec04bbedb0656ec845509035eb}{port\+TIN\+\_\+\+IPT\+\_\+\+MEMORY\+\_\+\+PROTECTION\+\_\+\+WRITE}}~3
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_a5c0788ce09ba6c8be8dd7599f1377176}{port\+TIN\+\_\+\+IPT\+\_\+\+MEMORY\+\_\+\+PROTECTION\+\_\+\+EXECUTION}}~4
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_ac05a768f68abd98f28be5e0313ed6515}{port\+TIN\+\_\+\+IPT\+\_\+\+MEMORY\+\_\+\+PROTECTION\+\_\+\+PERIPHERAL\+\_\+\+ACCESS}}~5
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_af23cf09dc01576ae3f453843273d612d}{port\+TIN\+\_\+\+IPT\+\_\+\+MEMORY\+\_\+\+PROTECTION\+\_\+\+NULL\+\_\+\+ADDRESS}}~6
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_a63fc66e9db7a64c5a567f3d6fefe154d}{port\+TIN\+\_\+\+IPT\+\_\+\+MEMORY\+\_\+\+PROTECTION\+\_\+\+GLOBAL\+\_\+\+REGISTER\+\_\+\+WRITE\+\_\+\+PROTECTION}}~7
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_aebe03fed8ed96e9f07fa3a0eab0c7ce3}{port\+TIN\+\_\+\+IE\+\_\+\+ILLEGAL\+\_\+\+OPCODE}}~1
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_ac721c04450108aadf4bb89f200aea693}{port\+TIN\+\_\+\+IE\+\_\+\+UNIMPLEMENTED\+\_\+\+OPCODE}}~2
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_af06d62070e1eb8b2be65291dd9dbb921}{port\+TIN\+\_\+\+IE\+\_\+\+INVALID\+\_\+\+OPERAND}}~3
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_a5d8f29815d7b281ad0e74c2993f33eb1}{port\+TIN\+\_\+\+IE\+\_\+\+DATA\+\_\+\+ADDRESS\+\_\+\+ALIGNMENT}}~4
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_a839742a1cf33628369e89e9baa8b4a1e}{port\+TIN\+\_\+\+IE\+\_\+\+INVALID\+\_\+\+LOCAL\+\_\+\+MEMORY\+\_\+\+ADDRESS}}~5
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_a88cb81edc5f51574e7a55b068aee9ce7}{port\+TIN\+\_\+\+CM\+\_\+\+FREE\+\_\+\+CONTEXT\+\_\+\+LIST\+\_\+\+DEPLETION}}~1
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_a2a7f15a31db2366f92e50766b9abe484}{port\+TIN\+\_\+\+CM\+\_\+\+CALL\+\_\+\+DEPTH\+\_\+\+OVERFLOW}}~2
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_a2c093ef9717650fa21b107526a594261}{port\+TIN\+\_\+\+CM\+\_\+\+CALL\+\_\+\+DEPTH\+\_\+\+UNDEFLOW}}~3
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_a3c56cccf318cc2d97ccd7a6198256bef}{port\+TIN\+\_\+\+CM\+\_\+\+FREE\+\_\+\+CONTEXT\+\_\+\+LIST\+\_\+\+UNDERFLOW}}~4
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_ade5bfcd7385e0090c512a558cbd32a4c}{port\+TIN\+\_\+\+CM\+\_\+\+CALL\+\_\+\+STACK\+\_\+\+UNDERFLOW}}~5
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_a34f74adf77b80ef51fc77dc6ddf2d36d}{port\+TIN\+\_\+\+CM\+\_\+\+CONTEXT\+\_\+\+TYPE}}~6
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_ad5dd939bcebb4a64ace182148e2a6ecb}{port\+TIN\+\_\+\+CM\+\_\+\+NESTING\+\_\+\+ERROR}}~7
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_abeed4a92b28d993b3ec720db7f5f1c7d}{port\+TIN\+\_\+\+SBP\+\_\+\+PROGRAM\+\_\+\+FETCH\+\_\+\+SYNCHRONOUS\+\_\+\+ERROR}}~1
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_a9657bedeff9a9d3db32847ffb4bf4f65}{port\+TIN\+\_\+\+SBP\+\_\+\+DATA\+\_\+\+ACCESS\+\_\+\+SYNCHRONOUS\+\_\+\+ERROR}}~2
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_a0efb53203fe1e31f991c4d8498579cb1}{port\+TIN\+\_\+\+SBP\+\_\+\+DATA\+\_\+\+ACCESS\+\_\+\+ASYNCHRONOUS\+\_\+\+ERROR}}~3
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_a0ba91b09ce91c633797573d2d93bdef5}{port\+TIN\+\_\+\+SBP\+\_\+\+COPROCESSOR\+\_\+\+TRAP\+\_\+\+ASYNCHRONOUS\+\_\+\+ERROR}}~4
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_a251922ef039d9e89290931b624750ed7}{port\+TIN\+\_\+\+SBP\+\_\+\+PROGRAM\+\_\+\+MEMORY\+\_\+\+INTEGRITY\+\_\+\+ERROR}}~5
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_ae47f3511a67430b35ecac9a94f6ad0c3}{port\+TIN\+\_\+\+SBP\+\_\+\+DATA\+\_\+\+MEMORY\+\_\+\+INTEGRITY\+\_\+\+ERROR}}~6
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_a4ec173ee40ccc4a8aa63bbc40d742f2c}{port\+TIN\+\_\+\+ASSERT\+\_\+\+ARITHMETIC\+\_\+\+OVERFLOW}}~1
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_a6a82e70ebd8fbef797f0928e02fa5e05}{port\+TIN\+\_\+\+ASSERT\+\_\+\+STICKY\+\_\+\+ARITHMETIC\+\_\+\+OVERFLOW}}~2
+\item 
+\#define \mbox{\hyperlink{porttrap_8c_a064714dade4b780c59cfe3d357aeee3b}{port\+TIN\+\_\+\+NMI\+\_\+\+NON\+\_\+\+MASKABLE\+\_\+\+INTERRUPT}}~0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{porttrap_8c_a17a5aece41bf1c8f900abc6c18e21f79}{v\+MMUTrap}} (int i\+Trap\+Identification) \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_ab35b2424ac8c0625cfdbbcf916c5e1c3}{\+\_\+\+\_\+attribute\+\_\+\+\_\+}}((longcall
+\item 
+void \mbox{\hyperlink{porttrap_8c_a5df71a2cd124792eeddc63b57ec6de08}{v\+Internal\+Protection\+Trap}} (int i\+Trap\+Identification) \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_ab35b2424ac8c0625cfdbbcf916c5e1c3}{\+\_\+\+\_\+attribute\+\_\+\+\_\+}}((longcall
+\item 
+void \mbox{\hyperlink{porttrap_8c_a51979b7d23c817291c4bec28288e37ef}{v\+Instruction\+Error\+Trap}} (int i\+Trap\+Identification) \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_ab35b2424ac8c0625cfdbbcf916c5e1c3}{\+\_\+\+\_\+attribute\+\_\+\+\_\+}}((longcall
+\item 
+void \mbox{\hyperlink{porttrap_8c_aafb193dbaa52093ad36ea36e60742031}{v\+Context\+Management\+Trap}} (int i\+Trap\+Identification) \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_ab35b2424ac8c0625cfdbbcf916c5e1c3}{\+\_\+\+\_\+attribute\+\_\+\+\_\+}}((longcall
+\item 
+void \mbox{\hyperlink{porttrap_8c_a8b44898fec32d8fa9b25be516928ff69}{v\+System\+Bus\+And\+Peripherals\+Trap}} (int i\+Trap\+Identification) \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_ab35b2424ac8c0625cfdbbcf916c5e1c3}{\+\_\+\+\_\+attribute\+\_\+\+\_\+}}((longcall
+\item 
+void \mbox{\hyperlink{porttrap_8c_a0d55dbf825efb634259c4f5cecda97f6}{v\+Assertion\+Trap}} (int i\+Trap\+Identification) \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_ab35b2424ac8c0625cfdbbcf916c5e1c3}{\+\_\+\+\_\+attribute\+\_\+\+\_\+}}((longcall
+\item 
+void \mbox{\hyperlink{porttrap_8c_ad338c056dbca06ab78a09678009a1cb2}{v\+Non\+Maskable\+Interrupt\+Trap}} (int i\+Trap\+Identification) \mbox{\hyperlink{_g_c_c_2_a_r_m___a_a_r_c_h64_2port_8c_ab35b2424ac8c0625cfdbbcf916c5e1c3}{\+\_\+\+\_\+attribute\+\_\+\+\_\+}}((longcall
+\item 
+void \mbox{\hyperlink{porttrap_8c_abb81dc2f729d6c6fe39b23aa9f61e1a5}{v\+Trap\+Install\+Handlers}} (void)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+volatile uint32\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{porttrap_8c_a5e358c18e49afa9676a4d260b9ce1bfa}{px\+Current\+TCB}}
+\item 
+void \mbox{\hyperlink{porttrap_8c_acf66f77446c31149307d114f4e52e89a}{weak}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{porttrap_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{porttrap_8c_a6690536b9d305a9282546f5a536c8328}\index{porttrap.c@{porttrap.c}!portASSERT\_TRAP@{portASSERT\_TRAP}}
+\index{portASSERT\_TRAP@{portASSERT\_TRAP}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portASSERT\_TRAP}{portASSERT\_TRAP}}
+{\footnotesize\ttfamily \label{porttrap_8c_a6690536b9d305a9282546f5a536c8328} 
+\#define port\+ASSERT\+\_\+\+TRAP~5}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00059}{59}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_ab3f86fd445d3b2c5cf8bcb08ec93235e}\index{porttrap.c@{porttrap.c}!portCM\_TRAP@{portCM\_TRAP}}
+\index{portCM\_TRAP@{portCM\_TRAP}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portCM\_TRAP}{portCM\_TRAP}}
+{\footnotesize\ttfamily \label{porttrap_8c_ab3f86fd445d3b2c5cf8bcb08ec93235e} 
+\#define port\+CM\+\_\+\+TRAP~3}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00057}{57}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_a81801d9644ad1d4521a3eaf4137d8571}\index{porttrap.c@{porttrap.c}!portIE\_TRAP@{portIE\_TRAP}}
+\index{portIE\_TRAP@{portIE\_TRAP}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portIE\_TRAP}{portIE\_TRAP}}
+{\footnotesize\ttfamily \label{porttrap_8c_a81801d9644ad1d4521a3eaf4137d8571} 
+\#define port\+IE\+\_\+\+TRAP~2}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00056}{56}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_ad0e47b88bb18949b0510947bad3e1190}\index{porttrap.c@{porttrap.c}!portIPT\_TRAP@{portIPT\_TRAP}}
+\index{portIPT\_TRAP@{portIPT\_TRAP}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portIPT\_TRAP}{portIPT\_TRAP}}
+{\footnotesize\ttfamily \label{porttrap_8c_ad0e47b88bb18949b0510947bad3e1190} 
+\#define port\+IPT\+\_\+\+TRAP~1}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00055}{55}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_a19574159690cc73d5516f9631513d4a4}\index{porttrap.c@{porttrap.c}!portMMU\_TRAP@{portMMU\_TRAP}}
+\index{portMMU\_TRAP@{portMMU\_TRAP}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portMMU\_TRAP}{portMMU\_TRAP}}
+{\footnotesize\ttfamily \label{porttrap_8c_a19574159690cc73d5516f9631513d4a4} 
+\#define port\+MMU\+\_\+\+TRAP~0}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00054}{54}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_aab331e9d6d1e8dac44c97388276cca85}\index{porttrap.c@{porttrap.c}!portNMI\_TRAP@{portNMI\_TRAP}}
+\index{portNMI\_TRAP@{portNMI\_TRAP}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portNMI\_TRAP}{portNMI\_TRAP}}
+{\footnotesize\ttfamily \label{porttrap_8c_aab331e9d6d1e8dac44c97388276cca85} 
+\#define port\+NMI\+\_\+\+TRAP~7}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00060}{60}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_a87db88c9e1fb17c8c046effd3bf7bfc2}\index{porttrap.c@{porttrap.c}!portSBP\_TRAP@{portSBP\_TRAP}}
+\index{portSBP\_TRAP@{portSBP\_TRAP}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portSBP\_TRAP}{portSBP\_TRAP}}
+{\footnotesize\ttfamily \label{porttrap_8c_a87db88c9e1fb17c8c046effd3bf7bfc2} 
+\#define port\+SBP\+\_\+\+TRAP~4}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00058}{58}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_a4ec173ee40ccc4a8aa63bbc40d742f2c}\index{porttrap.c@{porttrap.c}!portTIN\_ASSERT\_ARITHMETIC\_OVERFLOW@{portTIN\_ASSERT\_ARITHMETIC\_OVERFLOW}}
+\index{portTIN\_ASSERT\_ARITHMETIC\_OVERFLOW@{portTIN\_ASSERT\_ARITHMETIC\_OVERFLOW}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_ASSERT\_ARITHMETIC\_OVERFLOW}{portTIN\_ASSERT\_ARITHMETIC\_OVERFLOW}}
+{\footnotesize\ttfamily \label{porttrap_8c_a4ec173ee40ccc4a8aa63bbc40d742f2c} 
+\#define port\+TIN\+\_\+\+ASSERT\+\_\+\+ARITHMETIC\+\_\+\+OVERFLOW~1}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00100}{100}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_a6a82e70ebd8fbef797f0928e02fa5e05}\index{porttrap.c@{porttrap.c}!portTIN\_ASSERT\_STICKY\_ARITHMETIC\_OVERFLOW@{portTIN\_ASSERT\_STICKY\_ARITHMETIC\_OVERFLOW}}
+\index{portTIN\_ASSERT\_STICKY\_ARITHMETIC\_OVERFLOW@{portTIN\_ASSERT\_STICKY\_ARITHMETIC\_OVERFLOW}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_ASSERT\_STICKY\_ARITHMETIC\_OVERFLOW}{portTIN\_ASSERT\_STICKY\_ARITHMETIC\_OVERFLOW}}
+{\footnotesize\ttfamily \label{porttrap_8c_a6a82e70ebd8fbef797f0928e02fa5e05} 
+\#define port\+TIN\+\_\+\+ASSERT\+\_\+\+STICKY\+\_\+\+ARITHMETIC\+\_\+\+OVERFLOW~2}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00101}{101}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_a2a7f15a31db2366f92e50766b9abe484}\index{porttrap.c@{porttrap.c}!portTIN\_CM\_CALL\_DEPTH\_OVERFLOW@{portTIN\_CM\_CALL\_DEPTH\_OVERFLOW}}
+\index{portTIN\_CM\_CALL\_DEPTH\_OVERFLOW@{portTIN\_CM\_CALL\_DEPTH\_OVERFLOW}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_CM\_CALL\_DEPTH\_OVERFLOW}{portTIN\_CM\_CALL\_DEPTH\_OVERFLOW}}
+{\footnotesize\ttfamily \label{porttrap_8c_a2a7f15a31db2366f92e50766b9abe484} 
+\#define port\+TIN\+\_\+\+CM\+\_\+\+CALL\+\_\+\+DEPTH\+\_\+\+OVERFLOW~2}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00084}{84}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_a2c093ef9717650fa21b107526a594261}\index{porttrap.c@{porttrap.c}!portTIN\_CM\_CALL\_DEPTH\_UNDEFLOW@{portTIN\_CM\_CALL\_DEPTH\_UNDEFLOW}}
+\index{portTIN\_CM\_CALL\_DEPTH\_UNDEFLOW@{portTIN\_CM\_CALL\_DEPTH\_UNDEFLOW}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_CM\_CALL\_DEPTH\_UNDEFLOW}{portTIN\_CM\_CALL\_DEPTH\_UNDEFLOW}}
+{\footnotesize\ttfamily \label{porttrap_8c_a2c093ef9717650fa21b107526a594261} 
+\#define port\+TIN\+\_\+\+CM\+\_\+\+CALL\+\_\+\+DEPTH\+\_\+\+UNDEFLOW~3}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00085}{85}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_ade5bfcd7385e0090c512a558cbd32a4c}\index{porttrap.c@{porttrap.c}!portTIN\_CM\_CALL\_STACK\_UNDERFLOW@{portTIN\_CM\_CALL\_STACK\_UNDERFLOW}}
+\index{portTIN\_CM\_CALL\_STACK\_UNDERFLOW@{portTIN\_CM\_CALL\_STACK\_UNDERFLOW}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_CM\_CALL\_STACK\_UNDERFLOW}{portTIN\_CM\_CALL\_STACK\_UNDERFLOW}}
+{\footnotesize\ttfamily \label{porttrap_8c_ade5bfcd7385e0090c512a558cbd32a4c} 
+\#define port\+TIN\+\_\+\+CM\+\_\+\+CALL\+\_\+\+STACK\+\_\+\+UNDERFLOW~5}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00087}{87}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_a34f74adf77b80ef51fc77dc6ddf2d36d}\index{porttrap.c@{porttrap.c}!portTIN\_CM\_CONTEXT\_TYPE@{portTIN\_CM\_CONTEXT\_TYPE}}
+\index{portTIN\_CM\_CONTEXT\_TYPE@{portTIN\_CM\_CONTEXT\_TYPE}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_CM\_CONTEXT\_TYPE}{portTIN\_CM\_CONTEXT\_TYPE}}
+{\footnotesize\ttfamily \label{porttrap_8c_a34f74adf77b80ef51fc77dc6ddf2d36d} 
+\#define port\+TIN\+\_\+\+CM\+\_\+\+CONTEXT\+\_\+\+TYPE~6}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00088}{88}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_a88cb81edc5f51574e7a55b068aee9ce7}\index{porttrap.c@{porttrap.c}!portTIN\_CM\_FREE\_CONTEXT\_LIST\_DEPLETION@{portTIN\_CM\_FREE\_CONTEXT\_LIST\_DEPLETION}}
+\index{portTIN\_CM\_FREE\_CONTEXT\_LIST\_DEPLETION@{portTIN\_CM\_FREE\_CONTEXT\_LIST\_DEPLETION}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_CM\_FREE\_CONTEXT\_LIST\_DEPLETION}{portTIN\_CM\_FREE\_CONTEXT\_LIST\_DEPLETION}}
+{\footnotesize\ttfamily \label{porttrap_8c_a88cb81edc5f51574e7a55b068aee9ce7} 
+\#define port\+TIN\+\_\+\+CM\+\_\+\+FREE\+\_\+\+CONTEXT\+\_\+\+LIST\+\_\+\+DEPLETION~1}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00083}{83}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_a3c56cccf318cc2d97ccd7a6198256bef}\index{porttrap.c@{porttrap.c}!portTIN\_CM\_FREE\_CONTEXT\_LIST\_UNDERFLOW@{portTIN\_CM\_FREE\_CONTEXT\_LIST\_UNDERFLOW}}
+\index{portTIN\_CM\_FREE\_CONTEXT\_LIST\_UNDERFLOW@{portTIN\_CM\_FREE\_CONTEXT\_LIST\_UNDERFLOW}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_CM\_FREE\_CONTEXT\_LIST\_UNDERFLOW}{portTIN\_CM\_FREE\_CONTEXT\_LIST\_UNDERFLOW}}
+{\footnotesize\ttfamily \label{porttrap_8c_a3c56cccf318cc2d97ccd7a6198256bef} 
+\#define port\+TIN\+\_\+\+CM\+\_\+\+FREE\+\_\+\+CONTEXT\+\_\+\+LIST\+\_\+\+UNDERFLOW~4}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00086}{86}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_ad5dd939bcebb4a64ace182148e2a6ecb}\index{porttrap.c@{porttrap.c}!portTIN\_CM\_NESTING\_ERROR@{portTIN\_CM\_NESTING\_ERROR}}
+\index{portTIN\_CM\_NESTING\_ERROR@{portTIN\_CM\_NESTING\_ERROR}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_CM\_NESTING\_ERROR}{portTIN\_CM\_NESTING\_ERROR}}
+{\footnotesize\ttfamily \label{porttrap_8c_ad5dd939bcebb4a64ace182148e2a6ecb} 
+\#define port\+TIN\+\_\+\+CM\+\_\+\+NESTING\+\_\+\+ERROR~7}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00089}{89}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_a5d8f29815d7b281ad0e74c2993f33eb1}\index{porttrap.c@{porttrap.c}!portTIN\_IE\_DATA\_ADDRESS\_ALIGNMENT@{portTIN\_IE\_DATA\_ADDRESS\_ALIGNMENT}}
+\index{portTIN\_IE\_DATA\_ADDRESS\_ALIGNMENT@{portTIN\_IE\_DATA\_ADDRESS\_ALIGNMENT}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_IE\_DATA\_ADDRESS\_ALIGNMENT}{portTIN\_IE\_DATA\_ADDRESS\_ALIGNMENT}}
+{\footnotesize\ttfamily \label{porttrap_8c_a5d8f29815d7b281ad0e74c2993f33eb1} 
+\#define port\+TIN\+\_\+\+IE\+\_\+\+DATA\+\_\+\+ADDRESS\+\_\+\+ALIGNMENT~4}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00079}{79}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_aebe03fed8ed96e9f07fa3a0eab0c7ce3}\index{porttrap.c@{porttrap.c}!portTIN\_IE\_ILLEGAL\_OPCODE@{portTIN\_IE\_ILLEGAL\_OPCODE}}
+\index{portTIN\_IE\_ILLEGAL\_OPCODE@{portTIN\_IE\_ILLEGAL\_OPCODE}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_IE\_ILLEGAL\_OPCODE}{portTIN\_IE\_ILLEGAL\_OPCODE}}
+{\footnotesize\ttfamily \label{porttrap_8c_aebe03fed8ed96e9f07fa3a0eab0c7ce3} 
+\#define port\+TIN\+\_\+\+IE\+\_\+\+ILLEGAL\+\_\+\+OPCODE~1}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00076}{76}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_a839742a1cf33628369e89e9baa8b4a1e}\index{porttrap.c@{porttrap.c}!portTIN\_IE\_INVALID\_LOCAL\_MEMORY\_ADDRESS@{portTIN\_IE\_INVALID\_LOCAL\_MEMORY\_ADDRESS}}
+\index{portTIN\_IE\_INVALID\_LOCAL\_MEMORY\_ADDRESS@{portTIN\_IE\_INVALID\_LOCAL\_MEMORY\_ADDRESS}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_IE\_INVALID\_LOCAL\_MEMORY\_ADDRESS}{portTIN\_IE\_INVALID\_LOCAL\_MEMORY\_ADDRESS}}
+{\footnotesize\ttfamily \label{porttrap_8c_a839742a1cf33628369e89e9baa8b4a1e} 
+\#define port\+TIN\+\_\+\+IE\+\_\+\+INVALID\+\_\+\+LOCAL\+\_\+\+MEMORY\+\_\+\+ADDRESS~5}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00080}{80}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_af06d62070e1eb8b2be65291dd9dbb921}\index{porttrap.c@{porttrap.c}!portTIN\_IE\_INVALID\_OPERAND@{portTIN\_IE\_INVALID\_OPERAND}}
+\index{portTIN\_IE\_INVALID\_OPERAND@{portTIN\_IE\_INVALID\_OPERAND}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_IE\_INVALID\_OPERAND}{portTIN\_IE\_INVALID\_OPERAND}}
+{\footnotesize\ttfamily \label{porttrap_8c_af06d62070e1eb8b2be65291dd9dbb921} 
+\#define port\+TIN\+\_\+\+IE\+\_\+\+INVALID\+\_\+\+OPERAND~3}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00078}{78}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_ac721c04450108aadf4bb89f200aea693}\index{porttrap.c@{porttrap.c}!portTIN\_IE\_UNIMPLEMENTED\_OPCODE@{portTIN\_IE\_UNIMPLEMENTED\_OPCODE}}
+\index{portTIN\_IE\_UNIMPLEMENTED\_OPCODE@{portTIN\_IE\_UNIMPLEMENTED\_OPCODE}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_IE\_UNIMPLEMENTED\_OPCODE}{portTIN\_IE\_UNIMPLEMENTED\_OPCODE}}
+{\footnotesize\ttfamily \label{porttrap_8c_ac721c04450108aadf4bb89f200aea693} 
+\#define port\+TIN\+\_\+\+IE\+\_\+\+UNIMPLEMENTED\+\_\+\+OPCODE~2}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00077}{77}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_a5c0788ce09ba6c8be8dd7599f1377176}\index{porttrap.c@{porttrap.c}!portTIN\_IPT\_MEMORY\_PROTECTION\_EXECUTION@{portTIN\_IPT\_MEMORY\_PROTECTION\_EXECUTION}}
+\index{portTIN\_IPT\_MEMORY\_PROTECTION\_EXECUTION@{portTIN\_IPT\_MEMORY\_PROTECTION\_EXECUTION}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_IPT\_MEMORY\_PROTECTION\_EXECUTION}{portTIN\_IPT\_MEMORY\_PROTECTION\_EXECUTION}}
+{\footnotesize\ttfamily \label{porttrap_8c_a5c0788ce09ba6c8be8dd7599f1377176} 
+\#define port\+TIN\+\_\+\+IPT\+\_\+\+MEMORY\+\_\+\+PROTECTION\+\_\+\+EXECUTION~4}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00070}{70}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_a63fc66e9db7a64c5a567f3d6fefe154d}\index{porttrap.c@{porttrap.c}!portTIN\_IPT\_MEMORY\_PROTECTION\_GLOBAL\_REGISTER\_WRITE\_PROTECTION@{portTIN\_IPT\_MEMORY\_PROTECTION\_GLOBAL\_REGISTER\_WRITE\_PROTECTION}}
+\index{portTIN\_IPT\_MEMORY\_PROTECTION\_GLOBAL\_REGISTER\_WRITE\_PROTECTION@{portTIN\_IPT\_MEMORY\_PROTECTION\_GLOBAL\_REGISTER\_WRITE\_PROTECTION}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_IPT\_MEMORY\_PROTECTION\_GLOBAL\_REGISTER\_WRITE\_PROTECTION}{portTIN\_IPT\_MEMORY\_PROTECTION\_GLOBAL\_REGISTER\_WRITE\_PROTECTION}}
+{\footnotesize\ttfamily \label{porttrap_8c_a63fc66e9db7a64c5a567f3d6fefe154d} 
+\#define port\+TIN\+\_\+\+IPT\+\_\+\+MEMORY\+\_\+\+PROTECTION\+\_\+\+GLOBAL\+\_\+\+REGISTER\+\_\+\+WRITE\+\_\+\+PROTECTION~7}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00073}{73}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_af23cf09dc01576ae3f453843273d612d}\index{porttrap.c@{porttrap.c}!portTIN\_IPT\_MEMORY\_PROTECTION\_NULL\_ADDRESS@{portTIN\_IPT\_MEMORY\_PROTECTION\_NULL\_ADDRESS}}
+\index{portTIN\_IPT\_MEMORY\_PROTECTION\_NULL\_ADDRESS@{portTIN\_IPT\_MEMORY\_PROTECTION\_NULL\_ADDRESS}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_IPT\_MEMORY\_PROTECTION\_NULL\_ADDRESS}{portTIN\_IPT\_MEMORY\_PROTECTION\_NULL\_ADDRESS}}
+{\footnotesize\ttfamily \label{porttrap_8c_af23cf09dc01576ae3f453843273d612d} 
+\#define port\+TIN\+\_\+\+IPT\+\_\+\+MEMORY\+\_\+\+PROTECTION\+\_\+\+NULL\+\_\+\+ADDRESS~6}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00072}{72}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_ac05a768f68abd98f28be5e0313ed6515}\index{porttrap.c@{porttrap.c}!portTIN\_IPT\_MEMORY\_PROTECTION\_PERIPHERAL\_ACCESS@{portTIN\_IPT\_MEMORY\_PROTECTION\_PERIPHERAL\_ACCESS}}
+\index{portTIN\_IPT\_MEMORY\_PROTECTION\_PERIPHERAL\_ACCESS@{portTIN\_IPT\_MEMORY\_PROTECTION\_PERIPHERAL\_ACCESS}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_IPT\_MEMORY\_PROTECTION\_PERIPHERAL\_ACCESS}{portTIN\_IPT\_MEMORY\_PROTECTION\_PERIPHERAL\_ACCESS}}
+{\footnotesize\ttfamily \label{porttrap_8c_ac05a768f68abd98f28be5e0313ed6515} 
+\#define port\+TIN\+\_\+\+IPT\+\_\+\+MEMORY\+\_\+\+PROTECTION\+\_\+\+PERIPHERAL\+\_\+\+ACCESS~5}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00071}{71}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_a6520569fea7230dc66ee1b5a19065deb}\index{porttrap.c@{porttrap.c}!portTIN\_IPT\_MEMORY\_PROTECTION\_READ@{portTIN\_IPT\_MEMORY\_PROTECTION\_READ}}
+\index{portTIN\_IPT\_MEMORY\_PROTECTION\_READ@{portTIN\_IPT\_MEMORY\_PROTECTION\_READ}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_IPT\_MEMORY\_PROTECTION\_READ}{portTIN\_IPT\_MEMORY\_PROTECTION\_READ}}
+{\footnotesize\ttfamily \label{porttrap_8c_a6520569fea7230dc66ee1b5a19065deb} 
+\#define port\+TIN\+\_\+\+IPT\+\_\+\+MEMORY\+\_\+\+PROTECTION\+\_\+\+READ~2}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00068}{68}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_ad4654eec04bbedb0656ec845509035eb}\index{porttrap.c@{porttrap.c}!portTIN\_IPT\_MEMORY\_PROTECTION\_WRITE@{portTIN\_IPT\_MEMORY\_PROTECTION\_WRITE}}
+\index{portTIN\_IPT\_MEMORY\_PROTECTION\_WRITE@{portTIN\_IPT\_MEMORY\_PROTECTION\_WRITE}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_IPT\_MEMORY\_PROTECTION\_WRITE}{portTIN\_IPT\_MEMORY\_PROTECTION\_WRITE}}
+{\footnotesize\ttfamily \label{porttrap_8c_ad4654eec04bbedb0656ec845509035eb} 
+\#define port\+TIN\+\_\+\+IPT\+\_\+\+MEMORY\+\_\+\+PROTECTION\+\_\+\+WRITE~3}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00069}{69}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_a74b7095c6659a6b412bbf4654c2f7ff4}\index{porttrap.c@{porttrap.c}!portTIN\_IPT\_PRIVILEGED\_INSTRUCTION@{portTIN\_IPT\_PRIVILEGED\_INSTRUCTION}}
+\index{portTIN\_IPT\_PRIVILEGED\_INSTRUCTION@{portTIN\_IPT\_PRIVILEGED\_INSTRUCTION}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_IPT\_PRIVILEGED\_INSTRUCTION}{portTIN\_IPT\_PRIVILEGED\_INSTRUCTION}}
+{\footnotesize\ttfamily \label{porttrap_8c_a74b7095c6659a6b412bbf4654c2f7ff4} 
+\#define port\+TIN\+\_\+\+IPT\+\_\+\+PRIVILEGED\+\_\+\+INSTRUCTION~1}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00067}{67}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_ad9b9239a473b11f706afb8b0d6586f1a}\index{porttrap.c@{porttrap.c}!portTIN\_MMU\_VIRTUAL\_ADDRESS\_FILL@{portTIN\_MMU\_VIRTUAL\_ADDRESS\_FILL}}
+\index{portTIN\_MMU\_VIRTUAL\_ADDRESS\_FILL@{portTIN\_MMU\_VIRTUAL\_ADDRESS\_FILL}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_MMU\_VIRTUAL\_ADDRESS\_FILL}{portTIN\_MMU\_VIRTUAL\_ADDRESS\_FILL}}
+{\footnotesize\ttfamily \label{porttrap_8c_ad9b9239a473b11f706afb8b0d6586f1a} 
+\#define port\+TIN\+\_\+\+MMU\+\_\+\+VIRTUAL\+\_\+\+ADDRESS\+\_\+\+FILL~0}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00063}{63}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_a7c003a9a21dc8823e318b576bc82ed7b}\index{porttrap.c@{porttrap.c}!portTIN\_MMU\_VIRTUAL\_ADDRESS\_PROTECTION@{portTIN\_MMU\_VIRTUAL\_ADDRESS\_PROTECTION}}
+\index{portTIN\_MMU\_VIRTUAL\_ADDRESS\_PROTECTION@{portTIN\_MMU\_VIRTUAL\_ADDRESS\_PROTECTION}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_MMU\_VIRTUAL\_ADDRESS\_PROTECTION}{portTIN\_MMU\_VIRTUAL\_ADDRESS\_PROTECTION}}
+{\footnotesize\ttfamily \label{porttrap_8c_a7c003a9a21dc8823e318b576bc82ed7b} 
+\#define port\+TIN\+\_\+\+MMU\+\_\+\+VIRTUAL\+\_\+\+ADDRESS\+\_\+\+PROTECTION~1}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00064}{64}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_a064714dade4b780c59cfe3d357aeee3b}\index{porttrap.c@{porttrap.c}!portTIN\_NMI\_NON\_MASKABLE\_INTERRUPT@{portTIN\_NMI\_NON\_MASKABLE\_INTERRUPT}}
+\index{portTIN\_NMI\_NON\_MASKABLE\_INTERRUPT@{portTIN\_NMI\_NON\_MASKABLE\_INTERRUPT}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_NMI\_NON\_MASKABLE\_INTERRUPT}{portTIN\_NMI\_NON\_MASKABLE\_INTERRUPT}}
+{\footnotesize\ttfamily \label{porttrap_8c_a064714dade4b780c59cfe3d357aeee3b} 
+\#define port\+TIN\+\_\+\+NMI\+\_\+\+NON\+\_\+\+MASKABLE\+\_\+\+INTERRUPT~0}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00104}{104}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_a0ba91b09ce91c633797573d2d93bdef5}\index{porttrap.c@{porttrap.c}!portTIN\_SBP\_COPROCESSOR\_TRAP\_ASYNCHRONOUS\_ERROR@{portTIN\_SBP\_COPROCESSOR\_TRAP\_ASYNCHRONOUS\_ERROR}}
+\index{portTIN\_SBP\_COPROCESSOR\_TRAP\_ASYNCHRONOUS\_ERROR@{portTIN\_SBP\_COPROCESSOR\_TRAP\_ASYNCHRONOUS\_ERROR}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_SBP\_COPROCESSOR\_TRAP\_ASYNCHRONOUS\_ERROR}{portTIN\_SBP\_COPROCESSOR\_TRAP\_ASYNCHRONOUS\_ERROR}}
+{\footnotesize\ttfamily \label{porttrap_8c_a0ba91b09ce91c633797573d2d93bdef5} 
+\#define port\+TIN\+\_\+\+SBP\+\_\+\+COPROCESSOR\+\_\+\+TRAP\+\_\+\+ASYNCHRONOUS\+\_\+\+ERROR~4}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00095}{95}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_a0efb53203fe1e31f991c4d8498579cb1}\index{porttrap.c@{porttrap.c}!portTIN\_SBP\_DATA\_ACCESS\_ASYNCHRONOUS\_ERROR@{portTIN\_SBP\_DATA\_ACCESS\_ASYNCHRONOUS\_ERROR}}
+\index{portTIN\_SBP\_DATA\_ACCESS\_ASYNCHRONOUS\_ERROR@{portTIN\_SBP\_DATA\_ACCESS\_ASYNCHRONOUS\_ERROR}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_SBP\_DATA\_ACCESS\_ASYNCHRONOUS\_ERROR}{portTIN\_SBP\_DATA\_ACCESS\_ASYNCHRONOUS\_ERROR}}
+{\footnotesize\ttfamily \label{porttrap_8c_a0efb53203fe1e31f991c4d8498579cb1} 
+\#define port\+TIN\+\_\+\+SBP\+\_\+\+DATA\+\_\+\+ACCESS\+\_\+\+ASYNCHRONOUS\+\_\+\+ERROR~3}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00094}{94}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_a9657bedeff9a9d3db32847ffb4bf4f65}\index{porttrap.c@{porttrap.c}!portTIN\_SBP\_DATA\_ACCESS\_SYNCHRONOUS\_ERROR@{portTIN\_SBP\_DATA\_ACCESS\_SYNCHRONOUS\_ERROR}}
+\index{portTIN\_SBP\_DATA\_ACCESS\_SYNCHRONOUS\_ERROR@{portTIN\_SBP\_DATA\_ACCESS\_SYNCHRONOUS\_ERROR}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_SBP\_DATA\_ACCESS\_SYNCHRONOUS\_ERROR}{portTIN\_SBP\_DATA\_ACCESS\_SYNCHRONOUS\_ERROR}}
+{\footnotesize\ttfamily \label{porttrap_8c_a9657bedeff9a9d3db32847ffb4bf4f65} 
+\#define port\+TIN\+\_\+\+SBP\+\_\+\+DATA\+\_\+\+ACCESS\+\_\+\+SYNCHRONOUS\+\_\+\+ERROR~2}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00093}{93}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_ae47f3511a67430b35ecac9a94f6ad0c3}\index{porttrap.c@{porttrap.c}!portTIN\_SBP\_DATA\_MEMORY\_INTEGRITY\_ERROR@{portTIN\_SBP\_DATA\_MEMORY\_INTEGRITY\_ERROR}}
+\index{portTIN\_SBP\_DATA\_MEMORY\_INTEGRITY\_ERROR@{portTIN\_SBP\_DATA\_MEMORY\_INTEGRITY\_ERROR}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_SBP\_DATA\_MEMORY\_INTEGRITY\_ERROR}{portTIN\_SBP\_DATA\_MEMORY\_INTEGRITY\_ERROR}}
+{\footnotesize\ttfamily \label{porttrap_8c_ae47f3511a67430b35ecac9a94f6ad0c3} 
+\#define port\+TIN\+\_\+\+SBP\+\_\+\+DATA\+\_\+\+MEMORY\+\_\+\+INTEGRITY\+\_\+\+ERROR~6}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00097}{97}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_abeed4a92b28d993b3ec720db7f5f1c7d}\index{porttrap.c@{porttrap.c}!portTIN\_SBP\_PROGRAM\_FETCH\_SYNCHRONOUS\_ERROR@{portTIN\_SBP\_PROGRAM\_FETCH\_SYNCHRONOUS\_ERROR}}
+\index{portTIN\_SBP\_PROGRAM\_FETCH\_SYNCHRONOUS\_ERROR@{portTIN\_SBP\_PROGRAM\_FETCH\_SYNCHRONOUS\_ERROR}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_SBP\_PROGRAM\_FETCH\_SYNCHRONOUS\_ERROR}{portTIN\_SBP\_PROGRAM\_FETCH\_SYNCHRONOUS\_ERROR}}
+{\footnotesize\ttfamily \label{porttrap_8c_abeed4a92b28d993b3ec720db7f5f1c7d} 
+\#define port\+TIN\+\_\+\+SBP\+\_\+\+PROGRAM\+\_\+\+FETCH\+\_\+\+SYNCHRONOUS\+\_\+\+ERROR~1}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00092}{92}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+\Hypertarget{porttrap_8c_a251922ef039d9e89290931b624750ed7}\index{porttrap.c@{porttrap.c}!portTIN\_SBP\_PROGRAM\_MEMORY\_INTEGRITY\_ERROR@{portTIN\_SBP\_PROGRAM\_MEMORY\_INTEGRITY\_ERROR}}
+\index{portTIN\_SBP\_PROGRAM\_MEMORY\_INTEGRITY\_ERROR@{portTIN\_SBP\_PROGRAM\_MEMORY\_INTEGRITY\_ERROR}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{portTIN\_SBP\_PROGRAM\_MEMORY\_INTEGRITY\_ERROR}{portTIN\_SBP\_PROGRAM\_MEMORY\_INTEGRITY\_ERROR}}
+{\footnotesize\ttfamily \label{porttrap_8c_a251922ef039d9e89290931b624750ed7} 
+\#define port\+TIN\+\_\+\+SBP\+\_\+\+PROGRAM\+\_\+\+MEMORY\+\_\+\+INTEGRITY\+\_\+\+ERROR~5}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00096}{96}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{porttrap_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{porttrap_8c_a0d55dbf825efb634259c4f5cecda97f6}\index{porttrap.c@{porttrap.c}!vAssertionTrap@{vAssertionTrap}}
+\index{vAssertionTrap@{vAssertionTrap}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{vAssertionTrap()}{vAssertionTrap()}}
+{\footnotesize\ttfamily \label{porttrap_8c_a0d55dbf825efb634259c4f5cecda97f6} 
+void v\+Assertion\+Trap (\begin{DoxyParamCaption}\item[{int}]{i\+Trap\+Identification}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00257}{257}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+Here is the caller graph for this function\+:
+% FIG 1
+\Hypertarget{porttrap_8c_aafb193dbaa52093ad36ea36e60742031}\index{porttrap.c@{porttrap.c}!vContextManagementTrap@{vContextManagementTrap}}
+\index{vContextManagementTrap@{vContextManagementTrap}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{vContextManagementTrap()}{vContextManagementTrap()}}
+{\footnotesize\ttfamily \label{porttrap_8c_aafb193dbaa52093ad36ea36e60742031} 
+void v\+Context\+Management\+Trap (\begin{DoxyParamCaption}\item[{int}]{i\+Trap\+Identification}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00220}{220}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+Here is the caller graph for this function\+:
+% FIG 2
+\Hypertarget{porttrap_8c_a51979b7d23c817291c4bec28288e37ef}\index{porttrap.c@{porttrap.c}!vInstructionErrorTrap@{vInstructionErrorTrap}}
+\index{vInstructionErrorTrap@{vInstructionErrorTrap}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{vInstructionErrorTrap()}{vInstructionErrorTrap()}}
+{\footnotesize\ttfamily \label{porttrap_8c_a51979b7d23c817291c4bec28288e37ef} 
+void v\+Instruction\+Error\+Trap (\begin{DoxyParamCaption}\item[{int}]{i\+Trap\+Identification}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00203}{203}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+Here is the caller graph for this function\+:
+% FIG 3
+\Hypertarget{porttrap_8c_a5df71a2cd124792eeddc63b57ec6de08}\index{porttrap.c@{porttrap.c}!vInternalProtectionTrap@{vInternalProtectionTrap}}
+\index{vInternalProtectionTrap@{vInternalProtectionTrap}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{vInternalProtectionTrap()}{vInternalProtectionTrap()}}
+{\footnotesize\ttfamily \label{porttrap_8c_a5df71a2cd124792eeddc63b57ec6de08} 
+void v\+Internal\+Protection\+Trap (\begin{DoxyParamCaption}\item[{int}]{i\+Trap\+Identification}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00168}{168}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+Here is the caller graph for this function\+:
+% FIG 4
+\Hypertarget{porttrap_8c_a17a5aece41bf1c8f900abc6c18e21f79}\index{porttrap.c@{porttrap.c}!vMMUTrap@{vMMUTrap}}
+\index{vMMUTrap@{vMMUTrap}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{vMMUTrap()}{vMMUTrap()}}
+{\footnotesize\ttfamily \label{porttrap_8c_a17a5aece41bf1c8f900abc6c18e21f79} 
+void v\+MMUTrap (\begin{DoxyParamCaption}\item[{int}]{i\+Trap\+Identification}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00155}{155}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+Here is the caller graph for this function\+:
+% FIG 5
+\Hypertarget{porttrap_8c_ad338c056dbca06ab78a09678009a1cb2}\index{porttrap.c@{porttrap.c}!vNonMaskableInterruptTrap@{vNonMaskableInterruptTrap}}
+\index{vNonMaskableInterruptTrap@{vNonMaskableInterruptTrap}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{vNonMaskableInterruptTrap()}{vNonMaskableInterruptTrap()}}
+{\footnotesize\ttfamily \label{porttrap_8c_ad338c056dbca06ab78a09678009a1cb2} 
+void v\+Non\+Maskable\+Interrupt\+Trap (\begin{DoxyParamCaption}\item[{int}]{i\+Trap\+Identification}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00271}{271}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+Here is the caller graph for this function\+:
+% FIG 6
+\Hypertarget{porttrap_8c_a8b44898fec32d8fa9b25be516928ff69}\index{porttrap.c@{porttrap.c}!vSystemBusAndPeripheralsTrap@{vSystemBusAndPeripheralsTrap}}
+\index{vSystemBusAndPeripheralsTrap@{vSystemBusAndPeripheralsTrap}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{vSystemBusAndPeripheralsTrap()}{vSystemBusAndPeripheralsTrap()}}
+{\footnotesize\ttfamily \label{porttrap_8c_a8b44898fec32d8fa9b25be516928ff69} 
+void v\+System\+Bus\+And\+Peripherals\+Trap (\begin{DoxyParamCaption}\item[{int}]{i\+Trap\+Identification}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00239}{239}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+Here is the caller graph for this function\+:
+% FIG 7
+\Hypertarget{porttrap_8c_abb81dc2f729d6c6fe39b23aa9f61e1a5}\index{porttrap.c@{porttrap.c}!vTrapInstallHandlers@{vTrapInstallHandlers}}
+\index{vTrapInstallHandlers@{vTrapInstallHandlers}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{vTrapInstallHandlers()}{vTrapInstallHandlers()}}
+{\footnotesize\ttfamily \label{porttrap_8c_abb81dc2f729d6c6fe39b23aa9f61e1a5} 
+void v\+Trap\+Install\+Handlers (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00116}{116}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+
+Here is the call graph for this function\+:
+% FIG 8
+Here is the caller graph for this function\+:
+% FIG 9
+
+
+\label{doc-var-members}
+\Hypertarget{porttrap_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{porttrap_8c_a5e358c18e49afa9676a4d260b9ce1bfa}\index{porttrap.c@{porttrap.c}!pxCurrentTCB@{pxCurrentTCB}}
+\index{pxCurrentTCB@{pxCurrentTCB}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{pxCurrentTCB}{pxCurrentTCB}}
+{\footnotesize\ttfamily \label{porttrap_8c_a5e358c18e49afa9676a4d260b9ce1bfa} 
+volatile uint32\+\_\+t\texorpdfstring{$\ast$}{*} px\+Current\+TCB\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_source_l00067}{67}} of file \mbox{\hyperlink{_i_a_r_278_k0_r_2_i_s_r___support_8h_source}{ISR\+\_\+\+Support.\+h}}.
+
+\Hypertarget{porttrap_8c_acf66f77446c31149307d114f4e52e89a}\index{porttrap.c@{porttrap.c}!weak@{weak}}
+\index{weak@{weak}!porttrap.c@{porttrap.c}}
+\doxysubsubsection{\texorpdfstring{weak}{weak}}
+{\footnotesize\ttfamily \label{porttrap_8c_acf66f77446c31149307d114f4e52e89a} 
+void weak}
+
+
+
+Definition at line \mbox{\hyperlink{porttrap_8c_source_l00107}{107}} of file \mbox{\hyperlink{porttrap_8c_source}{porttrap.\+c}}.
+

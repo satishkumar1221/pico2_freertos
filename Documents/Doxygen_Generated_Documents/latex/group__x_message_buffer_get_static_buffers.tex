@@ -1,0 +1,29 @@
+\doxysection{x\+Message\+Buffer\+Get\+Static\+Buffers }
+\hypertarget{group__x_message_buffer_get_static_buffers}{}\label{group__x_message_buffer_get_static_buffers}\index{xMessageBufferGetStaticBuffers@{xMessageBufferGetStaticBuffers}}
+\doxylink{message__buffer_8h}{message\+\_\+buffer.\+h}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ xMessageBufferGetStaticBuffers(\ \mbox{\hyperlink{message__buffer_8h_a6c510e0a4aeb3a08df4af49c1d651057}{MessageBufferHandle\_t}}\ xMessageBuffer,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ **\ ppucMessageBufferStorageArea,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_aebe27a051714571e9051a8e33fe40bd9}{StaticMessageBuffer\_t}}\ **\ ppxStaticMessageBuffer\ );}
+
+\end{DoxyCode}
+
+
+Retrieve pointers to a statically created message buffer\textquotesingle{}s data structure buffer and storage area buffer. These are the same buffers that are supplied at the time of creation.
+
+config\+USE\+\_\+\+STREAM\+\_\+\+BUFFERS must be set to 1 in for Free\+RTOSConfig.\+h for x\+Message\+Buffer\+Get\+Static\+Buffers() to be available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Message\+Buffer} & The message buffer for which to retrieve the buffers.\\
+\hline
+{\em ppuc\+Message\+Buffer\+Storage\+Area} & Used to return a pointer to the message buffer\textquotesingle{}s storage area buffer.\\
+\hline
+{\em ppx\+Static\+Message\+Buffer} & Used to return a pointer to the message buffer\textquotesingle{}s data structure buffer.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pd\+TRUE if buffers were retrieved, pd\+FALSE otherwise.. 
+\end{DoxyReturn}

@@ -1,0 +1,55 @@
+\doxysection{porttrace.\+h}
+\hypertarget{porttrace_8h_source}{}\label{porttrace_8h_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/XCC/Xtensa/porttrace.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/portable/ThirdParty/XCC/Xtensa/porttrace.h}}
+\mbox{\hyperlink{porttrace_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00001}00001\ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2015-\/2019\ Cadence\ Design\ Systems,\ Inc.}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00004}00004\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00005}00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00006}00006\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00007}00007\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00008}00008\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00009}00009\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00010}00010\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00011}00011\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00012}00012\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00013}00013\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00014}00014\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00015}00015\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00016}00016\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00017}00017\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00018}00018\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00019}00019\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00020}00020\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00021}00021\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00022}00022\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00023}00023\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00024}00024\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00025}00025\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00026}00026\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00027}00027\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00028}00028\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00030}00030\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00031}00031\ \textcolor{comment}{\ *\ This\ utility\ helps\ tracing\ the\ entering\ and\ exiting\ from\ tasks.}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00032}00032\ \textcolor{comment}{\ *\ It\ maintains\ a\ circular\ buffer\ of\ tasks\ in\ the\ order\ they\ execute,}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00033}00033\ \textcolor{comment}{\ *\ and\ their\ execution\ time.\ To\ enable\ it,\ set\ configUSE\_TRACE\_FACILITY\_2}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00034}00034\ \textcolor{comment}{\ *\ to\ 1\ in\ FreeRTOSConfig.h.\ You\ will\ also\ need\ to\ download\ the}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00035}00035\ \textcolor{comment}{\ *\ FreeRTOS\_trace\ patch\ that\ contains\ porttrace.c\ and\ the\ complete\ version}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00036}00036\ \textcolor{comment}{\ *\ of\ porttrace.h.}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00037}00037\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00039}00039\ \textcolor{preprocessor}{\#ifndef\ PORTTRACE\_H}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00040}00040\ \textcolor{preprocessor}{\#define\ PORTTRACE\_H}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00042}00042\ \textcolor{preprocessor}{\#if\ configUSE\_TRACE\_FACILITY\_2}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00043}00043\ \textcolor{preprocessor}{\ \ \ \ \#error\ "{}You\ need\ to\ download\ the\ FreeRTOS\_trace\ patch\ that\ overwrites\ this\ file"{}}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00044}00044\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00046}\mbox{\hyperlink{porttrace_8h_a80694636cf455e39e7df019d6434e7e4}{00046}}\ \textcolor{preprocessor}{\#define\ porttracePrint(nelements)}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00047}\mbox{\hyperlink{porttrace_8h_a1f5cccd6cb3b375e0102262e128c5d61}{00047}}\ \textcolor{preprocessor}{\#define\ porttraceStamp(stamp,\ count\_incr)}}
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{porttrace_8h_source_l00049}00049\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ PORTTRACE\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

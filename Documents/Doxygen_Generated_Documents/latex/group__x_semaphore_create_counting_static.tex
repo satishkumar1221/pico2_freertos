@@ -1,0 +1,60 @@
+\doxysection{x\+Semaphore\+Create\+Counting\+Static }
+\hypertarget{group__x_semaphore_create_counting_static}{}\label{group__x_semaphore_create_counting_static}\index{xSemaphoreCreateCountingStatic@{xSemaphoreCreateCountingStatic}}
+semphr. h 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{semphr_8h_ad88c6df4a04beedeac782918c8a332f5}{SemaphoreHandle\_t}}\ xSemaphoreCreateCountingStatic(\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxMaxCount,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ uxInitialCount,\ \mbox{\hyperlink{_free_r_t_o_s_8h_a5899eefbfd03bc6eb83c9accffc8975e}{StaticSemaphore\_t}}\ *pxSemaphoreBuffer\ );}
+
+\end{DoxyCode}
+
+
+Creates a new counting semaphore instance, and returns a handle by which the new counting semaphore can be referenced.
+
+In many usage scenarios it is faster and more memory efficient to use a direct to task notification in place of a counting semaphore! \href{https://www.FreeRTOS.org/RTOS-task-notifications.html}{\texttt{https\+://www.\+Free\+RTOS.\+org/\+RTOS-\/task-\/notifications.\+html}}
+
+Internally, within the Free\+RTOS implementation, counting semaphores use a block of memory, in which the counting semaphore structure is stored. If a counting semaphore is created using x\+Semaphore\+Create\+Counting() then the required memory is automatically dynamically allocated inside the x\+Semaphore\+Create\+Counting() function. (see \href{https://www.FreeRTOS.org/a00111.html}{\texttt{https\+://www.\+Free\+RTOS.\+org/a00111.\+html}}). If a counting semaphore is created using x\+Semaphore\+Create\+Counting\+Static() then the application writer must provide the memory. x\+Semaphore\+Create\+Counting\+Static() therefore allows a counting semaphore to be created without using any dynamic memory allocation.
+
+Counting semaphores are typically used for two things\+:
+
+1) Counting events.
+
+In this usage scenario an event handler will \textquotesingle{}give\textquotesingle{} a semaphore each time an event occurs (incrementing the semaphore count value), and a handler task will \textquotesingle{}take\textquotesingle{} a semaphore each time it processes an event (decrementing the semaphore count value). The count value is therefore the difference between the number of events that have occurred and the number that have been processed. In this case it is desirable for the initial count value to be zero.
+
+2) Resource management.
+
+In this usage scenario the count value indicates the number of resources available. To obtain control of a resource a task must first obtain a semaphore -\/ decrementing the semaphore count value. When the count value reaches zero there are no free resources. When a task finishes with the resource it \textquotesingle{}gives\textquotesingle{} the semaphore back -\/ incrementing the semaphore count value. In this case it is desirable for the initial count value to be equal to the maximum count value, indicating that all resources are free.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ux\+Max\+Count} & The maximum count value that can be reached. When the semaphore reaches this value it can no longer be \textquotesingle{}given\textquotesingle{}.\\
+\hline
+{\em ux\+Initial\+Count} & The count value assigned to the semaphore when it is created.\\
+\hline
+{\em px\+Semaphore\+Buffer} & Must point to a variable of type \doxylink{_free_r_t_o_s_8h_a5899eefbfd03bc6eb83c9accffc8975e}{Static\+Semaphore\+\_\+t}, which will then be used to hold the semaphore\textquotesingle{}s data structure, removing the need for the memory to be allocated dynamically.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If the counting semaphore was successfully created then a handle to the created counting semaphore is returned. If px\+Semaphore\+Buffer was NULL then NULL is returned.
+\end{DoxyReturn}
+Example usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{semphr_8h_ad88c6df4a04beedeac782918c8a332f5}{SemaphoreHandle\_t}}\ xSemaphore;}
+\DoxyCodeLine{\mbox{\hyperlink{_free_r_t_o_s_8h_a5899eefbfd03bc6eb83c9accffc8975e}{StaticSemaphore\_t}}\ xSemaphoreBuffer;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ vATask(\ \textcolor{keywordtype}{void}\ *\ pvParameters\ )}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\mbox{\hyperlink{semphr_8h_ad88c6df4a04beedeac782918c8a332f5}{SemaphoreHandle\_t}}\ xSemaphore\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ Counting\ semaphore\ cannot\ be\ used\ before\ they\ have\ been\ created.\ \ Create}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ a\ counting\ semaphore\ using\ xSemaphoreCreateCountingStatic().\ \ The\ max}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ value\ to\ which\ the\ semaphore\ can\ count\ is\ 10,\ and\ the\ initial\ value}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ assigned\ to\ the\ count\ will\ be\ 0.\ \ The\ address\ of\ xSemaphoreBuffer\ is}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ passed\ in\ and\ will\ be\ used\ to\ hold\ the\ semaphore\ structure,\ so\ no\ dynamic}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ memory\ allocation\ will\ be\ used.}}
+\DoxyCodeLine{\ xSemaphore\ =\ xSemaphoreCreateCounting(\ 10,\ 0,\ \&xSemaphoreBuffer\ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \textcolor{comment}{//\ No\ memory\ allocation\ was\ attempted\ so\ xSemaphore\ cannot\ be\ NULL,\ so\ there}}
+\DoxyCodeLine{\ \textcolor{comment}{//\ is\ no\ need\ to\ check\ its\ value.}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

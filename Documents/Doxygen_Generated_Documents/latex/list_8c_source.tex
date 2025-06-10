@@ -1,0 +1,254 @@
+\doxysection{list.\+c}
+\hypertarget{list_8c_source}{}\label{list_8c_source}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/list.c@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/list.c}}
+\mbox{\hyperlink{list_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00002}00002\ \textcolor{comment}{\ *\ FreeRTOS\ Kernel\ <DEVELOPMENT\ BRANCH>}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00003}00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2021\ Amazon.com,\ Inc.\ or\ its\ affiliates.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00005}00005\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ MIT}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00006}00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00007}00007\ \textcolor{comment}{\ *\ Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00008}00008\ \textcolor{comment}{\ *\ this\ software\ and\ associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00009}00009\ \textcolor{comment}{\ *\ the\ Software\ without\ restriction,\ including\ without\ limitation\ the\ rights\ to}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00010}00010\ \textcolor{comment}{\ *\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,\ sublicense,\ and/or\ sell\ copies\ of}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00011}00011\ \textcolor{comment}{\ *\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is\ furnished\ to\ do\ so,}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00012}00012\ \textcolor{comment}{\ *\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00013}00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00014}00014\ \textcolor{comment}{\ *\ The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00015}00015\ \textcolor{comment}{\ *\ copies\ or\ substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00016}00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00017}00017\ \textcolor{comment}{\ *\ THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00018}00018\ \textcolor{comment}{\ *\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00019}00019\ \textcolor{comment}{\ *\ FOR\ A\ PARTICULAR\ PURPOSE\ AND\ NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00020}00020\ \textcolor{comment}{\ *\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,\ DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00021}00021\ \textcolor{comment}{\ *\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT\ OF\ OR\ IN}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00022}00022\ \textcolor{comment}{\ *\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00023}00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00024}00024\ \textcolor{comment}{\ *\ https://www.FreeRTOS.org}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00025}00025\ \textcolor{comment}{\ *\ https://github.com/FreeRTOS}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00026}00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00027}00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00030}00030\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00032}00032\ \textcolor{comment}{/*\ Defining\ MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE\ prevents\ task.h\ from\ redefining}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00033}00033\ \textcolor{comment}{\ *\ all\ the\ API\ functions\ to\ use\ the\ MPU\ wrappers.\ \ That\ should\ only\ be\ done\ when}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00034}00034\ \textcolor{comment}{\ *\ task.h\ is\ included\ from\ an\ application\ file.\ */}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00035}\mbox{\hyperlink{list_8c_ab622d8c674f2a417a666a7ed89109e79}{00035}}\ \textcolor{preprocessor}{\#define\ MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00037}00037\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_free_r_t_o_s_8h}{FreeRTOS.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00038}00038\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{list_8h}{list.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00040}00040\ \textcolor{comment}{/*\ The\ MPU\ ports\ require\ MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE\ to\ be}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00041}00041\ \textcolor{comment}{\ *\ defined\ for\ the\ header\ files\ above,\ but\ not\ in\ this\ file,\ in\ order\ to}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00042}00042\ \textcolor{comment}{\ *\ generate\ the\ correct\ privileged\ Vs\ unprivileged\ linkage\ and\ placement.\ */}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00043}00043\ \textcolor{preprocessor}{\#undef\ MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00045}00045\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00046}00046\ \textcolor{comment}{*\ PUBLIC\ LIST\ API\ documented\ in\ list.h}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00047}00047\ \textcolor{comment}{*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00049}\mbox{\hyperlink{list_8h_adeef7734d7d6d9a3eea642a70c106919}{00049}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{list_8c_aa0831d347bba16bfbe524f4faa790b9d}{vListInitialise}}(\ \mbox{\hyperlink{list_8h_ad14d7e3de1350e459c7c23c6f59c902a}{List\_t}}\ *\ \textcolor{keyword}{const}\ pxList\ )}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00050}00050\ \{}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00051}00051\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_aeb3dbee5adebc2d4c74f1fd0e1021aa1}{traceENTER\_vListInitialise}}(\ pxList\ );}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00053}00053\ \ \ \ \ \textcolor{comment}{/*\ The\ list\ structure\ contains\ a\ list\ item\ which\ is\ used\ to\ mark\ the}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00054}00054\ \textcolor{comment}{\ \ \ \ \ *\ end\ of\ the\ list.\ \ To\ initialise\ the\ list\ the\ list\ end\ is\ inserted}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00055}00055\ \textcolor{comment}{\ \ \ \ \ *\ as\ the\ only\ list\ entry.\ */}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00056}00056\ \ \ \ \ pxList-\/>\mbox{\hyperlink{structx_l_i_s_t_a7bf64d87701493b4c8c5c977682500d7}{pxIndex}}\ =\ (\ \mbox{\hyperlink{list_8h_a1a62d469392f9bfe2443e7efab9c8398}{ListItem\_t}}\ *\ )\ \&(\ pxList-\/>\mbox{\hyperlink{structx_l_i_s_t_a49ad62fa153126e27e273811167b336a}{xListEnd}}\ );}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00058}00058\ \ \ \ \ \mbox{\hyperlink{list_8h_a0e65118e1baa7ab805cdfb37e580501d}{listSET\_FIRST\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE}}(\ \&(\ pxList-\/>\mbox{\hyperlink{structx_l_i_s_t_a49ad62fa153126e27e273811167b336a}{xListEnd}}\ )\ );}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00060}00060\ \ \ \ \ \textcolor{comment}{/*\ The\ list\ end\ value\ is\ the\ highest\ possible\ value\ in\ the\ list\ to}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00061}00061\ \textcolor{comment}{\ \ \ \ \ *\ ensure\ it\ remains\ at\ the\ end\ of\ the\ list.\ */}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00062}00062\ \ \ \ \ pxList-\/>\mbox{\hyperlink{structx_l_i_s_t_a49ad62fa153126e27e273811167b336a}{xListEnd}}.\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_a9b1f26de79f9da1403ca3ebc7a2e653a}{xItemValue}}\ =\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a72723ba1e4a85ca14f25c2b9e066613d}{portMAX\_DELAY}};}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00064}00064\ \ \ \ \ \textcolor{comment}{/*\ The\ list\ end\ next\ and\ previous\ pointers\ point\ to\ itself\ so\ we\ know}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00065}00065\ \textcolor{comment}{\ \ \ \ \ *\ when\ the\ list\ is\ empty.\ */}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00066}00066\ \ \ \ \ pxList-\/>\mbox{\hyperlink{structx_l_i_s_t_a49ad62fa153126e27e273811167b336a}{xListEnd}}.\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_a03713c4ee953ef5ca6adbec883720c60}{pxNext}}\ =\ (\ \mbox{\hyperlink{list_8h_a1a62d469392f9bfe2443e7efab9c8398}{ListItem\_t}}\ *\ )\ \&(\ pxList-\/>\mbox{\hyperlink{structx_l_i_s_t_a49ad62fa153126e27e273811167b336a}{xListEnd}}\ );}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00067}00067\ \ \ \ \ pxList-\/>\mbox{\hyperlink{structx_l_i_s_t_a49ad62fa153126e27e273811167b336a}{xListEnd}}.\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_ae8e553eae41010a8e41c66d76c94110b}{pxPrevious}}\ =\ (\ \mbox{\hyperlink{list_8h_a1a62d469392f9bfe2443e7efab9c8398}{ListItem\_t}}\ *\ )\ \&(\ pxList-\/>\mbox{\hyperlink{structx_l_i_s_t_a49ad62fa153126e27e273811167b336a}{xListEnd}}\ );}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00069}00069\ \ \ \ \ \textcolor{comment}{/*\ Initialize\ the\ remaining\ fields\ of\ xListEnd\ when\ it\ is\ a\ proper\ ListItem\_t\ */}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00070}00070\ \textcolor{preprocessor}{\ \ \ \ \#if\ (\ configUSE\_MINI\_LIST\_ITEM\ ==\ 0\ )}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00071}00071\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00072}00072\ \ \ \ \ \ \ \ \ pxList-\/>\mbox{\hyperlink{structx_l_i_s_t_a49ad62fa153126e27e273811167b336a}{xListEnd}}.\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_aeb3110b50fe0dbce826d929b27b5ddb1}{pvOwner}}\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00073}00073\ \ \ \ \ \ \ \ \ pxList-\/>\mbox{\hyperlink{structx_l_i_s_t_a49ad62fa153126e27e273811167b336a}{xListEnd}}.\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_afb1e27a88f6b064cd0216de08009844a}{pxContainer}}\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00074}00074\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_ac8b9d912bdcfdb5544f373d2a94268b2}{listSET\_SECOND\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE}}(\ \&(\ pxList-\/>\mbox{\hyperlink{structx_l_i_s_t_a49ad62fa153126e27e273811167b336a}{xListEnd}}\ )\ );}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00075}00075\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00076}00076\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00078}00078\ \ \ \ \ pxList-\/>\mbox{\hyperlink{structx_l_i_s_t_aa5cb7cdc699e1252af0441e46e427a03}{uxNumberOfItems}}\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ )\ 0U;}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00080}00080\ \ \ \ \ \textcolor{comment}{/*\ Write\ known\ values\ into\ the\ list\ if}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00081}00081\ \textcolor{comment}{\ \ \ \ \ *\ configUSE\_LIST\_DATA\_INTEGRITY\_CHECK\_BYTES\ is\ set\ to\ 1.\ */}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00082}00082\ \ \ \ \ \mbox{\hyperlink{list_8h_a5d68b1187d09c64d6ee329786cb0289b}{listSET\_LIST\_INTEGRITY\_CHECK\_1\_VALUE}}(\ pxList\ );}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00083}00083\ \ \ \ \ \mbox{\hyperlink{list_8h_a83b40c6e61534ef41229bd912dacab48}{listSET\_LIST\_INTEGRITY\_CHECK\_2\_VALUE}}(\ pxList\ );}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00085}00085\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_acaa57dc58fbf1219d341059d21994e08}{traceRETURN\_vListInitialise}}();}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00086}00086\ \}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00087}00087\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00089}\mbox{\hyperlink{list_8h_ab91611baae53be209a05d211f55f5395}{00089}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{list_8c_a43e37223a86f5d0688ac4470d3106e87}{vListInitialiseItem}}(\ \mbox{\hyperlink{list_8h_a1a62d469392f9bfe2443e7efab9c8398}{ListItem\_t}}\ *\ \textcolor{keyword}{const}\ pxItem\ )}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00090}00090\ \{}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00091}00091\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_ab212ef0cc756ae4648cf94bde7396cee}{traceENTER\_vListInitialiseItem}}(\ pxItem\ );}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00093}00093\ \ \ \ \ \textcolor{comment}{/*\ Make\ sure\ the\ list\ item\ is\ not\ recorded\ as\ being\ on\ a\ list.\ */}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00094}00094\ \ \ \ \ pxItem-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_afb1e27a88f6b064cd0216de08009844a}{pxContainer}}\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00096}00096\ \ \ \ \ \textcolor{comment}{/*\ Write\ known\ values\ into\ the\ list\ item\ if}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00097}00097\ \textcolor{comment}{\ \ \ \ \ *\ configUSE\_LIST\_DATA\_INTEGRITY\_CHECK\_BYTES\ is\ set\ to\ 1.\ */}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00098}00098\ \ \ \ \ \mbox{\hyperlink{list_8h_a0e65118e1baa7ab805cdfb37e580501d}{listSET\_FIRST\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE}}(\ pxItem\ );}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00099}00099\ \ \ \ \ \mbox{\hyperlink{list_8h_ac8b9d912bdcfdb5544f373d2a94268b2}{listSET\_SECOND\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE}}(\ pxItem\ );}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00101}00101\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_a81982f2f363a2d72346961033c9d2d33}{traceRETURN\_vListInitialiseItem}}();}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00102}00102\ \}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00103}00103\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00105}\mbox{\hyperlink{list_8h_a71a6a6099b3cbd8f90539aabe5c9e572}{00105}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{list_8c_a3240bc0f43fcf755be02bfc6de7dc6ef}{vListInsertEnd}}(\ \mbox{\hyperlink{list_8h_ad14d7e3de1350e459c7c23c6f59c902a}{List\_t}}\ *\ \textcolor{keyword}{const}\ pxList,}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a1a62d469392f9bfe2443e7efab9c8398}{ListItem\_t}}\ *\ \textcolor{keyword}{const}\ pxNewListItem\ )}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00107}00107\ \{}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00108}00108\ \ \ \ \ \mbox{\hyperlink{list_8h_a1a62d469392f9bfe2443e7efab9c8398}{ListItem\_t}}\ *\ \textcolor{keyword}{const}\ pxIndex\ =\ pxList-\/>\mbox{\hyperlink{structx_l_i_s_t_a7bf64d87701493b4c8c5c977682500d7}{pxIndex}};}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00110}00110\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_a45cd2d4a54723d02135fec2d308043a2}{traceENTER\_vListInsertEnd}}(\ pxList,\ pxNewListItem\ );}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00112}00112\ \ \ \ \ \textcolor{comment}{/*\ Only\ effective\ when\ configASSERT()\ is\ also\ defined,\ these\ tests\ may\ catch}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00113}00113\ \textcolor{comment}{\ \ \ \ \ *\ the\ list\ data\ structures\ being\ overwritten\ in\ memory.\ \ They\ will\ not\ catch}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00114}00114\ \textcolor{comment}{\ \ \ \ \ *\ data\ errors\ caused\ by\ incorrect\ configuration\ or\ use\ of\ FreeRTOS.\ */}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00115}00115\ \ \ \ \ \mbox{\hyperlink{list_8h_a337d6137e0a4d37321efc5c2f31dba22}{listTEST\_LIST\_INTEGRITY}}(\ pxList\ );}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00116}00116\ \ \ \ \ \mbox{\hyperlink{list_8h_a95b994725c299cdc81c74efc16210cc6}{listTEST\_LIST\_ITEM\_INTEGRITY}}(\ pxNewListItem\ );}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00118}00118\ \ \ \ \ \textcolor{comment}{/*\ Insert\ a\ new\ list\ item\ into\ pxList,\ but\ rather\ than\ sort\ the\ list,}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00119}00119\ \textcolor{comment}{\ \ \ \ \ *\ makes\ the\ new\ list\ item\ the\ last\ item\ to\ be\ removed\ by\ a\ call\ to}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00120}00120\ \textcolor{comment}{\ \ \ \ \ *\ listGET\_OWNER\_OF\_NEXT\_ENTRY().\ */}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00121}00121\ \ \ \ \ pxNewListItem-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_a03713c4ee953ef5ca6adbec883720c60}{pxNext}}\ =\ pxIndex;}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00122}00122\ \ \ \ \ pxNewListItem-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_ae8e553eae41010a8e41c66d76c94110b}{pxPrevious}}\ =\ pxIndex-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_ae8e553eae41010a8e41c66d76c94110b}{pxPrevious}};}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00124}00124\ \ \ \ \ \textcolor{comment}{/*\ Only\ used\ during\ decision\ coverage\ testing.\ */}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00125}00125\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_a2ddaee9013b02cfbfe2773ec4257375c}{mtCOVERAGE\_TEST\_DELAY}}();}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00127}00127\ \ \ \ \ pxIndex-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_ae8e553eae41010a8e41c66d76c94110b}{pxPrevious}}-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_a03713c4ee953ef5ca6adbec883720c60}{pxNext}}\ =\ pxNewListItem;}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00128}00128\ \ \ \ \ pxIndex-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_ae8e553eae41010a8e41c66d76c94110b}{pxPrevious}}\ =\ pxNewListItem;}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00130}00130\ \ \ \ \ \textcolor{comment}{/*\ Remember\ which\ list\ the\ item\ is\ in.\ */}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00131}00131\ \ \ \ \ pxNewListItem-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_afb1e27a88f6b064cd0216de08009844a}{pxContainer}}\ =\ pxList;}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00133}00133\ \ \ \ \ (\ pxList-\/>\mbox{\hyperlink{structx_l_i_s_t_aa5cb7cdc699e1252af0441e46e427a03}{uxNumberOfItems}}\ )\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ )\ (\ pxList-\/>\mbox{\hyperlink{structx_l_i_s_t_aa5cb7cdc699e1252af0441e46e427a03}{uxNumberOfItems}}\ +\ 1U\ );}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00135}00135\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_a7191cf41d93757d37bb01ca65558ed6e}{traceRETURN\_vListInsertEnd}}();}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00136}00136\ \}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00137}00137\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00139}\mbox{\hyperlink{list_8h_aa129290da5cbda47dffb7bf877b2f02a}{00139}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{list_8c_a28faa70d3ec4b4f39e53b0fc52d62ecf}{vListInsert}}(\ \mbox{\hyperlink{list_8h_ad14d7e3de1350e459c7c23c6f59c902a}{List\_t}}\ *\ \textcolor{keyword}{const}\ pxList,}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a1a62d469392f9bfe2443e7efab9c8398}{ListItem\_t}}\ *\ \textcolor{keyword}{const}\ pxNewListItem\ )}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00141}00141\ \{}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00142}00142\ \ \ \ \ \mbox{\hyperlink{list_8h_a1a62d469392f9bfe2443e7efab9c8398}{ListItem\_t}}\ *\ pxIterator;}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00143}00143\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xValueOfInsertion\ =\ pxNewListItem-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_a9b1f26de79f9da1403ca3ebc7a2e653a}{xItemValue}};}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00145}00145\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_a9e6e4941b4c1aa358cc3a265efff3d0c}{traceENTER\_vListInsert}}(\ pxList,\ pxNewListItem\ );}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00147}00147\ \ \ \ \ \textcolor{comment}{/*\ Only\ effective\ when\ configASSERT()\ is\ also\ defined,\ these\ tests\ may\ catch}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00148}00148\ \textcolor{comment}{\ \ \ \ \ *\ the\ list\ data\ structures\ being\ overwritten\ in\ memory.\ \ They\ will\ not\ catch}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00149}00149\ \textcolor{comment}{\ \ \ \ \ *\ data\ errors\ caused\ by\ incorrect\ configuration\ or\ use\ of\ FreeRTOS.\ */}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00150}00150\ \ \ \ \ \mbox{\hyperlink{list_8h_a337d6137e0a4d37321efc5c2f31dba22}{listTEST\_LIST\_INTEGRITY}}(\ pxList\ );}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00151}00151\ \ \ \ \ \mbox{\hyperlink{list_8h_a95b994725c299cdc81c74efc16210cc6}{listTEST\_LIST\_ITEM\_INTEGRITY}}(\ pxNewListItem\ );}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00153}00153\ \ \ \ \ \textcolor{comment}{/*\ Insert\ the\ new\ list\ item\ into\ the\ list,\ sorted\ in\ xItemValue\ order.}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00154}00154\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00155}00155\ \textcolor{comment}{\ \ \ \ \ *\ If\ the\ list\ already\ contains\ a\ list\ item\ with\ the\ same\ item\ value\ then\ the}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00156}00156\ \textcolor{comment}{\ \ \ \ \ *\ new\ list\ item\ should\ be\ placed\ after\ it.\ \ This\ ensures\ that\ TCBs\ which\ are}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00157}00157\ \textcolor{comment}{\ \ \ \ \ *\ stored\ in\ ready\ lists\ (all\ of\ which\ have\ the\ same\ xItemValue\ value)\ get\ a}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00158}00158\ \textcolor{comment}{\ \ \ \ \ *\ share\ of\ the\ CPU.\ \ However,\ if\ the\ xItemValue\ is\ the\ same\ as\ the\ back\ marker}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00159}00159\ \textcolor{comment}{\ \ \ \ \ *\ the\ iteration\ loop\ below\ will\ not\ end.\ \ Therefore\ the\ value\ is\ checked}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00160}00160\ \textcolor{comment}{\ \ \ \ \ *\ first,\ and\ the\ algorithm\ slightly\ modified\ if\ necessary.\ */}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00161}00161\ \ \ \ \ \textcolor{keywordflow}{if}(\ xValueOfInsertion\ ==\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a72723ba1e4a85ca14f25c2b9e066613d}{portMAX\_DELAY}}\ )}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00162}00162\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00163}00163\ \ \ \ \ \ \ \ \ pxIterator\ =\ pxList-\/>\mbox{\hyperlink{structx_l_i_s_t_a49ad62fa153126e27e273811167b336a}{xListEnd}}.\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_ae8e553eae41010a8e41c66d76c94110b}{pxPrevious}};}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00164}00164\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00165}00165\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00166}00166\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00167}00167\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ ***\ NOTE\ ***********************************************************}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00168}00168\ \textcolor{comment}{\ \ \ \ \ \ \ \ *\ \ If\ you\ find\ your\ application\ is\ crashing\ here\ then\ likely\ causes\ are}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00169}00169\ \textcolor{comment}{\ \ \ \ \ \ \ \ *\ \ listed\ below.\ \ In\ addition\ see\ https://www.FreeRTOS.org/FAQHelp.html\ for}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00170}00170\ \textcolor{comment}{\ \ \ \ \ \ \ \ *\ \ more\ tips,\ and\ ensure\ configASSERT()\ is\ defined!}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00171}00171\ \textcolor{comment}{\ \ \ \ \ \ \ \ *\ \ https://www.FreeRTOS.org/a00110.html\#configASSERT}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00172}00172\ \textcolor{comment}{\ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00173}00173\ \textcolor{comment}{\ \ \ \ \ \ \ \ *\ \ \ 1)\ Stack\ overflow\ -\/}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00174}00174\ \textcolor{comment}{\ \ \ \ \ \ \ \ *\ \ \ \ \ \ see\ https://www.FreeRTOS.org/Stacks-\/and-\/stack-\/overflow-\/checking.html}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00175}00175\ \textcolor{comment}{\ \ \ \ \ \ \ \ *\ \ \ 2)\ Incorrect\ interrupt\ priority\ assignment,\ especially\ on\ Cortex-\/M}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00176}00176\ \textcolor{comment}{\ \ \ \ \ \ \ \ *\ \ \ \ \ \ parts\ where\ numerically\ high\ priority\ values\ denote\ low\ actual}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00177}00177\ \textcolor{comment}{\ \ \ \ \ \ \ \ *\ \ \ \ \ \ interrupt\ priorities,\ which\ can\ seem\ counter\ intuitive.\ \ See}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00178}00178\ \textcolor{comment}{\ \ \ \ \ \ \ \ *\ \ \ \ \ \ https://www.FreeRTOS.org/RTOS-\/Cortex-\/M3-\/M4.html\ and\ the\ definition}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00179}00179\ \textcolor{comment}{\ \ \ \ \ \ \ \ *\ \ \ \ \ \ of\ configMAX\_SYSCALL\_INTERRUPT\_PRIORITY\ on}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00180}00180\ \textcolor{comment}{\ \ \ \ \ \ \ \ *\ \ \ \ \ \ https://www.FreeRTOS.org/a00110.html}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00181}00181\ \textcolor{comment}{\ \ \ \ \ \ \ \ *\ \ \ 3)\ Calling\ an\ API\ function\ from\ within\ a\ critical\ section\ or\ when}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00182}00182\ \textcolor{comment}{\ \ \ \ \ \ \ \ *\ \ \ \ \ \ the\ scheduler\ is\ suspended,\ or\ calling\ an\ API\ function\ that\ does}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00183}00183\ \textcolor{comment}{\ \ \ \ \ \ \ \ *\ \ \ \ \ \ not\ end\ in\ "{}FromISR"{}\ from\ an\ interrupt.}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00184}00184\ \textcolor{comment}{\ \ \ \ \ \ \ \ *\ \ \ 4)\ Using\ a\ queue\ or\ semaphore\ before\ it\ has\ been\ initialised\ or}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00185}00185\ \textcolor{comment}{\ \ \ \ \ \ \ \ *\ \ \ \ \ \ before\ the\ scheduler\ has\ been\ started\ (are\ interrupts\ firing}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00186}00186\ \textcolor{comment}{\ \ \ \ \ \ \ \ *\ \ \ \ \ \ before\ vTaskStartScheduler()\ has\ been\ called?).}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00187}00187\ \textcolor{comment}{\ \ \ \ \ \ \ \ *\ \ \ 5)\ If\ the\ FreeRTOS\ port\ supports\ interrupt\ nesting\ then\ ensure\ that}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00188}00188\ \textcolor{comment}{\ \ \ \ \ \ \ \ *\ \ \ \ \ \ the\ priority\ of\ the\ tick\ interrupt\ is\ at\ or\ below}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00189}00189\ \textcolor{comment}{\ \ \ \ \ \ \ \ *\ \ \ \ \ \ configMAX\_SYSCALL\_INTERRUPT\_PRIORITY.}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00190}00190\ \textcolor{comment}{\ \ \ \ \ \ \ \ **********************************************************************/}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00192}00192\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\ pxIterator\ =\ (\ \mbox{\hyperlink{list_8h_a1a62d469392f9bfe2443e7efab9c8398}{ListItem\_t}}\ *\ )\ \&(\ pxList-\/>\mbox{\hyperlink{structx_l_i_s_t_a49ad62fa153126e27e273811167b336a}{xListEnd}}\ );\ pxIterator-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_a03713c4ee953ef5ca6adbec883720c60}{pxNext}}-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_a9b1f26de79f9da1403ca3ebc7a2e653a}{xItemValue}}\ <=\ xValueOfInsertion;\ pxIterator\ =\ pxIterator-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_a03713c4ee953ef5ca6adbec883720c60}{pxNext}}\ )}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00193}00193\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ There\ is\ nothing\ to\ do\ here,\ just\ iterating\ to\ the\ wanted}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00195}00195\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ insertion\ position.}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00196}00196\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ IF\ YOU\ FIND\ YOUR\ CODE\ STUCK\ HERE,\ SEE\ THE\ NOTE\ JUST\ ABOVE.}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00197}00197\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00198}00198\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00199}00199\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00200}00200\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00201}00201\ \ \ \ \ pxNewListItem-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_a03713c4ee953ef5ca6adbec883720c60}{pxNext}}\ =\ pxIterator-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_a03713c4ee953ef5ca6adbec883720c60}{pxNext}};}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00202}00202\ \ \ \ \ pxNewListItem-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_a03713c4ee953ef5ca6adbec883720c60}{pxNext}}-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_ae8e553eae41010a8e41c66d76c94110b}{pxPrevious}}\ =\ pxNewListItem;}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00203}00203\ \ \ \ \ pxNewListItem-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_ae8e553eae41010a8e41c66d76c94110b}{pxPrevious}}\ =\ pxIterator;}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00204}00204\ \ \ \ \ pxIterator-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_a03713c4ee953ef5ca6adbec883720c60}{pxNext}}\ =\ pxNewListItem;}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00205}00205\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00206}00206\ \ \ \ \ \textcolor{comment}{/*\ Remember\ which\ list\ the\ item\ is\ in.\ \ This\ allows\ fast\ removal\ of\ the}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00207}00207\ \textcolor{comment}{\ \ \ \ \ *\ item\ later.\ */}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00208}00208\ \ \ \ \ pxNewListItem-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_afb1e27a88f6b064cd0216de08009844a}{pxContainer}}\ =\ pxList;}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00209}00209\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00210}00210\ \ \ \ \ (\ pxList-\/>\mbox{\hyperlink{structx_l_i_s_t_aa5cb7cdc699e1252af0441e46e427a03}{uxNumberOfItems}}\ )\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ )\ (\ pxList-\/>\mbox{\hyperlink{structx_l_i_s_t_aa5cb7cdc699e1252af0441e46e427a03}{uxNumberOfItems}}\ +\ 1U\ );}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00212}00212\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_a5ad64585a361c93e2243e4c0c032e901}{traceRETURN\_vListInsert}}();}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00213}00213\ \}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00214}00214\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00215}00215\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00216}00216\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00217}\mbox{\hyperlink{list_8h_a2eb1558482076fff8cafc63419c2d34a}{00217}}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ \mbox{\hyperlink{list_8c_a274fdced76bbdd9d8a4c4840ded2920c}{uxListRemove}}(\ \mbox{\hyperlink{list_8h_a1a62d469392f9bfe2443e7efab9c8398}{ListItem\_t}}\ *\ \textcolor{keyword}{const}\ pxItemToRemove\ )}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00218}00218\ \{}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00219}00219\ \ \ \ \ \textcolor{comment}{/*\ The\ list\ item\ knows\ which\ list\ it\ is\ in.\ \ Obtain\ the\ list\ from\ the\ list}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00220}00220\ \textcolor{comment}{\ \ \ \ \ *\ item.\ */}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00221}00221\ \ \ \ \ \mbox{\hyperlink{list_8h_ad14d7e3de1350e459c7c23c6f59c902a}{List\_t}}\ *\ \textcolor{keyword}{const}\ pxList\ =\ pxItemToRemove-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_afb1e27a88f6b064cd0216de08009844a}{pxContainer}};}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00223}00223\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_ad405db0adc7a85a793e3d0f685c1467f}{traceENTER\_uxListRemove}}(\ pxItemToRemove\ );}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00224}00224\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00225}00225\ \ \ \ \ pxItemToRemove-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_a03713c4ee953ef5ca6adbec883720c60}{pxNext}}-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_ae8e553eae41010a8e41c66d76c94110b}{pxPrevious}}\ =\ pxItemToRemove-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_ae8e553eae41010a8e41c66d76c94110b}{pxPrevious}};}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00226}00226\ \ \ \ \ pxItemToRemove-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_ae8e553eae41010a8e41c66d76c94110b}{pxPrevious}}-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_a03713c4ee953ef5ca6adbec883720c60}{pxNext}}\ =\ pxItemToRemove-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_a03713c4ee953ef5ca6adbec883720c60}{pxNext}};}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00227}00227\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00228}00228\ \ \ \ \ \textcolor{comment}{/*\ Only\ used\ during\ decision\ coverage\ testing.\ */}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00229}00229\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_a2ddaee9013b02cfbfe2773ec4257375c}{mtCOVERAGE\_TEST\_DELAY}}();}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00230}00230\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00231}00231\ \ \ \ \ \textcolor{comment}{/*\ Make\ sure\ the\ index\ is\ left\ pointing\ to\ a\ valid\ item.\ */}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00232}00232\ \ \ \ \ \textcolor{keywordflow}{if}(\ pxList-\/>\mbox{\hyperlink{structx_l_i_s_t_a7bf64d87701493b4c8c5c977682500d7}{pxIndex}}\ ==\ pxItemToRemove\ )}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00233}00233\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00234}00234\ \ \ \ \ \ \ \ \ pxList-\/>\mbox{\hyperlink{structx_l_i_s_t_a7bf64d87701493b4c8c5c977682500d7}{pxIndex}}\ =\ pxItemToRemove-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_ae8e553eae41010a8e41c66d76c94110b}{pxPrevious}};}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00235}00235\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00236}00236\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00237}00237\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00238}00238\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_ac77e2af1a6b0d38fbab36cf2aa96f1a8}{mtCOVERAGE\_TEST\_MARKER}}();}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00239}00239\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00240}00240\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00241}00241\ \ \ \ \ pxItemToRemove-\/>\mbox{\hyperlink{structx_l_i_s_t___i_t_e_m_afb1e27a88f6b064cd0216de08009844a}{pxContainer}}\ =\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00242}00242\ \ \ \ \ (\ pxList-\/>\mbox{\hyperlink{structx_l_i_s_t_aa5cb7cdc699e1252af0441e46e427a03}{uxNumberOfItems}}\ )\ =\ (\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a646f89d4298e4f5afd522202b11cb2e6}{UBaseType\_t}}\ )\ (\ pxList-\/>\mbox{\hyperlink{structx_l_i_s_t_aa5cb7cdc699e1252af0441e46e427a03}{uxNumberOfItems}}\ -\/\ 1U\ );}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00243}00243\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00244}00244\ \ \ \ \ \mbox{\hyperlink{_free_r_t_o_s_8h_a17b041c8b3a9b5da7017a3fedb8002bc}{traceRETURN\_uxListRemove}}(\ pxList-\/>\mbox{\hyperlink{structx_l_i_s_t_aa5cb7cdc699e1252af0441e46e427a03}{uxNumberOfItems}}\ );}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00245}00245\ }
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00246}00246\ \ \ \ \ \textcolor{keywordflow}{return}\ pxList-\/>\mbox{\hyperlink{structx_l_i_s_t_aa5cb7cdc699e1252af0441e46e427a03}{uxNumberOfItems}};}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00247}00247\ \}}
+\DoxyCodeLine{\Hypertarget{list_8c_source_l00248}00248\ \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+
+\end{DoxyCode}

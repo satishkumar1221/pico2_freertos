@@ -1,0 +1,363 @@
+\doxysection{D\+:/\+Projects/\+Raspberrypi\+\_\+pico/pico\+\_\+freertos\+\_\+final/freertos\+\_\+pico2/pico\+\_\+freertos/\+Free\+RTOS-\/\+Kernel/include/message\+\_\+buffer.h File Reference}
+\hypertarget{message__buffer_8h}{}\label{message__buffer_8h}\index{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/message\_buffer.h@{D:/Projects/Raspberrypi\_pico/pico\_freertos\_final/freertos\_pico2/pico\_freertos/FreeRTOS-\/Kernel/include/message\_buffer.h}}
+{\ttfamily \#include "{}stream\+\_\+buffer.\+h"{}}\newline
+Include dependency graph for message\+\_\+buffer.\+h\+:
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{message__buffer_8h_a2959cd0e3d2bd20d46908e5c9872be36}{x\+Message\+Buffer\+Create}}(x\+Buffer\+Size\+Bytes)
+\item 
+\#define \mbox{\hyperlink{message__buffer_8h_acc84f4a15dbd39ecbad35f7337e78b2c}{x\+Message\+Buffer\+Create\+Static}}(x\+Buffer\+Size\+Bytes,  puc\+Message\+Buffer\+Storage\+Area,  px\+Static\+Message\+Buffer)
+\item 
+\#define \mbox{\hyperlink{message__buffer_8h_a858f6da6fe24a226c45caf1634ea1605}{x\+Message\+Buffer\+Send}}(x\+Message\+Buffer,  pv\+Tx\+Data,  x\+Data\+Length\+Bytes,  x\+Ticks\+To\+Wait)
+\item 
+\#define \mbox{\hyperlink{message__buffer_8h_aeef5b0c4f8c2db6ca2230a8874813e79}{x\+Message\+Buffer\+Send\+From\+ISR}}(x\+Message\+Buffer,  pv\+Tx\+Data,  x\+Data\+Length\+Bytes,  px\+Higher\+Priority\+Task\+Woken)
+\item 
+\#define \mbox{\hyperlink{message__buffer_8h_af12a227ba511a95cbea5aa81c7f3ba12}{x\+Message\+Buffer\+Receive}}(x\+Message\+Buffer,  pv\+Rx\+Data,  x\+Buffer\+Length\+Bytes,  x\+Ticks\+To\+Wait)
+\item 
+\#define \mbox{\hyperlink{message__buffer_8h_adf596c00c44752a3c8c542cc6b5df234}{x\+Message\+Buffer\+Receive\+From\+ISR}}(x\+Message\+Buffer,  pv\+Rx\+Data,  x\+Buffer\+Length\+Bytes,  px\+Higher\+Priority\+Task\+Woken)
+\item 
+\#define \mbox{\hyperlink{message__buffer_8h_aa29d6c50600a7b0154e4a47e7c981d1a}{v\+Message\+Buffer\+Delete}}(x\+Message\+Buffer)
+\item 
+\#define \mbox{\hyperlink{message__buffer_8h_a60a7e136b74c2a8ce703a99ef636f179}{x\+Message\+Buffer\+Is\+Full}}(x\+Message\+Buffer)
+\item 
+\#define \mbox{\hyperlink{message__buffer_8h_a7bc30ef43be4bd228d80de1da88c71d8}{x\+Message\+Buffer\+Is\+Empty}}(x\+Message\+Buffer)
+\item 
+\#define \mbox{\hyperlink{message__buffer_8h_a6d22ac0fd0463b202f2e22674380a41c}{x\+Message\+Buffer\+Reset}}(x\+Message\+Buffer)
+\item 
+\#define \mbox{\hyperlink{message__buffer_8h_aae899c9f189cb5e6400545e6ddffb247}{x\+Message\+Buffer\+Reset\+From\+ISR}}(x\+Message\+Buffer)
+\item 
+\#define \mbox{\hyperlink{message__buffer_8h_a9f1e75a283ef603e914e10ae354e5ab8}{x\+Message\+Buffer\+Space\+Available}}(x\+Message\+Buffer)
+\item 
+\#define \mbox{\hyperlink{message__buffer_8h_a572622608a32242b1d7a922b71f96658}{x\+Message\+Buffer\+Spaces\+Available}}(x\+Message\+Buffer)
+\item 
+\#define \mbox{\hyperlink{message__buffer_8h_ae2b56b6564cf2476891394231a31ecad}{x\+Message\+Buffer\+Next\+Length\+Bytes}}(x\+Message\+Buffer)
+\item 
+\#define \mbox{\hyperlink{message__buffer_8h_a45918d12bf530cb2b4bf21c0936460a9}{x\+Message\+Buffer\+Send\+Completed\+From\+ISR}}(x\+Message\+Buffer,  px\+Higher\+Priority\+Task\+Woken)
+\item 
+\#define \mbox{\hyperlink{message__buffer_8h_a22b1a37d0d4f39acd87250f73d9aab0c}{x\+Message\+Buffer\+Receive\+Completed\+From\+ISR}}(x\+Message\+Buffer,  px\+Higher\+Priority\+Task\+Woken)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef \mbox{\hyperlink{stream__buffer_8h_a8b80974e2278f073412293e6580ce56f}{Stream\+Buffer\+Handle\+\_\+t}} \mbox{\hyperlink{message__buffer_8h_a6c510e0a4aeb3a08df4af49c1d651057}{Message\+Buffer\+Handle\+\_\+t}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{message__buffer_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{message__buffer_8h_aa29d6c50600a7b0154e4a47e7c981d1a}\index{message\_buffer.h@{message\_buffer.h}!vMessageBufferDelete@{vMessageBufferDelete}}
+\index{vMessageBufferDelete@{vMessageBufferDelete}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{\texorpdfstring{vMessageBufferDelete}{vMessageBufferDelete}}
+{\footnotesize\ttfamily \label{message__buffer_8h_aa29d6c50600a7b0154e4a47e7c981d1a} 
+\#define v\+Message\+Buffer\+Delete(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{stream__buffer_8h_a05dc9d2ae220a050526a062eddf6d7a2}{vStreamBufferDelete}}(\ xMessageBuffer\ )}
+
+\end{DoxyCode}
+\doxylink{message__buffer_8h}{message\+\_\+buffer.\+h}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{message__buffer_8h_aa29d6c50600a7b0154e4a47e7c981d1a}{vMessageBufferDelete}}(\ \mbox{\hyperlink{message__buffer_8h_a6c510e0a4aeb3a08df4af49c1d651057}{MessageBufferHandle\_t}}\ xMessageBuffer\ );}
+
+\end{DoxyCode}
+
+
+Deletes a message buffer that was previously created using a call to \doxylink{message__buffer_8h_a2959cd0e3d2bd20d46908e5c9872be36}{x\+Message\+Buffer\+Create()} or \doxylink{message__buffer_8h_acc84f4a15dbd39ecbad35f7337e78b2c}{x\+Message\+Buffer\+Create\+Static()}. If the message buffer was created using dynamic memory (that is, by \doxylink{message__buffer_8h_a2959cd0e3d2bd20d46908e5c9872be36}{x\+Message\+Buffer\+Create()}), then the allocated memory is freed.
+
+A message buffer handle must not be used after the message buffer has been deleted.
+
+config\+USE\+\_\+\+STREAM\+\_\+\+BUFFERS must be set to 1 in for Free\+RTOSConfig.\+h for \doxylink{message__buffer_8h_aa29d6c50600a7b0154e4a47e7c981d1a}{v\+Message\+Buffer\+Delete()} to be available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Message\+Buffer} & The handle of the message buffer to be deleted. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{message__buffer_8h_source_l00716}{716}} of file \mbox{\hyperlink{message__buffer_8h_source}{message\+\_\+buffer.\+h}}.
+
+\Hypertarget{message__buffer_8h_a2959cd0e3d2bd20d46908e5c9872be36}\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferCreate@{xMessageBufferCreate}}
+\index{xMessageBufferCreate@{xMessageBufferCreate}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{\texorpdfstring{xMessageBufferCreate}{xMessageBufferCreate}}
+{\footnotesize\ttfamily \label{message__buffer_8h_a2959cd0e3d2bd20d46908e5c9872be36} 
+\#define x\+Message\+Buffer\+Create(\begin{DoxyParamCaption}\item[{}]{x\+Buffer\+Size\+Bytes}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{stream__buffer_8h_a271fb5ebc2ed5a362976e76d1ad6abef}{xStreamBufferGenericCreate}}(\ (\ xBufferSizeBytes\ ),\ (\ \textcolor{keywordtype}{size\_t}\ )\ 0,\ \mbox{\hyperlink{stream__buffer_8h_a64b5768bc9db67aa80f820293a2cc358}{sbTYPE\_MESSAGE\_BUFFER}},\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}},\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{message__buffer_8h_source_l00160}{160}} of file \mbox{\hyperlink{message__buffer_8h_source}{message\+\_\+buffer.\+h}}.
+
+\Hypertarget{message__buffer_8h_acc84f4a15dbd39ecbad35f7337e78b2c}\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferCreateStatic@{xMessageBufferCreateStatic}}
+\index{xMessageBufferCreateStatic@{xMessageBufferCreateStatic}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{\texorpdfstring{xMessageBufferCreateStatic}{xMessageBufferCreateStatic}}
+{\footnotesize\ttfamily \label{message__buffer_8h_acc84f4a15dbd39ecbad35f7337e78b2c} 
+\#define x\+Message\+Buffer\+Create\+Static(\begin{DoxyParamCaption}\item[{}]{x\+Buffer\+Size\+Bytes}{, }\item[{}]{puc\+Message\+Buffer\+Storage\+Area}{, }\item[{}]{px\+Static\+Message\+Buffer}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ xStreamBufferGenericCreateStatic(\ (\ xBufferSizeBytes\ ),\ 0,\ \mbox{\hyperlink{stream__buffer_8h_a64b5768bc9db67aa80f820293a2cc358}{sbTYPE\_MESSAGE\_BUFFER}},\ (\ pucMessageBufferStorageArea\ ),\ (\ pxStaticMessageBuffer\ ),\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}},\ \mbox{\hyperlink{_third_party_2_g_c_c_2_a_r_c___e_m___h_s_2portmacro_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{message__buffer_8h_source_l00245}{245}} of file \mbox{\hyperlink{message__buffer_8h_source}{message\+\_\+buffer.\+h}}.
+
+\Hypertarget{message__buffer_8h_a7bc30ef43be4bd228d80de1da88c71d8}\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferIsEmpty@{xMessageBufferIsEmpty}}
+\index{xMessageBufferIsEmpty@{xMessageBufferIsEmpty}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{\texorpdfstring{xMessageBufferIsEmpty}{xMessageBufferIsEmpty}}
+{\footnotesize\ttfamily \label{message__buffer_8h_a7bc30ef43be4bd228d80de1da88c71d8} 
+\#define x\+Message\+Buffer\+Is\+Empty(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{stream__buffer_8h_af65cd558025ddc29ca68fba1b3f5dc19}{xStreamBufferIsEmpty}}(\ xMessageBuffer\ )}
+
+\end{DoxyCode}
+\doxylink{message__buffer_8h}{message\+\_\+buffer.\+h} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{message__buffer_8h_a7bc30ef43be4bd228d80de1da88c71d8}{xMessageBufferIsEmpty}}(\ \mbox{\hyperlink{message__buffer_8h_a6c510e0a4aeb3a08df4af49c1d651057}{MessageBufferHandle\_t}}\ xMessageBuffer\ );}
+
+\end{DoxyCode}
+
+
+Tests to see if a message buffer is empty (does not contain any messages).
+
+config\+USE\+\_\+\+STREAM\+\_\+\+BUFFERS must be set to 1 in for Free\+RTOSConfig.\+h for \doxylink{message__buffer_8h_a7bc30ef43be4bd228d80de1da88c71d8}{x\+Message\+Buffer\+Is\+Empty()} to be available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Message\+Buffer} & The handle of the message buffer being queried.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If the message buffer referenced by x\+Message\+Buffer is empty then pd\+TRUE is returned. Otherwise pd\+FALSE is returned. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{message__buffer_8h_source_l00757}{757}} of file \mbox{\hyperlink{message__buffer_8h_source}{message\+\_\+buffer.\+h}}.
+
+\Hypertarget{message__buffer_8h_a60a7e136b74c2a8ce703a99ef636f179}\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferIsFull@{xMessageBufferIsFull}}
+\index{xMessageBufferIsFull@{xMessageBufferIsFull}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{\texorpdfstring{xMessageBufferIsFull}{xMessageBufferIsFull}}
+{\footnotesize\ttfamily \label{message__buffer_8h_a60a7e136b74c2a8ce703a99ef636f179} 
+\#define x\+Message\+Buffer\+Is\+Full(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{stream__buffer_8h_ae393d82ee06e89692248a4381f85dc86}{xStreamBufferIsFull}}(\ xMessageBuffer\ )}
+
+\end{DoxyCode}
+\doxylink{message__buffer_8h}{message\+\_\+buffer.\+h} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a46fb21e00ae0729d7515c0fbf2269796}{BaseType\_t}}\ \mbox{\hyperlink{message__buffer_8h_a60a7e136b74c2a8ce703a99ef636f179}{xMessageBufferIsFull}}(\ \mbox{\hyperlink{message__buffer_8h_a6c510e0a4aeb3a08df4af49c1d651057}{MessageBufferHandle\_t}}\ xMessageBuffer\ );}
+
+\end{DoxyCode}
+
+
+Tests to see if a message buffer is full. A message buffer is full if it cannot accept any more messages, of any size, until space is made available by a message being removed from the message buffer.
+
+config\+USE\+\_\+\+STREAM\+\_\+\+BUFFERS must be set to 1 in for Free\+RTOSConfig.\+h for \doxylink{message__buffer_8h_a60a7e136b74c2a8ce703a99ef636f179}{x\+Message\+Buffer\+Is\+Full()} to be available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Message\+Buffer} & The handle of the message buffer being queried.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If the message buffer referenced by x\+Message\+Buffer is full then pd\+TRUE is returned. Otherwise pd\+FALSE is returned. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{message__buffer_8h_source_l00737}{737}} of file \mbox{\hyperlink{message__buffer_8h_source}{message\+\_\+buffer.\+h}}.
+
+\Hypertarget{message__buffer_8h_ae2b56b6564cf2476891394231a31ecad}\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferNextLengthBytes@{xMessageBufferNextLengthBytes}}
+\index{xMessageBufferNextLengthBytes@{xMessageBufferNextLengthBytes}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{\texorpdfstring{xMessageBufferNextLengthBytes}{xMessageBufferNextLengthBytes}}
+{\footnotesize\ttfamily \label{message__buffer_8h_ae2b56b6564cf2476891394231a31ecad} 
+\#define x\+Message\+Buffer\+Next\+Length\+Bytes(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{stream__buffer_8h_a9a952a2cffab91471ec2a3651e2160ec}{xStreamBufferNextMessageLengthBytes}}(\ xMessageBuffer\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{message__buffer_8h_source_l00871}{871}} of file \mbox{\hyperlink{message__buffer_8h_source}{message\+\_\+buffer.\+h}}.
+
+\Hypertarget{message__buffer_8h_af12a227ba511a95cbea5aa81c7f3ba12}\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferReceive@{xMessageBufferReceive}}
+\index{xMessageBufferReceive@{xMessageBufferReceive}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{\texorpdfstring{xMessageBufferReceive}{xMessageBufferReceive}}
+{\footnotesize\ttfamily \label{message__buffer_8h_af12a227ba511a95cbea5aa81c7f3ba12} 
+\#define x\+Message\+Buffer\+Receive(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer}{, }\item[{}]{pv\+Rx\+Data}{, }\item[{}]{x\+Buffer\+Length\+Bytes}{, }\item[{}]{x\+Ticks\+To\+Wait}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{stream__buffer_8h_a55efc144b988598d84a6087d3e20b507}{xStreamBufferReceive}}(\ (\ xMessageBuffer\ ),\ (\ pvRxData\ ),\ (\ xBufferLengthBytes\ ),\ (\ xTicksToWait\ )\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{message__buffer_8h_source_l00587}{587}} of file \mbox{\hyperlink{message__buffer_8h_source}{message\+\_\+buffer.\+h}}.
+
+\Hypertarget{message__buffer_8h_a22b1a37d0d4f39acd87250f73d9aab0c}\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferReceiveCompletedFromISR@{xMessageBufferReceiveCompletedFromISR}}
+\index{xMessageBufferReceiveCompletedFromISR@{xMessageBufferReceiveCompletedFromISR}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{\texorpdfstring{xMessageBufferReceiveCompletedFromISR}{xMessageBufferReceiveCompletedFromISR}}
+{\footnotesize\ttfamily \label{message__buffer_8h_a22b1a37d0d4f39acd87250f73d9aab0c} 
+\#define x\+Message\+Buffer\+Receive\+Completed\+From\+ISR(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer}{, }\item[{}]{px\+Higher\+Priority\+Task\+Woken}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{stream__buffer_8h_ac12e93e96e0eafbc0e981d00e7275d32}{xStreamBufferReceiveCompletedFromISR}}(\ (\ xMessageBuffer\ ),\ (\ pxHigherPriorityTaskWoken\ )\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{message__buffer_8h_source_l00958}{958}} of file \mbox{\hyperlink{message__buffer_8h_source}{message\+\_\+buffer.\+h}}.
+
+\Hypertarget{message__buffer_8h_adf596c00c44752a3c8c542cc6b5df234}\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferReceiveFromISR@{xMessageBufferReceiveFromISR}}
+\index{xMessageBufferReceiveFromISR@{xMessageBufferReceiveFromISR}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{\texorpdfstring{xMessageBufferReceiveFromISR}{xMessageBufferReceiveFromISR}}
+{\footnotesize\ttfamily \label{message__buffer_8h_adf596c00c44752a3c8c542cc6b5df234} 
+\#define x\+Message\+Buffer\+Receive\+From\+ISR(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer}{, }\item[{}]{pv\+Rx\+Data}{, }\item[{}]{x\+Buffer\+Length\+Bytes}{, }\item[{}]{px\+Higher\+Priority\+Task\+Woken}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{stream__buffer_8h_a6c882a1d9f26c40f93f271bd1b844b3b}{xStreamBufferReceiveFromISR}}(\ (\ xMessageBuffer\ ),\ (\ pvRxData\ ),\ (\ xBufferLengthBytes\ ),\ (\ pxHigherPriorityTaskWoken\ )\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{message__buffer_8h_source_l00692}{692}} of file \mbox{\hyperlink{message__buffer_8h_source}{message\+\_\+buffer.\+h}}.
+
+\Hypertarget{message__buffer_8h_a6d22ac0fd0463b202f2e22674380a41c}\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferReset@{xMessageBufferReset}}
+\index{xMessageBufferReset@{xMessageBufferReset}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{\texorpdfstring{xMessageBufferReset}{xMessageBufferReset}}
+{\footnotesize\ttfamily \label{message__buffer_8h_a6d22ac0fd0463b202f2e22674380a41c} 
+\#define x\+Message\+Buffer\+Reset(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{stream__buffer_8h_a5253429645c67902c2fc8682f8af0aac}{xStreamBufferReset}}(\ xMessageBuffer\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{message__buffer_8h_source_l00788}{788}} of file \mbox{\hyperlink{message__buffer_8h_source}{message\+\_\+buffer.\+h}}.
+
+\Hypertarget{message__buffer_8h_aae899c9f189cb5e6400545e6ddffb247}\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferResetFromISR@{xMessageBufferResetFromISR}}
+\index{xMessageBufferResetFromISR@{xMessageBufferResetFromISR}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{\texorpdfstring{xMessageBufferResetFromISR}{xMessageBufferResetFromISR}}
+{\footnotesize\ttfamily \label{message__buffer_8h_aae899c9f189cb5e6400545e6ddffb247} 
+\#define x\+Message\+Buffer\+Reset\+From\+ISR(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{stream__buffer_8h_a6cd5f53639a304aba6a1d734cc2db0dd}{xStreamBufferResetFromISR}}(\ xMessageBuffer\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{message__buffer_8h_source_l00821}{821}} of file \mbox{\hyperlink{message__buffer_8h_source}{message\+\_\+buffer.\+h}}.
+
+\Hypertarget{message__buffer_8h_a858f6da6fe24a226c45caf1634ea1605}\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferSend@{xMessageBufferSend}}
+\index{xMessageBufferSend@{xMessageBufferSend}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{\texorpdfstring{xMessageBufferSend}{xMessageBufferSend}}
+{\footnotesize\ttfamily \label{message__buffer_8h_a858f6da6fe24a226c45caf1634ea1605} 
+\#define x\+Message\+Buffer\+Send(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer}{, }\item[{}]{pv\+Tx\+Data}{, }\item[{}]{x\+Data\+Length\+Bytes}{, }\item[{}]{x\+Ticks\+To\+Wait}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{stream__buffer_8h_a35cdf3b6bf677086b9128782f762499d}{xStreamBufferSend}}(\ (\ xMessageBuffer\ ),\ (\ pvTxData\ ),\ (\ xDataLengthBytes\ ),\ (\ xTicksToWait\ )\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{message__buffer_8h_source_l00387}{387}} of file \mbox{\hyperlink{message__buffer_8h_source}{message\+\_\+buffer.\+h}}.
+
+\Hypertarget{message__buffer_8h_a45918d12bf530cb2b4bf21c0936460a9}\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferSendCompletedFromISR@{xMessageBufferSendCompletedFromISR}}
+\index{xMessageBufferSendCompletedFromISR@{xMessageBufferSendCompletedFromISR}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{\texorpdfstring{xMessageBufferSendCompletedFromISR}{xMessageBufferSendCompletedFromISR}}
+{\footnotesize\ttfamily \label{message__buffer_8h_a45918d12bf530cb2b4bf21c0936460a9} 
+\#define x\+Message\+Buffer\+Send\+Completed\+From\+ISR(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer}{, }\item[{}]{px\+Higher\+Priority\+Task\+Woken}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{stream__buffer_8h_abc37189e4eb8618f5434ae333dd50b23}{xStreamBufferSendCompletedFromISR}}(\ (\ xMessageBuffer\ ),\ (\ pxHigherPriorityTaskWoken\ )\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{message__buffer_8h_source_l00914}{914}} of file \mbox{\hyperlink{message__buffer_8h_source}{message\+\_\+buffer.\+h}}.
+
+\Hypertarget{message__buffer_8h_aeef5b0c4f8c2db6ca2230a8874813e79}\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferSendFromISR@{xMessageBufferSendFromISR}}
+\index{xMessageBufferSendFromISR@{xMessageBufferSendFromISR}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{\texorpdfstring{xMessageBufferSendFromISR}{xMessageBufferSendFromISR}}
+{\footnotesize\ttfamily \label{message__buffer_8h_aeef5b0c4f8c2db6ca2230a8874813e79} 
+\#define x\+Message\+Buffer\+Send\+From\+ISR(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer}{, }\item[{}]{pv\+Tx\+Data}{, }\item[{}]{x\+Data\+Length\+Bytes}{, }\item[{}]{px\+Higher\+Priority\+Task\+Woken}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{stream__buffer_8h_a1dab226e99230e01e79bc2b5c0605e44}{xStreamBufferSendFromISR}}(\ (\ xMessageBuffer\ ),\ (\ pvTxData\ ),\ (\ xDataLengthBytes\ ),\ (\ pxHigherPriorityTaskWoken\ )\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{message__buffer_8h_source_l00495}{495}} of file \mbox{\hyperlink{message__buffer_8h_source}{message\+\_\+buffer.\+h}}.
+
+\Hypertarget{message__buffer_8h_a9f1e75a283ef603e914e10ae354e5ab8}\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferSpaceAvailable@{xMessageBufferSpaceAvailable}}
+\index{xMessageBufferSpaceAvailable@{xMessageBufferSpaceAvailable}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{\texorpdfstring{xMessageBufferSpaceAvailable}{xMessageBufferSpaceAvailable}}
+{\footnotesize\ttfamily \label{message__buffer_8h_a9f1e75a283ef603e914e10ae354e5ab8} 
+\#define x\+Message\+Buffer\+Space\+Available(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{stream__buffer_8h_a9a78e0206cb1dc343c329f9db579208d}{xStreamBufferSpacesAvailable}}(\ xMessageBuffer\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{message__buffer_8h_source_l00846}{846}} of file \mbox{\hyperlink{message__buffer_8h_source}{message\+\_\+buffer.\+h}}.
+
+\Hypertarget{message__buffer_8h_a572622608a32242b1d7a922b71f96658}\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferSpacesAvailable@{xMessageBufferSpacesAvailable}}
+\index{xMessageBufferSpacesAvailable@{xMessageBufferSpacesAvailable}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{\texorpdfstring{xMessageBufferSpacesAvailable}{xMessageBufferSpacesAvailable}}
+{\footnotesize\ttfamily \label{message__buffer_8h_a572622608a32242b1d7a922b71f96658} 
+\#define x\+Message\+Buffer\+Spaces\+Available(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{stream__buffer_8h_a9a78e0206cb1dc343c329f9db579208d}{xStreamBufferSpacesAvailable}}(\ xMessageBuffer\ )\ \textcolor{comment}{/*\ Corrects\ typo\ in\ original\ macro\ name.\ */}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{message__buffer_8h_source_l00848}{848}} of file \mbox{\hyperlink{message__buffer_8h_source}{message\+\_\+buffer.\+h}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{message__buffer_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{message__buffer_8h_a6c510e0a4aeb3a08df4af49c1d651057}\index{message\_buffer.h@{message\_buffer.h}!MessageBufferHandle\_t@{MessageBufferHandle\_t}}
+\index{MessageBufferHandle\_t@{MessageBufferHandle\_t}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{\texorpdfstring{MessageBufferHandle\_t}{MessageBufferHandle\_t}}
+{\footnotesize\ttfamily \label{message__buffer_8h_a6c510e0a4aeb3a08df4af49c1d651057} 
+typedef \mbox{\hyperlink{stream__buffer_8h_a8b80974e2278f073412293e6580ce56f}{Stream\+Buffer\+Handle\+\_\+t}} \mbox{\hyperlink{message__buffer_8h_a6c510e0a4aeb3a08df4af49c1d651057}{Message\+Buffer\+Handle\+\_\+t}}}
+
+Type by which message buffers are referenced. For example, a call to \doxylink{message__buffer_8h_a2959cd0e3d2bd20d46908e5c9872be36}{x\+Message\+Buffer\+Create()} returns an \doxylink{message__buffer_8h_a6c510e0a4aeb3a08df4af49c1d651057}{Message\+Buffer\+Handle\+\_\+t} variable that can then be used as a parameter to \doxylink{message__buffer_8h_a858f6da6fe24a226c45caf1634ea1605}{x\+Message\+Buffer\+Send()}, \doxylink{message__buffer_8h_af12a227ba511a95cbea5aa81c7f3ba12}{x\+Message\+Buffer\+Receive()}, etc. Message buffer is essentially built as a stream buffer hence its handle is also set to same type as a stream buffer handle. 
+
+Definition at line \mbox{\hyperlink{message__buffer_8h_source_l00086}{86}} of file \mbox{\hyperlink{message__buffer_8h_source}{message\+\_\+buffer.\+h}}.
+
