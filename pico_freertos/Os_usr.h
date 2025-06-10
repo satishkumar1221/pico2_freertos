@@ -1,0 +1,92 @@
+#pragma once 
+#ifndef _OS_USR_H_
+#define _OS_USR_H_
+
+
+extern void OS_startup(); 
+
+extern void Start_OS(); 
+
+#define TOTAL_NUMBER_OF_CORES 2 
+#define CORE0 0u
+#define CORE1 0u 
+
+
+#define Os(x,c) OS_##x##ms_task_c##c 
+
+#define TASK_STACK_DEPTH(x,c) TASK_STACK_DEPTH_##x##ms_core##c
+
+#define TASK_Prio(x,core) TASK_Prio_##x##ms_core##core
+
+/*Define the task prio for newly created tasks */
+#define TASK_Prio_20ms_core0 4
+#define TASK_Prio_50ms_core0 4
+#define TASK_Prio_100ms_core0 4
+#define TASK_Prio_1000ms_core0 4
+#define TASK_Prio_2000ms_core0 4
+/*Define the task prio for newly created tasks */
+#define TASK_Prio_20ms_core1 4
+#define TASK_Prio_50ms_core1 4
+#define TASK_Prio_100ms_core1 4
+#define TASK_Prio_1000ms_core1 4
+#define TASK_Prio_2000ms_core1 4
+
+/*Stack depth configuration for individual tasks*/
+
+#define TASK_STACK_DEPTH_20ms_core0 1024 
+#define TASK_STACK_DEPTH_50ms_core0 1024 
+#define TASK_STACK_DEPTH_100ms_core0 1024 
+#define TASK_STACK_DEPTH_1000ms_core0 1024 
+#define TASK_STACK_DEPTH_2000ms_core0 1024 
+
+#define TASK_STACK_DEPTH_20ms_core1 1024 
+#define TASK_STACK_DEPTH_50ms_core1 1024 
+#define TASK_STACK_DEPTH_100ms_core1 1024 
+#define TASK_STACK_DEPTH_1000ms_core1 1024 
+#define TASK_STACK_DEPTH_2000ms_core1 1024 
+
+typedef enum 
+{
+   task_20ms_c0, 
+   task_50ms_c0, 
+   task_100ms_c0, 
+   task_1000ms_c0, 
+   task_2000ms_c0, 
+   TOTAL_NUMBER_OF_TASKS_C0
+}tasks_core0;  
+
+typedef enum 
+{
+   task_20ms_c1, 
+   task_50ms_c1, 
+   task_100ms_c1, 
+   task_1000ms_c1, 
+   task_2000ms_c1, 
+   TOTAL_NUMBER_OF_TASKS_C1
+}tasks_core1;  
+
+/*Extern OS functions*/
+extern void OS_20ms_task_c0(void *pvParameters); 
+extern void OS_50ms_task_c0(void *pvParameters);
+extern void OS_100ms_task_c0(void *pvParameters);
+extern void OS_1000ms_task_c0(void *pvParameters);
+extern void OS_2000ms_task_c0(void *pvParameters); 
+
+
+
+class OS_start
+{
+    public :
+    OS_start();
+    void OS_startup_code(void);
+    private :
+    
+    void Initlize_const_tables(); 
+    void Initlize_Ram_Lowleveldriver();
+    void Initlize_ASW_Components();
+    void Initlize_CDD_Components(); 
+    void start_scheduler(); 
+    
+
+}; 
+#endif 
