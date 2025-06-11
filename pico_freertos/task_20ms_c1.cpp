@@ -1,6 +1,18 @@
+/******************************************************************************
+ * File:        task_20ms_c1.cpp
+ * Author:      satish kumar
+ * copyright:   satish kumar
+ * Date:        6/10/2025
+ * Description:  cyclic task 20ms for core 1 is run here.  
+ *
+ * Revision History: 
+ *   <06/10/2025> - 1.0 : File created and modified to start core0 and core1 cyclic tasks :satish kumar 
+ *  
+ ******************************************************************************/
+
 
 /**
- * @file task_20ms_c0.cpp
+ * @file task_20ms_c1.cpp
  * @brief Contains the 20ms periodic task implementation for FreeRTOS.
  */
 

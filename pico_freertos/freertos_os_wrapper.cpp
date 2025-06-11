@@ -1,3 +1,17 @@
+/******************************************************************************
+ * File:        freertos_os_wrapper.cpp
+ * Author:      satish kumar
+ * copyright:   satish kumar
+ * Date:        6/8/2025
+ * Description:  This module is reposnible for scheduling the cyclic tasks ny interacting with freertos API. 
+ *
+ * Revision History:
+ *   <06/8/2025> - 1.0 : File created and modified to start core0 cyclic tasks :satish kumar 
+ *   <06/10/2025> - 1.0 : File created and modified to start core0 and core1 cyclic tasks :satish kumar 
+ *  
+ ******************************************************************************/
+
+
 #include <stdio.h>
 #include "pico/stdlib.h"
 
@@ -58,6 +72,7 @@ OS_start::OS_start()
 
 }
 
+#if 0
 static void synchronize_two_Cores()
 {
     multicore_fifo_push_blocking(FLAG_VALUE);
@@ -84,6 +99,7 @@ static void synchronize_two_Cores()
         tight_loop_contents();
 }
 
+#endif 
 
 void OS_start:: start_scheduler()
 {

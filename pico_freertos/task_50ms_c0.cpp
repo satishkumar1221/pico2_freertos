@@ -6,7 +6,7 @@
 #include "HAL/ADC/adc.h"
 
 /**
- *  @brief Creates a new 50ms task for the scheduler in FreeRTOS. This task is created using xTaskCreate and is executed every 50ms.
+ *  @brief Creates a new 50ms task for the scheduler in FreeRTOS. This tpadcask is created using xTaskCreate and is executed every 50ms.
  * @param pvParameters Pointer to task parameters. As of now task parameters in NULL
  * @code{cpp}
  *  TickType_t xLastWakeTime = xTaskGetTickCount ();

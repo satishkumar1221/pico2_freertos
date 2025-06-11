@@ -40,7 +40,7 @@ pico_sdk_init()
 add_subdirectory(Os_Config)
 add_subdirectory(HAL)
 
-add_executable(pico_freertos pico_freertos.cpp 
+add_executable(pico_freertos pico_freertos.cpp
                              freertos_os_wrapper.cpp 
                              task_20ms_c0.cpp 
                              task_50ms_c0.cpp 
@@ -78,7 +78,7 @@ target_include_directories(pico_freertos PUBLIC
 
 # Add the standard library to the build
 target_link_libraries(pico_freertos
-        pico_stdlib FreeRTOS-Kernel-Heap4 OS_Lib HAL_Lib)
+        pico_stdlib FreeRTOS-Kernel-Heap4 OS_Lib hardware_adc hardware_spi hardware_dma hardware_uart hardware_i2c HAL_Lib )
 
 
 

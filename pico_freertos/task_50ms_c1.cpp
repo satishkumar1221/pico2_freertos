@@ -1,3 +1,16 @@
+/******************************************************************************
+ * File:        task_50ms_c1.cpp
+ * Author:      satish kumar
+ * copyright:   satish kumar
+ * Date:        6/10/2025
+ * Description:  cyclic task 50ms for core 1 is run here.  
+ *
+ * Revision History: 
+ *   <06/10/2025> - 1.0 : File created and modified to start core0 and core1 cyclic tasks :satish kumar 
+ *  
+ ******************************************************************************/
+
+
 #include "Os_usr.h"
 #include "FreeRTOS.h"
 #include "mpu_wrappers.h" 
