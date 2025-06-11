@@ -38,6 +38,7 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 add_subdirectory(Os_Config)
+add_subdirectory(HAL)
 
 add_executable(pico_freertos pico_freertos.cpp 
                              freertos_os_wrapper.cpp 
@@ -59,12 +60,19 @@ pico_enable_stdio_usb(pico_freertos 0)
 target_include_directories(pico_freertos PUBLIC
         ${CMAKE_CURRENT_LIST_DIR}
         ${CMAKE_CURRENT_LIST_DIR}/OS_Config 
+        ${CMAKE_CURRENT_LIST_DIR}/HAL
+        ${CMAKE_CURRENT_LIST_DIR}/HAL/ADC
+        ${CMAKE_CURRENT_LIST_DIR}/HAL/DMA
+        ${CMAKE_CURRENT_LIST_DIR}/HAL/DIO
+        ${CMAKE_CURRENT_LIST_DIR}/HAL/I2C 
+         ${CMAKE_CURRENT_LIST_DIR}/HAL/SPI
+        ${CMAKE_CURRENT_LIST_DIR}/HAL/UART   
         ${PROJECT_SOURCE_DIR}
 )
 
 # Add the standard library to the build
 target_link_libraries(pico_freertos
-        pico_stdlib FreeRTOS-Kernel-Heap4 OS_Lib)
+        pico_stdlib FreeRTOS-Kernel-Heap4 OS_Lib HAL_Lib)
 
 
 

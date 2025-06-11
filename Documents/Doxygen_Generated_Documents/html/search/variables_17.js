@@ -45,11 +45,12 @@ var searchData=
   ['xsystemcallstackinfo_42',['xSystemCallStackInfo',['../struct_m_p_u___s_e_t_t_i_n_g_s.html#a31a3fab8a30129acb6b840d8bf336684',1,'MPU_SETTINGS']]],
   ['xtasknumber_43',['xTaskNumber',['../structx_t_a_s_k___s_t_a_t_u_s.html#acd44468ba37270b04f83d0833c098057',1,'xTASK_STATUS']]],
   ['xtaskreturnaddress_44',['xTaskReturnAddress',['../_third_party_2_g_c_c_2_r_p2350___r_i_s_c-_v_2port_8c.html#a6abacde79d672b52a65f728542cb35f9',1,'port.c']]],
-  ['xtaskswaitingtoreceive_45',['xTasksWaitingToReceive',['../struct_queue_definition.html#af6d61526f77beee659cd604a0c473359',1,'QueueDefinition']]],
-  ['xtaskswaitingtosend_46',['xTasksWaitingToSend',['../struct_queue_definition.html#aaab135c4345cb0393d6ff3cd5164c7b2',1,'QueueDefinition']]],
-  ['xtasktonotify_47',['xTaskToNotify',['../structx_task_generic_notify_params.html#a0a4fc8975b662ab93dcd6df80000d9ad',1,'xTaskGenericNotifyParams']]],
-  ['xtickstowait_48',['xTicksToWait',['../structx_task_generic_notify_wait_params.html#aa4fc3043aa0a0a798503f509cb5fe1c6',1,'xTaskGenericNotifyWaitParams::xTicksToWait'],['../structx_timer_generic_command_from_task_params.html#a8e8272cc579e14e6cbf2ccd282ab525c',1,'xTimerGenericCommandFromTaskParams::xTicksToWait'],['../structx_event_group_wait_bits_params.html#a8e7b0c5ef0a6136e9a0e226ffd0f2c49',1,'xEventGroupWaitBitsParams::xTicksToWait']]],
-  ['xtimeonentering_49',['xTimeOnEntering',['../structx_t_i_m_e___o_u_t.html#a3464939ca050f7bcc6ffe0d8d3766337',1,'xTIME_OUT']]],
-  ['xtimer_50',['xTimer',['../structx_timer_generic_command_from_task_params.html#af7d2c8e80d6ee297cbbc7fc8e003273c',1,'xTimerGenericCommandFromTaskParams']]],
-  ['xwaitforallbits_51',['xWaitForAllBits',['../structx_event_group_wait_bits_params.html#a622e8a2d722e9496a93e298ed79e03c7',1,'xEventGroupWaitBitsParams']]]
+  ['xtaskswaitingforbits_45',['xTasksWaitingForBits',['../struct_event_group_def__t.html#a3dd347560456bfe452415efb52760dc3',1,'EventGroupDef_t']]],
+  ['xtaskswaitingtoreceive_46',['xTasksWaitingToReceive',['../struct_queue_definition.html#af6d61526f77beee659cd604a0c473359',1,'QueueDefinition']]],
+  ['xtaskswaitingtosend_47',['xTasksWaitingToSend',['../struct_queue_definition.html#aaab135c4345cb0393d6ff3cd5164c7b2',1,'QueueDefinition']]],
+  ['xtasktonotify_48',['xTaskToNotify',['../structx_task_generic_notify_params.html#a0a4fc8975b662ab93dcd6df80000d9ad',1,'xTaskGenericNotifyParams']]],
+  ['xtickstowait_49',['xTicksToWait',['../structx_task_generic_notify_wait_params.html#aa4fc3043aa0a0a798503f509cb5fe1c6',1,'xTaskGenericNotifyWaitParams::xTicksToWait'],['../structx_timer_generic_command_from_task_params.html#a8e8272cc579e14e6cbf2ccd282ab525c',1,'xTimerGenericCommandFromTaskParams::xTicksToWait'],['../structx_event_group_wait_bits_params.html#a8e7b0c5ef0a6136e9a0e226ffd0f2c49',1,'xEventGroupWaitBitsParams::xTicksToWait']]],
+  ['xtimeonentering_50',['xTimeOnEntering',['../structx_t_i_m_e___o_u_t.html#a3464939ca050f7bcc6ffe0d8d3766337',1,'xTIME_OUT']]],
+  ['xtimer_51',['xTimer',['../structx_timer_generic_command_from_task_params.html#af7d2c8e80d6ee297cbbc7fc8e003273c',1,'xTimerGenericCommandFromTaskParams']]],
+  ['xwaitforallbits_52',['xWaitForAllBits',['../structx_event_group_wait_bits_params.html#a622e8a2d722e9496a93e298ed79e03c7',1,'xEventGroupWaitBitsParams']]]
 ];

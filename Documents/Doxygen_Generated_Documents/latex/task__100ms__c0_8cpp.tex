@@ -4,13 +4,18 @@
 {\ttfamily \#include "{}Free\+RTOS.\+h"{}}\newline
 {\ttfamily \#include "{}mpu\+\_\+wrappers.\+h"{}}\newline
 {\ttfamily \#include "{}task.\+h"{}}\newline
-Include dependency graph for task\+\_\+100ms\+\_\+c0.\+cpp\+:
-% FIG 0
+Include dependency graph for task\+\_\+100ms\+\_\+c0.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{task__100ms__c0_8cpp__incl}
+\end{center}
+\end{figure}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{task__100ms__c0_8cpp_a1718fb93ee3426ee7311612c6e6939eb}{OS\+\_\+100ms\+\_\+task\+\_\+c0}} (void \texorpdfstring{$\ast$}{*}pv\+Parameters)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Creates a new 100ms task for the scheduler in Free\+RTOS. This task is created using x\+Task\+Create and is executed every 100ms. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -29,10 +34,33 @@ void OS\+\_\+100ms\+\_\+task\+\_\+c0 (\begin{DoxyParamCaption}\item[{void \texor
 
 
 
-Definition at line \mbox{\hyperlink{task__100ms__c0_8cpp_source_l00007}{7}} of file \mbox{\hyperlink{task__100ms__c0_8cpp_source}{task\+\_\+100ms\+\_\+c0.\+cpp}}.
+Creates a new 100ms task for the scheduler in Free\+RTOS. This task is created using x\+Task\+Create and is executed every 100ms. 
+
+100ms periodic task for Free\+RTOS scheduler.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pv\+Parameters} & Pointer to task parameters. As of now task parameters in NULL Create a new 100ms function called by the scheduler in from th efreertos. Used xtaskcrete to create the tasks \texorpdfstring{$\ast$}{*} 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xLastWakeTime\ =\ \mbox{\hyperlink{task_8h_a753ecfe23e7386066ecccad5d16422f7}{xTaskGetTickCount}}\ ();}
+\DoxyCodeLine{\ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xDelay100ms\ =\ \mbox{\hyperlink{projdefs_8h_a353d0f62b82a402cb3db63706c81ec3f}{pdMS\_TO\_TICKS}}(100);}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(;;)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{task__100ms__c0_8cpp_a4d3f4f3dcbcefb17034115a4ea7dd552}{V\_Os\_Task\_Counter\_100ms}}++;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{task_8h_aeaef1dd0632e6e3441388bf82a7d18d3}{vTaskDelayUntil}}(\ \&xLastWakeTime,\ xDelay100ms);}
+\DoxyCodeLine{\ \}}
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{task__100ms__c0_8cpp_source_l00031}{31}} of file \mbox{\hyperlink{task__100ms__c0_8cpp_source}{task\+\_\+100ms\+\_\+c0.\+cpp}}.
 
 Here is the call graph for this function\+:
-% FIG 1
+% FIG 0
 
 
 \label{doc-var-members}

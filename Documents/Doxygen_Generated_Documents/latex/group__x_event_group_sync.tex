@@ -2,7 +2,7 @@
 \hypertarget{group__x_event_group_sync}{}\label{group__x_event_group_sync}\index{xEventGroupSync@{xEventGroupSync}}
 \doxylink{event__groups_8h}{event\+\_\+groups.\+h} 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{event__groups_8h_ab2f21b93db0b2a0ab64d7a81ff32ac2e}{EventBits\_t}}\ \mbox{\hyperlink{event__groups_8h_a869511456b86426f52e2eec898bff341}{xEventGroupSync}}(\ \ \ \ \mbox{\hyperlink{event__groups_8h_acab96e0b6a5cab7f7b29822b79cc78ed}{EventGroupHandle\_t}}\ xEventGroup,}
+\DoxyCodeLine{\mbox{\hyperlink{event__groups_8h_ab2f21b93db0b2a0ab64d7a81ff32ac2e}{EventBits\_t}}\ \mbox{\hyperlink{event__groups_8c_ac38db316f0928c7ddaacb677a75dbc03}{xEventGroupSync}}(\ \ \ \ \mbox{\hyperlink{event__groups_8h_acab96e0b6a5cab7f7b29822b79cc78ed}{EventGroupHandle\_t}}\ xEventGroup,}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{event__groups_8h_ab2f21b93db0b2a0ab64d7a81ff32ac2e}{EventBits\_t}}\ uxBitsToSet,}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{event__groups_8h_ab2f21b93db0b2a0ab64d7a81ff32ac2e}{EventBits\_t}}\ uxBitsToWaitFor,}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xTicksToWait\ );}
@@ -20,7 +20,7 @@ The config\+USE\+\_\+\+EVENT\+\_\+\+GROUPS configuration constant must be set to
 
 
 \begin{DoxyParams}{Parameters}
-{\em x\+Event\+Group} & The event group in which the bits are being tested. The event group must have previously been created using a call to x\+Event\+Group\+Create().\\
+{\em x\+Event\+Group} & The event group in which the bits are being tested. The event group must have previously been created using a call to \doxylink{event__groups_8c_a2e8622ce280fff2f60ad867dff0a4519}{x\+Event\+Group\+Create()}.\\
 \hline
 {\em ux\+Bits\+To\+Set} & The bits to set in the event group before determining if, and possibly waiting for, all the bits specified by the ux\+Bits\+To\+Wait parameter are set.\\
 \hline
@@ -59,7 +59,7 @@ Example usage\+:
 \DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ by\ ALL\_SYNC\_BITS.\ \ All\ three\ tasks\ have\ reached\ the\ synchronisation}}
 \DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ point\ when\ all\ the\ ALL\_SYNC\_BITS\ are\ set.\ \ Wait\ a\ maximum\ of\ 100ms}}
 \DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ for\ this\ to\ happen.}}
-\DoxyCodeLine{\ \ \ \ \ uxReturn\ =\ \mbox{\hyperlink{event__groups_8h_a869511456b86426f52e2eec898bff341}{xEventGroupSync}}(\ xEventBits,\ TASK\_0\_BIT,\ ALL\_SYNC\_BITS,\ xTicksToWait\ );}
+\DoxyCodeLine{\ \ \ \ \ uxReturn\ =\ \mbox{\hyperlink{event__groups_8c_ac38db316f0928c7ddaacb677a75dbc03}{xEventGroupSync}}(\ xEventBits,\ TASK\_0\_BIT,\ ALL\_SYNC\_BITS,\ xTicksToWait\ );}
 \DoxyCodeLine{}
 \DoxyCodeLine{\ \ \ \ \ \textcolor{keywordflow}{if}(\ (\ uxReturn\ \&\ ALL\_SYNC\_BITS\ )\ ==\ ALL\_SYNC\_BITS\ )}
 \DoxyCodeLine{\ \ \ \ \ \{}
@@ -80,7 +80,7 @@ Example usage\+:
 \DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ bits\ defined\ by\ ALL\_SYNC\_BITS.\ \ All\ three\ tasks\ have\ reached\ the}}
 \DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ synchronisation\ point\ when\ all\ the\ ALL\_SYNC\_BITS\ are\ set.\ \ Wait}}
 \DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ indefinitely\ for\ this\ to\ happen.}}
-\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{event__groups_8h_a869511456b86426f52e2eec898bff341}{xEventGroupSync}}(\ xEventBits,\ TASK\_1\_BIT,\ ALL\_SYNC\_BITS,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a72723ba1e4a85ca14f25c2b9e066613d}{portMAX\_DELAY}}\ );}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{event__groups_8c_ac38db316f0928c7ddaacb677a75dbc03}{xEventGroupSync}}(\ xEventBits,\ TASK\_1\_BIT,\ ALL\_SYNC\_BITS,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a72723ba1e4a85ca14f25c2b9e066613d}{portMAX\_DELAY}}\ );}
 \DoxyCodeLine{}
 \DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ xEventGroupSync()\ was\ called\ with\ an\ indefinite\ block\ time,\ so}}
 \DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ this\ task\ will\ only\ reach\ here\ if\ the\ synchronisation\ was\ made\ by\ all}}
@@ -99,7 +99,7 @@ Example usage\+:
 \DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ bits\ defined\ by\ ALL\_SYNC\_BITS.\ \ All\ three\ tasks\ have\ reached\ the}}
 \DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ synchronisation\ point\ when\ all\ the\ ALL\_SYNC\_BITS\ are\ set.\ \ Wait}}
 \DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ indefinitely\ for\ this\ to\ happen.}}
-\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{event__groups_8h_a869511456b86426f52e2eec898bff341}{xEventGroupSync}}(\ xEventBits,\ TASK\_2\_BIT,\ ALL\_SYNC\_BITS,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a72723ba1e4a85ca14f25c2b9e066613d}{portMAX\_DELAY}}\ );}
+\DoxyCodeLine{\ \ \ \ \ \mbox{\hyperlink{event__groups_8c_ac38db316f0928c7ddaacb677a75dbc03}{xEventGroupSync}}(\ xEventBits,\ TASK\_2\_BIT,\ ALL\_SYNC\_BITS,\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a72723ba1e4a85ca14f25c2b9e066613d}{portMAX\_DELAY}}\ );}
 \DoxyCodeLine{}
 \DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ xEventGroupSync()\ was\ called\ with\ an\ indefinite\ block\ time,\ so}}
 \DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ this\ task\ will\ only\ reach\ here\ if\ the\ synchronisation\ was\ made\ by\ all}}

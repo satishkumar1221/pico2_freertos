@@ -95,15 +95,15 @@ void \mbox{\hyperlink{_os__usr_8h_a50de6d213ac95f568491068ee6bf93b0}{OS\+\_\+sta
 void \mbox{\hyperlink{_os__usr_8h_afddc2fa2a712e0e3ae2998b4a078cd88}{Start\+\_\+\+OS}} ()
 \item 
 void \mbox{\hyperlink{_os__usr_8h_a1d134b4a5a2adcc32fab162f2c68412b}{OS\+\_\+20ms\+\_\+task\+\_\+c0}} (void \texorpdfstring{$\ast$}{*}pv\+Parameters)
-\item 
+\begin{DoxyCompactList}\small\item\em 20ms periodic task for Free\+RTOS scheduler. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{_os__usr_8h_a83e20497b35f34f62bd3f102b2aa6ca1}{OS\+\_\+50ms\+\_\+task\+\_\+c0}} (void \texorpdfstring{$\ast$}{*}pv\+Parameters)
-\item 
+\begin{DoxyCompactList}\small\item\em 50ms periodic task for Free\+RTOS scheduler. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{_os__usr_8h_a1718fb93ee3426ee7311612c6e6939eb}{OS\+\_\+100ms\+\_\+task\+\_\+c0}} (void \texorpdfstring{$\ast$}{*}pv\+Parameters)
-\item 
+\begin{DoxyCompactList}\small\item\em 100ms periodic task for Free\+RTOS scheduler. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{_os__usr_8h_a0611b55c47d905a818fdf34a3c751a7c}{OS\+\_\+1000ms\+\_\+task\+\_\+c0}} (void \texorpdfstring{$\ast$}{*}pv\+Parameters)
-\item 
+\begin{DoxyCompactList}\small\item\em 1000ms periodic task for Free\+RTOS scheduler. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{_os__usr_8h_a9aeeac0c21b4026409e7ac06b64ab007}{OS\+\_\+2000ms\+\_\+task\+\_\+c0}} (void \texorpdfstring{$\ast$}{*}pv\+Parameters)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em 2000ms periodic task for Free\+RTOS scheduler. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \label{doc-define-members}
@@ -484,7 +484,33 @@ void OS\+\_\+1000ms\+\_\+task\+\_\+c0 (\begin{DoxyParamCaption}\item[{void \texo
 
 
 
-Definition at line \mbox{\hyperlink{task__1000ms__c0_8cpp_source_l00005}{5}} of file \mbox{\hyperlink{task__1000ms__c0_8cpp_source}{task\+\_\+1000ms\+\_\+c0.\+cpp}}.
+1000ms periodic task for Free\+RTOS scheduler. 
+
+This task increments a counter and delays for 1000ms in each loop iteration.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em pv\+Parameters} & Pointer to task parameters (currently unused, should be NULL). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None
+\end{DoxyReturn}
+1000ms periodic task for Free\+RTOS scheduler.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_os__usr_8h_a0611b55c47d905a818fdf34a3c751a7c}{OS\_1000ms\_task\_c0}}(\textcolor{keywordtype}{void}\ *pvParameters)}
+
+\end{DoxyCode}
+ 
+\begin{DoxyParams}{Parameters}
+{\em pv\+Parameters} & Pointer to task parameters. As of now task parameters in NUL \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{task__1000ms__c0_8cpp_source_l00020}{20}} of file \mbox{\hyperlink{task__1000ms__c0_8cpp_source}{task\+\_\+1000ms\+\_\+c0.\+cpp}}.
 
 Here is the call graph for this function\+:
 % FIG 1
@@ -496,7 +522,52 @@ void OS\+\_\+100ms\+\_\+task\+\_\+c0 (\begin{DoxyParamCaption}\item[{void \texor
 
 
 
-Definition at line \mbox{\hyperlink{task__100ms__c0_8cpp_source_l00007}{7}} of file \mbox{\hyperlink{task__100ms__c0_8cpp_source}{task\+\_\+100ms\+\_\+c0.\+cpp}}.
+100ms periodic task for Free\+RTOS scheduler. 
+
+This task increments a counter and delays for 100ms in each loop iteration.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em pv\+Parameters} & Pointer to task parameters (currently unused, should be NULL). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None
+\end{DoxyReturn}
+100ms periodic task for Free\+RTOS scheduler.
+
+This task increments a counter and delays for 100ms in each loop iteration.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em pv\+Parameters} & Pointer to task parameters (currently unused, should be NULL). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None
+\end{DoxyReturn}
+100ms periodic task for Free\+RTOS scheduler.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pv\+Parameters} & Pointer to task parameters. As of now task parameters in NULL Create a new 100ms function called by the scheduler in from th efreertos. Used xtaskcrete to create the tasks \texorpdfstring{$\ast$}{*} 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xLastWakeTime\ =\ \mbox{\hyperlink{task_8h_a753ecfe23e7386066ecccad5d16422f7}{xTaskGetTickCount}}\ ();}
+\DoxyCodeLine{\ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xDelay100ms\ =\ \mbox{\hyperlink{projdefs_8h_a353d0f62b82a402cb3db63706c81ec3f}{pdMS\_TO\_TICKS}}(100);}
+\DoxyCodeLine{\ \textcolor{keywordflow}{for}(;;)}
+\DoxyCodeLine{\ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{task__100ms__c0_8cpp_a4d3f4f3dcbcefb17034115a4ea7dd552}{V\_Os\_Task\_Counter\_100ms}}++;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{task_8h_aeaef1dd0632e6e3441388bf82a7d18d3}{vTaskDelayUntil}}(\ \&xLastWakeTime,\ xDelay100ms);}
+\DoxyCodeLine{\ \}}
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{task__100ms__c0_8cpp_source_l00031}{31}} of file \mbox{\hyperlink{task__100ms__c0_8cpp_source}{task\+\_\+100ms\+\_\+c0.\+cpp}}.
 
 Here is the call graph for this function\+:
 % FIG 2
@@ -508,7 +579,37 @@ void OS\+\_\+2000ms\+\_\+task\+\_\+c0 (\begin{DoxyParamCaption}\item[{void \texo
 
 
 
-Definition at line \mbox{\hyperlink{task__2000ms__c0_8cpp_source_l00006}{6}} of file \mbox{\hyperlink{task__2000ms__c0_8cpp_source}{task\+\_\+2000ms\+\_\+c0.\+cpp}}.
+2000ms periodic task for Free\+RTOS scheduler. 
+
+This task increments a counter and delays for 2000ms in each loop iteration.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em pv\+Parameters} & Pointer to task parameters (currently unused, should be NULL). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None
+\end{DoxyReturn}
+2000ms periodic task for Free\+RTOS scheduler.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_os__usr_8h_a9aeeac0c21b4026409e7ac06b64ab007}{OS\_2000ms\_task\_c0}}(\textcolor{keywordtype}{void}\ *pvParameters)}
+
+\end{DoxyCode}
+
+
+Create a new 2000ms function called by the scheduler in from th efreertos. Used xtaskcrete to create the tasks \texorpdfstring{$\ast$}{*}
+
+
+\begin{DoxyParams}{Parameters}
+{\em pv\+Parameters} & Pointer to task parameters. As of now task parameters in NUL \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{task__2000ms__c0_8cpp_source_l00022}{22}} of file \mbox{\hyperlink{task__2000ms__c0_8cpp_source}{task\+\_\+2000ms\+\_\+c0.\+cpp}}.
 
 Here is the call graph for this function\+:
 % FIG 3
@@ -520,7 +621,21 @@ void OS\+\_\+20ms\+\_\+task\+\_\+c0 (\begin{DoxyParamCaption}\item[{void \texorp
 
 
 
-Definition at line \mbox{\hyperlink{task__20ms__c0_8cpp_source_l00007}{7}} of file \mbox{\hyperlink{task__20ms__c0_8cpp_source}{task\+\_\+20ms\+\_\+c0.\+cpp}}.
+20ms periodic task for Free\+RTOS scheduler. 
+
+This task increments a counter and delays for 20ms in each loop iteration.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em pv\+Parameters} & Pointer to task parameters (currently unused, should be NULL). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{task__20ms__c0_8cpp_source_l00026}{26}} of file \mbox{\hyperlink{task__20ms__c0_8cpp_source}{task\+\_\+20ms\+\_\+c0.\+cpp}}.
 
 Here is the call graph for this function\+:
 % FIG 4
@@ -532,7 +647,39 @@ void OS\+\_\+50ms\+\_\+task\+\_\+c0 (\begin{DoxyParamCaption}\item[{void \texorp
 
 
 
-Definition at line \mbox{\hyperlink{task__50ms__c0_8cpp_source_l00006}{6}} of file \mbox{\hyperlink{task__50ms__c0_8cpp_source}{task\+\_\+50ms\+\_\+c0.\+cpp}}.
+50ms periodic task for Free\+RTOS scheduler. 
+
+This task increments a counter and delays for 50ms in each loop iteration.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em pv\+Parameters} & Pointer to task parameters (currently unused, should be NULL). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None
+\end{DoxyReturn}
+50ms periodic task for Free\+RTOS scheduler.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pv\+Parameters} & Pointer to task parameters. As of now task parameters in NULL 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xLastWakeTime\ =\ \mbox{\hyperlink{task_8h_a753ecfe23e7386066ecccad5d16422f7}{xTaskGetTickCount}}\ ();}
+\DoxyCodeLine{\textcolor{keyword}{const}\ \mbox{\hyperlink{_a_r_mv8_m_2non__secure_2portmacrocommon_8h_a83586323ab175c3dfcbd7f4704e09743}{TickType\_t}}\ xDelay50ms\ =\ \mbox{\hyperlink{projdefs_8h_a353d0f62b82a402cb3db63706c81ec3f}{pdMS\_TO\_TICKS}}(50);}
+\DoxyCodeLine{\textcolor{keywordflow}{for}(;;)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ }
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{task_8h_aeaef1dd0632e6e3441388bf82a7d18d3}{vTaskDelayUntil}}(\ \&xLastWakeTime,\ xDelay50ms);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{task__50ms__c0_8cpp_source_l00023}{23}} of file \mbox{\hyperlink{task__50ms__c0_8cpp_source}{task\+\_\+50ms\+\_\+c0.\+cpp}}.
 
 Here is the call graph for this function\+:
 % FIG 5

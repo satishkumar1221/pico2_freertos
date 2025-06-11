@@ -32,6 +32,7 @@ var annotated_dup =
     [ "A_BLOCK_LINK", "struct_a___b_l_o_c_k___l_i_n_k.html", "struct_a___b_l_o_c_k___l_i_n_k" ],
     [ "corCoRoutineControlBlock", "structcor_co_routine_control_block.html", "structcor_co_routine_control_block" ],
     [ "event", "structevent.html", "structevent" ],
+    [ "EventGroupDef_t", "struct_event_group_def__t.html", "struct_event_group_def__t" ],
     [ "HeapRegion", "struct_heap_region.html", "struct_heap_region" ],
     [ "IDTEntry", "struct_i_d_t_entry.html", "struct_i_d_t_entry" ],
     [ "IDTPointer", "struct_i_d_t_pointer.html", "struct_i_d_t_pointer" ],
