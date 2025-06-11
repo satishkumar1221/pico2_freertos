@@ -128,6 +128,67 @@ extern void OS_2000ms_task_c0(void *pvParameters);
 
 
 
+/**
+ * @brief 20ms periodic task for FreeRTOS scheduler for core 1 .
+ * 
+ * This task increments a counter and delays for 20ms in each loop iteration.
+ * 
+ * @param[in] pvParameters Pointer to task parameters (currently unused, should be NULL).
+ * @return None
+ */
+extern void OS_20ms_task_c1(void *pvParameters); 
+
+
+/**
+ * @brief 50ms periodic task for FreeRTOS scheduler for core 1.
+ * 
+ * This task increments a counter and delays for 50ms in each loop iteration.
+ * 
+ * @param[in] pvParameters Pointer to task parameters (currently unused, should be NULL).
+ * @return None
+ */
+extern void OS_50ms_task_c1(void *pvParameters);
+
+/**
+ * @brief 100ms periodic task for FreeRTOS scheduler for core 1 .
+ * 
+ * This task increments a counter and delays for 100ms in each loop iteration.
+ * 
+ * @param[in] pvParameters Pointer to task parameters (currently unused, should be NULL).
+ * @return None
+ */
+/**
+ * @brief 100ms periodic task for FreeRTOS scheduler.
+ * 
+ * This task increments a counter and delays for 100ms in each loop iteration.
+ * 
+ * @param[in] pvParameters Pointer to task parameters (currently unused, should be NULL).
+ * @return None
+ */
+extern void OS_100ms_task_c1(void *pvParameters);
+
+/**
+ * @brief 1000ms periodic task for FreeRTOS scheduler for core 1.
+ * 
+ * This task increments a counter and delays for 1000ms in each loop iteration.
+ * 
+ * @param[in] pvParameters Pointer to task parameters (currently unused, should be NULL).
+ * @return None
+ */
+extern void OS_1000ms_task_c1(void *pvParameters);
+/**
+ * @brief 2000ms periodic task for FreeRTOS scheduler for core 1.
+ * 
+ * This task increments a counter and delays for 2000ms in each loop iteration.
+ * 
+ * @param[in] pvParameters Pointer to task parameters (currently unused, should be NULL).
+ * @return None
+ */
+extern void OS_2000ms_task_c1(void *pvParameters); 
+
+
+
+
 class OS_start
 {
     public :

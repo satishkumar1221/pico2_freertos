@@ -42,10 +42,16 @@ add_subdirectory(HAL)
 
 add_executable(pico_freertos pico_freertos.cpp 
                              freertos_os_wrapper.cpp 
-                             task_20ms_c0.cpp task_50ms_c0.cpp 
+                             task_20ms_c0.cpp 
+                             task_50ms_c0.cpp 
                              task_100ms_c0.cpp 
                              task_1000ms_c0.cpp 
-                             task_2000ms_c0.cpp)
+                             task_2000ms_c0.cpp
+                             task_20ms_c1.cpp 
+                             task_50ms_c1.cpp 
+                             task_100ms_c1.cpp 
+                             task_1000ms_c1.cpp 
+                             task_2000ms_c1.cpp)
 
 pico_set_program_name(pico_freertos "pico_freertos")
 pico_set_program_version(pico_freertos "0.1")

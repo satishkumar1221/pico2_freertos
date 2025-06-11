@@ -7,13 +7,15 @@
 #include "task.h"
 #include "Os_usr.h"
 
-void temp_func(void *pvParameters)
-{
 
-}
+
+
 int main()
 {
     stdio_init_all();
+    /*start core 1 before starting os */
+   
+
    OS_start start_os; 
    //start_os.OS_startup_code();
   
