@@ -9,8 +9,8 @@
 #include "mpu_wrappers.h" 
 #include "task.h"
 
-
-
+#include "apilib.h"
+#include "memlib.h"
 uint32_t V_Os_Task_Counter_20ms = 0; 
 
 /**
@@ -22,14 +22,24 @@ uint32_t V_Os_Task_Counter_20ms = 0;
  * @return None
  */
 
-
+ uint32_t V_bitset = 0;
+uint32_t src = 0xAABBCCDD; 
 void OS_20ms_task_c0(void *pvParameters)
 {
+	
     TickType_t xLastWakeTime = xTaskGetTickCount ();
+	#if 0 /*Test code for librareis will have a test folder later on*/
+	MemLib lib; 
+	lib.memcopy_overlapprotection(&V_bitset,&src,sizeof(src));
+	API_LIB<uint32_t>temp ;
+	lib.memzero(&V_bitset,sizeof(src)); 
+	temp.set_bits(&V_bitset,(static_cast<uint32_t>(3)));
+	#endif  
     const TickType_t xDelay20ms = pdMS_TO_TICKS(20);
 	for(;;)
 	{
 		V_Os_Task_Counter_20ms++; 
+		
 		vTaskDelayUntil( &xLastWakeTime, xDelay20ms);
 	}
 }

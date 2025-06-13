@@ -64,13 +64,14 @@ add_library(HAL_Lib
            ${CMAKE_CURRENT_LIST_DIR}/ADC/adc_cfg.cpp
            ${CMAKE_CURRENT_LIST_DIR}/ADC/adc.cpp
 )
- file(GLOB_RECURSE HEADER_FILES "${PROJECT_SOURCE_DIR}/**/*.h")
+
+file(GLOB_RECURSE HEADER_FILES "${PROJECT_SOURCE_DIR}/**/*.h")
 #include the target dorectories
 
 
 
 
-include_directories(OS PRIVATE
+include_directories(HAL PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
         ${CMAKE_CURRENT_LIST_DIR}/ADC
         ${CMAKE_CURRENT_LIST_DIR}/DIO

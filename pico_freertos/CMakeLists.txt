@@ -39,19 +39,25 @@ pico_sdk_init()
 # Add executable. Default name is the project name, version 0.1
 add_subdirectory(Os_Config)
 add_subdirectory(HAL)
+#add_library(INFRA::mylib ALIAS mylib)
+add_subdirectory(INFRA)
 
-add_executable(pico_freertos pico_freertos.cpp
-                             freertos_os_wrapper.cpp 
-                             task_20ms_c0.cpp 
-                             task_50ms_c0.cpp 
-                             task_100ms_c0.cpp 
-                             task_1000ms_c0.cpp 
-                             task_2000ms_c0.cpp
-                             task_20ms_c1.cpp 
-                             task_50ms_c1.cpp 
-                             task_100ms_c1.cpp 
-                             task_1000ms_c1.cpp 
-                             task_2000ms_c1.cpp)
+add_executable(
+    pico_freertos 
+    pico_freertos.cpp
+    freertos_os_wrapper.cpp
+    task_20ms_c0.cpp
+    task_50ms_c0.cpp
+    task_100ms_c0.cpp
+    task_1000ms_c0.cpp
+    task_2000ms_c0.cpp
+    task_20ms_c1.cpp
+    task_50ms_c1.cpp
+    task_100ms_c1.cpp
+    task_1000ms_c1.cpp
+    task_2000ms_c1.cpp
+    
+)
 
 pico_set_program_name(pico_freertos "pico_freertos")
 pico_set_program_version(pico_freertos "0.1")
@@ -65,20 +71,26 @@ pico_enable_stdio_usb(pico_freertos 0)
 # Add the standard include files to the build
 target_include_directories(pico_freertos PUBLIC
         ${CMAKE_CURRENT_LIST_DIR}
+        ${CMAKE_CURRENT_LIST_DIR}/INFRA/API_LIB
+        ${CMAKE_CURRENT_LIST_DIR}/INFRA/MEM_Lib
         ${CMAKE_CURRENT_LIST_DIR}/OS_Config 
         ${CMAKE_CURRENT_LIST_DIR}/HAL
         ${CMAKE_CURRENT_LIST_DIR}/HAL/ADC
         ${CMAKE_CURRENT_LIST_DIR}/HAL/DMA
         ${CMAKE_CURRENT_LIST_DIR}/HAL/DIO
         ${CMAKE_CURRENT_LIST_DIR}/HAL/I2C 
-         ${CMAKE_CURRENT_LIST_DIR}/HAL/SPI
+        ${CMAKE_CURRENT_LIST_DIR}/HAL/SPI
         ${CMAKE_CURRENT_LIST_DIR}/HAL/UART   
         ${PROJECT_SOURCE_DIR}
+       
 )
 
+#target_link_libraries(pico_freertos PRIVATE Infra_Lib pico_stdlib)
+
+#target_link_libraries(pico_stdlib INTERFACE INFRA::Infra_Lib)
 # Add the standard library to the build
-target_link_libraries(pico_freertos
-        pico_stdlib FreeRTOS-Kernel-Heap4 OS_Lib hardware_adc hardware_spi hardware_dma hardware_uart hardware_i2c HAL_Lib )
+target_link_libraries(pico_freertos PRIVATE
+        pico_stdlib FreeRTOS-Kernel-Heap4 HAL_Lib Infra_Lib OS_Lib hardware_adc hardware_spi hardware_dma hardware_uart hardware_i2c  )
 
 
 
