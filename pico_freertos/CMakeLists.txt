@@ -24,7 +24,7 @@ if (EXISTS ${picoVscode})
 endif()
 # ====================================================================================
 set(PICO_BOARD pico2 CACHE STRING "Board type")
-
+#set(CMAKE_FILE_ENCODING "UTF-8")
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
 #include(${CMAKE_SOURCE_DIR}/FreeRTOS-Kernel/portable/ThirdParty/GCC/RP2350_ARM_NTZ/FreeRTOS_Kernel_import.cmake)
@@ -72,6 +72,7 @@ pico_enable_stdio_usb(pico_freertos 0)
 target_include_directories(pico_freertos PUBLIC
         ${CMAKE_CURRENT_LIST_DIR}
         ${CMAKE_CURRENT_LIST_DIR}/INFRA/API_LIB
+         ${CMAKE_CURRENT_LIST_DIR}/INFRA/Custom_Queue
         ${CMAKE_CURRENT_LIST_DIR}/INFRA/MEM_Lib
         ${CMAKE_CURRENT_LIST_DIR}/OS_Config 
         ${CMAKE_CURRENT_LIST_DIR}/HAL

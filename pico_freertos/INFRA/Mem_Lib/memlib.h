@@ -2,8 +2,8 @@
 
 #ifndef MEMLIB_H
 #define MEMLIB_H
-#include<stdio.h> 
-#include<iostream> 
+//#include<iostream> 
+//#include <stdint.h>
 #include "apilib.h"
 
 
