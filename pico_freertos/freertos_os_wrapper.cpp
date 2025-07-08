@@ -26,13 +26,47 @@
 //xTaskCreate(temp_func, "temp", 1024, NULL, 4, NULL);
 #define FLAG_VALUE 0xAABB
 #define uxCoreAffinityMask  (1<<1)
+
+
+/**
+ * @file freertos_os_wrapper.cpp
+ */
+/**
+ * @brief Defines a struct for task configuration in FreeRTOS.
+ */
+
 typedef struct
 {
+        /**
+     * @var TaskFunction_t func_ptr_task
+     * @brief Pointer to the function that will be executed by the task.
+     */
    TaskFunction_t func_ptr_task;
+    /**
+     * @var const char* pc_name
+     * @brief Name of the task.
+     */
    const char *pc_name; 
+       /**
+     * @var uint32_t stack_depth
+     * @brief Stack depth required for the task.
+     */
     const uint32_t stack_depth; 
+        /**
+     * @var void* const pvParameters
+     * @brief Pointer to any parameters that need to be passed to the task.
+     */
     void * const pvParameters;
+        /**
+     * @var unsigned long uxPriority
+     * @brief Priority of the task.
+     */
     unsigned long uxPriority;
+    
+    /**
+     * @var TaskHandle_t* const pxCreatedTask
+     * @brief Handle of the created task.
+     */
     TaskHandle_t * const pxCreatedTask; 
 }sttag_task_config_struct; 
 

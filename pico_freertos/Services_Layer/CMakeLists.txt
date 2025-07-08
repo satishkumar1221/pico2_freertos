@@ -27,29 +27,32 @@ message(STATUS "CMAKE_SOURCE_DIR: ${CMAKE_SOURCE_DIR}")
 # Add executable. Default name is the project name, version 0.1
 # Add the standard include files to the build
 include_directories(
-                    ${CMAKE_CURRENT_LIST_DIR}/API_LIB
-                    ${CMAKE_CURRENT_LIST_DIR}/Mem_Lib
-                   ${CMAKE_CURRENT_LIST_DIR}/Custom_Queue
+                    ${CMAKE_CURRENT_LIST_DIR}/NVM
+                    ${CMAKE_CURRENT_LIST_DIR}/Diagnostics
                     ${CMAKE_SOURCE_DIR}
-                    ${PICO_SDK_PATH}/pico-sdk/src/common/pico_base/include
+                    {CMAKE_CURRENT_LIST_DIR}/../../INFRA
+                   {CMAKE_CURRENT_LIST_DIR}/../../INFRA/API_LIB
+                   {CMAKE_CURRENT_LIST_DIR}/../../INFRA/Mem_Lib
+                   {CMAKE_CURRENT_LIST_DIR}/../../INFRA/Custom_Queue
+                    {CMAKE_CURRENT_LIST_DIR}/../../HAL/DMA
+                   {CMAKE_CURRENT_LIST_DIR}/../../HAL/SPI
+                   #${PICO_SDK_PATH}/pico-sdk/src/common/pico_base/include
 )
 
 set(SOURCES 
-   {CMAKE_CURRENT_LIST_DIR}/API_LIB/apilib.cpp
-   {CMAKE_CURRENT_LIST_DIR}/Mem_Lib/memlibrary.cpp
-   {CMAKE_CURRENT_LIST_DIR}/Custom_Queue/queue_custom.cpp
+   {CMAKE_CURRENT_LIST_DIR}/NVM/Nvm_Cfg.cpp
+   {CMAKE_CURRENT_LIST_DIR}/NVM/Nvm_class.cpp
 )
 #set sources and add_executable
 
 message(STATUS "CMAKE_CURRENT_LIST_DIR: ${CMAKE_CURRENT_LIST_DIR}")
 
-add_library(Infra_Lib 
-           ${CMAKE_CURRENT_LIST_DIR}/Mem_Lib/memlibrary.cpp
-           ${CMAKE_CURRENT_LIST_DIR}/API_LIB/apilib.cpp
-           ${CMAKE_CURRENT_LIST_DIR}/Custom_Queue/queue_custom.cpp
+add_library(Services_Lib 
+           ${CMAKE_CURRENT_LIST_DIR}/NVM/Nvm_Cfg.cpp
+           ${CMAKE_CURRENT_LIST_DIR}/NVM/Nvm_class.cpp
 )
 
-target_include_directories(Infra_Lib PUBLIC "${CMAKE_CURRENT_LIST_DIR}")
+target_link_libraries(Services_Lib HAL_Lib Infra_Lib)
 
 
 file(GLOB_RECURSE HEADER_FILES "${PROJECT_SOURCE_DIR}/**/*.h")

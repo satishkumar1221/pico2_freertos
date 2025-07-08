@@ -46,8 +46,11 @@ add_library(OS_Lib
 
 include_directories(OS PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
-        ${CMAKE_CURRENT_LIST_DIR}/Integration)
-
+        ${CMAKE_CURRENT_LIST_DIR}/Integration
+        ${CMAKE_CURRENT_LIST_DIR}/../../HAL/DMA
+      ${CMAKE_CURRENT_LIST_DIR}/../../HAL/SPI
+         ${PICO_SDK_PATH}/pico-sdk/src/common/pico_base/include
+)
 
 
 # Pull in our pico_stdlib which pulls in commonly used features

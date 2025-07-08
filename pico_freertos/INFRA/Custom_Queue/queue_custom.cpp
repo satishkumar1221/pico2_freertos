@@ -65,7 +65,7 @@ Queue_stat Queue ::push_element_queue(Queue_Id type , const void *ptr_usr_data)
             V_Queue_DataStruct[type].head = 0; 
             /*Add the first element to  the queue*/
             dest_ptr =  static_cast<void*>(V_Queue_DataStruct[type].ptr_user_Data + (V_Queue_DataStruct[type].head * V_Queue_DataStruct[type].size_of_individual_element));
-            memcopy(dest_ptr,ptr_usr_data,V_Queue_DataStruct[type].size_of_individual_element);
+            lib_memcopy(dest_ptr,ptr_usr_data,V_Queue_DataStruct[type].size_of_individual_element);
             /*increment head to be read y for the next element to be inserted*/
             V_Queue_DataStruct[type].head++; 
             stat = QUEUE_OK; 
@@ -74,7 +74,7 @@ Queue_stat Queue ::push_element_queue(Queue_Id type , const void *ptr_usr_data)
         {
             V_Queue_DataStruct[type].head = V_Queue_DataStruct[type].head % V_Queue_DataStruct[type].size_of_queue_buffer; 
             dest_ptr =  static_cast<void*>(V_Queue_DataStruct[type].ptr_user_Data + (V_Queue_DataStruct[type].head * V_Queue_DataStruct[type].size_of_individual_element));
-            memcopy(dest_ptr,ptr_usr_data,V_Queue_DataStruct[type].size_of_individual_element); 
+            lib_memcopy(dest_ptr,ptr_usr_data,V_Queue_DataStruct[type].size_of_individual_element); 
             if(check_for_full_queue(type , &V_Queue_DataStruct[type]) == QUEUE_OK)
             {
                     V_Queue_DataStruct[type].head++; 
@@ -125,7 +125,7 @@ Queue_stat Queue ::pop_element_queue(Queue_Id type ,  void *ptr_usr_data)
                 dest_ptr =  static_cast<void*>(V_Queue_DataStruct[type].ptr_user_Data); /*start with tail equal to 0 */
                 if(ptr_usr_data != NULL)
                 {
-                    memcopy(ptr_usr_data,dest_ptr,V_Queue_DataStruct[type].size_of_individual_element); 
+                    lib_memcopy(ptr_usr_data,dest_ptr,V_Queue_DataStruct[type].size_of_individual_element); 
                 }
                  stat = QUEUE_OK;
             }
@@ -135,7 +135,7 @@ Queue_stat Queue ::pop_element_queue(Queue_Id type ,  void *ptr_usr_data)
             dest_ptr =  static_cast<void*>(V_Queue_DataStruct[type].ptr_user_Data + (V_Queue_DataStruct[type].tail * V_Queue_DataStruct[type].size_of_individual_element));
             if(ptr_usr_data != NULL)
             {
-                memcopy(ptr_usr_data,dest_ptr,V_Queue_DataStruct[type].size_of_individual_element); 
+                lib_memcopy(ptr_usr_data,dest_ptr,V_Queue_DataStruct[type].size_of_individual_element); 
             }
             V_Queue_DataStruct[type].tail++; 
             stat = QUEUE_OK;
@@ -167,14 +167,14 @@ Queue_stat Queue ::peek_element_queue(Queue_Id type , void *ptr_usr_data)
                 dest_ptr =  static_cast<void*>(V_Queue_DataStruct[type].ptr_user_Data); /*start with tail equal to 0 */
                 if(ptr_usr_data != NULL)
                 {
-                    memcopy(ptr_usr_data,dest_ptr,V_Queue_DataStruct[type].size_of_individual_element); 
+                    lib_memcopy(ptr_usr_data,dest_ptr,V_Queue_DataStruct[type].size_of_individual_element); 
                 }
                  stat = QUEUE_OK;
             }
             else 
             {
              dest_ptr =  static_cast<void*>(V_Queue_DataStruct[type].ptr_user_Data + (V_Queue_DataStruct[type].tail * V_Queue_DataStruct[type].size_of_individual_element));
-             memcopy(ptr_usr_data,dest_ptr,V_Queue_DataStruct[type].size_of_individual_element); 
+             lib_memcopy(ptr_usr_data,dest_ptr,V_Queue_DataStruct[type].size_of_individual_element); 
               stat = QUEUE_OK;
             }
              

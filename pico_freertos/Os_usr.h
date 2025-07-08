@@ -2,6 +2,15 @@
 #ifndef _OS_USR_H_
 #define _OS_USR_H_
 
+#include "HAL/DMA/dma_hal.h"
+//#include "HAL/SPI/spi_hal.h"
+//#include "INFRA/API_LIB/apilib.h"
+//#include "FreeRTOS.h"
+//#include "task.h"
+//#include "FreeRTOS.h"
+//#include "task.h"
+
+
 
 extern void OS_startup(); 
 
@@ -189,7 +198,7 @@ extern void OS_2000ms_task_c1(void *pvParameters);
 
 
 
-class OS_start
+class OS_start : public DMA_config
 {
     public :
     OS_start();

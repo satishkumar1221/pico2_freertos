@@ -41,6 +41,7 @@ add_subdirectory(Os_Config)
 add_subdirectory(HAL)
 #add_library(INFRA::mylib ALIAS mylib)
 add_subdirectory(INFRA)
+add_subdirectory(Services_Layer)
 
 add_executable(
     pico_freertos 
@@ -82,7 +83,7 @@ target_include_directories(pico_freertos PUBLIC
         ${CMAKE_CURRENT_LIST_DIR}/HAL/I2C 
         ${CMAKE_CURRENT_LIST_DIR}/HAL/SPI
         ${CMAKE_CURRENT_LIST_DIR}/HAL/UART   
-        ${PROJECT_SOURCE_DIR}
+        
        
 )
 
@@ -90,8 +91,7 @@ target_include_directories(pico_freertos PUBLIC
 
 #target_link_libraries(pico_stdlib INTERFACE INFRA::Infra_Lib)
 # Add the standard library to the build
-target_link_libraries(pico_freertos PRIVATE
-        pico_stdlib FreeRTOS-Kernel-Heap4 HAL_Lib Infra_Lib OS_Lib hardware_adc hardware_spi hardware_dma hardware_uart hardware_i2c  )
+target_link_libraries(pico_freertos PRIVATE FreeRTOS-Kernel-Heap4 HAL_Lib  OS_Lib hardware_uart Services_Lib )
 
 
 

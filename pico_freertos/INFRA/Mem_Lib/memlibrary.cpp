@@ -1,5 +1,5 @@
-#include "memlib.h"
-
+#include "memlibrary.h"
+#include "../API_LIB/apilib.h"
 
 /******************************************************************************
  * File:        mem_lib.cpp
@@ -28,7 +28,7 @@
  *  @param[out] None 
  */
 
-void MemLib ::memcopy(void *dest ,const void *src , uint32_t size )
+void MemLib ::lib_memcopy(void *dest ,const void *src , uint32_t size )
 {
   auto itr = 0;  
   if( (src!= NULL && dest!=NULL) &&(size>0))
@@ -72,9 +72,9 @@ void MemLib ::memcopy_overlapprotection(void *dest ,const void *src , uint32_t s
     if (dest < src || dest >= (src + size))
     {
     /* safe memcopy. First copy to the destination buffer */ 
-      memcopy(buffer_safe,src,size);
+      lib_memcopy(buffer_safe,src,size);
     /*copy from buffer to the destination */
-      memcopy(dest,buffer_safe,size);
+      lib_memcopy(dest,buffer_safe,size);
     }
     else 
     {
@@ -101,7 +101,7 @@ void MemLib ::memcopy_overlapprotection(void *dest ,const void *src , uint32_t s
  */
 
 
-void MemLib ::memset (void *dest , uint8_t value , uint32_t size )
+void MemLib ::lib_memset (void *dest , uint8_t value , uint32_t size )
 {
   auto itr = 0;
 
@@ -134,14 +134,14 @@ void MemLib ::memset (void *dest , uint8_t value , uint32_t size )
  *  @param[out] None 
  */
 
-void MemLib ::memmove(void *dest, const void *src, uint32_t size)
+void MemLib ::lib_memmove(void *dest, const void *src, uint32_t size)
 {
   auto itr = 0; 
   if( (src!= NULL && dest!=NULL) &&(size>0))
   {
       if (dest < src || dest >= (src + size))
       {
-         memcopy(dest,src,size);
+         lib_memcopy(dest,src,size);
       }
       else 
       {
@@ -163,7 +163,7 @@ void MemLib ::memmove(void *dest, const void *src, uint32_t size)
  * @return None
  *  @param[out] None 
  */
-void MemLib:: memzero(void *dest , uint32_t size )
+void MemLib:: lib_memzero(void *dest , uint32_t size )
 {
     auto itr = 0;
     if((dest != NULL) && (size != 0 ))

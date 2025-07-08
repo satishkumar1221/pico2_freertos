@@ -11,6 +11,12 @@
  *  
  ******************************************************************************/
 #include "../Os_usr.h"
+//#include "../HAL/DMA/dma_hal.h"
+
+/*Global variables. Should not be destroyed. Hence not using any unioque pointers. Low level code*/
+
+DMA_config V_DMA_Config; 
+
 
 void OS_start :: OS_startup_code(void)
 {
@@ -25,9 +31,11 @@ void OS_start :: OS_startup_code(void)
 }
 
 
+
+
 void OS_start:: Initlize_Ram_Lowleveldriver()
 {
-
+     V_DMA_Config.DMA_Init(); 
 }
 
 void OS_start:: Initlize_ASW_Components()

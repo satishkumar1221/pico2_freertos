@@ -34,8 +34,14 @@ include_directories(${CMAKE_CURRENT_LIST_DIR}/ADC
 {CMAKE_CURRENT_LIST_DIR}/SPI
 {CMAKE_CURRENT_LIST_DIR}/UART
 {CMAKE_CURRENT_LIST_DIR}/DMA
+{CMAKE_CURRENT_LIST_DIR}/../../INFRA
+{CMAKE_CURRENT_LIST_DIR}/../../INFRA/API_LIB
+{CMAKE_CURRENT_LIST_DIR}/../../INFRA/Mem_Lib
+{CMAKE_CURRENT_LIST_DIR}/../../INFRA/Custom_Queue
+
 )
-set(SOURCES {CMAKE_CURRENT_LIST_DIR}/ADC/adc_cfg.cpp
+set(SOURCES 
+{CMAKE_CURRENT_LIST_DIR}/ADC/adc_cfg.cpp
 {CMAKE_CURRENT_LIST_DIR}/DIO/dio_cfg.cpp
 {CMAKE_CURRENT_LIST_DIR}/I2C/i2c_cfg.cpp
 {CMAKE_CURRENT_LIST_DIR}/SPI/spi_cfg.cpp
@@ -45,8 +51,8 @@ set(SOURCES {CMAKE_CURRENT_LIST_DIR}/ADC/adc_cfg.cpp
 {CMAKE_CURRENT_LIST_DIR}/ADC/adc.cpp
 {CMAKE_CURRENT_LIST_DIR}/DIO/dio.cpp
 {CMAKE_CURRENT_LIST_DIR}/I2C/i2c.cpp
-{CMAKE_CURRENT_LIST_DIR}/SPI/spi.cpp
-{CMAKE_CURRENT_LIST_DIR}/DMA/dma.cpp
+{CMAKE_CURRENT_LIST_DIR}/SPI/spi_hal.cpp
+{CMAKE_CURRENT_LIST_DIR}/DMA/dma_hal.cpp
 
 )
 
@@ -56,14 +62,18 @@ add_library(HAL_Lib
            ${CMAKE_CURRENT_LIST_DIR}/I2C/i2c_cfg.cpp
            ${CMAKE_CURRENT_LIST_DIR}/I2C/i2c.cpp
            ${CMAKE_CURRENT_LIST_DIR}/SPI/spi_cfg.cpp
-           ${CMAKE_CURRENT_LIST_DIR}/SPI/spi.cpp
+           ${CMAKE_CURRENT_LIST_DIR}/SPI/spi_hal.cpp
            ${CMAKE_CURRENT_LIST_DIR}/UART/uart_cfg.cpp
            ${CMAKE_CURRENT_LIST_DIR}/UART/uart.cpp
            ${CMAKE_CURRENT_LIST_DIR}/DMA/dma_cfg.cpp
-           ${CMAKE_CURRENT_LIST_DIR}/DMA/dma.cpp
+           ${CMAKE_CURRENT_LIST_DIR}/DMA/dma_hal.cpp
            ${CMAKE_CURRENT_LIST_DIR}/ADC/adc_cfg.cpp
            ${CMAKE_CURRENT_LIST_DIR}/ADC/adc.cpp
+           
+        
 )
+
+target_link_libraries( HAL_Lib pico_stdlib   pico_base hardware_spi hardware_dma hardware_adc Infra_Lib  pico_binary_info)
 
 file(GLOB_RECURSE HEADER_FILES "${PROJECT_SOURCE_DIR}/**/*.h")
 #include the target dorectories
@@ -78,7 +88,11 @@ include_directories(HAL PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}/I2C
         ${CMAKE_CURRENT_LIST_DIR}/SPI
         ${CMAKE_CURRENT_LIST_DIR}/UART
+        {CMAKE_SOURCE_DIR}/INFRA/Mem_Lib
+        {CMAKE_SOURCE_DIR}/INFRA
 )
+
+
 
 
 
