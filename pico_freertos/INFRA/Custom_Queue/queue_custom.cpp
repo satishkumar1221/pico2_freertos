@@ -1,3 +1,17 @@
+/******************************************************************************
+ * File:        queue_custom.cpp
+ * Author:      satish kumar
+ * copyright:   satish kumar
+ * Date:        6/10/2025
+ * Description: Contains logic for statically allocated circular queue
+ *
+ * Revision History: 
+ *   <07/08/2025> - 1.0 : Initlial version :satish kumar 
+* 
+ *  
+ ******************************************************************************/
+
+
 
 #include "queue_custom.h"
 Queue_Data_Struct V_Queue_DataStruct[TOTAL_NUMBER_QUEUES]; 

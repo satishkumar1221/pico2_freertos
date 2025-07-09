@@ -1,3 +1,16 @@
+/******************************************************************************
+ * File:        dma_hal.cpp
+ * Author:      satish kumar
+ * copyright:   satish kumar
+ * Date:        6/10/2025
+ * Description: Contains logic for dimrect memory access in hardware abstraction layer
+ *
+ * Revision History: 
+ *   <07/08/2025> - 1.0 : Initlial version :satish kumar 
+* 
+ *  
+ ******************************************************************************/
+
 #include "dma_hal.h"
 #include "hardware/spi.h"
 

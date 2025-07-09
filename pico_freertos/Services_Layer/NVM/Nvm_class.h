@@ -51,11 +51,7 @@ class NVM_Class : public Queue,public API_LIB<uint8_t>, public DMA_config
      */
 
     void NVM_Init(void); 
-        /**
-     * @fn void NVM_MainFunction(void)
-     * @brief The main function of the NVM module.
-     */
-    void NVM_MainFunction(void);  
+
     /**
      * @fn void NVM_ReadAll_sdcard(void)
      * @brief Reads all data from the SD card.
@@ -103,4 +99,12 @@ class NVM_Class : public Queue,public API_LIB<uint8_t>, public DMA_config
 
 
 };
+
+
+
+        /**
+     * @fn void NVM_MainFunction(void)
+     * @brief The main function of the NVM module.
+     */
+    void NVM_MainFunction(void);  
 #endif
