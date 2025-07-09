@@ -42,6 +42,7 @@ add_subdirectory(HAL)
 #add_library(INFRA::mylib ALIAS mylib)
 add_subdirectory(INFRA)
 add_subdirectory(Services_Layer)
+add_subdirectory(ASW)
 
 add_executable(
     pico_freertos 
@@ -91,7 +92,7 @@ target_include_directories(pico_freertos PUBLIC
 
 #target_link_libraries(pico_stdlib INTERFACE INFRA::Infra_Lib)
 # Add the standard library to the build
-target_link_libraries(pico_freertos PRIVATE FreeRTOS-Kernel-Heap4 HAL_Lib  OS_Lib hardware_uart Services_Lib )
+target_link_libraries(pico_freertos PRIVATE FreeRTOS-Kernel-Heap4 HAL_Lib  OS_Lib hardware_uart Services_Lib ASW_LIB )
 
 
 

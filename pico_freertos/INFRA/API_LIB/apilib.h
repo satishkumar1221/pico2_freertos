@@ -136,6 +136,8 @@ class API_LIB
      */
       T mul_uint_overflow_protection(T* result , T A , T B );
 
+      T increment_counter(T* src_ptr , const T value_to_be_incremented, const T threshold ); 
+
 };
 
 #define NUMBER_BITS_TO_BYTES 8u
@@ -226,6 +228,30 @@ void API_LIB<T>:: clear_bits_mask(T* src_ptr , const T bit_mask)
    {
       CATCH_EXCEPTION(); 
    }
+}
+
+
+template <typename T>
+T API_LIB<T>:: increment_counter( T* src_ptr , const T value_to_be_incremented, const T threshold )
+{ 
+   
+    if((src_ptr != NULL))
+   {
+        /* Satish To do : Write a swtich case base don the size. sizeof(T)*/
+         *src_ptr += value_to_be_incremented; 
+          if(*src_ptr >= threshold)
+          {
+            *src_ptr = threshold;
+          }
+   }
+   else 
+   {
+      CATCH_EXCEPTION(); 
+   }
+
+   /*To do : temporary , As of now return E_OK */
+
+   return(0);
 }
 
 

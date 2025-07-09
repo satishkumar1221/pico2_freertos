@@ -40,6 +40,7 @@ void spi_config :: spi_hal_init()
  */
 void spi_config :: intilize_gpio_spi(uint8_t spi_bus_id )
 {
+ 
     gpio_set_function(C_SPI_Cfg[spi_bus_id].miso_pin, GPIO_FUNC_SPI);
     gpio_init(C_SPI_Cfg[spi_bus_id].cs_pin);
     if(spi_bus_id == 0)

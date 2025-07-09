@@ -13,7 +13,7 @@
 #include "FreeRTOS.h"
 #include "mpu_wrappers.h" 
 #include "task.h"
-
+#include "../ASW/POWERMOD/powermod.h"
 /**
  * 
  * @code{cpp}
@@ -34,7 +34,7 @@ extern void OS_1000ms_task_c0(void *pvParameters)
     const TickType_t xDelay1000ms = pdMS_TO_TICKS(1000);
 	for(;;)
 	{
-		
+		powermod_cyclic_task(); 
 		vTaskDelayUntil( &xLastWakeTime, xDelay1000ms);
 	}
 }
