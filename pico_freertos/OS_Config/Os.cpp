@@ -15,7 +15,7 @@
 
 /*Global variables. Should not be destroyed. Hence not using any unioque pointers. Low level code*/
 
-DMA_config V_DMA_Config; 
+
 
 
 void OS_start :: OS_startup_code(void)
@@ -35,7 +35,10 @@ void OS_start :: OS_startup_code(void)
 
 void OS_start:: Initlize_Ram_Lowleveldriver()
 {
-    V_DMA_Config.DMA_Init(); 
+    DMA_config object_DMA_Config; 
+    Digital_input_output object_dio; 
+    object_DMA_Config.DMA_Init(); 
+    object_dio.Digital_input_output_init(); 
 }
 
 void OS_start:: Initlize_ASW_Components()
