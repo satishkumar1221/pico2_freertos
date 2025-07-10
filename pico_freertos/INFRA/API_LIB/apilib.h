@@ -24,6 +24,11 @@
 
 using namespace std;  
 
+
+#define E_OK 0u 
+
+#define E_NOT_OK 1u
+
 #define CATCH_EXCEPTION() while(1) {  }
 /**
  * @brief Template class for bit manipulation and arithmetic operations with overflow protection.

@@ -10,14 +10,16 @@ using namespace std;
 /*As the queue is not dynamically allocated and is general purpose user should add the queue ID here. This is the onky thing user have to do. user can pass any dataype*/
 typedef enum 
 {
+    NVM_Queue,
     test_queue, 
    TOTAL_NUMBER_QUEUES
 }Queue_Id; 
 
 typedef enum 
 {
+   
     Circular_Queue, 
-    Threadsafe_Queue, 
+    Threadsafe_Queue, /*Yet to write thread safe queue*/
     Total_Queue_Types
 
 }Queue_type; 
@@ -74,6 +76,8 @@ class Queue : public MemLib
      * @brief Returns the topmost element of the queue without removing it.
      */
     Queue_stat peek_element_queue(Queue_Id type , void *ptr_usr_data); 
+
+    Queue_stat Get_Queue_Status(Queue_Id type); 
     private : 
      /**
      * @fn Queue_stat check_for_full_queue(Queue_Id type , const Queue_Data_Struct *ptr_queue)

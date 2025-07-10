@@ -12,6 +12,9 @@
 #include "apilib.h"
 #include "memlibrary.h"
 #include "queue_custom.h"
+
+#include "../Services_Layer/NVM/Nvm_class.h"
+#include "../Services_Layer/MemIf/Memif.h"
 uint32_t V_Os_Task_Counter_20ms = 0; 
 
 uint8_t stickyflag; 
@@ -37,6 +40,9 @@ void OS_20ms_task_c0(void *pvParameters)
 {
 	
     TickType_t xLastWakeTime = xTaskGetTickCount ();
+
+    NVM_MainFunction(); 
+    MemIf_MainFunction(); 
 	#if 0 /*Test code for librareis will have a test folder later on*/
     Queue q;
 	MemLib lib; 

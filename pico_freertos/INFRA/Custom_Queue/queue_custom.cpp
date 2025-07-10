@@ -205,4 +205,25 @@ Queue_stat Queue ::peek_element_queue(Queue_Id type , void *ptr_usr_data)
 }
 
 
+Queue_stat Queue ::Get_Queue_Status(Queue_Id type)
+{
+
+    Queue_stat stat; 
+
+    if(check_for_empty_queue(type , &V_Queue_DataStruct[type]) == QUEUE_EMPTY)
+    {
+        stat = QUEUE_EMPTY; 
+    }
+    else if((check_for_full_queue(type , &V_Queue_DataStruct[type]) ) == QUEUE_FULL)
+    {
+        stat = QUEUE_FULL; 
+    }
+    else 
+    {
+        stat = QUEUE_OK; 
+    }
+
+}
+
+
     /*Control should never reach */

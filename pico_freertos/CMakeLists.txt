@@ -84,6 +84,8 @@ target_include_directories(pico_freertos PUBLIC
         ${CMAKE_CURRENT_LIST_DIR}/HAL/I2C 
         ${CMAKE_CURRENT_LIST_DIR}/HAL/SPI
         ${CMAKE_CURRENT_LIST_DIR}/HAL/UART   
+        ${CMAKE_CURRENT_LIST_DIR}/Services_Layer/NVM
+        ${CMAKE_CURRENT_LIST_DIR}/Services_Layer/MemIf 
         
        
 )
