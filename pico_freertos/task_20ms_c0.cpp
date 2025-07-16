@@ -40,8 +40,9 @@ void OS_20ms_task_c0(void *pvParameters)
 {
 	
     TickType_t xLastWakeTime = xTaskGetTickCount ();
-
-    NVM_MainFunction(); 
+    /*NVM should be calle first */
+    NVM_MainFunction();
+    /*MemIf should be called later on. MemIf should never be called befor NVM as the data validation is done as a part of NVM */ 
     MemIf_MainFunction(); 
 	#if 0 /*Test code for librareis will have a test folder later on*/
     Queue q;

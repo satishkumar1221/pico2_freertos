@@ -7,6 +7,12 @@ stTag_NVM_userbuffer V_stTag_NVM_userbuffer[NVM_BUFFER_SIZE];
 /* Gives infiormation about the job beign processed  */
 stTag_NVM_Internal V_stTag_NVM_Internal_prv_status; 
 
+stTag_NVM_userbuffer V_stTag_debug_data; 
+
+entag_nvmoperation V_entag_nvm_Operation[TOTAL_NUMBER_OF_BLOCKS_CONFIGURED]; 
+
+
+entag_Nvm_States V_entag_Nvm_States_memif_if; 
 /**
  * @brief Initializes the NVM module and its internal data structures.
  *
@@ -31,11 +37,69 @@ void NVM_Class :: NVM_ReadAll_sdcard()
 void NVM_Class :: NVM_Writeall_sdcard()
 {
 
-}       
+}      
+
+
+uint8_t NVM_Class :: Validate_Blocks_Queue(uint16_t block_id)
+{
+    auto status = E_NOT_OK; 
+    if((block_id >= 0 ) && (block_id < TOTAL_NUMBER_OF_BLOCKS_CONFIGURED))
+    {
+        status = E_OK; 
+    }
+    else 
+    {
+        status = E_NOT_OK; 
+    }
+    return(status); 
+ }
+
+
+/**
+ * @brief Validates blocks in the NVM queue and processes them based on their status.
+ *
+ * This private method checks if there are any pending operations in the NVM queue. If so,
+ * it retrieves the next user operation structure, validates the corresponding block,
+ * and processes it accordingly:
+ * - If validation fails, remove the block from the queue and handle the error.
+ * - If validation passes, allow the Memory Interface (MemIF) to read the function from the queue.
+ *
+ * @note This method is intended for internal use within the NVM_Class. It is not meant to be called directly by other classes or functions.
+ */
+void NVM_Class :: NVM_Prv_MainFunction()
+{ 
+    stTag_NVM_userbuffer usr_buffer;
+    auto status = E_NOT_OK;  
+    // Check if there are pending operations in the NVM queue
+    
+      if(QUEUE_EMPTY != Get_Queue_Status(NVM_Queue))
+      {
+         peek_element_queue(NVM_Queue , &usr_buffer); 
+         status = Validate_Blocks_Queue(usr_buffer.block_number); 
+         
+         if(E_NOT_OK == status)
+         {
+            pop_element_queue(NVM_Queue , &V_stTag_debug_data); 
+
+            /* Have to write a DET_Module*/
+         }
+
+         else 
+         {
+             /*Do nothing Mem_IF will read the function from the queue */
+         }
+      }
+
+      //Get_status_Current_
+
+}   
 
 
 void NVM_MainFunction()
 {
+    NVM_Class obj_nvm_class; 
+     /* Validate all the blocks in the queue. In case of invalid block remove the block from queue */
+     obj_nvm_class.NVM_Prv_MainFunction(); 
     
 }
 
@@ -71,7 +135,20 @@ void NVM_Class :: Initlize_Buffers()
     Queue_init(V_stTag_NVM_userbuffer , NVM_Queue , sizeof(V_stTag_NVM_userbuffer) , ((sizeof(V_stTag_NVM_userbuffer)) / (sizeof(V_stTag_NVM_userbuffer[0])))); /*Not required to crate objects as NVM inherits queue*/
 }
 
-
+/**
+ * @brief Retrieves job data from NVM based on the given block name and operation.
+ *
+ * This method checks if there are any pending operations in the NVM queue. If so,
+ * it retrieves the next user operation structure and extracts the relevant data:
+ * block number, operation type, and data pointer. The function then returns
+ * `E_OK` to indicate success or `E_NOT_OK` if no job was found.
+ *
+ * @param block_name A pointer to store the retrieved block name with the current job status.
+ * @param ptr_data A pointer to store the retrieved data buffer based on the operation type.
+ * @param operation The operation type (read/write).
+ *
+ * @return `E_OK` if the job data was successfully retrieved, or `E_NOT_OK` if no job was found.
+ */
 uint8_t NVM_Class :: Get_Job_Requested_From_NVM(uint16_t block_name , uint8_t *ptr_data  , uint8_t operation)
 {
     stTag_NVM_userbuffer user_operation;

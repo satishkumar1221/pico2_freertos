@@ -50,6 +50,8 @@ typedef struct
 
 }stTag_NVM_Internal;
 
+extern entag_Nvm_States V_entag_Nvm_States_memif_if; 
+extern stTag_NVM_Internal V_stTag_NVM_Internal_prv_status; 
  /**
  * @class NVM_Class
  */
@@ -113,12 +115,18 @@ class NVM_Class : public Queue,public API_LIB<uint8_t>, public DMA_config
      */
     void Send_Data_MemIF(); 
 
-  
-
+    friend void NVM_MainFunction(); /*Friend function used as I want t access a provate member of the class. NVM_Mainfunction() is a interface function called in RTOS */
+    
+    entag_nvmoperation Get_MemIf_Status();  
+    
     protected : 
-  uint8_t  Get_Job_Requested_From_NVM(uint16_t block_name , uint8_t *ptr_data  , uint8_t operation); 
+      uint8_t  Get_Job_Requested_From_NVM(uint16_t block_name , uint8_t *ptr_data  , uint8_t operation); 
 
-     private : 
+    private : 
+    
+      uint8_t Validate_Blocks_Queue(uint16_t block_number); 
+    
+    void NVM_Prv_MainFunction(); 
 
 };
 
