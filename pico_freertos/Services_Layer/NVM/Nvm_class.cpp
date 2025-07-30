@@ -28,11 +28,28 @@ void NVM_Class :: NVM_Init()
 }
 
 
+/**
+ * @brief Reads all data from the SD card.
+ *
+ * This function reads all available data from the SD card and performs necessary operations.
+ * The specific details of how the data is read and handled are encapsulated within this method.
+ *
+ * @return A status code indicating success or failure.
+ */
 
 void NVM_Class :: NVM_ReadAll_sdcard()
 { 
-       
+    
 }
+/**
+ * @brief Writes all data to the SD card.
+ *
+ * This function is responsible for writing all relevant data to an SD card.
+ * It should handle any necessary operations such as opening a file, writing data,
+ * and closing the file once the operation is complete.
+ *
+ * @note Ensure that the SD card is properly initialized before calling this function.
+ */
 
 void NVM_Class :: NVM_Writeall_sdcard()
 {
@@ -129,6 +146,7 @@ void NVM_Class :: write_Data_sdcard(uint8_t block_number , uint8_t *data)
  * This method initializes the `V_stTag_NVM_userbuffer` array as a queue with specified size and capacity,
  * utilizing the fact that the `NVM_Class` inherits from the Queue class.
  */
+
 
 void NVM_Class :: Initlize_Buffers()
 {

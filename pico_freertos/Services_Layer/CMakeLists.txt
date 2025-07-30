@@ -29,6 +29,7 @@ message(STATUS "CMAKE_SOURCE_DIR: ${CMAKE_SOURCE_DIR}")
 include_directories(
                     ${CMAKE_CURRENT_LIST_DIR}/NVM
                     ${CMAKE_CURRENT_LIST_DIR}/MemIf
+                    ${CMAKE_CURRENT_LIST_DIR}/SDCARD
                     ${CMAKE_CURRENT_LIST_DIR}/Diagnostics
                     ${CMAKE_SOURCE_DIR}
                     {CMAKE_CURRENT_LIST_DIR}/../../INFRA
@@ -52,6 +53,7 @@ add_library(Services_Lib
            ${CMAKE_CURRENT_LIST_DIR}/NVM/Nvm_Cfg.cpp
            ${CMAKE_CURRENT_LIST_DIR}/NVM/Nvm_class.cpp
            ${CMAKE_CURRENT_LIST_DIR}/MemIf/MemIf.cpp
+           ${CMAKE_CURRENT_LIST_DIR}/sdcard/sdcard.cpp
 )
 
 target_link_libraries(Services_Lib HAL_Lib Infra_Lib)

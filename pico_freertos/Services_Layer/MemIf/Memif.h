@@ -6,6 +6,8 @@
 #define JOB_ACCEPTED 1U 
 #define JOB_REJECTED 2U 
 #define NO_JOB_REQUESTED 0U 
+
+
 typedef struct Memif
 {
     uint16_t block_name; 
@@ -20,7 +22,6 @@ typedef struct Memif
 class MemIf : public NVM_Class 
 {
     public :  
-    
     void Get_Memif_status(); 
     void Set_Memif_status(entag_Nvm_States state ,entag_Nvm_States *ptr_nvm); 
     void Set_NVM_status(); 
