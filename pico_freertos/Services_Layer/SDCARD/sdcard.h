@@ -8,23 +8,71 @@
 #define END_PATTERN    0xFACE 
 extern uint32_t V_Internalblock_cache[TOTAL_NUMBER_OF_BLOCKS_CONFIGURED]; 
 
+#pragma pack(push, 1)
+
+
+/**
+ * @brief Header structure containing packet pattern, size, and CRC.
+ *
+ * This struct defines the header of a data packet, including:
+ * - A unique identifier (`pattern`) for the packet type or version.
+ * - The size of the associated data payload.
+ * - A CRC value for error detection in the header.
+ */
+
 typedef struct 
 
 {
      uint16_t pattern; 
-     uint32_t size;
+     uint16_t size;
      uint16_t CRC;  
      /* data */
 }header_Struct;
 
+
+#pragma pack(pop)
+
+
+
+/**
+ * @brief Structure representing a single block of data with associated metadata.
+ *
+ * This struct contains:
+ * - A `header_Struct` for packet identification and size.
+ * - A pointer to the user data payload (`ptr_user_data`).
+ * - The size of the user data payload.
+ * - An end pattern for packet detection.
+ * - A CRC value for error detection in the block.
+ */
+#pragma pack(push, 1)
 typedef struct 
 {
      header_Struct header; 
      uint8_t  *ptr_user_data;  
      uint16_t size;
-     uint16_t CRC;
      uint16_t end_pattern; 
+     uint16_t CRC;
 }Block_struct; 
+#pragma pack(pop)
+
+
+/**
+ * @brief Structure representing a complete data packet.
+ *
+ * This struct contains:
+ * - A `header_Struct` for packet identification and size.
+ * - A `Block_struct` containing the actual data block with its metadata.
+ */
+
+#pragma pack(push, 1)
+typedef struct 
+
+{
+     header_Struct header; 
+     Block_struct  block_data;
+}Data_packet; 
+
+#pragma pack(pop)
 
 
 typedef enum 

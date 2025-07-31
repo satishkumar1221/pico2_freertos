@@ -1,11 +1,23 @@
 #include "sdcard.h"
-
+#include "INFRA\API_LIB\crc16.h"
 /*Internal cache block to identify if the data is writtena fter being configured*/
+
+using namespace std;
+
+
+
+#define CRC_HEADER_SIZE 2U
 uint32_t V_Internalblock_cache[TOTAL_NUMBER_OF_BLOCKS_CONFIGURED]; 
 
 sttag_Memif V_Sttag_Memif_Request; 
 entag_fee_hl V_entag_sdcard_state = no_operation_sdcard; 
- 
+
+Data_packet V_sttag_sdcard_packet;
+
+static uint8_t lock_packet; 
+
+#define LOCK_DATA(x) *x = true
+#define UNLOCK_DATA(x) *x = FALSE
 
 /* @brief Triggers the SD card read operation via the state machine.
  *
@@ -93,8 +105,8 @@ void SD_Card_Interface ::sdcard_Statemachine_HL(uint16_t block_name , sttag_Memi
         case write_sdcard :  V_entag_sdcard_state = pack_data; 
                      break; 
 
-        case pack_data :// Pack_header_Struct(memif_job); 
-                         // Pack_UserData_CRC(memif_job);   
+        case pack_data : Pack_header_Struct(memif_job); 
+                         Pack_UserData_CRC(memif_job);   
                          V_entag_sdcard_state = trigger_write; 
                          break; 
 
@@ -113,14 +125,25 @@ void SD_Card_Interface ::sdcard_Statemachine_HL(uint16_t block_name , sttag_Memi
         default     :  sticky_flag = false;   break; 
         
     }
-
-     
-
-
-
       
 }
- 
 
+void SD_Card_Interface :: Pack_header_Struct(sttag_Memif *memif_job)
+{
+    CRC16 obj_crc_16; 
+    V_sttag_sdcard_packet.header.pattern = HEADER_PATTERN; 
+    V_sttag_sdcard_packet.header.size = memif_job->size; 
+    static_assert(sizeof(header_Struct) == 6,"header_Struct must be exactly 6 bytes");
+
+    V_sttag_sdcard_packet.header.CRC = obj_crc_16.processBuffer((reinterpret_cast<const uint8_t*>(&V_sttag_sdcard_packet.header)) ,  ((sizeof(V_sttag_sdcard_packet.header)) -CRC_HEADER_SIZE)); 
+
+
+}
+ 
+void SD_Card_Interface :: Pack_UserData_CRC(sttag_Memif *memif_job)
+{
+    
+}
+ 
 
 

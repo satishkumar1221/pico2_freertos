@@ -12,7 +12,7 @@ stTag_NVM_userbuffer V_stTag_debug_data;
 entag_nvmoperation V_entag_nvm_Operation[TOTAL_NUMBER_OF_BLOCKS_CONFIGURED]; 
 
 
-entag_Nvm_States V_entag_Nvm_States_memif_if; 
+//entag_Nvm_States V_entag_Nvm_States_memif_if; 
 /**
  * @brief Initializes the NVM module and its internal data structures.
  *
@@ -106,11 +106,20 @@ void NVM_Class :: NVM_Prv_MainFunction()
              /*Do nothing Mem_IF will read the function from the queue */
          }
       }
-
-      //Get_status_Current_
-
+       
+      Handle_Internal_NVM_Operations(); 
 }   
 
+
+void NVM_Class :: Handle_Internal_NVM_Operations()
+{
+   entag_Nvm_States memof_status = checkStatusInMemIf(); 
+
+ 
+
+
+
+}
 
 void NVM_MainFunction()
 {

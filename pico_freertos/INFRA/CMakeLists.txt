@@ -36,6 +36,7 @@ include_directories(
 
 set(SOURCES 
    {CMAKE_CURRENT_LIST_DIR}/API_LIB/apilib.cpp
+   {CMAKE_CURRENT_LIST_DIR}/API_LIB/crc16.cpp
    {CMAKE_CURRENT_LIST_DIR}/Mem_Lib/memlibrary.cpp
    {CMAKE_CURRENT_LIST_DIR}/Custom_Queue/queue_custom.cpp
 )
@@ -46,6 +47,7 @@ message(STATUS "CMAKE_CURRENT_LIST_DIR: ${CMAKE_CURRENT_LIST_DIR}")
 add_library(Infra_Lib 
            ${CMAKE_CURRENT_LIST_DIR}/Mem_Lib/memlibrary.cpp
            ${CMAKE_CURRENT_LIST_DIR}/API_LIB/apilib.cpp
+           ${CMAKE_CURRENT_LIST_DIR}/API_LIB/crc16.cpp
            ${CMAKE_CURRENT_LIST_DIR}/Custom_Queue/queue_custom.cpp
 )
 
