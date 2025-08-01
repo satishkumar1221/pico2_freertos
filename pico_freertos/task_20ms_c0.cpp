@@ -44,9 +44,9 @@ void OS_20ms_task_c0(void *pvParameters)
     /*NVM should be calle first */
     NVM_MainFunction();
     /*MemIf should be called later on. MemIf should never be called befor NVM as the data validation is done as a part of NVM */ 
-    MemIf_MainFunction(); 
+  //  MemIf_MainFunction(); 
     /*sd card main function to process the request related to sd card . As filesytem is not used user must specify the persistant ID of the blocks or can be auto generated*/
-    sd_card_main_function(); 
+  //  sd_card_main_function(); 
 	#if 0 /*Test code for librareis will have a test folder later on*/
     Queue q;
 	MemLib lib; 

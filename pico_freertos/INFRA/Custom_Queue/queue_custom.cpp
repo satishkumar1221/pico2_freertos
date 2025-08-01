@@ -223,6 +223,8 @@ Queue_stat Queue ::Get_Queue_Status(Queue_Id type)
         stat = QUEUE_OK; 
     }
 
+    return(stat); 
+
 }
 
 

@@ -57,6 +57,14 @@ void NVM_Class :: NVM_Writeall_sdcard()
 }      
 
 
+void  Init_NVM() 
+{
+    NVM_Class obj_nvm; 
+    obj_nvm.NVM_Init(); 
+}
+
+
+
 uint8_t NVM_Class :: Validate_Blocks_Queue(uint16_t block_id)
 {
     auto status = E_NOT_OK; 
@@ -199,3 +207,5 @@ uint8_t NVM_Class :: Get_Job_Requested_From_NVM(uint16_t block_name , uint8_t *p
     return(return_type); 
     // block_name = V_ 
 } 
+
+

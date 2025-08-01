@@ -10,6 +10,7 @@
 //#include "FreeRTOS.h"
 //#include "task.h"
 #include "HAL/DIO/dio.h"
+//
 
 extern void OS_startup(); 
 
@@ -197,7 +198,7 @@ extern void OS_2000ms_task_c1(void *pvParameters);
 
 
 
-class OS_start : public DMA_config
+class OS_start : public DMA_config 
 {
     public :
     OS_start();
@@ -209,6 +210,7 @@ class OS_start : public DMA_config
     void Initlize_ASW_Components();
     void Initlize_CDD_Components(); 
     void start_scheduler(); 
+    void Initlize_ServiceLayer_Components(); 
     
 
 }; 

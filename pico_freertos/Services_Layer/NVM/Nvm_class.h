@@ -59,6 +59,9 @@ extern stTag_NVM_Internal V_stTag_NVM_Internal_prv_status;
  * @brief Defines a class for handling non-volatile memory operations.
  */
 extern stTag_NVM_Internal V_stTag_NVM_Internal_prv_status;
+
+
+extern void  Init_NVM() ; /*Function to Initlize NVM C stule */
 class NVM_Class : public Queue,public API_LIB<uint8_t>, public DMA_config
 {
     public :

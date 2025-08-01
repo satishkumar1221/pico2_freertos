@@ -14,8 +14,7 @@
 //#include "../HAL/DMA/dma_hal.h"
 
 /*Global variables. Should not be destroyed. Hence not using any unioque pointers. Low level code*/
-
-
+//#include "../Services_Layer/NVM/Nvm_class.h"
 
 
 void OS_start :: OS_startup_code(void)
@@ -24,7 +23,7 @@ void OS_start :: OS_startup_code(void)
     Initlize_Ram_Lowleveldriver(); 
     Initlize_ASW_Components();
     Initlize_CDD_Components(); 
-    
+    Initlize_ServiceLayer_Components(); 
     start_scheduler(); 
 
 
@@ -46,9 +45,17 @@ void OS_start:: Initlize_ASW_Components()
     
 }
 
+/*TO DO: To create a interface file for the OS . This is a temporary fix :Kumar Satish */
+extern void  Init_NVM();
+void OS_start:: Initlize_ServiceLayer_Components()
+{
+     Init_NVM(); 
+}
+
+
 void OS_start:: Initlize_CDD_Components()
 {
-    
+        
 }
 
 void OS_start:: Initlize_const_tables()
