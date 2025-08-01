@@ -92,7 +92,7 @@ uint8_t NVM_Class :: Validate_Blocks_Queue(uint16_t block_id)
  * @note This method is intended for internal use within the NVM_Class. It is not meant to be called directly by other classes or functions.
  */
 void NVM_Class :: NVM_Prv_MainFunction()
-{ 
+{  
     stTag_NVM_userbuffer usr_buffer;
     auto status = E_NOT_OK;  
     // Check if there are pending operations in the NVM queue
@@ -121,12 +121,17 @@ void NVM_Class :: NVM_Prv_MainFunction()
 
 void NVM_Class :: Handle_Internal_NVM_Operations()
 {
-   entag_Nvm_States memof_status = checkStatusInMemIf(); 
+   entag_Nvm_States memof_status = Get_MemIf_Status(); 
 
  
 
 
 
+}
+
+inline entag_Nvm_States NVM_Class ::  Get_MemIf_Status()
+{
+    return(V_entag_Nvm_States_memif_if);
 }
 
 void NVM_MainFunction()

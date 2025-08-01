@@ -53,7 +53,10 @@ void MemIf:: MemIf_Interface_function()
 
 void MemIf :: Send_Data_SdCard(sttag_Memif *memif_jobstat)
 {
-    memif_jobstat = &V_sttag_Memif; 
+    if(V_sttag_Memif.job_status != NO_JOB_REQUESTED)
+    {
+         memif_jobstat = &V_sttag_Memif;
+    } 
 }
 
 void  MemIf :: set_job_status_sdcard(entag_Nvm_States job_status_sdcard)
@@ -64,6 +67,7 @@ void  MemIf :: set_job_status_sdcard(entag_Nvm_States job_status_sdcard)
 void  MemIf :: set_operation_status_sdcard(entag_Nvm_States job_status_sdcard)
 {
     V_sttag_Memif.operation_status = job_status_sdcard; 
+    V_entag_Nvm_States_memif_if =  V_sttag_Memif.operation_status; /*Updated NVM status with Memif */
 }
 
 

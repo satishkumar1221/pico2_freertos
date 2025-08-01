@@ -62,7 +62,7 @@ extern stTag_NVM_Internal V_stTag_NVM_Internal_prv_status;
 
 
 extern void  Init_NVM() ; /*Function to Initlize NVM C stule */
-class NVM_Class : public Queue,public API_LIB<uint8_t>, public DMA_config
+class NVM_Class : public Queue,public API_LIB<uint8_t>
 {
     public :
 
@@ -72,31 +72,7 @@ class NVM_Class : public Queue,public API_LIB<uint8_t>, public DMA_config
      */
 
     void NVM_Init(void); 
-
-   
  
-    /**
- * @brief Checks the current status of a memory interface operation.
- *
- * This virtual function provides an interface to check the current operational status of the memory
- * interface. It is designed to be overridden by subclasses to implement specific status-checking logic.
- *
- * Subclasses should return appropriate values based on the actual state of the memory operation.
- *
- * @return The current status of the memory interface:
- * - `E_OK`: Operation is successful or in a valid state.
- * - Other statuses as defined in `entag_Nvm_States` for error conditions or specific states.
- */
-    virtual entag_Nvm_States checkStatusInMemIf() const {
-    /* In C++, when you declare a method as const, it signals:
-   “This method will not (and cannot) change any member variables of the class (unless they’re marked mutable).”
-   
-   It's a contract to the compiler that calling getSDCardJobStatus() won’t alter the internal state of the object.
-  */ 
-      return NVM_OK; // default or stub
-    }
-
-
     /**
      * @fn void NVM_ReadAll_sdcard(void)
      * @brief Reads all data from the SD card.
@@ -144,7 +120,7 @@ class NVM_Class : public Queue,public API_LIB<uint8_t>, public DMA_config
 
     friend void NVM_MainFunction(); /*Friend function used as I want t access a provate member of the class. NVM_Mainfunction() is a interface function called in RTOS */
     
-    entag_nvmoperation Get_MemIf_Status();  
+    entag_Nvm_States Get_MemIf_Status();  
     
     protected : 
       uint8_t  Get_Job_Requested_From_NVM(uint16_t block_name , uint8_t *ptr_data  , uint8_t operation); 

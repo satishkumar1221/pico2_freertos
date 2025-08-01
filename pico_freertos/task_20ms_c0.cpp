@@ -41,41 +41,17 @@ void OS_20ms_task_c0(void *pvParameters)
 {
 	
     TickType_t xLastWakeTime = xTaskGetTickCount ();
-    /*NVM should be calle first */
-    NVM_MainFunction();
-    /*MemIf should be called later on. MemIf should never be called befor NVM as the data validation is done as a part of NVM */ 
-  //  MemIf_MainFunction(); 
-    /*sd card main function to process the request related to sd card . As filesytem is not used user must specify the persistant ID of the blocks or can be auto generated*/
-  //  sd_card_main_function(); 
-	#if 0 /*Test code for librareis will have a test folder later on*/
-    Queue q;
-	MemLib lib; 
-	lib.memcopy_overlapprotection(&V_bitset,&src,sizeof(src));
-	API_LIB<uint32_t>temp ;
-	lib.memzero(&V_bitset,sizeof(src)); 
-	temp.set_bits(&V_bitset,(static_cast<uint32_t>(3)));
-	
-Queue q;
-   if(stickyflag == 0)
-   {
-	
-	stat = q.Queue_init(V_arr_queue,test_queue,(sizeof(V_arr_queue)/sizeof(uint16_t)),sizeof(uint16_t));
-	stickyflag = 1; 
-   }
-   stat = q.push_element_queue(test_queue,&test_data[0]);
-   stat = q.push_element_queue(test_queue,&test_data[2]);
-   stat= q.push_element_queue(test_queue,&test_data[3]);
-   stat= q.push_element_queue(test_queue,&test_data[4]);
-   stat =q.push_element_queue(test_queue,&test_data[2]);
-   stat =q.pop_element_queue(test_queue,NULL);
-   stat =q.pop_element_queue(test_queue,NULL);
-   stat =q.push_element_queue(test_queue,&test_data[2]);
-    stat =q.push_element_queue(test_queue,&test_data[3]);
-  #endif
+
     const TickType_t xDelay20ms = pdMS_TO_TICKS(20);
 	for(;;)
 	{
 		V_Os_Task_Counter_20ms++; 
+            /*NVM should be calle first */
+    NVM_MainFunction();
+    /*MemIf should be called later on. MemIf should never be called befor NVM as the data validation is done as a part of NVM */ 
+    MemIf_MainFunction(); 
+    /*sd card main function to process the request related to sd card . As filesytem is not used user must specify the persistant ID of the blocks or can be auto generated*/
+    sd_card_main_function(); 
 		
 		vTaskDelayUntil( &xLastWakeTime, xDelay20ms);
 	}
