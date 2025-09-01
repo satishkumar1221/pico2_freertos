@@ -14,6 +14,11 @@
 #define CONFIGURE_SPI_BUS 1
 #define CONFIGURE_I2C_BUS 2
 #define CONFIGURE_GPIO    3 
+
+
+
+extern uint8_t V_TX_BUFFER_DMA_LAYER[512];  
+extern uint8_t V_RX_BUFFER_DMA_LAYER[512]; 
 typedef union 
 {
     uint32_t R; 
