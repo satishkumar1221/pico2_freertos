@@ -3,51 +3,63 @@
 
 #include "Nvm_class.h"
 
-#define JOB_ACCEPTED 1U 
-#define JOB_REJECTED 2U 
-#define NO_JOB_REQUESTED 0U 
+#define JOB_ACCEPTED 1U
+#define JOB_REJECTED 2U
+#define NO_JOB_REQUESTED 0U
 
 
 typedef struct Memif
 {
-    uint16_t block_name; 
-    uint8_t *ptr_data; 
+    uint16_t block_name;
+    uint8_t *ptr_data;
     uint8_t operation;
-    entag_Nvm_States operation_status; 
-    uint8_t job_status; 
-    uint16_t size; 
+    entag_Nvm_States operation_status;
+    uint8_t job_status;
+    uint16_t size;
     /* data */
 }sttag_Memif;
 
-extern sttag_Memif V_sttag_Memif; 
+extern sttag_Memif V_sttag_Memif;
 
-
-class MemIf : public NVM_Class 
+typedef enum
 {
-    public :  
-    void Get_Memif_status(); 
-    void Set_Memif_status(entag_Nvm_States state ,entag_Nvm_States *ptr_nvm); 
-    void Set_NVM_status(); 
-    void Get_NVM_Status();  
-    void MemIf_Interface_function(); 
+    Job_status_MemIf_OK,
+    Job_status_MemIf_BUSY,
+    Job_status_MemIf_FAILED,
+    Job_status_MemIf_NOT_OKAY
+}Job_status_MemIf;
+
+
+extern Job_status_MemIf V_MemIF_Job_stats;
+
+#define SET_MEMIF_STAT(job_status) V_MemIF_Job_stats = static_cast<Job_status_MemIf>(job_status);
+#define GET_MEMIF_STAT() V_MemIF_Job_stats
+class MemIf : public NVM_Class
+{
+    public :
+    void Get_Memif_status();
+    void Set_Memif_status(entag_Nvm_States state ,entag_Nvm_States *ptr_nvm);
+    void Set_NVM_status();
+    void Get_NVM_Status();
+    void MemIf_Interface_function();
     void Send_Data_SdCard(sttag_Memif *memif_jobstat);
-    
-    void set_job_status_sdcard(entag_Nvm_States job_status_sdcard); 
 
-    void set_operation_status_sdcard(entag_Nvm_States job_status_sdcard); 
+    void set_job_status_sdcard(entag_Nvm_States job_status_sdcard);
+
+    void set_operation_status_sdcard(entag_Nvm_States job_status_sdcard);
 
 
 
-    private : 
-     
+    private :
+
     protected :
 
-}; 
+};
 
-/*Function used for calling cyclically in the cyclic task. Done to avoid efficient object managemet. 
+/*Function used for calling cyclically in the cyclic task. Done to avoid efficient object managemet.
 Creating objects to call functiosn takes up stack spacce*/
 
 
-extern void MemIf_MainFunction(); 
+extern void MemIf_MainFunction();
 
 #endif

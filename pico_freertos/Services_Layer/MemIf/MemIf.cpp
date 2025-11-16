@@ -3,6 +3,9 @@
 sttag_Memif V_sttag_Memif; 
 /*externed in NVM to get the job status. Want to avoid the virtual keyword*/
 entag_Nvm_States V_entag_Nvm_States_memif_if; 
+
+Job_status_MemIf V_MemIF_Job_stats;
+
 void MemIf_MainFunction()
 {
     MemIf obj_memif_class; 
@@ -35,8 +38,21 @@ void MemIf:: MemIf_Interface_function()
             Set_Memif_status(NVM_BUSY , &V_entag_Nvm_States_memif_if); 
             V_sttag_Memif.job_status = JOB_ACCEPTED; 
         }
-        else
+        else if(Job_status_LLD_BUSY == GET_MEMIF_STAT())
         {
+            Set_Memif_status(NVM_BUSY , &V_entag_Nvm_States_memif_if);
+        }
+        else 
+        {
+            if((Job_status_LLD_FAILED == GET_MEMIF_STAT()) ||(Job_status_LLD_NOT_OKAY == GET_MEMIF_STAT()))
+            {
+                 Set_Memif_status(NVM_INTEGRITY_FAILED , &V_entag_Nvm_States_memif_if);
+            }
+            else 
+            {
+                Set_Memif_status(NVM_OK , &V_entag_Nvm_States_memif_if);
+            }
+            V_sttag_Memif.job_status = NO_JOB_REQUESTED; 
 
         }
         
@@ -66,8 +82,8 @@ void  MemIf :: set_job_status_sdcard(entag_Nvm_States job_status_sdcard)
 
 void  MemIf :: set_operation_status_sdcard(entag_Nvm_States job_status_sdcard)
 {
-    V_sttag_Memif.operation_status = job_status_sdcard; 
-    V_entag_Nvm_States_memif_if =  V_sttag_Memif.operation_status; /*Updated NVM status with Memif */
+   // V_sttag_Memif.operation_status = job_status_sdcard; 
+  //  V_entag_Nvm_States_memif_if =  V_sttag_Memif.operation_status; /*Updated NVM status with Memif */
 }
 
 

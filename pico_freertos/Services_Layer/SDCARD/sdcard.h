@@ -3,19 +3,19 @@
 
 #include "Memif.h"
 #include "dma_hal.h"
+//#include "dma_hal.h"
 /*Currently th  */
 
 /*Configurabnle by user */
 #define CHAINING_ARRAY_LENGTH 10
 
-#define MEMORY_CARD_SIZE  32 /*Memory card size in GB*/
+#define MEMORY_CARD_SIZE 32 /*Memory card size in GB*/
 
-#define BOOK_KEEPING_BLOCKS               2 /*2GB reserved fo*/
+#define BOOK_KEEPING_BLOCKS 2 /*2GB reserved fo*/
 #define CONVERT_GB_TO_BYTES MEMORY_CARD_SIZE * 125000000U
 
 constexpr uint32_t HEADER_PATTERN = 0xFADEFADE;
 constexpr uint16_t END_PATTERN = 0xFACE;
-
 
 constexpr uint16_t SECTOR_SIZE_PHYSICAL =
     512; /*secot size can be changed for external eeproms as well*/
@@ -24,17 +24,21 @@ constexpr uint16_t SECTOR_SIZE_PHYSICAL =
 constexpr uint16_t single_block_operation = (uint16_t)0;
 constexpr uint16_t multi_block_operation = (uint16_t)0;
 
-
 /*cache invalidated stat  */
 constexpr uint32_t CACHE_INVALIDATED_BLOCK_NOT_PROGRAMMED = 0xAABBCCDD;
 constexpr uint32_t CACHE_AVAILABLE_BLOCK_PROGRAMMED_ONCE = 0x01;
 
 extern uint32_t V_Internalblock_cache[TOTAL_NUMBER_OF_BLOCKS_CONFIGURED];
 
+extern uint8_t Trigger_sdcard_write;
+
+
+
+
 #if 0
-typedef enum 
+typedef enum
 {
-  single_block_operation = (uint8_t) 0 ,   
+  single_block_operation = (uint8_t) 0 ,
   multi_block_operation
 }block_types;
 #endif
@@ -87,7 +91,7 @@ typedef struct
 typedef struct {
 
   header_Struct header;
- // uint8_t  *ptr_reserve_data; /*Removing as it is useless*/
+  // uint8_t  *ptr_reserve_data; /*Removing as it is useless*/
   // uint32_t size;
   uint16_t end_pattern;
   uint16_t CRC;
@@ -98,7 +102,7 @@ typedef struct {
   header_Struct header;
   // uint8_t  *ptr_user_data; /*Removing as it is useless*/
   // uint32_t size;
-  //uint16_t block_id;
+  // uint16_t block_id;
   uint64_t
       address_next_block[CHAINING_ARRAY_LENGTH]; /*Only valid for  multi block
                                                     operation 0 for single block
@@ -133,7 +137,7 @@ typedef struct
 } Data_packet_multiplesectorwrites;
 
 #pragma pack(pop)
-#endif 
+#endif
 typedef enum {
   no_operation_sdcard,
   write_sdcard, /*made it equal to memif nad nvm */
@@ -148,8 +152,8 @@ typedef enum {
 typedef struct {
   header_Struct header;
   uint32_t cache_value;
-  uint32_t cache_address; 
-  uint16_t CRC_Value;  
+  uint32_t cache_address;
+  uint16_t CRC_Value;
 
 } cache_struct;
 
@@ -314,13 +318,13 @@ private:
    */
 
   void Pack_UserData_CRC(sttag_Memif *memif_job);
-
-  uint8_t Validate_sector_tobewritten(header_Struct &header_Struct );
+void Read_sdcard_data(sttag_Memif *memif_job , uint16_t block_name); 
+  uint8_t Validate_sector_tobewritten(header_Struct &header_Struct);
 
   uint64_t rand64(void);
-uint32_t random_sector(void) ;
-uint64_t random_byte_offset(void) ;
-
+  uint32_t random_sector(void);
+  uint64_t random_byte_offset(void);
+  void Trigger_Write_sdcard();
 };
 
 void sd_card_main_function();

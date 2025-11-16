@@ -158,7 +158,7 @@ void NVM_Class :: write_Data_sdcard(uint8_t block_number , uint8_t *data)
      user_operation.block_number = block_number; 
      user_operation.operation_type = write; 
      user_operation.ptr_usr_buffer = data; 
-     push_element_queue(NVM_Queue, data);  /*Not required to crate objects as NVM inherits queue*/
+     push_element_queue(NVM_Queue, &user_operation);  /*Not required to crate objects as NVM inherits queue*/
     
 }
 
