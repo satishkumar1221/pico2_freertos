@@ -76,7 +76,7 @@ void SD_Card_Interface ::Write_Data_Sdcard(uint16_t block_name) {
 void SD_Card_Interface ::Recieve_Data_MemIf(sttag_Memif *memif_jobstat) {
   MemIf obj_memif;
   obj_memif.Send_Data_SdCard(memif_jobstat);
-
+   V_Sttag_Memif_Request = *memif_jobstat;  /*temporary fix */
   if (memif_jobstat->operation == read) {
     Read_Data_Sdcard(memif_jobstat->block_name);
   }
